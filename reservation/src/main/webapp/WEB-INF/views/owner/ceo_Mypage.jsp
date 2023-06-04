@@ -40,12 +40,12 @@
                     </div>
                     <!-- 왼쪽 사이드바 버튼들-->
                     <!-- 클릭된 버튼은 색으로 따로 표시함-->
-                    <button type="button" class="btn btn-outline-secondary text-black p-3" onclick="location.href='../ceo/ceo_Mypage.jsp'">내 정보</button>
-                    <button type="button" class="btn btn-outline-secondary active mt-4 text-black p-3" onclick="location.href='../store/store_Mypage.jsp'">가게 등록</button>
-                    <button type="button" class="btn btn-outline-secondary text-black p-3" onclick="location.href='../store/store_Reservation.jsp'">예약관리</button>
-                    <button type="button" class="btn btn-outline-secondary text-black p-3" onclick="location.href='../store/store_Sales.jsp'">매출관리</button>
-                    <button type="button" class="btn btn-outline-secondary text-black p-3" onclick="location.href='../store/store_Coupon.jsp'">쿠폰/이벤트</button>
-                    <button type="button" class="btn btn-outline-secondary text-black p-3" onclick="location.href='../ceo/ceo_MypageDelete.jsp'">회원탈퇴</button>
+					<button type="button" class="btn btn-outline-secondary text-black p-3" onclick="location.href='CeoMypage'">내 정보</button>
+                    <button type="button" class="btn btn-outline-secondary active mt-4 text-black p-3" onclick="location.href='StoreMypage'">가게 등록</button>
+                    <button type="button" class="btn btn-outline-secondary text-black p-3" onclick="location.href='StoreReservation'">예약관리</button>
+                    <button type="button" class="btn btn-outline-secondary text-black p-3" onclick="location.href='StoreSales'">매출관리</button>
+                    <button type="button" class="btn btn-outline-secondary text-black p-3" onclick="location.href='StoreCoupon'">쿠폰/이벤트</button>
+                    <button type="button" class="btn btn-outline-secondary text-black p-3" onclick="location.href='CeoMypageDelete'">회원탈퇴</button>
                 </div>
             </div>
 
@@ -54,6 +54,7 @@
                 <!-- 내용(수정할 부분!) -->
                  <div class="card" style="margin-top: 20px;">
               <div class="card-body">
+              <form action="CeoMypagePro" method="post">
                 <p class="card-text">
                 아이디<br>
                 <input type="text" name="id" placeholder="4~30자리 / 영문, 숫자, 특수문자'_' 사용가능" style="width:500px;" required>
@@ -79,7 +80,8 @@
            	</p> 
            	<div id="button_page" style="float : right;">
 				<input type="submit" value="저장">&nbsp;&nbsp;
-			</div>           
+			</div>  
+			</form>         
             </div>
         </div>
       </div>

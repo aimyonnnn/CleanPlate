@@ -40,17 +40,18 @@
                     </div>
                     <!-- 왼쪽 사이드바 버튼들-->
                     <!-- 클릭된 버튼은 색으로 따로 표시함-->
-                    <button type="button" class="btn btn-outline-secondary text-black p-3" onclick="location.href='../ceo/ceo_Mypage.jsp'">내 정보</button>
-                    <button type="button" class="btn btn-outline-secondary active mt-4 text-black p-3" onclick="location.href='../store/store_Mypage.jsp'">가게 등록</button>
-                    <button type="button" class="btn btn-outline-secondary text-black p-3" onclick="location.href='../store/store_Reservation.jsp'">예약관리</button>
-                    <button type="button" class="btn btn-outline-secondary text-black p-3" onclick="location.href='../store/store_Sales.jsp'">매출관리</button>
-                    <button type="button" class="btn btn-outline-secondary text-black p-3" onclick="location.href='../store/store_Coupon.jsp'">쿠폰/이벤트</button>
-                    <button type="button" class="btn btn-outline-secondary text-black p-3" onclick="location.href='../ceo/ceo_MypageDelete.jsp'">회원탈퇴</button>
+					<button type="button" class="btn btn-outline-secondary text-black p-3" onclick="location.href='CeoMypage'">내 정보</button>
+                    <button type="button" class="btn btn-outline-secondary active mt-4 text-black p-3" onclick="location.href='StoreMypage'">가게 등록</button>
+                    <button type="button" class="btn btn-outline-secondary text-black p-3" onclick="location.href='StoreReservation'">예약관리</button>
+                    <button type="button" class="btn btn-outline-secondary text-black p-3" onclick="location.href='StoreSales'">매출관리</button>
+                    <button type="button" class="btn btn-outline-secondary text-black p-3" onclick="location.href='StoreCoupon'">쿠폰/이벤트</button>
+                    <button type="button" class="btn btn-outline-secondary text-black p-3" onclick="location.href='CeoMypageDelete'">회원탈퇴</button>
                 </div>
             </div>
 
             <!-- 내용 구역 -->
             <div class="col-md-8">
+            <form action="StoreReservation" method="post">
               <div class="card" style="margin-top: 20px;">
               
               <div class="card-body" ><br>
@@ -90,25 +91,15 @@
 		                out.print(tel);
 		                %>
 			      </td>
-			      <td><input type = "checkbox">&nbsp;LUNCH<br>
-			      	  <input type = "checkbox">DINNER
+			      <td>LUNCH<br>
+			      	  DINNER
 			      </td>
 			      <td>
-			      	<label><input type="checkbox" >&nbsp;성인 한우오마카세</label>
-			        <select style="width:100px">
-	                <option value="1인용" selected>1인용</option>
-	                <option value="2인용">2인용</option>
-	                <option value="3인용">3인용</option>
-	                <option value="4인용">4인용</option>
-	           		</select>
+			      	<label>&nbsp;성인 한우오마카세</label>
+
 	           		<br>
-			      	<label><input type="checkbox" >&nbsp;아동 한우오마카세</label>
-			        <select style="width:100px">
-	                <option value="1인용" selected>1인용</option>
-	                <option value="2인용">2인용</option>
-	                <option value="3인용">3인용</option>
-	                <option value="4인용">4인용</option>
-	                </select>		      	
+			      	<label>&nbsp;아동 한우오마카세</label>
+	      	
 			       </td>
 			      <td>예약완료</td>
 			      <td><input type = "checkbox"></td>			      
@@ -133,25 +124,14 @@
 		                out.print(tel2);
 		                %>
 			      </td>
-			      <td><input type = "checkbox">&nbsp;LUNCH<br>
-			      	  <input type = "checkbox">DINNER
+			      <td>LUNCH<br>
+			      	 DINNER
 			      </td>
 			      <td>
-			      	<label><input type="checkbox" >&nbsp;성인 한우오마카세</label>
-			        <select style="width:100px">
-	                <option value="1인용" selected>1인용</option>
-	                <option value="2인용">2인용</option>
-	                <option value="3인용">3인용</option>
-	                <option value="4인용">4인용</option>
-	           		</select>
+			      	<label>성인 한우오마카세</label>
 	           		<br>
-			      	<label><input type="checkbox" >&nbsp;아동 한우오마카세</label>
-			        <select style="width:100px">
-	                <option value="1인용" selected>1인용</option>
-	                <option value="2인용">2인용</option>
-	                <option value="3인용">3인용</option>
-	                <option value="4인용">4인용</option>
-	                </select>		      	
+			      	<label>아동 한우오마카세</label>
+		      	
 			       </td>
 			      <td>예약취소</td>
 			      <td><input type = "checkbox"></td>			      
@@ -176,25 +156,15 @@
 		                out.print(tel3);
 		                %>
 			      </td>
-			      <td><input type = "checkbox">&nbsp;LUNCH<br>
-			      	  <input type = "checkbox">DINNER
+			      <td>LUNCH<br>
+			      	  DINNER
 			      </td>
 			      <td>
-			      	<label><input type="checkbox" >&nbsp;성인 한우오마카세</label>
-			        <select style="width:100px">
-	                <option value="1인용" selected>1인용</option>
-	                <option value="2인용">2인용</option>
-	                <option value="3인용">3인용</option>
-	                <option value="4인용">4인용</option>
-	           		</select>
+			      	<label>성인 한우오마카세</label>
+
 	           		<br>
-			      	<label><input type="checkbox" >&nbsp;아동 한우오마카세</label>
-			        <select style="width:100px">
-	                <option value="1인용" selected>1인용</option>
-	                <option value="2인용">2인용</option>
-	                <option value="3인용">3인용</option>
-	                <option value="4인용">4인용</option>
-	                </select>		      	
+			      	<label>아동 한우오마카세</label>
+		      	
 			       </td>
 			      <td>예약완료</td>
 			      <td><input type = "checkbox"></td>
@@ -205,11 +175,12 @@
             </div>
             		<br><br>
 					<div style="margin:0 auto">
-					<input type="button" value="삭제" >
-					<input type="submit" value="저장" onclick="location.href='store_Reservation.jsp'">&nbsp;&nbsp;
+					<input type="button" value="삭제">
+					<input type="submit" value="저장">&nbsp;&nbsp;
 					</div>
 					<br><br>
             </div>
+            </form>
             </div>             
            </div>
         </div>
