@@ -252,7 +252,7 @@
 	                <label for="name" style="width: 100%;">이름<br>
 	                  <input type="text" id="name" class="form-control" placeholder="이름 입력">
 	                </label>
-	              </div>z
+	              </div>
 	              <div class="input-container">
 	                <label for="phone" style="width: 80%;">휴대폰번호<br>
 	                  <input type="text" id="phone" class="form-control" placeholder="'_'빼고 숫자만 입력">
