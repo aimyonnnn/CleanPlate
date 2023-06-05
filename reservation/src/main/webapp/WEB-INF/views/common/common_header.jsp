@@ -23,7 +23,7 @@
       <div class="container d-flex justify-content-between align-items-center">
         <img src="${pageContext.request.contextPath }/resources/images/logo.gif" style="width: 150px; height: 150px">
         <div>
-          <button type="button" class="btn btn-outline-light text-black me-2" onclick="location.href='../member/member_login.jsp'">로그인</button>
+          <button type="button" class="btn btn-outline-light text-black me-2" onclick="location.href='LoginForm'">로그인</button>
           <button type="button" class="btn btn-outline-light text-black">예약내역</button>
         </div>
       </div>
