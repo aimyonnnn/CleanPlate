@@ -35,10 +35,10 @@
                     </div>
                     <!-- 왼쪽 사이드바 버튼들-->
                     <!-- 클릭된 버튼은 색으로 따로 표시함-->
-                    <button type="button" class="btn btn-outline-secondary text-black p-3" onclick="location.href='../manager/managerpage.jsp'">공지사항</button>
-                    <button type="button" class="btn btn-outline-secondary text-black p-3" onclick="location.href='../manager/managerpage_ceo.jsp'">점주관리</button>
-                    <button type="button" class="btn btn-outline-secondary text-black p-3" onclick="location.href='../manager/managerpage_c.jsp'">쿠폰관리</button>
-                    <button type="button" class="btn btn-outline-secondary text-black p-3" onclick="location.href='../manager/managerpage_de.jsp'">신고 경고/정지</button>
+                    <button type="button" class="btn btn-outline-secondary text-black p-3" onclick="location.href='manager'">내 정보</button>
+                    <button type="button" class="btn btn-outline-secondary text-black p-3" onclick="location.href='managerpage_n'">공지사항</button>
+                    <button type="button" class="btn btn-outline-secondary acitve text-black p-3" onclick="location.href='managerpage_ceo'">점주관리</button>
+                    <button type="button" class="btn btn-outline-secondary text-black p-3" onclick="location.href='managerpage_de'">신고 경고/정지</button>
                 </div>
             </div>
 

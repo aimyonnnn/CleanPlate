@@ -35,56 +35,49 @@
                     </div>
                     <!-- 왼쪽 사이드바 버튼들-->
                     <!-- 클릭된 버튼은 색으로 따로 표시함-->
-                    <button type="button" class="btn btn-outline-secondary active text-black p-3" onclick="location.href='manager'">내 정보</button>
-                    <button type="button" class="btn btn-outline-secondary text-black p-3" onclick="location.href='managerpage_n'">공지사항</button>
+                    <button type="button" class="btn btn-outline-secondary text-black p-3" onclick="location.href='manager'">내 정보</button>
+                    <button type="button" class="btn btn-outline-secondary active text-black p-3" onclick="location.href='managerpage'">공지사항</button>
                     <button type="button" class="btn btn-outline-secondary text-black p-3" onclick="location.href='managerpage_ceo'">점주관리</button>
                     <button type="button" class="btn btn-outline-secondary text-black p-3" onclick="location.href='managerpage_de'">신고 경고/정지</button>
                 </div>
             </div>
 
-            <!-- 내용 -->
-            <div class="col-md-9">
-                <div class="mb-3 row d-flex justify-content-center">
-                    <label for="staticEmail" class="col-sm-2 col-form-label">Id</label>
-                    <div class="col-md-6">
-                        <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="admin">
-                     </div>
+            <!-- 내용 구역 -->
+            <div class="col-md-8">
+                <!-- 내용 -->
+                <div class="row align-items-center ">
+                    <table class="table table-striped mt-5 text-center">
+                        <thead>
+                            <tr>
+                                <th>글번호</th>
+                                <th>제목</th>
+                                <th>작성일자</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>000001</td>
+                                <td>공지사항1</td>
+                                <td>23-05-22</td>
+                                <td>
+                                    <button type="button" class="btn btn-outline-secondary text-black p-3">수정</button>
+                                    <button type="button" class="btn btn-outline-secondary text-black p-3">삭제</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table> 
+                    
                 </div>
-                <div class="mb-3 row d-flex justify-content-center">
-                    <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
-                    <div class="col-md-6">
-                        <input type="password" class="form-control" id="inputPassword" style="width: 150px;">
-                    </div>
+                <div class="row d-flex justify-content-center align-items-center ">
+                    <button type="button" class="btn btn-outline-secondary text-black p-3" style="width: 75px;">등록</button>
+
                 </div>
-                <div class="mb-3 row">
-                    <div class="col-md-9 mt-5 d-flex justify-content-end">
-                        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#checkpass">비밀번호 확인</button>
-                    </div>
-                </div>
+
+
             </div>
         </div>
     </div>
-    
-    
-    <!-- 비밀번호 확인 창  -->
-	<div class="modal fade" id="checkpass" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-	        		<h1 class="modal-title fs-5" id="exampleModalLabel">비밀번호 확인</h1>
-	        		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-	      		</div>
-	      	<div class="modal-body">
-	        	<input type="password" placeholder="비밀번호를 입력해주세요" style="width: 300px;">
-	      	</div>
-	      	<div class="modal-footer">
-				<button type="button" class="btn btn-secondary ">확인</button>
-	   			<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-	     	</div>
-	     	
-	  		</div>
-		</div>
-	</div>
     
    	<!-- 하단 부분 include 처리영역 -->
     <hr class="mt-5">
