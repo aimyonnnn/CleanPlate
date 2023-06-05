@@ -38,13 +38,13 @@
                     </div>
                     <!-- 왼쪽 사이드바 버튼들-->
                     <!-- 클릭된 버튼은 색으로 따로 표시함-->
-                    <button type="button" class="btn btn-outline-secondary text-black p-3" onclick="location.href='../member/mypage.jsp'">내 정보</button>
-                    <button type="button" class="btn btn-outline-secondary text-black p-3" onclick="location.href='../member/mypage_rs.jsp'" >예약 내역</button>
-                    <button type="button" class="btn btn-outline-secondary active text-black p-3" onclick="location.href='../member/mypage_like.jsp'">내가 찜한 식당</button>
-                    <button type="button" class="btn btn-outline-secondary text-black p-3" onclick="location.href='../member/mypage_rv.jsp'">내가 쓴 리뷰</button>
-                    <button type="button" class="btn btn-outline-secondary text-black p-3" onclick="location.href='../member/mypage_ce.jsp'">쿠폰/이벤트</button>
-                    <button type="button" class="btn btn-outline-secondary text-black p-3" onclick="location.href='../member/mypage_q.jsp'">1:1 문의</button>
-                    <button type="button" class="btn btn-outline-secondary text-black p-3" onclick="location.href='../member/mypage_d.jsp'">회원탈퇴</button>
+                    <button type="button" class="btn btn-outline-secondary active text-black p-3" onclick="location.href='member'">내 정보</button>
+                    <button type="button" class="btn btn-outline-secondary text-black p-3" onclick="location.href='mypage_rs'" >예약 내역</button>
+                    <button type="button" class="btn btn-outline-secondary text-black p-3" onclick="location.href='mypage_like'">내가 찜한 식당</button>
+                    <button type="button" class="btn btn-outline-secondary text-black p-3" onclick="location.href='mypage_rv'">내가 쓴 리뷰</button>
+                    <button type="button" class="btn btn-outline-secondary text-black p-3" onclick="location.href='mypage_ce'">쿠폰/이벤트</button>
+                    <button type="button" class="btn btn-outline-secondary text-black p-3" onclick="location.href='mypage_q'">1:1 문의</button>
+                    <button type="button" class="btn btn-outline-secondary text-black p-3" onclick="location.href='mypage_d'">회원탈퇴</button>
                 </div>
             </div>
 
