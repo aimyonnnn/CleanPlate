@@ -27,49 +27,56 @@
     <!-- 사이드바, 내용 넣는 구역!-->
     <div class="container mt-5">
         <div class="row d-flex justify-content-center">
-            <div class="col-md-2 align-items-center d-flex">
+            <div class="col-2 align-items-center d-flex">
                 <!-- 버튼 그룹 -->
-                <div class="btn-group-vertical btn-group-lg d-flex align-self-start" role="group" aria-label="Vertical button group">
-                    <!-- 프로필 사진 -->
-                    <div class="input-group mb-5 d-flex shadow-lg d-flex justify-content-center pe-3" style="border-radius: 10px;">
-                        <img src="../images/profile.png" alt="" style="width: 100px; height: 100px;" class="justify-content-center">
-                        <p class="d-flex align-items-center"><span>님 환영합니다</span></p>
-
-                    </div>
+                <!-- 프로필 사진 -->
+                <div class="input-group mb-5 d-flex shadow-lg d-flex justify-content-center pe-3" style="border-radius: 10px;">
+                    <img src="../images/profile.png" alt="" style="width: 100px; height: 100px;" class="justify-content-center">
+                    <p class="d-flex align-items-center"><span>님 환영합니다</span></p>
+                    
                     <!-- 왼쪽 사이드바 버튼들-->
                     <!-- 클릭된 버튼은 색으로 따로 표시함-->
-                    <button type="button" class="btn btn-outline-secondary active text-black p-3" onclick="location.href='member'">내 정보</button>
-                    <button type="button" class="btn btn-outline-secondary text-black p-3" onclick="location.href='mypage_rs'" >예약 내역</button>
-                    <button type="button" class="btn btn-outline-secondary text-black p-3" onclick="location.href='mypage_like'">내가 찜한 식당</button>
-                    <button type="button" class="btn btn-outline-secondary text-black p-3" onclick="location.href='mypage_rv'">내가 쓴 리뷰</button>
-                    <button type="button" class="btn btn-outline-secondary text-black p-3" onclick="location.href='mypage_ce'">쿠폰/이벤트</button>
-                    <button type="button" class="btn btn-outline-secondary text-black p-3" onclick="location.href='mypage_q'">1:1 문의</button>
-                    <button type="button" class="btn btn-outline-secondary text-black p-3" onclick="location.href='mypage_d'">회원탈퇴</button>
+                </div>
+            </div>
+            <div class="col-10"></div>
+        </div>
+        <div class="row">
+            <div class="col-2">
+                <div class="btn-group-vertical btn-group-lg d-flex align-self-start" role="group" aria-label="Vertical button group">
+                    <button type="button" class="btn btn-outline-warning active p-3" onclick="location.href='member'" style="color: white;">내 정보</button>
+                    <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='mypage_rs'" >예약 내역</button>
+                    <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='mypage_like'">내가 찜한 식당</button>
+                    <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='mypage_rv'">내가 쓴 리뷰</button>
+                    <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='mypage_d'">회원탈퇴</button>
                 </div>
             </div>
             <!-- 내용 -->
-            <div class="col-md-9">
-                <div class="mb-3 row d-flex justify-content-center">
-                    <label for="staticEmail" class="col-sm-2 col-form-label">Id</label>
-                    <div class="col-md-6">
-                        <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="admin">
-                     </div>
-                </div>
-                <div class="mb-3 row d-flex justify-content-center">
-                    <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
-                    <div class="col-md-6">
-                        <input type="password" class="form-control" id="inputPassword" style="width: 150px;">
+            <div class="col-10">
+                <form action="#" method="post">
+                    <div class="mb-3 row d-flex justify-content-center">
+                        <label for="staticEmail" class="col-sm-2 col-form-label">Id</label>
+                        <div class="col-md-6">
+                            <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="admin">
+                        </div>
                     </div>
-                </div>
-                <div class="mb-3 row">
-                    <div class="col-md-9 mt-5 d-flex justify-content-end">
-                        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#checkpass">비밀번호 확인</button>
+                    <div class="mb-3 row d-flex justify-content-center">
+                        <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+                        <div class="col-md-6">
+                            <input type="password" class="form-control" id="inputPassword" style="width: 150px;">
+                        </div>
                     </div>
-                </div>
+                    <div class="mb-3 row">
+                        <div class="col-md-9 mt-5 d-flex justify-content-end">
+                            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#checkpass" style="color: white;">비밀번호 확인</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
     
+    
+    <!-- 아래의 비밀번호 확인 창을 제외한 나머지 레이아웃은 위를 카피하여 사용하면 됩니다! -->
     
     <!-- 비밀번호 확인 창  -->
 	<div class="modal fade" id="checkpass" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
