@@ -59,71 +59,81 @@ $(document).ready(function(){
                 </div>
             </div>
             <!-- 내용 구역 -->
-            <div class="col-md-8" style="margin-left: 5rem;">
-
+            <div class="col-md-10">
+                
                 <!-- 내용 -->
-                <table class="table  mt-5 text-center" >
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th>가게명</th>
-                            <th>별점</th>
-                            <th>리뷰수</th>
-                            <th>예약</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><img src="..." class="img-thumbnail" alt="가게사진" style="width: 150px; height: 150px;"></td>
-                            <td>XX오마카세</td>
-                            <td>별점표현</td>
-                            <td>리뷰수</td>
-                            <td>
-                                <button type="button" class="btn btn-outline-warning p-3">예약하기</button>
-                                <button type="button" class="btn btn-outline-warning p-3" data-bs-toggle="modal" data-bs-target="#likedelete">찜 취소</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><img src="..." class="img-thumbnail" alt="가게사진" style="width: 150px; height: 150px;"></td>
-                            <td>XX파인다이닝</td>
-                            <td>별점표현</td>
-                            <td>리뷰수</td>
-                            <td>
-                                <button type="button" class="btn btn-outline-warning p-3">예약하기</button>
-                                <button type="button" class="btn btn-outline-warning p-3" data-bs-toggle="modal" data-bs-target="#likedelete">찜 취소</button>
-                            </td>
-                        </tr>
-                        
-                    </tbody>
-                </table>  
-                             
-            </div>
-            <!-- 내용 구역 -->
+                <div class="row align-items-center" style="margin-left: 3rem;">
+                    <div class="card ms-3 me-5 mt-5 align-items-center" style="width: 20rem;">
+                        <img src="..." class="card-img-top" alt="리뷰사진">
+                        <div class="card-body">
+                          <h5 class="card-title">오마카세</h5>
+                          <p class="card-text">리뷰내용</p>
+                          <a href="#" class="btn btn-outline-warning p-3" id="modifymodal">수정</a>
+                          <a href="#" class="btn btn-outline-warning p-3" data-bs-toggle="modal" data-bs-target="#reviewdelete">삭제</a>
+                        </div>
+                    </div>
+                    <div class="card ms-3 me-5 mt-5 align-items-center" style="width: 20rem;">
+                        <img src="..." class="card-img-top" alt="리뷰사진">
+                        <div class="card-body">
+                          <h5 class="card-title">파인다이닝</h5>
+                          <p class="card-text">리뷰내용</p>
+                          <a href="#" class="btn btn-outline-warning p-3" data-bs-toggle="modal" data-bs-target="#reviewmodify">수정</a>
+                          <a href="#" class="btn btn-outline-warning p-3" data-bs-toggle="modal" data-bs-target="#reviewdelete">삭제</a>
+                        </div>
+                    </div>
+                </div>
+
 
             </div>
 
         </div>
     </div>
     
-    <!-- 찜 취소 모달창-->
-    <div class="modal fade" id="likedelete" tabindex="-1" >
+    
+    <!-- 수정 버튼 클릭시 리뷰 수정 모달창-->
+    <div class="modal fade" id="reviewmodify" tabindex="-1" >
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h1 class="modal-title fs-5">찜 취소</h1>
+              <h1 class="modal-title fs-5">리뷰 수정</h1>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              찜을 취소 하시겠습니까?
+                <form action="#" method="post" enctype="multipart/form-data">
+                    사진 <input type="file" name="file"><br>
+                    별점 <br>
+                    내용 <br> 
+                    <textarea cols="50" rows="5" name="content"></textarea>
+
+                </form>
+
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-outline-warning p-3">확인</button>
+              <button type="button" class="btn btn-outline-warning p-3">수정</button>
+              <button type="button" class="btn btn-outline-warning p-3" data-bs-dismiss="modal">취소</button>
+            </div>
+          </div>
+        </div>
+
+
+    <!-- 삭제 버튼 클릭시 리뷰 삭제 모달창-->
+    <div class="modal fade" id="reviewdelete" tabindex="-1" >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5">리뷰 삭제</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              선택하신 리뷰를 삭제 하시겠습니까?
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-outline-warning p-3">삭제</button>
               <button type="button" class="btn btn-outline-warning p-3" data-bs-dismiss="modal">취소</button>
             </div>
           </div>
         </div>
     </div>
-
  
     <!-- 하단 부분 include 처리영역 -->
     <hr class="mt-5">
