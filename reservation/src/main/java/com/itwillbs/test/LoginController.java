@@ -72,17 +72,23 @@ public class LoginController {
 	}
 	//=================================로그인 & 로그아웃=================================
 	
-	// 회원 마이페이지 
+	//=================================회원 마이페이지=================================
 	// 로그인 성공후 XXX님 클릭시 마이페이지로 이동
 	@GetMapping("mypage")
-	public String myPage() {
-		return "member/mypage";
+	public String mypage() {
+		return "member/mypage_form";
+	}
+	
+	// 비밀번호 입력 후 내정보 수정 페이지로 이동
+	@PostMapping("mypagePro")
+	public String mypagePro() {
+		return "member/mypage_info";
 	}
 	
 	// 예약 내역 클릭시 
-	@GetMapping("mypage_rs")
-	public String mypage_rs() {
-		return "member/mypage_rs";
+	@GetMapping("mypage_rslist")
+	public String mypage_rslist() {
+		return "member/mypage_rslist";
 	}
 	
 	// 내가 찜한 식당
@@ -97,26 +103,14 @@ public class LoginController {
 		return "member/mypage_rv";
 	}
 	
-	// 쿠폰/이벤트
-	@GetMapping("mypage_ce")
-	public String mypage_ce() {
-		return "member/mypage_ce";
-	}
-	
-	// 1:1 문의
-	@GetMapping("mypage_q")
-	public String mypage_q() {
-		return "member/mypage_q";
-	}
-	
 	// 회원탈퇴 
-	@GetMapping("mypage_d")
+	@GetMapping("withdrawal")
 	public String mypage_d() {
-		return "member/mypage_d";
+		return "member/mypage_withdrawal";
 	}
+	//=================================회원 마이페이지 끝=================================
 	
-	
-	// 관리자페이지
+	//=================================관리자 페이지=================================
 	// 로그인 성공 후 관리자 클릭시 관리자페이지로 이동
 	@GetMapping("manager")
 	public String manager() {
@@ -140,4 +134,5 @@ public class LoginController {
 	public String managerpage_de() {
 		return "manager/managerpage_de";
 	}
+	//=================================관리자 페이지 끝=================================
 }

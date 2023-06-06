@@ -38,65 +38,47 @@
                     <!-- 클릭된 버튼은 색으로 따로 표시함-->
                 </div>
             </div>
-            <div class="col-10"></div>
+            <div class="col-10">
+            	<h2 style="margin-left: 40px; margin-top: 30px;">내 정보</h2>
+            	<div style="margin-left: 40px;">
+            		개인정보보호를 위해 회원님의 비밀번호를 다시 한번 확인합니다.
+            	</div>
+        	</div>
         </div>
         <div class="row">
             <div class="col-2">
                 <div class="btn-group-vertical btn-group-lg d-flex align-self-start" role="group" aria-label="Vertical button group">
-                    <button type="button" class="btn btn-outline-warning active p-3" onclick="location.href='member'" style="color: white;">내 정보</button>
-                    <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='mypage_rs'" >예약 내역</button>
+                    <button type="button" class="btn btn-outline-warning active p-3" onclick="location.href='mypage'" style="color: white;">내 정보</button>
+                    <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='mypage_rslist'" >예약 내역</button>
                     <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='mypage_like'">내가 찜한 식당</button>
                     <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='mypage_rv'">내가 쓴 리뷰</button>
-                    <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='mypage_d'">회원탈퇴</button>
+                    <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='withdrawal'">회원탈퇴</button>
                 </div>
             </div>
             <!-- 내용 -->
             <div class="col-10">
-                <form action="#" method="post">
+                <form action="mypagePro" method="post">
                     <div class="mb-3 row d-flex justify-content-center">
-                        <label for="staticEmail" class="col-sm-2 col-form-label">Id</label>
+                        <label for="id" class="col-sm-2 col-form-label">아이디</label>
                         <div class="col-md-6">
-                            <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="admin">
+                            <input type="text" readonly class="form-control-plaintext" id="id" value="hong(임시)">
                         </div>
                     </div>
                     <div class="mb-3 row d-flex justify-content-center">
-                        <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+                        <label for="passwd" class="col-sm-2 col-form-label">비밀번호</label>
                         <div class="col-md-6">
-                            <input type="password" class="form-control" id="inputPassword" style="width: 150px;">
+                            <input type="password" class="form-control" id="passwd" style="width: 180px;">
                         </div>
                     </div>
                     <div class="mb-3 row">
-                        <div class="col-md-9 mt-5 d-flex justify-content-end">
-                            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#checkpass" style="color: white;">비밀번호 확인</button>
+                        <div class="col-md-7 mt-5 d-flex justify-content-end">
+                            <button type="submit" class="btn btn-warning" style="color: white;">확인</button>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-    
-    
-    <!-- 아래의 비밀번호 확인 창을 제외한 나머지 레이아웃은 위를 카피하여 사용하면 됩니다! -->
-    
-    <!-- 비밀번호 확인 창  -->
-	<div class="modal fade" id="checkpass" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-	        		<h1 class="modal-title fs-5" id="exampleModalLabel">비밀번호 확인</h1>
-	        		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-	      		</div>
-	      	<div class="modal-body">
-	        	<input type="password" placeholder="비밀번호를 입력해주세요" style="width: 300px;">
-	      	</div>
-	      	<div class="modal-footer">
-				<button type="button" class="btn btn-secondary ">확인</button>
-	   			<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-	     	</div>
-	     	
-	  		</div>
-		</div>
-	</div>
  
     <!-- 하단 부분 include 처리영역 -->
     <hr class="mt-5">
