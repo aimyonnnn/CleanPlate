@@ -100,7 +100,7 @@ public class LoginController {
 	// 내가 쓴 리뷰
 	@GetMapping("mypage_rv")
 	public String mypage_rv() {
-		return "member/mypage_rv";
+		return "member/mypageReview";
 	}
 	
 	// 회원탈퇴 
