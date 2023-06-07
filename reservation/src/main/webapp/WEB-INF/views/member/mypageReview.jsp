@@ -40,7 +40,7 @@
                 </div>
             </div>
             <div class="col-10">
-            	<h2 style="margin-left: 40px; margin-top: 30px;">내가 쓴 리뷰</h2>
+            	<h2 style="margin-left: 40px; margin-top: 40px;">내가 쓴 리뷰</h2>
             </div>
         </div>
         <div class="row">
@@ -64,8 +64,8 @@
                         <div class="card-body">
                           <h5 class="card-title">오마카세</h5>
                           <p class="card-text">리뷰내용</p>
-                          <a href="#modifymodal" class="btn btn-outline-warning p-3" data-bs-toggle="modal" data-bs-target="#reviewmodify">수정</a>
-                          <a href="#" class="btn btn-outline-warning p-3" data-bs-toggle="modal" data-bs-target="#reviewdelete">삭제</a>
+                          <a href="#" class="btn btn-warning" style="color: white;" data-bs-toggle="modal" data-bs-target="#reviewmodify">수정</a>
+                          <a href="#" class="btn btn-warning" style="color: white;" data-bs-toggle="modal" data-bs-target="#reviewdelete">삭제</a>
                         </div>
                     </div>
                     <div class="card ms-3 me-5 mt-5 align-items-center" style="width: 20rem;">
@@ -73,8 +73,8 @@
                         <div class="card-body">
                           <h5 class="card-title">파인다이닝</h5>
                           <p class="card-text">리뷰내용</p>
-                          <a href="#" class="btn btn-outline-warning p-3" data-bs-toggle="modal" data-bs-target="#reviewmodify">수정</a>
-                          <a href="#" class="btn btn-outline-warning p-3" data-bs-toggle="modal" data-bs-target="#reviewdelete">삭제</a>
+                          <a href="#" class="btn btn-warning" style="color: white;" data-bs-toggle="modal" data-bs-target="#reviewmodify">수정</a>
+                          <a href="#" class="btn btn-warning" style="color: white;" data-bs-toggle="modal" data-bs-target="#reviewdelete">삭제</a>
                         </div>
                     </div>
                 </div>
@@ -96,17 +96,16 @@
             </div>
             <div class="modal-body">
                 <form action="#" method="post" enctype="multipart/form-data">
-                    사진 <input type="file" name="file"><br>
-                    별점 <br>
-                    내용 <br> 
-                    <textarea cols="50" rows="5" name="content"></textarea>
-
+                   <b>리뷰 사진</b> <input type="file" name="file"><br>
+                   <b>별점</b> <br>
+                   <b>내용</b> <br> 
+                   <textarea cols="50" rows="5" name="content"></textarea>
                 </form>
 
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-outline-warning p-3">수정</button>
-              <button type="button" class="btn btn-outline-warning p-3" data-bs-dismiss="modal">취소</button>
+              <button type="button" class="btn btn-warning" style="color: white;">수정</button>
+              <button type="button" class="btn btn-warning" style="color: white;"data-bs-dismiss="modal">취소</button>
             </div>
           </div>
         </div>
@@ -125,8 +124,8 @@
               선택하신 리뷰를 삭제 하시겠습니까?
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-outline-warning p-3">삭제</button>
-              <button type="button" class="btn btn-outline-warning p-3" data-bs-dismiss="modal">취소</button>
+              <button type="button" class="btn btn-warning" style="color: white;">삭제</button>
+              <button type="button" class="btn btn-warning" style="color: white;" data-bs-dismiss="modal">취소</button>
             </div>
           </div>
         </div>
