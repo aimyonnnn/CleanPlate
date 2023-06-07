@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +11,8 @@
 		<!-- jQuery CDN -->
 		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <!-- bootstrap -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     <!-- 이부분은 지우면 안됩니다 -->
 </head>
 <body>
@@ -43,28 +45,25 @@
 		    <h2 style="margin-left: 40px; margin-top: 30px;">예약내역</h2>
 		        <!-- 드롭다운 시작 -->
 		        <div class="dropdown" style="margin-left: 40px;">
-				  <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-				    방문예정
-				  </button>
-				  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-				    <li><a class="dropdown-item" href="#">방문완료</a></li>
-				    <li><a class="dropdown-item" href="#">취소/노쇼</a></li>
-				  </ul>
+				  <select class="form-select form-select mb-3" aria-label=".form-select example" style="width: 130px;">
+					  <option selected value="planToVisit">방문예정</option>
+					  <option value="visited">방문완료</option>
+					  <option value="cancelNoshow">취소/노쇼</option>
+					</select>
 				</div>
 				<!-- 드롭다운 끝 -->
 			</div>
         </div>
         <div class="row">
             <div class="col-2">
-                <!-- 왼쪽 사이드바 버튼영역-->
+                <!-- 왼쪽 사이드바 버튼 구역-->
                 <div class="btn-group-vertical btn-group-lg d-flex align-self-start" role="group" aria-label="Vertical button group">
-                    <button type="button" class="btn btn-outline-warning active p-3" onclick="location.href='member'" style="color: white;">내 정보</button>
-                    <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='memberRSList'" >예약 내역</button>
+                    <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='member'" style="color: white;">내 정보</button>
+                    <button type="button" class="btn btn-outline-warning active p-3" onclick="location.href='memberRSList'" >예약 내역</button>
                     <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='memberLike'">내가 찜한 식당</button>
                     <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='memberReview'">내가 쓴 리뷰</button>
                     <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='memberWithdrawal'">회원탈퇴</button>
                 </div>
-                <!-- 왼쪽 사이드바 버튼영역-->
             </div>
             <!-- 내용 -->
             <div class="col-md-8">
@@ -86,23 +85,15 @@
                             <td>동백키친</td>
                             <td>23-05-23</td>
                             <td>17:00</td>
-                            <td>예약중</td>
-                            <td><button type="button" class="btn btn-warning" style="color: white;" data-bs-toggle="modal" data-bs-target="#exampleModal">상세보기</button></td>
-                        </tr>
-                        <tr>
-                            <td>000001</td>
-                            <td>동백키친</td>
-                            <td>23-05-23</td>
-                            <td>17:00</td>
-                            <td>예약중</td>
+                            <td>방문예정</td>
                             <td><button type="button" class="btn btn-warning" style="color: white;" data-bs-toggle="modal" data-bs-target="#exampleModal">상세보기</button></td>
                         </tr>
                         <tr>
                             <td>000002</td>
                             <td>동백키친</td>
-                            <td>23-05-20</td>
+                            <td>23-05-24</td>
                             <td>12:00</td>
-                            <td>이용완료</td>
+                            <td>방문예정</td>
                             <td><button type="button" class="btn btn-warning" style="color: white;" data-bs-toggle="modal" data-bs-target="#exampleModal">상세보기</button></td>
                         </tr>
                     </tbody>
@@ -111,7 +102,7 @@
         </div>
     </div>
  
- 	<!-- 확인 모달 -->
+ 	<!-- 예약내역 출력 첫번째 모달창 -->
 	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg">
 	    	<div class="modal-content">
@@ -120,7 +111,7 @@
 	        		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 	      		</div>
 	      		<div class="modal-body">
-	        		<!-- Center 시작-->
+	        		<!-- Content 시작-->
 					<div class="container">
 					    <div class="row">
 					        <div class="h-50 p-3 col-md-12 padding: 20px" style="text-align: center;">
@@ -218,31 +209,75 @@
 					            <div class="h-50 p-3 col-md-1"> </div>
 					        </div>      
 					    </div>
+					    <div class="d-flex justify-content-center">
+			        		<button type="button" class="btn btn-outline-warning" id="cancelButton">예약 취소하기</button>
+			        		<button type="button" class="btn btn-outline-warning" style="margin-left: 10px;" data-bs-toggle="modal" data-bs-target="#assignmentModal">예약 양도하기</button>
+			        		<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="margin-left: 10px;">닫기</button>
+					    </div>
 					</div>
-					<!-- Center 끝-->
+					<!-- Content 끝-->
 					</div>
 	        		
 	      		</div>
-	      		<div class="modal-footer">
-	        		<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-	        		<button type="button" class="btn btn-warning" style="color: white;" id="withdrawButton">예약 취소하기</button>
-	      		</div>
 	    	</div>
 		</div>
-	<!-- 확인 모달 끝 -->
- 
- 	<!-- 모달창에서 예약 취소 후 취소 확인 페이지로 넘어가기 -->
-	<script>
-	  $("#withdrawButton").click(function() {
-	    // 예약 취소 페이지로 이동
-	    window.location.href = "/mypage";
-	  });
-	  
-	  // 드롭박스 적용 스크립트
-	  $(function() {
-	     $('.dropdown-toggle').dropdown();
-	  });
-	</script>
+	<!-- 예약내역 출력 첫번째 모달창 끝 -->
+ 	
+ 	<!-- 두번째 양도 관련 모달창 -->
+	<div class="modal fade" id="assignmentModal" tabindex="-1" aria-labelledby="assignmentModalLabel" aria-hidden="true">
+	  <div class="modal-dialog modal-lg">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="assignmentModalLabel">예약 양도</h5>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	      <div class="modal-body">
+	        <table class="table table-striped text-center">
+                    <thead>
+                        <tr>
+                            <th>예약번호</th>
+                            <th>식당</th>
+                            <th>날짜</th>
+                            <th>시간</th>
+                            <th>상태</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>000001</td>
+                            <td>동백키친</td>
+                            <td>23-05-23</td>
+                            <td>17:00</td>
+                            <td>방문예정</td>
+                        </tr>
+                   </tbody>
+            </table>
+	            <div class="d-flex justify-content-center">
+	            	양도한 예약은 양도 게시판에 등록되며, 고객센터를 통해서만 취소가 가능합니다. 
+	            </div>
+	         <div class="mt-3 d-flex justify-content-center">
+        		<button type="button" class="btn btn-outline-warning" id="assignmentButton">예약 양도하기</button>
+        		<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="margin-left: 10px;">닫기</button>
+		     </div>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	<!-- 두번째 양도 관련 모달창 끝 -->
+ 	
+ 	
+ 	<script>
+	 	<!-- 모달창에서 취소버튼 클릭 시 환불 페이지로 넘어가기 -->
+	 	$(document).on("click", "#cancelButton", function(event){
+	 	    // 예약 환불 페이지로 이동
+	 		window.location.href = '<c:url value="환불페이지"/>';
+	 	});
+	 	<!-- 모달창에서 취소버튼 클릭 시 양도 페이지로 넘어가기 -->
+	 	$(document).on("click", "#assignmentButton", function(event){
+	 	    // 예약 양도 페이지로 이동
+	 		window.location.href = '<c:url value="양도페이지"/>';
+	 	});
+ 	</script>
  
     <!-- 하단 부분 include 처리영역 -->
     <hr class="mt-5">

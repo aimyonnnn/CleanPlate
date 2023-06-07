@@ -46,11 +46,11 @@
             <div class="col-2">
                 <!-- 왼쪽 사이드바 버튼영역-->
                 <div class="btn-group-vertical btn-group-lg d-flex align-self-start" role="group" aria-label="Vertical button group">
-                    <button type="button" class="btn btn-outline-warning active p-3" onclick="location.href='member'" style="color: white;">내 정보</button>
+                    <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='member'" style="color: white;">내 정보</button>
                     <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='memberRSList'" >예약 내역</button>
                     <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='memberLike'">내가 찜한 식당</button>
                     <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='memberReview'">내가 쓴 리뷰</button>
-                    <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='memberWithdrawal'">회원탈퇴</button>
+                    <button type="button" class="btn btn-outline-warning active p-3" onclick="location.href='memberWithdrawal'">회원탈퇴</button>
                 </div>
                 <!-- 왼쪽 사이드바 버튼영역-->
             </div>
