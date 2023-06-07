@@ -56,7 +56,7 @@
             </div>
             <!-- 내용 -->
             <div class="col-10">
-                <form action="mypagePro" method="post">
+                <form action="memberPro" method="post">
                     <div class="mb-3 row d-flex justify-content-center">
                         <label for="id" class="col-sm-2 col-form-label">아이디</label>
                         <div class="col-md-6">
