@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,13 +12,7 @@
     <!-- 이부분은 지우면 안됩니다 -->
 </head>
 
-<script>
-$(document).ready(function(){
-    $("#modifymodal").click(function(){
-        $("#reviewmodify").modal();
-    });
-});
-</script>
+
 <body>
    	<!-- 공통 상단바 구역 -->
 <%@ include file="../common/common_header.jsp" %>
@@ -42,33 +37,34 @@ $(document).ready(function(){
                     <img src="../images/profile.png" alt="" style="width: 100px; height: 100px;" class="justify-content-center">
                     <p class="d-flex align-items-center"><span>님 환영합니다</span></p>
                     
-                    <!-- 왼쪽 사이드바 버튼들-->
-                    <!-- 클릭된 버튼은 색으로 따로 표시함-->
                 </div>
             </div>
-            <div class="col-10"></div>
+            <div class="col-10">
+            	<h2 style="margin-left: 40px; margin-top: 30px;">내가 쓴 리뷰</h2>
+            </div>
         </div>
         <div class="row">
             <div class="col-2">
+            	<!-- 왼쪽 사이드바 버튼 구역-->
                 <div class="btn-group-vertical btn-group-lg d-flex align-self-start" role="group" aria-label="Vertical button group">
                     <button type="button" class="btn btn-outline-warning active p-3" onclick="location.href='member'" style="color: white;">내 정보</button>
-                    <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='mypage_rs'" >예약 내역</button>
+                    <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='mypage_rslist'" >예약 내역</button>
                     <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='mypage_like'">내가 찜한 식당</button>
                     <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='mypage_rv'">내가 쓴 리뷰</button>
                     <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='mypage_d'">회원탈퇴</button>
                 </div>
             </div>
             <!-- 내용 구역 -->
-            <div class="col-md-10">
+            <div class="col-md-8">
                 
                 <!-- 내용 -->
-                <div class="row align-items-center" style="margin-left: 3rem;">
+                <div class="row align-items-center" style="margin-left: 50px;">
                     <div class="card ms-3 me-5 mt-5 align-items-center" style="width: 20rem;">
                         <img src="..." class="card-img-top" alt="리뷰사진">
                         <div class="card-body">
                           <h5 class="card-title">오마카세</h5>
                           <p class="card-text">리뷰내용</p>
-                          <a href="#" class="btn btn-outline-warning p-3" id="modifymodal">수정</a>
+                          <a href="#modifymodal" class="btn btn-outline-warning p-3" data-bs-toggle="modal" data-bs-target="#reviewmodify">수정</a>
                           <a href="#" class="btn btn-outline-warning p-3" data-bs-toggle="modal" data-bs-target="#reviewdelete">삭제</a>
                         </div>
                     </div>
@@ -91,7 +87,7 @@ $(document).ready(function(){
     
     
     <!-- 수정 버튼 클릭시 리뷰 수정 모달창-->
-    <div class="modal fade" id="reviewmodify" tabindex="-1" >
+    <div class="modal" id="reviewmodify" tabindex="-1" >
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
@@ -114,10 +110,11 @@ $(document).ready(function(){
             </div>
           </div>
         </div>
+    </div>
 
 
     <!-- 삭제 버튼 클릭시 리뷰 삭제 모달창-->
-    <div class="modal fade" id="reviewdelete" tabindex="-1" >
+    <div class="modal" id="reviewdelete" tabindex="-1" >
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
