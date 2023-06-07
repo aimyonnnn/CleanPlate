@@ -39,8 +39,6 @@
                     <img src="../images/profile.png" alt="" style="width: 100px; height: 100px;" class="justify-content-center">
                     <p class="d-flex align-items-center"><span>님 환영합니다</span></p>
                     
-                    <!-- 왼쪽 사이드바 버튼들-->
-                    <!-- 클릭된 버튼은 색으로 따로 표시함-->
                 </div>
             </div>
             <div class="col-10">
@@ -58,6 +56,7 @@
         </div>
         <div class="row">
             <div class="col-2">
+                <!-- 왼쪽 사이드바 버튼 구역-->
                 <div class="btn-group-vertical btn-group-lg d-flex align-self-start" role="group" aria-label="Vertical button group">
                     <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='mypage'">내 정보</button>
                     <button type="button" class="btn btn-outline-warning active p-3" onclick="location.href='mypage_rslist'" >예약 내역</button>
