@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!doctype html>
 <html lang="en">
   <head>
@@ -35,6 +36,7 @@
 
   	  <!-- aos 라이브러리-->
       <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+      
   </head>
   <body>
 <!-- ======================================================================================================================== -->
@@ -72,17 +74,15 @@
   background-image:linear-gradient(
   rgba(0, 0, 0, 0.8),
   rgba(0, 0, 0, 0.8)),
-  url(../images/1.jpg); background-size: cover;">
+  url(${pageContext.request.contextPath }/resources/images/1.jpg); background-size: cover;">
   
   <!-- top 시작-->
     <div class="container text-black text-white mt-2 position-absolute top-0 start-50 translate-middle-x" style="z-index: 99999; background: transparent; position: relative;" >
       <div class="container d-flex justify-content-between align-items-center">
-        <img src="../images/logo.gif" style="width: 120px; height: 120px">
+        <img src="${pageContext.request.contextPath }/resources/images/logo.gif" style="width: 120px; height: 120px">
         
         <div class="btn-group">
-          <button type="button" class="btn btn-outline-light text-white me-2 border-0 bg-transparent" onclick="location.href='../member/member_login.jsp'">로그인</button>
-          <!-- <button type="button" class="btn btn-outline-light text-white me-2 border-0 bg-transparent">회원가입</button> -->
-          <button type="button" class="btn btn-outline-light text-white border-0 bg-transparent">예약내역</button>
+          <button type="button" class="btn btn-outline-light text-white me-2 border-0 bg-transparent" onclick="location.href='loginForm'">로그인</button>
         </div>
       </div>
 
@@ -99,16 +99,19 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
               <ul class="navbar-nav gnb">
-                <li class="nav-item me-5"><a class="nav-link active" aria-current="page" href="../main.jsp" style="color: white;">Home</a></li>
-                <li class="nav-item me-5"><a class="nav-link" href="../reservation/reservation_main.jsp" style="color: white;">Reservation</a></li>
-                <li class="nav-item me-5"><a class="nav-link" href="../event/event_active.jsp" style="color: white;">Event</a></li>
-                <li class="nav-item"><a class="nav-link" href="../help/help_home.jsp" style="color: white;">Help</a></li>
+                <li class="nav-item me-5"><a class="nav-link active" aria-current="page" href ='<c:url value="/" />' style="color: white;">Home</a></li>
+                <li class="nav-item me-5"><a class="nav-link" href ='<c:url value="/reservationMain" />' style="color: white;">Reservation</a></li>
+                <li class="nav-item me-5"><a class="nav-link" href ='<c:url value="/assignment" />' style="color: white;">Assignment</a></li>
+                <li class="nav-item"><a class="nav-link" href ='<c:url value="/" />' style="color: white;">Help</a></li>
               </ul>
             </div>
           </div>
         </nav>
       </div>
     </div>
+    
+<div style="height: 40px; width: 100%"></div>    
+    
     <br>
     <!-- top 끝-->
 <div style="position: relative; top: 150px;">
@@ -142,7 +145,7 @@
             <div class="row g-0">
             <div class="col-md-4">
               <div class="d-flex flex-column justify-content-center align-self-center">
-                  <img src="../images/r2.jpg" class="img-fluid rounded-start mt-1 ms-1" alt="..." style="height: 90%;">
+                  <img src="${pageContext.request.contextPath }/resources/images/r2.jpg" class="img-fluid rounded-start mt-1 ms-1" alt="..." style="height: 90%;">
                   <div class="btn-group">
                     <button class="btn btn-danger mt-2 ms-1 w-100 p-2">예약하기</button>
                   </div>
@@ -170,7 +173,7 @@
             <div class="row g-0">
             <div class="col-md-4">
               <div class="d-flex flex-column justify-content-center align-self-center">
-                  <img src="../images/r2.jpg" class="img-fluid rounded-start mt-1 ms-1" alt="..." style="height: 90%;">
+                  <img src="${pageContext.request.contextPath }/resources/images/r2.jpg" class="img-fluid rounded-start mt-1 ms-1" alt="..." style="height: 90%;">
                   <div class="btn-group">
                     <button class="btn btn-danger mt-2 ms-1 w-100 p-2">예약하기</button>
                   </div>
@@ -197,7 +200,7 @@
             <div class="row g-0">
             <div class="col-md-4">
               <div class="d-flex flex-column justify-content-center align-self-center">
-                  <img src="../images/r2.jpg" class="img-fluid rounded-start mt-1 ms-1" alt="..." style="height: 90%;">
+                  <img src="${pageContext.request.contextPath }/resources/images/r2.jpg" class="img-fluid rounded-start mt-1 ms-1" alt="..." style="height: 90%;">
                   <div class="btn-group">
                     <button class="btn btn-danger mt-2 ms-1 w-100 p-2">예약하기</button>
                   </div>
@@ -224,7 +227,7 @@
             <div class="row g-0">
             <div class="col-md-4">
               <div class="d-flex flex-column justify-content-center align-self-center">
-                  <img src="../images/r2.jpg" class="img-fluid rounded-start mt-1 ms-1" alt="..." style="height: 90%;">
+                  <img src="${pageContext.request.contextPath }/resources/images/r2.jpg" class="img-fluid rounded-start mt-1 ms-1" alt="..." style="height: 90%;">
                   <div class="btn-group">
                     <button class="btn btn-danger mt-2 ms-1 w-100 p-2">예약하기</button>
                   </div>
@@ -251,7 +254,7 @@
             <div class="row g-0">
             <div class="col-md-4">
               <div class="d-flex flex-column justify-content-center align-self-center">
-                  <img src="../images/r2.jpg" class="img-fluid rounded-start mt-1 ms-1" alt="..." style="height: 90%;">
+                  <img src="${pageContext.request.contextPath }/resources/images/r2.jpg" class="img-fluid rounded-start mt-1 ms-1" alt="..." style="height: 90%;">
                   <div class="btn-group">
                     <button class="btn btn-danger mt-2 ms-1 w-100 p-2">예약하기</button>
                   </div>
@@ -278,7 +281,7 @@
             <div class="row g-0">
             <div class="col-md-4">
               <div class="d-flex flex-column justify-content-center align-self-center">
-                  <img src="../images/r2.jpg" class="img-fluid rounded-start mt-1 ms-1" alt="..." style="height: 90%;">
+                  <img src="${pageContext.request.contextPath }/resources/images/r2.jpg" class="img-fluid rounded-start mt-1 ms-1" alt="..." style="height: 90%;">
                   <div class="btn-group">
                     <button class="btn btn-danger mt-2 ms-1 w-100 p-2">예약하기</button>
                   </div>
@@ -305,7 +308,7 @@
             <div class="row g-0">
             <div class="col-md-4">
               <div class="d-flex flex-column justify-content-center align-self-center">
-                  <img src="../images/r2.jpg" class="img-fluid rounded-start mt-1 ms-1" alt="..." style="height: 90%;">
+                  <img src="${pageContext.request.contextPath }/resources/images/r2.jpg" class="img-fluid rounded-start mt-1 ms-1" alt="..." style="height: 90%;">
                   <div class="btn-group">
                     <button class="btn btn-danger mt-2 ms-1 w-100 p-2">예약하기</button>
                   </div>
@@ -332,7 +335,7 @@
             <div class="row g-0">
             <div class="col-md-4">
               <div class="d-flex flex-column justify-content-center align-self-center">
-                  <img src="../images/r2.jpg" class="img-fluid rounded-start mt-1 ms-1" alt="..." style="height: 90%;">
+                  <img src="${pageContext.request.contextPath }/resources/images/r2.jpg" class="img-fluid rounded-start mt-1 ms-1" alt="..." style="height: 90%;">
                   <div class="btn-group">
                     <button class="btn btn-danger mt-2 ms-1 w-100 p-2">예약하기</button>
                   </div>
@@ -359,7 +362,7 @@
             <div class="row g-0">
             <div class="col-md-4">
               <div class="d-flex flex-column justify-content-center align-self-center">
-                  <img src="../images/r2.jpg" class="img-fluid rounded-start mt-1 ms-1" alt="..." style="height: 90%;">
+                  <img src="${pageContext.request.contextPath }/resources/images/r2.jpg" class="img-fluid rounded-start mt-1 ms-1" alt="..." style="height: 90%;">
                   <div class="btn-group">
                     <button class="btn btn-danger mt-2 ms-1 w-100 p-2">예약하기</button>
                   </div>
@@ -386,7 +389,7 @@
             <div class="row g-0">
             <div class="col-md-4">
               <div class="d-flex flex-column justify-content-center align-self-center">
-                  <img src="../images/r2.jpg" class="img-fluid rounded-start mt-1 ms-1" alt="..." style="height: 90%;">
+                  <img src="${pageContext.request.contextPath }/resources/images/r2.jpg" class="img-fluid rounded-start mt-1 ms-1" alt="..." style="height: 90%;">
                   <div class="btn-group">
                     <button class="btn btn-danger mt-2 ms-1 w-100 p-2">예약하기</button>
                   </div>

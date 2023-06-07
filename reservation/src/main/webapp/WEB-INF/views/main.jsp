@@ -48,7 +48,7 @@
 		        	<!-- 세션 id가 존재할 경우 세션 아이디에 저장된 회원 닉네임 출력 -->
 		            <button type="button" class="btn btn-outline-light text-white me-2 border-0 bg-transparent" onclick="location.href='mypage'">${sessionScope.kId} 님</button>
 					<!-- 세션 id가 존재할 경우 예약내역 버튼 활성화 -->
-					<button type="button" class="btn btn-outline-light text-white border-0 bg-transparent" onclick="location.href='mypage_rs'">예약내역</button>
+					<button type="button" class="btn btn-outline-light text-white border-0 bg-transparent" onclick="location.href='mypage_rslist'">예약내역</button>
 		            <!-- 세션 id가 존재할 경우 로그아웃 버튼 출력 -->
 		            <button type="button" class="btn btn-outline-light text-white me-2 border-0 bg-transparent" onclick="location.href='logout'" id="logout">로그아웃</button>
 		        </c:otherwise>
@@ -87,7 +87,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
               <ul class="navbar-nav gnb">
                 <li class="nav-item me-5"><a class="nav-link active" aria-current="page" href ='<c:url value="/" />' style="color: white;">Home</a></li>
-                <li class="nav-item me-5"><a class="nav-link" href ='<c:url value="/" />' style="color: white;">Reservation</a></li>
+                <li class="nav-item me-5"><a class="nav-link" href ='<c:url value="/reservationMain" />' style="color: white;">Reservation</a></li>
                 <li class="nav-item me-5"><a class="nav-link" href ='<c:url value="/assignment" />' style="color: white;">Assignment</a></li>
                 <li class="nav-item"><a class="nav-link" href ='<c:url value="/" />' style="color: white;">Help</a></li>
               </ul>
