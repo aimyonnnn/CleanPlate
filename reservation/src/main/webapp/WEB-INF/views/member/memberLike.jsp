@@ -45,7 +45,7 @@
             <div class="col-2">
                 <!-- 왼쪽 사이드바 버튼영역-->
                 <div class="btn-group-vertical btn-group-lg d-flex align-self-start" role="group" aria-label="Vertical button group">
-                    <button type="button" class="btn btn-outline-warning active p-3" onclick="location.href='member'" style="color: white;">내 정보</button>
+                    <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='member'" >내 정보</button>
                     <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='memberRSList'" >예약 내역</button>
                     <button type="button" class="btn btn-outline-warning active p-3" onclick="location.href='memberLike'">내가 찜한 식당</button>
                     <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='memberReview'">내가 쓴 리뷰</button>
@@ -109,7 +109,7 @@
           </div>
           <div class="modal-body">
             <div class="row g-0 text-center">
-              <div class="col-sm-6 col-md-12"><h3><b>동백 키친</b></h3></div><br><br>
+              <div class="col-sm-6 col-md-12"><h3><b>XX오마카세</b></h3></div><br><br>
               <hr class="my-2">
             </div>
             <!-- modal center -->
@@ -119,7 +119,7 @@
                 <!-- 인원수 선택 -->
                 <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" id="mystatus" type="button" data-bs-toggle="dropdown" aria-expanded="true">
-                      인원수를 선택해주세요.
+                      인원수
                     </button>
                     <ul id="mytype" class="dropdown-menu">
                       <li><a class="dropdown-item" href="#">2명</a></li>
@@ -142,6 +142,7 @@
                   </script>
               </div>
               <!-- 인원수 선택 -->
+
               <!-- 예약일 선택-->
               <div class="col-sm-6 col-md-5">
                 
@@ -154,94 +155,62 @@
                 <input type="date" data-placeholder="날짜를 선택하세요."></input>
               </div>
               <!-- 예약일 선택-->
+              <!-- 메뉴 선택 -->
+              <table class="table-warning text-center" style="font-size: 120%;">
+                <thead>
+                  <tr>
+                    <th scope="col">메뉴</th>
+                    <th scope="col">가격</th>
+                    <th scope="col">갯수</th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">런치 코스</th>
+                    <td>80,000원</td>
+                    <td>
+                        <button type="button" class="btn btn-outline" onclick="fnCalCount('m', this);">-</button>
+                        <input type="text" name="pop_out" value="0" readonly="readonly" style="text-align:center; width: 10%;"/>
+                        <button type ="button" class="btn btn-outline" onclick="fnCalCount('p',this);">+</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">디너 코스</th>
+                    <td>100,000원</td>
+                    <td>
+                        <button type="button" class="btn btn-outline" onclick="fnCalCount('m', this);">-</button>
+                        <input type="text" name="pop_out" value="0" readonly="readonly" style="text-align:center; width: 10%;"/>
+                        <button type ="button" class="btn btn-outline" onclick="fnCalCount('p',this);">+</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">쉐프 테이스팅 코스</th>
+                    <td>150,000원</td>
+                    <td>
+                        <button type="button" class="btn btn-outline" onclick="fnCalCount('m', this);">-</button>
+                        <input type="text" name="pop_out" value="0" readonly="readonly" style="text-align:center; width: 10%;"/>
+                        <button type ="button" class="btn btn-outline" onclick="fnCalCount('p',this);">+</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <!-- 메뉴 선택 -->
+
 
             </div>
             <br>
             
-            <div class="row g-0 text-center">
-              <!-- 메뉴1 -->
-              <div class="row g-0 text-center border border-3">
-                <div class="col-sm-6 col-md-5" style="background-color: white;">
-                  <h3>쉐프 테이스팅 코스</h3>
-                </div>
-                <div class="col-sm-3 col-md-2" style="background-color: white;">
-                  <h3>88,000원</h3>
-                </div>
-                <div class="col-sm-3 col-md-5" style="background-color: white;">
-                  <button type ="button" class="btn btn-primary" onclick="fnCalCount('p',this);">+</button>
-                  <input type="text" name="pop_out" value="0" readonly="readonly" style="text-align:center; width: 10%;"/>
-                  <button type="button" class="btn btn-primary" onclick="fnCalCount('m', this);">-</button>
-                  <button type="button" class="btn btn-primary"> 삭제 </button>
-                </div>
-              </div>
-              <!-- 메뉴1 -->
-              <!-- 메뉴2 -->
-              <div class="row g-0 text-center border border-3">
-                <div class="col-sm-6 col-md-5" style="background-color: white;">
-                  <h3>쉐프 테이스팅 코스</h3>
-                </div>
-                <div class="col-sm-3 col-md-2" style="background-color: white;">
-                  <h3>88,000원</h3>
-                </div>
-                <div class="col-sm-3 col-md-5" style="background-color: white;">
-                  <button type ="button" class="btn btn-primary" onclick="fnCalCount('p',this);">+</button>
-                  <input type="text" name="pop_out" value="0" readonly="readonly" style="text-align:center; width: 10%;"/>
-                  <button type="button" class="btn btn-primary" onclick="fnCalCount('m', this);">-</button>
-                  <button type="button" class="btn btn-primary"> 삭제 </button>
-                </div>
-              </div>
-              <!-- 메뉴2 -->
-              <!-- 메뉴3 -->
-              <div class="row g-0 text-center border border-3">
-                <div class="col-sm-6 col-md-5" style="background-color: white;">
-                  <h3>쉐프 테이스팅 코스</h3>
-                </div>
-                <div class="col-sm-3 col-md-2" style="background-color: white;">
-                  <h3>88,000원</h3>
-                </div>
-                <div class="col-sm-3 col-md-5" style="background-color: white;">
-                  <button type ="button" class="btn btn-primary" onclick="fnCalCount('p',this);">+</button>
-                  <input type="text" name="pop_out" value="0" readonly="readonly" style="text-align:center; width: 10%;"/>
-                  <button type="button" class="btn btn-primary" onclick="fnCalCount('m', this);">-</button>
-                  <button type="button" class="btn btn-primary"> 삭제 </button>
-                </div>
-              </div>
-              <!-- 메뉴3 -->
-              <!-- 메뉴4 -->
-              <div class="row g-0 text-center border border-3">
-                <div class="col-sm-6 col-md-5" style="background-color: white;">
-                  <h3>쉐프 테이스팅 코스</h3>
-                </div>
-                <div class="col-sm-3 col-md-2" style="background-color: white;">
-                  <h3>88,000원</h3>
-                </div>
-                <div class="col-sm-3 col-md-5" style="background-color: white;">
-                  <button type ="button" class="btn btn-primary" onclick="fnCalCount('p',this);">+</button>
-                  <input type="text" name="pop_out" value="0" readonly="readonly" style="text-align:center; width: 10%;"/>
-                  <button type="button" class="btn btn-primary" onclick="fnCalCount('m', this);">-</button>
-                  <button type="button" class="btn btn-primary"> 삭제 </button>
-                </div>
-              </div>
-              <!-- 메뉴4 -->
+             <!-- 주문 메뉴 및 총 금액 -->
             </div>
-            <!-- 주문 메뉴 및 총 금액 -->
-            <div class="row g-0 ">
-              <div class="row g-0 border border-3">
-                 <div class="col-sm-6 col-md-12" style="background-color: white; vertical-align: top; text-align: left;">
-                   <p>
-                     <h3 >주문메뉴 : </h3>
-                   </p>
-                 </div>
-                 <div class="col-sm-6 col-md-12" style="background-color: white; text-align: left;">
-                   <h3 style="color: red">총금액 : </h3>
-                 </div>
-               </div>
-             </div>
+            <div class="col-sm-6 col-md-12" style="background-color: white; text-align: left;">
+              <h3 style="color: red">총금액 : </h3>
+            </div>
              <!-- 주문 메뉴 및 총 금액 -->
              <!-- modal center -->
            <div class="modal-footer">
-             <button type="button" class="btn btn-warning" onclick="location.href='../reservation/reservation_result.jsp' ">카카오 결제하기</button>
-             <button type="button" class="btn btn-primary" onclick="location.href='../reservation/reservation_result.jsp' ">결제하기</button>
+             <button type="button" class="btn btn-warning" onclick="location.href='../reservation/reservation_result.jsp' ">카카오 결제</button>
+             <button type="button" class="btn btn-primary" onclick="location.href='../reservation/reservation_result.jsp' ">결제</button>
            </div>
          </div>
        </div>

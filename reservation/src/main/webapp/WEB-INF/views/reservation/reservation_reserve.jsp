@@ -160,9 +160,9 @@
                                 <h3>88,000원</h3>
                               </div>
                               <div class="col-sm-3 col-md-5" style="background-color: white;">
-                                <button type ="button" class="btn btn-primary" onclick="fnCalCount('p',this);">+</button>
+                                <button type ="button" class="btn btn-primary">+</button>
                                 <input type="text" name="pop_out" value="0" readonly="readonly" style="text-align:center; width: 10%;"/>
-                                <button type="button" class="btn btn-primary" onclick="fnCalCount('m', this);">-</button>
+                                <button type="button" class="btn btn-primary">-</button>
                                 <button type="button" class="btn btn-primary"> 삭제 </button>
                               </div>
                             </div>
@@ -176,9 +176,9 @@
                                 <h3>88,000원</h3>
                               </div>
                               <div class="col-sm-3 col-md-5" style="background-color: white;">
-                                <button type ="button" class="btn btn-primary" onclick="fnCalCount('p',this);">+</button>
+                                <button type ="button" class="btn btn-primary">+</button>
                                 <input type="text" name="pop_out" value="0" readonly="readonly" style="text-align:center; width: 10%;"/>
-                                <button type="button" class="btn btn-primary" onclick="fnCalCount('m', this);">-</button>
+                                <button type="button" class="btn btn-primary">-</button>
                                 <button type="button" class="btn btn-primary"> 삭제 </button>
                               </div>
                             </div>
@@ -192,9 +192,9 @@
                                 <h3>88,000원</h3>
                               </div>
                               <div class="col-sm-3 col-md-5" style="background-color: white;">
-                                <button type ="button" class="btn btn-primary" onclick="fnCalCount('p',this);">+</button>
+                                <button type ="button" class="btn btn-primary">+</button>
                                 <input type="text" name="pop_out" value="0" readonly="readonly" style="text-align:center; width: 10%;"/>
-                                <button type="button" class="btn btn-primary" onclick="fnCalCount('m', this);">-</button>
+                                <button type="button" class="btn btn-primary">-</button>
                                 <button type="button" class="btn btn-primary"> 삭제 </button>
                               </div>
                             </div>
@@ -208,9 +208,9 @@
                                 <h3>88,000원</h3>
                               </div>
                               <div class="col-sm-3 col-md-5" style="background-color: white;">
-                                <button type ="button" class="btn btn-primary" onclick="fnCalCount('p',this);">+</button>
+                                <button type ="button" class="btn btn-primary">+</button>
                                 <input type="text" name="pop_out" value="0" readonly="readonly" style="text-align:center; width: 10%;"/>
-                                <button type="button" class="btn btn-primary" onclick="fnCalCount('m', this);">-</button>
+                                <button type="button" class="btn btn-primary">-</button>
                                 <button type="button" class="btn btn-primary"> 삭제 </button>
                               </div>
                             </div>
