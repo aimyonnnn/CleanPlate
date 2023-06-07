@@ -45,11 +45,11 @@
         <div class="row">
             <div class="col-2">
                 <div class="btn-group-vertical btn-group-lg d-flex align-self-start" role="group" aria-label="Vertical button group">
-                    <button type="button" class="btn btn-outline-warning active p-3" onclick="location.href='member'" style="color: white;">내 정보</button>
+                    <button type="button" class="btn btn-outline-warning active p-3" onclick="location.href='mypage'" style="color: white;">내 정보</button>
                     <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='mypage_rslist'" >예약 내역</button>
                     <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='mypage_like'">내가 찜한 식당</button>
                     <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='mypage_rv'">내가 쓴 리뷰</button>
-                    <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='mypage_d'">회원탈퇴</button>
+                    <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='withdrawal'">회원탈퇴</button>
                 </div>
             </div>
             <!-- 내용 구역 -->
