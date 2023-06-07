@@ -36,7 +36,6 @@
                 <div class="input-group mb-5 d-flex shadow-lg d-flex justify-content-center pe-3" style="border-radius: 10px;">
                     <img src="../images/profile.png" alt="" style="width: 100px; height: 100px;" class="justify-content-center">
                     <p class="d-flex align-items-center"><span>님 환영합니다</span></p>
-                    
                 </div>
             </div>
             <div class="col-10">
@@ -45,14 +44,15 @@
         </div>
         <div class="row">
             <div class="col-2">
-            	<!-- 왼쪽 사이드바 버튼 구역-->
+                <!-- 왼쪽 사이드바 버튼영역-->
                 <div class="btn-group-vertical btn-group-lg d-flex align-self-start" role="group" aria-label="Vertical button group">
-                    <button type="button" class="btn btn-outline-warning active p-3" onclick="location.href='mypage'" style="color: white;">내 정보</button>
-                    <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='mypage_rslist'" >예약 내역</button>
-                    <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='mypage_like'">내가 찜한 식당</button>
-                    <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='mypage_rv'">내가 쓴 리뷰</button>
-                    <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='withdrawal'">회원탈퇴</button>
+                    <button type="button" class="btn btn-outline-warning active p-3" onclick="location.href='member'" style="color: white;">내 정보</button>
+                    <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='memberRSList'" >예약 내역</button>
+                    <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='memberLike'">내가 찜한 식당</button>
+                    <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='memberReview'">내가 쓴 리뷰</button>
+                    <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='memberWithdrawal'">회원탈퇴</button>
                 </div>
+                <!-- 왼쪽 사이드바 버튼영역-->
             </div>
             <!-- 내용 구역 -->
             <div class="col-10">
@@ -60,7 +60,7 @@
                 <!-- 내용 -->
                 <div class="row align-items-center" style="margin-left: 50px;">
                     <div class="card ms-3 me-5 mt-5 align-items-center" style="width: 20rem;">
-                        <img src="..." class="card-img-top" alt="리뷰사진">
+                        <img src="..." width="150" height="150" class="card-img-top" alt="리뷰사진">
                         <div class="card-body">
                           <h5 class="card-title">오마카세</h5>
                           <p class="card-text">리뷰내용</p>
@@ -69,7 +69,7 @@
                         </div>
                     </div>
                     <div class="card ms-3 me-5 mt-5 align-items-center" style="width: 20rem;">
-                        <img src="..." class="card-img-top" alt="리뷰사진">
+                        <img src="..." width="150" height="150" class="card-img-top" alt="리뷰사진">
                         <div class="card-body">
                           <h5 class="card-title">파인다이닝</h5>
                           <p class="card-text">리뷰내용</p>

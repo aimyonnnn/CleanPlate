@@ -74,39 +74,39 @@ public class LoginController {
 	
 	//=================================회원 마이페이지=================================
 	// 로그인 성공후 XXX님 클릭시 마이페이지로 이동
-	@GetMapping("mypage")
-	public String mypage() {
-		return "member/mypage_form";
+	@GetMapping("member")
+	public String member() {
+		return "member/memberForm";
 	}
 	
 	// 비밀번호 입력 후 내정보 수정 페이지로 이동
-	@PostMapping("mypagePro")
-	public String mypagePro() {
-		return "member/mypage_info";
+	@PostMapping("memberPro")
+	public String memberPro() {
+		return "member/memberInfo";
 	}
 	
 	// 예약 내역 클릭시 
-	@GetMapping("mypage_rslist")
-	public String mypage_rslist() {
-		return "member/mypage_rslist";
+	@GetMapping("memberRSList")
+	public String memberRSList() {
+		return "member/memberRSList";
 	}
 	
 	// 내가 찜한 식당
-	@GetMapping("mypage_like")
-	public String mypage_like() {
-		return "member/mypage_like";
+	@GetMapping("memberLike")
+	public String memberLike() {
+		return "member/memberLike";
 	}
 	
 	// 내가 쓴 리뷰
-	@GetMapping("mypage_rv")
-	public String mypage_rv() {
-		return "member/mypageReview";
+	@GetMapping("memberReview")
+	public String memberReview() {
+		return "member/memberReview";
 	}
 	
 	// 회원탈퇴 
-	@GetMapping("withdrawal")
-	public String mypage_d() {
-		return "member/mypage_withdrawal";
+	@GetMapping("memberWithdrawal")
+	public String memberWithdrawal() {
+		return "member/memberWithdrawal";
 	}
 	//=================================회원 마이페이지 끝=================================
 	
