@@ -10,6 +10,20 @@
         <title>MyPage</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <!-- 이부분은 지우면 안됩니다 -->
+    <!-- 별점 css 부분 -->
+     <style>
+        .star_rating {font-size:0; letter-spacing:-4px;}
+        .star_rating a {
+            font-size:22px;
+            letter-spacing:0;
+            display:inline-block;
+            margin-left:5px;
+            color:#ccc;
+            text-decoration:none;
+        }
+        .star_rating a:first-child {margin-left:0;}
+        .star_rating a.on {color:#f9c401;}
+    </style>
 </head>
 
 
@@ -96,10 +110,38 @@
             </div>
             <div class="modal-body">
                 <form action="#" method="post" enctype="multipart/form-data">
-                   <b>리뷰 사진</b> <input type="file" name="file"><br>
-                   <b>별점</b> <br>
-                   <b>내용</b> <br> 
-                   <textarea cols="50" rows="5" name="content"></textarea>
+                    <table>
+                        <tr>
+                            <th>리뷰사진</th>
+                            <td><input type="file" name="file"></td>
+                        </tr>
+                        <tr>
+                            <th>별점</th>
+                            <td>
+                                <p class="star_rating">
+                                    <a href="#" class="on">★</a>
+                                    <a href="#" class="on">★</a>
+                                    <a href="#" class="on">★</a>
+                                    <a href="#" class="on">★</a>
+                                    <a href="#" class="on">★</a>
+                                </p>
+                                <!-- 별점 jQuery -->
+	                            <script>
+	                                $( ".star_rating a" ).click(function() {
+	                                $(this).parent().children("a").removeClass("on");
+	                                $(this).addClass("on").prevAll("a").addClass("on");
+	                                return false;
+	                                });
+	                            </script>
+                                <!-- 별점 jQuery -->
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>내용</th>
+                            <td><textarea cols="50" rows="5" name="content"></textarea></td>
+                        </tr>
+
+                    </table>
                 </form>
 
             </div>
