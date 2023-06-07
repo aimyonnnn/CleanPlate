@@ -86,7 +86,7 @@
                             <td>23-05-23</td>
                             <td>17:00</td>
                             <td>방문예정</td>
-                            <td><button type="button" class="btn btn-warning" style="color: white;" data-bs-toggle="modal" data-bs-target="#exampleModal">상세보기</button></td>
+                            <td><button type="button" class="btn btn-warning" style="color: white;" data-bs-toggle="modal" data-bs-target="#rsListModal">상세보기</button></td>
                         </tr>
                         <tr>
                             <td>000002</td>
@@ -94,7 +94,7 @@
                             <td>23-05-24</td>
                             <td>12:00</td>
                             <td>방문예정</td>
-                            <td><button type="button" class="btn btn-warning" style="color: white;" data-bs-toggle="modal" data-bs-target="#exampleModal">상세보기</button></td>
+                            <td><button type="button" class="btn btn-warning" style="color: white;" data-bs-toggle="modal" data-bs-target="#rsListModal">상세보기</button></td>
                         </tr>
                     </tbody>
                 </table> 
@@ -103,11 +103,11 @@
     </div>
  
  	<!-- 예약내역 출력 첫번째 모달창 -->
-	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal fade" id="rsListModal" tabindex="-1" aria-labelledby="rsListModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg">
 	    	<div class="modal-content">
 	    		<div class="modal-header">
-	        		<h1 class="modal-title fs-5" id="exampleModalLabel">예약 내역</h1>
+	        		<h1 class="modal-title fs-5" id="rsListModalLabel">예약 내역</h1>
 	        		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 	      		</div>
 	      		<div class="modal-body">
@@ -257,7 +257,7 @@
 	            </div>
 	         <div class="mt-3 d-flex justify-content-center">
         		<button type="button" class="btn btn-outline-warning" id="assignmentButton">예약 양도하기</button>
-        		<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="margin-left: 10px;">닫기</button>
+        		<button type="button" class="btn btn-secondary" id="closeButton" data-bs-dismiss="modal" style="margin-left: 10px;">닫기</button>
 		     </div>
 	      </div>
 	    </div>
@@ -276,6 +276,11 @@
 	 	$(document).on("click", "#assignmentButton", function(event){
 	 	    // 예약 양도 페이지로 이동
 	 		window.location.href = '<c:url value="양도페이지"/>';
+	 	});
+	 	<!-- 모달창에서 닫기버튼 클릭 시 현재 페이지로 돌아가기 -->
+	 	$(document).on("click", "#closeButton", function(event){
+	 	    // 예약 양도 페이지로 이동
+	 		window.location.href = "memberRSList";
 	 	});
  	</script>
  
