@@ -26,11 +26,11 @@ public class AssignmentController {
 	
 	@PostMapping("/assignAgreePro")
 	public String loginProcess(@RequestParam String id, HttpServletRequest request) {
-		
-		logger.info("Welcome "+id);
-		
-    	HttpSession session = request.getSession();
-    	session.setAttribute("id", id);
+//		
+//		logger.info("Welcome "+id);
+//		
+//    	HttpSession session = request.getSession();
+//    	session.setAttribute("id", id);
 		return "assignment/assignmentChat";
 	}
 	

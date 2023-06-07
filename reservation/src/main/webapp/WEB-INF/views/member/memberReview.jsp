@@ -125,12 +125,25 @@
                                     <a href="#" class="on">★</a>
                                     <a href="#" class="on">★</a>
                                 </p>
+                                <!-- 나중에 폼 전송시에는 type을 hidden으로 바꾸면 됨, 지금은 확인해야하니 text로 함-->
+                                <input type="text" value="" id="starRating" name="starRating">
                                 <!-- 별점 jQuery -->
 	                            <script>
 	                                $( ".star_rating a" ).click(function() {
 	                                $(this).parent().children("a").removeClass("on");
 	                                $(this).addClass("on").prevAll("a").addClass("on");
 	                                return false;
+	                                });
+	                                
+	                                let starCount = 0; // 별점을 저장할 변수 선언
+	                                $(".star_rating a").click(function(e) { // 콜백함수에 파라미터 추가
+	                                    e.preventDefault(); // a태그 기본 동작 방지
+	                                    // 실제 클릭된 이벤트 요소(e.currentTarget)의 인덱스를 가져옴
+	                                    // index는 0부터 시작이니 +1을 해주면 됨
+	                                    let index = $(e.currentTarget).index() + 1; 
+// 	                                    console.log($(e.currentTarget).index()); // 콘솔 확인용
+	                                    starCount = index;
+	                                    $("#starRating").val(starCount); // 전송할 폼의 input에 값을 넣음
 	                                });
 	                            </script>
                                 <!-- 별점 jQuery -->

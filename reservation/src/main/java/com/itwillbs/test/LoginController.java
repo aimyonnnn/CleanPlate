@@ -2,14 +2,22 @@ package com.itwillbs.test;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.itwillbs.test.service.LoginService;
+
+import net.nurigo.java_sdk.exceptions.CoolsmsException;
+
 @Controller
 public class LoginController {
+	
+	@Autowired
+	private LoginService service;
 	
 	//=================================로그인 & 로그아웃=================================
 	// 메인에서 로그인 버튼 클릭 시 로그인 폼으로 이동
@@ -22,6 +30,12 @@ public class LoginController {
 	@PostMapping("loginPro")
 	public String LoginMain() {
 	    return "redirect:/";
+	}
+	
+	// CoolSMS 문자 인증
+	@PostMapping("/checkPhone")
+	public @ResponseBody String checkPhone(@RequestParam(value="to") String to) throws CoolsmsException {
+		return service.PhoneNumberCheck(to);
 	}
 	
 	// 카카오 로그인
