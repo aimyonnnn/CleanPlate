@@ -8,8 +8,7 @@
 	<%--line-awesome icon 사용을 위한 스타일 시트 --%>
 	<link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <title>admin Main</title>
-    <link href="adminDetail.css" rel="stylesheet" type="text/css"/>
-    <link rel="shortcut icon" href="#">
+      <link href="adminMain.css" rel="stylesheet" type="text/css"/>
   </head>
   <body>
 <!-- --------------------사이드 바 영역----------------------------  -->
@@ -45,7 +44,7 @@
                 </a>
               </li>
               <li>
-                <a href="adminStatistics.jsp">
+                <a href="#">
                   <span class="las la-history"></span>
                   사이트 이용 통계
                 </a>
@@ -57,9 +56,9 @@
           </div>
           <ul>
             <li>
-                <a href="adminMember.jsp">
+                <a href="adminCustomer.jsp">
                  <span class="las la-users"></span>
-                 회원 관리
+                 고객 관리
                  </a>
             </li>
             <li>
@@ -69,7 +68,7 @@
                  </a>
              </li>
              <li>
-                <a href="adminReservation.jsp">
+                <a href="adminReservation">
                   <span class="las la-history"></span>
                   예약 관리
                 </a>
@@ -84,12 +83,12 @@
            <div class="menu-head">
              <span>Team2</span>
            </div>
-            <li><a><span class="las la-laugh"></span>박수민</a></li>
-            <li><a><span class="las la-laugh"></span>김민진</a></li>
-            <li><a><span class="las la-laugh"></span>김보희</a></li>
-            <li><a><span class="las la-laugh"></span>이재승</a></li>
-            <li><a><span class="las la-laugh"></span>김묘정</a></li>
-            <li><a><span class="las la-laugh"></span>이건무</a></li>
+            <li><a><span class="las la-laugh"></span>수민</a></li>
+            <li><a><span class="las la-laugh"></span>민진</a></li>
+            <li><a><span class="las la-laugh"></span>보희</a></li>
+            <li><a><span class="las la-laugh"></span>재승</a></li>
+            <li><a><span class="las la-laugh"></span>묘정</a></li>
+            <li><a><span class="las la-laugh"></span>건무</a></li>
         </div>
       </div>
     </div>
@@ -107,7 +106,7 @@
         <div class="page-header">
           <div>
             <h1>관리자 페이지</h1>
-            <small>이용 회원, 예약 통계 확인 및 관리</small>
+            <small>이용 고객, 예약 통계 확인 및 관리</small>
           </div>
         </div> 
 
@@ -195,7 +194,7 @@
           <div class="jobs">
             <h2>최근 예약
                 <small>
-                    <a href="adminAllReservation.jsp">전체 예약 확인하기</a>
+                    <a href="#">전체 예약 확인하기</a>
                     <span class="las la-arrow-right"></span>
                 </small>
             </h2>
@@ -205,7 +204,7 @@
               <tbody>
               <tr>
                   <td><div><span class = "indicator"></span></div></td>
-                  <td><div th:text="">아이디 :</div></td>
+                  <td><div th:text="">이름 :</div></td>
                   <%-- DB 연동 후 th:text 내에 "'컬럼명: '+${파라미터명}" 추가 --%>
                   <td><div th:text="">테이블 수 :</div></td>
                   <td><div th:text="">날짜 :</div></td>
