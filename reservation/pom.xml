@@ -33,6 +33,13 @@
 			<version>${org.springframework-version}</version>
 		</dependency>
 		
+		 <!-- CoolSMS -->
+		 <dependency>
+			    <groupId>net.nurigo</groupId>
+			    <artifactId>javaSDK</artifactId>
+			    <version>2.2</version>
+		 </dependency> 
+		
 		<!-- websocket -->
 		<dependency>
 	            <groupId>org.springframework</groupId>

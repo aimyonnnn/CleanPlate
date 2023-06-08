@@ -227,15 +227,21 @@
 	                  <input type="text" id="birth" class="form-control" placeholder="YYYYMMDD">
 	                </label>
 	              </div>
-	           
-	              </div>
+	              <!-- 휴대폰 번호 인증 버튼 -->
 	              <div class="input-container">
 	                <label for="phone" style="width: 80%;">휴대폰번호<br>
 	                  <input type="text" id="phone" class="form-control" placeholder="'_'빼고 숫자만 입력">
 	                </label>
 	                <!-- 휴대폰 번호 인증 버튼 -->
-	                <button type="button" id="verify-phone">인증요청</button>
+	                <button type="button" id="verifyRequest">인증요청</button>
 	              </div>
+	              <div class="input-container">
+	                <label for="phone" style="width: 80%;">인증번호<br>
+	                  <input type="text" id="verifyNum" class="form-control">
+	                </label>
+	                <button type="button" id="verifyConfirm">인증확인</button>
+	              </div>
+	               <!-- 휴대폰 번호 인증 버튼 -->
 	              <div class="input-container">
 	                <label for="email" style="width: 100%;">이메일<br>
 	                  <input type="text" id="email" class="form-control">
@@ -246,7 +252,7 @@
 	                <span class="terms_agree"><strong>약관</strong></span>
 	                <div class="agree_box">
 	                  <ul class="agree_article">
-	                    <li>
+	                    <li style="list-style-type: none;">
 	                      <div class="InpBox">
 	                        <div class="form-check">
 	                          <input class="form-check-input" type="checkbox" id="agreeAllPersonal">
@@ -259,7 +265,7 @@
 	                    </li>
 	                  </ul>
 	                  <ul class="agree_article depth2">
-	                    <li>
+	                    <li style="list-style-type: none;">
 	                      <div class="agree_desc">
 	                        <div class="InpBox">
 	                          <div class="form-check">
@@ -274,7 +280,7 @@
 	                        <span class="blind">개인회원 약관 상세보기</span>
 	                      </a>
 	                    </li>
-	                    <li>
+	                    <li style="list-style-type: none;">
 	                      <div class="agree_desc">
 	                        <div class="InpBox">
 	                          <div class="form-check">
@@ -311,6 +317,35 @@
 	  </div>
 	</div>
 	<!-- 개인회원 모달창 끝 -->
+	
+	<!-- CoolSMS 문자인증 시작 -->
+	<script>
+	$('#verifyRequest').click(function(){
+		let to = $('input[id="phone"]').val();
+		$.ajax({
+			url : '<c:url value="/checkPhone"/>',
+			type : "POST",
+			data : "to=" + to,
+			dataType : "json",
+			success : function(data) {
+				let checkNum = data;
+				alert('checkNum:'+ checkNum);
+				$('#verifyConfirm').click(function(){
+					let userNum = $('input[id="verifyNum"]').val();		
+					if(checkNum == userNum){
+						alert('인증 성공하였습니다.');
+					}else {
+						alert('인증 실패하였습니다. 다시 입력해주세요.');
+					}
+				});
+			},
+			error : function() {
+				alert("에러")
+			}
+		});
+	});
+	</script>
+	<!-- CoolSMS 문자인증 끝 -->
 	
 	<!-- 기업회원 모달창 -->
 	<div class="modal fade" id="business-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -351,13 +386,20 @@
 	                  <input type="text" id="name" class="form-control" placeholder="이름 입력">
 	                </label>
 	              </div>
+	               <!-- 휴대폰 번호 인증 버튼 -->
 	              <div class="input-container">
 	                <label for="phone" style="width: 80%;">휴대폰번호<br>
-	                  <input type="text" id="phone" class="form-control" placeholder="'_'빼고 숫자만 입력">
+	                  <input type="text" id="businessPhone" class="form-control" placeholder="'_'빼고 숫자만 입력">
 	                </label>
-	                <!-- 휴대폰 번호 인증 버튼 -->
-	                <button type="button" id="verify-phone">인증요청</button>
+	                <button type="button" id="businessRequest">인증요청</button>
 	              </div>
+	              <div class="input-container">
+	                <label for="phone" style="width: 80%;">인증번호<br>
+	                  <input type="text" id="businessNum" class="form-control">
+	                </label>
+	                <button type="button" id="businessConfirm">인증확인</button>
+	              </div>
+	               <!-- 휴대폰 번호 인증 버튼 -->
 	              <div class="input-container">
 	                <label for="email" style="width: 100%;">이메일<br>
 	                  <input type="text" id="businessEmail" class="form-control">
@@ -368,7 +410,7 @@
 	                <span class="terms_agree"><strong>약관</strong></span>
 	                <div class="agree_box">
 	                  <ul class="agree_article">
-	                    <li>
+	                    <li style="list-style-type: none;">
 	                      <div class="InpBox">
 	                        <div class="form-check">
 	                          <input class="form-check-input" type="checkbox" id="agreeAllPersonal">
@@ -381,7 +423,7 @@
 	                    </li>
 	                  </ul>
 	                  <ul class="agree_article depth2">
-	                    <li>
+	                    <li style="list-style-type: none;">
 	                      <div class="agree_desc">
 	                        <div class="InpBox">
 	                          <div class="form-check">
@@ -396,7 +438,7 @@
 	                        <span class="blind">개인회원 약관 상세보기</span>
 	                      </a>
 	                    </li>
-	                    <li>
+	                    <li style="list-style-type: none;">
 	                      <div class="agree_desc">
 	                        <div class="InpBox">
 	                          <div class="form-check">
@@ -433,6 +475,36 @@
 	  </div>
 	</div>
 	<!-- 기업회원 모달창 끝 -->
+	
+	<!-- CoolSMS 문자인증 시작 -->
+	<script>
+	$('#businessRequest').click(function(){
+		let to = $('input[id="businessPhone"]').val();
+		$.ajax({
+			url : '<c:url value="/checkPhone"/>',
+			type : "POST",
+			data : "to=" + to,
+			dataType : "json",
+			success : function(data) {
+				let checkNum = data;
+				alert('checkNum:'+ checkNum);
+				$('#businessConfirm').click(function(){
+					let userNum = $('input[id="businessNum"]').val();		
+					if(checkNum == userNum){
+						alert('인증 성공하였습니다.');
+					}else {
+						alert('인증 실패하였습니다. 다시 입력해주세요.');
+					}
+				});
+			},
+			error : function() {
+				alert("에러")
+			}
+		});
+	});
+	</script>
+	<!-- CoolSMS 문자인증 끝 -->
+	
 	
 	<footer class="footer">
 		<jsp:include page="../common/common_footer.jsp"/>
