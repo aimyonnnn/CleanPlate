@@ -127,7 +127,6 @@
                         <tr>
                             <th>별점</th>
                             <td>
-<<<<<<< HEAD
                                 <div class="starRev">
                                     <!-- 편의 상 가장 첫번째의 별은 기본으로 class="on"이 되게 설정해주었습니다. -->
                                     <span class="starR on">⭐</span>
@@ -135,46 +134,29 @@
                                     <span class="starR">⭐</span>
                                     <span class="starR">⭐</span>
                                     <span class="starR">⭐</span>
-                                  </div>
-                            <script>
-                                $('.starRev span').click(function(){
-                                $(this).parent().children('span').removeClass('on');
-                                $(this).addClass('on').prevAll('span').addClass('on');
-                                return false;
-                                });
-
-                            </script>
-=======
-                                <p class="star_rating">
-                                    <a href="#" class="on">★</a>
-                                    <a href="#" class="on">★</a>
-                                    <a href="#" class="on">★</a>
-                                    <a href="#" class="on">★</a>
-                                    <a href="#" class="on">★</a>
-                                </p>
+                                </div>
                                 <!-- 나중에 폼 전송시에는 type을 hidden으로 바꾸면 됨, 지금은 확인해야하니 text로 함-->
                                 <input type="text" value="" id="starRating" name="starRating">
-                                <!-- 별점 jQuery -->
 	                            <script>
-	                                $( ".star_rating a" ).click(function() {
-	                                $(this).parent().children("a").removeClass("on");
-	                                $(this).addClass("on").prevAll("a").addClass("on");
+	                                <!-- 별점 jQuery -->
+	                                $('.starRev span').click(function(){
+	                                $(this).parent().children('span').removeClass('on');
+	                                $(this).addClass('on').prevAll('span').addClass('on');
 	                                return false;
 	                                });
-	                                
 	                                let starCount = 0; // 별점을 저장할 변수 선언
-	                                $(".star_rating a").click(function(e) { // 콜백함수에 파라미터 추가
+	                                $(".starRev span").click(function(e) { // 콜백함수에 파라미터 추가
 	                                    e.preventDefault(); // a태그 기본 동작 방지
 	                                    // 실제 클릭된 이벤트 요소(e.currentTarget)의 인덱스를 가져옴
 	                                    // index는 0부터 시작이니 +1을 해주면 됨
 	                                    let index = $(e.currentTarget).index() + 1; 
-// 	                                    console.log($(e.currentTarget).index()); // 콘솔 확인용
+	//                                     console.log($(e.currentTarget).index()); // 콘솔 확인용
 	                                    starCount = index;
 	                                    $("#starRating").val(starCount); // 전송할 폼의 input에 값을 넣음
 	                                });
+	                                <!-- 별점 jQuery -->
+	
 	                            </script>
-                                <!-- 별점 jQuery -->
->>>>>>> branch 'master' of https://github.com/aimyonnnn/King.git
                             </td>
                         </tr>
                         <tr>
