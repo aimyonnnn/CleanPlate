@@ -10,19 +10,28 @@
         <title>MyPage</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <!-- 이부분은 지우면 안됩니다 -->
-    <!-- 별점 css 부분 -->
-     <style>
-        .star_rating {font-size:0; letter-spacing:-4px;}
-        .star_rating a {
-            font-size:22px;
-            letter-spacing:0;
-            display:inline-block;
-            margin-left:5px;
-            color:#ccc;
-            text-decoration:none;
+    <style>
+        /* 각 별들의 기본 설정 */
+        .starR{
+        display: inline-block;
+        width: 30px;
+        height: 30px;
+        color: transparent;
+        text-shadow: 0 0 0 #f0f0f0;
+        font-size: 1.8em;
+        box-sizing: border-box;
+        cursor: pointer;
         }
-        .star_rating a:first-child {margin-left:0;}
-        .star_rating a.on {color:#f9c401;}
+
+        /* 별 이모지에 마우스 오버 시 */
+        .starR:hover {
+        text-shadow: 0 0 0 #ccc;
+        }
+
+        /* 별 이모지를 클릭 후 class="on"이 되었을 경우 */
+        .starR.on{
+        text-shadow: 0 0 0 #ffbc00;
+        }
     </style>
 </head>
 
@@ -118,22 +127,22 @@
                         <tr>
                             <th>별점</th>
                             <td>
-                                <p class="star_rating">
-                                    <a href="#" class="on">★</a>
-                                    <a href="#" class="on">★</a>
-                                    <a href="#" class="on">★</a>
-                                    <a href="#" class="on">★</a>
-                                    <a href="#" class="on">★</a>
-                                </p>
-                                <!-- 별점 jQuery -->
-	                            <script>
-	                                $( ".star_rating a" ).click(function() {
-	                                $(this).parent().children("a").removeClass("on");
-	                                $(this).addClass("on").prevAll("a").addClass("on");
-	                                return false;
-	                                });
-	                            </script>
-                                <!-- 별점 jQuery -->
+                                <div class="starRev">
+                                    <!-- 편의 상 가장 첫번째의 별은 기본으로 class="on"이 되게 설정해주었습니다. -->
+                                    <span class="starR on">⭐</span>
+                                    <span class="starR">⭐</span>
+                                    <span class="starR">⭐</span>
+                                    <span class="starR">⭐</span>
+                                    <span class="starR">⭐</span>
+                                  </div>
+                            <script>
+                                $('.starRev span').click(function(){
+                                $(this).parent().children('span').removeClass('on');
+                                $(this).addClass('on').prevAll('span').addClass('on');
+                                return false;
+                                });
+
+                            </script>
                             </td>
                         </tr>
                         <tr>
