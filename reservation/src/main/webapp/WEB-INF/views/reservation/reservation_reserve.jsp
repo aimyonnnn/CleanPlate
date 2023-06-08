@@ -12,6 +12,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/5.2.3/css/bootstrap.min.css">
 <script src="../js/jquery-3.7.0.js"></script>
+<link href="${pageContext.request.contextPath }/resources/css/starrating.css" rel="stylesheet" type="text/css">
 
 <style>
     /* Make the image fully responsive */
@@ -27,7 +28,7 @@
 <!-- TOP 시작 -->
 <body>
 <header>
-<%@ include file="../common/common_header.jsp" %>
+	<jsp:include page="../common/common_header.jsp"/>
 </header>
 <!-- TOP 끝 -->
 <!-- Center 시작-->
@@ -77,9 +78,66 @@
                 <!-- 가게 제목 -->
                 <div class="h-50 p-3 col " style="background-color: white">
                   <h1>키친동백</h1>
-                  <button type="button" class="btn btn-warning">즐겨찾기</button>
+                  <button type="button" class="btn btn-warning">즐겨찾기</button> <button type="button" id="testBtn" class="btn btn-warning">리뷰</button>
                 </div>
                 <!-- 가게 제목 -->
+                <!-- 리뷰 모달창 -->
+						<div class="modal fade" id="testModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+								<h3 class="modal-title" id="exampleModalLabel">리뷰쓰기</h5>
+								</div>
+								<div class="modal-body">
+								<!-- 별점주기 코드 -->
+									<div class="starpoint_wrap">
+									  <div class="starpoint_box">
+									    <label for="starpoint_1" class="label_star" title="0.5"><span class="blind">0.5점</span></label>
+									    <label for="starpoint_2" class="label_star" title="1"><span class="blind">1점</span></label>
+									    <label for="starpoint_3" class="label_star" title="1.5"><span class="blind">1.5점</span></label>
+									    <label for="starpoint_4" class="label_star" title="2"><span class="blind">2점</span></label>
+									    <label for="starpoint_5" class="label_star" title="2.5"><span class="blind">2.5점</span></label>
+									    <label for="starpoint_6" class="label_star" title="3"><span class="blind">3점</span></label>
+									    <label for="starpoint_7" class="label_star" title="3.5"><span class="blind">3.5점</span></label>
+									    <label for="starpoint_8" class="label_star" title="4"><span class="blind">4점</span></label>
+									    <label for="starpoint_9" class="label_star" title="4.5"><span class="blind">4.5점</span></label>
+									    <label for="starpoint_10" class="label_star" title="5"><span class="blind">5점</span></label>
+									    <input type="radio" name="starpoint" id="starpoint_1" class="star_radio">
+									    <input type="radio" name="starpoint" id="starpoint_2" class="star_radio">
+									    <input type="radio" name="starpoint" id="starpoint_3" class="star_radio">
+									    <input type="radio" name="starpoint" id="starpoint_4" class="star_radio">
+									    <input type="radio" name="starpoint" id="starpoint_5" class="star_radio">
+									    <input type="radio" name="starpoint" id="starpoint_6" class="star_radio">
+									    <input type="radio" name="starpoint" id="starpoint_7" class="star_radio">
+									    <input type="radio" name="starpoint" id="starpoint_8" class="star_radio">
+									    <input type="radio" name="starpoint" id="starpoint_9" class="star_radio">
+									    <input type="radio" name="starpoint" id="starpoint_10" class="star_radio">
+									    <span class="starpoint_bg"></span>
+									  </div>
+									</div>
+								<p><textarea cols="50" rows="5" placeholder="음식의 맛, 양 등에 대한 솔직한 리뷰를 남겨주세요."></textarea><br>
+								<label class="file-label" for="chooseFile">사진 선택</label>
+								<input class="file" id="chooseFile" type="file" multiple>
+								</p>
+								<hr>
+								<p style = "text-align: center">추천하는 메뉴가 있나요?</p>
+								치킨 치즈 머핀 세트
+								</div>
+								<div class="modal-footer">
+									<button class="btn" type="button" data-dismiss="modal">완료</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<script>
+						$('#testBtn').click(function(e){
+							e.preventDefault();
+							$('#testModal').modal("show");
+						});
+					</script>                
+                <!-- 리뷰 모달창 -->
+                
                 <!-- 즐겨 찾기 -->
                 <div class="col" style="background-color: white;">
                   <!-- <button type="button" class="btn btn-warning">즐겨찾기</button> -->
@@ -160,9 +218,9 @@
                                 <h3>88,000원</h3>
                               </div>
                               <div class="col-sm-3 col-md-5" style="background-color: white;">
-                                <button type ="button" class="btn btn-primary">+</button>
+                                <button type ="button" class="btn btn-primary" onclick="fnCalCount('p',this);">+</button>
                                 <input type="text" name="pop_out" value="0" readonly="readonly" style="text-align:center; width: 10%;"/>
-                                <button type="button" class="btn btn-primary">-</button>
+                                <button type="button" class="btn btn-primary" onclick="fnCalCount('m', this);">-</button>
                                 <button type="button" class="btn btn-primary"> 삭제 </button>
                               </div>
                             </div>
@@ -176,9 +234,9 @@
                                 <h3>88,000원</h3>
                               </div>
                               <div class="col-sm-3 col-md-5" style="background-color: white;">
-                                <button type ="button" class="btn btn-primary">+</button>
+                                <button type ="button" class="btn btn-primary" onclick="fnCalCount('p',this);">+</button>
                                 <input type="text" name="pop_out" value="0" readonly="readonly" style="text-align:center; width: 10%;"/>
-                                <button type="button" class="btn btn-primary">-</button>
+                                <button type="button" class="btn btn-primary" onclick="fnCalCount('m', this);">-</button>
                                 <button type="button" class="btn btn-primary"> 삭제 </button>
                               </div>
                             </div>
@@ -192,9 +250,9 @@
                                 <h3>88,000원</h3>
                               </div>
                               <div class="col-sm-3 col-md-5" style="background-color: white;">
-                                <button type ="button" class="btn btn-primary">+</button>
+                                <button type ="button" class="btn btn-primary" onclick="fnCalCount('p',this);">+</button>
                                 <input type="text" name="pop_out" value="0" readonly="readonly" style="text-align:center; width: 10%;"/>
-                                <button type="button" class="btn btn-primary">-</button>
+                                <button type="button" class="btn btn-primary" onclick="fnCalCount('m', this);">-</button>
                                 <button type="button" class="btn btn-primary"> 삭제 </button>
                               </div>
                             </div>
@@ -208,9 +266,9 @@
                                 <h3>88,000원</h3>
                               </div>
                               <div class="col-sm-3 col-md-5" style="background-color: white;">
-                                <button type ="button" class="btn btn-primary">+</button>
+                                <button type ="button" class="btn btn-primary" onclick="fnCalCount('p',this);">+</button>
                                 <input type="text" name="pop_out" value="0" readonly="readonly" style="text-align:center; width: 10%;"/>
-                                <button type="button" class="btn btn-primary">-</button>
+                                <button type="button" class="btn btn-primary" onclick="fnCalCount('m', this);">-</button>
                                 <button type="button" class="btn btn-primary"> 삭제 </button>
                               </div>
                             </div>
@@ -399,7 +457,7 @@
 
 <!-- footer -->
 	<footer class="footer">
-<%@ include file="../common/common_footer.jsp" %>
+		<jsp:include page="../common/common_footer.jsp"/>
 	</footer>
 <!-- footer -->
 </body>
