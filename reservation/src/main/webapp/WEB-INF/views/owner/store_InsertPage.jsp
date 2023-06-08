@@ -156,7 +156,7 @@
 						  </tbody>
                 	</table>
 					<div style="margin-left:380px;">
-					    <button type="submit" class="btn btn-warning" style="color: white;">수정완료</button>
+					    <button type="submit" class="btn btn-warning" style="color: white;">가게추가</button>
 					</div>
                 </form>	
 			  </div>
