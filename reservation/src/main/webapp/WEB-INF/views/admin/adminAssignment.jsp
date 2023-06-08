@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	<%-- 예약 페이지 뷰 만들어지기 전까지 보류 상태  --%>
 </body>
 </html>

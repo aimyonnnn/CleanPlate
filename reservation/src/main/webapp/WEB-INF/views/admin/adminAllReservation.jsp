@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1">
 	<%--line-awesome icon 사용을 위한 스타일 시트 --%>
 	<link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
-    <title>admin store</title>
+    <title>admin AllReservation</title>
     <link href="adminDetail.css" rel="stylesheet" type="text/css"/>
     <link rel="shortcut icon" href="#">
   </head>
@@ -106,17 +106,17 @@
      <main>
         <div class="page-header">
           <div>
-            <h1>가게 관리</h1>
-            <small>가게 관리 페이지</small>
+            <h1>전체 예약</h1>
+            <small>전체 예약 내역 기록 페이지</small>
           </div>
         </div> 
 
     <div class="main">
       <div class="title row">
         <div class="col-7">
-          <h5 class="title6">총 가게 수 :</h5>
-          <h5 class="title6">30</h5>
-          <%-- DB 연동 후 th:text="${size() 메서드 이용해서 total 값 받아 추가}" --%>
+          <h5 class="title6">총 예약 기록 데이터 수 :</h5>
+          <h5 class="title6">1</h5>
+          <%-- th:text="${size() 메서드로 total 받아올 곳} --%>
         </div>
       </div>
     </div>
@@ -126,26 +126,25 @@
         <thead>
         <tr>
           <th>#</th>
-          <th>가게 이름</th>
-          <th>점주 ID</th>
-          <th>점주 이름</th>
-          <th>전화 번호</th>
-          <th>등록일</th>
-          <th>가게 관리</th>
+          <th>Member ID</th>
+          <th>이름</th>
+          <th>예약 날짜</th>
+          <th>예약 시간</th>
+          <th>테이블 수</th>
+          <th>취소 유무</th>
         </tr>
         </thead>
         <tbody>
         <tr>
+        <%-- th:each="history : ${histories} --%>
           <td>1</td>
-          <%--각 td 태그에 th:text="${파라미터명}으로 값 받아오기 필수" --%>
-          <td>동백키친</td>
+          <%-- th:text="idx 파라미터값"--%>
           <td>hong2023</td>
           <td>홍길동</td>
-          <td>010-1234-5678</td>
           <td>2023-06-07</td>
-          <td><button type="button" class="btn btn-sm btn-primary"
-                      onclick="location.href='deleteStoreForm.jsp '"
-          >정보 수정</button></td>
+          <td>12:00:00</td>
+          <td>3</td>
+          <td>N</td>
         </tr>
         </tbody>
       </table>
