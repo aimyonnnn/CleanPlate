@@ -121,8 +121,8 @@
 		    Kakao.isInitialized();
 		    function loginWithKakao() {
 		        Kakao.Auth.login({
-		        	// 이메일값 받아오기
-		            scope: 'account_email',
+		        	// 닉네임 이용 중 동의 설정 후 받아오기
+		            scope: 'profile_nickname', 
 		            success: function (response) {
 		                Kakao.API.request({
 		                    url: '/v2/user/me',
