@@ -12,7 +12,7 @@
 </head>
 <body>
    	<!-- 공통 상단바 구역 -->
-<%@ include file="../common/common_header.jsp" %>
+	<%@ include file="../common/common_header.jsp" %>
    	<!-- 공통 상단바 구역 -->
 
     <!-- 제목 구역 -->
@@ -80,8 +80,8 @@
     </div>
  
     <!-- 하단 부분 include 처리영역 -->
-    <hr class="mt-5">
-<%@ include file="../common/common_footer.jsp" %>
+    	<hr class="mt-5">
+		<%@ include file="../common/common_footer.jsp" %>
     <!-- 하단 부분 include 처리영역 -->
     
     <!-- 이부분은 지우면 안됩니다 -->
