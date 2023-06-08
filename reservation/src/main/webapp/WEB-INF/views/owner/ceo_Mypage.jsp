@@ -44,8 +44,8 @@
  <div class="row">
             <div class="col-2">
                 <div class="btn-group-vertical btn-group-lg d-flex align-self-start" role="group" aria-label="Vertical button group">
-					<button type="button" class="btn btn-outline-warning active text-black p-3" onclick="location.href='CeoMypage'">내 정보</button>
-                    <button type="button" class="btn btn-outline-warning mt-4 text-black p-3" onclick="location.href='StoreMypage'">가게정보 </button>
+					<button type="button" class="btn btn-outline-warning text-black p-3" onclick="location.href='CeoMypage'">내 정보</button>
+                    <button type="button" class="btn btn-outline-warning active mt-4 text-black p-3" onclick="location.href='StoreList'">가게리스트 </button>
                     <button type="button" class="btn btn-outline-warning text-black p-3" onclick="location.href='StoreReservation'">예약관리</button>
                     <button type="button" class="btn btn-outline-warning text-black p-3" onclick="location.href='StoreSales'">매출관리</button>
                     <button type="button" class="btn btn-outline-warning text-black p-3" onclick="location.href='CeoMypageDelete'">회원탈퇴</button>

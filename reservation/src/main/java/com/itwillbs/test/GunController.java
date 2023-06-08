@@ -38,15 +38,19 @@ public class GunController {
 	}
 	
 	//owner의 식당마이페이지로 이동 Mapping
-	@GetMapping("StoreMypage")
+	@GetMapping("StorePage")
 	public String StoreMypage() {
-		return "owner/store_Mypage";
+		return "owner/store_Page";
+	}
+	@GetMapping("StoreList")
+	public String StoreList() {
+		return "owner/store_List";
 	}
 	
 	//owner의 식당마이페이지에서 수정후 이동 Mapping
 	@PostMapping("StoreMypagePro")
 	public String StoreMypagePro() {
-		return "owner/store_Mypage";
+		return "owner/store_List";
 	}
 	
 	//owner의 점주마이페이지로 이동 Mapping
@@ -71,6 +75,12 @@ public class GunController {
 	@PostMapping("CeoMypageDeletePro")
 	public String CeoMypageDeletePro() {
 		return "main";
+	}
+	
+	//owner의 점주정보 페이지로 이동 Mapping
+	@PostMapping("ceoMypageInfo")
+	public String ceoMypageInfo() {
+		return "owner/ceo_info";
 	}
 	
 }
