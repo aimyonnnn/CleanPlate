@@ -37,11 +37,17 @@ public class OwnerController {
 		return "owner/store_SalesinOut";
 	}
 	
-	//owner의 식당마이페이지로 이동 Mapping
-	@GetMapping("StorePage")
-	public String StoreMypage() {
-		return "owner/store_Page";
+	//owner의 식당추가로 이동 Mapping
+	@GetMapping("StoreInsertPage")
+	public String StoreInsertPage() {
+		return "owner/store_InsertPage";
 	}
+	//owner의 식당수정로 이동 Mapping
+	@GetMapping("StoreUpdatePage")
+	public String StoreUpdatePage() {
+		return "owner/store_UpdatePage";
+	}
+	//owner의 식당리스트로 이동 Mapping
 	@GetMapping("StoreList")
 	public String StoreList() {
 		return "owner/store_List";
@@ -80,7 +86,7 @@ public class OwnerController {
 	//owner의 점주정보 페이지로 이동 Mapping
 	@PostMapping("ceoMypageInfo")
 	public String ceoMypageInfo() {
-		return "owner/ceo_info";
+		return "owner/ceo_Info";
 	}
 	
 	// 그래프

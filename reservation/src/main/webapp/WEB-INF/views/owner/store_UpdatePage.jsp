@@ -66,12 +66,17 @@
 						    	<td><input class="form-control" type="text" id="name" value="마제소바" aria-label="default input example"></td>
 						    </tr>
 						    <tr>
+						    	<th scope="row"><label for="id">사업자 번호</label></th>
+						    	<td><input class="form-control" type="text" id="id" aria-label="Disabled input example" disabled readonly></td>
+						    </tr>
+						    <tr>
 						    	<th scope="row"><label for="passwd">식당소개</label></th>
 						    	<td colspan="2"><textarea class="form-control" rows="5" cols="50">식당소개</textarea></td>
 						    </tr>
 						    <tr>
 						    	<th>주소</th>
 								<td>
+								<!-- 다음 api 사용 -->
 								<div class="input-group mb-3">
 									<input type="text" id="sample6_postcode" class="form-control" placeholder="우편번호" aria-label="Recipient's username" aria-describedby="button-addon2">
 									<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" class="btn btn-outline-secondary" id="button-addon2">
@@ -276,6 +281,7 @@
   </div>
  <!-- 메뉴 설정 모달창 끝 -->
  
+ <!-- 다음 주소 api 스크립트 시작 -->
  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
     function sample6_execDaumPostcode() {
@@ -326,6 +332,7 @@
         }).open();
     }
 </script>
+ <!-- 다음 주소 api 스크립트 끝 -->
     
     <!-- 하단 부분 include 처리영역 -->
     <hr class="mt-5">

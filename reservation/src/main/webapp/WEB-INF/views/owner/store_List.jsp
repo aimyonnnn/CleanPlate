@@ -41,7 +41,7 @@
             </div>
             <div class="col-10">
             	<h2 style="margin-left: 40px; margin-top: 40px;">가게 리스트</h2>
-                <button type="button" class="btn btn-outline-warning" style="margin-left: 40px;" onclick="location.href='StorePage'">추가</button>
+                <button type="button" class="btn btn-outline-warning" style="margin-left: 40px;" onclick="location.href='StoreInsertPage'">추가</button>
             </div>
         </div>
         <div class="row">
@@ -73,19 +73,19 @@
                                 <td>동백키친</td>
                                 <td>010-1234-5678</td>
                                 <td>부산 부산진구 동천로107번길</td>
-                                <td><button type="button" class="btn btn-outline-warning" onclick="location.href='StorePage'">수정</button></td>
+                                <td><button type="button" class="btn btn-outline-warning" onclick="location.href='StoreUpdatePage'">수정</button></td>
                             </tr>
                             <tr>
                                 <td>동백키친</td>
                                 <td>010-1234-5678</td>
                                 <td>부산 부산진구 동천로107번길</td>
-                                <td><button type="button" class="btn btn-outline-warning" onclick="location.href='StorePage'">수정</button></td>
+                                <td><button type="button" class="btn btn-outline-warning" onclick="location.href='StoreUpdatePage'">수정</button></td>
                             </tr>
                             <tr>
                                 <td>동백키친</td>
                                 <td>010-1234-5678 </td>
                                 <td>부산 부산진구 동천로107번길</td>
-                                <td><button type="button" class="btn btn-outline-warning" onclick="location.href='StorePage'">수정</button></td>
+                                <td><button type="button" class="btn btn-outline-warning" onclick="location.href='StoreUpdatePage'">수정</button></td>
                             </tr>
                         </tbody>
                     </table> 
