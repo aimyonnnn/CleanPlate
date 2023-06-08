@@ -10,7 +10,8 @@ import net.nurigo.java_sdk.exceptions.CoolsmsException;
 
 @Service
 public class LoginService {
-
+	
+	// coolsms 문자연동 시작
 	public String PhoneNumberCheck(String to) throws CoolsmsException{
 		String api_key = "#"; // 실제 테스트 시에 바꿔줘야함! 기능 동작 확인 완료함!
 		String api_secret = "#"; // 실제 테스트 시에 바꿔줘야함! 기능 동작 확인 완료함!
@@ -34,6 +35,10 @@ public class LoginService {
 		return numStr;
 		 
 	}
+	// coolsms 문자연동 끝
+	
+	
+	
 	
 	
 	

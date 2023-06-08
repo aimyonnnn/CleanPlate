@@ -47,6 +47,7 @@ public class LoginController {
 
 		// DB에서 리턴받았다고 가정
 	    String existingEmail = email;
+//	    String existingEmail = "tset";
 	    
 	    // 카카오에서 전달받은 이메일 값으로 회원가입 여부 판별
 	    if (existingEmail.equals(email)) { // DB에 카카오에서 전달받은 이메일이 존재할 경우
