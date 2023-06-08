@@ -9,6 +9,7 @@
         <title>Store_MyPage</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 		<link href="top.css" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
 
     <!-- 이부분은 지우면 안됩니다 -->
 </head>
@@ -29,114 +30,245 @@
     <!-- 사이드바, 내용 넣는 구역!-->
     <div class="container mt-5">
         <div class="row d-flex justify-content-center">
-            <div class="col-md-2 align-items-center d-flex">
+            <div class="col-2 align-items-center d-flex">
                 <!-- 왼쪽 사이드바 구역 -->
-                <div class="btn-group-vertical btn-group-lg d-flex align-self-start" role="group" aria-label="Vertical button group">
-                    <!-- 프로필 사진 -->
-                    <div class="input-group mb-5 d-flex shadow-lg d-flex justify-content-center pe-3" style="border-radius: 10px;">
-                        <img src="../image/profile.png" alt="" style="width: 100px; height: 100px;" class="justify-content-center">
-                        <p class="d-flex align-items-center"><span>님 환영합니다</span></p>
-
-                    </div>
-                    <!-- 왼쪽 사이드바 버튼들-->
-                    <!-- 클릭된 버튼은 색으로 따로 표시함-->
-					<button type="button" class="btn btn-outline-secondary text-black p-3" onclick="location.href='CeoMypage'">내 정보</button>
-                    <button type="button" class="btn btn-outline-secondary active mt-4 text-black p-3" onclick="location.href='StoreMypage'">가게 등록</button>
-                    <button type="button" class="btn btn-outline-secondary text-black p-3" onclick="location.href='StoreReservation'">예약관리</button>
-                    <button type="button" class="btn btn-outline-secondary text-black p-3" onclick="location.href='StoreSales'">매출관리</button>
-                    <button type="button" class="btn btn-outline-secondary text-black p-3" onclick="location.href='StoreCoupon'">쿠폰/이벤트</button>
-                    <button type="button" class="btn btn-outline-secondary text-black p-3" onclick="location.href='CeoMypageDelete'">회원탈퇴</button>
+                <!-- 프로필 사진 -->
+                <div class="input-group mb-5 d-flex shadow-lg d-flex justify-content-center pe-3" style="border-radius: 10px;">
+                    <img src="../image/profile.png" alt="" style="width: 100px; height: 100px;" class="justify-content-center">
+                    <p class="d-flex align-items-center"><span>님 환영합니다</span></p>
+                    
                 </div>
             </div>
-
+            <div class="col-10">
+            	<h2 style="margin-left: 40px; margin-top: 40px;">가게 정보</h2>
+            </div>
+        </div>
+        <div class="row">
+        <div class="col-2">
+            <div class="btn-group-vertical btn-group-lg d-flex align-self-start" role="group" aria-label="Vertical button group">
+                    <!-- 왼쪽 사이드바 버튼들-->
+                    <!-- 클릭된 버튼은 색으로 따로 표시함-->
+					<button type="button" class="btn btn-outline-warning text-black p-3" onclick="location.href='CeoMypage'">내 정보</button>
+                    <button type="button" class="btn btn-outline-warning active mt-4 text-black p-3" onclick="location.href='StoreMypage'">가게정보 </button>
+                    <button type="button" class="btn btn-outline-warning text-black p-3" onclick="location.href='StoreReservation'">예약관리</button>
+                    <button type="button" class="btn btn-outline-warning text-black p-3" onclick="location.href='StoreSales'">매출관리</button>
+                    <button type="button" class="btn btn-outline-warning text-black p-3" onclick="location.href='CeoMypageDelete'">회원탈퇴</button>
+            </div>
+        </div>
             <!-- 내용 구역 -->
-            <div class="col-md-10">
-            <form action="StoreMypagePro" method="post">
-				<div class="card" style="margin-top: 20px;">
-				  <div class="card-body">
-				  <div class="row">
-					  <div class="col-6">
-					  <br>
-					  <h5 class="card-title">매장 상세사진</h5>
-						  <div>
-						  <input type="file" value="" class="real-upload" accept="image/*">
-						  </div>
-					  <br><br>
-					  
-					  <h5 class="card-title">기본 정보</h5>
-					  <div>   
-						  식당이름
-						  <input type="text" name="name_Store" placeholder="내용을 입력해주세요" style="width:300px;"><br>
-						  <br>사업자번호
-						  <input type="text" name="name_StoreNum" placeholder="내용을 입력해주세요" style="width:300px;"> <input type="button" value="중복확인" ><br>
-						  <br>우편 번호
-						  <input type="text" name="zip_Code" placeholder="내용을 입력해주세요" style="width:200px;"> <input type="button" value="검색" ><br>
-						  도로명주소
-						  <input type="text" name="addresses" placeholder="내용을 입력해주세요" style="width:300px;"><br>
-						  상세명주소
-						  <input type="text" name="addresses_D" placeholder="내용을 입력해주세요" style="width:300px;">
-					  </div>
-					  <br><br>
-						  
-					  <div>
-					  <h5 class="card-title">소개 정보</h5>
-						  식당소개
-						  <br><textarea name ="introduce" rows="8" cols="50" > </textarea><br>
-					  </div> 
-				  </div>
-  
-  
-				  
-				  <div class="col-6">
-					  <div>
-						  <br>영업시간
-						  <input type ="time">~<input type ="time">  <input type="text" placeholder="브레이크 시간 00:00 ~ 00:00" style="width:220px;"><br>
-						  <br>휴무일
-						  <input type ="time">~<input type ="time"><br>
-						  <br>전화번호
-						  <input type="text" name = "tel1_ceo" style ="width:100px">-<input type="text"  name = "tel2_ceo" style ="width:100px">-<input type="text"  name = "tel3_ceo" style ="width:100px"><br>
-						  <br>개업일시
-						  <input type ="date" value = "2023-01-01" min = "1980-01-01"><br>
-						  <br>식당편의시설<br>
-						  <input type ="text" placeholder="식당 내 시설을 입력해주세요." style ="width:300px"><br>
-											
-					  </div>
-					  <br><br>
-					  
-					  <h5 class="card-title">테이블 설정</h5>
-					  <div>
-						  <br>테이블설정 <input type="submit" value="생성"> <input type="submit" value="삭제">
-						  <br>테이블규격
-						  <select style="width:100px;margin-right:10px">
-						  <option value="1인용" selected>1인용</option>
-						  <option value="2인용">2인용</option>
-						  <option value="3인용">3인용</option>
-						  <option value="4인용">4인용</option>
-						  </select>
-						  <input type="text" placeholder="내용을 입력해주세요" style="width:300px;">
-						  <br><br>메뉴설정 <input type="submit" value="생성"> <input type="submit" value="삭제">
-						  <br>메뉴
-						  <select style="width:100px;margin-right:10px">
-						  <option value="LUNCH" selected>LUNCH</option>
-						  <option value="DINNER">DINNER</option>
-						  </select>
-						  <input type="text" placeholder="내용을 입력해주세요" style="width:300px;"><br>
-					  </div>
-				  </div>
-				  </div>
-				  </div>
-					  <br><br>
-					  <div style="margin:0 auto">
-					  <input type="submit" value="저장">&nbsp;&nbsp;
-					  </div>
-					  <br><br>
+            <!-- 가게내용 페이지 시작 -->
+            <div class="col">
+                   <form action="#" method="post">
+                	<table class="table" style="margin-left: 70px; width: 58%;">
+						<tbody>
+						    <tr>
+						    	<th scope="row" width="150"><label for="name">식당이름</label></th>
+						    	<td><input class="form-control" type="text" id="name" value="마제소바" aria-label="default input example"></td>
+						    </tr>
+						    <tr>
+						    	<th scope="row"><label for="passwd">우편번호</label></th>
+						    	<td colspan="2"><input type="text" class="form-control" value="00000" id="passwd" aria-label="default input example"></td>
+						    </tr>
+						    <tr>
+						    	<th scope="row"><label for="id">도로명주소</label></th>
+						    	<td><input class="form-control" type="text" id="id" value="123456789ab" aria-label="Disabled input example"></td>
+						    </tr>
+						    <tr>
+						    	<th scope="row"><label for="nick">상세명주소</label></th>
+						    	<td colspan="2"><input class="form-control" type="text" id="nick" value="itwill 건물 앞" aria-label="default input example"></td>
+						    </tr>
+						    <!-- 영업 시간 시작 -->
+						    <tr>
+						    	<th scope="row"><label for="birth">영업시간</label></th>
+						    	<td>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <input class="form-control" type ="time"> <!-- 영업 시작 시간 -->
+                                    </div>
+                                    <div class="col-6">
+                                        <input class="form-control" type ="time"> <!-- 영업 마감 시간 -->
+                                    </div>
+                                    <div class="col mt-2">
+                                        <input type="text" class="form-control" placeholder="브레이크 시간 00:00 ~ 00:00"> <!-- 크레이크 타입 기록 -->
+                                    </div>
+                                    
+                                </div>
+						    	</td>
+						    </tr>
+						    <!-- 영업 시간 끝 -->
+						    <tr>
+						    	<th scope="row"><label for="birth">정기휴무일</label></th> <!-- select box -->
+						    	<td>
+									<div class="dropdown">
+										<select class="form-select form-select" aria-label=".form-select example" style="width: 180px;">
+											<option selected value="planToVisit">없음</option>
+											<option value="visited">월요일</option>
+											<option value="cancelNoshow">화요일</option>
+											<option value="cancelNoshow">수요일</option>
+											<option value="cancelNoshow">목요일</option>
+											<option value="cancelNoshow">금요일</option>
+											<option value="cancelNoshow">토요일</option>
+											<option value="cancelNoshow">일요일</option>
+										</select>
+									</div>
+                                </td>
+						    </tr>
+						    <tr>
+						    	<th scope="row"><label for="phone">가계 전화번호</label></th>
+						    	<td>
+							  		<div class="d-flex align-items-center">
+							    		<input class="form-control" type="text" id="phone" value="010-1234-5678" aria-label="default input example" style="width: 365px;">
+							    	</div>
+								</td>
+						    </tr>
+						    <tr>
+						    	<th scope="row"><label for="birth">식당 편의 시설</label></th>
+						    	<td><input type ="text" class="form-control" placeholder="식당 내 시설을 입력해주세요."></td>
+						    </tr>
+						    <tr>
+						    	<th scope="row"><label for="birth">테이블</label></th>
+						    	<td><button type="button" class="btn btn-warning" style="color: white;" data-bs-toggle="modal" data-bs-target="#talbe">테이블 수정</button></td>
+						    </tr>
+						    <tr>
+						    	<th scope="row"><label for="birth">메뉴</label></th>
+						    	<td><button type="button" class="btn btn-warning" style="color: white;"  data-bs-toggle="modal" data-bs-target="#menu">메뉴 수정</button></td>
+						    </tr>
+						    <tr>
+						    	<th scope="row"><label for="birth">사진</label></th>
+						    	<td><input type="file" class="form-control" style="color: white;"></td>
+						    </tr>
+						  </tbody>
+                	</table>
+					<div style="margin-left:380px;">
+					    <button type="submit" class="btn btn-warning" style="color: white;">수정완료</button>
+					</div>
+                </form>	
 			  </div>
-			  </form>
-			  </div>
-  
-								
-			 </div>
+            </div>
 		  </div>
+		              <!-- 가게내용 페이지 끝 -->
+		  
+
+		  
+
+<!-- Modal -->
+<!-- 테이블 모달창 -->
+<div class="modal fade" id="talbe" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+          <!-- 테이블 모달 제목 시작 -->
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">테이블규격</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+          <!-- 테이블 모달 제목 끝 -->
+      <!-- 테이블 모달 내용 시작 -->
+      <div class="modal-body">
+		<select style="width:100px;margin-right:10px">
+		<option value="1인용" selected>1인용</option>
+	    <option value="2인용">2인용</option>
+	    <option value="3인용">3인용</option>
+	    <option value="4인용">4인용</option>
+	  	</select>
+        <button class="btn btn-primary">추가</button>
+	  	<br>
+        <div class="row mt-3 align-items-center">
+                   <!-- foreach 문으로 작성 -->
+            <div class="col-auto ">2인용</div>
+            <div class="col-auto"><input type="number" value="2" class="form-control"></div>
+            <div class="col-auto"><button class="btn btn-warning text-white">삭제</button></div>
+	  	    
+        </div>
+      </div>
+      <!-- 테이블 모달 내용 끝 -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">저장</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 테이블 모달창 끝 -->
+
+<!-- 메뉴 목록 모달창 -->
+<div class="modal fade" id="menu" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">메뉴목록</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+		<!-- 메뉴 목록 내용 시작 -->
+        <div class="modal-body">
+          <div class="row mt-3 align-items-center">
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col" class="col-5">메뉴명</th>
+                    <th scope="col" class="col-3">가격</th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                <!-- foreach 문으로 작성 -->
+                  <tr>
+                    <td scope="row">또루뀨막또</td>
+                    <td>38000</td>
+                    <td>
+	                    <button class="btn btn-warning text-white me-1" data-bs-toggle="modal" data-bs-target="#menuPro">수정</button>
+	                    <button class="btn btn-warning text-white">삭제</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td scope="row">또루뀨막또</td>
+                    <td>38000</td>
+                    <td>
+	                    <button class="btn btn-warning text-white me-1" data-bs-toggle="modal" data-bs-target="#menuPro">수정</button>
+	                    <button class="btn btn-warning text-white">삭제</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+          </div>
+        </div>
+		<!-- 메뉴 목록 내용 끝 -->
+        <div class="modal-footer">
+            <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#menuPro" style="color: white;">추가</button>
+            <button type="button" class="btn btn-primary">저장</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+        </div>
+      </div>
+    </div>
+</div>
+
+<!-- 메뉴 목록 모달 창 끝 -->
+
+<!-- 메뉴 설정 모달창 -->
+<div class="modal fade" id="menuPro" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">메뉴설정</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <!-- 메뉴 설정 내용 시작 -->
+        <div class="modal-body">
+          <div class="row mt-3 align-items-center">
+            메뉴 이름 : <input type="text" class="form-control">
+            메뉴 설명 : <textarea rows="5" cols="30" class="form-control"></textarea>
+            메뉴 가격 : <input type="text" class="form-control">
+           	메뉴 사진 : <input type="file" class="form-control" multiple="multiple">
+          </div>
+        </div>
+        <!-- 메뉴 설정 내용 끝 -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+          <button type="button" class="btn btn-primary">저장</button>
+        </div>
+      </div>
+    </div>
+  </div>
+ <!-- 메뉴 설정 모달창 끝 -->
  
     
     <!-- 하단 부분 include 처리영역 -->
