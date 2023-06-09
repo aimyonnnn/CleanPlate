@@ -12,6 +12,73 @@
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
 
     <!-- 이부분은 지우면 안됩니다 -->
+    <script  src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script>
+        
+        // 사업자번호 입력시 자동으로 하이픈 생성
+        $(document).ready(function () {
+           $(function () {
+                    
+                    $('#res_brn').keydown(function (event) {
+                     // 입력값 변수 지정
+                     // 브라우저가 charCode 속성을 지원하지 않는 경우 키 코드 (IE8 및 이전 버전)를 사용
+                     var input = event.charCode || event.keyCode || 0;
+                     $text = $(this); 
+                     if (input !== 8 && input !== 9) {
+                         if ($text.val().length == 3) { // 앞 3자리 되면 하이픈
+                             $text.val($text.val() + '-');
+                         }
+                         if ($text.val().length == 6) { // 가운데 2자리(앞,하이픈 포함 6자리) 되면 하이픈
+                             $text.val($text.val() + '-');
+                         }
+                     }
+                     // KeyCode아스키코드 8번 => Back Space 9번 => Horizontal Tab
+                     // 46번 => Delete 숫자 0~9 (48번~57번) 숫자키패드(96번~105번)외에는 입력불가
+                     return (input == 8 || input == 9 || input == 46 || 
+                                                (input >= 48 && input <= 57) || (input >= 96 && input <= 105));
+                 })
+           });
+           
+           // 전화번호 입력시 자동으로 하이픈 생성 
+//            $(function () {
+               
+//                $('#res_tel').keydown(function (event) {
+//                 // 입력값 변수 지정
+//                 // 브라우저가 charCode 속성을 지원하지 않는 경우 키 코드 (IE8 및 이전 버전)를 사용
+//                 var input = event.charCode || event.keyCode || 0;
+//                 $text = $(this); 
+//                 if (input !== 8 && input !== 9) {
+//                 	if($text.val() == '02') {
+                		
+// 	                    if ($text.val().length == 2) { // 앞 2자리 되면 하이픈
+// 	                        $text.val($text.val() + '-');
+// 	                    } else if ($text.val().length == 6) { // 가운데 3자리(앞,하이픈 포함 5자리) 되면 하이픈
+// 	                        $text.val($text.val() + '-');
+// 	                    }
+                		
+//                 	} else if($text.val() != '02') {
+                		
+// 	                    if ($text.val().length == 3) { // 앞 3자리 되면 하이픈
+// 	                        $text.val($text.val() + '-');
+// 	                    } else if ($text.val().length ==7) { // 가운데 3자리(앞,하이픈 포함 7자리) 되면 하이픈
+// 	                        $text.val($text.val() + '-');
+// 	                    }
+//                 	}
+//                 }
+//                             // KeyCode아스키코드 8번 => Back Space 9번 => Horizontal Tab
+//                             // 46번 => Delete 숫자 0~9 (48번~57번) 숫자키패드(96번~105번)외에는 입력불가
+//                 return (input == 8 || input == 9 || input == 46 || 
+//                                            (input >= 48 && input <= 57) || (input >= 96 && input <= 105));
+//             })
+//       });
+           
+           // 전화번호 입력시 자동으로 하이픈 생성 
+           $(document).on("keyup", "#res_tel", function() { 
+        		$(this).val( $(this).val().replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,"$1-$2-$3").replace("--", "-") );
+        	});
+        
+        });
+        </script>
 </head>
 <body>
 	<!-- 공통 상단바 구역 -->
@@ -40,62 +107,69 @@
                 </div>
             </div>
             <div class="col-10">
-            	<h2 style="margin-left: 40px; margin-top: 40px;">가게 정보</h2>
+            	<h2 style="margin-left: 40px; margin-top: 40px;">가게 등록</h2>
             </div>
         </div>
         <div class="row">
-        <div class="col-2">
+          <div class="col-2">
+            <!-- 왼쪽 사이드바 버튼들-->
+            <!-- 클릭된 버튼은 active 표시함-->
             <div class="btn-group-vertical btn-group-lg d-flex align-self-start" role="group" aria-label="Vertical button group">
-                    <!-- 왼쪽 사이드바 버튼들-->
-                    <!-- 클릭된 버튼은 색으로 따로 표시함-->
-					<button type="button" class="btn btn-outline-warning text-black p-3" onclick="location.href='CeoMypage'">내 정보</button>
-                    <button type="button" class="btn btn-outline-warning active mt-4 text-black p-3" onclick="location.href='StoreList'">가게리스트 </button>
-                    <button type="button" class="btn btn-outline-warning text-black p-3" onclick="location.href='StoreReservation'">예약관리</button>
-                    <button type="button" class="btn btn-outline-warning text-black p-3" onclick="location.href='StoreSales'">매출관리</button>
-                    <button type="button" class="btn btn-outline-warning text-black p-3" onclick="location.href='CeoMypageDelete'">회원탈퇴</button>
+					      <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='CeoMypage'">내 정보</button>
+                <button type="button" class="btn btn-outline-warning active p-3" onclick="location.href='StoreList'">가게리스트 </button>
+                <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='StoreReservation'">예약관리</button>
+                <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='StoreSales'">매출관리</button>
+                <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='CeoMypageDelete'">회원탈퇴</button>
             </div>
         </div>
             <!-- 내용 구역 -->
-            <!-- 가게내용 페이지 시작 -->
-            <div class="col">
+            <div class="col-10">
+                <!-- 가게내용 페이지 시작 -->
                    <form action="#" method="post">
                 	<table class="table" style="margin-left: 70px; width: 58%;">
 						<tbody>
+                            <tr>
+                                <th scope="row"><label for="res_brn">사업자 번호</label></th>
+                                <td>
+                                    <div class="input-group">
+                                        <!-- 사업자번호 자리수는 10자리 000-00-00000 형식 (하이픈 포함시 12자리)-->
+                                        <!-- pattern 속성에 정규표현식 입력하여 숫자만 입력가능-->
+                                        <input class="form-control" type="text" name="res_brn" id="res_brn" maxlength="12" pattern="[0-9]{3}-[0-9]{2}-[0-9]{5}">
+                                        <button type="button" class="btn btn-outline-secondary">인증</button>
+                                    </div>
+                                </td>
+                            </tr>
 						    <tr>
-						    	<th scope="row" width="150"><label for="name">식당이름</label></th>
-						    	<td><input class="form-control" type="text" id="name" aria-label="default input example"></td>
+						    	<!-- 가게이름 글자수 제한 여부? -->
+						    	<th scope="row" width="150"><label for="res_name">가게 이름</label></th>
+						    	<td><input class="form-control" type="text" name="res_name" id="res_name" aria-label="default input example"></td>
 						    </tr>
+                            <tr>
+                                <th scope="row"><label for="res_tel">전화번호</label></th>
+                                <td>
+                                      <div class="d-flex align-items-center">
+                                        <input class="form-control" type="text" name="res_tel" id="res_tel" maxlength="13">
+                                    </div>
+                                </td>
+                            </tr>
 						    <tr>
-						    	<th scope="row"><label for="id">사업자 번호</label></th>
-						    	<td>
-						    		<div class="input-group">
-								    	<input class="form-control" type="text" id="id" value="123456789ab" aria-label="Disabled input example">
-								    	<button type="button" class="btn btn-outline-secondary">인증</button>
-							    	</div>
-						    	</td>
-						    </tr>
-						    <tr>
-						    	<th scope="row"><label for="passwd">식당소개</label></th>
-						    	<td colspan="2"><textarea class="form-control" rows="5" cols="50"></textarea></td>
-						    </tr>
-						    <tr>
-						    	<th>주소</th>
+                                <th>주소</th>
 								<td>
 								<!-- 다음 api 사용 -->
 								<div class="input-group mb-3">
 									<input type="text" id="sample6_postcode" class="form-control" placeholder="우편번호" aria-label="Recipient's username" aria-describedby="button-addon2">
 									<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" class="btn btn-outline-secondary" id="button-addon2">
 								</div>									
-									<input type="text" class="form-control" id="sample6_address" placeholder="주소">
-								<div class="input-group mb-3">
-									<input type="text" class="form-control" id="sample6_detailAddress" placeholder="상세주소">
+                                <input type="text" class="form-control" id="sample6_address" placeholder="주소">
+								<div class="input-group mb-3 mt-2">
+                                    <input type="text" class="form-control" id="sample6_detailAddress" placeholder="상세주소"> 
 									<input type="text" class="form-control" id="sample6_extraAddress" placeholder="참고항목">
 								</div>
 								</td>
 						    </tr>
 						    <!-- 영업 시간 시작 -->
 						    <tr>
-						    	<th scope="row"><label for="birth">영업시간</label></th>
+                                <th scope="row"><label for="birth">영업시간</label></th>
 						    	<td>
                                 <div class="row">
                                     <div class="col-6">
@@ -109,14 +183,14 @@
                                     </div>
                                     
                                 </div>
-						    	</td>
+                            </td>
 						    </tr>
 						    <!-- 영업 시간 끝 -->
 						    <tr>
-						    	<th scope="row"><label for="birth">정기휴무일</label></th> <!-- select box -->
+                                <th scope="row"><label for="birth">정기휴무일</label></th> <!-- select box -->
 						    	<td>
-									<div class="dropdown">
-										<select class="form-select form-select" aria-label=".form-select example" style="width: 180px;">
+                                    <div class="dropdown">
+                                        <select class="form-select form-select" aria-label=".form-select example" style="width: 180px;">
 											<option selected value="planToVisit">없음</option>
 											<option value="visited">월요일</option>
 											<option value="cancelNoshow">화요일</option>
@@ -130,27 +204,23 @@
                                 </td>
 						    </tr>
 						    <tr>
-						    	<th scope="row"><label for="phone">가계 전화번호</label></th>
-						    	<td>
-							  		<div class="d-flex align-items-center">
-							    		<input class="form-control" type="text" id="phone" aria-label="default input example" style="width: 365px;">
-							    	</div>
-								</td>
-						    </tr>
-						    <tr>
-						    	<th scope="row"><label for="birth">식당 편의 시설</label></th>
+                                <th scope="row"><label for="birth">가게 편의 시설</label></th>
 						    	<td><input type ="text" class="form-control" placeholder="식당 내 시설을 입력해주세요."></td>
 						    </tr>
+                            <tr>
+                                <th scope="row"><label for="passwd">가게소개</label></th>
+                                <td colspan="2"><textarea class="form-control" rows="5" cols="50"></textarea></td>
+                            </tr>
 						    <tr>
 						    	<th scope="row"><label for="birth">테이블</label></th>
 						    	<td><button type="button" class="btn btn-warning" style="color: white;" data-bs-toggle="modal" data-bs-target="#talbe">테이블 수정</button></td>
 						    </tr>
 						    <tr>
-						    	<th scope="row"><label for="birth">메뉴</label></th>
+                                <th scope="row"><label for="birth">메뉴</label></th>
 						    	<td><button type="button" class="btn btn-warning" style="color: white;"  data-bs-toggle="modal" data-bs-target="#menu">메뉴 수정</button></td>
 						    </tr>
 						    <tr>
-						    	<th scope="row"><label for="birth">사진</label></th>
+                                <th scope="row"><label for="birth">사진</label></th>
 						    	<td><input type="file" class="form-control" style="color: white;"></td>
 						    </tr>
 						  </tbody>
@@ -161,8 +231,9 @@
                 </form>	
 			  </div>
             </div>
-		  </div>
-		              <!-- 가게내용 페이지 끝 -->
+            
+		</div>
+        <!-- 가게내용 페이지 끝 -->
 		  
 
 		  

@@ -41,21 +41,21 @@
             </div>
             <div class="col-10">
             	<h2 style="margin-left: 40px; margin-top: 40px;">가게 리스트</h2>
-                <button type="button" class="btn btn-outline-warning" style="margin-left: 40px;" onclick="location.href='StoreInsertPage'">추가</button>
+                <button type="button" class="btn btn-warning" style="margin-left: 40px; color: white;" onclick="location.href='StoreInsertPage'">가게 등록</button>
             </div>
         </div>
         <div class="row">
-        <div class="col-2">
-            <div class="btn-group-vertical btn-group-lg d-flex align-self-start" role="group" aria-label="Vertical button group">
-                    <!-- 왼쪽 사이드바 버튼들-->
-                    <!-- 클릭된 버튼은 색으로 따로 표시함-->
-					<button type="button" class="btn btn-outline-warning text-black p-3" onclick="location.href='CeoMypage'">내 정보</button>
-                    <button type="button" class="btn btn-outline-warning active mt-4 text-black p-3" onclick="location.href='StoreList'">가게리스트 </button>
-                    <button type="button" class="btn btn-outline-warning text-black p-3" onclick="location.href='StoreReservation'">예약관리</button>
-                    <button type="button" class="btn btn-outline-warning text-black p-3" onclick="location.href='StoreSales'">매출관리</button>
-                    <button type="button" class="btn btn-outline-warning text-black p-3" onclick="location.href='CeoMypageDelete'">회원탈퇴</button>
+            <div class="col-2">
+                <!-- 왼쪽 사이드바 버튼들-->
+                <!-- 클릭된 버튼은 active 표시함-->
+                <div class="btn-group-vertical btn-group-lg d-flex align-self-start" role="group" aria-label="Vertical button group">
+                    <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='CeoMypage'">내 정보</button>
+                    <button type="button" class="btn btn-outline-warning active p-3" onclick="location.href='StoreList'">가게리스트 </button>
+                    <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='StoreReservation'">예약관리</button>
+                    <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='StoreSales'">매출관리</button>
+                    <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='CeoMypageDelete'">회원탈퇴</button>
+                </div>
             </div>
-        </div>
             <!-- 내용 구역 -->
             <!-- 가게리스트  페이지 시작 -->
                 <div class="col-8">
@@ -73,19 +73,19 @@
                                 <td>동백키친</td>
                                 <td>010-1234-5678</td>
                                 <td>부산 부산진구 동천로107번길</td>
-                                <td><button type="button" class="btn btn-outline-warning" onclick="location.href='StoreUpdatePage'">수정</button></td>
+                                <td><button type="button" class="btn btn-warning" style="color: white;" onclick="location.href='StoreUpdatePage'">수정</button></td>
                             </tr>
                             <tr>
                                 <td>동백키친</td>
                                 <td>010-1234-5678</td>
                                 <td>부산 부산진구 동천로107번길</td>
-                                <td><button type="button" class="btn btn-outline-warning" onclick="location.href='StoreUpdatePage'">수정</button></td>
+                                <td><button type="button" class="btn btn-warning" style="color: white;" onclick="location.href='StoreUpdatePage'">수정</button></td>
                             </tr>
                             <tr>
                                 <td>동백키친</td>
                                 <td>010-1234-5678 </td>
                                 <td>부산 부산진구 동천로107번길</td>
-                                <td><button type="button" class="btn btn-outline-warning" onclick="location.href='StoreUpdatePage'">수정</button></td>
+                                <td><button type="button" class="btn btn-warning" style="color: white;" onclick="location.href='StoreUpdatePage'">수정</button></td>
                             </tr>
                         </tbody>
                     </table> 
