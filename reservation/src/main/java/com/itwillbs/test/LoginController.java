@@ -86,29 +86,5 @@ public class LoginController {
 		return "member/member_find";
 	}
 	//=================================로그인 & 로그아웃=================================
-	//=================================관리자 페이지=================================
-	// 로그인 성공 후 관리자 클릭시 관리자페이지로 이동
-	@GetMapping("manager")
-	public String manager() {
-		return "manager/managerpage";
-	}
-	
-	// 관리자의 공지 페이지로 이동
-	@GetMapping("managerpage_n")
-	public String manage_n() {
-		return "manager/managerpage_n";
-	}
-	
-	// 관리자의 점주 관리 페이지로 이동
-	@GetMapping("managerpage_ceo")
-	public String managerpage_ceo() {
-		return "manager/managerpage_ceo";
-	}
-	
-	// 관리자의 신고 페이지로 이동
-	@GetMapping("managerpage_de")
-	public String managerpage_de() {
-		return "manager/managerpage_de";
-	}
-	//=================================관리자 페이지 끝=================================
+
 }
