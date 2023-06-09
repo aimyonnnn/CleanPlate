@@ -115,7 +115,7 @@ public class LoginController {
 		} else {
 		// DB에 카카오 이메일이 존재하는 경우 => 기존 회원이므로 로그인 처리
 		// 기존 회원이므로 세션에 유저의 이메일을 세션에 저장
-		// 카카오 로그인으로 로그인 할 경우 메인의 header부분에 카카오 이메일을 출력함
+		// 카카오 로그인으로 로그인 할 경우 메인의 header부분에 카카오 이메일을 출력함 "xxx@xxx.com 님" 출력됨
 			session.setAttribute("sId", email);
 			return "existing";
 		}

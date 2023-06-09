@@ -40,8 +40,11 @@
 	  $('#businessEmail').val(email);
 	  
 	  // 세션 스토리지에 카카오 이메일 값이 존재할 경우에 회원가입 모달창 자동으로 실행
+	  // 모달창 실행 후 세션 스토리지에 저장된 이메일과 닉네임을 삭제
 	  if (email) {
 		  $('#personal-modal').modal('show');
+		  sessionStorage.removeItem("nickname");
+		  sessionStorage.removeItem("email");
 	  }
 	
 	  // 세션 스토리지에 카카오 이메일 값이 존재할 경우에 <input> 요소를 읽기 전용으로 설정
