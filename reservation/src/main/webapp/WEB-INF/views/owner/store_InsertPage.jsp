@@ -39,38 +39,6 @@
                  })
            });
            
-           // 전화번호 입력시 자동으로 하이픈 생성 
-//            $(function () {
-               
-//                $('#res_tel').keydown(function (event) {
-//                 // 입력값 변수 지정
-//                 // 브라우저가 charCode 속성을 지원하지 않는 경우 키 코드 (IE8 및 이전 버전)를 사용
-//                 var input = event.charCode || event.keyCode || 0;
-//                 $text = $(this); 
-//                 if (input !== 8 && input !== 9) {
-//                 	if($text.val() == '02') {
-                		
-// 	                    if ($text.val().length == 2) { // 앞 2자리 되면 하이픈
-// 	                        $text.val($text.val() + '-');
-// 	                    } else if ($text.val().length == 6) { // 가운데 3자리(앞,하이픈 포함 5자리) 되면 하이픈
-// 	                        $text.val($text.val() + '-');
-// 	                    }
-                		
-//                 	} else if($text.val() != '02') {
-                		
-// 	                    if ($text.val().length == 3) { // 앞 3자리 되면 하이픈
-// 	                        $text.val($text.val() + '-');
-// 	                    } else if ($text.val().length ==7) { // 가운데 3자리(앞,하이픈 포함 7자리) 되면 하이픈
-// 	                        $text.val($text.val() + '-');
-// 	                    }
-//                 	}
-//                 }
-//                             // KeyCode아스키코드 8번 => Back Space 9번 => Horizontal Tab
-//                             // 46번 => Delete 숫자 0~9 (48번~57번) 숫자키패드(96번~105번)외에는 입력불가
-//                 return (input == 8 || input == 9 || input == 46 || 
-//                                            (input >= 48 && input <= 57) || (input >= 96 && input <= 105));
-//             })
-//       });
            
            // 전화번호 입력시 자동으로 하이픈 생성 
            $(document).on("keyup", "#res_tel", function() { 
@@ -140,11 +108,12 @@
                                 </td>
                             </tr>
 						    <tr>
-						    	<!-- 가게이름 글자수 제한 여부? -->
+						    	<!-- 가게이름 글자수 제한 100자리 -->
 						    	<th scope="row" width="150"><label for="res_name">가게 이름</label></th>
-						    	<td><input class="form-control" type="text" name="res_name" id="res_name" aria-label="default input example"></td>
+						    	<td><input class="form-control" type="text" name="res_name" id="res_name" aria-label="default input example" maxlength="100"></td>
 						    </tr>
                             <tr>
+                            	<!-- 너무 빠르게 입력할 경우 인식불가 -->
                                 <th scope="row"><label for="res_tel">전화번호</label></th>
                                 <td>
                                       <div class="d-flex align-items-center">
