@@ -4,12 +4,17 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.itwillbs.test.service.CeoService;
 import com.itwillbs.test.service.LoginService;
+import com.itwillbs.test.service.MemberService;
+import com.itwillbs.test.vo.CeoVO;
+import com.itwillbs.test.vo.MemberVO;
 
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
 
@@ -18,6 +23,10 @@ public class LoginController {
 	
 	@Autowired
 	private LoginService service;
+	@Autowired
+	private MemberService memberService;
+	@Autowired
+	private CeoService ceoService;
 	
 	//=================================로그인 & 로그아웃=================================
 	// 메인에서 로그인 버튼 클릭 시 로그인 폼으로 이동
@@ -69,16 +78,34 @@ public class LoginController {
 	}
 	
 	//개인회원 가입 시
-	@PostMapping("personalJoinPro")
-	public String PersonalJoinPro() {
-		return "redirect:/loginForm";
-	}
-	
-	//기업회원 가입 시
-	@PostMapping("businessJoinPro")
-	public String businessJoinPro() {
-		return "redirect:/loginForm";
-	}
+		@PostMapping("memberJoinPro")
+		public String memberJoinPro(MemberVO member, Model model) {
+			System.out.println("memberJoinPro");
+			
+			int insertCount = memberService.registMember(member);
+			
+			if(insertCount == 0) { // 가입 실패 시 
+				model.addAttribute("msg", "회원가입 실패! 다시 등록해주세요.");
+				return "loginForm";
+			} else { // 가입 성공 시
+				return "redirect:/loginForm";
+			}
+		}
+		
+		//기업회원 가입 시
+		@PostMapping("ceoJoinPro")
+		public String ceoJoinPro(CeoVO ceo, Model model) {
+			System.out.println("ceoJoinPro");
+			
+			int insertCount = ceoService.registCeo(ceo);
+			
+			if(insertCount == 0) { // 가입 실패 시 
+				model.addAttribute("msg", "회원가입 실패! 다시 등록해주세요.");
+				return "loginForm";
+			} else { // 가입 성공 시
+				return "redirect:/loginForm";
+			}
+		}
 	
 	//아이디, 비밀번호 찾기
 	@GetMapping("forgotten")

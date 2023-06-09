@@ -194,43 +194,43 @@
 	      <div class="modal-body">
 	        <div>
 	          <!-- form 태그 시작 -->
-	          <form action="personalJoinPro" method="post">
+	          <form action="memberJoinPro" method="post">
 	            <div class="container">
 	              <h3>Clean Plate로 식당 예약 간편하게!</h3>
 	              <div class="input-container">
 	                <label for="id" style="width: 100%;">아이디<br>
-	                  <input type="text" id="id" class="form-control" placeholder="4~20자리 / 영문, 숫자, 특수문자'_' 사용가능">
+	                  <input type="text" name="m_id" id="id" class="form-control" placeholder="4~20자리 / 영문, 숫자, 특수문자'_' 사용가능">
 	                </label>
 	              </div>
 	              <div class="input-container">
 	                <label for="password1" style="width: 100%;">비밀번호<br>
-	                  <input type="password" id="password1" class="form-control" placeholder="8~16자리/영문 대소문자,숫자,특수문자 조합">
+	                  <input type="password" name="m_passwd" id="password1" class="form-control" placeholder="8~16자리/영문 대소문자,숫자,특수문자 조합">
 	                </label>
 	              </div>
 	              <div class="input-container">
 	                <label for="password2" style="width: 100%;">비밀번호 확인<br>
-	                  <input type="password" id="password2" class="form-control">
+	                  <input type="password" name="m_passwd2" id="password2" class="form-control">
 	                </label>
 	              </div>
 	              <div class="input-container">
 	                <label for="name" style="width: 100%;">이름<br>
-	                  <input type="text" id="name" class="form-control" placeholder="이름 입력">
+	                  <input type="text" name="m_name" id="name" class="form-control" placeholder="이름 입력">
 	                </label>
 	              </div>
 	              <div class="input-container">
 	                <label for="nickname" style="width: 100%;">닉네임<br>
-	                  <input type="text" id="nickname" class="form-control" placeholder="10자리 / 영문, 숫자, 특수문자'_' 사용가능">
+	                  <input type="text" name="m_nick" id="nickname" class="form-control" placeholder="10자리 / 영문, 숫자, 특수문자'_' 사용가능">
 	                </label>
 	              </div>
 	              <div class="input-container">
 	                <label for="birth" style="width: 100%;">생년월일<br>
-	                  <input type="text" id="birth" class="form-control" placeholder="YYYYMMDD">
+	                  <input type="text" name="m_birth" id="birth" class="form-control" placeholder="YYYYMMDD">
 	                </label>
 	              </div>
 	              <!-- 휴대폰 번호 인증 버튼 -->
 	              <div class="input-container">
-	                <label for="phone" style="width: 80%;">휴대폰번호<br>
-	                  <input type="text" id="phone" class="form-control" placeholder="'_'빼고 숫자만 입력">
+	                <label for="tel" style="width: 80%;">전화번호<br>
+	                  <input type="text" name="m_tel" id="tel" class="form-control" placeholder="'_'빼고 숫자만 입력">
 	                </label>
 	                <!-- 휴대폰 번호 인증 버튼 -->
 	                <button type="button" id="verifyRequest">인증요청</button>
@@ -244,7 +244,7 @@
 	               <!-- 휴대폰 번호 인증 버튼 -->
 	              <div class="input-container">
 	                <label for="email" style="width: 100%;">이메일<br>
-	                  <input type="text" id="email" class="form-control">
+	                  <input type="text" name="m_email" id="email" class="form-control">
 	                </label>
 	              </div>
 	              <!-- 약관 -->
@@ -358,22 +358,17 @@
 	      <div class="modal-body">
 	        <div>
 	          <!-- form 태그 시작 -->
-	          <form action="businessJoinPro" method="post">
+	          <form action="ceoJoinPro" method="post">
 	            <div class="container">
 	              <h3>Clean Plate로 식당 예약 간편하게!</h3>
 	              <div class="input-container">
-	                <label for="crn" style="width: 100%;">사업자등록번호<br>
-	                  <input type="text" id="crn" class="form-control" placeholder="사업자등록번호 10자리">
-	                </label>
-	              </div>
-	              <div class="input-container">
 	                <label for="id" style="width: 100%;">아이디<br>
-	                  <input type="text" id="id" class="form-control" placeholder="4~20자리 / 영문, 숫자, 특수문자'_' 사용가능">
+	                  <input type="text" name="c_id" id="id" class="form-control" placeholder="4~20자리 / 영문, 숫자, 특수문자'_' 사용가능">
 	                </label>
 	              </div>
 	              <div class="input-container">
 	                <label for="password1" style="width: 100%;">비밀번호<br>
-	                  <input type="password" id="password1" class="form-control" placeholder="8~16자리/영문 대소문자,숫자,특수문자 조합">
+	                  <input type="password" name="c_passwd" id="password1" class="form-control" placeholder="8~16자리/영문 대소문자,숫자,특수문자 조합">
 	                </label>
 	              </div>
 	              <div class="input-container">
@@ -383,13 +378,13 @@
 	              </div>
 	              <div class="input-container">
 	                <label for="name" style="width: 100%;">이름<br>
-	                  <input type="text" id="name" class="form-control" placeholder="이름 입력">
+	                  <input type="text" name="c_name" id="name" class="form-control" placeholder="이름 입력">
 	                </label>
 	              </div>
 	               <!-- 휴대폰 번호 인증 버튼 -->
 	              <div class="input-container">
-	                <label for="phone" style="width: 80%;">휴대폰번호<br>
-	                  <input type="text" id="businessPhone" class="form-control" placeholder="'_'빼고 숫자만 입력">
+	                <label for="businessPhone" style="width: 80%;">휴대폰번호<br>
+	                  <input type="text" name="c_tel" id="businessPhone" class="form-control" placeholder="'_'빼고 숫자만 입력">
 	                </label>
 	                <button type="button" id="businessRequest">인증요청</button>
 	              </div>
@@ -402,7 +397,7 @@
 	               <!-- 휴대폰 번호 인증 버튼 -->
 	              <div class="input-container">
 	                <label for="email" style="width: 100%;">이메일<br>
-	                  <input type="text" id="businessEmail" class="form-control">
+	                  <input type="text" name="c_email" id="email" class="form-control">
 	                </label>
 	              </div>
 	              <!-- 약관 -->
