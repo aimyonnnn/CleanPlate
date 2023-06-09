@@ -32,12 +32,20 @@ public class LoginController {
 	private CeoService ceoService;
 	
 	//=================================로그인 & 로그아웃=================================
-	// 메인에서 로그인 버튼 클릭 시 로그인 폼으로 이동
+	// 메인에서 로그인 버튼 클릭 시 로그인 폼으로 이동 시
+	// 1. 세션 "sId"가 존재하면 메인으로 리다이렉트
+	// 2. 세션의 "sId"가 존재하지 않으면 로그인페이지로 이동
 	@GetMapping("loginForm")
-	public String LoginForm(){
-		return "member/member_login";
+	public String loginForm(HttpServletRequest request) {
+		// false를 설정해서 세션이 새로 생기지 않도록 설정, 이미 존재할 경우 현재 존재하는 세션을 반환함
+	    HttpSession session = request.getSession(false);
+	    
+	    if (session != null && session.getAttribute("sId") != null) {
+	        return "redirect:/"; // 세션의 sId가 있으면 "/"으로 리다이렉트
+	    }
+	    return "member/member_login";
 	}
-	
+
 	 // 로그인 버튼 클릭 시
 	   @PostMapping("loginPro")
 	   public String loginMain(
