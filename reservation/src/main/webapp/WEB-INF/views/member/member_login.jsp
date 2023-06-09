@@ -125,7 +125,7 @@
 		    function loginWithKakao() {
 		        Kakao.Auth.login({
 		        	// 닉네임 이용 중 동의 설정 후 받아오기
-		            scope: 'profile_nickname',
+		            scope: "profile_nickname, account_email",
 		            success: function (response) {
 		                Kakao.API.request({
 		                    url: '/v2/user/me',
@@ -135,6 +135,7 @@
 		                        var nickname = response.kakao_account.profile.nickname;
 		                        
 		                        // JSON 객체 출력하기
+		                        console.log(JSON.stringify(response));
 		                        alert(JSON.stringify(response));
 		                        
 		                        // ajax요청
