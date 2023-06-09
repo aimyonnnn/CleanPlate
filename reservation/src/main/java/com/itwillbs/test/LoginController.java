@@ -32,8 +32,8 @@ public class LoginController {
 	private CeoService ceoService;
 	
 	//=================================로그인 & 로그아웃=================================
-	// 메인에서 로그인 버튼 클릭 시 로그인 폼으로 이동 시
-	// 1. 세션 "sId"가 존재하면 메인으로 리다이렉트
+	// 로그인 폼으로 이동 시
+	// 1. 세션의 "sId"가 존재하면 메인으로 리다이렉트
 	// 2. 세션의 "sId"가 존재하지 않으면 로그인페이지로 이동
 	@GetMapping("loginForm")
 	public String loginForm(HttpServletRequest request) {
@@ -106,21 +106,20 @@ public class LoginController {
 		// 카카오에서 불러온 email, nickname 콘솔에 출력
 		System.out.println("email : "+ email + ", nickname : " + nickname);
 
-		// DB에서 리턴받았다고 가정
-	    String existingEmail = email;
-//	    String existingEmail = "tset";
-	    
-	    // 카카오에서 전달받은 이메일 값으로 회원가입 여부 판별
-	    if (existingEmail.equals(email)) { // DB에 카카오에서 전달받은 이메일이 존재할 경우
-	    	System.out.println("existing");
-	    	// 이미 가입된 회원이므로 세션에 유저의 nickname을 저장
-	    	session.setAttribute("kId", nickname);
-	        return "existing";
-	    } else {
-	    	System.out.println("new"); // DB에 이메일이 존재하지 않을 경우 => 회원가입 진행
-	        return "new";
-	    }
-	}
+		MemberVO member = service.isCorrectKakaoUser(email);
+		System.out.println(member);
+		
+		// DB에 카카오 이메일이 존재하지 않으면 => 회원가입 진행
+		if(member == null) {
+			return "new";
+		} else {
+		// DB에 카카오 이메일이 존재하는 경우 => 기존 회원이므로 로그인 처리
+		// 기존 회원이므로 세션에 유저의 이메일을 세션에 저장
+		// 카카오 로그인으로 로그인 할 경우 메인의 header부분에 카카오 이메일을 출력함
+			session.setAttribute("sId", email);
+			return "existing";
+		}
+	}		
 	
 	//로그아웃
 	@GetMapping("/logout")

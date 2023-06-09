@@ -8,7 +8,10 @@ import com.itwillbs.test.vo.MemberVO;
 @Mapper
 public interface LoginMapper {
 	
-	// id, passwd 조회하기
+	// 로그인 시 id, passwd 조회하기
 	MemberVO isCorrectUser(@Param("id") String id, @Param("passwd") String passwd);
+	
+	// 카카오 이메일로 로그인 시 email 조회하기
+	MemberVO isCorrectKakaoUser(String email);
 	
 }
