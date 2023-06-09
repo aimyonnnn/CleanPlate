@@ -86,45 +86,6 @@ public class LoginController {
 		return "member/member_find";
 	}
 	//=================================로그인 & 로그아웃=================================
-	
-	//=================================회원 마이페이지=================================
-	// 로그인 성공후 XXX님 클릭시 마이페이지로 이동
-	@GetMapping("member")
-	public String member() {
-		return "member/memberForm";
-	}
-	
-	// 비밀번호 입력 후 내정보 수정 페이지로 이동
-	@PostMapping("memberPro")
-	public String memberPro() {
-		return "member/memberInfo";
-	}
-	
-	// 예약 내역 클릭시 
-	@GetMapping("memberRSList")
-	public String memberRSList() {
-		return "member/memberRSList";
-	}
-	
-	// 내가 찜한 식당
-	@GetMapping("memberLike")
-	public String memberLike() {
-		return "member/memberLike";
-	}
-	
-	// 내가 쓴 리뷰
-	@GetMapping("memberReview")
-	public String memberReview() {
-		return "member/memberReview";
-	}
-	
-	// 회원탈퇴 
-	@GetMapping("memberWithdrawal")
-	public String memberWithdrawal() {
-		return "member/memberWithdrawal";
-	}
-	//=================================회원 마이페이지 끝=================================
-	
 	//=================================관리자 페이지=================================
 	// 로그인 성공 후 관리자 클릭시 관리자페이지로 이동
 	@GetMapping("manager")
