@@ -13,7 +13,7 @@
 				, #{c_name}
 				, #{c_tel}
 				, #{c_email}
-				,  '1' 
+				, '1'
 				, now()
 			)
 	</insert>

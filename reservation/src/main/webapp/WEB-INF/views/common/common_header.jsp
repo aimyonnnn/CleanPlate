@@ -52,13 +52,13 @@
         <div>
         	
             <c:choose>
-                <c:when test="${empty sessionScope.kId}">
+                <c:when test="${empty sessionScope.sId}">
                 	<!-- 세션 id가 존재하지 않을 경우 로그인 버튼 출력 -->
                     <button type="button" class="btn btn-outline-light text-black me-2 border-0" onclick="location.href='loginForm'">로그인</button>
                 </c:when>
                 <c:otherwise>
                     <!-- 세션 id가 존재할 경우 세션 아이디에 저장된 회원 닉네임 출력 -->
-                    <button type="button" class="btn btn-outline-light text-black me-2 border-0" onclick="location.href='mypage'">${sessionScope.kId} 님</button>
+                    <button type="button" class="btn btn-outline-light text-black me-2 border-0" onclick="location.href='mypage'">${sessionScope.sId} 님</button>
 			  		<!-- 세션 id가 존재할 경우 예약내역 버튼 활성화 -->
 			  		<button type="button" class="btn btn-outline-light text-black border-0 bg-transparent" onclick="location.href='mypage_rs'">예약내역</button>
                 	<!-- 세션 id가 존재할 경우 로그아웃 버튼 출력 -->

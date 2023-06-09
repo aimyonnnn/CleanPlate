@@ -14,20 +14,6 @@ public class MemberVO { // 회원 테이블
 	private String m_birth; // 생년월일
 	private String m_tel; // 전화번호
 	private String m_email; // 이메일
-	private MemberStatus m_status; // enum 타입 회원상태
+	private String m_status; // 회원상태
 	private Date m_regdate; // 회원가입일
-}
-
-enum MemberStatus {
-	ACTIVE(1), SUSPENSION(2), WITHDRAWAL(3); // 활동중, 정지, 탈퇴
-	
-	private int value;
-	
-	MemberStatus(int value) {
-		this.value = value;
-	}
-	
-	public int getValue() {
-        return value;
-    }
 }

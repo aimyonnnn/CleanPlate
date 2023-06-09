@@ -3,13 +3,20 @@ package com.itwillbs.test.service;
 import java.util.HashMap;
 import java.util.Random;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.itwillbs.test.mapper.LoginMapper;
+import com.itwillbs.test.vo.MemberVO;
 
 import net.nurigo.java_sdk.api.Message;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
 
 @Service
 public class LoginService {
+	
+	@Autowired
+	private LoginMapper mapper;
 	
 	// coolsms 문자연동 시작
 	public String PhoneNumberCheck(String to) throws CoolsmsException{
@@ -36,9 +43,12 @@ public class LoginService {
 		 
 	}
 	// coolsms 문자연동 끝
-	
-	
-	
+
+	// id, passwd 조회하기
+	public MemberVO isCorrectUser(String id, String passwd) {
+		System.out.println("LoginService");
+		return mapper.isCorrectUser(id, passwd);
+	}
 	
 	
 	

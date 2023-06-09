@@ -70,7 +70,7 @@
 	
 	<!-- 세션 아이디가 존재하지 않을 경우에만 로그인폼을 출력 -->
 	<c:choose>	
-		<c:when test="${empty sessionScope.kId }">
+		<c:when test="${empty sessionScope.sId }">
 			<!-- 로그인 시작 -->
 			<div class="form personalLogin">
 				<form action="loginPro" method="post">
@@ -78,21 +78,21 @@
 					    <div class="personalButton">개인회원</div>
 					    <div class="businessButton">기업회원</div>
 					</div>
-				    <!-- 로그인 유지, 아이디 저장 체크박스 -->
-		          	<div class="checkbox-container">
-						<input type="checkbox" id="keepLoggedIn" name="keepLoggedIn">
-						<label for="keepLoggedIn">로그인 유지</label>
-						<span class="spacing"></span>
-						<input type="checkbox" id="rememberId" name="rememberId">
-						<label for="rememberId">아이디 저장</label>
-			      	</div>
-			      	<!-- 아이디, 비번 입력 -->
-				  	<div class="form-elements">
-				    	<div class="form-element">
-				      		<input type="text" placeholder="아이디" name="id">
-				    	</div>
-				    	<div class="form-element">
-				    		<input type="password" placeholder="비밀번호" name="passwd">
+				     <!-- 로그인 유지, 아이디 저장 체크박스 -->
+                   <div class="checkbox-container">
+	                  <input type="checkbox" id="keepLoggedIn" name="keepLoggedIn" ${empty cookie.keepLoggedIn.value ? "" : "checked" }>
+	                  <label for="keepLoggedIn">로그인 유지</label>
+	                  <span class="spacing"></span>
+	                  <input type="checkbox" id="rememberId" name="rememberId" ${empty cookie.rememberId.value ? "" : "checked" }>
+	                  <label for="rememberId">아이디 저장</label>
+	                  </div>
+	                  <!-- 아이디, 비번 입력 -->
+                	 <div class="form-elements">
+                     <div class="form-element">
+                        <input type="text" placeholder="아이디" name="id" value="${cookie.rememberId.value }">
+                     </div>
+                   <div class="form-element">
+                      <input type="password" placeholder="비밀번호" name="passwd">
 				    	</div>
 				    	<div class="form-element d-flex flex-row">
 				    		<button type="submit" id="submit-btn">로그인</button>

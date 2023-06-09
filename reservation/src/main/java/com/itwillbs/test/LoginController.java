@@ -1,5 +1,8 @@
 package com.itwillbs.test;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,11 +38,52 @@ public class LoginController {
 		return "member/member_login";
 	}
 	
-	// 로그인폼에서 로그인 버튼 클릭 시
-	@PostMapping("loginPro")
-	public String LoginMain() {
-	    return "redirect:/";
-	}
+	 // 로그인 버튼 클릭 시
+	   @PostMapping("loginPro")
+	   public String loginMain(
+			   String id, String passwd,
+			   boolean rememberId, boolean keepLoggedIn,
+	           HttpServletRequest request, HttpServletResponse response, Model model) {
+	   System.out.println("loginMain");
+	   
+       // 1. id와 passwd를 확인한다. => 일치하지 않을 시 로그인폼으로 이동
+	   MemberVO member = service.isCorrectUser(id, passwd);
+	   System.out.println(member);
+
+		if(member == null) {
+			return "redirect:/loginForm";
+		}
+	   
+       // 2. id, passwd가 일치하면
+       // 2-1. 속성명 sId에 id값을 저장한다.
+       HttpSession session = request.getSession();
+       session.setAttribute("sId", id);
+
+       // 3. 아이디 기억하기를 체크한 경우, 쿠키를 생성하여 아이디를 저장
+       if (rememberId) {
+           Cookie Cookie = new Cookie("rememberId", id);
+           Cookie.setMaxAge(7 * 24 * 60 * 60); // 쿠키 유효기간을 7일로 설정
+           response.addCookie(Cookie);
+       } else {
+         Cookie cookie = new Cookie("rememberId", "");
+         cookie.setMaxAge(0);
+         response.addCookie(cookie);
+       }
+       
+       // 4. 로그인 유지를 체크한 경우
+       if (keepLoggedIn) {
+           Cookie keepLoggedInCookie = new Cookie("keepLoggedIn", id);
+           keepLoggedInCookie.setMaxAge(7 * 24 * 60 * 60); // 쿠키 유효기간을 7일로 설정
+           response.addCookie(keepLoggedInCookie);
+       } else {
+          Cookie cookie = new Cookie("keepLoggedIn", "");
+          cookie.setMaxAge(0);
+          response.addCookie(cookie);
+       }
+
+       return "redirect:/";
+	   }
+		   
 	
 	// CoolSMS 문자 인증
 	@PostMapping("/checkPhone")
