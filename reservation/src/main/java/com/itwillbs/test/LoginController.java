@@ -37,7 +37,8 @@ public class LoginController {
 	// 2. 세션의 "sId"가 존재하지 않으면 로그인페이지로 이동
 	@GetMapping("loginForm")
 	public String loginForm(HttpServletRequest request) {
-		// false를 설정해서 세션이 새로 생기지 않도록 설정, 이미 존재할 경우 현재 존재하는 세션을 반환함
+		// false를 설정해서 세션이 새로 생기지 않도록 설정
+		// 세션이 이미 존재할 경우 현재 존재하는 세션을 반환함, 그렇지 않으면 null을 반환
 	    HttpSession session = request.getSession(false);
 	    
 	    if (session != null && session.getAttribute("sId") != null) {
@@ -51,10 +52,12 @@ public class LoginController {
 	   public String loginMain(
 			   String id, String passwd,
 			   boolean rememberId, boolean keepLoggedIn,
-	           HttpServletRequest request, HttpServletResponse response, Model model) {
+	           HttpServletRequest request, HttpServletResponse response,
+	           Model model) {
+		   
 	   System.out.println("loginMain");
 	   
-       // 1. id와 passwd를 확인한다. => 일치하지 않을 시 로그인폼으로 이동
+       // 1. id, passwd를 확인한다. => 일치하지 않을 시 로그인폼 리다이렉트
 	   MemberVO member = service.isCorrectUser(id, passwd);
 	   System.out.println(member);
 
@@ -62,7 +65,7 @@ public class LoginController {
 			return "redirect:/loginForm";
 		}
 	   
-       // 2. id, passwd가 일치하면
+       // 2. id, passwd가 일치하는 경우
        // 2-1. 속성명 sId에 id값을 저장한다.
        HttpSession session = request.getSession();
        session.setAttribute("sId", id);
@@ -88,12 +91,12 @@ public class LoginController {
           cookie.setMaxAge(0);
           response.addCookie(cookie);
        }
-
+       
+       // 로그인 완료 후 메인으로 리다이렉트
        return "redirect:/";
-	   }
-		   
+    }	   
 	
-	// CoolSMS 문자 인증
+	// coolsms 문자 인증
 	@PostMapping("/checkPhone")
 	public @ResponseBody String checkPhone(@RequestParam(value="to") String to) throws CoolsmsException {
 		return service.PhoneNumberCheck(to);

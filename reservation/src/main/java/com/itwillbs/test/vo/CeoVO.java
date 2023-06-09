@@ -12,7 +12,7 @@ public class CeoVO { // 회원 테이블
 	private String c_name; // 이름
 	private String c_tel; // 전화번호
 	private String c_email; // 이메일
-	private String c_status; // 회원상태
+	private int c_status; // 회원상태
 	private Date c_regdate; // 회원가입일
 }
 
