@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
-    String kId = (String) session.getAttribute("kId");
-    pageContext.setAttribute("kId", kId);
+    String sId = (String) session.getAttribute("sId");
+    pageContext.setAttribute("sId", sId);
 %>
 <html>
 <head>
@@ -37,7 +37,7 @@
 <script>
 
 $(document).ready(function() {
-    var kId = '<%= kId %>';
+    var kId = '<%= sId %>';
     $("input[name='id']").val(kId);
     $("input[name='id']").attr("readOnly", "readOnly");
 });
@@ -46,7 +46,7 @@ $(document).ready(function() {
 	<title>Chat</title>
 </head>
 <c:choose>
-	<c:when test="${empty sessionScope.kId}">
+	<c:when test="${empty sessionScope.sId}">
 		<body>
 			<script>
 				alert("로그인 후에만 접근할 수 있습니다.");
