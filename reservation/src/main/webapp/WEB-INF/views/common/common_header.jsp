@@ -25,6 +25,16 @@
 	
     <title>top</title>
     
+    <!-- 채널톡 API 시작 -->
+	<script>
+	  (function(){var w=window;if(w.ChannelIO){return w.console.error("ChannelIO script included twice.");}var ch=function(){ch.c(arguments);};ch.q=[];ch.c=function(args){ch.q.push(args);};w.ChannelIO=ch;function l(){if(w.ChannelIOInitialized){return;}w.ChannelIOInitialized=true;var s=document.createElement("script");s.type="text/javascript";s.async=true;s.src="https://cdn.channel.io/plugin/ch-plugin-web.js";var x=document.getElementsByTagName("script")[0];if(x.parentNode){x.parentNode.insertBefore(s,x);}}if(document.readyState==="complete"){l();}else{w.addEventListener("DOMContentLoaded",l);w.addEventListener("load",l);}})();
+	
+	  ChannelIO('boot', {
+	    "pluginKey": "1389a4f2-b052-41e3-8f07-442396576322"
+	  });
+	</script>
+	<!-- 채널톡 API 시작 -->
+    
     <script>
      // 로그아웃 버튼 클릭시 브라우저의 세션 스토리지에 있는 nickname, email값 삭제
      // 카카오 로그아웃
@@ -48,7 +58,7 @@
 	
 	<div class="container bg-white text-black mt-2">
     <div class="container d-flex justify-content-between align-items-center">
-        <img src="${pageContext.request.contextPath}/resources/images/logo.gif" style="width: 150px; height: 150px">
+        <img src="${pageContext.request.contextPath}/resources/images/logo.gif" style="width: 150px; height: 150px;" onclick="location.href='<c:url value="/"/>'">
         <div>
         	
             <c:choose>

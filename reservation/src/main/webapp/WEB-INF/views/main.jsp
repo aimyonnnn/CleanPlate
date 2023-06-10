@@ -16,13 +16,22 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/ScrollMagic.min.js"></script>
     
     <!-- jQuery CDN -->
-    <!-- 나중에 js파일로 교체 예정 -->
     <script
             src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
             integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
             crossorigin="anonymous"
             referrerpolicy="no-referrer">
     </script>
+    
+    <!-- 채널톡 API 시작 -->
+	<script>
+	  (function(){var w=window;if(w.ChannelIO){return w.console.error("ChannelIO script included twice.");}var ch=function(){ch.c(arguments);};ch.q=[];ch.c=function(args){ch.q.push(args);};w.ChannelIO=ch;function l(){if(w.ChannelIOInitialized){return;}w.ChannelIOInitialized=true;var s=document.createElement("script");s.type="text/javascript";s.async=true;s.src="https://cdn.channel.io/plugin/ch-plugin-web.js";var x=document.getElementsByTagName("script")[0];if(x.parentNode){x.parentNode.insertBefore(s,x);}}if(document.readyState==="complete"){l();}else{w.addEventListener("DOMContentLoaded",l);w.addEventListener("load",l);}})();
+	
+	  ChannelIO('boot', {
+	    "pluginKey": "1389a4f2-b052-41e3-8f07-442396576322"
+	  });
+	</script>
+	<!-- 채널톡 API 끝 -->
 
     <!-- CSS -->
     <link href="${pageContext.request.contextPath }/resources/css/main.css" rel="styleSheet" type="text/css">
@@ -36,7 +45,8 @@
 	<!-- top 시작-->
     <div class="container text-black text-white mt-2 position-absolute top-0 start-50 translate-middle-x" style="z-index: 99999; background: transparent;">
       <div class="container d-flex justify-content-between align-items-center">
-        <img src="${pageContext.request.contextPath }/resources/images/logo.gif" style="width: 150px; height: 150px">
+        <img src="${pageContext.request.contextPath }/resources/images/logo.gif" style="width: 150px; height: 150px;"
+        onclick="location.href='<c:url value="/"/>'">
         
         <div class="btn-group">
 		    <c:choose>
@@ -124,7 +134,6 @@
 	  </div>
 	</div>
 	<!-- 스크롤 내릴 때 텍스트 좌우 스크롤 애니메이션 처리 끝 -->
-	
 	
 	<!-- 스크롤 이벤트 처리를 위한 자바스크립트 코드 시작 -->
 	<script>
