@@ -306,7 +306,7 @@ public class LoginController {
 	        		modelAndView.setViewName("redirect:/login");//로그인 페이지 리다이렉트
 	        	}else {modelAndView.setViewName("main");//세션 유효시 메인 홈페이지로 이동!
 	        }
-	        return modelAndView;
+	        return modelAndView; 
 	    }
 
 	        @GetMapping("/logout")
