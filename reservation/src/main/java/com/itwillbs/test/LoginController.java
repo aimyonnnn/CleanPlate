@@ -10,12 +10,15 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.itwillbs.test.service.CeoService;
 import com.itwillbs.test.service.LoginService;
@@ -286,4 +289,49 @@ public class LoginController {
 	        return password.toString();
 	    }
 
+	    //로그아웃에 필요한 내용 : 일정 시간 이후 움직임 없으면 로그아웃
+	    @Controller
+	    
+	    public class UserController {
+        
+	    	@Autowired
+	    	private HttpServletRequest request;
+	    	
+	        @GetMapping
+	        public ModelAndView logoutCon(HttpServletRequest request) {
+	        	HttpSession session = request.getSession(false);
+	        	ModelAndView modelAndView = new ModelAndView();	        	
+				if(session == null) {//세션만료시 로그아웃되어야 한다.
+	        		logout();
+	        		modelAndView.setViewName("redirect:/login");//로그인 페이지 리다이렉트
+	        	}else {modelAndView.setViewName("main");//세션 유효시 메인 홈페이지로 이동!
+	        }
+	        return modelAndView;
+	    }
+
+	        @GetMapping("/logout")
+	        public String logout() {
+	            HttpSession session = request.getSession(false);
+	            if (session != null) {
+	                session.invalidate(); // 세션 무효화
+	            }
+	            // 로그인 완료 후 메인으로 리다이렉트
+	            return "redirect:/";
+	        	}
+	        
+	        //이부분에 대해서는 설명 필요할 예정
+	        //(로그인 세션설정 시간이 지나면 자동 로그아웃을 기능을 위해 일반적인 로그인 방식에
+	        //세션 유효시간 설정할 필요가있습니다)쿠키랑은 다름!
+//	        @GetMapping("/login")
+//	        public String login() {
+//	        	HttpSession session = request.getSession();
+//	        	
+//	        	// 로그인 성공한 경우 세션 유효 시간 설정 (30분)
+//	        	session.setMaxInactiveInterval(1800);
+//	        	
+//	        	// 로그인 처리 후 홈 페이지로 리다이렉트
+//	        	return "redirect:/";
+	        }
+	    }
+	    
 }
