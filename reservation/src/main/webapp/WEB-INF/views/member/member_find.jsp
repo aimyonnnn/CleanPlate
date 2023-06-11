@@ -96,16 +96,16 @@
 	      		<div class="modal-body">
 	        		<div>
 	        			<!-- 개인회원 아이디 찾기 폼 시작 -->
-	          			<form action="#" method="post">
+	          			<form action="memberIdFind" method="post">
 	            			<div class="container">
                 				<div class="input-container">
 					                <label for="name" style="text-align: left; width: 100%;">이름<br>
-					                	<input type="text" id="name" class="form-control" placeholder="이름 입력">
+					                	<input type="text" id="name" name="m_name" class="form-control" placeholder="이름 입력">
 					                </label>
 	              				</div>
 	              				<div class="input-container">
 					                <label for="phone" style="text-align: left; width: 70%;">휴대폰번호<br>
-					                	<input type="text" id="phone" class="form-control" placeholder="'_'빼고 숫자만 입력">
+					                	<input type="text" id="phone" name="m_tel" class="form-control" placeholder="'_'빼고 숫자만 입력">
 					                </label>
                 					<!-- 휴대폰 번호 인증 버튼 -->
                						<button type="button" id="verify-phone">인증요청</button>
@@ -131,22 +131,22 @@
 				</div>
 				<div class="modal-body">
 					<div>
-						<form action="#" method="post">
+						<form action="memberPasswdFind" method="post">
 							<div class="container">
 								<div class="input-container">
 					                <label for="id" style="text-align: left; width: 100%;">아이디<br>
-					                	<input type="text" id="id" class="form-control" placeholder="4~20자리 / 영문, 숫자, 특수문자'_' 사용가능">
+					                	<input type="text" id="id" name="m_id" class="form-control" placeholder="4~20자리 / 영문, 숫자, 특수문자'_' 사용가능">
 					                </label>
 	              				</div>
 								<div class="input-container">
 					                <label for="name" style="text-align: left; width: 100%;">이름<br>
-					                	<input type="text" id="name" class="form-control" placeholder="이름 입력">
+					                	<input type="text" id="name" name="m_name" class="form-control" placeholder="이름 입력">
 					                </label>
 								</div>
 				                <!-- 휴대폰 번호 인증 버튼 -->
 								<div class="input-container">
 					                <label for="phone" style="text-align: left; width: 80%;">휴대폰번호<br>
-					                	<input type="text" id="phone" class="form-control" placeholder="'_'빼고 숫자만 입력">
+					                	<input type="text" id="phone" name="m_tel" class="form-control" placeholder="'_'빼고 숫자만 입력">
 					                </label>
 	                				<button type="button" id="verify-phone">인증요청</button>
 	              				</div>
@@ -157,7 +157,7 @@
 								</div>
 							</div>
 							<div class="d-flex justify-content-center mt-1">
-								<button type="button" id="verify-confirm">인증완료</button>
+								<button type="submit" id="verify-confirm">인증완료</button>
 							</div>
 							<!-- 휴대폰 번호 인증 버튼 -->
 						</form>
@@ -181,16 +181,16 @@
 				<div class="modal-body">
 					<div>
 						<!-- 기업회원 아이디 찾기 폼 시작 -->
-						<form action="#" method="post">
+						<form action="ceoIdFind" method="post">
 							<div class="container">
 								<div class="input-container">
 					                <label for="name" style="text-align: left; width: 100%;">담당자명 (이름)<br>
-					                	<input type="text" id="name" class="form-control" placeholder="이름 입력">
+					                	<input type="text" id="name" name="c_name" class="form-control" placeholder="이름 입력">
 					                </label>
 								</div>
 								<div class="input-container">
 					                <label for="phone" style="text-align: left; width: 80%;">휴대폰번호<br>
-					                	<input type="text" id="phone" class="form-control" placeholder="'_'빼고 숫자만 입력">
+					                	<input type="text" id="phone" name="c_tel" class="form-control" placeholder="'_'빼고 숫자만 입력">
 					                </label>
 					                <!-- 휴대폰 번호 인증 버튼 -->
 					                <button type="button" id="verify-phone">인증요청</button>
@@ -202,7 +202,7 @@
 								</div>
 							</div>
 							<div class="d-flex justify-content-center mt-1">
-								<button type="button" id="verify-confirm">인증완료</button>
+								<button type="submit" id="verify-confirm">인증완료</button>
 							</div>
 							<!-- 휴대폰 번호 인증 버튼 끝 -->
 						</form>

@@ -17,4 +17,9 @@ public class MemberService {
 		return mapper.insertMember(member);
 	}
 	
+	// 임시 비빌번호 업데이트
+	public int randomPassword(MemberVO membervo) {
+		return mapper.updatePassword(membervo);
+	}
+	
 }

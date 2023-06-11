@@ -1,5 +1,9 @@
 package com.itwillbs.test;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.security.SecureRandom;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -161,11 +165,125 @@ public class LoginController {
 			}
 		}
 	
-	//아이디, 비밀번호 찾기
-	@GetMapping("forgotten")
-	public String forgotten() {
-		return "member/member_find";
-	}
-	//=================================로그인 & 로그아웃=================================
+		//아이디, 비밀번호 찾기
+		@GetMapping("forgotten")
+		public String forgotten() {
+			return "member/member_find";
+		}
+		
+		//회원 아이디 찾기
+		@PostMapping("memberIdFind")
+		public String memberIdFind(@RequestParam String m_name, @RequestParam String m_tel, Model model, HttpServletResponse response) {
+			
+			System.out.println(m_name + ", " + m_tel);
+			
+			MemberVO member = service.retrieveMemberId(m_name, m_tel);
+			
+			System.out.println(member);
+			
+			if(member == null) { // id 찾기 실패 시
+				try {
+					response.setContentType("text/html; charset=UTF-8");
+					PrintWriter out = response.getWriter();
+					out.print("<script>");
+					out.print("alert('입력하신 정보가 일치하지 않습니다.');");
+					out.print("history.back();");
+					out.print("</script>");
+					out.flush();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			
+			model.addAttribute("member", member);
+			
+			return "member/memberIdFind";
+		}
+		
+		//회원 비밀번호 찾기
+		@PostMapping("memberPasswdFind")
+		public String memberPasswdFind(MemberVO membervo , Model model, HttpServletResponse response) {
+			System.out.println(membervo);
+			
+			MemberVO member = service.retrievePasswdFind(membervo);
+			
+			System.out.println(member);
+			
+			
+			
+			if(member == null) { // passwd 찾기 실패 시
+				try {
+					response.setContentType("text/html; charset=UTF-8");
+					PrintWriter out = response.getWriter();
+					out.print("<script>");
+					out.print("alert('입력하신 정보가 일치하지 않습니다.');");
+					out.print("history.back();");
+					out.print("</script>");
+					out.flush();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			// 랜덤 비밀번호 생성
+			String RdPassword = generateRandomPassword();
+			System.out.println("Random Password: " + RdPassword);
+			
+			membervo.setM_passwd(RdPassword);
+			
+			
+			int updateCount = memberService.randomPassword(membervo);
+				
+			model.addAttribute("member",member);
+			
+			return "member/memberPasswdFind";
+		}
+		
+		//점주 아이디 찾기
+		@PostMapping("ceoIdFind")
+		public String ceoIdFind(@RequestParam String c_name, @RequestParam String c_tel, Model model) {
+			
+			System.out.println(c_name + ", " + c_tel);
+			
+			CeoVO ceo = service.retrieveCeoId(c_name, c_tel);
+			
+			System.out.println(ceo);
+			
+			if(ceo == null) { // id 찾기 실패 시
+				return "member/loginForm";
+			}
+			
+			model.addAttribute("member", ceo);
+			
+			return "member/memberIdFind";
+		}
+		//=================================로그인 & 로그아웃=================================
+		//=================================랜덤 비밀번호 생성================================
+		
+	    // 사용할 문자 세트 정의
+	    private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()";
+	    
+	    // 생성할 비밀번호의 길이
+	    private static final int PASSWORD_LENGTH = 10;
+
+	    // 랜덤 비밀번호 생성 메서드
+	    public static String generateRandomPassword() {
+	        // SecureRandom 클래스를 사용하여 안전한 랜덤 값을 생성
+	        SecureRandom random = new SecureRandom();
+	        
+	        // 비밀번호를 저장할 StringBuilder 객체 생성
+	        StringBuilder password = new StringBuilder();
+
+	        // 비밀번호 길이만큼 반복하여 랜덤 문자 선택
+	        for (int i = 0; i < PASSWORD_LENGTH; i++) {
+	            // 문자 세트에서 랜덤한 인덱스 선택
+	            int randomIndex = random.nextInt(CHARACTERS.length());
+	            
+	            // 선택된 인덱스에 해당하는 문자를 비밀번호에 추가
+	            password.append(CHARACTERS.charAt(randomIndex));
+	        }
+
+	        // 생성된 비밀번호를 문자열 형태로 반환
+	        return password.toString();
+	    }
 
 }

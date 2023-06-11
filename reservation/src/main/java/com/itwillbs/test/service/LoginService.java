@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.itwillbs.test.mapper.LoginMapper;
+import com.itwillbs.test.vo.CeoVO;
 import com.itwillbs.test.vo.MemberVO;
 
 import net.nurigo.java_sdk.api.Message;
@@ -53,6 +54,21 @@ public class LoginService {
 	// 카카오 이메일로 로그인 시 email 조회하기
 	public MemberVO isCorrectKakaoUser(String email) {
 		return mapper.isCorrectKakaoUser(email);
+	}
+	
+	//이름과 전화번호로 회원 조회
+	public MemberVO retrieveMemberId(String m_name, String m_tel) {
+		return mapper.selectMemberId(m_name, m_tel);
+	}
+
+	//이름과 전화번호로 점주 조회
+	public CeoVO retrieveCeoId(String c_name, String c_tel) {
+		return mapper.selectCeoId(c_name, c_tel);
+	}
+	
+	//아이디와 이름 그리고 전화번호로 회원 조회
+	public MemberVO retrievePasswdFind(MemberVO membervo) {
+		return mapper.selectMemberPasswd(membervo);
 	}
 	
 	

@@ -21,4 +21,26 @@
 		</select>
 		<!-- 카카오 이메일로 로그인 시 email 조회하기 끝-->
 		
+				<!-- 아이디/비밀번호 찾기 -->
+		<!-- 일반회원 아이디 찾기 -->
+		<select id="selectMemberId" resultType="com.itwillbs.test.vo.MemberVO">
+			select * 
+	    	from members
+	    	where m_name = #{m_name} and m_tel = #{m_tel}
+		</select>
+		
+		<!-- ceo 아이디 찾기 -->
+		<select id="selectCeoId" resultType="com.itwillbs.test.vo.CeoVO">
+			select * 
+	    	from members
+	    	where m_name = #{c_name} and m_tel = #{c_tel}
+		</select>
+		
+		<!-- 일반회원 비밀번호 찾기 -->
+		<select id="selectMemberPasswd" resultType="com.itwillbs.test.vo.MemberVO">
+			select * 
+	    	from members
+	    	where m_id = #{m_id} and m_name = #{m_name} and m_tel = #{m_tel}
+		</select>
+		
 </mapper>

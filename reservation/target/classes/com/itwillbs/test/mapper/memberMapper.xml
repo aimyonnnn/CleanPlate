@@ -20,4 +20,11 @@
 			)
 	</insert>
 	<!-- 개인회원 정보 등록 끝 -->
+	
+	<!-- 회원 랜덤 비밀번호 발급 -->
+	<update id="updatePassword">
+		UPDATE members 
+			SET m_passwd = #{m_passwd} 
+			WHERE m_id = #{m_id} AND m_name = #{m_name}
+	</update>
 </mapper>

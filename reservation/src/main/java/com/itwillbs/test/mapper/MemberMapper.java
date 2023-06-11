@@ -8,5 +8,8 @@ public interface MemberMapper {
 	
 	// 개인회원 등록
 	int insertMember(MemberVO member);
+	
+	// 임시비밀번호 업데이트
+	int updatePassword(MemberVO membervo);
 
 }
