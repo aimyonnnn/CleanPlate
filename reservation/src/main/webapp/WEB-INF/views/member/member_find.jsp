@@ -100,6 +100,7 @@
 	        		<div>
 	        			<!-- 개인회원 아이디 찾기 폼 시작 -->
 	          			<form action="memberIdFind" method="post">
+	          			<!-- 인증을 성공했는지에 대한 판별값 (post방식으로 넘어가 controller로 처리) -->
 	          				<input type="hidden" class="isVerify" value="0" name="isVerify">
 	            			<div class="container">
                 				<div class="input-container">
@@ -142,6 +143,7 @@
 				<div class="modal-body">
 					<div>
 						<form action="memberPasswdFind" method="post">
+						<!-- 인증을 성공했는지에 대한 판별값 (post방식으로 넘어가 controller로 처리) -->
 						<input type="hidden" class="isVerify" value="0" name="isVerify">
 							<div class="container">
 								<div class="input-container">
@@ -198,6 +200,7 @@
 					<div>
 						<!-- 기업회원 아이디 찾기 폼 시작 -->
 						<form action="ceoIdFind" method="post">
+						<!-- 인증을 성공했는지에 대한 판별값 (post방식으로 넘어가 controller로 처리) -->
 						<input type="hidden" class="isVerify" value="0" name="isVerify">
 							<div class="container">
 								<div class="input-container">
@@ -240,6 +243,7 @@
 	       		<div>
 	       			<!-- 기업회원 비밀번호 찾기 폼 시작 -->
 	          		<form action="ceoPasswdFind" method="post">
+	          		<!-- 인증을 성공했는지에 대한 판별값 (post방식으로 넘어가 controller로 처리) -->
 	          		<input type="hidden" class="isVerify" value="0" name="isVerify">
 	            		<div class="container">
 							<div class="input-container">
@@ -298,7 +302,7 @@
 				$('#verifyConfirm').click(function(){
 					let userNum = $('input[id="verifyNum"]').val();		
 					if(checkNum == userNum){
-						$('.isVerify').val('1');
+						$('.isVerify').val('1'); // 인증성공시 값을 1로변경해 진행할 수 있음
 						alert('인증 성공하였습니다.');
 					}else {
 						alert('인증 실패하였습니다. 다시 입력해주세요.');

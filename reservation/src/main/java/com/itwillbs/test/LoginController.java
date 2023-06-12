@@ -181,6 +181,7 @@ public class LoginController {
 			
 			System.out.println(m_name + ", " + m_tel + ", " + isVerify);
 			
+			// 전화번호 인증을 했는지 하지 않았는지 판별
 			if(isVerify != 1) {
 				model.addAttribute("msg", "전화번호 인증이 확인되지 않았습니다.");
 				return "fail_back";
@@ -205,6 +206,7 @@ public class LoginController {
 		public String memberPasswdFind(MemberVO membervo , Model model, @RequestParam int isVerify) {
 			System.out.println(membervo);
 			
+			// 전화번호 인증을 했는지 하지 않았는지 판별
 			if(isVerify != 1) {
 				model.addAttribute("msg", "전화번호 인증이 확인되지 않았습니다.");
 				return "fail_back";
@@ -240,6 +242,7 @@ public class LoginController {
 			
 			System.out.println(c_name + ", " + c_tel);
 			
+			// 전화번호 인증을 했는지 하지 않았는지 판별
 			if(isVerify != 1) {
 				model.addAttribute("msg", "전화번호 인증이 확인되지 않았습니다.");
 				return "fail_back";
@@ -266,6 +269,7 @@ public class LoginController {
 					
 					System.out.println(ceo);
 					
+					// 전화번호 인증을 했는지 하지 않았는지 판별
 					if(isVerify != 1) {
 						model.addAttribute("msg", "전화번호 인증이 확인되지 않았습니다.");
 						return "fail_back";
