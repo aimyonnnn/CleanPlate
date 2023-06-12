@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -176,9 +177,14 @@ public class LoginController {
 		
 		//회원 아이디 찾기
 		@PostMapping("memberIdFind")
-		public String memberIdFind(@RequestParam String m_name, @RequestParam String m_tel, Model model) {
+		public String memberIdFind(@RequestParam String m_name, @RequestParam String m_tel, Model model, @RequestParam int isVerify) {
 			
-			System.out.println(m_name + ", " + m_tel);
+			System.out.println(m_name + ", " + m_tel + ", " + isVerify);
+			
+			if(isVerify != 1) {
+				model.addAttribute("msg", "전화번호 인증이 확인되지 않았습니다.");
+				return "fail_back";
+			}
 			
 			MemberVO member = service.retrieveMemberId(m_name, m_tel);
 			
@@ -196,8 +202,13 @@ public class LoginController {
 		
 		//회원 비밀번호 찾기
 		@PostMapping("memberPasswdFind")
-		public String memberPasswdFind(MemberVO membervo , Model model) {
+		public String memberPasswdFind(MemberVO membervo , Model model, @RequestParam int isVerify) {
 			System.out.println(membervo);
+			
+			if(isVerify != 1) {
+				model.addAttribute("msg", "전화번호 인증이 확인되지 않았습니다.");
+				return "fail_back";
+			}
 			
 			MemberVO member = service.retrievePasswdFind(membervo);
 			
@@ -225,9 +236,14 @@ public class LoginController {
 		
 		//점주 아이디 찾기
 		@PostMapping("ceoIdFind")
-		public String ceoIdFind(@RequestParam String c_name, @RequestParam String c_tel, Model model) {
+		public String ceoIdFind(@RequestParam String c_name, @RequestParam String c_tel, Model model, @RequestParam int isVerify) {
 			
 			System.out.println(c_name + ", " + c_tel);
+			
+			if(isVerify != 1) {
+				model.addAttribute("msg", "전화번호 인증이 확인되지 않았습니다.");
+				return "fail_back";
+			}
 			
 			CeoVO ceo = service.retrieveCeoId(c_name, c_tel);
 			
@@ -246,9 +262,14 @@ public class LoginController {
 		
 		//점주 비밀번호 찾기
 				@PostMapping("ceoPasswdFind")
-				public String ceoPasswdFind(CeoVO ceo , Model model) {
+				public String ceoPasswdFind(CeoVO ceo , Model model, @RequestParam int isVerify) {
 					
 					System.out.println(ceo);
+					
+					if(isVerify != 1) {
+						model.addAttribute("msg", "전화번호 인증이 확인되지 않았습니다.");
+						return "fail_back";
+					}
 					
 					CeoVO ceoResult = service.retrievePasswdFind(ceo);
 					

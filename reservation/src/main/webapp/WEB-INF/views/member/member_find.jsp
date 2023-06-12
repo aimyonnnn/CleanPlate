@@ -8,6 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>FIND ID/PASSWD</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
     <!-- 이부분은 지우면 안됩니다 -->
 </head>
 <body>
@@ -64,6 +65,7 @@
 						  
 						 	<!-- 자주 묻는 질문 시작 -->
 							<button type="button" class="btn btn-outline-warning" style="border-radius: 0;">
+
 								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-square-text" viewBox="0 0 16 16">
 									<path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1h-2.5a2 2 0 0 0-1.6.8L8 14.333 6.1 11.8a2 2 0 0 0-1.6-.8H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2.5a1 1 0 0 1 .8.4l1.9 2.533a1 1 0 0 0 1.6 0l1.9-2.533a1 1 0 0 1 .8-.4H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
 									<path d="M3 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3 6a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 6zm0 2.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
@@ -84,6 +86,7 @@
 		</div>
 	</div>
 	<!-- 문의하기 끝 -->
+					
 
   <!-- 개인회원 아이디 / 비밀번호 찾기 모달창 -->
 	<div class="modal fade" id="personal-idpw" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -97,6 +100,7 @@
 	        		<div>
 	        			<!-- 개인회원 아이디 찾기 폼 시작 -->
 	          			<form action="memberIdFind" method="post">
+	          				<input type="hidden" class="isVerify" value="0" name="isVerify">
 	            			<div class="container">
                 				<div class="input-container">
 					                <label for="name" style="text-align: left; width: 100%;">이름<br>
@@ -104,26 +108,32 @@
 					                </label>
 	              				</div>
 	              				<div class="input-container">
-					                <label for="phone" style="text-align: left; width: 70%;">휴대폰번호<br>
-					                	<input type="text" id="phone" name="m_tel" class="form-control" placeholder="'_'빼고 숫자만 입력">
+					                <label for="phone" style="text-align: left; width: 100%;">휴대폰번호<br>
+					                	<div class="input-group mb-3">
+						                	<input type="text" id="phone" name="m_tel" class="form-control" placeholder="'_'빼고 숫자만 입력">
+	               							<button type="button" id="verifyRequest" class="btn btn-outline-warning">인증요청</button>
+               							</div>
 					                </label>
                 					<!-- 휴대폰 번호 인증 버튼 -->
-               						<button type="button" id="verify-phone">인증요청</button>
 	              				</div>
 	             				<div class="input-container">
 					                <label for="verify-phone" style="text-align: left; width: 100%;">인증번호<br>
-					                	<input type="text" id="verify-phone" class="form-control">
+						        		<div class="input-group mb-3">
+						                	<input type="text" id="verifyNum" class="form-control">
+	                						<button type="button" id="verifyConfirm" class="btn btn-outline-warning">인증확인</button>
+	                					</div>
 					                </label>
 	              				</div>
 	            			</div>
 	            				<div class="d-flex justify-content-center mt-1">
-                					<button type="submit" id="verify-confirm">인증확인</button>
+                					<button type="submit" class="btn btn-outline-warning">아이디찾기</button>
               					</div>
                 				<!-- 휴대폰 번호 인증 끝 -->
 	          			</form>
 	        			<!-- 개인회원 아이디 찾기 폼 끝 -->
 					</div>
 				</div>
+
 				
 				<!-- 개인회원 비밀번호 찾기 폼 시작 -->
 				<div class="modal-header">
@@ -132,6 +142,7 @@
 				<div class="modal-body">
 					<div>
 						<form action="memberPasswdFind" method="post">
+						<input type="hidden" class="isVerify" value="0" name="isVerify">
 							<div class="container">
 								<div class="input-container">
 					                <label for="id" style="text-align: left; width: 100%;">아이디<br>
@@ -143,22 +154,27 @@
 					                	<input type="text" id="name" name="m_name" class="form-control" placeholder="이름 입력">
 					                </label>
 								</div>
-				                <!-- 휴대폰 번호 인증 버튼 -->
-								<div class="input-container">
-					                <label for="phone" style="text-align: left; width: 80%;">휴대폰번호<br>
-					                	<input type="text" id="phone" name="m_tel" class="form-control" placeholder="'_'빼고 숫자만 입력">
+	              				<div class="input-container">
+					                <label for="phone" style="text-align: left; width: 100%;">휴대폰번호<br>
+					                	<div class="input-group mb-3">
+						                	<input type="text" id="phone" name="m_tel" class="form-control" placeholder="'_'빼고 숫자만 입력">
+	               							<button type="button" id="verifyRequest" class="btn btn-outline-warning">인증요청</button>
+               							</div>
 					                </label>
-	                				<button type="button" id="verify-phone">인증요청</button>
+                					<!-- 휴대폰 번호 인증 버튼 -->
 	              				</div>
-								<div class="input-container">
+	             				<div class="input-container">
 					                <label for="verify-phone" style="text-align: left; width: 100%;">인증번호<br>
-					                	<input type="text" id="verify-phone" class="form-control">
+						        		<div class="input-group mb-3">
+						                	<input type="text" id="verifyNum" class="form-control">
+	                						<button type="button" id="verifyConfirm" class="btn btn-outline-warning">인증확인</button>
+	                					</div>
 					                </label>
-								</div>
-							</div>
-							<div class="d-flex justify-content-center mt-1">
-								<button type="submit" id="verify-confirm">인증완료</button>
-							</div>
+	              				</div>
+	            			</div>
+	            				<div class="d-flex justify-content-center mt-1">
+                					<button type="submit" class="btn btn-outline-warning">임시비밀번호 발급</button>
+              					</div>
 							<!-- 휴대폰 번호 인증 버튼 -->
 						</form>
 						<!-- 개인회원 비밀번호 찾기 폼 끝 -->
@@ -182,28 +198,34 @@
 					<div>
 						<!-- 기업회원 아이디 찾기 폼 시작 -->
 						<form action="ceoIdFind" method="post">
+						<input type="hidden" class="isVerify" value="0" name="isVerify">
 							<div class="container">
 								<div class="input-container">
 					                <label for="name" style="text-align: left; width: 100%;">담당자명 (이름)<br>
 					                	<input type="text" id="name" name="c_name" class="form-control" placeholder="이름 입력">
 					                </label>
 								</div>
-								<div class="input-container">
-					                <label for="phone" style="text-align: left; width: 80%;">휴대폰번호<br>
-					                	<input type="text" id="phone" name="c_tel" class="form-control" placeholder="'_'빼고 숫자만 입력">
-					                </label>
-					                <!-- 휴대폰 번호 인증 버튼 -->
-					                <button type="button" id="verify-phone">인증요청</button>
-	              				</div>
 	              				<div class="input-container">
-					                <label for="verify-phone" style="text-align: left; width: 100%;">인증번호<br>
-					                	<input type="text" id="verify-phone" class="form-control">
+					                <label for="phone" style="text-align: left; width: 100%;">휴대폰번호<br>
+					                	<div class="input-group mb-3">
+						                	<input type="text" id="phone" name="c_tel" class="form-control" placeholder="'_'빼고 숫자만 입력">
+	               							<button type="button" id="verifyRequest" class="btn btn-outline-warning">인증요청</button>
+               							</div>
 					                </label>
-								</div>
-							</div>
-							<div class="d-flex justify-content-center mt-1">
-								<button type="submit" id="verify-confirm">인증완료</button>
-							</div>
+                					<!-- 휴대폰 번호 인증 버튼 -->
+	              				</div>
+	             				<div class="input-container">
+					                <label for="verify-phone" style="text-align: left; width: 100%;">인증번호<br>
+						        		<div class="input-group mb-3">
+						                	<input type="text" id="verifyNum" class="form-control">
+	                						<button type="button" id="verifyConfirm" class="btn btn-outline-warning">인증확인</button>
+	                					</div>
+					                </label>
+	              				</div>
+	            			</div>
+	            				<div class="d-flex justify-content-center mt-1">
+                					<button type="submit" class="btn btn-outline-warning">아이디찾기</button>
+              					</div>
 							<!-- 휴대폰 번호 인증 버튼 끝 -->
 						</form>
 						<!-- 기업회원 아이디 찾기 폼 끝 -->
@@ -218,6 +240,7 @@
 	       		<div>
 	       			<!-- 기업회원 비밀번호 찾기 폼 시작 -->
 	          		<form action="ceoPasswdFind" method="post">
+	          		<input type="hidden" class="isVerify" value="0" name="isVerify">
 	            		<div class="container">
 							<div class="input-container">
 				                <label for="id" style="text-align: left; width: 100%;">아이디<br>
@@ -229,22 +252,27 @@
 				                	<input type="text" id="name" name="c_name" class="form-control" placeholder="이름 입력">
 				                </label>
 							</div>
-				            <!-- 휴대폰 번호 인증 시작 -->
-							<div class="input-container">
-				                <label for="phone" style="text-align: left; width: 80%;">휴대폰번호<br>
-				                	<input type="text" id="phone" name="c_tel" class="form-control" placeholder="'_'빼고 숫자만 입력">
-				                </label>
-				                <button type="button" id="verify-phone">인증요청</button>
-	              			</div>
-							<div class="input-container">
-				                <label for="verify-phone" style="text-align: left; width: 100%;">인증번호<br>
-				                	<input type="text" id="verify-phone" class="form-control">
-				                </label>
-							</div>
-	            		</div>
-						<div class="d-flex justify-content-center mt-1">
-							<button type="submit" id="verify-confirm">인증완료</button>
-						</div>
+	              				<div class="input-container">
+					                <label for="phone" style="text-align: left; width: 100%;">휴대폰번호<br>
+					                	<div class="input-group mb-3">
+						                	<input type="text" id="phone" name="c_tel" class="form-control" placeholder="'_'빼고 숫자만 입력">
+	               							<button type="button" id="verifyRequest" class="btn btn-outline-warning">인증요청</button>
+               							</div>
+					                </label>
+                					<!-- 휴대폰 번호 인증 버튼 -->
+	              				</div>
+	             				<div class="input-container">
+					                <label for="verify-phone" style="text-align: left; width: 100%;">인증번호<br>
+						        		<div class="input-group mb-3">
+						                	<input type="text" id="verifyNum" class="form-control">
+	                						<button type="button" id="verifyConfirm" class="btn btn-outline-warning">인증확인</button>
+	                					</div>
+					                </label>
+	              				</div>
+	            			</div>
+	            				<div class="d-flex justify-content-center mt-1">
+                					<button type="submit" class="btn btn-outline-warning">임시비밀번호 발급</button>
+              					</div>
 			            <!-- 휴대폰 번호 인증 끝 -->
 					</form>
 					<!-- 기업회원 비밀번호 찾기 폼 끝 -->
@@ -255,12 +283,41 @@
 	</div>
 	<!-- 기업회원 아이디/비밀번호 찾기 모달창 끝 -->
 
+	<!-- CoolSMS 문자인증 시작 -->
+	<script>
+	$('#verifyRequest').click(function(){
+		let to = $('input[id="phone"]').val();
+		$.ajax({
+			url : '<c:url value="/checkPhone"/>',
+			type : "POST",
+			data : "to=" + to,
+			dataType : "json",
+			success : function(data) {
+				let checkNum = data;
+				alert('checkNum:'+ checkNum);
+				$('#verifyConfirm').click(function(){
+					let userNum = $('input[id="verifyNum"]').val();		
+					if(checkNum == userNum){
+						$('.isVerify').val('1');
+						alert('인증 성공하였습니다.');
+					}else {
+						alert('인증 실패하였습니다. 다시 입력해주세요.');
+					}
+				});
+			},
+			error : function() {
+				alert("에러")
+			}
+		});
+	});
+	</script>
+	<!-- CoolSMS 문자인증 끝 -->
 
     <!-- 하단 부분 include 처리영역 -->
     	<hr class="mt-5">
 		<%@ include file="../common/common_footer.jsp" %>
     <!-- 하단 부분 include 처리영역 -->
-    
+    <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
     <!-- 이부분은 지우면 안됩니다 -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 </body>
