@@ -217,22 +217,22 @@
 			<div class="modal-body">
 	       		<div>
 	       			<!-- 기업회원 비밀번호 찾기 폼 시작 -->
-	          		<form action="#" method="post">
+	          		<form action="ceoPasswdFind" method="post">
 	            		<div class="container">
 							<div class="input-container">
 				                <label for="id" style="text-align: left; width: 100%;">아이디<br>
-				                	<input type="text" id="id" class="form-control" placeholder="4~20자리 / 영문, 숫자, 특수문자'_' 사용가능">
+				                	<input type="text" id="id" name="c_id" class="form-control" placeholder="4~20자리 / 영문, 숫자, 특수문자'_' 사용가능">
 				                </label>
 							</div>
 							<div class="input-container">
 				                <label for="name" style="text-align: left; width: 100%;">담당자명 (이름)<br>
-				                	<input type="text" id="name" class="form-control" placeholder="이름 입력">
+				                	<input type="text" id="name" name="c_name" class="form-control" placeholder="이름 입력">
 				                </label>
 							</div>
 				            <!-- 휴대폰 번호 인증 시작 -->
 							<div class="input-container">
 				                <label for="phone" style="text-align: left; width: 80%;">휴대폰번호<br>
-				                	<input type="text" id="phone" class="form-control" placeholder="'_'빼고 숫자만 입력">
+				                	<input type="text" id="phone" name="c_tel" class="form-control" placeholder="'_'빼고 숫자만 입력">
 				                </label>
 				                <button type="button" id="verify-phone">인증요청</button>
 	              			</div>
@@ -243,7 +243,7 @@
 							</div>
 	            		</div>
 						<div class="d-flex justify-content-center mt-1">
-							<button type="button" id="verify-confirm">인증완료</button>
+							<button type="submit" id="verify-confirm">인증완료</button>
 						</div>
 			            <!-- 휴대폰 번호 인증 끝 -->
 					</form>

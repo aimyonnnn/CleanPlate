@@ -32,8 +32,8 @@
 		<!-- ceo 아이디 찾기 -->
 		<select id="selectCeoId" resultType="com.itwillbs.test.vo.CeoVO">
 			select * 
-	    	from members
-	    	where m_name = #{c_name} and m_tel = #{c_tel}
+	    	from CEO
+	    	where c_name = #{c_name} and c_tel = #{c_tel}
 		</select>
 		
 		<!-- 일반회원 비밀번호 찾기 -->
@@ -41,6 +41,12 @@
 			select * 
 	    	from members
 	    	where m_id = #{m_id} and m_name = #{m_name} and m_tel = #{m_tel}
+		</select>
+		
+		<select id="selectCeoPasswd" resultType="com.itwillbs.test.vo.CeoVO">
+			select * 
+	    	from CEO
+	    	where c_id = #{c_id} and c_name = #{c_name} and c_tel = #{c_tel}
 		</select>
 		
 </mapper>

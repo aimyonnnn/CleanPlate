@@ -70,6 +70,10 @@ public class LoginService {
 	public MemberVO retrievePasswdFind(MemberVO membervo) {
 		return mapper.selectMemberPasswd(membervo);
 	}
+
+	public CeoVO retrievePasswdFind(CeoVO ceo) {
+		return mapper.selectCeoPasswd(ceo);
+	}
 	
 	
 	

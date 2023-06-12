@@ -18,4 +18,10 @@
 			)
 	</insert>
 	<!-- 기업회원 정보 등록 끝 -->
+	<!-- 임시 비밀번호 발급 -->
+	<update id="updatePasswdCeo">
+		UPDATE CEO
+			SET c_passwd = #{c_passwd}
+			WHERE c_id = #{c_id} AND c_name = #{c_name}
+	</update>
 </mapper>

@@ -23,5 +23,7 @@ public interface LoginMapper {
 	
 	// 회원 비밀번호 번경전 정보가 있는지 조회
 	MemberVO selectMemberPasswd(MemberVO membervo);
+
+	CeoVO selectCeoPasswd(CeoVO ceo);
 	
 }

@@ -16,4 +16,9 @@ public class CeoService {
 		System.out.println("registCeo");
 		return mapper.insertCeo(ceo);
 	}
+	
+	// 점주 임시비밀번호 발급
+	public int randomPassword(CeoVO ceoResult) {
+		return mapper.updatePasswdCeo(ceoResult);
+	}
 }
