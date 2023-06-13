@@ -233,7 +233,7 @@
                 return;
             }
             
-            ws = new WebSocket("ws://localhost:8080/test/echo.do");
+            ws = new WebSocket("ws://localhost:8089/test/echo.do");
             
             ws.onopen = function(event){
                 if(event.data === undefined){
