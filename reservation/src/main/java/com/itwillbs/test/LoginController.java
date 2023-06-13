@@ -1,7 +1,5 @@
 package com.itwillbs.test;
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.security.SecureRandom;
 
 import javax.servlet.http.Cookie;
@@ -10,13 +8,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -62,15 +57,15 @@ public class LoginController {
 			   boolean rememberId, boolean keepLoggedIn,
 	           HttpServletRequest request, HttpServletResponse response,
 	           Model model) {
-		   
-	   System.out.println("loginMain");
 	   
        // 1. id, passwd를 확인한다. => 일치하지 않을 시 로그인폼 리다이렉트
 	   MemberVO member = service.isCorrectUser(id, passwd);
 	   System.out.println(member);
 
 		if(member == null) {
-			return "redirect:/loginForm";
+			String msg = "아이디 또는 비밀번호가 일치하지 않습니다";
+			model.addAttribute("msg", msg);
+			return "fail_back";
 		}
 	   
        // 2. id, passwd가 일치하는 경우

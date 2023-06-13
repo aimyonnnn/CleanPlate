@@ -1,95 +1,163 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-<!doctype html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="com.google.gson.Gson" %>
+      
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-  	
-  	 <title>Reservation</title>
-  	
-    <!-- Required meta tags -->
+<head>
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    
+    <title>Assignment</title>
+    
+    <!-- AOS 라이브러리 -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    
+    <!-- jQuery CDN -->
+    <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+            integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer">
+    </script>
+    
     <!-- Bootstrap CDN -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     
     <!-- CSS -->
-    <link rel="stylesheet" href="" />
+    <link href="${pageContext.request.contextPath }/resources/css/main.css" rel="styleSheet" type="text/css">
     
-     <!-- Link Swiper's CSS -->
-     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
-     <style>
-       .mySwiper {
-         width: 100%;
-         height: 300px;
-       }
-       .swiper-slide {
-         display: flex;
-         justify-content: center;
-         align-items: center;
-       }
-
-       .list-group-item:hover{
-        background-color: #eee;
-       }
-
-      </style>
-      <!-- Link Swiper's CSS -->
-
-  	  <!-- aos 라이브러리-->
-      <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-      
-  </head>
-  <body>
-<!-- ======================================================================================================================== -->
- 	
-
-
- 
-<!-- =============================================================================================================== -->
-<!-- =============================================================================================================== -->
-<!-- 상단 이미지 슬라이드 추가시 필요한 라이브러리 -->
-<!-- <div class="swiper mySwiper">
-  <div class="swiper-wrapper">
-    <div class="swiper-slide">Slide 1</div>
-    <div class="swiper-slide">Slide 2</div>
-    <div class="swiper-slide">Slide 3</div>
-  </div>
-  <div class="swiper-button-next"></div>
-  <div class="swiper-button-prev"></div>
-</div> -->
-
-<!-- <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-<script>
-  var swiper = new Swiper(".mySwiper", {
-    navigation: {
-      nextEl: ".swiper-button-next",
-      prevEl: ".swiper-button-prev"
+    <!-- 채널톡 API 시작 -->
+	<script>
+	  (function(){var w=window;if(w.ChannelIO){return w.console.error("ChannelIO script included twice.");}var ch=function(){ch.c(arguments);};ch.q=[];ch.c=function(args){ch.q.push(args);};w.ChannelIO=ch;function l(){if(w.ChannelIOInitialized){return;}w.ChannelIOInitialized=true;var s=document.createElement("script");s.type="text/javascript";s.async=true;s.src="https://cdn.channel.io/plugin/ch-plugin-web.js";var x=document.getElementsByTagName("script")[0];if(x.parentNode){x.parentNode.insertBefore(s,x);}}if(document.readyState==="complete"){l();}else{w.addEventListener("DOMContentLoaded",l);w.addEventListener("load",l);}})();
+	
+	  ChannelIO('boot', {
+	    "pluginKey": "1389a4f2-b052-41e3-8f07-442396576322"
+	  });
+	</script>
+	<!-- 채널톡 API 끝 -->
+    
+    <style>
+    
+    body {
+        background-color: #f8f9fa;
     }
-  });
-</script> -->
-<!-- 상단 이미지 슬라이드 추가시 필요한 라이브러리 -->
+    .container {
+    	margin-top: 30px;
+    }
 
-<!-- =============================================================================================================== -->
+    .card {
+        border: none;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+    }
 
-<div style="
+    .card:hover {
+        transform: translateY(-5px);
+    }
+
+    .card-img-top {
+        height: 200px;
+        object-fit: cover;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+    }
+
+    .card-title {
+        font-size: 24px;
+        font-weight: bold;
+        margin-top: 15px;
+        margin-bottom: 20px;
+        color: #333;
+        text-align: center;
+    }
+
+    .card-text {
+        color: #555;
+    }
+
+    .card-price {
+        font-size: 16px;
+        font-weight: bold;
+        margin-top: 10px;
+    }
+
+    .btn-deal,
+    .btn-chat {
+        margin-top: 15px;
+    }
+
+    .banner {
+        background-color: #f8f9fa;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 30px;
+        text-align: center;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .banner-title {
+        font-size: 32px;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 10px;
+    }
+
+    .banner-description {
+        font-size: 18px;
+        color: #555;
+    }
+    .card-body p {
+		margin-top: 3px;
+ 		margin-bottom: 3px;
+	}
+    
+   /* 텍스트양이 많아서 글자가 넘칠 때 ... 으로 표시 */
+	.ellipsis {
+	  white-space: nowrap;      /* 줄바꿈 방지 */
+	  overflow: hidden;         /* 넘치는 부분 감추기 */
+	  text-overflow: ellipsis;  /* 넘치는 부분에 ... 표시 */
+	  max-width: 200px;         /* 표시할 최대 너비 설정 */
+	}
+
+	/* 마우스를 올리면 전체 텍스트가 보임 */
+	.ellipsis:hover {
+	  white-space: normal;  /* 줄바꿈 허용하여 전체 텍스트 표시 */
+	  overflow: visible;   /* 넘치는 텍스트 표시 */
+	  max-width: none;     /* 최대 너비 제한 해제 */
+	}
+	 
+</style>
+</head>
+<body style="
   background-image:linear-gradient(
   rgba(0, 0, 0, 0.8),
   rgba(0, 0, 0, 0.8)),
   url(${pageContext.request.contextPath }/resources/images/1.jpg); background-size: cover;">
   
-  <!-- top 시작-->
-    <div class="container text-black text-white mt-2 position-absolute top-0 start-50 translate-middle-x" style="z-index: 99999; background: transparent; position: relative;" >
-      <div class="container d-flex justify-content-between align-items-center">
-        <img src="${pageContext.request.contextPath }/resources/images/logo.gif" style="width: 120px; height: 120px">
-        
-        <div class="btn-group">
-          <button type="button" class="btn btn-outline-light text-white me-2 border-0 bg-transparent" onclick="location.href='loginForm'">로그인</button>
-        </div>
-      </div>
-
-	  <!-- 로그인, 예약내역 버튼 아래 네비바 -->
+     <div class="d-flex justify-content-end mt-5 me-5">
+	      <div class="btn-group">
+		    <c:choose>
+		        <c:when test="${empty sessionScope.sId}">
+		        	<!-- 세션 id가 존재하지 않을 경우 로그인 버튼 출력 -->
+		            <button type="button" class="btn btn-outline-light text-white me-2 border-0 bg-transparent" onclick="location.href='login'">로그인</button>
+		        </c:when>
+		        <c:otherwise>
+		        	<!-- 세션 id가 존재할 경우 세션 아이디에 저장된 회원 닉네임 출력 -->
+		            <button type="button" class="btn btn-outline-light text-white me-2 border-0 bg-transparent" onclick="location.href='member'">${sessionScope.sId} 님</button>
+					<!-- 세션 id가 존재할 경우 예약내역 버튼 활성화 -->
+					<button type="button" class="btn btn-outline-light text-white border-0 bg-transparent" onclick="location.href='memberRSList'">예약내역</button>
+		            <!-- 세션 id가 존재할 경우 로그아웃 버튼 출력 -->
+		            <button type="button" class="btn btn-outline-light text-white me-2 border-0 bg-transparent" onclick="location.href='logout'" id="logout">로그아웃</button>
+		        </c:otherwise>
+		    </c:choose>
+		</div>
+     </div> 
+     
+     <!-- 네비바 시작 -->
       <div class="d-flex justify-content-center">
         <nav class="navbar navbar-expand-lg navbar-light fs-5">
           <div class="container-fluid">
@@ -111,327 +179,77 @@
           </div>
         </nav>
       </div>
-    </div>
+      <!-- 네비바 끝 -->
     
-<div style="height: 40px; width: 100%"></div>    
+   
+    <!-- container 시작 -->
+    <div class="container">
     
-    <br>
-    <!-- top 끝-->
-<div style="position: relative; top: 150px;">
-
-<div class="container">
-    <div class="row  row-cols-1 row-cols-md-1 g-4">
-    <div class="col-12 text-center" >
-      <div class="list-group list-group-horizontal">
-        <a href="#"class="list-group-item list-group-item-action" aria-current="true">예약많은순</a>
-        <a href="#" class="list-group-item list-group-item-action">리뷰순</a>
-        <a href="#" class="list-group-item list-group-item-action">평점순</a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="container mt-5 sticky-top d-flex justify-content-center" style="top: 50px;">
-  <div class="input-group mb-3" style="height: 50px; width: 50%;">
-      <input type="text" class="form-control" placeholder="식당, 음식으로 검색하세요" aria-label="Recipient's username" aria-describedby="button-addon2" style="border: 3px solid;">
-      <button class="btn btn-outline-secondary btn-lg bg-white shadow-lg" type="button" id="button-addon2" style="border: 3px solid black;">검색</button>
-    </div>
-  </div>
-  
-  
-<div class="container">
-  <div class="row">
-
-    <div class="col-md-12 my-3" data-aos="fade-right" data-aos-offset="500" data-aos-easing="ease-in-sine">
-      <div class="card mb-3" style="max-width: 100%; height: 350px;">
-        <div class="d-flex">
-            <div class="row g-0">
-            <div class="col-md-4">
-              <div class="d-flex flex-column justify-content-center align-self-center">
-                  <img src="${pageContext.request.contextPath }/resources/images/r2.jpg" class="img-fluid rounded-start mt-1 ms-1" alt="..." style="height: 90%;">
-                  <div class="btn-group">
-                    <button class="btn btn-danger mt-2 ms-1 w-100 p-2">예약하기</button>
-                  </div>
-              </div>
-            </div>
-            <div class="col-md-8">
-              <div class="card-body">
-                <h1 class="card-title">키친동백</h1>
-                <p class="card-text">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi nisi consectetur saepe, natus, reiciendis quidem a excepturi libero beatae perspiciatis iure. Tenetur, saepe illum error iusto vitae autem doloremque. Officia.
-                </p>
-                <p class="card-text"><h5>부산광역시 해운대구 달맞이길117번가길 85</h5></p>
-                <p class="card-text">#파인다이닝 #2인 #3인 #예약 #부산 #다이닝코스</p>
-                <a href="../reservation/reservation_reserve.jsp" class="stretched-link"></a>
-              </div>
-          </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-12 my-3" data-aos="fade-left" data-aos-offset="500" data-aos-easing="ease-in-sine">
-      <div class="card mb-3" style="max-width: 100%; height: 350px;">
-        <div class="d-flex">
-            <div class="row g-0">
-            <div class="col-md-4">
-              <div class="d-flex flex-column justify-content-center align-self-center">
-                  <img src="${pageContext.request.contextPath }/resources/images/r2.jpg" class="img-fluid rounded-start mt-1 ms-1" alt="..." style="height: 90%;">
-                  <div class="btn-group">
-                    <button class="btn btn-danger mt-2 ms-1 w-100 p-2">예약하기</button>
-                  </div>
-              </div>
-            </div>
-            <div class="col-md-8">
-              <div class="card-body">
-                <h1 class="card-title">광안다이닝</h1>
-                <p class="card-text">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi nisi consectetur saepe, natus, reiciendis quidem a excepturi libero beatae perspiciatis iure. Tenetur, saepe illum error iusto vitae autem doloremque. Officia.
-                </p>
-                <p class="card-text">부산광역시 해운대구 달맞이길117번가길 85</p>
-                <a href="" class="stretched-link"></a>
-              </div>
-          </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-12 my-3" data-aos="fade-right" data-aos-offset="500" data-aos-easing="ease-in-sine">
-      <div class="card mb-3" style="max-width: 100%; height: 350px;">
-        <div class="d-flex">
-            <div class="row g-0">
-            <div class="col-md-4">
-              <div class="d-flex flex-column justify-content-center align-self-center">
-                  <img src="${pageContext.request.contextPath }/resources/images/r2.jpg" class="img-fluid rounded-start mt-1 ms-1" alt="..." style="height: 90%;">
-                  <div class="btn-group">
-                    <button class="btn btn-danger mt-2 ms-1 w-100 p-2">예약하기</button>
-                  </div>
-              </div>
-            </div>
-            <div class="col-md-8">
-              <div class="card-body">
-                <h1 class="card-title">이플다이닝</h1>
-                <p class="card-text">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi nisi consectetur saepe, natus, reiciendis quidem a excepturi libero beatae perspiciatis iure. Tenetur, saepe illum error iusto vitae autem doloremque. Officia.
-                </p>
-                <p class="card-text">부산광역시 해운대구 달맞이길117번가길 85</p>
-                <a href="../reservation/reserve.jsp" class="stretched-link"></a>
-              </div>
-          </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-12 my-3" data-aos="fade-left" data-aos-offset="500" data-aos-easing="ease-in-sine">
-      <div class="card mb-3" style="max-width: 100%; height: 350px;">
-        <div class="d-flex">
-            <div class="row g-0">
-            <div class="col-md-4">
-              <div class="d-flex flex-column justify-content-center align-self-center">
-                  <img src="${pageContext.request.contextPath }/resources/images/r2.jpg" class="img-fluid rounded-start mt-1 ms-1" alt="..." style="height: 90%;">
-                  <div class="btn-group">
-                    <button class="btn btn-danger mt-2 ms-1 w-100 p-2">예약하기</button>
-                  </div>
-              </div>
-            </div>
-            <div class="col-md-8">
-              <div class="card-body">
-                <h1 class="card-title">다이닝룸</h1>
-                <p class="card-text">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi nisi consectetur saepe, natus, reiciendis quidem a excepturi libero beatae perspiciatis iure. Tenetur, saepe illum error iusto vitae autem doloremque. Officia.
-                </p>
-                <p class="card-text">부산광역시 해운대구 달맞이길117번가길 85</p>
-                <a href="" class="stretched-link"></a>
-              </div>
-          </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-12 my-3" data-aos="fade-right" data-aos-offset="500" data-aos-easing="ease-in-sine">
-      <div class="card mb-3" style="max-width: 100%; height: 350px;">
-        <div class="d-flex">
-            <div class="row g-0">
-            <div class="col-md-4">
-              <div class="d-flex flex-column justify-content-center align-self-center">
-                  <img src="${pageContext.request.contextPath }/resources/images/r2.jpg" class="img-fluid rounded-start mt-1 ms-1" alt="..." style="height: 90%;">
-                  <div class="btn-group">
-                    <button class="btn btn-danger mt-2 ms-1 w-100 p-2">예약하기</button>
-                  </div>
-              </div>
-            </div>
-            <div class="col-md-8">
-              <div class="card-body">
-                <h1 class="card-title">레플랑시</h1>
-                <p class="card-text">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi nisi consectetur saepe, natus, reiciendis quidem a excepturi libero beatae perspiciatis iure. Tenetur, saepe illum error iusto vitae autem doloremque. Officia.
-                </p>
-                <p class="card-text">부산광역시 해운대구 달맞이길117번가길 85</p>
-                <a href="" class="stretched-link"></a>
-              </div>
-          </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-12 my-3" data-aos="fade-left" data-aos-offset="500" data-aos-easing="ease-in-sine">
-      <div class="card mb-3" style="max-width: 100%; height: 350px;">
-        <div class="d-flex">
-            <div class="row g-0">
-            <div class="col-md-4">
-              <div class="d-flex flex-column justify-content-center align-self-center">
-                  <img src="${pageContext.request.contextPath }/resources/images/r2.jpg" class="img-fluid rounded-start mt-1 ms-1" alt="..." style="height: 90%;">
-                  <div class="btn-group">
-                    <button class="btn btn-danger mt-2 ms-1 w-100 p-2">예약하기</button>
-                  </div>
-              </div>
-            </div>
-            <div class="col-md-8">
-              <div class="card-body">
-                <h1 class="card-title">르도헤 </h1>
-                <p class="card-text">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi nisi consectetur saepe, natus, reiciendis quidem a excepturi libero beatae perspiciatis iure. Tenetur, saepe illum error iusto vitae autem doloremque. Officia.
-                </p>
-                <p class="card-text">부산광역시 해운대구 달맞이길117번가길 85</p>
-                <a href="" class="stretched-link"></a>
-              </div>
-          </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-12 my-3" data-aos="fade-right" data-aos-offset="500" data-aos-easing="ease-in-sine">
-      <div class="card mb-3" style="max-width: 100%; height: 350px;">
-        <div class="d-flex">
-            <div class="row g-0">
-            <div class="col-md-4">
-              <div class="d-flex flex-column justify-content-center align-self-center">
-                  <img src="${pageContext.request.contextPath }/resources/images/r2.jpg" class="img-fluid rounded-start mt-1 ms-1" alt="..." style="height: 90%;">
-                  <div class="btn-group">
-                    <button class="btn btn-danger mt-2 ms-1 w-100 p-2">예약하기</button>
-                  </div>
-              </div>
-            </div>
-            <div class="col-md-8">
-              <div class="card-body">
-                <h1 class="card-title">키친동백</h1>
-                <p class="card-text">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi nisi consectetur saepe, natus, reiciendis quidem a excepturi libero beatae perspiciatis iure. Tenetur, saepe illum error iusto vitae autem doloremque. Officia.
-                </p>
-                <p class="card-text">부산광역시 해운대구 달맞이길117번가길 85</p>
-                <a href="" class="stretched-link"></a>
-              </div>
-          </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-12 my-3" data-aos="fade-left" data-aos-offset="500" data-aos-easing="ease-in-sine">
-      <div class="card mb-3" style="max-width: 100%; height: 350px;">
-        <div class="d-flex">
-            <div class="row g-0">
-            <div class="col-md-4">
-              <div class="d-flex flex-column justify-content-center align-self-center">
-                  <img src="${pageContext.request.contextPath }/resources/images/r2.jpg" class="img-fluid rounded-start mt-1 ms-1" alt="..." style="height: 90%;">
-                  <div class="btn-group">
-                    <button class="btn btn-danger mt-2 ms-1 w-100 p-2">예약하기</button>
-                  </div>
-              </div>
-            </div>
-            <div class="col-md-8">
-              <div class="card-body">
-                <h1 class="card-title">키친동백</h1>
-                <p class="card-text">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi nisi consectetur saepe, natus, reiciendis quidem a excepturi libero beatae perspiciatis iure. Tenetur, saepe illum error iusto vitae autem doloremque. Officia.
-                </p>
-                <p class="card-text">부산광역시 해운대구 달맞이길117번가길 85</p>
-                <a href="" class="stretched-link"></a>
-              </div>
-          </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-12 my-3" data-aos="fade-right" data-aos-offset="500" data-aos-easing="ease-in-sine">
-      <div class="card mb-3" style="max-width: 100%; height: 350px;">
-        <div class="d-flex">
-            <div class="row g-0">
-            <div class="col-md-4">
-              <div class="d-flex flex-column justify-content-center align-self-center">
-                  <img src="${pageContext.request.contextPath }/resources/images/r2.jpg" class="img-fluid rounded-start mt-1 ms-1" alt="..." style="height: 90%;">
-                  <div class="btn-group">
-                    <button class="btn btn-danger mt-2 ms-1 w-100 p-2">예약하기</button>
-                  </div>
-              </div>
-            </div>
-            <div class="col-md-8">
-              <div class="card-body">
-                <h1 class="card-title">키친동백</h1>
-                <p class="card-text">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi nisi consectetur saepe, natus, reiciendis quidem a excepturi libero beatae perspiciatis iure. Tenetur, saepe illum error iusto vitae autem doloremque. Officia.
-                </p>
-                <p class="card-text">부산광역시 해운대구 달맞이길117번가길 85</p>
-                <a href="" class="stretched-link"></a>
-              </div>
-          </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-12 my-3" data-aos="fade-left" data-aos-offset="500" data-aos-easing="ease-in-sine">
-      <div class="card mb-3" style="max-width: 100%; height: 350px;">
-        <div class="d-flex">
-            <div class="row g-0">
-            <div class="col-md-4">
-              <div class="d-flex flex-column justify-content-center align-self-center">
-                  <img src="${pageContext.request.contextPath }/resources/images/r2.jpg" class="img-fluid rounded-start mt-1 ms-1" alt="..." style="height: 90%;">
-                  <div class="btn-group">
-                    <button class="btn btn-danger mt-2 ms-1 w-100 p-2">예약하기</button>
-                  </div>
-              </div>
-            </div>
-            <div class="col-md-8">
-              <div class="card-body">
-                <h1 class="card-title">키친동백</h1>
-                <p class="card-text">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi nisi consectetur saepe, natus, reiciendis quidem a excepturi libero beatae perspiciatis iure. Tenetur, saepe illum error iusto vitae autem doloremque. Officia.
-                </p>
-                <p class="card-text">부산광역시 해운대구 달맞이길117번가길 85</p>
-                <a href="" class="stretched-link"></a>
-              </div>
-          </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-
-    </div>
-  </div>
-</div>
-
-
-</div>
-
-<!-- 좌우 슬라이드 처리를 위한 aos 라이브러리 -->
-<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-<script>
-  AOS.init();
-</script>      
-<!-- 좌우 슬라이드 처리를 위한 aos 라이브러리 -->
-
-
-<!-- bottom include 처리 영역 -->
-<%@ include file="../common/common_footer.jsp" %>
-<!-- bottom include 처리 영역 끝 -->
+    	<!-- 검색 버튼 -->
+		<div class="input-group mb-3" style="width: 650px; margin: 0 auto;">
+		  <input type="text" class="form-control" placeholder="식당을 검색하세요" aria-label="Recipient's username" aria-describedby="button-addon2" name="search">
+		  <button class="btn btn-outline-secondary bg-white text-dark" type="button" id="button-addon2">검색</button>
+		</div>
+        <!-- 검색 버튼 --> 
+      
+      <!-- row 시작 --> 
+      <div class="row">
+      
+			  <!-- 샘플 이미지 입니다 -->
+			  <!-- 반복문으로 양도게시판 리스트 출력 시작 -->
+			  <div class="col-md-4 mt-5" data-aos="fade-up" data-aos-anchor-placement="center-bottom">
+			    <div class="card">
+			      <img src="https://via.placeholder.com/200" class="card-img-top" alt="Item Image">
+			      <div class="card-body">
+			        <h5 class="card-title"><!-- 식당 이름 --><span>La Finest</span></h5>
+			        <p class="card-text ellipsis"><!-- 식당 소개 --><span>프렌치 레스토랑으로, 고급스러운 분위기와 정교한 프렌치 요리를 즐길 수 있습니다.</span></p>
+			        <p class="card-price">가격 : <span> 550,000원</span></p>
+				    <button type="button" class="btn btn-warning btn-chat w-100" id="contactButton" onclick="location.href='<c:url value=""/>'">예약하기</button>
+			      </div>
+			    </div>
+			  </div>
+			  <div class="col-md-4 mt-5" data-aos="fade-up" data-aos-anchor-placement="center-bottom">
+			    <div class="card">
+			      <img src="https://via.placeholder.com/200" class="card-img-top" alt="Item Image">
+			      <div class="card-body">
+			        <h5 class="card-title"><!-- 식당 이름 --><span>Essorée</span></h5>
+			        <p class="card-text ellipsis"><!-- 식당 소개 --><span>동남아시아 요리에 특화된 고급 다이닝 레스토랑으로, 태국, 인도네시아, 베트남 등 동남아시아의 다채로운 맛을 경험할 수 있습니다.</span></p>
+			        <p class="card-price">가격 : <span> 650,000원</span></p>
+				    <button type="button" class="btn btn-warning btn-chat w-100" id="contactButton" onclick="location.href='<c:url value=""/>'">예약하기</button>
+			      </div>
+			    </div>
+			  </div>
+			  <div class="col-md-4 mt-5" data-aos="fade-up" data-aos-anchor-placement="center-bottom">
+			    <div class="card">
+			      <img src="https://via.placeholder.com/200" class="card-img-top" alt="Item Image">
+			      <div class="card-body">
+			        <h5 class="card-title"><!-- 식당 이름 --><span>Le Jardin</span></h5>
+			        <p class="card-text ellipsis"><!-- 식당 소개 --><span>프랑스의 정원을 연상시키는 아름다운 실내 정원 레스토랑으로, 신선한 재료와 아름다운 분위기가 특징입니다.</span></p>
+			        <p class="card-price">가격 : <span> 450,000원</span></p>
+				    <button type="button" class="btn btn-warning btn-chat w-100" id="contactButton" onclick="location.href='<c:url value=""/>'">예약하기</button>
+			      </div>
+			    </div>
+			  </div>
+			  
+        <!-- row 끝 -->
+        </div> 
+        <!-- 반복문으로 양도게시판 리스트 출력 끝 -->
+			
+			
+	
+	
+	<!-- container 끝 -->
+	</div> 
+	
+	<!-- 하단 여백을 주기 위한 div 박스 -->
+	<div style="height: 300px; width: 100%"></div>
+	
+	<!-- 좌우 슬라이드 처리를 위한 aos 라이브러리 -->
+	<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+	<script>AOS.init();</script>
+	
+	<!-- include -->      
+	<%-- <jsp:include page="../common/common_footer.jsp"></jsp:include> --%>
 
     <!-- Bootstrap CDN -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

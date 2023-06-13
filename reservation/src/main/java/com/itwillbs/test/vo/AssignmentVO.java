@@ -7,7 +7,10 @@ import com.google.gson.Gson;
 import lombok.Data;
 
 /*
+
 양도 게시판 데이터 출력용 임시VO 입니다.
+정렬, 필터 기능 테스트용으로 만들었습니다.
+구문, 데이터 입력하면 정렬, 필터기능 정상 동작합니다.
 
 1. SQL 구문
 
@@ -55,6 +58,7 @@ public class AssignmentVO { // 양도테이블
     private String a_image; // 이미지
     private Date a_created_date; // 작성날짜
     private int m_idx; // 회원번호 
+    
     
     // json으로 변환
     public String toJson() {
