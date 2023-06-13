@@ -27,4 +27,31 @@
 			SET m_passwd = #{m_passwd} 
 			WHERE m_id = #{m_id} AND m_name = #{m_name}
 	</update>
+	
+	<!-- 맴버 정보 수정 폼 접근 시 비밀번호 재확인 -->
+	<select id="isCorrectMember" resultType="com.itwillbs.test.vo.MemberVO">
+		    select * 
+		    	from members
+		    		where m_id = #{id} and m_passwd = #{passwd}
+	</select>
+	
+	<!-- 멤버 정보 조회 -->
+	<select id="selectMember" resultType="com.itwillbs.test.vo.MemberVO">
+		    select * 
+		    	from members
+		    		where m_id = #{id}
+	</select>
+	
+	<!-- 맴버 정보 수정 -->
+	<update id="updateMember" parameterType="com.itwillbs.test.vo.MemberVO">
+		update members 
+			set m_name = #{m_name},
+			    m_passwd = #{m_passwd},
+			    m_nick = #{m_nick},
+			    m_tel = #{m_tel},
+<!-- 			    m_email = concat(#{email1}, '@', #{email2}), -->
+				m_email = #{m_email},
+			    m_passwd = #{m_passwd}
+			    	where m_id = #{m_id}
+	</update>
 </mapper>

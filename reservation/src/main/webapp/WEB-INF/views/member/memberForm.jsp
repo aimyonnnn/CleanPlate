@@ -32,7 +32,7 @@
                 <!-- 프로필 사진 -->
                 <div class="input-group mb-5 d-flex shadow-lg d-flex justify-content-center pe-3" style="border-radius: 10px;">
                     <img src="${pageContext.request.contextPath }/resources/images/adminProfile.png" alt="" style="width: 100px; height: 100px;" class="justify-content-center">
-                    <p class="d-flex align-items-center"><span>님 환영합니다</span></p>
+                    <p class="d-flex align-items-center"><span>${sessionScope.sId}님 환영합니다</span></p>
                 </div>
             </div>
             <div class="col-10">
@@ -58,15 +58,15 @@
             <div class="col-10">
                 <form action="memberInfo" method="post">
                     <div class="mb-3 row d-flex justify-content-center">
-                        <label for="id" class="col-sm-2 col-form-label">아이디</label>
+                        <label for="#" class="col-sm-2 col-form-label">아이디</label>
                         <div class="col-md-6">
-                            <input type="text" readonly class="form-control-plaintext" id="id" value="hong(임시)">
+                            <input type="text" readonly class="form-control-plaintext" name="id" value="${sessionScope.sId}">
                         </div>
                     </div>
                     <div class="mb-3 row d-flex justify-content-center">
-                        <label for="passwd" class="col-sm-2 col-form-label">비밀번호</label>
+                        <label for="#" class="col-sm-2 col-form-label">비밀번호</label>
                         <div class="col-md-6">
-                            <input type="password" class="form-control" id="passwd" style="width: 180px;">
+                            <input type="password" class="form-control" name="passwd" style="width: 180px;">
                         </div>
                     </div>
                     <div class="mb-3 row">

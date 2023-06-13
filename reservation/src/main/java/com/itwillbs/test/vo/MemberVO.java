@@ -14,6 +14,10 @@ public class MemberVO { // 회원 테이블
 	private String m_birth; // 생년월일
 	private String m_tel; // 전화번호
 	private String m_email; // 이메일
+	// -----이메일 분리용  -----------------
+//	private String m_email1; // 이메일1
+//	private String m_email2; // 이메일2
+	// -------------------------------------
 	private int m_status; // 회원상태
 	private Date m_regdate; // 회원가입일
 }

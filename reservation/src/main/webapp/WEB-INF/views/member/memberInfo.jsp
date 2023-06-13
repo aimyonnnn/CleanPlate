@@ -32,14 +32,14 @@
                 <!-- 프로필 사진 -->
                 <div class="input-group mb-5 d-flex shadow-lg d-flex justify-content-center pe-3" style="border-radius: 10px;">
                     <img src="${pageContext.request.contextPath }/resources/images/adminProfile.png" alt="" style="width: 100px; height: 100px;" class="justify-content-center">
-                    <p class="d-flex align-items-center"><span>님 환영합니다</span></p>
+                    <p class="d-flex align-items-center"><span>${sessionScope.sId}님 환영합니다</span></p>
                 </div>
             </div>
             <div class="col-10">
             	<h2 style="margin-left: 40px; margin-top: 40px;">나의 정보 변경</h2>
         	</div>
         </div>
-        
+        <h1>${member}</h1>
         <div class="row">
             <div class="col-2">
                 <!-- 왼쪽 사이드바 버튼영역-->
@@ -55,56 +55,56 @@
             <!-- 내용 -->
             <div class="col-10">
             	<!-- 내정보 수정 폼 시작 -->
-                <form action="#" method="post">
+                <form action="memberUpdate" method="post">
                 	<table class="table" style="margin-left: 70px; width: 58%;">
 						<tbody>
 						    <tr>
-						    	<th scope="row" width="150"><label for="name">이름</label></th>
-						    	<td><input class="form-control" type="text" id="name" aria-label="default input example"></td>
+						    	<th scope="row" width="150"><label for="userName">이름</label></th>
+						    	<td><input class="form-control" type="text" name="m_name" aria-label="default input example" value="${member.m_name }"></td>
 						    </tr>
 						    <tr>
-						    	<th scope="row"><label for="id">아이디</label></th>
-						    	<td><input class="form-control" type="text" id="id" value="hong" aria-label="Disabled input example" disabled readonly></td>
+						    	<th scope="row"><label for="userId">아이디</label></th>
+						    	<td><input class="form-control" type="text" name="m_id" aria-label="Disabled input example" disabled readonly value="${member.m_id }"></td>
 						    </tr>
 						    <tr>
-						    	<th scope="row"><label for="passwd">비밀번호</label></th>
-						    	<td colspan="2"><input type="password" class="form-control" id="passwd" aria-label="default input example"></td>
+						    	<th scope="row"><label for="userPasswd">비밀번호</label></th>
+						    	<td colspan="2"><input type="password" class="form-control" name="m_passwd" aria-label="default input example"></td>
 						    </tr>
 						    <tr>
-						    	<th scope="row"><label for="nick">닉네임</label></th>
-						    	<td colspan="2"><input class="form-control" type="text" id="nick" value="냠냠" aria-label="default input example"></td>
+						    	<th scope="row"><label for="userNick">닉네임</label></th>
+						    	<td colspan="2"><input class="form-control" type="text" name="m_nick" aria-label="default input example" value="${member.m_nick }"></td>
 						    </tr>
 						    <tr>
-						    	<th scope="row"><label for="birth">생년월일</label></th>
-						    	<td colspan="2"><input class="form-control" type="text" id="birth" value="1990-10-01" aria-label="Disabled input example" disabled readonly></td>
+						    	<th scope="row"><label for="userBirth">생년월일</label></th>
+						    	<td colspan="2"><input class="form-control" type="text" name="m_birth" value="2023-06-11" aria-label="Disabled input example" disabled readonly value="${member.m_birth }"></td>
 						    </tr>
 						    <tr>
-						    	<th scope="row"><label for="phone">휴대폰번호</label></th>
+						    	<th scope="row"><label for="userPhone">휴대폰번호</label></th>
 						    	<td style="height: 40px; vertical-align: middle;">
 							  		<div class="d-flex align-items-center">
-							    		<input class="form-control" type="text" id="phone" value="010-1234-5678" aria-label="default input example" style="width: 365px;">
+							    		<input class="form-control" type="text" name="m_tel"  aria-label="default input example" style="width: 365px;" value="${member.m_tel }">
 							        	<button type="button" class="btn btn-outline-warning" style="margin-left: 2px;">인증요청</button>
 							    	</div>
 							    	<div class="mt-2 d-flex align-items-center">
-							    		<input class="form-control" type="text" id="verifyPhone" aria-label="default input example" style="width: 365px;">
+							    		<input class="form-control" type="text" name="verifyPhone" aria-label="default input example" style="width: 365px;">
 							        	<button type="button" class="btn btn-outline-warning" style="margin-left: 2px;">인증확인</button>
 							    	</div>
 								</td>
 						    </tr>
 						    <tr>
-							    <th scope="row"><label for="email">이메일</label></th>
+							    <th scope="row"><label for="userEmail">이메일</label></th>
 							    <td colspan="2">
 							        <div class="input-group">
-							            <input type="text" class="form-control rounded" id="email" value="hong" aria-label="default input example" style="width: 120px;">@
-							            <input type="text" class="form-control rounded" id="email2" value="hong" aria-label="default input example" style="width: 120px;"> 
-							            <div class="input-group-append">
-							                <select class="form-select" id="email-domain" style="margin-left: 2px;">
-							                	<option value="">직접입력</option>
-							                    <option value="gmail.com">gmail.com</option>
-							                    <option value="naver.com">naver.com</option>
-							                    <option value="daum.net">daum.net</option>
-							                </select>
-							            </div>
+							            <input type="text" class="form-control rounded" name="m_email" aria-label="default input example" style="width: 120px;" value="${member.m_email }">
+<%-- 							            <input type="text" class="form-control rounded" name="email2"  aria-label="default input example" style="width: 120px;" value="${member.m_email2 }">  --%>
+<!-- 							            <div class="input-group-append"> -->
+<!-- 							                <select class="form-select" name="email-domain" style="margin-left: 2px;"> -->
+<!-- 							                	<option value="">직접입력</option> -->
+<!-- 							                    <option value="gmail.com">gmail.com</option> -->
+<!-- 							                    <option value="naver.com">naver.com</option> -->
+<!-- 							                    <option value="daum.net">daum.net</option> -->
+<!-- 							                </select> -->
+<!-- 							            </div> -->
 							        </div>
 							    </td>
 							</tr>
