@@ -6,123 +6,221 @@
 <head>
 
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<title>Clean Plate</title>
-    <style>
+	
+   	<!-- AOS 라이브러리 -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f0f0f0;
-        margin: 0;
-        padding: 20px;
-    }
-
-    .container-main {
-        max-width: 600px;
-		margin: 0 auto;
-        background-color: #fff;
-        padding: 20px;
-        border-radius: 5px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        justify-content: center;
-	    align-items: center;
-	    height: 100%;
-    }
-
-    .chat-header {
-        text-align: center;
-        margin-bottom: 20px;
-    }
-
-    .chat-buttons {
-        display: flex;
-        justify-content: center;
-        margin-bottom: 20px;
-    }
-
-    .chat-buttons button {
-        margin-left: 10px;
-        padding: 10px 20px;
-        background-color: #007bff;
-        color: #fff;
-        border: none;
-        border-radius: 3px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-    }
-
-    .chat-buttons button:hover {
-        background-color: #0056b3;
-    }
-
-    .message-input {
-        display: flex;
-        margin-bottom: 20px;
-    }
-
-    .message-input input[type="text"] {
-        flex-grow: 1;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 3px;
-    }
-
-    .message-input button {
-        margin-left: 10px;
-        padding: 10px 20px;
-        background-color: #007bff;
-        color: #fff;
-        border: none;
-        border-radius: 3px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-    }
-
-    .message-input button:hover {
-        background-color: #0056b3;
-    }
-
-    .message-list {
-        border: 1px solid #ccc;
-        padding: 10px;
-        height: 300px;
-        overflow-y: scroll;
-        background-color: #f9f9f9;
-        border-radius: 3px;
-    }
-
-    .message-list p {
-        margin: 0;
-        padding: 10px;
-        background-color: #fff;
-        border-radius: 3px;
-        margin-bottom: 5px;
-        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-    }
+    <!-- jQuery CDN -->
+    <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+            integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer">
+    </script>
+	
+	<!-- Bootstrap CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    
+	<title>Clean Plate</title>
+	
+    <style>
+		.container-main {
+		  max-width: 500px;
+		  margin: 0 auto;
+		  background-color: #fff;
+		  border-radius: 5px;
+		  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+		  overflow: hidden;
+		}
+		
+		.chat-header {
+		  background-color: #ff5938;
+		  padding: 10px;
+		  color: #fff;
+		}
+		
+		.chat-header h2 {
+		  margin: 0;
+		}
+		
+		.message-list {
+		  height: 450px;
+		  overflow-y: auto;
+		  padding: 10px;
+		}
+		
+		.message-bubble {
+		  display: flex;
+		  align-items: flex-start;
+		  margin-bottom: 10px;
+		}
+		
+		.message-bubble .sender-avatar {
+		  width: 40px;
+		  height: 40px;
+		  border-radius: 50%;
+		  background-color: #ff5938;
+		  margin-right: 10px;
+		}
+		
+		.message-bubble .message-content {
+		  flex: 1;
+		  background-color: #f2f2f2;
+		  padding: 10px;
+		  border-radius: 10px;
+		}
+		
+		.message-bubble .message-content p {
+		  margin: 0;
+		}
+		
+		.message-input {
+		  display: flex;
+		  align-items: center;
+		  background-color: #fff;
+		  border-top: 1px solid #ccc;
+		  padding: 10px;
+		}
+		
+		.message-input input[type="text"] {
+		  flex: 1;
+		  border: none;
+		  padding: 8px;
+		}
+		
+		.message-input button {
+		  background-color: #ff5938;
+		  color: #fff;
+		  padding: 8px 15px;
+		  border: none;
+		  border-radius: 3px;
+		  margin-left: 10px;
+		  cursor: pointer;
+		}
+		
+		.chat-buttons {
+		  display: flex;
+		  justify-content: center;
+		  margin-top: 10px;
+		}
+		
+		.chat-buttons button {
+		  background-color: #ff5938;
+		  color: #fff;
+		  padding: 6px 12px;
+		  border: none;
+		  border-radius: 3px;
+		  margin: 0 3px;
+		  cursor: pointer;
+		  transition: background-color 0.3s ease;
+		}
+		
+		.chat-buttons button:hover {
+		  background-color: #e64128;
+		}
+		
+		.message-input button:hover {
+		 background-color: #e64128;
+		}
 	</style>
 	
 </head>
-<body>
+<body style="
+  background-image:linear-gradient(
+  rgba(0, 0, 0, 0.8),
+  rgba(0, 0, 0, 0.8)),
+  url(${pageContext.request.contextPath }/resources/images/1.jpg); background-size: cover;">
 
    <div style="height: 100px; width: 100%"></div>
   		
-   <div class="container-main">
+   <div class="container-main" data-aos="flip-left">
         <div class="chat-header">
             <h2>Clean Plate</h2>
         </div>
         <div class="chat-buttons">
-            <button type="button" onclick="openSocket();">채팅방 참여하기</button>
-            <button type="button" onclick="closeSocket();">채팅방 종료하기</button>
-            <button type="button" onclick="location.href='<c:url value='/'/>'">홈으로 이동</button>
-        </div>
-        <div class="message-input">
-            <input type="text" id="sender" value="${sessionScope.kId}" style="display: none;">
-            <input type="text" id="messageinput" placeholder="메시지를 입력하세요">
-            <button type="button" onclick="send();">메시지 전송</button>
-            <button type="button" onclick="clearText();">채팅내역 삭제</button>
+            <button type="button" onclick="openSocket();">대화 연결</button>
         </div>
         <div class="message-list" id="messages"></div>
+        <div style="height: 20px; width: 100%"></div>
+        <div class="message-input">
+            <input type="text" id="sender" value="${sessionScope.sId}" style="display: none;">
+            <input type="text" id="messageinput" placeholder="메시지를 입력하세요">
+            <button type="button" onclick="send();">메시지 전송</button>
+<%--             <button type="button" onclick="location.href='<c:url value='/'/>'">거래 완료</button> --%>
+            <button type="button" id="completeButton">거래 완료</button>
+<!--             <button type="button" onclick="closeSocket();">연결 종료</button> -->
+<!--             <button type="button" onclick="clearText();">채팅내역 삭제</button> -->
+        </div>
     </div>
+   	
+    <script>
+    
+ 	// 양도글을 작성한 사람에게만 거래 완료 버튼이 보이게 함
+ 	// 거래완료 버튼 클릭 시 세션의 sId값을 판별하여 양도테이블의 상태컬럼을 거래완료 상태로 변경
+    $(document).ready(function() {
+    	
+      // 페이지 로드 시 버튼 숨기기
+      $('#completeButton').hide();
+      
+      // 세션에서 sId값을 가져온다
+      var id = '<%=session.getAttribute("sId") %>';
+      console.log("양도글을 작성한 회원인지 판별, 양도글을 작성한 회원이면 거래완료 버튼이 보임");
+
+      // 버튼 표시 여부를 확인하는 Ajax 요청
+      $.ajax({
+        url: '<c:url value="/checkAssignmentWriter"/>', // 작성자 확인을 위한 요청 URL
+        type: 'POST',
+        dataType: 'json',
+        data: {
+          id: id
+        },
+        success: function(response) {
+          console.log(response);
+
+          if (response === 1) { // 양도글을 작성한 회원일 때 (리턴값이 1이면!)
+            // 양도글 작성자인 경우 거래완료 버튼을 표시함
+            console.log("양도글을 작성한 회원 : " + id);
+            $('#completeButton').show();
+			
+            // 거래완료 버틐 클릭 시 Ajax 요청
+            $('#completeButton').click(function() {
+              alert("거래 완료를 신청한 회원의 정보 입니다. : " + id);
+
+              $.ajax({
+                url: '<c:url value="/aassignmentComplete"/>',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                  id: id
+                },
+                success: function(response) {
+                  
+                  console.log(response);
+                  console.log(typeof response, response); // number 1 리턴
+
+                  if (response === 1) { // 양도 완료
+                    alert('양도가 완료되었습니다. 감사합니다.');
+                    location.href = '<c:url value="/"/>';
+                  } else {
+                    alert('양도가 실패하였습니다.');
+                  }
+                },
+                error: function(xhr, status, error) {
+                  alert('AJAX 요청이 실패하였습니다.', error);
+                }
+              });
+            });
+
+          }
+        },
+        error: function(xhr, status, error) {
+          console.log('작성자 확인 요청이 실패하였습니다.', error);
+        }
+      });
+    });
+
+    </script>
+    
     
     <!-- 웹소켓 자바스크립트 -->
     <script type="text/javascript">
@@ -135,7 +233,7 @@
                 return;
             }
             
-            ws = new WebSocket("ws://localhost:8089/test/echo.do");
+            ws = new WebSocket("ws://localhost:8080/test/echo.do");
             
             ws.onopen = function(event){
                 if(event.data === undefined){
@@ -176,5 +274,9 @@
       	}
         
   </script>
+  
+  	<!-- AOS 라이브러리 -->
+	<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+	<script> AOS.init();</script> 
 </body>
 </html>

@@ -1,23 +1,51 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>        
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="com.google.gson.Gson" %>
+      
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    
     <title>Assignment</title>
+    
     <!-- AOS 라이브러리 -->
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    
+    <!-- jQuery CDN -->
+    <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+            integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer">
+    </script>
+    
     <!-- Bootstrap CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    
+    <!-- CSS -->
+    <link href="${pageContext.request.contextPath }/resources/css/main.css" rel="styleSheet" type="text/css">
+    
+    <!-- 채널톡 API 시작 -->
+	<script>
+	  (function(){var w=window;if(w.ChannelIO){return w.console.error("ChannelIO script included twice.");}var ch=function(){ch.c(arguments);};ch.q=[];ch.c=function(args){ch.q.push(args);};w.ChannelIO=ch;function l(){if(w.ChannelIOInitialized){return;}w.ChannelIOInitialized=true;var s=document.createElement("script");s.type="text/javascript";s.async=true;s.src="https://cdn.channel.io/plugin/ch-plugin-web.js";var x=document.getElementsByTagName("script")[0];if(x.parentNode){x.parentNode.insertBefore(s,x);}}if(document.readyState==="complete"){l();}else{w.addEventListener("DOMContentLoaded",l);w.addEventListener("load",l);}})();
+	
+	  ChannelIO('boot', {
+	    "pluginKey": "1389a4f2-b052-41e3-8f07-442396576322"
+	  });
+	</script>
+	<!-- 채널톡 API 끝 -->
+    
     <style>
     
     body {
         background-color: #f8f9fa;
     }
     .container {
-    margin-top: 50px;
+    	margin-top: 30px;
     }
 
     .card {
@@ -82,7 +110,26 @@
         font-size: 18px;
         color: #555;
     }
- 
+    .card-body p {
+		margin-top: 3px;
+ 		margin-bottom: 3px;
+	}
+    
+   /* 텍스트양이 많아서 글자가 넘칠 때 ... 으로 표시 */
+	.ellipsis {
+	  white-space: nowrap;      /* 줄바꿈 방지 */
+	  overflow: hidden;         /* 넘치는 부분 감추기 */
+	  text-overflow: ellipsis;  /* 넘치는 부분에 ... 표시 */
+	  max-width: 200px;         /* 표시할 최대 너비 설정 */
+	}
+
+	/* 마우스를 올리면 전체 텍스트가 보임 */
+	.ellipsis:hover {
+	  white-space: normal;  /* 줄바꿈 허용하여 전체 텍스트 표시 */
+	  overflow: visible;   /* 넘치는 텍스트 표시 */
+	  max-width: none;     /* 최대 너비 제한 해제 */
+	}
+	 
 </style>
 </head>
 <body style="
@@ -109,57 +156,204 @@
 		    </c:choose>
 		</div>
      </div> 
-        
+     
+     <!-- 네비바 시작 -->
+      <div class="d-flex justify-content-center">
+        <nav class="navbar navbar-expand-lg navbar-light fs-5">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="#"></a>
+            <button class="navbar-toggler" type="button"
+              data-bs-toggle="collapse" data-bs-target="#navbarNav"
+              aria-controls="navbarNav" aria-expanded="false"
+              aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav gnb">
+                <li class="nav-item me-5"><a class="nav-link active" aria-current="page" href ='<c:url value="/" />' style="color: white;">Home</a></li>
+                <li class="nav-item me-5"><a class="nav-link" href ='<c:url value="/reservationMain" />' style="color: white;">Reservation</a></li>
+                <li class="nav-item me-5"><a class="nav-link" href ='<c:url value="/assignment" />' style="color: white;">Assignment</a></li>
+                <li class="nav-item"><a class="nav-link" href ='<c:url value="/" />' style="color: white;">Help</a></li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+      <!-- 네비바 끝 -->
+    
+   
+    <!-- container 시작 -->
     <div class="container">
+    
+    	<!-- 상단 배너 -->
         <div class="banner">
             <h2 class="banner-title">당신의 예약을 양도해보세요!</h2>
             <p class="banner-description">누군가의 특별한 날을 더욱 특별하게 만들어주세요.</p>
         </div>
+       <!-- 상단 배너 --> 
+       	
         <div class="row">
-
-            <div class="col-4"  data-aos="fade-up" data-aos-anchor-placement="center-bottom">
-                <div class="card">
+        	
+        	<!-- 정렬 버튼 -->
+			<div class="col-12">
+			  <div class="text-center">
+			    <button type="button" class="btn btn-warning mx-2" id="PriceLow">가격낮은순</button>
+			    <button type="button" class="btn btn-warning mx-2" id="PriceHigh">가격높은순</button>
+			    <button type="button" class="btn btn-warning mx-2" id="PriceBy50">50만원이하</button>
+			    <button type="button" class="btn btn-warning mx-2" id="RevAsc">예약빠른순</button>
+			    <button type="button" class="btn btn-warning mx-2" id="RevDesc">예약느린순</button>
+			    <button type="button" class="btn btn-warning mx-2" id="abc">가나다순</button>
+			    <button type="button" class="btn btn-warning mx-2" id="creDate">등록일자순</button>
+			    <button type="button" class="btn btn-danger mx-2" id="today">TODAY</button>
+			  </div>
+			</div>
+			<!-- 정렬 버튼 -->
+						 
+            <!-- 반복문으로 양도게시판 리스트 출력 시작 -->
+            <div id="assignContainer" class="row">
+                <c:forEach var="assignment" items="${assignmentList}">
+                <div class="col-md-4 mt-5" data-aos="fade-up" data-aos-anchor-placement="center-bottom">
+                  <div class="card">
                     <img src="https://via.placeholder.com/200" class="card-img-top" alt="Item Image">
                     <div class="card-body">
-                        <h5 class="card-title">광안 다이닝 2인권</h5>
-                        <p class="card-text">광안 다이닝 2인권을 양도합니다</p>
-                        <p class="card-date">예약 날짜 : <span>6/29일 오후 3시</span></p>
-                        <p class="card-price">가격 : <span>500,000원</span></p>
-                        <button type="button" class="btn btn-success btn-chat w-100" id="contactButton" onclick="location.href='<c:url value="assignAgree"/>'">채팅으로 문의하기</button>
+                      <h5 class="card-title"><span>${assignment.a_title}</span></h5>
+                      <p class="card-text ellipsis"><span>${assignment.a_content}</span></p>
+                      <p class="card-revDate">예약 날짜 : <span>${assignment.a_reservation_date}</span></p>
+                      <p class="card-creDate">등록 일자 : <span>${assignment.a_created_date}</span></p>
+                      <p class="card-price">가격 : <span>${assignment.a_price}원</span></p>
+                    <button type="button" class="btn btn-warning btn-chat w-100" id="contactButton" onclick="location.href='<c:url value="assignAgree"/>'">채팅으로 문의하기</button>
                     </div>
+                  </div>
                 </div>
+              </c:forEach>
             </div>
-
-            <div class="col-4"  data-aos="fade-up" data-aos-anchor-placement="center-bottom">
-                <div class="card">
-                    <img src="https://via.placeholder.com/200" class="card-img-top" alt="Item Image">
-                    <div class="card-body">
-                        <h5 class="card-title">광안 다이닝 2인권</h5>
-                        <p class="card-text">광안 다이닝 2인권을 양도합니다</p>
-                        <p class="card-date">예약 날짜 : 6/29일 오후 3시</p>
-                        <p class="card-price">가격 : 500,000원</p>
-                        <button type="button" class="btn btn-success btn-chat w-100" id="contactButton" onclick="location.href='<c:url value="assignAgree"/>'">채팅으로 문의하기</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-4"  data-aos="fade-up" data-aos-anchor-placement="center-bottom">
-                <div class="card">
-                    <img src="https://via.placeholder.com/200" class="card-img-top" alt="Item Image">
-                    <div class="card-body">
-                        <h5 class="card-title">광안 다이닝 2인권</h5>
-                        <p class="card-text">광안 다이닝 2인권을 양도합니다</p>
-                        <p class="card-date">예약 날짜 : 6/29일 오후 3시</p>
-                        <p class="card-price">가격 : 500,000원</p>
-                        <button type="button" class="btn btn-success btn-chat w-100" id="contactButton" onclick="location.href='<c:url value="assignAgree"/>'">채팅으로 문의하기</button>
-                    </div>
-                </div>
-            </div>
-
+            <!-- 반복문으로 양도게시판 리스트 출력 끝 -->
+            
         </div>
        </div>
-    
-	  <div style="height: 300px; width: 100%"></div>
+       <!-- container 끝 -->
+       
+      <script>
+      
+   	   // JSON 데이터 가져오기
+       let assignmentList = <%= new Gson().toJson(request.getAttribute("assignmentList")) %>;
+       console.log("assignmentList : " + assignmentList);
+       
+       // 가격낮은순 정렬
+       $('#PriceLow').click(() => {
+         	assignmentList.sort(function(a, b) {
+          		 return a.a_price - b.a_price;
+       	 	});
+		     console.log(assignmentList);
+	         appendList(assignmentList);
+       });
+       
+       // 가격높은순 정렬
+       $('#PriceHigh').click(() => {
+       		assignmentList.sort((a, b) => {
+				return b.a_price - a.a_price;       			
+       		});
+	       	 console.log(assignmentList);
+	         appendList(assignmentList);
+       });
+       
+       // 50만원이하 필터
+       $('#PriceBy50').click(() => {
+    	  	let newAssignmentList = assignmentList.filter(a => {
+    	  		return a.a_price <= 500000;
+    	  	});
+    	  	 console.log(newAssignmentList);
+	         appendList(newAssignmentList);
+       });
+       
+       // 예약빠른순 정렬
+       $('#RevAsc').click(() => {
+    	   assignmentList.sort((a, b) => {
+    		    return Date.parse(a.a_reservation_date) - Date.parse(b.a_reservation_date);
+    	   });
+    	    console.log(assignmentList);
+	        appendList(assignmentList);
+       });
+       
+       // 예약느린순 정렬
+       $('#RevDesc').click(()=>{
+    	   assignmentList.sort((a, b) => {
+    		    return Date.parse(b.a_reservation_date) - Date.parse(a.a_reservation_date);
+    	   });
+    	    console.log(assignmentList);
+	        appendList(assignmentList);
+       });
+       
+       // 가게명 가나다순 정렬
+       $('#abc').click(() => {
+    	   assignmentList.sort((a, b) => {
+    			if(a.a_title > b.a_title) {
+    				return 1
+    			} else {
+    				return -1
+    			}
+    	   });
+    	   console.log(assignmentList);
+	       appendList(assignmentList);
+       });
+       
+       // 당일예약 필터
+       $('#today').click(() => {
+         let filteredList = assignmentList.filter(a => {
+           let today = new Date();
+           let reservationDate = new Date(a.a_reservation_date);
+           return (
+             today.getFullYear() === reservationDate.getFullYear() &&
+             today.getMonth() === reservationDate.getMonth() &&
+             today.getDate() === reservationDate.getDate()
+           );
+         });
+         console.log(filteredList);
+         appendList(filteredList);
+       });
+       
+       //등록일자순 정렬 - 오름차순
+       $('#creDate').click(() => {
+    	   assignmentList.sort((a, b) => {
+    		  const dateA = new Date(a.a_created_date);
+    		  const dateB = new Date(b.a_created_date);
+				return dateA - dateB;		   
+    	   });
+    	   console.log(assignmentList);
+           appendList(assignmentList);
+       });
+       
+         // appendList() 
+         function appendList(assignmentList) {
+        	 
+	         let card = $('#assignContainer');
+	         card.empty();
+	         
+	         $.each(assignmentList, (index, data) => {
+	           console.log(data);
+	           
+	           let template = `<div class="col-md-4 mt-5" data-aos="fade-up" data-aos-anchor-placement="center-bottom">
+				               <div class="card">
+				                 <img src="https://via.placeholder.com/200" class="card-img-top" alt="Item Image">
+				                 <div class="card-body">
+				                   <h5 class="card-title"><span>${'${data.a_title}'}</span></h5>
+				                   <p class="card-text ellipsis"><span>${'${data.a_content}'}</span></p>
+				                   <p class="card-revDate">예약 날짜 : <span>${'${data.a_reservation_date}'}</span></p>
+				                   <p class="card-creDate">등록 일자 : <span>${'${data.a_created_date}'}</span></p>
+				                   <p class="card-price">가격 : <span>${'${data.a_price}'}원</span></p>
+				                   <button type="button" class="btn btn-warning btn-chat w-100" id="contactButton" onclick="location.href='<c:url value='assignAgree'/> '">채팅으로 문의하기</button>
+				                 </div>
+				               </div>
+				             </div> `;
+				             
+	           card.append(template);
+	         });
+         }
+
+	 </script>
+
+	<!-- 하단 여백을 주기 위한 div 박스 -->
+	<div style="height: 300px; width: 100%"></div>
  	
  	<!-- AOS 라이브러리 -->
 	<script src="https://unpkg.com/aos@next/dist/aos.js"></script>

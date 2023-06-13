@@ -6,9 +6,23 @@
 %>
 <html>
 <head>
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-	<script src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
+  	<!-- AOS 라이브러리 -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    
+    <!-- jQuery CDN -->
+    <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+            integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer">
+    </script>
+	
+	<!-- Bootstrap CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    
+	<!-- CSS -->
 	<link href="//maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css" rel="stylesheet">
+	
 	<style>
 	   body {
 	        background: #f8f8f8;
@@ -37,41 +51,49 @@
 <script>
 
 $(document).ready(function() {
-    var kId = '<%= sId %>';
-    $("input[name='id']").val(kId);
+    var sId = '<%= sId %>';
+    $("input[name='id']").val(sId);
     $("input[name='id']").attr("readOnly", "readOnly");
 });
 
 </script>
 	<title>Chat</title>
 </head>
+<body style="
+  background-image:linear-gradient(
+  rgba(0, 0, 0, 0.8),
+  rgba(0, 0, 0, 0.8)),
+  url(${pageContext.request.contextPath }/resources/images/1.jpg); background-size: cover;">
+  
 <c:choose>
 	<c:when test="${empty sessionScope.sId}">
-		<body>
 			<script>
 				alert("로그인 후에만 접근할 수 있습니다.");
 				location.href = "<c:url value='/'/>"; // 로그인 페이지로 이동
 			</script>
-		</body>
 	</c:when>
 	<c:otherwise>
-		 <div class="container">
-	        <div class="panel panel-success">
+		 <div class="container" data-aos="fade-up" data-aos-anchor-placement="center-bottom">
+	        <div class="panel panel-success"  style="background-color: white; border-radius: 10px">
 	            <div class="panel-title">
 	                <p>
 	                Clean Plate는 개인 거래에 어떠한 관여도 하지 않습니다.
 	                모든 거래는 사용자 간의 자유로운 합의에 기반하며, 
 	                Clean Plate는 거래 내용이나 결과에 대해 어떠한 책임도 지지 않습니다.
-	                자세한 내용은 이용 약관을 참고해주시기 바랍니다. 
+	                자세한 내용은 이용 약관을 참고해주시기 바랍니다.
+	                채팅방으로 입장하시겠습니까?
 	                </p>
 	            </div>
 	            <div class="panel-body">
 	                <form id="login-form" method="post" action="assignAgreePro">
 	                    <div>
-	                        <input type="hidden" name="id" class="form-control" style="text-align: center;">
+	                    	<!-- hidden 태그로 전송 - 양도번호, 회원번호 -->
+	                        <input type="text" name="id" class="form-control" style="text-align: center;">
+	                        <input type="hidden" name="a_idx" class="form-control" style="text-align: center;">
+	                        <input type="hidden" name="m_idx" class="form-control" style="text-align: center;">
 	                    </div>
 	                    <div>
-	                        <button type="submit" class="form-control btn btn-primary">동의하기</button>
+	                        <button type="submit" class="form-control btn btn-warning" style="margin-bottom: -10px;">>동의하기</button>
 	                    </div>
 	                </form>
 	            </div>
@@ -79,4 +101,9 @@ $(document).ready(function() {
     	</div>
 	</c:otherwise>
 </c:choose>
+
+	<!-- AOS 라이브러리 -->
+	<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+	<script> AOS.init();</script> 
+</body>
 </html>
