@@ -224,14 +224,14 @@
 	              			</div>
 							<div class="input-container">
 								<label for="m_name" style="width: 100%;">이름<br></label>
-									<input type="text" name="m_name" id="m_name" class="form-control" placeholder="이름 입력" required>
+									<input type="text" name="m_name" id="m_name" class="form-control" maxlength="13" pattern="^[가-힣a-zA-Z]+$" placeholder="이름 입력" required>
 								<div class="invalid-feedback">
 				                    이름을 입력해주세요.
 				                </div>
 							</div>
 							<div class="input-container">
 								<label for="m_nick" style="width: 100%;">닉네임<br></label>
-									<input type="text" name="m_nick" id="m_nick" class="form-control" maxlength="10" required>
+									<input type="text" name="m_nick" id="m_nick" class="form-control" maxlength="10"  pattern="^[가-힣a-zA-Z]+$" required>
 								<div class="invalid-feedback">
 				                    닉네임은 최대 10글자까지 입력해주세요.
 				                </div>
@@ -247,7 +247,7 @@
 							<div class="input-container">
 								<label for="m_tel">전화번호<br></label>
 								<div class="d-flex flex-row">
-									<input type="text" name="m_tel" id="m_tel" class="form-control" placeholder="'-'빼고 숫자만 입력" maxlength="13" style="width: 78%;" required>
+									<input type="text" name="m_tel" id="m_tel" class="form-control" placeholder="'-'빼고 숫자만 입력" maxlength="13" pattern="^[0-9]+$" style="width: 78%;" required>
 									<button type="button" class="ml-2 btn btn-warning" id="verifyRequest" style="margin-left: 7px;">인증요청</button>
 								</div>
 								<div class="invalid-feedback">
@@ -266,7 +266,7 @@
 	              			</div>
 							<div class="input-container">
 								<label for="m_email" style="width: 100%;">이메일<br></label>
-									<input type="text" name="m_email" id="m_email" class="form-control" placeholder="xxx@xxxx.xxx 형식으로 입력" pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+(\.[A-Za-z]{2,})+$" required>
+									<input type="text" name="m_email" id="m_email" class="form-control" placeholder="xxx@xxxx.xxx 형식으로 입력" pattern="^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$" required>
 								<div class="invalid-feedback">
 				                    이메일을 입력해주세요.
 				                </div>
@@ -408,7 +408,7 @@
 	              			</div>
 							<div class="input-container">
 								<label for="c_name" style="width: 100%;">이름<br></label>
-									<input type="text" name="c_name" id="c_name" class="form-control" placeholder="이름 입력" required>
+									<input type="text" name="c_name" id="c_name" class="form-control" placeholder="이름 입력" maxlength="13" pattern="^[가-힣a-zA-Z]+$" required>
 								<div class="invalid-feedback">
 				                    이름을 입력해주세요.
 				                </div>
@@ -417,7 +417,7 @@
 							<div class="input-container">
 								<label for="c_tel">전화번호<br></label>
 									<div class="d-flex flex-row">
-										<input type="text" name="c_tel" id="c_tel" class="form-control" placeholder="'_'빼고 숫자만 입력" maxlength="13" style="width:78%;" required>
+										<input type="text" name="c_tel" id="c_tel" class="form-control" placeholder="'_'빼고 숫자만 입력" maxlength="13" pattern="^[0-9]+$" style="width:78%;" required>
 										<button type="button" class="btn btn-warning" id="businessRequest" style="margin-left: 7px;">인증요청</button>
 									</div>
 								<div class="invalid-feedback">
@@ -436,7 +436,7 @@
 							</div>
 							<div class="input-container">
 								<label for="c_email" style="width: 100%;">이메일<br></label>
-									<input type="text" name="c_email" id="c_email" class="form-control" placeholder="xxx@xxxx.xxx 형식으로 입력" pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+(\.[A-Za-z]{2,})+$" required>
+									<input type="text" name="c_email" id="c_email" class="form-control" placeholder="xxx@xxxx.xxx 형식으로 입력" pattern="^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$" required>
 								<div class="invalid-feedback">
 				                    이메일을 입력해주세요.
 				                </div>
