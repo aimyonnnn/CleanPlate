@@ -312,7 +312,7 @@
          appendList(filteredList);
        });
        
-       //등록일자순 정렬 - 오름차순
+       // 등록일자순 정렬 - 오름차순
        $('#creDate').click(() => {
     	   assignmentList.sort((a, b) => {
     		  const dateA = new Date(a.a_created_date);
