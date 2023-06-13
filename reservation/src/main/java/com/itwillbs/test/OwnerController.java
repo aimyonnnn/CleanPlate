@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class OwnerController {
 	
+	/* 예약관리 페이지 */
 	//owner의 예약관리 페이지 이동 Mapping
 	@GetMapping("StoreReservation")
 	public String StoreReservation() {
@@ -19,12 +20,14 @@ public class OwnerController {
 		return "owner/store_Reservation";
 	}
 	
+	/* 리뷰관리 페이지 */
 	//owner의 리뷰관리및 편집 페이지 이동 Mapping
 	@GetMapping("StoreReservationEdit")
 	public String StoreReservationEdit() {
 		return "owner/store_ReservationEdit";
 	}
 	
+	/* 매출관리 페이지 */
 	//owner의 매출관리 페이지 이동 Mapping
 	@GetMapping("StoreSales")
 	public String StoreSales() {
@@ -37,6 +40,13 @@ public class OwnerController {
 		return "owner/store_SalesinOut";
 	}
 	
+	// 그래프
+	@GetMapping("storeSalesGraph")
+	public String storeSalesGraph(){
+		return "owner/store_SalesGraph";
+	}
+	
+	/* 식당관리 페이지 */
 	//owner의 식당추가로 이동 Mapping
 	@GetMapping("StoreInsertPage")
 	public String StoreInsertPage() {
@@ -59,6 +69,7 @@ public class OwnerController {
 		return "owner/store_List";
 	}
 	
+	/* 점주마이페이지 */
 	//owner의 점주마이페이지로 이동 Mapping
 	@GetMapping("CeoMypage")
 	public String CeoMypage() {
@@ -87,12 +98,6 @@ public class OwnerController {
 	@PostMapping("ceoMypageInfo")
 	public String ceoMypageInfo() {
 		return "owner/ceo_Info";
-	}
-	
-	// 그래프
-	@GetMapping("storeSalesGraph")
-	public String storeSalesGraph(){
-		return "owner/store_SalesGraph";
 	}
 	
 	
