@@ -9,6 +9,15 @@
         <title>MyPage</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <!-- 이부분은 지우면 안됩니다 -->
+    <script>
+function upOK(){
+    if(confirm('수정하시겠습니까?') == true){ // 확인
+        document.form.submit();
+    } else { // 취소
+    	return;
+    }
+}
+</script>
 </head>
 <body>
    	<!-- 공통 상단바 구역 -->
@@ -64,11 +73,11 @@
 						    </tr>
 						    <tr>
 						    	<th scope="row"><label for="userId">아이디</label></th>
-						    	<td><input class="form-control" type="text" name="m_id" aria-label="Disabled input example" disabled readonly value="${member.m_id }"></td>
+						    	<td><input class="form-control" type="text" name="m_id" aria-label="Disabled input example" readonly value="${member.m_id }"></td>
 						    </tr>
 						    <tr>
 						    	<th scope="row"><label for="userPasswd">비밀번호</label></th>
-						    	<td colspan="2"><input type="password" class="form-control" name="m_passwd" aria-label="default input example"></td>
+						    	<td colspan="2"><input type="password" class="form-control" name="m_passwd" aria-label="default input example" required="required"></td>
 						    </tr>
 						    <tr>
 						    	<th scope="row"><label for="userNick">닉네임</label></th>
@@ -111,7 +120,7 @@
 						  </tbody>
                 	</table>
 					<div style="margin-left:380px;">
-					    <button type="submit" class="btn btn-warning" style="color: white;">수정완료</button>
+					    <button type="submit" class="btn btn-warning" style="color: white;" onclick="upOK()">수정완료</button>
 					</div>
                 </form>
                 <!-- 내정보 수정 폼 끝 -->

@@ -64,6 +64,7 @@ public class MemberController {
 	@PostMapping("memberUpdate")
 	public String memberUpdate(Model model, MemberVO member) {
 		service.updateMember(member);
+		System.out.println(member);
 		model.addAttribute("member", member);
 		System.out.println(member);
 
