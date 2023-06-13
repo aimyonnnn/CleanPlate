@@ -67,7 +67,7 @@
 
     <!-- 사이드바, 내용 넣는 구역!-->
     <div class="container mt-5">
-        <div class="row d-flex justify-content-center">
+        <div class="row d-flex justify-content-center"">
             <div class="col-2 align-items-center d-flex">
                 <!-- 왼쪽 사이드바 구역 -->
                 <!-- 프로필 사진 -->
