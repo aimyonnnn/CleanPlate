@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwillbs.test.service.MemberService;
 import com.itwillbs.test.vo.MemberVO;
@@ -27,7 +28,6 @@ public class MemberController {
 	@GetMapping("member")
 	public String member(HttpServletRequest request, HttpServletResponse response,
 	        Model model) {
-		System.out.println("MemberForm");
 		
 		return "member/memberForm";
 	}
@@ -36,7 +36,6 @@ public class MemberController {
 	@PostMapping("memberInfo")
 	public String memberInfo(HttpSession session, String id, String passwd, HttpServletRequest request, HttpServletResponse response,
         Model model) {
-		System.out.println("MemberInfo");
 		
 	MemberVO member = service.isCorrectMember(id, passwd);
 	
@@ -56,7 +55,6 @@ public class MemberController {
 		return "member/memberForm";
 	}
 		model.addAttribute("member", member);
-		System.out.println(member);
 		return "member/memberInfo";
 	}
 	
@@ -64,11 +62,15 @@ public class MemberController {
 	@PostMapping("memberUpdate")
 	public String memberUpdate(Model model, MemberVO member) {
 		service.updateMember(member);
-		System.out.println(member);
 		model.addAttribute("member", member);
-		System.out.println(member);
 
 			return "redirect:/member";
+	}
+	
+	// 결제 폼 이동(임시) 
+	@GetMapping("paymentForm")
+	public String paymentForm() {
+		return "payment/paymentForm";
 	}
 	
 	// 예약 내역 클릭시 

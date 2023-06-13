@@ -51,6 +51,7 @@
                     <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='memberLike'">내가 찜한 식당</button>
                     <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='memberReview'">내가 쓴 리뷰</button>
                     <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='memberWithdrawal'">회원탈퇴</button>
+                    <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='paymentForm'">주문테스트용</button>
                 </div>
                 <!-- 왼쪽 사이드바 버튼영역-->
             </div>

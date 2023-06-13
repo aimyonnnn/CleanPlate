@@ -48,7 +48,6 @@ function upOK(){
             	<h2 style="margin-left: 40px; margin-top: 40px;">나의 정보 변경</h2>
         	</div>
         </div>
-        <h1>${member}</h1>
         <div class="row">
             <div class="col-2">
                 <!-- 왼쪽 사이드바 버튼영역-->
@@ -73,7 +72,7 @@ function upOK(){
 						    </tr>
 						    <tr>
 						    	<th scope="row"><label for="userId">아이디</label></th>
-						    	<td><input class="form-control" type="text" name="m_id" aria-label="Disabled input example" readonly value="${member.m_id }"></td>
+						    	<td><input class="form-control" type="text" name="m_id" aria-label="Disabled input example"  value="${member.m_id }" readonly="readonly" ></td>
 						    </tr>
 						    <tr>
 						    	<th scope="row"><label for="userPasswd">비밀번호</label></th>
@@ -85,7 +84,7 @@ function upOK(){
 						    </tr>
 						    <tr>
 						    	<th scope="row"><label for="userBirth">생년월일</label></th>
-						    	<td colspan="2"><input class="form-control" type="text" name="m_birth" value="2023-06-11" aria-label="Disabled input example" disabled readonly value="${member.m_birth }"></td>
+						    	<td colspan="2"><input class="form-control" type="text" name="m_birth" value="2023-06-11" aria-label="Disabled input example"  value="${member.m_birth }" readonly="readonly"></td>
 						    </tr>
 						    <tr>
 						    	<th scope="row"><label for="userPhone">휴대폰번호</label></th>
