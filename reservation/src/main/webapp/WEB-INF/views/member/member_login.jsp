@@ -188,137 +188,157 @@
 		
 	
 	<!-- 개인회원 모달창 -->
-	<div class="modal fade" id="personal-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	  <div class="modal-dialog">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <h1 class="modal-title fs-5" id="exampleModalLabel">개인회원가입</h1>
-	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-	      </div>
-	      <div class="modal-body">
-	        <div>
-	          <!-- form 태그 시작 -->
-	          <form action="memberJoinPro" method="post">
-	            <div class="container">
-	              <h3>Clean Plate로 식당 예약 간편하게!</h3>
-	              <div class="input-container">
-	                <label for="id" style="width: 100%;">아이디<br>
-	                  <input type="text" name="m_id" id="id" class="form-control" placeholder="4~20자리 / 영문, 숫자, 특수문자'_' 사용가능">
-	                </label>
-	              </div>
-	              <div class="input-container">
-	                <label for="password1" style="width: 100%;">비밀번호<br>
-	                  <input type="password" name="m_passwd" id="password1" class="form-control" placeholder="8~16자리/영문 대소문자,숫자,특수문자 조합">
-	                </label>
-	              </div>
-	              <div class="input-container">
-	                <label for="password2" style="width: 100%;">비밀번호 확인<br>
-	                  <input type="password" name="m_passwd2" id="password2" class="form-control">
-	                </label>
-	              </div>
-	              <div class="input-container">
-	                <label for="name" style="width: 100%;">이름<br>
-	                  <input type="text" name="m_name" id="name" class="form-control" placeholder="이름 입력">
-	                </label>
-	              </div>
-	              <div class="input-container">
-	                <label for="nickname" style="width: 100%;">닉네임<br>
-	                  <input type="text" name="m_nick" id="nickname" class="form-control" placeholder="10자리 / 영문, 숫자, 특수문자'_' 사용가능">
-	                </label>
-	              </div>
-	              <div class="input-container">
-	                <label for="birth" style="width: 100%;">생년월일<br>
-	                  <input type="text" name="m_birth" id="birth" class="form-control" placeholder="YYYYMMDD">
-	                </label>
-	              </div>
-	              <!-- 휴대폰 번호 인증 버튼 -->
-	              <div class="input-container">
-	                <label for="tel" style="width: 80%;">전화번호<br>
-	                  <input type="text" name="m_tel" id="tel" class="form-control" placeholder="'_'빼고 숫자만 입력">
-	                </label>
-	                <!-- 휴대폰 번호 인증 버튼 -->
-	                <button type="button" id="verifyRequest">인증요청</button>
-	              </div>
-	              <div class="input-container">
-	                <label for="phone" style="width: 80%;">인증번호<br>
-	                  <input type="text" id="verifyNum" class="form-control">
-	                </label>
-	                <button type="button" id="verifyConfirm">인증확인</button>
-	              </div>
-	               <!-- 휴대폰 번호 인증 버튼 -->
-	              <div class="input-container">
-	                <label for="email" style="width: 100%;">이메일<br>
-	                  <input type="text" name="m_email" id="email" class="form-control">
-	                </label>
-	              </div>
-	              <!-- 약관 -->
-	              <div class="cont_division">
-	                <span class="terms_agree"><strong>약관</strong></span>
-	                <div class="agree_box">
-	                  <ul class="agree_article">
-	                    <li style="list-style-type: none;">
-	                      <div class="InpBox">
-	                        <div class="form-check">
-	                          <input class="form-check-input" type="checkbox" id="agreeAllPersonal">
-	                          <label class="form-check-label" for="agreeAllPersonal">
-	                            <strong class="all_agree">전체 동의</strong>
-	                          </label>
-	                        </div>
-	                        <input type="hidden" name="hidden_check_all" value="0" id="hidden_check_all">
-	                      </div>
-	                    </li>
-	                  </ul>
-	                  <ul class="agree_article depth2">
-	                    <li style="list-style-type: none;">
-	                      <div class="agree_desc">
-	                        <div class="InpBox">
-	                          <div class="form-check">
-	                            <input class="form-check-input" type="checkbox" id="agree_rule1">
-	                            <label class="form-check-label" for="agree_rule1">
-	                              <span><strong>(필수) 개인회원 약관에 동의</strong></span>
-	                            </label>
-	                          </div>
-	                        </div>
-	                      </div>
-	                      <a href="/zf_user/help/terms-of-service/person" class="view_indetail" target="_blank">
-	                        <span class="blind">개인회원 약관 상세보기</span>
-	                      </a>
-	                    </li>
-	                    <li style="list-style-type: none;">
-	                      <div class="agree_desc">
-	                        <div class="InpBox">
-	                          <div class="form-check">
-	                            <input class="form-check-input" type="checkbox" id="agree_take1">
-	                            <label class="form-check-label" for="agree_take1">
-	                              <span><strong>(필수) 개인정보 수집 및 이용에 동의</strong></span>
-	                            </label>
-	                          </div>
-	                        </div>
-	                      </div>
-	                      <a id="popupClausePrivacyPerson" href="/zf_user/popup/privacy-policy?category=person_privacy_req" class="view_indetail popup_clause_open" target="_blank">
-	                        <span class="blind">개인정보 수집 및 이용에 동의 약관 상세보기</span>
-	                      </a>
-	                    </li>
-	                  </ul>
-	                </div>
-	              </div>
-	            
-	              <div class="input-container">
-	                <label for="agree_privacy">개인정보 수집 및 이용에 대한 안내 및 동의<br></label>
-	                <textarea id="agree_privacy" rows="5" readonly style="width: 100%;">본인은 [개인정보 수집 및 이용]안내 및 본인의 동의에 대하여 모두 확인하였으며, 동의합니다.
-	                
-	이용자는 개인정보 제공에 동의하지 않거나 개인정보 기재를 거부할 권리가 있으나, 이 경우 회원 가입 및 이용이 제한될 수 있습니다.</textarea>
-	              </div>
-	            </div>
-	            <!-- 회원가입 버튼 -->
-				<div class="d-flex justify-content-center mt-1">
-					<button type="submit" id="signup-button">회원가입</button>
+	<div class="modal fade" id="personal-modal" tabindex="-1" aria-labelledby="personalModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+	    	<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title fs-5" id="personalModalLabel">개인회원가입</h4>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
-	          </form>
-	        </div>
-	      </div>
-	    </div>
-	  </div>
+				<div class="modal-body">
+					<div>
+          			<!-- 개인회원 form 시작 -->
+          			<form class="validation-form" action="memberJoinPro" method="post" novalidate>
+						<div class="container">
+			            	<h3 class="fs-3">Clean Plate로 식당 예약 간편하게!</h3>
+			            	<div class="input-container">
+				                <label for="m_id" style="width: 100%;">아이디<br></label>
+				                	<input type="text" name="m_id" id="m_id" class="form-control" placeholder="4~20자리 / 영문, 숫자, 특수문자'_' 사용가능" maxlength="20" pattern="^[A-Za-z0-9_]{4,20}$" oninput="checkId()" required>
+			                	<div class="invalid-feedback">
+				                    아이디는 4~20자리의 영문, 숫자 특수문자'_'만 사용 가능합니다.
+				                </div>
+	              			</div>
+							<div class="input-container">
+								<label for="password" style="width: 100%;">비밀번호<br></label>
+							    	<input type="password" name="m_passwd" id="password" class="form-control" placeholder="8~16자리/영문, 숫자, 특수문자 조합" maxlength="16" pattern="^[A-Za-z0-9_!@#$%^&*()-=+]{8,16}$" required>
+								<div class="invalid-feedback">
+				                    비밀번호는 4~20자리의 영문, 숫자 특수문자만 사용 가능합니다.
+				                </div>
+							</div>
+							<div class="input-container">
+								<label for="password2" style="width: 100%;">비밀번호 확인<br></label>
+									<input type="password" name="passwdCheck" id="password2" class="form-control" required>
+								<div class="invalid-feedback" id="password2-error">
+				                    비밀번호가 일치하지 않습니다.
+				                </div>
+	              			</div>
+							<div class="input-container">
+								<label for="name" style="width: 100%;">이름<br></label>
+									<input type="text" name="m_name" id="name" class="form-control" placeholder="이름 입력" required>
+								<div class="invalid-feedback">
+				                    이름을 입력해주세요.
+				                </div>
+							</div>
+							<div class="input-container">
+								<label for="nickname" style="width: 100%;">닉네임<br></label>
+									<input type="text" name="m_nick" id="nickname" class="form-control" maxlength="10" required>
+								<div class="invalid-feedback">
+				                    닉네임은 최대 10글자까지 입력해주세요.
+				                </div>
+							</div>
+							<div class="input-container">
+								<label for="birth" style="width: 100%;">생년월일<br></label>
+									<input type="text" name="m_birth" id="birth" class="form-control" placeholder="YYYY-MM-DD 형식으로 입력" maxlength="10" pattern="^[0-9]{4}-[0-9]{2}-[0-9]{2}$" required>
+								<div class="invalid-feedback">
+				                    생년월일을 입력해주세요. 예시) 1990-10-01
+				                </div>
+							</div>
+	              			<!-- 휴대폰 번호 인증 버튼 -->
+							<div class="input-container">
+								<label for="tel">전화번호<br></label>
+								<div class="d-flex flex-row">
+									<input type="text" name="m_tel" id="tel" class="form-control" placeholder="'-'빼고 숫자만 입력" maxlength="13" style="width: 78%;" required>
+									<button type="button" class="ml-2 btn btn-warning" id="verifyRequest" style="margin-left: 7px;">인증요청</button>
+								</div>
+								<div class="invalid-feedback">
+				                    전화번호를 숫자만 입력해주세요.
+				                </div>
+							</div>
+	              			<div class="input-container">
+			                <label for="phone">인증번호<br></label>
+			                	<div class="d-flex flex-row">
+				                	<input type="text" id="verifyNum" class="form-control" maxlength="4" pattern="^[0-9]{4}$"  style="width: 78%;" required>
+		                			<button type="button" class="btn btn-warning" id="verifyConfirm" style="margin-left: 7px;">인증확인</button>
+			                	</div>
+		                	<div class="invalid-feedback">
+			                    인증번호를 입력해주세요.
+			                </div>
+	              			</div>
+							<div class="input-container">
+								<label for="email" style="width: 100%;">이메일<br></label>
+									<input type="text" name="m_email" id="email" class="form-control" placeholder="xxx@xxxx.xxx 형식으로 입력" pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+(\.[A-Za-z]{2,})+$" required>
+								<div class="invalid-feedback">
+				                    이메일을 입력해주세요.
+				                </div>
+							</div>
+	              			<!-- 약관 시작 -->
+	              			<div class="cont_division">
+	                			<span class="terms_agree">약관</span>
+	                			<div class="agree_box border border-bottom" style="border-radius: 5px;">
+	                  				<ul class="agree_article" style="margin-top:10px; margin-left: -15px;">
+									<li style="list-style-type: none;">
+										<div class="InpBox">
+											<div class="form-check">
+												<input class="form-check-input" type="checkbox" id="agreeAll">
+												<label class="form-check-label" for="agreeAll">
+													<strong class="all_agree">전체 동의</strong>
+												</label>
+											</div>
+											<input type="hidden" name="hidden_check_all" value="0" id="hidden_check_all">
+										</div>
+									</li>
+									</ul>
+									<ul class="agree_article depth2" style="margin-left: -15px;">
+									<li style="list-style-type: none;">
+										<div class="agree_desc">
+											<div class="InpBox">
+												<div class="form-check">
+													<input class="form-check-input" type="checkbox" name="agreeCheck" id="agree_rule1" required>
+														<label class="form-check-label" for="agree_rule1">
+															<span><strong>(필수) 회원 약관에 동의</strong></span>
+														</label>
+												</div>
+											</div>
+										</div>
+										<a href="/zf_user/help/terms-of-service/person" class="view_indetail" target="_blank">
+											<span class="blind">회원 약관 상세보기</span>
+										</a>
+									</li>
+	                    			<li style="list-style-type: none;">
+	                      				<div class="agree_desc">
+											<div class="InpBox">
+												<div class="form-check">
+													<input class="form-check-input" type="checkbox" name="agreeCheck" id="agree_take1" required>
+														<label class="form-check-label" for="agree_take1">
+															<span><strong>(필수) 개인정보 수집 및 이용에 동의</strong></span>
+														</label>
+												</div>
+											</div>
+										</div>
+										<a id="popupClausePrivacyPerson" href="/zf_user/popup/privacy-policy?category=person_privacy_req" class="view_indetail popup_clause_open" target="_blank">
+											<span class="blind">개인정보 수집 및 이용에 동의 약관 상세보기</span>
+										</a>
+	                    			</li>
+	                  				</ul>
+								</div>
+							</div>
+							<div class="input-container">
+								<label for="agree_privacy">개인정보 수집 및 이용에 대한 안내 및 동의<br></label>
+								<textarea id="agree_privacy" rows="5" readonly style="width: 100%;">본인은 [개인정보 수집 및 이용]안내 및 본인의 동의에 대하여 모두 확인하였으며, 동의합니다.
+
+이용자는 개인정보 제공에 동의하지 않거나 개인정보 기재를 거부할 권리가 있으나, 이 경우 회원 가입 및 이용이 제한될 수 있습니다.</textarea>
+							</div>
+						</div>
+						<!-- 약관 끝 -->
+						<!-- 회원가입 버튼 -->
+						<div class="d-flex justify-content-center">
+							<button type="submit" class="mt-1 btn btn-warning" id="signup-button">회원가입</button>
+						</div>
+					</form>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 	<!-- 개인회원 모달창 끝 -->
 	
@@ -352,128 +372,212 @@
 	<!-- CoolSMS 문자인증 끝 -->
 	
 	<!-- 기업회원 모달창 -->
-	<div class="modal fade" id="business-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	  <div class="modal-dialog">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <h1 class="modal-title fs-5" id="exampleModalLabel">기업회원가입</h1>
-	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-	      </div>
-	      <div class="modal-body">
-	        <div>
-	          <!-- form 태그 시작 -->
-	          <form action="ceoJoinPro" method="post">
-	            <div class="container">
-	              <h3>Clean Plate로 식당 예약 간편하게!</h3>
-	              <div class="input-container">
-	                <label for="id" style="width: 100%;">아이디<br>
-	                  <input type="text" name="c_id" id="id" class="form-control" placeholder="4~20자리 / 영문, 숫자, 특수문자'_' 사용가능">
-	                </label>
-	              </div>
-	              <div class="input-container">
-	                <label for="password1" style="width: 100%;">비밀번호<br>
-	                  <input type="password" name="c_passwd" id="password1" class="form-control" placeholder="8~16자리/영문 대소문자,숫자,특수문자 조합">
-	                </label>
-	              </div>
-	              <div class="input-container">
-	                <label for="password2" style="width: 100%;">비밀번호 확인<br>
-	                  <input type="password" id="password2" class="form-control">
-	                </label>
-	              </div>
-	              <div class="input-container">
-	                <label for="name" style="width: 100%;">이름<br>
-	                  <input type="text" name="c_name" id="name" class="form-control" placeholder="이름 입력">
-	                </label>
-	              </div>
-	               <!-- 휴대폰 번호 인증 버튼 -->
-	              <div class="input-container">
-	                <label for="businessPhone" style="width: 80%;">휴대폰번호<br>
-	                  <input type="text" name="c_tel" id="businessPhone" class="form-control" placeholder="'_'빼고 숫자만 입력">
-	                </label>
-	                <button type="button" id="businessRequest">인증요청</button>
-	              </div>
-	              <div class="input-container">
-	                <label for="phone" style="width: 80%;">인증번호<br>
-	                  <input type="text" id="businessNum" class="form-control">
-	                </label>
-	                <button type="button" id="businessConfirm">인증확인</button>
-	              </div>
-	               <!-- 휴대폰 번호 인증 버튼 -->
-	              <div class="input-container">
-	                <label for="email" style="width: 100%;">이메일<br>
-	                  <input type="text" name="c_email" id="email" class="form-control">
-	                </label>
-	              </div>
-	              <!-- 약관 -->
-	              <div class="cont_division">
-	                <span class="terms_agree"><strong>약관</strong></span>
-	                <div class="agree_box">
-	                  <ul class="agree_article">
-	                    <li style="list-style-type: none;">
-	                      <div class="InpBox">
-	                        <div class="form-check">
-	                          <input class="form-check-input" type="checkbox" id="agreeAllPersonal">
-	                          <label class="form-check-label" for="agreeAllPersonal">
-	                            <strong class="all_agree">전체 동의</strong>
-	                          </label>
-	                        </div>
-	                        <input type="hidden" name="hidden_check_all" value="0" id="hidden_check_all">
-	                      </div>
-	                    </li>
-	                  </ul>
-	                  <ul class="agree_article depth2">
-	                    <li style="list-style-type: none;">
-	                      <div class="agree_desc">
-	                        <div class="InpBox">
-	                          <div class="form-check">
-	                            <input class="form-check-input" type="checkbox" id="agree_rule1">
-	                            <label class="form-check-label" for="agree_rule1">
-	                              <span><strong>(필수) 개인회원 약관에 동의</strong></span>
-	                            </label>
-	                          </div>
-	                        </div>
-	                      </div>
-	                      <a href="/zf_user/help/terms-of-service/person" class="view_indetail" target="_blank">
-	                        <span class="blind">개인회원 약관 상세보기</span>
-	                      </a>
-	                    </li>
-	                    <li style="list-style-type: none;">
-	                      <div class="agree_desc">
-	                        <div class="InpBox">
-	                          <div class="form-check">
-	                            <input class="form-check-input" type="checkbox" id="agree_take1">
-	                            <label class="form-check-label" for="agree_take1">
-	                              <span><strong>(필수) 개인정보 수집 및 이용에 동의</strong></span>
-	                            </label>
-	                          </div>
-	                        </div>
-	                      </div>
-	                      <a id="popupClausePrivacyPerson" href="/zf_user/popup/privacy-policy?category=person_privacy_req" class="view_indetail popup_clause_open" target="_blank">
-	                        <span class="blind">개인정보 수집 및 이용에 동의 약관 상세보기</span>
-	                      </a>
-	                    </li>
-	                  </ul>
-	                </div>
-	              </div>
-	             
-	              <div class="input-container">
-	                <label for="agree_privacy">개인정보 수집 및 이용에 대한 안내 및 동의<br></label>
-	                <textarea id="agree_privacy" rows="5" readonly style="width: 100%;">본인은 [개인정보 수집 및 이용]안내 및 본인의 동의에 대하여 모두 확인하였으며, 동의합니다.
-	                
-	이용자는 개인정보 제공에 동의하지 않거나 개인정보 기재를 거부할 권리가 있으나, 이 경우 회원 가입 및 이용이 제한될 수 있습니다.</textarea>
-	              </div>
-	            </div>
-	            <!-- 회원가입 버튼 -->
-				<div class="d-flex justify-content-center">
-					<button type="submit" id="signup-button">회원가입</button>
+	<div class="modal fade" id="business-modal" tabindex="-1" aria-labelledby="businessModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="businessModalLabel">기업회원가입</h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
-	          </form>
-	        </div>
-	      </div>
-	    </div>
-	  </div>
+				<div class="modal-body">
+					<div>
+					<!-- form 태그 시작 -->
+					<form class="validation-form" action="ceoJoinPro" method="post" novalidate>
+						<div class="container">
+							<h3>Clean Plate로 식당 예약 간편하게!</h3>
+							<div class="input-container">
+								<label for="c_id" style="width: 100%;">아이디<br></label>
+									<input type="text" name="c_id" id="c_id" class="form-control" placeholder="4~20자리 / 영문, 숫자, 특수문자'_' 사용가능" maxlength="20" pattern="^[A-Za-z0-9_]{4,20}$" oninput="checkBusinessId()" required>
+									<div class="invalid-feedback">
+						                    아이디는 4~20자리의 영문, 숫자 특수문자'_'만 사용 가능합니다.
+						            </div>
+		              			</div>
+							<div class="input-container">
+								<label for="password" style="width: 100%;">비밀번호<br></label>
+							    	<input type="password" name="c_passwd" id="c_password" class="form-control" placeholder="8~16자리/영문, 숫자, 특수문자 조합" maxlength="16" pattern="^[A-Za-z0-9_!@#$%^&*()-=+]{8,16}$" required>
+								<div class="invalid-feedback">
+				                    비밀번호는 4~20자리의 영문, 숫자 특수문자만 사용 가능합니다.
+				                </div>
+							</div>
+							<div class="input-container">
+								<label for="password2" style="width: 100%;">비밀번호 확인<br></label>
+									<input type="password" name="passwdCheck" id="c_password2" class="form-control" required>
+								<div class="invalid-feedback" id="password-error">
+				                    비밀번호가 일치하지 않습니다.
+				                </div>
+	              			</div>
+							<div class="input-container">
+								<label for="name" style="width: 100%;">이름<br></label>
+									<input type="text" name="c_name" id="name" class="form-control" placeholder="이름 입력" required>
+								<div class="invalid-feedback">
+				                    이름을 입력해주세요.
+				                </div>
+							</div>
+ 							<!-- 휴대폰 번호 인증 버튼 -->
+							<div class="input-container">
+								<label for="businessPhone">전화번호<br></label>
+									<div class="d-flex flex-row">
+										<input type="text" name="c_tel" id="businessPhone" class="form-control" placeholder="'_'빼고 숫자만 입력" maxlength="13" style="width:78%;" required>
+										<button type="button" class="btn btn-warning" id="businessRequest" style="margin-left: 7px;">인증요청</button>
+									</div>
+								<div class="invalid-feedback">
+				                    전화번호를 숫자만 입력해주세요.
+				                </div>
+							</div>
+							<div class="input-container">
+								<label for="phone">인증번호<br></label>
+									<div class="d-flex flex-row">
+										<input type="text" id="businessNum" class="form-control" maxlength="4" pattern="^[0-9]{4}$" style="width:78%" required>
+										<button type="button" class="btn btn-warning" id="businessConfirm" style="margin-left: 7px;">인증확인</button>
+									</div>
+								<div class="invalid-feedback">
+				                    인증번호를 입력해주세요.
+				                </div>
+							</div>
+							<div class="input-container">
+								<label for="email" style="width: 100%;">이메일<br></label>
+									<input type="text" name="c_email" id="email" class="form-control" placeholder="xxx@xxxx.xxx 형식으로 입력" pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+(\.[A-Za-z]{2,})+$" required>
+								<div class="invalid-feedback">
+				                    이메일을 입력해주세요.
+				                </div>
+							</div>
+	              			<!-- 약관 시작 -->
+	              			<div class="cont_division">
+	                			<span class="terms_agree">약관</span>
+	                			<div class="agree_box border border-bottom" style="border-radius: 5px;">
+	                  				<ul class="agree_article" style="margin-top:10px; margin-left: -15px;">
+									<li style="list-style-type: none;">
+										<div class="InpBox">
+											<div class="form-check">
+												<input class="form-check-input" type="checkbox" id="agreeAllCeo">
+												<label class="form-check-label" for="agreeAllCeo">
+													<strong class="all_agree">전체 동의</strong>
+												</label>
+											</div>
+											<input type="hidden" name="hidden_check_all" value="0" id="hidden_check_all">
+										</div>
+									</li>
+									</ul>
+									<ul class="agree_article depth2" style="margin-left: -15px;">
+									<li style="list-style-type: none;">
+										<div class="agree_desc">
+											<div class="InpBox">
+												<div class="form-check">
+													<input class="form-check-input" type="checkbox" name="agreeCheck" id="agree_rule2" required>
+														<label class="form-check-label" for="agree_rule2">
+															<span><strong>(필수) 회원 약관에 동의</strong></span>
+														</label>
+												</div>
+											</div>
+										</div>
+										<a href="/zf_user/help/terms-of-service/person" class="view_indetail" target="_blank">
+											<span class="blind">회원 약관 상세보기</span>
+										</a>
+									</li>
+	                    			<li style="list-style-type: none;">
+	                      				<div class="agree_desc">
+											<div class="InpBox">
+												<div class="form-check">
+													<input class="form-check-input" type="checkbox" name="agreeCheck" id="agree_take2" required>
+														<label class="form-check-label" for="agree_take2">
+															<span><strong>(필수) 개인정보 수집 및 이용에 동의</strong></span>
+														</label>
+												 </div>
+											</div>
+										</div>
+										<a id="popupClausePrivacyPerson" href="/zf_user/popup/privacy-policy?category=person_privacy_req" class="view_indetail popup_clause_open" target="_blank">
+											<span class="blind">개인정보 수집 및 이용에 동의 약관 상세보기</span>
+										</a>
+	                    			</li>
+	                  				</ul>
+								</div>
+							</div>
+							<div class="input-container">
+								<label for="agree_privacy">개인정보 수집 및 이용에 대한 안내 및 동의<br></label>
+								<textarea id="agree_privacy" rows="5" readonly style="width: 100%;">본인은 [개인정보 수집 및 이용]안내 및 본인의 동의에 대하여 모두 확인하였으며, 동의합니다.
+
+이용자는 개인정보 제공에 동의하지 않거나 개인정보 기재를 거부할 권리가 있으나, 이 경우 회원 가입 및 이용이 제한될 수 있습니다.</textarea>
+							</div>
+						</div>
+						<!-- 약관 끝 -->
+						<!-- 회원가입 버튼 -->
+						<div class="d-flex justify-content-center">
+							<button type="submit" class="mt-1 btn btn-warning" id="signup-button">회원가입</button>
+						</div>
+					</form>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
-	<!-- 기업회원 모달창 끝 -->
+	<!-- 기업회원 모달창 끝 --> 
+	
+	<!-- 개인회원/기업회원 모달창 공통 스크립트 -->
+	<script>
+	// 개인회원 - 체크박스 
+	$(document).ready(function() {
+		$("#agreeAll").click(function() {
+			if($("#agreeAll").is(":checked")) $("input[name=agreeCheck]").prop("checked", true);
+			else $("input[name=agreeCheck]").prop("checked", false);
+		});
+
+		$("input[name=agreeCheck]").click(function() {
+			var total = $("input[name=agreeCheck]").length;
+			var checked = $("input[name=agreeCheck]:checked").length;
+
+			if(total != checked) $("#agreeAll").prop("checked", false);
+			else $("#agreeAll").prop("checked", true); 
+		});
+	});
+	
+	// 기업회원 - 체크박스 
+	$(document).ready(function() {
+		$("#agreeAllCeo").click(function() {
+			if($("#agreeAllCeo").is(":checked")) $("input[name=agreeCheck]").prop("checked", true);
+			else $("input[name=agreeCheck]").prop("checked", false);
+		});
+
+		$("input[name=agreeCheck]").click(function() {
+			var total = $("input[name=agreeCheck]").length;
+			var checked = $("input[name=agreeCheck]:checked").length;
+
+			if(total != checked) $("#agreeAllCeo").prop("checked", false);
+			else $("#agreeAllCeo").prop("checked", true); 
+		});
+	});
+	
+	 // 비밀번호 확인
+	 $(function() {
+	   $('.password-confirm').blur(function() {
+	     var password = $(this).closest('.input-container').find('.password').val();
+	     var confirmPassword = $(this).val();
+	
+	     if (password !== confirmPassword) {
+	       $(this).closest('.input-container').find('.password-error').show();
+	       $(this).val('');
+	       $(this).focus();
+	     } else {
+	       $(this).closest('.input-container').find('.password-error').hide();
+	     }
+	   });
+	 });
+	
+	// 유효성 검사
+ 	window.addEventListener('load', () => {
+        const forms = document.getElementsByClassName('validation-form');
+
+        Array.prototype.filter.call(forms, (form) => {
+            form.addEventListener('submit', function (event) {
+                if (form.checkValidity() === false) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            }, false);
+        });
+    }, false);
+	</script>
+	<!-- 개인회원/기업회원 모달창 공통 스크립트 끝 -->
 	
 	<!-- CoolSMS 문자인증 시작 -->
 	<script>
