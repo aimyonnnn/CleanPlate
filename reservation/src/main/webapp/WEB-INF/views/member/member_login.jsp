@@ -209,45 +209,45 @@
 				                </div>
 	              			</div>
 							<div class="input-container">
-								<label for="password" style="width: 100%;">비밀번호<br></label>
-							    	<input type="password" name="m_passwd" id="password" class="form-control" placeholder="8~16자리/영문, 숫자, 특수문자 조합" maxlength="16" pattern="^[A-Za-z0-9_!@#$%^&*()-=+]{8,16}$" required>
+								<label for="m_passwd" style="width: 100%;">비밀번호<br></label>
+							    	<input type="password" name="m_passwd" id="m_passwd" class="form-control" placeholder="8~16자리/영문, 숫자, 특수문자 조합" maxlength="16" pattern="^[A-Za-z0-9_!@#$%^&*()-=+]{8,16}$" required>
 								<div class="invalid-feedback">
 				                    비밀번호는 4~20자리의 영문, 숫자 특수문자만 사용 가능합니다.
 				                </div>
 							</div>
 							<div class="input-container">
-								<label for="password2" style="width: 100%;">비밀번호 확인<br></label>
-									<input type="password" name="passwdCheck" id="password2" class="form-control" required>
-								<div class="invalid-feedback" id="password2-error">
+								<label for="m_passwdCheck" style="width: 100%;">비밀번호 확인<br></label>
+									<input type="password" name="m_passwdCheck" id="m_passwdCheck" class="form-control" required>
+								<div class="invalid-feedback" id="password-error">
 				                    비밀번호가 일치하지 않습니다.
 				                </div>
 	              			</div>
 							<div class="input-container">
-								<label for="name" style="width: 100%;">이름<br></label>
-									<input type="text" name="m_name" id="name" class="form-control" placeholder="이름 입력" required>
+								<label for="m_name" style="width: 100%;">이름<br></label>
+									<input type="text" name="m_name" id="m_name" class="form-control" placeholder="이름 입력" required>
 								<div class="invalid-feedback">
 				                    이름을 입력해주세요.
 				                </div>
 							</div>
 							<div class="input-container">
-								<label for="nickname" style="width: 100%;">닉네임<br></label>
-									<input type="text" name="m_nick" id="nickname" class="form-control" maxlength="10" required>
+								<label for="m_nick" style="width: 100%;">닉네임<br></label>
+									<input type="text" name="m_nick" id="m_nick" class="form-control" maxlength="10" required>
 								<div class="invalid-feedback">
 				                    닉네임은 최대 10글자까지 입력해주세요.
 				                </div>
 							</div>
 							<div class="input-container">
-								<label for="birth" style="width: 100%;">생년월일<br></label>
-									<input type="text" name="m_birth" id="birth" class="form-control" placeholder="YYYY-MM-DD 형식으로 입력" maxlength="10" pattern="^[0-9]{4}-[0-9]{2}-[0-9]{2}$" required>
+								<label for="m_birth" style="width: 100%;">생년월일<br></label>
+									<input type="text" name="m_birth" id="m_birth" class="form-control" placeholder="YYYY-MM-DD 형식으로 입력" maxlength="10" pattern="^[0-9]{4}-[0-9]{2}-[0-9]{2}$" required>
 								<div class="invalid-feedback">
 				                    생년월일을 입력해주세요. 예시) 1990-10-01
 				                </div>
 							</div>
 	              			<!-- 휴대폰 번호 인증 버튼 -->
 							<div class="input-container">
-								<label for="tel">전화번호<br></label>
+								<label for="m_tel">전화번호<br></label>
 								<div class="d-flex flex-row">
-									<input type="text" name="m_tel" id="tel" class="form-control" placeholder="'-'빼고 숫자만 입력" maxlength="13" style="width: 78%;" required>
+									<input type="text" name="m_tel" id="m_tel" class="form-control" placeholder="'-'빼고 숫자만 입력" maxlength="13" style="width: 78%;" required>
 									<button type="button" class="ml-2 btn btn-warning" id="verifyRequest" style="margin-left: 7px;">인증요청</button>
 								</div>
 								<div class="invalid-feedback">
@@ -255,7 +255,7 @@
 				                </div>
 							</div>
 	              			<div class="input-container">
-			                <label for="phone">인증번호<br></label>
+			                <label for="verifyNum">인증번호<br></label>
 			                	<div class="d-flex flex-row">
 				                	<input type="text" id="verifyNum" class="form-control" maxlength="4" pattern="^[0-9]{4}$"  style="width: 78%;" required>
 		                			<button type="button" class="btn btn-warning" id="verifyConfirm" style="margin-left: 7px;">인증확인</button>
@@ -265,8 +265,8 @@
 			                </div>
 	              			</div>
 							<div class="input-container">
-								<label for="email" style="width: 100%;">이메일<br></label>
-									<input type="text" name="m_email" id="email" class="form-control" placeholder="xxx@xxxx.xxx 형식으로 입력" pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+(\.[A-Za-z]{2,})+$" required>
+								<label for="m_email" style="width: 100%;">이메일<br></label>
+									<input type="text" name="m_email" id="m_email" class="form-control" placeholder="xxx@xxxx.xxx 형식으로 입력" pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+(\.[A-Za-z]{2,})+$" required>
 								<div class="invalid-feedback">
 				                    이메일을 입력해주세요.
 				                </div>
@@ -393,31 +393,31 @@
 						            </div>
 		              			</div>
 							<div class="input-container">
-								<label for="password" style="width: 100%;">비밀번호<br></label>
-							    	<input type="password" name="c_passwd" id="c_password" class="form-control" placeholder="8~16자리/영문, 숫자, 특수문자 조합" maxlength="16" pattern="^[A-Za-z0-9_!@#$%^&*()-=+]{8,16}$" required>
+								<label for="c_passwd" style="width: 100%;">비밀번호<br></label>
+							    	<input type="password" name="c_passwd" id="c_passwd" class="form-control" placeholder="8~16자리/영문, 숫자, 특수문자 조합" maxlength="16" pattern="^[A-Za-z0-9_!@#$%^&*()-=+]{8,16}$" required>
 								<div class="invalid-feedback">
 				                    비밀번호는 4~20자리의 영문, 숫자 특수문자만 사용 가능합니다.
 				                </div>
 							</div>
 							<div class="input-container">
-								<label for="password2" style="width: 100%;">비밀번호 확인<br></label>
-									<input type="password" name="passwdCheck" id="c_password2" class="form-control" required>
-								<div class="invalid-feedback" id="password-error">
+								<label for="c_passwdCheck" style="width: 100%;">비밀번호 확인<br></label>
+									<input type="password" name="c_passwdCheck" id="c_passwdCheck" class="form-control" required>
+								<div class="invalid-feedback" id="password-error2">
 				                    비밀번호가 일치하지 않습니다.
 				                </div>
 	              			</div>
 							<div class="input-container">
-								<label for="name" style="width: 100%;">이름<br></label>
-									<input type="text" name="c_name" id="name" class="form-control" placeholder="이름 입력" required>
+								<label for="c_name" style="width: 100%;">이름<br></label>
+									<input type="text" name="c_name" id="c_name" class="form-control" placeholder="이름 입력" required>
 								<div class="invalid-feedback">
 				                    이름을 입력해주세요.
 				                </div>
 							</div>
  							<!-- 휴대폰 번호 인증 버튼 -->
 							<div class="input-container">
-								<label for="businessPhone">전화번호<br></label>
+								<label for="c_tel">전화번호<br></label>
 									<div class="d-flex flex-row">
-										<input type="text" name="c_tel" id="businessPhone" class="form-control" placeholder="'_'빼고 숫자만 입력" maxlength="13" style="width:78%;" required>
+										<input type="text" name="c_tel" id="c_tel" class="form-control" placeholder="'_'빼고 숫자만 입력" maxlength="13" style="width:78%;" required>
 										<button type="button" class="btn btn-warning" id="businessRequest" style="margin-left: 7px;">인증요청</button>
 									</div>
 								<div class="invalid-feedback">
@@ -425,7 +425,7 @@
 				                </div>
 							</div>
 							<div class="input-container">
-								<label for="phone">인증번호<br></label>
+								<label for="businessNum">인증번호<br></label>
 									<div class="d-flex flex-row">
 										<input type="text" id="businessNum" class="form-control" maxlength="4" pattern="^[0-9]{4}$" style="width:78%" required>
 										<button type="button" class="btn btn-warning" id="businessConfirm" style="margin-left: 7px;">인증확인</button>
@@ -435,8 +435,8 @@
 				                </div>
 							</div>
 							<div class="input-container">
-								<label for="email" style="width: 100%;">이메일<br></label>
-									<input type="text" name="c_email" id="email" class="form-control" placeholder="xxx@xxxx.xxx 형식으로 입력" pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+(\.[A-Za-z]{2,})+$" required>
+								<label for="c_email" style="width: 100%;">이메일<br></label>
+									<input type="text" name="c_email" id="c_email" class="form-control" placeholder="xxx@xxxx.xxx 형식으로 입력" pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+(\.[A-Za-z]{2,})+$" required>
 								<div class="invalid-feedback">
 				                    이메일을 입력해주세요.
 				                </div>
@@ -546,18 +546,32 @@
 		});
 	});
 	
-	 // 비밀번호 확인
+	 // 개인회원 비밀번호 확인
 	 $(function() {
-	   $('.password-confirm').blur(function() {
-	     var password = $(this).closest('.input-container').find('.password').val();
+	   $('#m_passwdCheck').blur(function() {
+	     var password = $('#m_passwd').val();
 	     var confirmPassword = $(this).val();
 	
 	     if (password !== confirmPassword) {
-	       $(this).closest('.input-container').find('.password-error').show();
 	       $(this).val('');
-	       $(this).focus();
+	       $('#password-error').show();
 	     } else {
-	       $(this).closest('.input-container').find('.password-error').hide();
+	    	 $('#password-error').hide();
+	     }
+	   });
+	 });
+	 
+	// 기업회원 비밀번호 확인
+	 $(function() {
+	   $('#c_passwdCheck').blur(function() {
+	     var password = $('#c_passwd').val();
+	     var confirmPassword = $(this).val();
+	
+	     if (password !== confirmPassword) {
+	       $(this).val('');
+	       $('#password-error2').show();
+	     } else {
+	    	 $('#password-error2').hide();
 	     }
 	   });
 	 });
