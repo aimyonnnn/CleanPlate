@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.itwillbs.test.mapper.ReservationMapper">
+	
+	<!-- 예약 검색 페이지 식당 이름 실시간 검색 -->
+	<select id="selectRestaurantName" resultType="com.itwillbs.test.vo.RestaurantVO">
+		select * from
+			 restaurant where
+			  	res_name like CONCAT('%',#{resName},'%')
+	</select>
+	<!-- 예약 검색 페이지 식당 이름 실시간 검색 -->
+	
+	<!-- 전체 식당 조회 -->
+	<select id="selectRestaurantList" resultType="com.itwillbs.test.vo.RestaurantVO">
+		select * from
+			restaurant
+	</select>
+	<!-- 전체 식당 조회 -->
+	
+	
+
+</mapper>
