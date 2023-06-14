@@ -38,8 +38,6 @@ public class MemberController {
         Model model) {
 		
 	MemberVO member = service.isCorrectMember(id, passwd);
-	
-	
 	if(member == null) {
 		try {
 		response.setContentType("text/html; charset=utf-8");
@@ -54,6 +52,15 @@ public class MemberController {
 		}
 		return "member/memberForm";
 	}
+		// 이메일 분리
+		member.setM_email1(member.getM_email().split("@")[0]);
+		member.setM_email2(member.getM_email().split("@")[1]);
+	
+		// 전화번호 분리
+		member.setM_tel1(member.getM_tel().split("-")[0]);
+		member.setM_tel2(member.getM_tel().split("-")[1]);
+		member.setM_tel3(member.getM_tel().split("-")[2]);
+		
 		model.addAttribute("member", member);
 		return "member/memberInfo";
 	}
@@ -63,6 +70,7 @@ public class MemberController {
 	public String memberUpdate(Model model, MemberVO member) {
 		service.updateMember(member);
 		model.addAttribute("member", member);
+		System.out.println(member);
 
 			return "redirect:/member";
 	}

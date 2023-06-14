@@ -48,9 +48,8 @@
 			set m_name = #{m_name},
 			    m_passwd = #{m_passwd},
 			    m_nick = #{m_nick},
-			    m_tel = #{m_tel},
-<!-- 			    m_email = concat(#{email1}, '@', #{email2}), -->
-				m_email = #{m_email},
+			    m_tel = concat(#{m_tel1},'-', #{m_tel2}, '-', #{m_tel3}),
+			    m_email = concat(#{m_email1},'@', #{m_email2}),
 			    m_passwd = #{m_passwd}
 			    	where m_id = #{m_id}
 	</update>

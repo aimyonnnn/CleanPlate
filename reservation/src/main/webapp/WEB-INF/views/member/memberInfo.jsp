@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,13 +12,25 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <!-- 이부분은 지우면 안됩니다 -->
     <script>
-function upOK(){
-    if(confirm('수정하시겠습니까?') == true){ // 확인
-        document.form.submit();
-    } else { // 취소
-    	return;
-    }
-}
+	function upOK(){
+		// submit 확인 스크립트
+   	 	if(confirm('수정하시겠습니까?') == true){ // 확인
+   	 		alert('수정되었습니다.');
+       		document.form.submit();
+    	} else { // 취소
+    		alert('취소되었습니다.');
+    		return;
+   		}
+	}
+		// email domain selectbox 값 받아오기
+        var selectBoxChange = function(value) {
+        	$("#changeInput").val(value);
+        }
+		
+		// startPhoneNumber selectbox 값 받아오기
+		var selectBoxChange2 = function(value) {
+        	$("#changeInput2").val(value);
+        }
 </script>
 </head>
 <body>
@@ -68,33 +82,46 @@ function upOK(){
 						<tbody>
 						    <tr>
 						    	<th scope="row" width="150"><label for="userName">이름</label></th>
-						    	<td><input class="form-control" type="text" name="m_name" aria-label="default input example" value="${member.m_name }"></td>
+						    	<td><input class="form-control" type="text" name="m_name" aria-label="default input example" value="${member.m_name }" placeholder="이름을 입력해주세요." required="required"></td>
 						    </tr>
 						    <tr>
 						    	<th scope="row"><label for="userId">아이디</label></th>
-						    	<td><input class="form-control" type="text" name="m_id" aria-label="Disabled input example"  value="${member.m_id }" readonly="readonly" ></td>
+						    	<td><input class="form-control" type="text" name="#" aria-label="Disabled input example"  value="${member.m_id }" readonly="readonly" disabled="disabled" ></td>
+						    	<td><input class="form-control" type="hidden" name="m_id" aria-label="Disabled input example"  value="${member.m_id }"></td>
 						    </tr>
 						    <tr>
 						    	<th scope="row"><label for="userPasswd">비밀번호</label></th>
-						    	<td colspan="2"><input type="password" class="form-control" name="m_passwd" aria-label="default input example" required="required"></td>
+						    	<td colspan="2"><input type="password" class="form-control" name="m_passwd" aria-label="default input example" required="required" placeholder="4~20자리의 영문, 숫자 특수문자만 사용 가능합니다."></td>
 						    </tr>
 						    <tr>
 						    	<th scope="row"><label for="userNick">닉네임</label></th>
-						    	<td colspan="2"><input class="form-control" type="text" name="m_nick" aria-label="default input example" value="${member.m_nick }"></td>
+						    	<td colspan="2"><input class="form-control" type="text" name="m_nick" aria-label="default input example" value="${member.m_nick }" placeholder="최대 10글자까지 입력해주세요." required="required"></td>
 						    </tr>
 						    <tr>
 						    	<th scope="row"><label for="userBirth">생년월일</label></th>
-						    	<td colspan="2"><input class="form-control" type="text" name="m_birth" value="2023-06-11" aria-label="Disabled input example"  value="${member.m_birth }" readonly="readonly"></td>
+						    	<td colspan="2"><input class="form-control" type="text" name="#" value="2023-06-11" aria-label="Disabled input example"  value="${member.m_birth }" readonly="readonly" disabled="disabled"></td>
+						    	<td colspan="2"><input class="form-control" type="hidden" name="m_birth" value="2023-06-11" aria-label="Disabled input example"  value="${member.m_birth }"></td>
 						    </tr>
 						    <tr>
 						    	<th scope="row"><label for="userPhone">휴대폰번호</label></th>
 						    	<td style="height: 40px; vertical-align: middle;">
 							  		<div class="d-flex align-items-center">
-							    		<input class="form-control" type="text" name="m_tel"  aria-label="default input example" style="width: 365px;" value="${member.m_tel }">
-							        	<button type="button" class="btn btn-outline-warning" style="margin-left: 2px;">인증요청</button>
+							  			<c:set var="arrTel" value="${fn:split(member.m_tel, '-')}" />
+							    		<select class="form-select" id="m_tel1" required="required" onchange="selectBoxChange2(this.value)" style="width: 80px;">
+							    		<option value="010" <c:if test="${fn:contains(member.m_tel1, '010')}">selected</c:if>>010</option>
+							    		<option value="011" <c:if test="${fn:contains(member.m_tel1, '011')}">selected</c:if>>011</option>
+							    		<option value="016" <c:if test="${fn:contains(member.m_tel1, '016')}">selected</c:if>>016</option>
+							    		<option value="017" <c:if test="${fn:contains(member.m_tel1, '017')}">selected</c:if>>017</option>
+							    		<option value="018" <c:if test="${fn:contains(member.m_tel1, '018')}">selected</c:if>>018</option>
+							    		<option value="019" <c:if test="${fn:contains(member.m_tel1, '019')}">selected</c:if>>019</option>
+							    		</select>&nbsp;-&nbsp;
+							    		<input type="hidden" name="m_tel1" id="changeInput2" value="${arrTel[0]}">
+							    		<input class="form-control" type="text" name="m_tel2"  aria-label="default input example" style="width: 70px;" value="${arrTel[1]}" required="required">&nbsp;-&nbsp;
+							    		<input class="form-control" type="text" name="m_tel3"  aria-label="default input example" style="width: 70px;" value="${arrTel[2]}" required="required">&nbsp;&nbsp;
+							        	<br><button type="button" class="btn btn-outline-warning">인증요청</button>
 							    	</div>
 							    	<div class="mt-2 d-flex align-items-center">
-							    		<input class="form-control" type="text" name="verifyPhone" aria-label="default input example" style="width: 365px;">
+							    		<input class="form-control" type="text" name="verifyPhone" aria-label="default input example" style="width: 120px;">
 							        	<button type="button" class="btn btn-outline-warning" style="margin-left: 2px;">인증확인</button>
 							    	</div>
 								</td>
@@ -103,16 +130,18 @@ function upOK(){
 							    <th scope="row"><label for="userEmail">이메일</label></th>
 							    <td colspan="2">
 							        <div class="input-group">
-							            <input type="text" class="form-control rounded" name="m_email" aria-label="default input example" style="width: 120px;" value="${member.m_email }">
-<%-- 							            <input type="text" class="form-control rounded" name="email2"  aria-label="default input example" style="width: 120px;" value="${member.m_email2 }">  --%>
-<!-- 							            <div class="input-group-append"> -->
-<!-- 							                <select class="form-select" name="email-domain" style="margin-left: 2px;"> -->
-<!-- 							                	<option value="">직접입력</option> -->
-<!-- 							                    <option value="gmail.com">gmail.com</option> -->
-<!-- 							                    <option value="naver.com">naver.com</option> -->
-<!-- 							                    <option value="daum.net">daum.net</option> -->
-<!-- 							                </select> -->
-<!-- 							            </div> -->
+							        	<c:set var="arrEmail" value="${fn:split(member.m_email, '@')}" />
+							            <input type="text" class="form-control rounded" name="m_email1" aria-label="default input example" style="width: 120px;" value="${arrEmail[0]}" required="required">
+							            &nbsp;@&nbsp;&nbsp;
+							            <input type="text" class="form-control rounded" id="changeInput" name="m_email2"  aria-label="default input example" style="width: 120px;" value="${arrEmail[1]}" required="required"> 
+							            <div class="input-group-append">
+							                <select class="form-select" id="domain" style="margin-left: 2px;" required="required" onchange="selectBoxChange(this.value)">
+							                	<option value="">직접입력</option>
+							                    <option value="gmail.com" <c:if test="${fn:contains(member.m_email2, 'gmail.com')}">selected</c:if>>gmail.com</option>
+							                    <option value="naver.com" <c:if test="${fn:contains(member.m_email2, 'naver.com')}">selected</c:if>>naver.com</option>
+							                    <option value="daum.net" <c:if test="${fn:contains(member.m_email2, 'daum.com')}">selected</c:if>>daum.net</option>
+							                </select>
+							            </div>
 							        </div>
 							    </td>
 							</tr>

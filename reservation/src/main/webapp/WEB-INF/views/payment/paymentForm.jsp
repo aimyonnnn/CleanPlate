@@ -13,7 +13,7 @@
 	<h1>주문 페이지 테스트용</h1>
 	<button onclick="requestPay()">결제하기</button>
 	
-	
+	<%-- 결제 스크립트 --%>
 	<script>
 	var IMP = window.IMP;
 	IMP.init("imp30787507"); // 예: imp00000000
@@ -25,18 +25,18 @@
           pay_method: "card",
           merchant_uid: "Clpt_" + "now()",
           name: "레스토랑 예약",
-          amount: 348000,
+          amount: 1,
           buyer_email: "hong@gmail.com",
           buyer_name: "홍길동",
           buyer_tel: "010-1234-5678",
           buyer_addr: "부산광역시 부산진구 부전동",
-          buyer_postcode: "01181"
+          buyer_postcode: "01181",
       }, function (rsp) {
     	    console.log(rsp);
     	    if (rsp.success) {
     	      var msg = '결제가 완료되었습니다.';
     	      alert(msg);
-    	      location.href = "결제 완료 후 이동할 페이지 url"
+    	      location.href = "reservationResult"
     	    } else {
     	      var msg = '결제에 실패하였습니다.';
     	      msg += '에러내용 : ' + rsp.error_msg;
@@ -44,6 +44,7 @@
     	    }
     	  });
     }
+	<%-- --------------------------------------------------------------------- --%>
   </script>
 </body>
 </html>
