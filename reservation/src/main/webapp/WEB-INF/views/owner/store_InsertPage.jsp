@@ -67,7 +67,7 @@
 
     <!-- 사이드바, 내용 넣는 구역!-->
     <div class="container mt-5">
-        <div class="row d-flex justify-content-center"">
+        <div class="row d-flex justify-content-center">
             <div class="col-2 align-items-center d-flex">
                 <!-- 왼쪽 사이드바 구역 -->
                 <!-- 프로필 사진 -->
@@ -96,7 +96,7 @@
             <!-- 내용 구역 -->
             <div class="col-10">
                 <!-- 가게내용 페이지 시작 -->
-                   <form action="#" method="post">
+                   <form action="storeInsertPro" method="post">
                 	<table class="table" style="margin-left: 70px; width: 58%;">
 						<tbody>
                             <tr>
@@ -147,10 +147,12 @@
 						    	<td>
 	                                <div class="row">
 	                                    <div class="col-6">
-	                                        <input class="form-control timepicker" type ="text" name="res_open1" id="res_open1"> <!-- 영업 시작 시간 -->
+	                                    	<!-- 영업 시작 시간 -->
+<!-- 	                                    	<input type="time" min="09:00" max="22:00" minutes-step="15" required> -->
+	                                        <input class="form-control timepicker" type ="text" name="res_open" id="res_open1"> 
 	                                    </div>
 	                                    <div class="col-6">
-	                                        <input class="form-control timepicker" type ="text" name="res_open2" id="res_open2"> <!-- 영업 마감 시간 -->
+	                                        <input class="form-control timepicker" type ="text" name="res_close" id="res_open2"> <!-- 영업 마감 시간 -->
 	                                    </div>
 	
 	                                </div>
@@ -178,10 +180,10 @@
                                 <td>
                                 	<div class="row">
 	                               	   <div class="col-6">
-	                                       <input class="form-control timepicker2" type ="text" name="res_break1" id="res_break1"> <!-- 브레이크 타임 시작 시간 -->
+	                                       <input class="form-control timepicker2" type ="text" name="res_breakstart" id="res_breakstart"> <!-- 브레이크 타임 시작 시간 -->
 	                                   </div>
 	                                   <div class="col-6">
-	                                       <input class="form-control timepicker2" type ="text" name="res_break2" id="res_break2"> <!-- 브레이크 타임 시작 시간 -->
+	                                       <input class="form-control timepicker2" type ="text" name="res_breakend" id="res_breakend"> <!-- 브레이크 타임 시작 시간 -->
 	                                   </div>
                                     </div>
                                 </td>
@@ -209,15 +211,15 @@
                                 <th scope="row">정기휴무일</th> <!-- select box -->
 						    	<td>
                                     <div class="dropdown">
-                                        <select class="form-select form-select" aria-label=".form-select example" style="width: 180px;">
-											<option selected value="planToVisit">없음</option>
-											<option value="visited">월요일</option>
-											<option value="cancelNoshow">화요일</option>
-											<option value="cancelNoshow">수요일</option>
-											<option value="cancelNoshow">목요일</option>
-											<option value="cancelNoshow">금요일</option>
-											<option value="cancelNoshow">토요일</option>
-											<option value="cancelNoshow">일요일</option>
+                                        <select name="res_holiday" class="form-select form-select" aria-label=".form-select example" style="width: 180px;">
+											<option selected value="없음">없음</option>
+											<option value="월요일">월요일</option>
+											<option value="화요일">화요일</option>
+											<option value="수요일">수요일</option>
+											<option value="목요일">목요일</option>
+											<option value="금요일">금요일</option>
+											<option value="토요일">토요일</option>
+											<option value="일요일">일요일</option>
 										</select>
 									</div>
                                 </td>
@@ -225,27 +227,27 @@
 						    <tr>
                                 <th scope="row">가게 편의 시설</th>
 						    	<td>
-									  <input class="form-check-input" type="checkbox" name="res_amenity" id="amenity">
+									  <input class="form-check-input" type="checkbox" name="res_amenity" id="amenity" value="단체석">
 									  <label class="form-check-label" for="amenity">
 									    단체석
 									  </label>
-									  <input class="form-check-input" type="checkbox" name="res_amenity" id="amenity2">
+									  <input class="form-check-input" type="checkbox" name="res_amenity" id="amenity2" value="주차">
 									  <label class="form-check-label" for="amenity2">
 									    주차
 									  </label>
-									  <input class="form-check-input" type="checkbox" name="res_amenity" id="amenity3">
+									  <input class="form-check-input" type="checkbox" name="res_amenity" id="amenity3" value="발렛파킹">
 									  <label class="form-check-label" for="amenity3">
 									    발렛파킹
 									  </label> <br>
-									  <input class="form-check-input" type="checkbox" name="res_amenity" id="amenity4">
+									  <input class="form-check-input" type="checkbox" name="res_amenity" id="amenity4" value="예약">
 									  <label class="form-check-label" for="amenity4">
 									    예약
 									  </label>
-									  <input class="form-check-input" type="checkbox" name="res_amenity" id="amenity5">
+									  <input class="form-check-input" type="checkbox" name="res_amenity" id="amenity5" value="반려동물 동반">
 									  <label class="form-check-label" for="amenity5">
 									    반려동물 동반
 									  </label>
-									  <input class="form-check-input" type="checkbox" name="res_amenity" id="amenity6">
+									  <input class="form-check-input" type="checkbox" name="res_amenity" id="amenity6" value="장애인 편의시설">
 									  <label class="form-check-label" for="amenity6">
 									    장애인 편의시설
 									  </label>
@@ -259,7 +261,7 @@
 							            <table class="table">
 							                <thead>
 							                  <tr>
-							                    <th scope="col" class="col-5">메뉴명</th>
+							                    <th scope="col" class="col-5">메뉴 이름</th>
 							                    <th scope="col" class="col-3">가격</th>
 							                    <th scope="col"></th>
 							                  </tr>
@@ -289,11 +291,11 @@
 						    </tr>
 						    <tr>
                                 <th scope="row"><label for="birth">가게사진</label></th>
-						    	<td><input type="file" class="form-control" style="color: white;"></td>
+						    	<td><input type="file" name="res_photo" class="form-control" style="color: white;"></td>
 						    </tr>
                             <tr>
                                 <th scope="row"><label for="res_intro">가게소개</label></th>
-                                <td colspan="2"><textarea class="form-control" rows="5" cols="50" id="res_intro"></textarea></td>
+                                <td colspan="2"><textarea class="form-control" rows="5" cols="50" name="res_intro" id="res_intro"></textarea></td>
                             </tr>
 						  </tbody>
                 	</table>
@@ -416,7 +418,7 @@
 								</tr>
 								<tr>
 									<th>메뉴 가격</th>
-									<td><input type="text" class="form-control" placeholder="숫자만 입력"></td>
+									<td><input type="text" class="form-control"  placeholder="숫자만 입력"  onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"/></td>
 								</tr>
 								<tr>
 									<th>메뉴 설명</th>
@@ -459,7 +461,9 @@
 						</tr>
 						<tr>
 							<th>메뉴 가격</th>
-							<td><input type="text" class="form-control" placeholder="숫자만 입력"></td>
+							<td>
+								<input type="text" class="form-control" placeholder="숫자만 입력" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"/>
+							</td>
 						</tr>
 						<tr>
 							<th>메뉴 설명</th>
