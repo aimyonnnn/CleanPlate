@@ -1,4 +1,4 @@
-package com.itwillbs.test.exceptions;
+package com.itwillbs.test.handler;
 
 import org.springframework.jdbc.BadSqlGrammarException;
 import org.springframework.ui.Model;
@@ -10,7 +10,7 @@ public class ExceptionHandlerController {
 
     @ExceptionHandler(BadSqlGrammarException.class)
     public String handleBadSqlGrammarException(BadSqlGrammarException ex, Model model) {
-        String msg = "해당 테이블을 찾을 수 없습니다. AssignmentVO에 임시 데이터와 구문이 있습니다. 테이블을 생성해주세요";
+        String msg = "해당 테이블을 찾을 수 없습니다. 테이블을 생성해주세요";
         model.addAttribute("msg", msg);
         return "fail_back";
     }
