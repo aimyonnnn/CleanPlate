@@ -35,9 +35,9 @@
 	  // 로컬의 세션 스토리지에 저장 한 이메일과 닉네임을 <input> 요소에 설정
 	  let nickname = sessionStorage.getItem('nickname');
 	  let email = sessionStorage.getItem('email');
-	  $('#nickname').val(nickname);
-	  $('#email').val(email);
-	  $('#businessEmail').val(email);
+	  $('#m_nickname').val(nickname);
+	  $('#m_email').val(email);
+	  $('#c_email').val(email);
 	  
 	  // 세션 스토리지에 카카오 이메일 값이 존재할 경우에 회원가입 모달창 자동으로 실행
 	  // 모달창 실행 후 세션 스토리지에 저장된 이메일과 닉네임을 삭제
@@ -49,8 +49,8 @@
 	
 	  // 세션 스토리지에 카카오 이메일 값이 존재할 경우에 <input> 요소를 읽기 전용으로 설정
 	  if (email) {
-	    $('#email').attr('readOnly', 'readOnly');
-	    $('#businessEmail').attr('readOnly', 'readOnly');
+	    $('#m_email').attr('readOnly', 'readOnly');
+	    $('#c_email').attr('readOnly', 'readOnly');
 	  }
 	
 	  // 개인회원 클릭 시
