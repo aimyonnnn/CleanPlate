@@ -77,8 +77,24 @@ public class MemberController {
 	
 	// 결제 폼 이동(임시) 
 	@GetMapping("paymentForm")
-	public String paymentForm() {
-		return "payment/paymentForm";
+	public String paymentForm(Model model, HttpServletRequest request, HttpServletResponse response) {
+		// 테스트용 값
+		model.addAttribute("name", "아이티윌bs");
+		model.addAttribute("amount", 100);
+		model.addAttribute("goodsname", "오마카세");
+		model.addAttribute("buyer_email", "hong@hong.com");
+		model.addAttribute("buyer_name", "홍길동");
+		model.addAttribute("buyer_tel", "010-1234-5678");
+		model.addAttribute("buyer_addr", "부산광역시 부산진구 부전동");
+		model.addAttribute("merchant_uid", "ORD20180131-0000011");
+		
+		return "payment/payments";
+	}
+	
+	// 관리자 페이지 이동(임시)
+	@GetMapping("admin")
+	public String adminMain() {
+		return "admin/adminMain";
 	}
 	
 	// 예약 내역 클릭시 

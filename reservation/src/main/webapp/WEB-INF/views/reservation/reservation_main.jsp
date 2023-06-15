@@ -231,7 +231,6 @@
 		  console.log(restaurantList);
 	      appendList(restaurantList);
 	  });
-      
        
        // appendList() 
        function appendList(restaurantList) {
