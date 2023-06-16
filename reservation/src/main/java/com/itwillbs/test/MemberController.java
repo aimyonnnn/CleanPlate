@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwillbs.test.service.MemberService;
+import com.itwillbs.test.vo.AssignmentVO;
 import com.itwillbs.test.vo.MemberVO;
 
 @Controller
@@ -55,7 +56,7 @@ public class MemberController {
 		// 이메일 분리
 		member.setM_email1(member.getM_email().split("@")[0]);
 		member.setM_email2(member.getM_email().split("@")[1]);
-	
+		
 		// 전화번호 분리
 		member.setM_tel1(member.getM_tel().split("-")[0]);
 		member.setM_tel2(member.getM_tel().split("-")[1]);

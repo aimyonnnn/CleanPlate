@@ -57,7 +57,7 @@ public class AssignmentVO { // 양도테이블
     private int a_price; // 가격 
     private String a_image; // 이미지
     private Date a_created_date; // 작성날짜
-    private int m_idx; // 회원번호 
+//    private int m_idx; // 회원번호 
     
     
     // json으로 변환

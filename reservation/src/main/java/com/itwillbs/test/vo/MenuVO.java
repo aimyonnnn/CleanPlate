@@ -9,6 +9,6 @@ public class MenuVO {
 	private String me_name;
 	private String me_context;
 	private int me_price;
-	private int res_idx;
+//	private int res_idx;
 	
 }
