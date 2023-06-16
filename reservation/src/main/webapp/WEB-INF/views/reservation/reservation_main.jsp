@@ -249,7 +249,7 @@
                   <p class="card-content ellipsis"><!-- 가게소개 -->${'${data.res_intro}'}</p>
                   <p class="card-address"><!-- 주소 -->${'${data.res_address}'} ${'${data.res_detailAddress}'}</p>
                   <p class="card-address"><!-- 영업시간 -->${'${data.res_open}'}~${'${data.res_close}'}</p>
-                  <button type="button" class="btn btn-warning btn-chat w-100" id="reservationButton" onclick="location.href='<c:url value='/'/> '">예약하기</button>
+                  <button type="button" class="btn btn-warning btn-chat w-100" id="reservationButton" onclick="location.href='<c:url value='reservationReserve'/> '">예약하기</button>
                 </div>
               </div>
             </div> `;
@@ -314,7 +314,7 @@
         </script>
       
       <!-- row 시작 --> 
-      <div class="row" id="shopList">
+      <div class="row container-fluid w-100" id="shopList">
       		  
 			  <!-- 샘플 데이터 입니다. 페이지 로드시에만 보여지는 곳 -->
 			  <!-- 반복문으로 양도게시판 리스트 출력 시작 -->

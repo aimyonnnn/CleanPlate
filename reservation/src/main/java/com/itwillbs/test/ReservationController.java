@@ -36,7 +36,7 @@ public class ReservationController {
 	// 예약 페이지
 	@GetMapping("reservationReserve")
 	public String reservationReserve() {
-		return "reservation/reservation_reserve";
+		return "reservation/reservation_store";
 	}
 	
 	// 결제 후 예약 내역 페이지
@@ -58,6 +58,7 @@ public class ReservationController {
 		return restaurantName;
 		
 	}
+	
 	
 	
 }
