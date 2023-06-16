@@ -1,5 +1,9 @@
 package com.itwillbs.test;
 
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.*;
@@ -18,7 +22,15 @@ public class OwnerController {
 	/* 예약관리 페이지 */
 	//owner의 예약관리 페이지 이동 Mapping
 	@GetMapping("StoreReservation")
-	public String StoreReservation() {
+	public String StoreReservation(Model model, HttpSession session) {
+		
+		List<ReservationVO> resList = service.getReservationList((String)session.getAttribute("sId"));
+		List<Reservation_DetailVO> RDList = service.getRDList((String)session.getAttribute("sId"));
+		
+		
+		model.addAttribute("resList",resList);
+		model.addAttribute("RDList",RDList);
+		
 		return "owner/store_Reservation";
 	}
 	

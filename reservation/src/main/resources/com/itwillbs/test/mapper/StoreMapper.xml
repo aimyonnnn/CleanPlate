@@ -24,5 +24,28 @@
 			)
 	
 	</insert>
+	
+	<select id="selectReservationList">
+		SELECT *
+		FROM reservation_info
+		WHERE c_idx = (SELECT c_idx
+			FROM ceo
+			WHERE c_id = #{id});
+	</select>
+	
+	<select id="selectRDList">
+		SELECT *
+			FROM reservation_detail_info
+			WHERE r_idx IN(
+				SELECT r_idx
+				FROM reservation
+				WHERE res_idx IN(SELECT res_idx
+						FROM restaurant
+						WHERE c_idx = (SELECT c_idx
+							FROM ceo
+							WHERE c_id = #{sId})
+						)
+			);
+	</select>
 
 </mapper>

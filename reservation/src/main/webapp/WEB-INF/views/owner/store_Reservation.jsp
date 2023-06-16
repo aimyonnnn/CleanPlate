@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,8 +14,8 @@
         <!-- bootstrap -->
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    </head>
     <!-- 이부분은 지우면 안됩니다 -->
+
 </head>
 <body>
    	<!-- 공통 상단바 구역 -->
@@ -49,8 +50,8 @@
 				<!-- 가계선택 -->
 				<div class="col-2">
 					<div class="dropdown" style="margin-left: 40px;">
-						<select class="form-select form-select mb-3" aria-label=".form-select example" style="width: 180px;">
-							<option selected value="planToVisit">전체예약</option>
+						<select class="form-select form-select mb-3" name="res_name" aria-label=".form-select example" style="width: 180px;">
+							<option selected value="">전체예약</option>
 							<option value="visited">칸다소바(서면점)</option>
 							<option value="cancelNoshow">칸다소바(전포점)</option>
 						</select>
@@ -99,30 +100,25 @@
                         </tr>
                     </thead>
                     <tbody>
+                    <c:forEach items="${resList }" var="resList" >
                         <tr>
-                            <td>000001</td>
-                            <td>동백키친</td>
-                            <td>23-05-23</td>
-                            <td>17:00</td>
-                            <td>방문예정</td>
-                            <td><button type="button" class="btn btn-warning" style="color: white;" data-bs-toggle="modal" data-bs-target="#rsListModal">상세보기</button></td>
+                            <td>${resList.r_idx }</td>
+                            <td>${resList.res_name }</td>
+                            <td><fmt:formatDate value="${resList.r_date }" pattern="yy-MM-dd"/></td>
+                            <td><fmt:formatDate value="${resList.r_date }" pattern="HH:mm"/></td>
+                            <td>${resList.r_status }</td>
+                            <td><button type="button" class="btn btn-warning" style="color: white;" data-bs-toggle="modal" data-bs-target="#rsListModal${resList.r_idx }">상세보기</button></td>
                         </tr>
-                        <tr>
-                            <td>000002</td>
-                            <td>동백키친</td>
-                            <td>23-05-24</td>
-                            <td>12:00</td>
-                            <td>취소/노쇼 </td>
-                            <td><button type="button" class="btn btn-warning" style="color: white;" data-bs-toggle="modal" data-bs-target="#rsListModal2">상세보기</button></td>
-                        </tr>
+                   </c:forEach>
                     </tbody>
                 </table> 
             </div>
         </div>
     </div>
- 
+
  	<!-- 예약관리 첫번째 모달창 (방문예정 상태) -->
-	 <div class="modal fade" id="rsListModal" tabindex="-1" aria-labelledby="rsListModalLabel" aria-hidden="true">
+ 	<c:forEach var="resList" items="${resList }">
+	 <div class="modal fade" id="rsListModal${resList.r_idx }" tabindex="-1" aria-labelledby="rsListModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 	    	<div class="modal-content">
 	    		<div class="modal-header">
@@ -136,7 +132,7 @@
 	        				<div class="col-md-12" style="text-align: center;">
 	            			<h1 style="color: #FFC107;">예약</h1>
 				            <hr>
-				            <h3 style="font-weight: bold;">키친동백</h3>
+				            <h3 style="font-weight: bold;">${resList.res_name }</h3>
 	        				</div>
 							<!-- 예약관리 테이블 시작 -->
 					        <div class="col-md-12">
@@ -144,33 +140,36 @@
 					                <tbody>
 										<tr>
 					                        <th>예약번호</th>
-					                        <td>000001</td>
+					                        <td>${resList.r_idx }</td>
 					                    </tr>
 					                    <tr>
 					                        <th>날짜</th>
-					                        <td>2023년 05월 23일</td>
+					                        <td><fmt:formatDate value="${resList.r_date }" pattern="yyyy년MM월dd일"/></td>
 					                    </tr>
 					                    <tr>
 					                        <th>시간</th>
-					                        <td>오후 17:00</td>
+					                        <td><fmt:formatDate value="${resList.r_date }" pattern="HH시mm분"/></td>
 					                    </tr>
 					                    <tr>
 					                        <th>인원</th>
-					                        <td>5명</td>
+					                        <td>${resList.r_personnel }</td>
 					                    </tr>
 					                    <tr>
 					                        <th>예약자</th>
-					                        <td>홍길동</td>
+					                        <td>${resList.m_name }</td>
 					                    </tr>
 										<tr>
 					                        <th>상태</th>
-					                        <td>방문예정</td>
+					                        <td>${resList.r_status }</td>
 					                    </tr>
 										<tr>
 					                        <th>메뉴</th>
 					                        <td>
-												또루꾸 막또 1개<br>
-												또루꾸 막또 2개<br>
+					                        <c:forEach var="RDList" items="${RDList }">
+					                        	<c:if test="${resList.r_idx eq RDList.r_idx }">
+													${RDList.me_name } : ${RDList.quantity }개<br>
+												</c:if>
+											</c:forEach>
 											</td>
 					                    </tr>
 		                			</tbody>
@@ -178,7 +177,8 @@
 		            			<!-- 예약관리 테이블 끝 -->
 		        			</div>
 						    <div class="d-flex justify-content-center">
-				        		<button type="button" class="btn btn-outline-warning" id="cancelButton">예약 취소하기</button>
+				        		<button type="button" class="btn btn-outline-warning" id="cancelButton" style="margin-left: 10px;" data-bs-toggle="modal" data-bs-target="#ModifyRsInfo${resList.r_idx }">예약 수정</button>
+				        		<button type="button" class="btn btn-outline-warning" id="cancelButton" style="margin-left: 10px;"> 예약 취소</button>
 				        		<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="margin-left: 10px;">닫기</button>
 						    </div>
 					</div>
@@ -188,91 +188,23 @@
 		</div>
 	</div>
 </div>
-	<!-- 예약관리 출력 첫번째 모달창 끝 -->
-
-	<!-- 예약관리 출력 두번째 모달창 시작 (방문완료 및 취소/노쇼) -->
-	<!-- 구현 작업시 하나의 모달로 처리할 것 -->
-	<div class="modal fade" id="rsListModal2" tabindex="-1" aria-labelledby="rsListModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-	    	<div class="modal-content">
-	    		<div class="modal-header">
-	        		<h1 class="modal-title fs-5" id="rsListModalLabel">예약 내역</h1>
-	        		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-	      		</div>
-	      		<div class="modal-body">
-	        		<!-- 예약관리 내용 시작-->
-					<div class="container">
-					    <div class="row">
-	        				<div class="col-md-12" style="text-align: center;">
-	            			<h1 style="color: #FFC107;">예약</h1>
-				            <hr>
-				            <h3 style="font-weight: bold;">키친동백</h3>
-	        				</div>
-							<!-- 예약관리 테이블 시작 -->
-					        <div class="col-md-12">
-					            <table class="mt-3 table d-flex justify-content-center">
-					                <tbody>
-										<tr>
-					                        <th>예약번호</th>
-					                        <td>000002</td>
-					                    </tr>
-					                    <tr>
-					                        <th>날짜</th>
-					                        <td>2023년 05월 23일</td>
-					                    </tr>
-					                    <tr>
-					                        <th>시간</th>
-					                        <td>오후 17:00</td>
-					                    </tr>
-					                    <tr>
-					                        <th>인원</th>
-					                        <td>5명</td>
-					                    </tr>
-					                    <tr>
-					                        <th>예약자</th>
-					                        <td>홍길동</td>
-					                    </tr>
-										<tr>
-					                        <th>상태</th>
-					                        <td>취소/노쇼</td>
-					                    </tr>
-										<tr>
-					                        <th>메뉴</th>
-					                        <td>
-												또루꾸 막또 1개<br>
-												또루꾸 막또 2개<br>
-											</td>
-					                    </tr>
-										<tr>
-											<th>취소사유</th>
-											<td>노쇼</td>
-										</tr>
-		                			</tbody>
-		           				 </table>
-		            			<!-- 예약관리 테이블 끝 -->
-		        			</div>
-						    <div class="d-flex justify-content-center">
-				        		<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="margin-left: 10px;">닫기</button>
-						    </div>
-					</div>
-					<!-- 예약관리 내용 끝-->
-	      		</div>
-	    	</div>
-		</div>
-	</div>
-</div>
-	<!-- 예약관리 출력 두번째 모달창 끝 -->
- 	
- 	
- 	
-
+</c:forEach>
+	<!-- 예약관리 출력 첫번째 모달창 끝 -->	
  
-    <!-- 하단 부분 include 처리영역 -->
+
+
+
+
+
+
+
+	<!-- 하단 부분 include 처리영역 -->
     <hr class="mt-5">
 <%@ include file="../common/common_footer.jsp" %>
     <!-- 하단 부분 include 처리영역 -->
     
     <!-- 이부분은 지우면 안됩니다 -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    
 </body>
-</html> 
+</html>
