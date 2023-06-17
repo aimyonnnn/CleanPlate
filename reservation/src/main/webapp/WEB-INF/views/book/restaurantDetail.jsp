@@ -21,7 +21,6 @@
         //		  isLiked라는 변수를 사용하여 토글 상태를 저장하고있다.
         isLiked = !isLiked;
         
-        // toggleLikeStatus 엔드포인트로 AJAX 요청
         $.post("/toggleLikeStatus", 
         		{ restaurant_idx: '<%= request.getParameter("restaurant_idx") %>',
         		  member_id: '<%= request.getParameter("member_id") %>' });
