@@ -18,6 +18,15 @@
 	</select>
 	<!-- 전체 식당 조회 -->
 	
+	<!-- 점주 전체 식당 조회 -->
+		<select id="selectOwnerRestaurantList" resultType="com.itwillbs.test.vo.RestaurantVO">
+			select * from
+				restaurant
+				where c_idx = (select c_idx
+							from ceo
+							where c_id = #{sId})
+		</select>
+	<!-- 점주 전체 식당 조회 -->
 	
 
 </mapper>

@@ -25,6 +25,11 @@ public class ReservationService {
 		return mapper.selectRestaurantList();
 	}
 	
+	// 점주의 전체 식당 리스트 조회
+	public List<RestaurantVO> getOwnerRestaurantList(String sId) {
+		return mapper.selectOwnerRestaurantList(sId);
+	}
+	
 	
 
 

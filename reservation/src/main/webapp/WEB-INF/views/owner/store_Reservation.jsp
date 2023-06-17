@@ -16,6 +16,7 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <!-- 이부분은 지우면 안됩니다 -->
 
+
 </head>
 <body>
    	<!-- 공통 상단바 구역 -->
@@ -50,10 +51,11 @@
 				<!-- 가계선택 -->
 				<div class="col-2">
 					<div class="dropdown" style="margin-left: 40px;">
-						<select class="form-select form-select mb-3" name="res_name" aria-label=".form-select example" style="width: 180px;">
-							<option selected value="">전체예약</option>
-							<option value="visited">칸다소바(서면점)</option>
-							<option value="cancelNoshow">칸다소바(전포점)</option>
+						<select class="form-select form-select mb-3" id="restaurantName" name="res_name" aria-label=".form-select example" style="width: 180px;">
+								<option selected value="">전체식당</option>
+								<c:forEach items="${restaurantList }" var="restaurantList">
+								<option value="${restaurantList.res_name }">${restaurantList.res_name }</option>
+								</c:forEach>
 						</select>
 					</div>
 				</div>
@@ -61,11 +63,12 @@
 				<!-- 방문상태 시작 -->
 				<div class="col">
 					<div class="dropdown" style="margin-left: 40px;">
-						<select class="form-select form-select mb-3" aria-label=".form-select example" style="width: 180px;">
-							<option selected value="planToVisit">전체상태</option>
-							<option value="visited">방문예정</option>
-							<option value="cancelNoshow">방문완료</option>
-							<option value="cancelNoshow">취소/노쇼</option>
+						<select class="form-select form-select mb-3" id="status" aria-label=".form-select example" style="width: 180px;">
+							<option selected value="">전체상태</option>
+							<option value="방문예정">방문예정</option>
+							<option value="방문완료">방문완료</option>
+							<option value="취소">취소</option>
+							<option value="양도">양도</option>
 						</select>
 					</div>
 				</div>
@@ -106,7 +109,22 @@
                             <td>${resList.res_name }</td>
                             <td><fmt:formatDate value="${resList.r_date }" pattern="yy-MM-dd"/></td>
                             <td><fmt:formatDate value="${resList.r_date }" pattern="HH:mm"/></td>
-                            <td>${resList.r_status }</td>
+                            <td>
+	                            <c:choose>
+	                           		<c:when test="${resList.r_status eq 1 }">
+	                           			방문예정
+	                           		</c:when>
+	                           		<c:when test="${resList.r_status eq 2 }">
+	                           			방문완료
+	                           		</c:when>
+	                           		<c:when test="${resList.r_status eq 3 }">
+	                           			취소
+	                           		</c:when>
+	                           		<c:otherwise>
+	                           			양도
+	                           		</c:otherwise>
+	                           	</c:choose>
+                            </td>
                             <td><button type="button" class="btn btn-warning" style="color: white;" data-bs-toggle="modal" data-bs-target="#rsListModal${resList.r_idx }">상세보기</button></td>
                         </tr>
                    </c:forEach>
@@ -160,7 +178,22 @@
 					                    </tr>
 										<tr>
 					                        <th>상태</th>
-					                        <td>${resList.r_status }</td>
+					                        <td>
+					                        <c:choose>
+			                            		<c:when test="${resList.r_status eq 1 }">
+			                            			방문예정
+			                            		</c:when>
+			                            		<c:when test="${resList.r_status eq 2 }">
+			                            			방문완료
+			                            		</c:when>
+			                            		<c:when test="${resList.r_status eq 3 }">
+			                            			취소
+			                            		</c:when>
+			                            		<c:otherwise>
+			                            			양도
+			                            		</c:otherwise>
+			                            	</c:choose>
+					                        </td>
 					                    </tr>
 										<tr>
 					                        <th>메뉴</th>
@@ -177,8 +210,9 @@
 		            			<!-- 예약관리 테이블 끝 -->
 		        			</div>
 						    <div class="d-flex justify-content-center">
-				        		<button type="button" class="btn btn-outline-warning" id="cancelButton" style="margin-left: 10px;" data-bs-toggle="modal" data-bs-target="#ModifyRsInfo${resList.r_idx }">예약 수정</button>
-				        		<button type="button" class="btn btn-outline-warning" id="cancelButton" style="margin-left: 10px;"> 예약 취소</button>
+						    	<c:if test="${resList.r_status eq 1  }">
+				        			<button type="button" class="btn btn-outline-warning" id="cancelButton" style="margin-left: 10px;"> 예약 취소</button>
+				        		</c:if>
 				        		<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="margin-left: 10px;">닫기</button>
 						    </div>
 					</div>
@@ -191,7 +225,26 @@
 </c:forEach>
 	<!-- 예약관리 출력 첫번째 모달창 끝 -->	
  
+<script type="text/javascript">
+$(document).ready(function() {
+	  $("#status, #restaurantName").on("change", function() {
+	    var selectedStatus = $("#status").val();
+	    var selectedRestaurant = $("#restaurantName").val();
 
+	    $("table tbody tr").each(function() {
+	      var statusCell = $(this).find("td:nth-child(5)");
+	      var restaurantNameCell = $(this).find("td:nth-child(2)");
+	      var status = statusCell.text().trim();
+	      var restaurantName = restaurantNameCell.text().trim();
+
+	      var showRow = (selectedStatus === "" || status === selectedStatus) && (selectedRestaurant === "" || restaurantName === selectedRestaurant);
+
+	      $(this).toggle(showRow);
+	    });
+	  });
+	});
+
+</script>
 
 
 

@@ -16,6 +16,9 @@ public interface ReservationMapper {
 	
 	// 전체 식당 조회
 	List<RestaurantVO> selectRestaurantList();
+	
+	// 점주 전체 식당 조회
+	List<RestaurantVO> selectOwnerRestaurantList(String sId);
 
 	
 	

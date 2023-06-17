@@ -18,6 +18,8 @@ public class OwnerController {
 	
 	@Autowired
 	private StoreService service;
+	@Autowired
+	private ReservationService resService;
 	
 	/* 예약관리 페이지 */
 	//owner의 예약관리 페이지 이동 Mapping
@@ -26,8 +28,11 @@ public class OwnerController {
 		
 		List<ReservationVO> resList = service.getReservationList((String)session.getAttribute("sId"));
 		List<Reservation_DetailVO> RDList = service.getRDList((String)session.getAttribute("sId"));
+		List<RestaurantVO> restaurantList = resService.getOwnerRestaurantList((String)session.getAttribute("sId"));
 		
+		System.out.println(restaurantList);
 		
+		model.addAttribute("restaurantList", restaurantList);
 		model.addAttribute("resList",resList);
 		model.addAttribute("RDList",RDList);
 		
