@@ -143,7 +143,7 @@
 		    <c:choose>
 		        <c:when test="${empty sessionScope.sId}">
 		        	<!-- 세션 id가 존재하지 않을 경우 로그인 버튼 출력 -->
-		            <button type="button" class="btn btn-outline-light text-white me-2 border-0 bg-transparent" onclick="location.href='member'">로그인</button>
+		            <button type="button" class="btn btn-outline-light text-white me-2 border-0 bg-transparent" onclick="location.href='loginForm'">로그인</button>
 		        </c:when>
 		        <c:otherwise>
 		        	<!-- 세션 id가 존재할 경우 세션 아이디에 저장된 회원 닉네임 출력 -->
@@ -203,7 +203,6 @@
 			    <button type="button" class="btn btn-warning mx-2" id="RevAsc">예약빠른순</button>
 			    <button type="button" class="btn btn-warning mx-2" id="RevDesc">예약느린순</button>
 			    <button type="button" class="btn btn-warning mx-2" id="abc">가나다순</button>
-			    <button type="button" class="btn btn-warning mx-2" id="creDate">등록일자순</button>
 			    <button type="button" class="btn btn-danger mx-2" id="today">TODAY</button>
 			  </div>
 			</div>
@@ -216,12 +215,23 @@
                   <div class="card">
                     <img src="https://via.placeholder.com/200" class="card-img-top" alt="Item Image">
                     <div class="card-body">
-                      <h5 class="card-title"><span>${assignment.a_title}</span></h5>
-                      <p class="card-text ellipsis"><span>${assignment.a_content}</span></p>
-                      <p class="card-revDate">예약 날짜 : <span>${assignment.a_reservation_date}</span></p>
-                      <p class="card-creDate">등록 일자 : <span>${assignment.a_created_date}</span></p>
-                      <p class="card-price">가격 : <span>${assignment.a_price}원</span></p>
-                    <button type="button" class="btn btn-warning btn-chat w-100" id="contactButton" onclick="location.href='<c:url value="assignAgree"/>'">채팅으로 문의하기</button>
+                      <!-- 가게명 클릭시 가게 상세정보 페이지로 이동 -->
+                      <h5>
+					    <span onclick="goToReservationReserve('${assignment.res_name}')">
+					      ${assignment.res_name}
+					    </span>
+					  </h5>
+					  <!-- 가게명 클릭시 가게 상세정보 페이지로 이동 -->
+                      <p>예약 날짜 : <span>${assignment.r_date}</span></p>
+                      <p>가격 : <span>${assignment.a_price}원</span></p>
+                      예약번호 : <!-- 예약번호 나중에 지울 예정입니다 --> <input type="text" name="r_idx" value="${assignment.r_idx}">
+                      <div class="d-flex">
+	                    <button type="button" class="btn btn-warning btn-chat w-50 mx-2"
+	                     id="contactButton" onclick="location.href='<c:url value="assignAgree"/>'">채팅문의</button>
+						<button type="button" class="btn btn-warning btn-chat w-50 mx-2" id="payButton"
+						onclick="location.href='<c:url value="assignmentPayment"/>' 
+						+ '?r_idx=${assignment.r_idx}&r_date=${assignment.r_date}&a_price=${assignment.a_price}&res_name=${assignment.res_name}&a_sellerId=${assignment.a_sellerId}'">바로구매</button>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -233,6 +243,7 @@
        </div>
        <!-- container 끝 -->
        
+	   <!--  필터 기능 시작 -->	       
       <script>
       
    	   // JSON 데이터 가져오기
@@ -269,7 +280,7 @@
        // 예약빠른순 정렬
        $('#RevAsc').click(() => {
     	   assignmentList.sort((a, b) => {
-    		    return Date.parse(a.a_reservation_date) - Date.parse(b.a_reservation_date);
+    		    return Date.parse(a.r_date) - Date.parse(b.r_date);
     	   });
     	    console.log(assignmentList);
 	        appendList(assignmentList);
@@ -278,7 +289,7 @@
        // 예약느린순 정렬
        $('#RevDesc').click(()=>{
     	   assignmentList.sort((a, b) => {
-    		    return Date.parse(b.a_reservation_date) - Date.parse(a.a_reservation_date);
+    		    return Date.parse(b.r_date) - Date.parse(a.r_date);
     	   });
     	    console.log(assignmentList);
 	        appendList(assignmentList);
@@ -287,7 +298,7 @@
        // 가게명 가나다순 정렬
        $('#abc').click(() => {
     	   assignmentList.sort((a, b) => {
-    			if(a.a_title > b.a_title) {
+    			if(a.res_name > b.res_name) {
     				return 1
     			} else {
     				return -1
@@ -301,7 +312,7 @@
        $('#today').click(() => {
          let filteredList = assignmentList.filter(a => {
            let today = new Date();
-           let reservationDate = new Date(a.a_reservation_date);
+           let reservationDate = new Date(a.r_date);
            return (
              today.getFullYear() === reservationDate.getFullYear() &&
              today.getMonth() === reservationDate.getMonth() &&
@@ -310,17 +321,6 @@
          });
          console.log(filteredList);
          appendList(filteredList);
-       });
-       
-       //등록일자순 정렬 - 오름차순
-       $('#creDate').click(() => {
-    	   assignmentList.sort((a, b) => {
-    		  const dateA = new Date(a.a_created_date);
-    		  const dateB = new Date(b.a_created_date);
-				return dateA - dateB;		   
-    	   });
-    	   console.log(assignmentList);
-           appendList(assignmentList);
        });
        
          // appendList() 
@@ -336,12 +336,17 @@
 				               <div class="card">
 				                 <img src="https://via.placeholder.com/200" class="card-img-top" alt="Item Image">
 				                 <div class="card-body">
-				                   <h5 class="card-title"><span>${'${data.a_title}'}</span></h5>
-				                   <p class="card-text ellipsis"><span>${'${data.a_content}'}</span></p>
-				                   <p class="card-revDate">예약 날짜 : <span>${'${data.a_reservation_date}'}</span></p>
-				                   <p class="card-creDate">등록 일자 : <span>${'${data.a_created_date}'}</span></p>
-				                   <p class="card-price">가격 : <span>${'${data.a_price}'}원</span></p>
-				                   <button type="button" class="btn btn-warning btn-chat w-100" id="contactButton" onclick="location.href='<c:url value='assignAgree'/> '">채팅으로 문의하기</button>
+				                   <h5><span>${'${data.res_name}'}</span></h5>
+				                   <p>예약 날짜 : <span>${'${data.r_date}'}</span></p>
+				                   <p>가격 : <span>${'${data.a_price}'}원</span></p>
+				                   예약번호 : <!-- 예약번호 나중에 지울 예정입니다 --> <input type="text" name="r_idx" value="${'${data.r_idx}'}">
+				                   <div class="d-flex">
+				                    <button type="button" class="btn btn-warning btn-chat w-50 mx-2"
+				                    	id="contactButton" onclick="location.href='<c:url value="assignAgree"/>'">채팅문의</button>
+			                    	<button type="button" class="btn btn-warning btn-chat w-50 mx-2" id="payButton"
+			    						onclick="location.href='<c:url value="assignmentPayment"/>' 
+			    						+ '?r_idx=${"${data.r_idx}"}&r_date=${"${data.r_date}"}&a_price=${"${data.a_price}"}&res_name=${"${data.res_name}"}&a_sellerId=${"${data.a_sellerId}"}'">바로구매</button>
+			                      </div>
 				                 </div>
 				               </div>
 				             </div> `;
@@ -349,7 +354,30 @@
 	           card.append(template);
 	         });
          }
-
+         
+         <!-- 가게명 클릭 시 가게 상세정보 페이지로 이동 -->
+         <!-- 클릭 시 가게명에 따라 동적으로 변경 예정입니다. -->
+  	     <!-- 가게명 클릭 시 resName을 서버로 전달하여 해당 가게의 정보를 가져옴 -->
+         function goToReservationReserve(res_name) {
+	    	   
+			    $.ajax({
+			      url: '<c:url value="getResName"/>',
+			      method: 'GET',
+			      data: { res_name: res_name },
+			      success: function(response) {
+			    	  
+			        console.log(response);
+			      
+			        location.href='<c:url value="reservationReserve"/>';
+			        
+			      },
+			      error: function(xhr, status, error) {
+			        console.error(error);
+			      }
+			   });
+			 }
+  	 	  <!-- 가게명 클릭 시 가게 상세정보 페이지로 이동 -->
+         
 	 </script>
 
 	<!-- 하단 여백을 주기 위한 div 박스 -->

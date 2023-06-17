@@ -18,22 +18,13 @@
 	</select>
 	<!-- 전체 식당 조회 -->
 	
-	<!-- 점주 전체 식당 조회 -->
-		<select id="selectOwnerRestaurantList" resultType="com.itwillbs.test.vo.RestaurantVO">
-			select * from
-				restaurant
-				where c_idx = (select c_idx
-							from ceo
-							where c_id = #{sId})
-		</select>
-	<!-- 점주 전체 식당 조회 -->
-	
-	<update id="UpdateCancleStatus">
-		UPDATE reservation
-			SET 
-				r_status = 3
-			WHERE
-				r_idx = #{r_idx}
+	<!-- 양도 거래 완료 시 예약테이블 판매자 예약 내역을 구매자로 업데이트 처리 -->
+	<update id="updateReservation" parameterType="map">
+		  UPDATE reservation
+			  SET m_idx = (SELECT m_idx FROM members WHERE m_id = #{sId}),
+			      r_status = 4
+					 WHERE r_idx = #{r_idx}
 	</update>
+	<!-- 양도 거래 완료 시 예약테이블 판매자 예약 내역을 구매자로 업데이트 처리 -->
 
 </mapper>

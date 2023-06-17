@@ -35,7 +35,10 @@ public class ReservationService {
 		return mapper.UpdateCancleStatus(r_idx);
 	}
 	
-	
+	// 예약 테이블의 판매자 회원번호를 구매자의 회원번호로 업데이트 및 예약상태 컬럼을 '4-양도' 변경함
+	public int updateReservation(String sId, int r_idx) {
+		return mapper.updateReservation(sId, r_idx);
+	}
 
 
 	

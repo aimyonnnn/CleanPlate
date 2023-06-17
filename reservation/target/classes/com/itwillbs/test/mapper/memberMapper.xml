@@ -53,4 +53,24 @@
 			    m_passwd = #{m_passwd}
 			    	where m_id = #{m_id}
 	</update>
+	
+	<!-- 양도 게시판 로그인 세션id 구분 -->
+	<select id="selectMemberInfo" resultType="com.itwillbs.test.vo.MemberVO">
+	  <choose>
+	    <when test="sId.matches('^\\w+@[a-zA-Z_]+?\\.[a-zA-Z]{2,3}$')">
+	      <!-- 이메일 형식인 경우 -->
+	      SELECT m_name, m_tel, m_email
+		      FROM members
+		      	WHERE m_email = #{sId}
+	    </when>
+	    <otherwise>
+	      <!-- 일반 로그인인 경우 -->
+	      SELECT m_name, m_tel, m_email
+		      FROM members
+		      	WHERE m_id = #{sId}
+	    </otherwise>
+	  </choose>
+	</select>
+	<!-- 양도 게시판 로그인 세션id 구분 -->
+	
 </mapper>

@@ -19,4 +19,9 @@ public class AssignmentService {
 		return mapper.getAssignmentList();
 	}
 	
+	// 양도 테이블의 양도상태 컬럼을 2-거래완료로 변경하기
+	public int updateStatus(int r_idx) {
+		return mapper.updateStatus(r_idx);
+	}
+	
 }

@@ -4,6 +4,7 @@ package com.itwillbs.test.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.itwillbs.test.vo.RestaurantVO;
 
@@ -23,6 +24,8 @@ public interface ReservationMapper {
 	// 취소버튼 누를시 상태를 취소로 변경
 	int UpdateCancleStatus(int r_idx);
 
-	
+	// 양도 결제 완료 시 업데이트 처리
+	int updateReservation(@Param("sId") String sId, @Param("r_idx") int r_idx);
+
 	
 }

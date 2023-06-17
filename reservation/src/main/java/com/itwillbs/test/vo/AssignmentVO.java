@@ -1,64 +1,77 @@
 package com.itwillbs.test.vo;
 
-import java.util.Date;
-
 import com.google.gson.Gson;
 
 import lombok.Data;
 
 /*
+ 
+ // 양도 게시판 테스트를 위한 샘플 데이터 입니다.
+ // 순서대로 입력하시면 됩니다.
+ 
+ // 구매자가 양도 게시판에서 구매하기를 클릭하고 결제하면
+ // 1. 예약 테이블의 회원번호를 구매자의 회원번호로 업데이트 및 예약상태 컬럼을 '4-양도' 변경함
+ // => 구매자의 회원번호는 sId 세션값으로 아이디를 조회하여 가져옴
+ // 2. 양도 테이블의 양도상태 컬럼을 2-거래완료로 변경
+ // 3. 양도 게시판으로 다시 접속 시 '2-거래완료' 처리된 글은 보이지 않음
 
-양도 게시판 데이터 출력용 임시VO 입니다.
-정렬, 필터 기능 테스트용으로 만들었습니다.
-구문, 데이터 입력하면 정렬, 필터기능 정상 동작합니다.
 
-1. SQL 구문
+use cleanplate;
+show tables;
+select * from members;
+select * from restaurant;
+select * from reservation;
+select * from assignment;
 
-CREATE TABLE assignment (
-  a_idx INT PRIMARY KEY AUTO_INCREMENT COMMENT '양도 인덱스',
-  a_title VARCHAR(45) NOT NULL COMMENT '제목',
-  a_content VARCHAR(500) COMMENT '내용',
-  a_status INT NOT NULL COMMENT '상태',
-  a_reservation_date DATE COMMENT '예약 날짜',
-  a_price int COMMENT '가격',
-  a_image VARCHAR(45) COMMENT '이미지',
-  a_created_date DATE NOT NULL COMMENT '생성일',
-  m_idx INT NOT NULL COMMENT '회원번호',
-);
+drop table members;
+drop table restaurant;
+drop table reservation;
+drop table assignment;
 
-2. 임시 데이터
-
-INSERT INTO ASSIGNMENT (a_title, a_content, a_status, a_reservation_date, a_price, a_image, a_created_date, m_idx)
+-- members 테이블
+INSERT INTO members (m_id, m_passwd, m_name, m_nick, m_birth, m_tel, m_email, m_status, m_regdate)
 VALUES
-  ('La Finest', '프렌치 레스토랑으로, 고급스러운 분위기와 정교한 프렌치 요리를 즐길 수 있습니다.', 1, '2023-07-01', 500000, '이미지1.jpg', '2023-06-09', 1),
-  ('Belluca', '이탈리안 다이닝 레스토랑으로, 품위 있는 분위기와 훌륭한 이탈리안 요리를 제공합니다.', 1, '2023-06-12', 490000, '이미지2.jpg', '2023-06-08', 1),
-  ('Cortina', '알프스 산맥을 연상시키는 고급스러운 스키 리조트 레스토랑으로, 산간지역의 특산물을 사용한 요리를 즐길 수 있습니다.', 1, '2023-06-18', 700000, '이미지3.jpg', '2023-06-01', 1),
-  ('Esquisse', '현대적이고 세련된 분위기의 프렌치 다이닝 레스토랑으로, 현대적인 감각으로 재해석된 프렌치 요리를 선보입니다.', 1, '2023-06-13', 800000, '이미지4.jpg', '2023-05-30', 1),
-  ('Essorée', '동남아시아 요리에 특화된 고급 다이닝 레스토랑으로, 태국, 인도네시아, 베트남 등 동남아시아의 다채로운 맛을 경험할 수 있습니다.', 1, '2023-06-14', 650000, '이미지5.jpg', '2023-05-29', 1),
-  ('Grand', '내지중해를 배경으로 한 고급스러운 다이닝 레스토랑으로, 지중해 지역의 해산물과 향신료를 사용한 요리를 맛볼 수 있습니다.', 1, '2023-07-13', 590000, '이미지6.jpg', '2023-06-03', 2),
-  ('Le Jardin', '프랑스의 정원을 연상시키는 아름다운 실내 정원 레스토랑으로, 신선한 재료와 아름다운 분위기가 특징입니다.', 1, '2023-06-15', 450000, '이미지7.jpg', '2023-06-05', 2),
-  ('La Boulangerie', '프랑스식 빵집으로, 신선한 빵과 디저트를 맛볼 수 있습니다.', 1, '2023-07-05', 750000, '이미지3.jpg', '2023-06-16', 1),
-  ('Sushi Yama', '일본식 초밥 전문 레스토랑으로, 신선한 재료와 정교한 솜씨로 만들어지는 초밥을 즐길 수 있습니다.', 1, '2023-06-21', 890000, '이미지8.jpg', '2023-06-03', 2),
-  ('Mexican Delight', '멕시코 음식 전문 레스토랑으로, 풍부한 맛과 특색 있는 멕시코 음식을 맛볼 수 있습니다.', 1, '2023-07-10', 510000, '이미지9.jpg', '2023-06-12', 2),
-  ('The Grill House', '고급 스테이크 하우스로, 최상급의 고기와 정통 그릴 요리를 즐길 수 있습니다.', 1, '2023-06-25', 550000, '이미지10.jpg', '2023-06-10', 2),
-  ('Seafood Paradise', '해산물 요리 전문 레스토랑으로, 신선한 해산물과 다양한 해산물 요리를 맛볼 수 있습니다.', 1, '2023-07-15', 420000, '이미지11.jpg', '2023-06-02', 2),
-  ('Vegetarian Delight', '채식주의자를 위한 고급 채식 레스토랑으로, 신선한 채소와 다양한 채식 요리를 제공합니다.', 1, '2023-06-29', 990000, '이미지12.jpg', '2023-06-01', 2)
+('user1', '1234', 'User1', 'Nickname1', '1990-01-01', '010-1234-5678', 'user1@example.com', 1, NOW()),
+('user2', '1234', 'User2', 'Nickname2', '1995-02-02', '010-9876-5432', 'user2@example.com', 1, NOW()),
+('user3', '1234', 'User3', 'Nickname3', '2000-03-03', '010-5555-5555', 'user3@example.com', 1, NOW());
+
+-- restaurant 테이블
+INSERT INTO restaurant (res_brn, res_name, res_tel, res_address, res_detailAddress, res_open, res_close, res_breakstart, res_breakend, res_holiday, res_amenity, res_photo, res_intro) VALUES
+('123456789012', 'Restaurant A', '123-456-7890', '123 Main Street', 'Unit 1', '09:00:00', '18:00:00', '13:00:00', '14:00:00', 'Sun', 'WiFi, Parking', 'photo_a.jpg', 'Welcome to Restaurant A!'),
+('987654321098', 'Restaurant B', '987-654-3210', '456 Elm Street', 'Suite 2', '10:00:00', '20:00:00', NULL, NULL, 'Mon', 'Outdoor Seating, Takeout', 'photo_b.jpg', 'Experience the finest at Restaurant B.'),
+('456789012345', 'Restaurant C', '456-789-0123', '789 Oak Street', 'Apt 3', '08:30:00', '17:30:00', NULL, NULL, 'Tue', 'Delivery, Bar', 'photo_c.jpg', 'Discover the flavors of Restaurant C.'),
+('654321098765', 'Restaurant D', '654-321-0987', '987 Maple Avenue', 'Floor 4', '07:00:00', '16:00:00', '12:00:00', '13:00:00', 'Wed', 'Private Dining, Live Music', 'photo_d.jpg', 'Indulge in the ambiance of Restaurant D.'),
+('987012345678', 'Restaurant E', '987-012-3456', '321 Cedar Street', 'Unit 5', '11:30:00', '21:30:00', NULL, NULL, 'Thu', 'Vegetarian Options, Outdoor Seating', 'photo_e.jpg', 'Experience a delightful journey at Restaurant E.');
+
+ -- reservation 테이블
+INSERT INTO reservation (m_idx, r_personnel, r_status, r_date, res_idx)
+VALUES
+  (1, 2, 1, '2023-06-17 18:00:00', 1),
+  (1, 4, 1, '2023-06-18 12:30:00', 2),
+  (1, 3, 1, '2023-06-19 20:00:00', 3),
+  (2, 1, 1, '2023-06-20 19:00:00', 4),
+  (2, 2, 1, '2023-06-21 15:30:00', 5);
+ 
+ -- assignment 테이블, 100원 테스트 결제용
+ INSERT INTO assignment (a_status, a_price, a_sellerId, r_idx) VALUES
+(1, 100, 'seller1', 1),
+(1, 200000, 'seller2', 2),
+(2, 150000, 'seller3', 3),
+(1, 120000, 'seller4', 4),
+(2, 580000, 'seller5', 5);
 
 */
 
 @Data
 public class AssignmentVO { // 양도테이블
 	
-    private int a_idx; // 양도번호
-    private String a_title; // 양도글 제목
-    private String a_content; // 내용 
-    private int a_status; // 양도글 상태 1-거래중, 2-거래완료
-    private Date a_reservation_date; // 예약날짜
-    private int a_price; // 가격 
-    private String a_image; // 이미지
-    private Date a_created_date; // 작성날짜
-//    private int m_idx; // 회원번호 
-    
+	private int a_idx; // 양도번호
+    private int a_status; // 양도상태
+    private int a_price; // 가격
+    private String a_sellerId; // 판매자
+    private int r_idx; // 예약번호
+    private String r_date; // 예약 날짜 및 시간
+    private String res_name; // 가게명
     
     // json으로 변환
     public String toJson() {

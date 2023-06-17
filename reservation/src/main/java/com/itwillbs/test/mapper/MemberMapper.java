@@ -23,5 +23,8 @@ public interface MemberMapper {
 
 	// 멤버 정보 조회
 	MemberVO selectMember(@Param("id") String id);
+	
+	// 양도 결제시 필요한 고객 정보
+	MemberVO selectMemberInfo(String sId);
 
 }

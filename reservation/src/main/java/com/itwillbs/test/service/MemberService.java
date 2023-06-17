@@ -38,4 +38,8 @@ public class MemberService {
 		return mapper.selectMember(id);
 	}
 	
+	// 양도 결제시 필요한 고객 정보
+	public MemberVO getMemberInfo(String sId) {
+		return mapper.selectMemberInfo(sId);
+	}
 }
