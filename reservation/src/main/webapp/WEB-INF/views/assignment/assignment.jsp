@@ -145,11 +145,15 @@
 		        	<!-- 세션 id가 존재하지 않을 경우 로그인 버튼 출력 -->
 		            <button type="button" class="btn btn-outline-light text-white me-2 border-0 bg-transparent" onclick="location.href='loginForm'">로그인</button>
 		        </c:when>
-		        <c:otherwise>
+		       <c:otherwise>
 		        	<!-- 세션 id가 존재할 경우 세션 아이디에 저장된 회원 닉네임 출력 -->
 		            <button type="button" class="btn btn-outline-light text-white me-2 border-0 bg-transparent" onclick="location.href='member'">${sessionScope.sId} 님</button>
 					<!-- 세션 id가 존재할 경우 예약내역 버튼 활성화 -->
 					<button type="button" class="btn btn-outline-light text-white border-0 bg-transparent" onclick="location.href='memberRSList'">예약내역</button>
+		            <!-- 세션 id가 "admin"인 경우 관리자 탭 표시 -->
+		            <c:if test="${sessionScope.sId eq 'admin'}">
+		                <button type="button" class="btn btn-outline-light text-white border-0 bg-transparent" onclick="location.href='adminMain'">관리자모드</button>
+		            </c:if>
 		            <!-- 세션 id가 존재할 경우 로그아웃 버튼 출력 -->
 		            <button type="button" class="btn btn-outline-light text-white me-2 border-0 bg-transparent" onclick="location.href='logout'" id="logout">로그아웃</button>
 		        </c:otherwise>
@@ -224,7 +228,7 @@
 					  <!-- 가게명 클릭시 가게 상세정보 페이지로 이동 -->
                       <p>예약 날짜 : <span>${assignment.r_date}</span></p>
                       <p>가격 : <span>${assignment.a_price}원</span></p>
-                      예약번호 : <!-- 예약번호 나중에 지울 예정입니다 --> <input type="text" name="r_idx" value="${assignment.r_idx}">
+                      예약번호 : <!-- 예약번호 나중에 지울 예정입니다 --> <input type="text" name="r_idx" value="${assignment.r_idx}" readonly="readonly">
                       <div class="d-flex">
 	                    <button type="button" class="btn btn-warning btn-chat w-50 mx-2"
 	                     id="contactButton" onclick="location.href='<c:url value="assignAgree"/>'">채팅문의</button>
@@ -339,7 +343,7 @@
 				                   <h5><span>${'${data.res_name}'}</span></h5>
 				                   <p>예약 날짜 : <span>${'${data.r_date}'}</span></p>
 				                   <p>가격 : <span>${'${data.a_price}'}원</span></p>
-				                   예약번호 : <!-- 예약번호 나중에 지울 예정입니다 --> <input type="text" name="r_idx" value="${'${data.r_idx}'}">
+				                   예약번호 : <!-- 예약번호 나중에 지울 예정입니다 --> <input type="text" name="r_idx" value="${'${data.r_idx}'}" readonly="readonly">
 				                   <div class="d-flex">
 				                    <button type="button" class="btn btn-warning btn-chat w-50 mx-2"
 				                    	id="contactButton" onclick="location.href='<c:url value="assignAgree"/>'">채팅문의</button>

@@ -67,13 +67,17 @@
                     <button type="button" class="btn btn-outline-light text-black me-2 border-0" onclick="location.href='loginForm'">로그인</button>
                 </c:when>
                 <c:otherwise>
-                    <!-- 세션 id가 존재할 경우 세션 아이디에 저장된 회원 닉네임 출력 -->
-                    <button type="button" class="btn btn-outline-light text-black me-2 border-0" onclick="location.href='member'">${sessionScope.sId} 님</button>
-			  		<!-- 세션 id가 존재할 경우 예약내역 버튼 활성화 -->
-			  		<button type="button" class="btn btn-outline-light text-black border-0 bg-transparent" onclick="location.href='memberRSList'">예약내역</button>
-                	<!-- 세션 id가 존재할 경우 로그아웃 버튼 출력 -->
-                    <button type="button" class="btn btn-outline-light text-black border-0" onclick="location.href='logout'" id="logout">로그아웃</button>
-                </c:otherwise>
+		        	<!-- 세션 id가 존재할 경우 세션 아이디에 저장된 회원 닉네임 출력 -->
+		            <button type="button" class="btn btn-outline-light text-white me-2 border-0 bg-transparent" onclick="location.href='member'">${sessionScope.sId} 님</button>
+					<!-- 세션 id가 존재할 경우 예약내역 버튼 활성화 -->
+					<button type="button" class="btn btn-outline-light text-white border-0 bg-transparent" onclick="location.href='memberRSList'">예약내역</button>
+		            <!-- 세션 id가 "admin"인 경우 관리자 탭 표시 -->
+		            <c:if test="${sessionScope.sId eq 'admin'}">
+		                <button type="button" class="btn btn-outline-light text-white border-0 bg-transparent" onclick="location.href='adminMain'">관리자모드</button>
+		            </c:if>
+		            <!-- 세션 id가 존재할 경우 로그아웃 버튼 출력 -->
+		            <button type="button" class="btn btn-outline-light text-white me-2 border-0 bg-transparent" onclick="location.href='logout'" id="logout">로그아웃</button>
+		        </c:otherwise>
             </c:choose>
             
         </div>

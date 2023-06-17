@@ -42,4 +42,9 @@ public class MemberService {
 	public MemberVO getMemberInfo(String sId) {
 		return mapper.selectMemberInfo(sId);
 	}
+	
+	// 카카오 로그인 시 회원 email을 조회 후 m_id를 리턴받아 세션id에 저장
+	public MemberVO getMemberId(String email) {
+		return mapper.selectMemberId(email);
+	}
 }

@@ -39,13 +39,15 @@ public class LoginController {
 	// 1. 세션의 "sId"가 존재하면 메인으로 리다이렉트
 	// 2. 세션의 "sId"가 존재하지 않으면 로그인페이지로 이동
 	@GetMapping("loginForm")
-	public String loginForm(HttpServletRequest request) {
+	public String loginForm(HttpServletRequest request, Model model) {
 		// false를 설정해서 세션이 새로 생기지 않도록 설정
 		// 세션이 이미 존재할 경우 현재 존재하는 세션을 반환함, 그렇지 않으면 null을 반환
 	    HttpSession session = request.getSession(false);
 	    
 	    if (session != null && session.getAttribute("sId") != null) {
-	        return "redirect:/"; // 세션의 sId가 있으면 "/"으로 리다이렉트
+	    	model.addAttribute("msg", "이미 로그인 중 입니다. 홈으로 이동합니다");
+//	        return "redirect:/"; // 세션의 sId가 있으면 "/"으로 리다이렉트
+	    	return "fail_back";
 	    }
 	    return "member/member_login";
 	}
@@ -120,9 +122,16 @@ public class LoginController {
 			return "new";
 		} else {
 		// DB에 카카오 이메일이 존재하는 경우 => 기존 회원이므로 로그인 처리
+			
+		// ==========================수정되었습니다=======================
 		// 기존 회원이므로 세션에 유저의 이메일을 세션에 저장
 		// 카카오 로그인으로 로그인 할 경우 메인의 header부분에 카카오 이메일을 출력함 "xxx@xxx.com 님" 출력됨
-			session.setAttribute("sId", email);
+		// ===============================================================
+			// => ######세션에는 유저id를 저장하는걸로 수정하겠습니다######
+			// 카카오 로그인 시 유저의 email을 세션에 담지않고 회원정보 조회 후 id를 세션에 저장
+			
+			MemberVO member2 = memberService.getMemberId(email);
+			session.setAttribute("sId", member2.getM_id());
 			return "existing";
 		}
 	}		

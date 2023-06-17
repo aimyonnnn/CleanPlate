@@ -27,4 +27,7 @@ public interface MemberMapper {
 	// 양도 결제시 필요한 고객 정보
 	MemberVO selectMemberInfo(String sId);
 
+	// 카카오 로그인 시 회원 email을 조회 후 m_id를 리턴받아 세션id에 저장
+	MemberVO selectMemberId(String email);
+
 }

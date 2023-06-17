@@ -121,9 +121,7 @@ public class AssignmentController {
            // 양도 테이블의 양도상태 컬럼을 2-거래완료로 변경하기
     	   // 양도상태 번호가 '2-거래완료'인 것은 양도게시판 리스트에서 제거하기
            int assignStatusCount = assignmentService.updateStatus(r_idx);   		
-           
 	           if(assignStatusCount > 0) {
-	        	   
 	        	   response.put("result", 1);
 	           }
 	           
@@ -135,8 +133,7 @@ public class AssignmentController {
    }
    
    
-   
-
+// =======================================================================================================
 //   // 결제 취소 테스트
 //   @PostMapping("assignCancle")
 //   @ResponseBody
