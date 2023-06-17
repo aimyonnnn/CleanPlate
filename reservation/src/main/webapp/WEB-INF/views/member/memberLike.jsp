@@ -91,7 +91,11 @@
                         
                     </tbody>
                 </table>  
-                             
+                
+                <!-- 작동하는지 넣어본 것입니다. 알맞게 작동되면 페이지 완료후 고치기 -->
+                  <h1>Member Like</h1>
+				  <p>식당 이름: <a href="restaurantDetail.jsp">식당 이름</a></p>
+				  <p>식당 정보: 식당 정보 내용</p>             
             </div>
             <!-- 내용 구역 -->
 
