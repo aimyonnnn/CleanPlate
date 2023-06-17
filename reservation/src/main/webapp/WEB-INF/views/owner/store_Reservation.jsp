@@ -211,7 +211,7 @@
 		        			</div>
 						    <div class="d-flex justify-content-center">
 						    	<c:if test="${resList.r_status eq 1  }">
-				        			<button type="button" class="btn btn-outline-warning" id="cancelButton" style="margin-left: 10px;"> 예약 취소</button>
+				        			<button type="button" class="btn btn-outline-warning" onclick="location.href='resCancel?r_idx=${resList.r_idx }'" id="cancelButton" style="margin-left: 10px;"> 예약 취소</button>
 				        		</c:if>
 				        		<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="margin-left: 10px;">닫기</button>
 						    </div>
@@ -243,6 +243,7 @@ $(document).ready(function() {
 	    });
 	  });
 	});
+	
 
 </script>
 

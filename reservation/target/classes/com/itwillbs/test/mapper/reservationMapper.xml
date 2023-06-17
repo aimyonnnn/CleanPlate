@@ -28,5 +28,12 @@
 		</select>
 	<!-- 점주 전체 식당 조회 -->
 	
+	<update id="UpdateCancleStatus">
+		UPDATE reservation
+			SET 
+				r_status = 3
+			WHERE
+				r_idx = #{r_idx}
+	</update>
 
 </mapper>

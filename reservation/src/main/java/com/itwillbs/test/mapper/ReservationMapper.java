@@ -19,6 +19,9 @@ public interface ReservationMapper {
 	
 	// 점주 전체 식당 조회
 	List<RestaurantVO> selectOwnerRestaurantList(String sId);
+	
+	// 취소버튼 누를시 상태를 취소로 변경
+	int UpdateCancleStatus(int r_idx);
 
 	
 	

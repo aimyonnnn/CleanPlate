@@ -30,6 +30,11 @@ public class ReservationService {
 		return mapper.selectOwnerRestaurantList(sId);
 	}
 	
+	// 상태를 취소로 변경
+	public int CancelStatus(int r_idx) {
+		return mapper.UpdateCancleStatus(r_idx);
+	}
+	
 	
 
 
