@@ -16,9 +16,15 @@
 	<!-- iamport -->
 	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 	
-	<!-- ScrollMagic -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/ScrollMagic.min.js"></script>
-    
+	<!-- 채널톡 API 시작 -->
+	<script>
+	  (function(){var w=window;if(w.ChannelIO){return w.console.error("ChannelIO script included twice.");}var ch=function(){ch.c(arguments);};ch.q=[];ch.c=function(args){ch.q.push(args);};w.ChannelIO=ch;function l(){if(w.ChannelIOInitialized){return;}w.ChannelIOInitialized=true;var s=document.createElement("script");s.type="text/javascript";s.async=true;s.src="https://cdn.channel.io/plugin/ch-plugin-web.js";var x=document.getElementsByTagName("script")[0];if(x.parentNode){x.parentNode.insertBefore(s,x);}}if(document.readyState==="complete"){l();}else{w.addEventListener("DOMContentLoaded",l);w.addEventListener("load",l);}})();
+	
+	  ChannelIO('boot', {
+	    "pluginKey": "1389a4f2-b052-41e3-8f07-442396576322"
+	  });
+	</script>
+	<!-- 채널톡 API 끝 -->
 	
     <!-- jQuery CDN -->
     <script
@@ -27,6 +33,7 @@
             crossorigin="anonymous"
             referrerpolicy="no-referrer">
     </script>
+    
  	<style>
 		body {
 			display: flex;
@@ -94,18 +101,18 @@
   
   <div class="container" data-aos="fade-up" data-aos-anchor-placement="center-bottom">
 		<h3>주문자 정보</h3>
-		<form action="reservationUpdate" method="post">
+		<form action="#" method="post">
 			<table>
 				<tbody>
 					<tr>
-						<th scope="row" width="150"><label for="resName">가게명</label></th>
-						<td><input class="form-control" type="text" name="#" aria-label="default input example" value="CleanPlate" readonly="readonly" disabled="disabled"></td>
-						<td><input class="form-control" type="hidden" name="res_name" aria-label="Disabled input example" value="CleanPlate"></td>
+						<th scope="row" width="150"><label for="companyName">결제처</label></th>
+						<td><input class="form-control" type="text" name="#" aria-label="default input example" value="Clean Plate" readonly="readonly" disabled="disabled"></td>
+						<td><input class="form-control" type="hidden" name="companyName" aria-label="Disabled input example" value="Clean Plate"></td>
 					</tr>
 					<tr>
-						<th scope="row" width="150"><label for="goodsName">주문명</label></th>
+						<th scope="row" width="150"><label for="resName">가게명</label></th>
 						<td><input class="form-control" type="text" name="#" aria-label="default input example" value="${res_name}" readonly="readonly" disabled="disabled"></td>
-						<td><input class="form-control" type="hidden" name="goodsname" aria-label="Disabled input example" value="${res_name}"></td>
+						<td><input class="form-control" type="hidden" name="resName" aria-label="Disabled input example" value="${res_name}"></td>
 					</tr>
 					<tr>
 						<th scope="row" width="150"><label for="pay">결제금액</label></th>
@@ -162,19 +169,19 @@
           function(rsp) {
             console.log(rsp);
             
-            // ================ 결제 성공 시 =================
+            // ================= 결제 성공 시 =================
             if (rsp.success) {
             	
               alert('결제가 완료되었습니다.');
               alert(JSON.stringify(rsp));
               console.log('결제가 완료되었습니다.');
-            
               	 
-			 //================= DB 업데이트 처리 시작 ===================
+			 // ================= DB 업데이트 처리 시작 =================
 		     // 1. 예약 테이블의 회원번호를 구매자의 회원번호로 업데이트 및 예약상태 컬럼을 '4-양도' 변경함
 			 // => 구매자의 회원번호는 sId 세션값으로 아이디를 조회하여 가져옴
 			 // 2. 양도 테이블의 양도상태 컬럼을 '2-거래완료'로 변경
 			 // 3. 양도 게시판으로 다시 접속 시 '2-거래완료' 처리된 글은 보이지 않음
+			 
 	  		 	 var a_sellerId = '${a_sellerId}';
 	  		 	 var r_idx = '${r_idx}';
 	  		 	 
@@ -204,11 +211,11 @@
 				        console.log('에러 메시지: ' + error);
 				    }
 				});
-	         //================= DB 업데이트 처리 끝 ===================
+	         //================= DB 업데이트 처리 끝 =================
 			  
 //               location.href = "<c:url value='/'/>";
             
-            // ================= 결제 실패 시 ================= 
+            // ================= 결제 실패 시 =================
             } else {
               var msg = '결제에 실패하였습니다.';
               msg += '에러내용: ' + rsp.error_msg;
@@ -218,19 +225,20 @@
       });
    }); // ready
    
-	   // 주문번호 만들기
-	   function createOrderNum(){
-		   	const date = new Date();
-		   	const year = date.getFullYear();
-		   	const month = String(date.getMonth() + 1).padStart(2, "0");
-		   	const day = String(date.getDate()).padStart(2, "0");
-	   	
-	   	let orderNum = year + month + day;
-	   	for(let i=0;i<10;i++) {
-	   		orderNum += Math.floor(Math.random() * 8);	
-	   	}
-	   		return orderNum;
-	   }
+   
+   // 주문번호 만들기
+   function createOrderNum(){
+	   	const date = new Date();
+	   	const year = date.getFullYear();
+	   	const month = String(date.getMonth() + 1).padStart(2, "0");
+	   	const day = String(date.getDate()).padStart(2, "0");
+   	
+   	let orderNum = year + month + day;
+   	for(let i=0;i<10;i++) {
+   		orderNum += Math.floor(Math.random() * 8);	
+   	}
+   		return orderNum;
+   }
        
    </script>
    
