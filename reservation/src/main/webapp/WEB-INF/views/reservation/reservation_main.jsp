@@ -247,13 +247,14 @@
          
        let template = `<div class="col-md-4 mt-5" data-aos="fade-up" data-aos-anchor-placement="center-bottom">
               <div class="card">
-                <img src="https://via.placeholder.com/200" class="card-img-top">
+              <img src="${pageContext.request.contextPath}/resources/images/${'${data.res_photo}'}" class="card-img-top" alt="Item Image">
                 <div class="card-body">
                   <h5 class="card-title"><!-- 가게 이름 -->${'${data.res_name}'}</h5>
                   <p class="card-content ellipsis"><!-- 가게소개 -->${'${data.res_intro}'}</p>
                   <p>주소 : ${'${data.res_address}'} ${'${data.res_detailAddress}'}</p>
                   <p>영업 시간 : ${'${data.res_open}'}~${'${data.res_close}'}</p>
-                  <button type="button" class="btn btn-warning btn-chat w-100" id="reservationButton" onclick="location.href='<c:url value='reservationReserve'/>'">예약하기</button>
+                  <button type="button" class="btn btn-warning btn-chat w-100" id="reservationButton"
+                	  onclick="goToReservationReserve('${"${data.res_name}"}')">예약하기</button>
                 </div>
               </div>
             </div> `;
@@ -271,13 +272,13 @@
 			  <c:forEach var="restaurant" items="${restaurantList}">
 				  <div class="col-md-4 mt-5" data-aos="fade-up" data-aos-anchor-placement="center-bottom">
 				    <div class="card">
-				      <img src="https://via.placeholder.com/200" class="card-img-top" alt="Item Image">
+				      <img src="${pageContext.request.contextPath }/resources/images/${restaurant.res_photo}" class="card-img-top" alt="Item Image">
 				      <div class="card-body">
 				        <h5 class="card-title"><!-- 가게 이름 -->${restaurant.res_name}</h5>
 				        <p class="card-content ellipsis"><!-- 가게 소개 -->${restaurant.res_intro}</p>
 				        <p>주소 : ${restaurant.res_address}</p>
 				        <p>영업 시간 : ${restaurant.res_open} ~ ${restaurant.res_close}</p>
-				        <button type="button" class="btn btn-warning btn-chat w-100" id="contactButton" onclick="location.href='<c:url value='reservationReserve'/>'">예약하기</button>
+				        <button type="button" class="btn btn-warning btn-chat w-100" id="contactButton" onclick="goToReservationReserve('${restaurant.res_name}')">예약하기</button>
 				      </div>
 				    </div>
 				  </div>
@@ -314,14 +315,14 @@
       	     	           
      	     	            let template = `<div class="col-md-4 mt-5" data-aos="fade-up" data-aos-anchor-placement="center-bottom">
      	     				               <div class="card">
-     	     				                 <img src="https://via.placeholder.com/200" class="card-img-top">
+     	     				            	<img src="${pageContext.request.contextPath}/resources/images/${'${data.res_photo}'}" class="card-img-top" alt="Item Image">
      	     				                 <div class="card-body">
      	     				                   <h5 class="card-title"><!-- 가게 이름 -->${'${data.res_name}'}</h5>
      	     				                   <p class="card-content ellipsis"><!-- 가게소개 -->${'${data.res_intro}'}</p>
      	     				                   <p>주소 : ${'${data.res_address}'}</p>
      	     				                   <p>영업 시간 : ${'${data.res_open}'} ~ ${'${data.res_close}'}</p>
      	     				                   <button type="button" class="btn btn-warning btn-chat w-100" id="reservationButton" 
-     	     				                	 onclick="location.href='<c:url value='reservationReserve'/>'">예약하기</button>
+     	     				                	 onclick="goToReservationReserve('${"${data.res_name}"}')">예약하기</button>
      	     				                 </div>
      	     				               </div>
      	     				             </div> `;
@@ -339,7 +340,14 @@
       		
       	}); // ready
         </script>		
-	
+		
+		<script>
+		 <!-- 가게명 클릭 시 가게 상세정보 페이지로 이동 -->
+  	     <!-- 가게명 클릭 시 resName을 서버로 전달하여 해당 가게의 정보를 가져옴 -->
+  	     function goToReservationReserve(res_name) {
+  		    location.href = "<c:url value='/getRestaurantInfo'/>?res_name=" + res_name;
+  	     }
+		</script>
 	
 	</div><!-- container 끝 -->
 	

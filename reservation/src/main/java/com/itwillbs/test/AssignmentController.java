@@ -20,8 +20,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.itwillbs.test.service.AssignmentService;
 import com.itwillbs.test.service.MemberService;
 import com.itwillbs.test.service.ReservationService;
+import com.itwillbs.test.service.RestaurantService;
 import com.itwillbs.test.vo.AssignmentVO;
 import com.itwillbs.test.vo.MemberVO;
+import com.itwillbs.test.vo.RestaurantVO;
 
 @Controller
 public class AssignmentController {
@@ -32,6 +34,8 @@ public class AssignmentController {
    private MemberService memberService;
    @Autowired
    private ReservationService reservationService;
+   @Autowired
+   private RestaurantService restaurantService;
    
    private static final Logger logger = LoggerFactory.getLogger(AssignmentController.class);
    
@@ -120,6 +124,7 @@ public class AssignmentController {
            // 예약 테이블의 회원번호를 구매자의 회원번호로 업데이트 및 예약상태 컬럼을 '4-양도' 변경 완료 시
            // 양도 테이블의 양도상태 컬럼을 2-거래완료로 변경하기
     	   // 양도상태 번호가 '2-거래완료'인 것은 양도게시판 리스트에서 제거하기
+    	   
            int assignStatusCount = assignmentService.updateStatus(r_idx);   		
 	           if(assignStatusCount > 0) {
 	        	   response.put("result", 1);
@@ -132,7 +137,45 @@ public class AssignmentController {
        return response;
    }
    
+   // 가게이름으로 가게 정보 조회하기
+   // 양도 게시판에서 가게이름 클릭 시 가게 상세 정보 페이지로 이동
+   @GetMapping("getRestaurantInfo")
+   public String getRestaurantInfo(@RequestParam String res_name, Model model) {
+	   
+       RestaurantVO restaurantInfo = restaurantService.getRestaurantInfo(res_name);
+       
+       model.addAttribute("restaurantInfo", restaurantInfo);
+       
+       return "assignment/assignmentTest";
+   }
    
+
+   
+   
+   
+   
+// =======================================================================================================
+//   // 가게이름으로 가게 정보 조회하기
+//   // 양도 게시판에서 가게이름 클릭 시 가게 상세 정보 페이지로 이동
+//   @GetMapping("getRestaurantInfo")
+//   @ResponseBody
+//   public RestaurantVO getRestaurantInfo(@RequestParam String res_name, Model model) {
+//	   
+//	   System.out.println("getRestaurantInfo");
+//	   System.out.println(res_name);
+//	   
+//	   RestaurantVO restaurantInfo = restaurantService.getRestaurantInfo(res_name);
+//	   
+//	   model.addAttribute("restaurantInfo", restaurantInfo);
+//	   
+//	   return restaurantInfo; 
+//   }
+//   
+//   // 가게이름 출력 테이스 페이지
+//   @GetMapping("assignmentTest")
+//   public String assignmentTest() {
+//	   return "assignment/assignmentTest";
+//   }
 // =======================================================================================================
 //   // 결제 취소 테스트
 //   @PostMapping("assignCancle")

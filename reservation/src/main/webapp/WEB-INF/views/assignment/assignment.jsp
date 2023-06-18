@@ -217,7 +217,7 @@
                 <c:forEach var="assignment" items="${assignmentList}">
                 <div class="col-md-4 mt-5" data-aos="fade-up" data-aos-anchor-placement="center-bottom">
                   <div class="card">
-                    <img src="https://via.placeholder.com/200" class="card-img-top" alt="Item Image">
+                    <img src="${pageContext.request.contextPath }/resources/images/${assignment.res_photo}" class="card-img-top" alt="Item Image">
                     <div class="card-body">
                       <!-- 가게명 클릭시 가게 상세정보 페이지로 이동 -->
                       <h5>
@@ -338,9 +338,9 @@
 	           
 	           let template = `<div class="col-md-4 mt-5" data-aos="fade-up" data-aos-anchor-placement="center-bottom">
 				               <div class="card">
-				                 <img src="https://via.placeholder.com/200" class="card-img-top" alt="Item Image">
+				               <img src="${pageContext.request.contextPath}/resources/images/${'${data.res_photo}'}" class="card-img-top" alt="Item Image">
 				                 <div class="card-body">
-				                   <h5><span>${'${data.res_name}'}</span></h5>
+				                   <h5><span onclick="goToReservationReserve('${"${data.res_name}"}')">${'${data.res_name}'}</span></h5>
 				                   <p>예약 날짜 : <span>${'${data.r_date}'}</span></p>
 				                   <p>가격 : <span>${'${data.a_price}'}원</span></p>
 				                   예약번호 : <!-- 예약번호 나중에 지울 예정입니다 --> <input type="text" name="r_idx" value="${'${data.r_idx}'}" readonly="readonly">
@@ -360,27 +360,27 @@
          }
          
          <!-- 가게명 클릭 시 가게 상세정보 페이지로 이동 -->
-         <!-- 클릭 시 가게명에 따라 동적으로 변경 예정입니다. -->
   	     <!-- 가게명 클릭 시 resName을 서버로 전달하여 해당 가게의 정보를 가져옴 -->
-         function goToReservationReserve(res_name) {
-	    	   
-			    $.ajax({
-			      url: '<c:url value="getResName"/>',
-			      method: 'GET',
-			      data: { res_name: res_name },
-			      success: function(response) {
-			    	  
-			        console.log(response);
-			      
-			        location.href='<c:url value="reservationReserve"/>';
-			        
-			      },
-			      error: function(xhr, status, error) {
-			        console.error(error);
-			      }
-			   });
-			 }
-  	 	  <!-- 가게명 클릭 시 가게 상세정보 페이지로 이동 -->
+  	     function goToReservationReserve(res_name) {
+  		    location.href = "<c:url value='/getRestaurantInfo'/>?res_name=" + res_name;
+  		  }
+  	     
+//          function goToReservationReserve(res_name) {
+//         	 $.ajax({
+//         		  // res_name으로 식당 정보 조회 후 => 가게 상세보기 페이지에 해당 가게 출력
+// 			      url: '<c:url value="getRestaurantInfo"/>',
+// 			      method: 'GET',
+// 			      data: { res_name: res_name },
+// 			      success: function(response) {
+// 			        alert(JSON.stringify(response));
+// 			        // 테스트 페이지로 이동해서 출력하기
+// 			        location.href='<c:url value="assignmentTest"/>';
+// 			      },
+// 			      error: function(xhr, status, error) {
+// 			        console.error(error);
+// 			      }
+// 			   });
+// 			 }
          
 	 </script>
 

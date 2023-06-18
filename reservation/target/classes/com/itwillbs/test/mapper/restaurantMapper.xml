@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.itwillbs.test.mapper.RestaurantMapper">
+
+    <!-- 가게이름으로 가게 정보 조회하기 -->
+	<select id="selectRestaurantInfo" resultType="com.itwillbs.test.vo.RestaurantVO">
+		select * from
+			restaurant
+				where res_name = #{res_name}		
+	</select>
+ 	<!-- 가게이름으로 가게 정보 조회하기 -->
+
+
+
+</mapper>

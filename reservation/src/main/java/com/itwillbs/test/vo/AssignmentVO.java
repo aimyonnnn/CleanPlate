@@ -39,11 +39,11 @@ VALUES
 
 -- restaurant 테이블
 INSERT INTO restaurant (res_brn, res_name, res_tel, res_address, res_detailAddress, res_open, res_close, res_breakstart, res_breakend, res_holiday, res_amenity, res_photo, res_intro) VALUES
-('123456789012', 'Restaurant A', '123-456-7890', '123 Main Street', 'Unit 1', '09:00:00', '18:00:00', '13:00:00', '14:00:00', 'Sun', 'WiFi, Parking', 'photo_a.jpg', 'Welcome to Restaurant A!'),
-('987654321098', 'Restaurant B', '987-654-3210', '456 Elm Street', 'Suite 2', '10:00:00', '20:00:00', NULL, NULL, 'Mon', 'Outdoor Seating, Takeout', 'photo_b.jpg', 'Experience the finest at Restaurant B.'),
-('456789012345', 'Restaurant C', '456-789-0123', '789 Oak Street', 'Apt 3', '08:30:00', '17:30:00', NULL, NULL, 'Tue', 'Delivery, Bar', 'photo_c.jpg', 'Discover the flavors of Restaurant C.'),
-('654321098765', 'Restaurant D', '654-321-0987', '987 Maple Avenue', 'Floor 4', '07:00:00', '16:00:00', '12:00:00', '13:00:00', 'Wed', 'Private Dining, Live Music', 'photo_d.jpg', 'Indulge in the ambiance of Restaurant D.'),
-('987012345678', 'Restaurant E', '987-012-3456', '321 Cedar Street', 'Unit 5', '11:30:00', '21:30:00', NULL, NULL, 'Thu', 'Vegetarian Options, Outdoor Seating', 'photo_e.jpg', 'Experience a delightful journey at Restaurant E.');
+('123456789012', 'Restaurant A', '123-456-7890', '123 Main Street', 'Unit 1', '09:00:00', '18:00:00', '13:00:00', '14:00:00', 'Sun', 'WiFi, Parking', 'restaurant/1.jpg', 'Welcome to Restaurant A!'),
+('987654321098', 'Restaurant B', '987-654-3210', '456 Elm Street', 'Suite 2', '10:00:00', '20:00:00', NULL, NULL, 'Mon', 'Outdoor Seating, Takeout', 'restaurant/2.jpg', 'Experience the finest at Restaurant B.'),
+('456789012345', 'Restaurant C', '456-789-0123', '789 Oak Street', 'Apt 3', '08:30:00', '17:30:00', NULL, NULL, 'Tue', 'Delivery, Bar', 'restaurant/3.jpg', 'Discover the flavors of Restaurant C.'),
+('654321098765', 'Restaurant D', '654-321-0987', '987 Maple Avenue', 'Floor 4', '07:00:00', '16:00:00', '12:00:00', '13:00:00', 'Wed', 'Private Dining, Live Music', 'restaurant/4.jpg', 'Indulge in the ambiance of Restaurant D.'),
+('987012345678', 'Restaurant E', '987-012-3456', '321 Cedar Street', 'Unit 5', '11:30:00', '21:30:00', NULL, NULL, 'Thu', 'Vegetarian Options, Outdoor Seating', 'restaurant/5.jpg', 'Experience a delightful journey at Restaurant E.');
 
  -- reservation 테이블
 INSERT INTO reservation (m_idx, r_personnel, r_status, r_date, res_idx)
@@ -74,6 +74,7 @@ public class AssignmentVO { // 양도테이블
     private int r_idx; // 예약번호
     private String r_date; // 예약 날짜 및 시간
     private String res_name; // 가게명
+    private String res_photo; // 가게 사진
     
     // json으로 변환
     public String toJson() {
