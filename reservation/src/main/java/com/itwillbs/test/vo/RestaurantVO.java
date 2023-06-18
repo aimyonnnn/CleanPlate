@@ -20,15 +20,14 @@ CREATE TABLE restaurant (
 	res_intro VARCHAR(100) NOT NULL COMMENT '가게소개글'
 );
 
-// 검색 테스트용 샘플 데이터
-INSERT INTO restaurant (res_brn, res_name, res_tel, res_address, res_detailAddress, res_open, res_close, res_breakstart, res_breakend, res_holiday, res_amenity, res_photo, res_intro)
-VALUES
-  ('1234567890', '레스토랑1', '010-1234-5678', '서울특별시 강남구', '강남로 123번길', '09:00', '21:00', '13:00', '14:00', '월', '와인 바', 'restaurant1.jpg', '레스토랑1 소개'),
-  ('2345678901', '레스토랑2', '010-2345-6789', '서울특별시 강서구', '강서로 456번길', '08:30', '20:30', NULL, NULL, '화', '야외 테라스', 'restaurant2.jpg', '레스토랑2 소개'),
-  ('3456789012', '레스토랑3', '010-3456-7890', '서울특별시 종로구', '종로로 789번길', '10:00', '22:00', '14:00', '15:00', '수', '키즈 코너', 'restaurant3.jpg', '레스토랑3 소개'),
-  ('4567890123', '레스토랑4', '010-4567-8901', '서울특별시 송파구', '송파로 1234번길', '07:30', '19:30', NULL, NULL, '목', NULL, 'restaurant4.jpg', '레스토랑4 소개'),
-  ('5678901234', '레스토랑5', '010-5678-9012', '서울특별시 강동구', '강동로 2345번길', '09:30', '21:30', '12:30', '13:30', '금', '주차장', 'restaurant5.jpg', '레스토랑5 소개'),
-  ('6789012345', '레스토랑6', '010-6789-0123', '서울특별시 마포구', '마포로 3456번길', '08:00', '20:00', NULL, NULL, '토', '바다 전망', 'restaurant6.jpg', '레스토랑6 소개')
+// 샘플 데이터
+INSERT INTO restaurant (res_brn, res_name, res_tel, res_address, res_detailAddress, res_open, res_close, res_breakstart, res_breakend, res_holiday, res_amenity, res_photo, res_intro) VALUES
+('123456789012', 'Restaurant A', '123-456-7890', '123 Main Street', 'Unit 1', '09:00:00', '18:00:00', '13:00:00', '14:00:00', 'Sun', 'WiFi, Parking', 'photo_a.jpg', 'Welcome to Restaurant A!'),
+('987654321098', 'Restaurant B', '987-654-3210', '456 Elm Street', 'Suite 2', '10:00:00', '20:00:00', NULL, NULL, 'Mon', 'Outdoor Seating, Takeout', 'photo_b.jpg', 'Experience the finest at Restaurant B.'),
+('456789012345', 'Restaurant C', '456-789-0123', '789 Oak Street', 'Apt 3', '08:30:00', '17:30:00', NULL, NULL, 'Tue', 'Delivery, Bar', 'photo_c.jpg', 'Discover the flavors of Restaurant C.'),
+('654321098765', 'Restaurant D', '654-321-0987', '987 Maple Avenue', 'Floor 4', '07:00:00', '16:00:00', '12:00:00', '13:00:00', 'Wed', 'Private Dining, Live Music', 'photo_d.jpg', 'Indulge in the ambiance of Restaurant D.'),
+('987012345678', 'Restaurant E', '987-012-3456', '321 Cedar Street', 'Unit 5', '11:30:00', '21:30:00', NULL, NULL, 'Thu', 'Vegetarian Options, Outdoor Seating', 'photo_e.jpg', 'Experience a delightful journey at Restaurant E.');
+
 
 */
 @Data

@@ -251,9 +251,9 @@
                 <div class="card-body">
                   <h5 class="card-title"><!-- 가게 이름 -->${'${data.res_name}'}</h5>
                   <p class="card-content ellipsis"><!-- 가게소개 -->${'${data.res_intro}'}</p>
-                  <p class="card-address"><!-- 주소 -->${'${data.res_address}'} ${'${data.res_detailAddress}'}</p>
-                  <p class="card-address"><!-- 영업시간 -->${'${data.res_open}'}~${'${data.res_close}'}</p>
-                  <button type="button" class="btn btn-warning btn-chat w-100" id="reservationButton" onclick="location.href='<c:url value='reservationReserve'/> '">예약하기</button>
+                  <p>주소 : ${'${data.res_address}'} ${'${data.res_detailAddress}'}</p>
+                  <p>영업 시간 : ${'${data.res_open}'}~${'${data.res_close}'}</p>
+                  <button type="button" class="btn btn-warning btn-chat w-100" id="reservationButton" onclick="location.href='<c:url value='reservationReserve'/>'">예약하기</button>
                 </div>
               </div>
             </div> `;
@@ -263,111 +263,85 @@
        }
        
        </script>
-        
-        <script>
-        	// 검색 버튼 클릭 시 <input>의 식당 이름을 가져와서 ajax요청 후 실시간 출력하기
-        	// 한글자 입력할 때 마다 조회됨!
-        	$(()=>{
-        		
-        		$('#restaurantName').on('input', () => {
-        			var resName = $('#restaurantName').val();
-        			console.log(resName);
-        			
-        			 $.ajax({
-        	                url: '<c:url value="/getRestaurantName"/>',
-        	                type: 'POST',
-        	                dataType: 'json',
-        	                data: {
-        	                  name: resName
-        	                },
-        	                success: function(response) {
-        	                console.log(response);
-        	                
-        	                let card = $('#shopList');
-        	                card.empty();
-        	                
-        	                $.each(response, (index, data) => {
-        	     	        console.log(data);
-        	     	           
-       	     	            let template = `<div class="col-md-4 mt-5" data-aos="fade-up" data-aos-anchor-placement="center-bottom">
-       	     				               <div class="card">
-       	     				                 <img src="https://via.placeholder.com/200" class="card-img-top">
-       	     				                 <div class="card-body">
-       	     				                   <h5 class="card-title"><!-- 가게 이름 -->${'${data.res_name}'}</h5>
-       	     				                   <p class="card-content ellipsis"><!-- 가게소개 -->${'${data.res_intro}'}</p>
-       	     				                   <p class="card-address"><!-- 주소 -->${'${data.res_address}'}</p>
-       	     				                   <p class="card-address"><!-- 영업시간 -->${'${data.res_open}'} ~ ${'${data.res_close}'}</p>
-       	     				                   <button type="button" class="btn btn-warning btn-chat w-100" id="reservationButton" onclick="location.href='<c:url value='/'/> '">예약하기</button>
-       	     				                 </div>
-       	     				               </div>
-       	     				             </div> `;
-       	     				             
-       	     	            card.append(template);
-        	     	         });
-        	                
-        	                },
-        	                error: function(xhr, status, error) {
-        	                  alert('AJAX 요청이 실패하였습니다.', error);
-        	             	}
-        	            });
-        			
-        		}); // click
-        		
-        	}); // ready
-       	
-        </script>
       
       <!-- row 시작 --> 
       <div class="row container-fluid w-100" id="shopList">
       		  
-			  <!-- 샘플 데이터 입니다. 페이지 로드시에만 보여지는 곳 -->
 			  <!-- 반복문으로 양도게시판 리스트 출력 시작 -->
-			  <div class="col-md-4 mt-5" data-aos="fade-up" data-aos-anchor-placement="center-bottom">
-			    <div class="card">
-			      <img src="https://via.placeholder.com/200" class="card-img-top" alt="Item Image">
-			      <div class="card-body">
-			        <h5 class="card-title"><!-- 식당 이름 -->La Finest</h5>
-			        <p class="card-content ellipsis"><!-- 식당 소개 --><span>프렌치 레스토랑으로, 고급스러운 분위기와 정교한 프렌치 요리를 즐길 수 있습니다.</span></p>
-			        <p class="card-address"><!-- 주소  -->부산진구 서면대로123</p>
-			        <p><span class="card-open"><!-- 영업 시작 시간 -->09:00</span> ~ <span class="card-close">20:00<!-- 영업 마감 시간 --></span></p>
-				    <button type="button" class="btn btn-warning btn-chat w-100" id="contactButton" onclick="location.href='<c:url value=""/>'">예약하기</button>
-			      </div>
-			    </div>
-			  </div>
-			  <div class="col-md-4 mt-5" data-aos="fade-up" data-aos-anchor-placement="center-bottom">
-			    <div class="card">
-			      <img src="https://via.placeholder.com/200" class="card-img-top" alt="Item Image">
-			      <div class="card-body">
-			        <h5 class="card-title"><!-- 식당 이름 -->LEssorée</h5>
-			        <p class="card-content ellipsis"><!-- 식당 소개 --><span>동남아시아 요리에 특화된 고급 다이닝 레스토랑으로, 태국, 인도네시아, 베트남 등 동남아시아의 다채로운 맛을 경험할 수 있습니다.</span></p>
-			        <p class="card-address"><!-- 주소  -->부산진구 서면대로123</p>
-			        <p><span class="card-open"><!-- 영업 시작 시간 -->09:00</span> ~ <span class="card-close">20:00<!-- 영업 마감 시간 --></span></p>
-				    <button type="button" class="btn btn-warning btn-chat w-100" id="contactButton" onclick="location.href='<c:url value=""/>'">예약하기</button>
-			      </div>
-			    </div>
-			  </div>
-			  <div class="col-md-4 mt-5" data-aos="fade-up" data-aos-anchor-placement="center-bottom">
-			    <div class="card">
-			      <img src="https://via.placeholder.com/200" class="card-img-top" alt="Item Image">
-			      <div class="card-body">
-			        <h5 class="card-title"><!-- 식당 이름 -->Le Jardin</h5>
-			        <p class="card-content ellipsis"><!-- 식당 소개 --><span>프랑스의 정원을 연상시키는 아름다운 실내 정원 레스토랑으로, 신선한 재료와 아름다운 분위기가 특징입니다.</span></p>
-			        <p class="card-address"><!-- 주소  -->부산진구 서면대로123</p>
-			        <p><span class="card-open"><!-- 영업 시작 시간 -->09:00</span> ~ <span class="card-close">20:00<!-- 영업 마감 시간 --></span></p>
-				    <button type="button" class="btn btn-warning btn-chat w-100" id="contactButton" onclick="location.href='<c:url value=""/>'">예약하기</button>
-			      </div>
-			    </div>
-			  </div>
+			  <c:forEach var="restaurant" items="${restaurantList}">
+				  <div class="col-md-4 mt-5" data-aos="fade-up" data-aos-anchor-placement="center-bottom">
+				    <div class="card">
+				      <img src="https://via.placeholder.com/200" class="card-img-top" alt="Item Image">
+				      <div class="card-body">
+				        <h5 class="card-title"><!-- 가게 이름 -->${restaurant.res_name}</h5>
+				        <p class="card-content ellipsis"><!-- 가게 소개 -->${restaurant.res_intro}</p>
+				        <p>주소 : ${restaurant.res_address}</p>
+				        <p>영업 시간 : ${restaurant.res_open} ~ ${restaurant.res_close}</p>
+				        <button type="button" class="btn btn-warning btn-chat w-100" id="contactButton" onclick="location.href='<c:url value='reservationReserve'/>'">예약하기</button>
+				      </div>
+				    </div>
+				  </div>
+			 </c:forEach>
+	        <!-- 반복문으로 양도게시판 리스트 출력 끝 -->
 			  
-        <!-- row 끝 -->
-        </div> 
-        <!-- 반복문으로 양도게시판 리스트 출력 끝 -->
+        </div><!-- row 끝 --> 
 			
-			
+	 <!-- 실시간 검색을 위한 ajax 요청 -->		
+	 <script>
+      	// 검색 버튼 클릭 시 <input>의 식당 이름을 가져와서 ajax 요청 후 실시간 출력하기
+      	// 한글자 입력할 때 마다 조회됨!
+      	$(()=>{
+      		
+      		$('#restaurantName').on('input', () => {
+      			var resName = $('#restaurantName').val();
+      			console.log(resName);
+      			
+      			 $.ajax({
+      	                url: '<c:url value="/getRestaurantName"/>',
+      	                type: 'POST',
+      	                dataType: 'json',
+      	                data: {
+      	                  name: resName
+      	                },
+      	                success: function(response) {
+      	                console.log(response);
+      	                
+      	                let card = $('#shopList');
+      	                card.empty();
+      	                
+      	                $.each(response, (index, data) => {
+      	     	        console.log(data);
+      	     	           
+     	     	            let template = `<div class="col-md-4 mt-5" data-aos="fade-up" data-aos-anchor-placement="center-bottom">
+     	     				               <div class="card">
+     	     				                 <img src="https://via.placeholder.com/200" class="card-img-top">
+     	     				                 <div class="card-body">
+     	     				                   <h5 class="card-title"><!-- 가게 이름 -->${'${data.res_name}'}</h5>
+     	     				                   <p class="card-content ellipsis"><!-- 가게소개 -->${'${data.res_intro}'}</p>
+     	     				                   <p>주소 : ${'${data.res_address}'}</p>
+     	     				                   <p>영업 시간 : ${'${data.res_open}'} ~ ${'${data.res_close}'}</p>
+     	     				                   <button type="button" class="btn btn-warning btn-chat w-100" id="reservationButton" 
+     	     				                	 onclick="location.href='<c:url value='reservationReserve'/>'">예약하기</button>
+     	     				                 </div>
+     	     				               </div>
+     	     				             </div> `;
+     	     				             
+     	     	            card.append(template);
+      	     	         });
+      	                
+      	                },
+      	                error: function(xhr, status, error) {
+      	                  alert('AJAX 요청이 실패하였습니다.', error);
+      	             	}
+      	            });
+      			
+      		}); // click
+      		
+      	}); // ready
+        </script>		
 	
 	
-	<!-- container 끝 -->
-	</div> 
+	</div><!-- container 끝 -->
 	
 	<!-- 하단 여백을 주기 위한 div 박스 -->
 	<div style="height: 300px; width: 100%"></div>

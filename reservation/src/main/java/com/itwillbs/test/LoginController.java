@@ -55,10 +55,9 @@ public class LoginController {
 	 // 로그인 버튼 클릭 시
 	   @PostMapping("loginPro")
 	   public String loginMain(
-			   String id, String passwd,
-			   boolean rememberId, boolean keepLoggedIn,
-	           HttpServletRequest request, HttpServletResponse response,
-	           Model model) {
+			   @RequestParam String id, @RequestParam String passwd,
+			   boolean rememberId, boolean keepLoggedIn, Model model,
+	           HttpServletRequest request, HttpServletResponse response) {
 	   
        // 1. id, passwd를 확인한다. => 일치하지 않을 시 로그인폼 리다이렉트
 	   MemberVO member = service.isCorrectUser(id, passwd);
@@ -89,7 +88,7 @@ public class LoginController {
        // 4. 로그인 유지를 체크한 경우
        if (keepLoggedIn) {
            Cookie keepLoggedInCookie = new Cookie("keepLoggedIn", id);
-           keepLoggedInCookie.setMaxAge(7 * 24 * 60 * 60); // 쿠키 유효기간을 7일로 설정
+           keepLoggedInCookie.setMaxAge(7 * 24 * 60 * 60);
            response.addCookie(keepLoggedInCookie);
        } else {
           Cookie cookie = new Cookie("keepLoggedIn", "");

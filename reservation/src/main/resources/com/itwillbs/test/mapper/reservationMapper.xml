@@ -3,13 +3,13 @@
 
 <mapper namespace="com.itwillbs.test.mapper.ReservationMapper">
 	
-	<!-- 예약 검색 페이지 식당 이름 실시간 검색 -->
+	<!-- Reservation탭의 식당 이름 검색하기 -->
 	<select id="selectRestaurantName" resultType="com.itwillbs.test.vo.RestaurantVO">
 		select * from
 			 restaurant where
 			  	res_name like CONCAT('%',#{resName},'%')
 	</select>
-	<!-- 예약 검색 페이지 식당 이름 실시간 검색 -->
+	<!-- Reservation탭의 식당 이름 검색하기 -->
 	
 	<!-- 전체 식당 조회 -->
 	<select id="selectRestaurantList" resultType="com.itwillbs.test.vo.RestaurantVO">
@@ -18,13 +18,13 @@
 	</select>
 	<!-- 전체 식당 조회 -->
 	
-	<!-- 양도 거래 완료 시 예약테이블 판매자 예약 내역을 구매자로 업데이트 처리 -->
+	<!-- 양도 거래 완료 시 예약테이블의 판매자 예약 내역을 구매자로 업데이트 처리 -->
 	<update id="updateReservation" parameterType="map">
 		  UPDATE reservation
 			  SET m_idx = (SELECT m_idx FROM members WHERE m_id = #{sId}),
 			      r_status = 4
 					 WHERE r_idx = #{r_idx}
 	</update>
-	<!-- 양도 거래 완료 시 예약테이블 판매자 예약 내역을 구매자로 업데이트 처리 -->
+	<!-- 양도 거래 완료 시 예약테이블의 판매자 예약 내역을 구매자로 업데이트 처리 -->
 
 </mapper>

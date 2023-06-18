@@ -45,8 +45,8 @@ public class ReservationController {
 		return "reservation/reservation_result";
 	}
 	
-	// 예약 검색 페이지 식당 이름 실시간 검색
-	// 한글자 입력할때마다 조회됨
+	// Reservation탭의 식당 이름 검색하기
+	// 글자 하나 입력할 때 마다 실시간으로 조회됨
 	@PostMapping("getRestaurantName")
 	@ResponseBody
 	public List<RestaurantVO> getRestaurantName(@RequestParam("name") String resName, Model model) {
