@@ -21,6 +21,12 @@ public class OwnerController {
 	@Autowired
 	private ReservationService resService;
 	
+	// 가게 매출관리 DashBoard
+	@GetMapping("storeDashBoard")
+	public String storeDashBoard() {
+		return "owner/storeDashBoard";
+	}
+	
 	/* 예약관리 페이지 */
 	//owner의 예약관리 페이지 이동 Mapping
 	@GetMapping("StoreReservation")
