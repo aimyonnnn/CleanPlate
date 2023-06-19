@@ -71,7 +71,6 @@
 	    </otherwise>
 	  </choose>
 	</select>
-	<!-- 양도 게시판 로그인 세션id 구분 -->
 	
 	<!-- 카카오 로그인 시 회원 email을 조회 후 m_id를 리턴받아 세션id에 저장 -->
 	<select id="selectMemberId" resultType="com.itwillbs.test.vo.MemberVO">
@@ -79,6 +78,5 @@
 			members
 				where m_email = #{email}
 	</select>
-	<!-- 카카오 로그인 시 회원 email을 조회 후 m_id를 리턴받아 세션id에 저장 -->
 	
 </mapper>

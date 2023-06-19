@@ -3,23 +3,21 @@
 
 <mapper namespace="com.itwillbs.test.mapper.LoginMapper">
 		
-		<!-- 로그인 시 id, passwd 조회하기 시작 -->
+		<!-- 로그인 시 id, passwd 조회하기 -->
 		<select id="isCorrectUser" resultType="String">
 		-- select * from members where m_id = 'test' and m_passwd = '테스트';
 		    select m_passwd 
 		    	from members
 		    		where m_id = #{id}
 		</select>
-		<!-- 로그인 시 id, passwd 조회하기 시작 -->
 		
-		<!-- 카카오 이메일로 로그인 시 email 조회하기 시작-->
+		<!-- 카카오 이메일로 로그인 시 email 조회하기 -->
 		<select id="isCorrectKakaoUser"  resultType="com.itwillbs.test.vo.MemberVO"> 
 		-- select * from members where m_email = '카카오 로그인 이메일';
 		   select *
 		   		from members
 		   			where m_email = #{email}
 		</select>
-		<!-- 카카오 이메일로 로그인 시 email 조회하기 끝-->
 		
 				<!-- 아이디/비밀번호 찾기 -->
 		<!-- 일반회원 아이디 찾기 -->

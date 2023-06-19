@@ -3,13 +3,12 @@
 
 <mapper namespace="com.itwillbs.test.mapper.RestaurantMapper">
 
-    <!-- 가게이름으로 가게 정보 조회하기 -->
+    <!-- Reservation 탭의 가게 정보 조회하기 -->
 	<select id="selectRestaurantInfo" resultType="com.itwillbs.test.vo.RestaurantVO">
 		select * from
 			restaurant
-				where res_name = #{res_name}		
+				where res_idx = #{res_idx}		
 	</select>
- 	<!-- 가게이름으로 가게 정보 조회하기 -->
 
 
 

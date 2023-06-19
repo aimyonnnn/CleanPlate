@@ -9,14 +9,12 @@
 			 restaurant where
 			  	res_name like CONCAT('%',#{resName},'%')
 	</select>
-	<!-- Reservation탭의 식당 이름 검색하기 -->
 	
 	<!-- 전체 식당 조회 -->
 	<select id="selectRestaurantList" resultType="com.itwillbs.test.vo.RestaurantVO">
 		select * from
 			restaurant
 	</select>
-	<!-- 전체 식당 조회 -->
 	
 	<!-- 점주 식당 조회 -->
 	<select id="selectOwnerRestaurantList" resultType="com.itwillbs.test.vo.RestaurantVO">

@@ -10,7 +10,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
-    <title>Assignment</title>
+    <title>reservation_main</title>
     
     <!-- AOS 라이브러리 -->
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
@@ -202,7 +202,6 @@
 		    <button type="button" class="btn btn-warning mx-2" id="storeName">가게이름순</button>
 		    <button type="button" class="btn btn-warning mx-2" id="openEarly">오픈시간순</button>
 		    <button type="button" class="btn btn-warning mx-2" id="reservationMany">예약많은순</button>
-		    <button type="button" class="btn btn-warning mx-2" id="priceHigh">가격높은순</button>
 		    <button type="button" class="btn btn-warning mx-2" id="reviewMany">평점순</button>
 		  </div>
 		</div>
@@ -230,7 +229,7 @@
       $('#openEarly').click(() => {
 	  restaurantList.sort((a, b) => {
 	      // a.res_open과 b.res_open을 시간 형식(HH:MM)으로 비교하여 오름차순 정렬
-	      return a.res_open.localeCompare(b.res_open, undefined, { numeric: true });
+	      return a.res_openinghours.localeCompare(b.res_openinghours, undefined, { numeric: true });
 	  });
 		  console.log(restaurantList);
 	      appendList(restaurantList);
@@ -247,14 +246,14 @@
          
        let template = `<div class="col-md-4 mt-5" data-aos="fade-up" data-aos-anchor-placement="center-bottom">
               <div class="card">
-              <img src="${pageContext.request.contextPath}/resources/images/${'${data.res_photo}'}" class="card-img-top" alt="Item Image">
+              <img src="${pageContext.request.contextPath}/resources/images/${'${data.res_photo1}'}" class="card-img-top" alt="Item Image">
                 <div class="card-body">
                   <h5 class="card-title"><!-- 가게 이름 -->${'${data.res_name}'}</h5>
                   <p class="card-content ellipsis"><!-- 가게소개 -->${'${data.res_intro}'}</p>
                   <p>주소 : ${'${data.res_address}'} ${'${data.res_detailAddress}'}</p>
-                  <p>영업 시간 : ${'${data.res_open}'}~${'${data.res_close}'}</p>
+                  <p>영업 시간 : ${'${data.res_openinghours}'}</p>
                   <button type="button" class="btn btn-warning btn-chat w-100" id="reservationButton"
-                	  onclick="goToReservationReserve('${"${data.res_name}"}')">예약하기</button>
+                	  onclick="goToReservationReserve('${"${data.res_idx}"}')">예약하기</button>
                 </div>
               </div>
             </div> `;
@@ -272,13 +271,13 @@
 			  <c:forEach var="restaurant" items="${restaurantList}">
 				  <div class="col-md-4 mt-5" data-aos="fade-up" data-aos-anchor-placement="center-bottom">
 				    <div class="card">
-				      <img src="${pageContext.request.contextPath }/resources/images/${restaurant.res_photo}" class="card-img-top" alt="Item Image">
+				      <img src="${pageContext.request.contextPath }/resources/images/${restaurant.res_photo1}" class="card-img-top" alt="Item Image">
 				      <div class="card-body">
 				        <h5 class="card-title"><!-- 가게 이름 -->${restaurant.res_name}</h5>
 				        <p class="card-content ellipsis"><!-- 가게 소개 -->${restaurant.res_intro}</p>
-				        <p>주소 : ${restaurant.res_address}</p>
-				        <p>영업 시간 : ${restaurant.res_open} ~ ${restaurant.res_close}</p>
-				        <button type="button" class="btn btn-warning btn-chat w-100" id="contactButton" onclick="goToReservationReserve('${restaurant.res_name}')">예약하기</button>
+				        <p>주소 : ${restaurant.res_address} ${data.res_detailAddress}</p>
+				        <p>영업 시간 : ${restaurant.res_openinghours}</p>
+				        <button type="button" class="btn btn-warning btn-chat w-100" id="contactButton" onclick="goToReservationReserve('${restaurant.res_idx}')">예약하기</button>
 				      </div>
 				    </div>
 				  </div>
@@ -315,14 +314,14 @@
       	     	           
      	     	            let template = `<div class="col-md-4 mt-5" data-aos="fade-up" data-aos-anchor-placement="center-bottom">
      	     				               <div class="card">
-     	     				            	<img src="${pageContext.request.contextPath}/resources/images/${'${data.res_photo}'}" class="card-img-top" alt="Item Image">
+     	     				            	<img src="${pageContext.request.contextPath}/resources/images/${'${data.res_photo1}'}" class="card-img-top" alt="Item Image">
      	     				                 <div class="card-body">
      	     				                   <h5 class="card-title"><!-- 가게 이름 -->${'${data.res_name}'}</h5>
      	     				                   <p class="card-content ellipsis"><!-- 가게소개 -->${'${data.res_intro}'}</p>
      	     				                   <p>주소 : ${'${data.res_address}'}</p>
-     	     				                   <p>영업 시간 : ${'${data.res_open}'} ~ ${'${data.res_close}'}</p>
+     	     				                   <p>영업 시간 : ${'${data.res_openinghours}'}</p>
      	     				                   <button type="button" class="btn btn-warning btn-chat w-100" id="reservationButton" 
-     	     				                	 onclick="goToReservationReserve('${"${data.res_name}"}')">예약하기</button>
+     	     				                	 onclick="goToReservationReserve('${"${data.res_idx}"}')">예약하기</button>
      	     				                 </div>
      	     				               </div>
      	     				             </div> `;
@@ -342,10 +341,11 @@
         </script>		
 		
 		<script>
-		 <!-- 가게명 클릭 시 가게 상세정보 페이지로 이동 -->
-  	     <!-- 가게명 클릭 시 resName을 서버로 전달하여 해당 가게의 정보를 가져옴 -->
-  	     function goToReservationReserve(res_name) {
-  		    location.href = "<c:url value='/getRestaurantInfo'/>?res_name=" + res_name;
+		
+		 <!-- AssignmentController-->
+		 <!-- 예약하기 클릭 시 가게 상세정보 페이지로 이동 -->
+  	     function goToReservationReserve(res_idx) {
+  		    location.href = "<c:url value='/getRestaurantInfo'/>?res_idx=" + res_idx;
   	     }
 		</script>
 	

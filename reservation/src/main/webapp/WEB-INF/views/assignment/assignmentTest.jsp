@@ -22,41 +22,46 @@
  <h1>${restaurantInfo.res_name}</h1>
  
 	<table border="1">
-	  <tr>
-	    <th>res_idx</th>
-	    <th>res_brn</th>
-	    <th>res_name</th>
-	    <th>res_tel</th>
-	    <th>res_address</th>
-	    <th>res_detailAddress</th>
-	    <th>res_open</th>
-	    <th>res_close</th>
-	    <th>res_breakstart</th>
-	    <th>res_breakend</th>
-	    <th>res_holiday</th>
-	    <th>res_amenity</th>
-	    <th>res_photo</th>
-	    <th>res_intro</th>
-	  </tr>
-	  <tr>
-	    <td>${restaurantInfo.res_idx}</td>
-	    <td>${restaurantInfo.res_brn}</td>
-	    <td>${restaurantInfo.res_name}</td>
-	    <td>${restaurantInfo.res_tel}</td>
-	    <td>${restaurantInfo.res_address}</td>
-	    <td>${restaurantInfo.res_detailAddress}</td>
-	    <td>${restaurantInfo.res_open}</td>
-	    <td>${restaurantInfo.res_close}</td>
-	    <td>${restaurantInfo.res_breakstart}</td>
-	    <td>${restaurantInfo.res_breakend}</td>
-	    <td>${restaurantInfo.res_holiday}</td>
-	    <td>${restaurantInfo.res_amenity}</td>
-	    <td>${restaurantInfo.res_photo}</td>
-	    <td>${restaurantInfo.res_intro}</td>
-	  </tr>
-	</table>
+    <tr>
+        <th>res_idx</th>
+        <th>res_brn</th>
+        <th>res_name</th>
+        <th>res_tel</th>
+        <th>res_address</th>
+        <th>res_detailAddress</th>
+        <th>res_openinghours</th>
+        <th>res_breaktime</th>
+        <th>res_dayoff</th>
+        <th>res_amenity</th>
+        <th>res_amenity_info</th>
+        <th>res_photo1</th>
+        <th>res_photo2</th>
+        <th>res_photo3</th>
+        <th>res_intro</th>
+        <th>c_idx</th>
+    </tr>
+    <tr>
+        <td>${restaurantInfo.res_idx}</td>
+        <td>${restaurantInfo.res_brn}</td>
+        <td>${restaurantInfo.res_name}</td>
+        <td>${restaurantInfo.res_tel}</td>
+        <td>${restaurantInfo.res_address}</td>
+        <td>${restaurantInfo.res_detailAddress}</td>
+        <td>${restaurantInfo.res_openinghours}</td>
+        <td>${restaurantInfo.res_breaktime}</td>
+        <td>${restaurantInfo.res_dayoff}</td>
+        <td>${restaurantInfo.res_amenity}</td>
+        <td>${restaurantInfo.res_amenity_info}</td>
+        <td>${restaurantInfo.res_photo1}</td>
+        <td>${restaurantInfo.res_photo2}</td>
+        <td>${restaurantInfo.res_photo3}</td>
+        <td>${restaurantInfo.res_intro}</td>
+        <td>${restaurantInfo.c_idx}</td>
+    </tr>
+</table>
+
   	
   	<p>사진 출력 테스트</p>
-  	<img src="${pageContext.request.contextPath }/resources/images/${restaurantInfo.res_photo}">
+  	<img src="${pageContext.request.contextPath }/resources/images/${restaurantInfo.res_photo1}">
 </body>
 </html>

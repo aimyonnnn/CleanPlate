@@ -44,20 +44,19 @@ public class AssignmentController {
       
       // 양도 리스트 전체 조회
        List<AssignmentVO> assignmentList = assignmentService.getAssignmentList();
-//       System.out.println(assignmentList);
 
        model.addAttribute("assignmentList", assignmentList);
        
        return "assignment/assignment";
    }
    
-   // 양도 동의하기
+   // 채팅방 동의하기
    @GetMapping("/assignAgree")
    public String login() {
       return "assignment/assignAgree";
    }
    
-   // 채팅방 입장
+   // 채팅방 입장하기
    @PostMapping("/assignAgreePro")
    public String loginProcess(@RequestParam String id, HttpServletRequest request) {
       logger.info("Welcome "+id);
@@ -137,78 +136,17 @@ public class AssignmentController {
        return response;
    }
    
-   // 가게이름으로 가게 정보 조회하기
-   // 양도 게시판에서 가게이름 클릭 시 가게 상세 정보 페이지로 이동
+   // Reservation 탭의 가게 정보 조회하기
    @GetMapping("getRestaurantInfo")
-   public String getRestaurantInfo(@RequestParam String res_name, Model model) {
+   public String getRestaurantInfo(@RequestParam String res_idx, Model model) {
 	   
-       RestaurantVO restaurantInfo = restaurantService.getRestaurantInfo(res_name);
+       RestaurantVO restaurantInfo = restaurantService.getRestaurantInfo(res_idx);
        
        model.addAttribute("restaurantInfo", restaurantInfo);
        
-       return "assignment/assignmentTest";
+       return "reservation/reservation_store";
    }
-   
-
-   
-   
-   
-   
-// =======================================================================================================
-//   // 가게이름으로 가게 정보 조회하기
-//   // 양도 게시판에서 가게이름 클릭 시 가게 상세 정보 페이지로 이동
-//   @GetMapping("getRestaurantInfo")
-//   @ResponseBody
-//   public RestaurantVO getRestaurantInfo(@RequestParam String res_name, Model model) {
-//	   
-//	   System.out.println("getRestaurantInfo");
-//	   System.out.println(res_name);
-//	   
-//	   RestaurantVO restaurantInfo = restaurantService.getRestaurantInfo(res_name);
-//	   
-//	   model.addAttribute("restaurantInfo", restaurantInfo);
-//	   
-//	   return restaurantInfo; 
-//   }
-//   
-//   // 가게이름 출력 테이스 페이지
-//   @GetMapping("assignmentTest")
-//   public String assignmentTest() {
-//	   return "assignment/assignmentTest";
-//   }
-// =======================================================================================================
-//   // 결제 취소 테스트
-//   @PostMapping("assignCancle")
-//   @ResponseBody
-//   public Map<String, Object> assignCancle(
-//           @RequestParam String merchant_uid,
-//           @RequestParam String cancel_request_amount,
-//           Model model) {
-//       System.out.println("assignCancle");
-//       
-//       // 파라미터 출력 테스트
-//       // merchant_uid : ORD20230615-0000001, cancel_request_amount : 99.95
-//       System.out.println("merchant_uid: " + merchant_uid +
-//               ", cancel_request_amount: " + cancel_request_amount);
-//
-//       model.addAttribute("merchant_uid", merchant_uid);
-//       model.addAttribute("cancel_request_amount", cancel_request_amount);
-//
-//       // 환불 금액 DB에 저장
-//       // 양도하는 사람의 예약 내역 삭제 처리
-//       // 양도받는 사람의 예약 내역으로 인서트
-//       // 양도상태를 거래완료로 변경 
-//
-////       saveRefundAmount(merchant_uid, cancel_request_amount);
-//       
-//       Map<String, Object> response = new HashMap<>();
-//       response.put("status", "success");
-//       response.put("message", "환불 요청이 성공적으로 처리되었습니다.");
-//       response.put("merchant_uid", merchant_uid);
-//       response.put("cancel_request_amount", cancel_request_amount);
-//
-//       return response;
-//   }
+ 
    
    
 }
