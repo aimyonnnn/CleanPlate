@@ -50,13 +50,6 @@ public class OwnerController {
 		return "owner/store_Reservation";
 	}
 	
-	/* 리뷰관리 페이지 */
-	//owner의 리뷰관리및 편집 페이지 이동 Mapping
-	@GetMapping("StoreReservationEdit")
-	public String StoreReservationEdit() {
-		return "owner/store_ReservationEdit";
-	}
-	
 	/* 매출관리 페이지 */
 	//그래프
 	@GetMapping("ownerSalesGraph")
@@ -159,19 +152,13 @@ public class OwnerController {
 	
 	//owner의 점주회원탈퇴 페이지로 이동 Mapping
 	@GetMapping("ownerWithdrawal")
-	public String CeoMypageDelete() {
+	public String ownerWithdrawal() {
 		return "owner/ownerWithdrawal";
-	}
-	
-	//owner의 점주회원탈퇴 입력 정보 가지고 이동 Mapping
-	@PostMapping("CeoMypageDeletePro")
-	public String CeoMypageDeletePro() {
-		return "main";
 	}
 	
 	//owner의 점주정보 페이지로 이동 Mapping
 	@PostMapping("ownerInfo")
-	public String ceoMypageInfo() {
+	public String ownerInfo() {
 		return "owner/ownerInfo";
 	}
 	
