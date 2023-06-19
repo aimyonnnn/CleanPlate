@@ -225,11 +225,11 @@
 	                                </script>
                                 
                             </tr>
-						    <!-- 영업 시간 끝 -->
-<!-- 						    <tr> -->
-<!-- 						    	<th scope="row">하루 예약 인원수</th> -->
-<!-- 						    	<td><input type="text" class="form-control" name="res_headcount" placeholder="숫자만 입력"  onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"></td> -->
-<!-- 						    </tr> -->
+						    영업 시간 끝
+						    <tr>
+						    	<th scope="row">하루 예약 인원수</th>
+						    	<td><input type="text" class="form-control" name="res_headcount" placeholder="숫자만 입력"  onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"></td>
+						    </tr>
 						    <tr>
                                 <th scope="row">정기휴무일</th> <!-- select box -->
 						    	<td>
