@@ -33,10 +33,16 @@ public class ReservationController {
 		return "reservation/reservation_main";
 	}
 	
+	// 가게 상세 페이지
+	@GetMapping("reservationStore")
+	public String reservationStore() {
+		return "reservation/reservation_store";
+	}
+	
 	// 예약 페이지
 	@GetMapping("reservationReserve")
 	public String reservationReserve() {
-		return "reservation/reservation_store";
+		return "reservation/reservation_reserve";
 	}
 	
 	// 결제 후 예약 내역 페이지
