@@ -2,13 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.example.mapper.LikeInfoMapper">
-    <insert id="toggleLikeStatus" parameterType="com.itwillbs.test.vo.LikeInfoVO">
-	<!-- toggleLikeStatus 작업을 수행할 구문쓰기 -->
-        INSERT INTO like_info (restaurant_idx, member_id, liked)
-        VALUES (#{restaurantIdx}, #{memberId}, #{liked})
-    <!-- 이미 눌러서 존재하는 경우 해당 키의 liked 값을 반전 -->    
-        ON DUPLICATE KEY UPDATE liked = NOT liked    
+<mapper namespace="com.itwillbs.test.mapper.LikeInfoMapper">
+    <insert id="toggleLikeStatus" parameterType="java.util.Map">
+        INSERT INTO like_info (res_idx, m_id, liked)
+        VALUES (#{res_idx}, #{m_id}, #{liked})
     </insert>
-
 </mapper>

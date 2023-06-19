@@ -7,6 +7,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Clean Plate</title>
+    
+   	<!-- 공통 상단바 구역 -->
+	<%@ include file="../common/common_header.jsp" %>
+   	<!-- 공통 상단바 구역 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <!-- 이부분은 지우면 안됩니다 -->
     <script type="text/javascript" src="/assets/global/js/jquery.bxslider.min.js"></script>
@@ -28,12 +32,46 @@
     </style>
 
     <!-- 위로가기 버튼 CSS -->
+    
+<script>
+  $(document).ready(function() {
+
+    $("#likeBtn").click(function() {
+      var rex_idx = "10001";
+      var m_id = "member1";
+      var liked="false";
+
+          $.ajax({
+            url: '${pageContext.request.contextPath }/toggleLikeStatus',
+            type: 'GET',
+            data: {'rex_idx': rex_idx, 'm_id': m_id, 'liked':liked},
+            async: false,
+            success: function(response) {
+              if (response == "ok") {
+                window.location.reload(true);
+                alert("ok");
+              } else {
+                alert("not ok");
+              }
+            },
+            error: function() {
+              alert("error");
+            }
+          });
+
+          var isLiked = true; 
+
+            if (isLiked) {
+                $("#likeBtn").removeClass("liked").addClass("unliked");
+             } else {
+                $("#likeBtn").removeClass("unliked").addClass("liked");
+             }
+    });
+  });
+  </script>
+    
 </head>
 <body>
-   	<!-- 공통 상단바 구역 -->
-	<%@ include file="../common/common_header.jsp" %>
-   	<!-- 공통 상단바 구역 -->
-   	
    	<!-- 위로 가기 버튼 -->
    	<button id="go-top"><svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor"
 	  class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16">
@@ -100,6 +138,9 @@
 	<!-- 가게 메인 소개 끝 -->
 	<hr>
 	
+	<!-- 찜하기 버튼 -->
+	  <button id="likeBtn" class="unliked">찜하기</button>
+	<!-- 찜하기 버튼 -->  
 	<!-- 가게 정보 -->
 	<div>
 		<table class="table">
