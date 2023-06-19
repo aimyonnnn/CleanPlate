@@ -11,9 +11,17 @@
 	<!-- com.zaxxer.hikari 패키지의 HikariConfig 클래스 지정 및 속성 설정 -->
 	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
 		<property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
-		<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/CleanPlate"></property>
-		<property name="username" value="root"></property>
+		
+		<!-- 서버 -->
+		<property name="jdbcUrl" value="jdbc:mysql://itwillbs.com:3306/c5d2302t2"></property>
+		<property name="username" value="c5d2302t2"></property>
 		<property name="password" value="1234"></property>
+		
+		<!-- 집에서 따로 작업하고 싶을 땐 밑에꺼 주석 풀고 사용 -->
+<!-- 		<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/CleanPlate"></property> -->
+<!-- 		<property name="username" value="root"></property> -->
+<!-- 		<property name="password" value="1234"></property> -->
+
 	</bean>
 	
 	<!-- 2. HikariCP를 통해 커넥션을 관리하는 DataSource 객체 설정(HikariConfig 객체 전달)  -->
