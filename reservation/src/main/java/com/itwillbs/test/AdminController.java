@@ -42,7 +42,7 @@ public class AdminController {
 		return "admin/adminReservation";
 	}
 	
-	// 관리자의 양도 관리 페이지로 이동 (아직 미구현)
+	// 관리자의 양도 관리 페이지로 이동
 	@GetMapping("adminAssignment")
 	public String adminAssignment() {
 		return "admin/adminAssignment";
