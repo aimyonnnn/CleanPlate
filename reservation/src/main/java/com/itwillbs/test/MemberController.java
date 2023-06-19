@@ -92,12 +92,6 @@ public class MemberController {
 		return "payment/payments";
 	}
 	
-	// 관리자 페이지 이동(임시)
-	@GetMapping("admin")
-	public String adminMain() {
-		return "admin/adminMain";
-	}
-	
 	// 예약 내역 클릭시 
 	@GetMapping("memberRSList")
 	public String memberRSList() {

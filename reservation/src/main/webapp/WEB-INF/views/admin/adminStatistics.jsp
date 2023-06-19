@@ -9,7 +9,7 @@
 	<link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
     <title>admin statistics</title>
-    <link href="adminDetail.css" rel="stylesheet" type="text/css"/>
+    <link href="${pageContext.request.contextPath }/resources/css/adminDetail.css" rel="stylesheet" type="text/css"/>
     <link rel="shortcut icon" href="#">
   </head>
   <body>
@@ -21,7 +21,7 @@
 
       <div class="sidebar-main"> 
         <div class="sidebar-user">
-            <img src="adminProfile.png">
+            <img src="${pageContext.request.contextPath }/resources/images/adminProfile.png">
           <div>
             <h3>관리자</h3>
             <span>CleanPlate AdminPage</span>
@@ -34,19 +34,19 @@
             </div>
             <ul>
               <li>
-                <a href="#">
+                <a href="./">
                   <span class="las la-chart-pie"></span>
                   홈페이지
                 </a>
               </li>
               <li>
-                <a href="adminMain.jsp">
+                <a href="adminMain">
                   <span class="las la-chart-pie"></span>
                   관리자 메인
                 </a>
               </li>
               <li>
-                <a href="adminStatistics.jsp">
+                <a href="adminStatistics">
                   <span class="las la-history"></span>
                   사이트 이용 통계
                 </a>
@@ -58,25 +58,25 @@
           </div>
           <ul>
             <li>
-                <a href="adminMember.jsp">
+                <a href="adminMember">
                  <span class="las la-users"></span>
                  회원 관리
                  </a>
             </li>
             <li>
-                <a href="adminStore.jsp">
+                <a href="adminStore">
                  <span class="las la-chair"></span>
                  가게 관리
                  </a>
              </li>
              <li>
-                <a href="adminReservation.jsp">
+                <a href="adminReservation">
                   <span class="las la-history"></span>
                   예약 관리
                 </a>
              </li>
             <li>
-              <a href="adminAssignment.jsp">
+              <a href="adminAssignment">
                   <span class="las la-walking"></span>
                  양도 관리
               </a>
