@@ -24,4 +24,11 @@
 			SET c_passwd = #{c_passwd}
 			WHERE c_id = #{c_id} AND c_name = #{c_name}
 	</update>
+	
+	<select id="selectCeo" parameterType="String" resultType="String">
+	    select c_passwd
+	    	from ceo
+	    		where c_id = #{id}
+	</select>
+	
 </mapper>

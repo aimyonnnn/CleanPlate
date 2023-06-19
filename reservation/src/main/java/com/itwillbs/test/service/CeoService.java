@@ -21,4 +21,8 @@ public class CeoService {
 	public int randomPassword(CeoVO ceoResult) {
 		return mapper.updatePasswdCeo(ceoResult);
 	}
+	
+	public String isCorrectCeo(String id) {
+		return mapper.selectCeo(id);
+	}
 }

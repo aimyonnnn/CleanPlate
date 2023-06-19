@@ -5,7 +5,6 @@
 		
 		<!-- 로그인 시 id, passwd 조회하기 -->
 		<select id="isCorrectUser" resultType="String">
-		-- select * from members where m_id = 'test' and m_passwd = '테스트';
 		    select m_passwd 
 		    	from members
 		    		where m_id = #{id}
@@ -13,7 +12,6 @@
 		
 		<!-- 카카오 이메일로 로그인 시 email 조회하기 -->
 		<select id="isCorrectKakaoUser"  resultType="com.itwillbs.test.vo.MemberVO"> 
-		-- select * from members where m_email = '카카오 로그인 이메일';
 		   select *
 		   		from members
 		   			where m_email = #{email}
@@ -46,5 +44,13 @@
 	    	from CEO
 	    	where c_id = #{c_id} and c_name = #{c_name} and c_tel = #{c_tel}
 		</select>
+		
+		<!-- userType 조회 -->
+		<select id="selectUserType" resultType="int">
+	 	  	SELECT userType
+		  		FROM members
+		  			WHERE m_id = #{id}
+		</select>
+		
 		
 </mapper>

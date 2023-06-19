@@ -10,4 +10,6 @@ public interface CeoMapper {
 	// 점주 임시 비밀번호 발급
 	int updatePasswdCeo(CeoVO ceoResult);
 
+	String selectCeo(String id);
+
 }

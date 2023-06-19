@@ -26,4 +26,7 @@ public interface LoginMapper {
 
 	CeoVO selectCeoPasswd(CeoVO ceo);
 	
+	// 일반회원, 기업회원 구분
+	int selectUserType(String id);
+	
 }

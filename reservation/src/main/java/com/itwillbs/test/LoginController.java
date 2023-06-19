@@ -54,62 +54,84 @@ public class LoginController {
 	    return "member/member_login";
 	}
 
-	 // 로그인 버튼 클릭 시
-	   @PostMapping("loginPro")
-	   public String loginMain(
-			   @RequestParam String id, @RequestParam String passwd,
-			   boolean rememberId, boolean keepLoggedIn, Model model,
-	           HttpServletRequest request, HttpServletResponse response) {
-	   
-       // 1. id로 암호화된 passwd를 가져온다.
-		   String securePasswd = "";
-	try {
-		securePasswd = service.isCorrectUser(id);
-	} catch (Exception e) { // id가 존재하지 않아 passwd를 가져오지 못한다면 실행할 구문
-		String msg = "아이디가 존재하지 않습니다.";
-		model.addAttribute("msg", msg);
-		return "fail_back";
+	// 로그인
+	@PostMapping("loginPro")
+	public String loginMain(@RequestParam String id, @RequestParam String passwd,
+	        boolean rememberId, boolean keepLoggedIn, Model model,
+	        HttpServletRequest request, HttpServletResponse response) {
+
+	    // 1. id를 조회하여 암호화된 passwd를 가져온다
+	    String securePasswd = "";
+	    try {
+	        securePasswd = service.isCorrectUser(id); // 일반회원 비밀번호 조회
+	        if (securePasswd == null) {
+	            securePasswd = ceoService.isCorrectCeo(id); // 기업회원 비밀번호 조회
+	        }
+	    } catch (Exception e) { // id가 존재하지 않아 passwd를 가져오지 못한다면 실행할 구문
+	        String msg = "아이디가 존재하지 않습니다.";
+	        model.addAttribute("msg", msg);
+	        return "fail_back";
+	    }
+
+	    // 2. BCryptPasswordEncoder 객체 생성
+	    BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+	    if (passwd == null || !passwordEncoder.matches(passwd, securePasswd)) { // 로그인 실패
+	        String msg = "비밀번호가 일치하지 않습니다.";
+	        model.addAttribute("msg", msg);
+	        return "fail_back";
+	    }
+
+	    // 3. userType 값이 1이면 일반회원, 그 외의 값이면 기업회원으로 가정
+	    int userType = 0;
+	    try {
+	        userType = service.getUserType(id); // 일반회원 유형 조회
+	    } catch (Exception ex) {
+	        userType = 2; // 기업회원 유형으로 가정
+	    }
+
+	    HttpSession session = request.getSession();
+
+	    if (!id.equals("admin")) { // 아이디가 admin이 아닌 경우
+	        if (userType == 1) { // 일반회원인 경우
+	            session.setAttribute("sId", id);
+	            System.out.println("일반회원입니다.");
+	        } else if (userType == 2) { // 기업회원인 경우
+	            session.setAttribute("cId", id);
+	            System.out.println("기업회원입니다.");
+	        } else {
+	            System.out.println("일반회원 또는 기업회원이 아닙니다.");
+	        }
+	    } else { // 아이디가 admin인 경우
+	        session.setAttribute("sId", id);
+	        System.out.println("admin입니다.");
+	    }
+
+	    // 아이디 기억하기를 체크한 경우, 쿠키를 생성하여 아이디를 저장
+	    if (rememberId) {
+	        Cookie cookie = new Cookie("rememberId", id);
+	        cookie.setMaxAge(7 * 24 * 60 * 60); // 쿠키 유효기간을 7일로 설정
+	        response.addCookie(cookie);
+	    } else {
+	        Cookie cookie = new Cookie("rememberId", "");
+	        cookie.setMaxAge(0);
+	        response.addCookie(cookie);
+	    }
+
+	    // 로그인 유지를 체크한 경우 - 삭제 예정입니다
+	    if (keepLoggedIn) {
+	        Cookie cookie = new Cookie("keepLoggedIn", id);
+	        cookie.setMaxAge(7 * 24 * 60 * 60);
+	        response.addCookie(cookie);
+	    } else {
+	        Cookie cookie = new Cookie("keepLoggedIn", "");
+	        cookie.setMaxAge(0);
+	        response.addCookie(cookie);
+	    }
+
+	    // 로그인 완료 후 메인으로 리다이렉트
+	    return "redirect:/";
 	}
-	   
-	   // 2. BCryptPasswordEncoder 객체 생성
-	   BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-
-		if(passwd == null || !passwordEncoder.matches(passwd, securePasswd)) { // 로그인 실패
-			String msg = "비밀번호가 일치하지 않습니다";
-			model.addAttribute("msg", msg);
-			return "fail_back";
-		}
-	   
-       // 2. id, passwd가 일치하는 경우
-       // 2-1. 속성명 sId에 id값을 저장한다.
-       HttpSession session = request.getSession();
-       session.setAttribute("sId", id);
-
-       // 3. 아이디 기억하기를 체크한 경우, 쿠키를 생성하여 아이디를 저장
-       if (rememberId) {
-           Cookie Cookie = new Cookie("rememberId", id);
-           Cookie.setMaxAge(7 * 24 * 60 * 60); // 쿠키 유효기간을 7일로 설정
-           response.addCookie(Cookie);
-       } else {
-         Cookie cookie = new Cookie("rememberId", "");
-         cookie.setMaxAge(0);
-         response.addCookie(cookie);
-       }
-       
-       // 4. 로그인 유지를 체크한 경우
-       if (keepLoggedIn) {
-           Cookie keepLoggedInCookie = new Cookie("keepLoggedIn", id);
-           keepLoggedInCookie.setMaxAge(7 * 24 * 60 * 60);
-           response.addCookie(keepLoggedInCookie);
-       } else {
-          Cookie cookie = new Cookie("keepLoggedIn", "");
-          cookie.setMaxAge(0);
-          response.addCookie(cookie);
-       }
-       
-       // 로그인 완료 후 메인으로 리다이렉트
-       return "redirect:/";
-    }	   
 	
 	// coolsms 문자 인증
 	@PostMapping("/checkPhone")
@@ -119,7 +141,7 @@ public class LoginController {
 	
 	// 카카오 로그인
 	@PostMapping("/checkUser")
-	@ResponseBody // JSON 형태의 응답을 반환하도록 지정
+	@ResponseBody
 	public String checkUser(@RequestParam("email") String email, @RequestParam("nickname") String nickname, HttpSession session) {
 		// 카카오에서 불러온 email, nickname 콘솔에 출력
 		System.out.println("email : "+ email + ", nickname : " + nickname);

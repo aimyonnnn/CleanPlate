@@ -75,6 +75,11 @@ public class LoginService {
 		return mapper.selectCeoPasswd(ceo);
 	}
 	
+	// 일반회원, 기업회원 구분
+	public int getUserType(String id) {
+		return mapper.selectUserType(id);
+	}
+	
 	
 	
 }
