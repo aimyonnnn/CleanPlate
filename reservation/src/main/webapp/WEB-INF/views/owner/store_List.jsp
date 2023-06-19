@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -70,27 +71,18 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>000-00-00000</td>
-                                <td>동백키친</td>
-                                <td>010-1234-5678</td>
-                                <td>부산 부산진구 동천로107번길</td>
-                                <td><button type="button" class="btn btn-warning" style="color: white;" onclick="location.href='StoreUpdatePage'">수정</button></td>
-                            </tr>
-                            <tr>
-                            	<td>000-00-00000</td>
-                                <td>동백키친</td>
-                                <td>010-1234-5678</td>
-                                <td>부산 부산진구 동천로107번길</td>
-                                <td><button type="button" class="btn btn-warning" style="color: white;" onclick="location.href='StoreUpdatePage'">수정</button></td>
-                            </tr>
-                            <tr>
-                            	<td>000-00-00000</td>
-                                <td>동백키친</td>
-                                <td>010-1234-5678 </td>
-                                <td>부산 부산진구 동천로107번길</td>
-                                <td><button type="button" class="btn btn-warning" style="color: white;" onclick="location.href='StoreUpdatePage'">수정</button></td>
-                            </tr>
+                        
+                   			<c:forEach var="restaurant" items="${restaurantList }">
+	                        	<tr>
+	                                <td>${restaurant.res_brn }</td>
+	                                <!-- 가게명 클릭시 가게 상세정보 페이지로 이동 -->
+	                                <td><a href='#'>${restaurant.res_name }</a></td>
+	                                <td>${restaurant.res_tel }</td>
+	                                <td>${restaurant.res_address } ${restaurant.res_detailAddress }</td>
+	                                <!-- 수정 버튼 클릭시 파라미터로 사업자번호 전달 -->
+	                                <td><button type="button" class="btn btn-warning" style="color: white;" onclick="location.href='StoreUpdatePage?res_brn=${restaurant.res_brn}'">수정</button></td>
+	                        	</tr>
+	                        </c:forEach>
                         </tbody>
                     </table> 
                 </div>

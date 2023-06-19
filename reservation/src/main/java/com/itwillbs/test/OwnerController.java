@@ -7,8 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.*;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import com.itwillbs.test.service.*;
 import com.itwillbs.test.vo.*;
@@ -83,16 +82,73 @@ public class OwnerController {
 	public String StoreInsertPage() {
 		return "owner/store_InsertPage";
 	}
-	//owner의 식당수정로 이동 Mapping
-	@GetMapping("StoreUpdatePage")
-	public String StoreUpdatePage() {
-		return "owner/store_UpdatePage";
+	
+	// 가게 추가 클릭시 가게등록 작업
+	@PostMapping("storeInsertPro")
+	public String storeInsertPro(RestaurantVO restaurant, Model model) {
+		System.out.println(restaurant);
+		
+		int insertCount = service.registStore(restaurant);
+		
+		// 성공시 storeInsertSucess 리다이렉트 
+		// 실패시 fail_back.jsp 가게등록 실패 출력
+		if(insertCount > 0) {
+			
+			return "redirect:/storeInsertSucess";
+		} else {
+			
+			model.addAttribute("msg", "가게 등록 실패!");
+			return "fail_back";
+		}
 	}
+	
+	// 가게 등록 성공시 StoreList로 리다이렉트
+	@GetMapping("storeInsertSucess")
+	public String storeInsertSucess() {
+		return "redirect:/StoreList";
+	}
+	
 	//owner의 식당리스트로 이동 Mapping
+	// 가게 목록 조회
 	@GetMapping("StoreList")
-	public String StoreList() {
+	public String StoreList(Model model) {
+		List<RestaurantVO> restaurantList = service.getRestaurantList();
+		model.addAttribute("restaurantList", restaurantList);
 		return "owner/store_List";
 	}
+	
+	//owner의 가게 수정 페이지로 이동 Mapping
+	@GetMapping("StoreUpdatePage")
+	public String StoreUpdatePage(@RequestParam String res_brn, Model model) {
+		
+		// 가게 상세 정보 저장
+		RestaurantVO restaurant = service.getRestaurantInfo(res_brn);
+		
+		model.addAttribute("restaurant", restaurant);
+		return "owner/store_UpdatePage";
+	}
+	// 가게 정보 수정 작업
+	@PostMapping("storeUpdate")
+	public String storeUpdate(RestaurantVO restaurant, Model model) {
+		
+		// 가게 정보 수정
+		int updateCount = service.ModifyRestaurant(restaurant);
+		// 성공시  success_forward.jsp 로 이동 가게 정보 수정 완료 출력
+		// 실패시 가게 정보 수정 실패! 출력
+		if(updateCount > 0) {
+			model.addAttribute("msg", "가게 정보 수정 완료");
+			model.addAttribute("targetURL", "StoreList");
+			return "success_forward";
+			
+		} else {
+			model.addAttribute("msg", "가게 정보 수정 실패!");
+			return "fail_back";
+			
+		}
+		
+		
+	}
+	
 	
 	//owner의 식당마이페이지에서 수정후 이동 Mapping
 	@PostMapping("StoreMypagePro")
@@ -131,30 +187,7 @@ public class OwnerController {
 		return "owner/ceo_Info";
 	}
 	
-	// 가게 추가 클릭시 가게등록 작업
-	@PostMapping("storeInsertPro")
-	public String storeInsertPro(RestaurantVO restaurant, Model model) {
-		System.out.println(restaurant);
-		
-		int insertCount = service.registStore(restaurant);
-		
-		// 성공시 storeInsertSucess 리다이렉트 
-		// 실패시 fail_back.jsp 가게등록 실패 출력
-		if(insertCount > 0) {
-			
-			return "redirect:/storeInsertSucess";
-		} else {
-			
-			model.addAttribute("msg", "가게 등록 실패!");
-			return "fail_back.jsp";
-		}
-	}
-	
-	@GetMapping("storeInsertSucess")
-	public String storeInsertSucess() {
-		return "owner/store_List";
-	}
-	
+
 	
 	
 }

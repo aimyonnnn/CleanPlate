@@ -27,5 +27,17 @@ public class StoreService {
 	public List<Reservation_DetailVO> getRDList(String sId) {
 		return mapper.selectRDList(sId);
 	}
+	// 가게 목록 조회
+	public List<RestaurantVO> getRestaurantList() {
+		return mapper.selectRestaurantList();
+	}
+	// 가게 정보 조회
+	public RestaurantVO getRestaurantInfo(String res_brn) {
+		return mapper.selectRestaurant(res_brn);
+	}
+	// 가게 수정
+	public int ModifyRestaurant(RestaurantVO restaurant) {
+		return mapper.updateRestaurant(restaurant);
+	}
 
 }

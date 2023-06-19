@@ -16,4 +16,10 @@ public interface StoreMapper {
 
 	List<Reservation_DetailVO> selectRDList(String sId);
 
+	List<RestaurantVO> selectRestaurantList();
+
+	RestaurantVO selectRestaurant(String res_brn);
+
+	int updateRestaurant(RestaurantVO restaurant);
+
 }

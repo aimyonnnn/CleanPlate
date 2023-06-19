@@ -10,6 +10,7 @@
 				, #{res_brn}
 				, #{res_name}
 				, #{res_tel}
+				, #{res_postcode}
 				, #{res_address}
 				, #{res_detailAddress}
 				, #{res_open}
@@ -47,5 +48,38 @@
 						)
 			);
 	</select>
+	
+	<select id="selectRestaurantList" resultType="com.itwillbs.test.vo.RestaurantVO">
+		SELECT * 
+			FROM restaurant
+	</select>
+	
+	<select id="selectRestaurant" resultType="com.itwillbs.test.vo.RestaurantVO">
+		SELECT * 
+			FROM restaurant
+				WHERE
+					res_brn = #{res_brn}
+	</select>
+	
+	<update id="updateRestaurant">
+		UPDATE restaurant
+			SET
+				res_brn = #{res_brn}
+				, res_name = #{res_name}
+				, res_tel = #{res_tel}
+				, res_postcode = #{res_postcode}
+				, res_address = #{res_address}
+				, res_detailAddress = #{res_detailAddress}
+				, res_open = #{res_open}
+				, res_close = #{res_close}
+				, res_breakstart = #{res_breakstart}
+				, res_breakend = #{res_breakend}
+				, res_holiday = #{res_holiday}
+				, res_amenity = #{res_amenity}
+				, res_photo = #{res_photo}
+				, res_intro = #{res_intro}
+					WHERE
+						res_brn = #{res_brn}
+	</update>	
 
 </mapper>

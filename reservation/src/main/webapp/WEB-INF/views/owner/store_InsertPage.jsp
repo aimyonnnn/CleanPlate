@@ -129,7 +129,7 @@
 								<td>
 								<!-- 다음 api 사용 -->
 								<div class="input-group mb-3">
-									<input type="text" id="postcode" class="form-control" placeholder="우편번호" aria-label="Recipient's username" aria-describedby="button-addon2">
+									<input type="text" id="postcode" class="form-control" name="res_postcode" placeholder="우편번호" aria-label="Recipient's username" aria-describedby="button-addon2">
 									<input type="button" onclick="DaumPostcode()" value="우편번호 찾기" class="btn btn-outline-secondary" id="button-addon2">
 								</div>									
                                 <input type="text" class="form-control" id="address" name="res_address" placeholder="주소" readonly>
@@ -226,6 +226,10 @@
                                 
                             </tr>
 						    <!-- 영업 시간 끝 -->
+<!-- 						    <tr> -->
+<!-- 						    	<th scope="row">하루 예약 인원수</th> -->
+<!-- 						    	<td><input type="text" class="form-control" name="res_headcount" placeholder="숫자만 입력"  onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"></td> -->
+<!-- 						    </tr> -->
 						    <tr>
                                 <th scope="row">정기휴무일</th> <!-- select box -->
 						    	<td>
@@ -437,7 +441,7 @@
 								</tr>
 								<tr>
 									<th>메뉴 가격</th>
-									<td><input type="text" pattern="" class="form-control" name="menu_price" placeholder="숫자만 입력"  onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"/></td>
+									<td><input type="text" class="form-control" name="menu_price" placeholder="숫자만 입력"  onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"></td>
 								</tr>
 								<tr>
 									<th>메뉴 설명</th>

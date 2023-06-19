@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,6 +19,27 @@
         
         // 사업자번호 입력시 자동으로 하이픈 생성
         $(document).ready(function () {
+           $(function () {
+                    
+                    $('#res_brn').keydown(function (event) {
+                     // 입력값 변수 지정
+                     // 브라우저가 charCode 속성을 지원하지 않는 경우 키 코드 (IE8 및 이전 버전)를 사용
+                     var input = event.charCode || event.keyCode || 0;
+                     $text = $(this); 
+                     if (input !== 8 && input !== 9) {
+                         if ($text.val().length == 3) { // 앞 3자리 되면 하이픈
+                             $text.val($text.val() + '-');
+                         }
+                         if ($text.val().length == 6) { // 가운데 2자리(앞,하이픈 포함 6자리) 되면 하이픈
+                             $text.val($text.val() + '-');
+                         }
+                     }
+                     // KeyCode아스키코드 8번 => Back Space 9번 => Horizontal Tab
+                     // 46번 => Delete 숫자 0~9 (48번~57번) 숫자키패드(96번~105번)외에는 입력불가
+                     return (input == 8 || input == 9 || input == 46 || 
+                                                (input >= 48 && input <= 57) || (input >= 96 && input <= 105));
+                 })
+           });
            
            
            // 전화번호 입력시 자동으로 하이픈 생성 
@@ -28,7 +51,7 @@
         
         });
           
-     </script>
+        </script>
 </head>
 <body>
 	<!-- 공통 상단바 구역 -->
@@ -75,27 +98,29 @@
             <!-- 내용 구역 -->
             <div class="col-10">
                 <!-- 가게내용 페이지 시작 -->
-                   <form action="#" method="post">
+                   <form action="storeUpdate" method="post">
                 	<table class="table" style="margin-left: 70px; width: 58%;">
 						<tbody>
                             <tr>
                                 <th scope="row"><label for="res_brn">사업자 번호</label></th>
                                 <td>
-                                     <!-- 사업자번호 변경 불가-->
-                                     <input class="form-control" type="text" readonly="readonly" value="사업자번호 변경불가">
+                                    <div class="input-group">
+                                    	<!-- 사업자번호 변경 불가-->
+                                        <input class="form-control" type="text" name="res_brn" id="res_brn" readonly="readonly" value="${restaurant.res_brn }">
+                                    </div>
                                 </td>
                             </tr>
 						    <tr>
-						    	<!-- 가게이름 글자수 제한 100자리 -->
+						    	<!-- 가게이름 변경불가? -->
 						    	<th scope="row" width="150"><label for="res_name">가게명</label></th>
-						    	<td><input class="form-control" type="text" readonly="readonly" value="가게명 변경불가"></td>
+						    	<td><input class="form-control" type="text" name="res_name" id="res_name" readonly="readonly" value="${restaurant.res_name}"></td>
 						    </tr>
                             <tr>
                             	<!-- 너무 빠르게 입력할 경우 인식불가 -->
                                 <th scope="row"><label for="res_tel">전화번호</label></th>
                                 <td>
                                       <div class="d-flex align-items-center">
-                                        <input class="form-control" type="text" name="res_tel" id="res_tel" maxlength="13" placeholder="'-'빼고 숫자만 입력">
+                                        <input class="form-control" type="text" name="res_tel" id="res_tel" value="${restaurant.res_tel}" maxlength="13" placeholder="'-'빼고 숫자만 입력">
                                     </div>
                                 </td>
                             </tr>
@@ -104,12 +129,12 @@
 								<td>
 								<!-- 다음 api 사용 -->
 								<div class="input-group mb-3">
-									<input type="text" id="postcode" class="form-control" placeholder="우편번호" aria-label="Recipient's username" aria-describedby="button-addon2">
+									<input type="text" id="postcode" name="res_postcode"class="form-control" placeholder="우편번호" aria-label="Recipient's username" aria-describedby="button-addon2" value="${restaurant.res_postcode}">
 									<input type="button" onclick="DaumPostcode()" value="우편번호 찾기" class="btn btn-outline-secondary" id="button-addon2">
 								</div>									
-                                <input type="text" class="form-control" id="address" name="res_address" placeholder="주소" readonly>
+                                <input type="text" class="form-control" id="address" name="res_address" placeholder="주소" readonly value="${restaurant.res_address}">
 								<div class="input-group mb-3 mt-2">
-                                    <input type="text" class="form-control" id="detailAddress" name="res_detailAddress" placeholder="상세주소"> 
+                                    <input type="text" class="form-control" id="detailAddress" name="res_detailAddress" placeholder="상세주소" value="${restaurant.res_detailAddress}"> 
 									<input type="text" class="form-control" id="extraAddress" placeholder="참고항목">
 								</div>
 								<!-- 우편번호 선택시(주소까지만 입력) 지도 표시 -->
@@ -122,13 +147,16 @@
 						    	<td>
 	                                <div class="row">
 	                                    <div class="col-6">
-	                                        <input class="form-control timepicker" type ="text" name="res_open1" id="res_open1"> <!-- 영업 시작 시간 -->
+	                                    	<!-- 영업 시작 시간 -->
+	                                        <input class="form-control timepicker" id="timepicker_open" type="text" name="res_open" value="${restaurant.res_open}"> 
 	                                    </div>
 	                                    <div class="col-6">
-	                                        <input class="form-control timepicker" type ="text" name="res_open2" id="res_open2"> <!-- 영업 마감 시간 -->
+	                                   		 <!-- 영업 마감 시간 -->
+	                                        <input class="form-control timepicker" id="timepicker_close" type="text" name="res_close" value="${restaurant.res_close}"> 
 	                                    </div>
 	
 	                                </div>
+	                                
 	                                <!-- 영업시간 24시간으로 표시하는 jQuery -->
 	                                <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 	                                <script type="text/javascript">
@@ -139,12 +167,17 @@
 			                                    minTime: '09', // 최소 시간
 			                                    maxTime: '22:00', // 최대 시간
 			                                    defaultTime: '09', // 기본값
-			                                    startTime: '09:00', // 시작시간
+// 			                                    startTime: '09:00', // 시작시간
 			                                    dynamic: true,
 			                                    dropdown: true,
 			                                    scrollbar: true
 			                                });
-		                                });   
+			                                
+// 			                                $('#timepicker_open').on('change', function() {
+// 			                                  $('#res_open').val($(this).val() + ":00");
+// 			                                });
+			                                
+		                                }); 
 	                                </script>
                             	</td>
 						    </tr>
@@ -152,11 +185,14 @@
                                 <th scope="row">브레이크타임</th> <!-- select box -->
                                 <td>
                                 	<div class="row">
-	                               	   <div class="col-6">
-	                                       <input class="form-control timepicker2" type ="text" name="res_break1" id="res_break1"> <!-- 브레이크 타임 시작 시간 -->
+	                               	   <div class="col-2">
+	                                	  <input type="checkbox" id="nobreak"> 없음
 	                                   </div>
-	                                   <div class="col-6">
-	                                       <input class="form-control timepicker2" type ="text" name="res_break2" id="res_break2"> <!-- 브레이크 타임 시작 시간 -->
+	                               	   <div class="col-5">
+	                                       <input class="form-control timepicker2" type ="text" name="res_breakstart" id="res_breakstart" value="${restaurant.res_breakstart}"> <!-- 브레이크 타임 시작 시간 -->
+	                                   </div>
+	                                   <div class="col-5">
+	                                       <input class="form-control timepicker2" type ="text" name="res_breakend" id="res_breakend" value="${restaurant.res_breakend}"> <!-- 브레이크 타임 시작 시간 -->
 	                                   </div>
                                     </div>
                                 </td>
@@ -169,11 +205,17 @@
 			                                    interval: 60, // 시간 간격
 			                                    minTime: '09', // 최소 시간
 			                                    maxTime: '22:00', // 최대 시간
-			                                    defaultTime: '09', // 기본값
-			                                    startTime: '09:00', // 시작시간
+// 			                                    defaultTime: '09', // 기본값
+// 			                                    startTime: '09:00', // 시작시간
 			                                    dynamic: true,
 			                                    dropdown: true,
 			                                    scrollbar: true
+			                                });
+			                                
+			                                // 체크 박스 선택시 브레이크타임 시간 null값으로 변경, disabled 상태로 바꿔주기
+			                                $("#nobreak").change(function() {
+			                                    var isChecked = $(this).is(":checked");
+			                                    $("#res_breakstart, #res_breakend").prop("disabled", isChecked).val(isChecked ? "" : null);
 			                                });
 		                                });   
 	                                </script>
@@ -184,15 +226,15 @@
                                 <th scope="row">정기휴무일</th> <!-- select box -->
 						    	<td>
                                     <div class="dropdown">
-                                        <select class="form-select form-select" aria-label=".form-select example" style="width: 180px;">
-											<option selected value="planToVisit">없음</option>
-											<option value="visited">월요일</option>
-											<option value="cancelNoshow">화요일</option>
-											<option value="cancelNoshow">수요일</option>
-											<option value="cancelNoshow">목요일</option>
-											<option value="cancelNoshow">금요일</option>
-											<option value="cancelNoshow">토요일</option>
-											<option value="cancelNoshow">일요일</option>
+                                        <select name="res_holiday" class="form-select form-select" aria-label=".form-select example" style="width: 180px;">
+											<option value="없음" <c:if test="${restaurant.res_holiday eq '없음' }">selected</c:if>>없음</option>
+											<option value="월요일" <c:if test="${restaurant.res_holiday eq '월요일' }">selected</c:if>>월요일</option>
+											<option value="화요일" <c:if test="${restaurant.res_holiday eq '화요일' }">selected</c:if>>화요일</option>
+											<option value="수요일" <c:if test="${restaurant.res_holiday eq '수요일' }">selected</c:if>>수요일</option>
+											<option value="목요일" <c:if test="${restaurant.res_holiday eq '목요일' }">selected</c:if>>목요일</option>
+											<option value="금요일" <c:if test="${restaurant.res_holiday eq '금요일' }">selected</c:if>>금요일</option>
+											<option value="토요일" <c:if test="${restaurant.res_holiday eq '토요일' }">selected</c:if>>토요일</option>
+											<option value="일요일" <c:if test="${restaurant.res_holiday eq '일요일' }">selected</c:if>>일요일</option>
 										</select>
 									</div>
                                 </td>
@@ -200,27 +242,33 @@
 						    <tr>
                                 <th scope="row">가게 편의 시설</th>
 						    	<td>
-									  <input class="form-check-input" type="checkbox" name="res_amenity" id="amenity">
+									  <input class="form-check-input" type="checkbox" name="res_amenity" id="amenity" value="단체석"
+									  <c:if test="${fn:contains(restaurant.res_amenity, '단체석')}">checked</c:if>>
 									  <label class="form-check-label" for="amenity">
 									    단체석
 									  </label>
-									  <input class="form-check-input" type="checkbox" name="res_amenity" id="amenity2">
+									  <input class="form-check-input" type="checkbox" name="res_amenity" id="amenity2" value="주차"
+									  <c:if test="${fn:contains(restaurant.res_amenity, '주차')}">checked</c:if>>
 									  <label class="form-check-label" for="amenity2">
 									    주차
 									  </label>
-									  <input class="form-check-input" type="checkbox" name="res_amenity" id="amenity3">
+									  <input class="form-check-input" type="checkbox" name="res_amenity" id="amenity3" value="발렛파킹"
+									  <c:if test="${fn:contains(restaurant.res_amenity, '발렛파킹')}">checked</c:if>>
 									  <label class="form-check-label" for="amenity3">
 									    발렛파킹
 									  </label> <br>
-									  <input class="form-check-input" type="checkbox" name="res_amenity" id="amenity4">
+									  <input class="form-check-input" type="checkbox" name="res_amenity" id="amenity4" value="예약"
+									  <c:if test="${fn:contains(restaurant.res_amenity, '예약')}">checked</c:if>>
 									  <label class="form-check-label" for="amenity4">
 									    예약
 									  </label>
-									  <input class="form-check-input" type="checkbox" name="res_amenity" id="amenity5">
+									  <input class="form-check-input" type="checkbox" name="res_amenity" id="amenity5" value="반려동물 동반"
+									  <c:if test="${fn:contains(restaurant.res_amenity, '반려동물 동반')}">checked</c:if>>
 									  <label class="form-check-label" for="amenity5">
 									    반려동물 동반
 									  </label>
-									  <input class="form-check-input" type="checkbox" name="res_amenity" id="amenity6">
+									  <input class="form-check-input" type="checkbox" name="res_amenity" id="amenity6" value="장애인 편의시설"
+									  <c:if test="${fn:contains(restaurant.res_amenity, '장애인 편의시설')}">checked</c:if>>
 									  <label class="form-check-label" for="amenity6">
 									    장애인 편의시설
 									  </label>
@@ -234,7 +282,7 @@
 							            <table class="table">
 							                <thead>
 							                  <tr>
-							                    <th scope="col" class="col-5">메뉴명</th>
+							                    <th scope="col" class="col-5">메뉴 이름</th>
 							                    <th scope="col" class="col-3">가격</th>
 							                    <th scope="col"></th>
 							                  </tr>
@@ -264,16 +312,16 @@
 						    </tr>
 						    <tr>
                                 <th scope="row"><label for="birth">가게사진</label></th>
-						    	<td><input type="file" class="form-control" style="color: white;"></td>
+						    	<td><input type="file" name="res_photo" class="form-control" style="color: white;" value="${restaurant.res_photo}" ></td>
 						    </tr>
                             <tr>
                                 <th scope="row"><label for="res_intro">가게소개</label></th>
-                                <td colspan="2"><textarea class="form-control" rows="5" cols="50" id="res_intro"></textarea></td>
+                                <td colspan="2"><textarea class="form-control" rows="5" cols="50" name="res_intro" id="res_intro" >${restaurant.res_intro}</textarea></td>
                             </tr>
 						  </tbody>
                 	</table>
 					<div style="margin-left:380px;">
-					    <button type="submit" class="btn btn-warning" style="color: white;">가게추가</button>
+					    <button type="submit" class="btn btn-warning" style="color: white;">가게수정</button>
 					</div>
 	
 					
@@ -381,25 +429,25 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
 		<!-- 메뉴 추가 내용 시작 -->
-		<form action="#" method="get">
+		<form action="menuInsert" method="post">
 	        <div class="modal-body">
 			         <div class="container d-flex justify-content-center p-3 modal-content border-0">
 							<table>
 								<tr>
 									<th>메뉴 이름</th>
-									<td><input type="text" class="form-control"></td>
+									<td><input type="text" class="form-control" name="menu_name"></td>
 								</tr>
 								<tr>
 									<th>메뉴 가격</th>
-									<td><input type="text" class="form-control" placeholder="숫자만 입력"></td>
+									<td><input type="text" pattern="" class="form-control" name="menu_price" placeholder="숫자만 입력"  onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"/></td>
 								</tr>
 								<tr>
 									<th>메뉴 설명</th>
-									<td><textarea rows="5" cols="30" class="form-control"></textarea></td>
+									<td><textarea rows="5" cols="30" class="form-control" name="menu_intro"></textarea></td>
 								</tr>
 								<tr>
 									<th>메뉴 사진</th>
-									<td><input type="file" class="form-control" multiple="multiple"></td>
+									<td><input type="file" name="menu_photo" class="form-control" multiple="multiple"></td>
 								</tr>
 							</table>
 					</div>
@@ -434,7 +482,9 @@
 						</tr>
 						<tr>
 							<th>메뉴 가격</th>
-							<td><input type="text" class="form-control" placeholder="숫자만 입력"></td>
+							<td>
+								<input type="text" class="form-control" placeholder="숫자만 입력" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"/>
+							</td>
 						</tr>
 						<tr>
 							<th>메뉴 설명</th>
