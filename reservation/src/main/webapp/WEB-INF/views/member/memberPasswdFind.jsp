@@ -28,7 +28,7 @@
 		<div class="col border border-warning p-4" style="border-radius: 5px;">
         	<h1 class="mt-3 text-start" style="border-radius: 5px; font-weight: normal; font-size: 30px; line-height:36px; letter-spacing: -3px;">${member.m_name } 회원님의 임시 비밀번호</h1>
             <div class="border border-warning m-5">
-                <h5 class="h5 m-4">${member.m_passwd }</h5>
+                <h5 class="h5 m-4">${RandomPasswd }</h5>
             </div>
      	</div>
 		</div>

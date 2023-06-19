@@ -4,11 +4,11 @@
 <mapper namespace="com.itwillbs.test.mapper.LoginMapper">
 		
 		<!-- 로그인 시 id, passwd 조회하기 시작 -->
-		<select id="isCorrectUser" resultType="com.itwillbs.test.vo.MemberVO">
+		<select id="isCorrectUser" resultType="String">
 		-- select * from members where m_id = 'test' and m_passwd = '테스트';
-		    select * 
+		    select m_passwd 
 		    	from members
-		    		where m_id = #{id} and m_passwd = #{passwd}
+		    		where m_id = #{id}
 		</select>
 		<!-- 로그인 시 id, passwd 조회하기 시작 -->
 		

@@ -46,9 +46,9 @@ public class LoginService {
 	// coolsms 문자연동 끝
 
 	// 로그인 시 id, passwd 조회하기
-	public MemberVO isCorrectUser(String id, String passwd) {
+	public String isCorrectUser(String id) {
 		System.out.println("LoginService");
-		return mapper.isCorrectUser(id, passwd);
+		return mapper.isCorrectUser(id);
 	}
 	
 	// 카카오 이메일로 로그인 시 email 조회하기

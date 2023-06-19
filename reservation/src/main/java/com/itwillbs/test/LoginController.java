@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.itwillbs.test.handler.MyPasswordEncoder;
 import com.itwillbs.test.service.CeoService;
 import com.itwillbs.test.service.LoginService;
 import com.itwillbs.test.service.MemberService;
@@ -59,12 +61,21 @@ public class LoginController {
 			   boolean rememberId, boolean keepLoggedIn, Model model,
 	           HttpServletRequest request, HttpServletResponse response) {
 	   
-       // 1. id, passwd를 확인한다. => 일치하지 않을 시 로그인폼 리다이렉트
-	   MemberVO member = service.isCorrectUser(id, passwd);
-	   System.out.println(member);
+       // 1. id로 암호화된 passwd를 가져온다.
+		   String securePasswd = "";
+	try {
+		securePasswd = service.isCorrectUser(id);
+	} catch (Exception e) { // id가 존재하지 않아 passwd를 가져오지 못한다면 실행할 구문
+		String msg = "아이디가 존재하지 않습니다.";
+		model.addAttribute("msg", msg);
+		return "fail_back";
+	}
+	   
+	   // 2. BCryptPasswordEncoder 객체 생성
+	   BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-		if(member == null) {
-			String msg = "아이디 또는 비밀번호가 일치하지 않습니다";
+		if(passwd == null || !passwordEncoder.matches(passwd, securePasswd)) { // 로그인 실패
+			String msg = "비밀번호가 일치하지 않습니다";
 			model.addAttribute("msg", msg);
 			return "fail_back";
 		}
@@ -147,6 +158,11 @@ public class LoginController {
 		public String memberJoinPro(MemberVO member, Model model) {
 			System.out.println("memberJoinPro");
 			
+			//암호화
+			MyPasswordEncoder passwordEncoder = new MyPasswordEncoder();
+			String securePasswd = passwordEncoder.getCryptoPassword(member.getM_passwd());
+			member.setM_passwd(securePasswd);
+			
 			int insertCount = memberService.registMember(member);
 			
 			if(insertCount == 0) { // 가입 실패 시 
@@ -161,6 +177,10 @@ public class LoginController {
 		@PostMapping("ceoJoinPro")
 		public String ceoJoinPro(CeoVO ceo, Model model) {
 			System.out.println("ceoJoinPro");
+			
+			MyPasswordEncoder passwordEncoder = new MyPasswordEncoder();
+			String securePasswd = passwordEncoder.getCryptoPassword(ceo.getC_passwd());
+			ceo.setC_passwd(securePasswd);
 			
 			int insertCount = ceoService.registCeo(ceo);
 			
@@ -209,6 +229,8 @@ public class LoginController {
 		public String memberPasswdFind(MemberVO membervo , Model model, @RequestParam int isVerify) {
 			System.out.println(membervo);
 			
+			isVerify = 1;
+			
 			// 전화번호 인증을 했는지 하지 않았는지 판별
 			if(isVerify != 1) {
 				model.addAttribute("msg", "전화번호 인증이 확인되지 않았습니다.");
@@ -225,16 +247,25 @@ public class LoginController {
 				model.addAttribute("msg", "입력하신 정보가 일치하지 않습니다.");
 				return "fail_back";
 			}
-			// 랜덤 비밀번호 생성
-			String RdPassword = generateRandomPassword();
-			System.out.println("Random Password: " + RdPassword);
+			// 랜덤 비밀번호 생성과 동시에 암호화
 			
-			membervo.setM_passwd(RdPassword);
+			String RandomPasswd = generateRandomPassword();
+			
+			MyPasswordEncoder passwordEncoder = new MyPasswordEncoder();
+			
+			String securePasswd = passwordEncoder.getCryptoPassword(RandomPasswd);
+			
+			membervo.setM_passwd(securePasswd);
 			
 			
 			int updateCount = memberService.randomPassword(membervo);
+			
+			if(updateCount <= 0) {
+				model.addAttribute("msg", "비밀번호 변경 실패");
+				return "fail_back";
+			}
 				
-			model.addAttribute("member",member);
+			model.addAttribute("RandomPasswd",RandomPasswd);
 			
 			return "member/memberPasswdFind";
 		}
@@ -289,15 +320,23 @@ public class LoginController {
 						return "fail_back";
 					}
 					// 랜덤 비밀번호 생성
-					String RdPassword = generateRandomPassword();
-					System.out.println("Random Password: " + RdPassword);
+					String RandomPasswd = generateRandomPassword();
 					
-					ceoResult.setC_passwd(RdPassword);
+					MyPasswordEncoder passwordEncoder = new MyPasswordEncoder();
+					
+					String securePasswd = passwordEncoder.getCryptoPassword(RandomPasswd);
+					
+					ceoResult.setC_passwd(securePasswd);
 					
 					
 					int updateCount = ceoService.randomPassword(ceoResult);
+					
+					if(updateCount <= 0) {
+						model.addAttribute("msg", "비밀번호 변경 실패");
+						return "fail_back";
+					}
 						
-					model.addAttribute("ceo",ceoResult);
+					model.addAttribute("RandomPasswd",RandomPasswd);
 					
 					return "member/ceoPasswdFind";
 				}

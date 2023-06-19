@@ -128,6 +128,14 @@
 		    <scope>provided</scope>
 		</dependency>	
 		
+		<!-- 6. 암호화에 사용할 BCryptPasswordEncoder 가 포함된 Spring-security-web 라이브러리 추가 -->
+		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-web -->
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-web</artifactId>
+		    <version>5.8.3</version>
+		</dependency>
+		
 		<!-- 아임포트 REST API연동 모듈 -->
 		<dependency>
    			<groupId>com.github.iamport</groupId>
