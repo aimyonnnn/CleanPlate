@@ -47,16 +47,16 @@
                 <!-- 왼쪽 사이드바 버튼들-->
                 <!-- 클릭된 버튼은 active 표시함-->
                 <div class="btn-group-vertical btn-group-lg d-flex align-self-start" role="group" aria-label="Vertical button group">
-                    <button type="button" class="btn btn-outline-warning active p-3" onclick="location.href='CeoMypage'">내 정보</button>
-                    <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='StoreList'">가게리스트 </button>
-                    <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='StoreReservation'">예약관리</button>
-                    <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='StoreSales'">매출관리</button>
-                    <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='CeoMypageDelete'">회원탈퇴</button>
+					<button type="button" class="btn btn-outline-warning active text-black p-3" onclick="location.href='ownerMypage'">내 정보</button>
+                    <button type="button" class="btn btn-outline-warning text-black p-3" onclick="location.href='ownerList'">가게리스트 </button>
+                    <button type="button" class="btn btn-outline-warning text-black p-3" onclick="location.href='StoreReservation'">예약관리</button>
+                    <button type="button" class="btn btn-outline-warning text-black p-3" onclick="location.href='ownerSalesGraph'">매출관리</button>
+                    <button type="button" class="btn btn-outline-warning text-black p-3" onclick="location.href='ownerWithdrawal'">회원탈퇴</button>
                 </div>
             </div>
             <!-- 내용 -->
             <div class="col-10">
-                <form action="ceoMypageInfo" method="post">
+                <form action="ownerInfo" method="post">
                     <div class="mb-3 row d-flex justify-content-center">
                         <label for="id" class="col-sm-2 col-form-label">아이디</label>
                         <div class="col-md-6">

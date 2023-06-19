@@ -58,22 +58,10 @@ public class OwnerController {
 	}
 	
 	/* 매출관리 페이지 */
-	//owner의 매출관리 페이지 이동 Mapping
-	@GetMapping("StoreSales")
-	public String StoreSales() {
-		return "owner/store_Sales";
-	}
-	
-	//owner의 매출관리및 편집 페이지 이동 Mapping
-	@GetMapping("StoreSalesinOut")
-	public String StoreSalesinOut() {
-		return "owner/store_SalesinOut";
-	}
-	
-	// 그래프
-	@GetMapping("storeSalesGraph")
+	//그래프
+	@GetMapping("ownerSalesGraph")
 	public String storeSalesGraph(){
-		return "owner/store_SalesGraph";
+		return "owner/ownerSalesGraph";
 	}
 	
 	/* 식당관리 페이지 */
@@ -110,11 +98,11 @@ public class OwnerController {
 	
 	//owner의 식당리스트로 이동 Mapping
 	// 가게 목록 조회
-	@GetMapping("StoreList")
+	@GetMapping("ownerList")
 	public String StoreList(Model model) {
 		List<RestaurantVO> restaurantList = service.getRestaurantList();
 		model.addAttribute("restaurantList", restaurantList);
-		return "owner/store_List";
+		return "owner/ownerList";
 	}
 	
 	//owner의 가게 수정 페이지로 이동 Mapping
@@ -153,26 +141,26 @@ public class OwnerController {
 	//owner의 식당마이페이지에서 수정후 이동 Mapping
 	@PostMapping("StoreMypagePro")
 	public String StoreMypagePro() {
-		return "owner/store_List";
+		return "owner/ownerList";
 	}
 	
 	/* 점주마이페이지 */
 	//owner의 점주마이페이지로 이동 Mapping
-	@GetMapping("CeoMypage")
+	@GetMapping("ownerMypage")
 	public String CeoMypage() {
-		return "owner/ceo_Mypage";
+		return "owner/ownerMypage";
 	}
 	
 	//owner의 점주마이페이지에서 수정후 이동 Mapping
 	@PostMapping("CeoMypagePro")
 	public String CeoMypagePro() {
-		return "owner/ceo_Mypage";
+		return "owner/ownerMypage";
 	}
 	
 	//owner의 점주회원탈퇴 페이지로 이동 Mapping
-	@GetMapping("CeoMypageDelete")
+	@GetMapping("ownerWithdrawal")
 	public String CeoMypageDelete() {
-		return "owner/ceo_MypageDelete";
+		return "owner/ownerWithdrawal";
 	}
 	
 	//owner의 점주회원탈퇴 입력 정보 가지고 이동 Mapping
@@ -182,9 +170,9 @@ public class OwnerController {
 	}
 	
 	//owner의 점주정보 페이지로 이동 Mapping
-	@PostMapping("ceoMypageInfo")
+	@PostMapping("ownerInfo")
 	public String ceoMypageInfo() {
-		return "owner/ceo_Info";
+		return "owner/ownerInfo";
 	}
 	
 
