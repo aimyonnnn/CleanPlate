@@ -275,7 +275,7 @@
 				      <div class="card-body">
 				        <h5 class="card-title"><!-- 가게 이름 -->${restaurant.res_name}</h5>
 				        <p class="card-content ellipsis"><!-- 가게 소개 -->${restaurant.res_intro}</p>
-				        <p>주소 : ${restaurant.res_address} ${data.res_detailAddress}</p>
+				        <p>주소 : ${restaurant.res_address} ${restaurant.res_detailAddress}</p>
 				        <p>영업 시간 : ${restaurant.res_openinghours}</p>
 				        <button type="button" class="btn btn-warning btn-chat w-100" id="contactButton" onclick="goToReservationReserve('${restaurant.res_idx}')">예약하기</button>
 				      </div>

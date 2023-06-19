@@ -14,12 +14,12 @@ public class AssignmentService {
 	@Autowired
 	private AssignmentMapper mapper;
 	
-	// 양도게시판 전체 리스트 조회하기
+	// 양도 게시판 출력
 	public List<AssignmentVO> getAssignmentList() {
 		return mapper.getAssignmentList();
 	}
 	
-	// 양도 테이블의 양도상태 컬럼을 2-거래완료로 변경하기
+	// 양도상태'2-거래완료'로 변경
 	public int updateStatus(int r_idx) {
 		return mapper.updateStatus(r_idx);
 	}

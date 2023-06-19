@@ -41,41 +41,40 @@ public class AssignmentController {
    
    @GetMapping("/assignment")
    public String getAssignment(Model model) {
-      
-      // 양도 리스트 전체 조회
+	   
+	   // 양도 게시판 출력 리스트
        List<AssignmentVO> assignmentList = assignmentService.getAssignmentList();
-
        model.addAttribute("assignmentList", assignmentList);
-       
        return "assignment/assignment";
+       
    }
    
-   // 채팅방 동의하기
+   // WebSocket - 동의
    @GetMapping("/assignAgree")
    public String login() {
       return "assignment/assignAgree";
    }
    
-   // 채팅방 입장하기
+   // WebSocket - 입장
    @PostMapping("/assignAgreePro")
    public String loginProcess(@RequestParam String id, HttpServletRequest request) {
       logger.info("Welcome "+id);
       return "assignment/assignmentChat";
    }
    
-   // 결제하기 - 바로구매 버튼 클릭 시
+   // 결제하기 버튼 클릭 시
    @GetMapping("assignmentPayment")
-   public String paymentForm(Model model,
-		   HttpSession session,
+   public String paymentForm(Model model, HttpSession session,
 		   @RequestParam("r_idx") int r_idx,
            @RequestParam("r_date") String r_date,
            @RequestParam("a_price") int a_price,
-           @RequestParam("res_name") String res_name,
-           @RequestParam("a_sellerId") String a_sellerId) {
+           @RequestParam("a_sellerId") String a_sellerId,
+           @RequestParam("res_name") String res_name) {
 	   
 	   System.out.println(a_sellerId);
-	  
+	   
 	   // 현재 세션에 저장된 id로 주문자 정보 조회하기
+	   // 기업회원은 구매 불가능!
 	   String sId = (String) session.getAttribute("sId");
 	   System.out.println(sId);
 	   
@@ -85,6 +84,7 @@ public class AssignmentController {
 	        return "fail_back";
 	    }
 	  
+	  // 주문자의 정보를 조회하여 폼에 입력
 	  MemberVO member = memberService.getMemberInfo(sId);
 	  System.out.println(member);
 	   
@@ -99,7 +99,7 @@ public class AssignmentController {
       
    }
    
-   // 예약내역 업데이트 하기
+   // 예약내역 업데이트
    // 예약 테이블의 회원번호를 구매자의 회원번호로 업데이트 및 예약상태 컬럼을 '4-양도' 변경함
    @PostMapping("/assignUpdate")
    @ResponseBody
@@ -123,27 +123,21 @@ public class AssignmentController {
            // 예약 테이블의 회원번호를 구매자의 회원번호로 업데이트 및 예약상태 컬럼을 '4-양도' 변경 완료 시
            // 양도 테이블의 양도상태 컬럼을 2-거래완료로 변경하기
     	   // 양도상태 번호가 '2-거래완료'인 것은 양도게시판 리스트에서 제거하기
-    	   
            int assignStatusCount = assignmentService.updateStatus(r_idx);   		
-	           if(assignStatusCount > 0) {
-	        	   response.put("result", 1);
-	           }
+	           if(assignStatusCount > 0) { response.put("result", 1); }
 	           
        } else {
            response.put("result", 0);
        }
-      
+       
        return response;
    }
    
-   // Reservation 탭의 가게 정보 조회하기
+   // 가게 정보 조회하기
    @GetMapping("getRestaurantInfo")
    public String getRestaurantInfo(@RequestParam String res_idx, Model model) {
-	   
        RestaurantVO restaurantInfo = restaurantService.getRestaurantInfo(res_idx);
-       
        model.addAttribute("restaurantInfo", restaurantInfo);
-       
        return "reservation/reservation_store";
    }
  
