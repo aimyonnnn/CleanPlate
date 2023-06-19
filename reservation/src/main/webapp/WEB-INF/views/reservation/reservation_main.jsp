@@ -199,6 +199,26 @@
 	    <!-- 정렬 버튼 -->
 		<div class="col-12 mt-4">
 		  <div class="text-center">
+		    <div class="d-inline-block mx-2">
+		      <select class="form-select" id="districtSelect">
+		        <option selected disabled>구 선택</option>
+				<option value="해운대구">해운대구</option>
+				<option value="부산진구">부산진구</option>
+				<option value="동래구">동래구</option>
+				<option value="연제구">연제구</option>
+				<option value="사상구">사상구</option>
+				<option value="강서구">강서구</option>
+				<option value="금정구">금정구</option>
+				<option value="사하구">사하구</option>
+				<option value="수영구">수영구</option>
+				<option value="영도구">영도구</option>
+				<option value="중구">중구</option>
+				<option value="북구">북구</option>
+				<option value="동구">동구</option>
+				<option value="남구">남구</option>
+				<option value="서구">서구</option>
+		      </select>
+		    </div>
 		    <button type="button" class="btn btn-warning mx-2" id="storeName">가게이름순</button>
 		    <button type="button" class="btn btn-warning mx-2" id="openEarly">오픈시간순</button>
 		    <button type="button" class="btn btn-warning mx-2" id="reservationMany">예약많은순</button>
@@ -211,7 +231,21 @@
 	   // JSON 데이터 가져오기
        let restaurantList = <%= new Gson().toJson(request.getAttribute("restaurantList")) %>;
        console.log("restaurantList : " + restaurantList);
+    
+       // 구 선택에 따른 가게 목록 필터링
+       $('#districtSelect').change(function() {
+         var selectedDistrict = $(this).val();
+         filterRestaurantList(selectedDistrict);
+       });
        
+       // 선택한 구에 따라 가게 목록 필터링하여 출력
+       function filterRestaurantList(district) {
+         var filteredList = restaurantList.filter(function(restaurant) {
+           return restaurant.res_detailAddress.includes(district);
+         });
+         appendList(filteredList);
+       }
+
        // 가게명 가나다순 정렬
        $('#storeName').click(() => {
     	   restaurantList.sort((a, b) => {
