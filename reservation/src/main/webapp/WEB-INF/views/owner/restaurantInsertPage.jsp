@@ -429,15 +429,15 @@
 									</tr>
 									<tr>
 										<th><label for="">메뉴 가격</label></th>
-										<td><input type="text" class="form-control"  name="me_name" id="me_name"placeholder="숫자만 입력"  onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"></td>
+										<td><input type="text" class="form-control"  name="me_price" id="me_price"placeholder="숫자만 입력"  onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"></td>
 									</tr>
 									<tr>
 										<th><label for="">메뉴 설명</label></th>
-										<td><textarea rows="5" cols="30" class="form-control" name="menu_intro"></textarea></td>
+										<td><textarea rows="5" cols="30" class="form-control" name="me_context"></textarea></td>
 									</tr>
 									<tr>
 										<th><label for="">메뉴 사진</label></th>
-										<td><input type="file" name="menu_photo" class="form-control" multiple="multiple"></td>
+										<td><input type="file" name="me_photo" class="form-control" multiple="multiple"></td>
 									</tr>
 								</table>
 	                </div>
