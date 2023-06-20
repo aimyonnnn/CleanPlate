@@ -12,7 +12,7 @@ public interface RestaurantMapper {
 	// Reservation 탭의 가게 정보 조회하기
 	RestaurantVO selectRestaurantInfo(String res_idx);
 
-	int insertStore(RestaurantVO restaurant);
+	int insertRestaurant(RestaurantVO restaurant);
 
 	List<ReservationVO> selectReservationList(String sId);
 

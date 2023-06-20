@@ -106,22 +106,22 @@
                                     <div class="input-group">
                                         <!-- 사업자번호 자리수는 10자리 000-00-00000 형식 (하이픈 포함시 12자리)-->
                                         <!-- pattern 속성에 정규표현식 입력하여 숫자만 입력가능-->
-                                        <input class="form-control" type="text" name="res_brn" id="res_brn" maxlength="12" pattern="[0-9]{3}-[0-9]{2}-[0-9]{5}" placeholder="'-'빼고 숫자만 입력">
-                                        <button type="button" class="btn btn-warning" style="color: black;">인증</button>
+                                        <input class="form-control" type="text" name="res_brn" id="res_brn" maxlength="12" pattern="[0-9]{3}-[0-9]{2}-[0-9]{5}" placeholder="'-'빼고 숫자만 입력" required>
+                                        <button type="button" class="btn btn-warning text-black">인증</button>
                                     </div>
                                 </td>
                             </tr>
 						    <tr>
 						    	<!-- 가게이름 글자수 제한 100자리 -->
 						    	<th scope="row" width="150"><label for="res_name">가게명</label></th>
-						    	<td><input class="form-control" type="text" name="res_name" id="res_name" aria-label="default input example" maxlength="100"></td>
+						    	<td><input class="form-control" type="text" name="res_name" id="res_name" aria-label="default input example" maxlength="100" required></td>
 						    </tr>
                             <tr>
                             	<!-- 너무 빠르게 입력할 경우 인식불가 -->
                                 <th scope="row"><label for="res_tel">전화번호</label></th>
                                 <td>
                                       <div class="d-flex align-items-center">
-                                        <input class="form-control" type="text" name="res_tel" id="res_tel" maxlength="13" placeholder="'-'빼고 숫자만 입력">
+                                        <input class="form-control" type="text" name="res_tel" id="res_tel" maxlength="13" placeholder="'-'빼고 숫자만 입력" required>
                                     </div>
                                 </td>
                             </tr>
@@ -130,8 +130,8 @@
 								<td>
 								<!-- 다음 api 사용 -->
 								<div class="input-group mb-3">
-									<input type="text" class="form-control" id="address" name="res_address" placeholder="주소" readonly>
-									<input type="button" onclick="DaumPostcode()" value="주소 찾기" class="btn btn-warning" style="color: black;" id="addfind">
+									<input type="text" class="form-control" id="address" name="res_address" placeholder="주소" readonly required>
+									<input type="button" onclick="DaumPostcode()" value="주소 찾기" class="btn btn-warning text-black"  id="addfind">
 								</div>									
                                 
 								<div class="input-group mb-3 mt-2">
@@ -152,17 +152,40 @@
 	                                        <input class="form-control timepicker" id="res_open" type="text" name="res_open"> 
 	                                    </div>
 	                                    <div class="col-1">
-	                                    	<b>-</b>
+	                                    	<b style="font-size: large;">-</b>
 	                                    </div>
 	                                    <div class="col-5">
 	                                        <input class="form-control timepicker" id="res_close" type="text" name="res_close"> 
 	                                    </div>
 	
 	                                </div>
-	                                <!-- 영업시간 24시간으로 표시하는 jQuery -->
+                            	</td>
+                            	
+						    </tr>
+						    <tr>
+                                <th scope="row">브레이크타임</th> <!-- select box -->
+                                <td>
+                                	<div class="row">
+	                               	   <div class="col-2">
+	                                	  <input type="checkbox" class="form-check-input" id="nobreak">없음
+	                                   </div>
+	                                   <!-- res_breaktime -->
+	                               	   <div class="col-4">
+	                                       <input class="form-control timepicker2" type ="text" name="res_breakstart" id="res_breakstart"> <!-- 브레이크 타임 시작 시간 -->
+	                                   </div>
+	                               	   <div class="col-1">
+	                                	  <b style="font-size: large;">-</b>
+	                                   </div>
+	                                   <div class="col-4">
+	                                       <input class="form-control timepicker2" type ="text" name="res_breakend" id="res_breakend"> <!-- 브레이크 타임 시작 시간 -->
+	                                   </div>
+                                    </div>
+                                </td>
+	 	                            <!-- 24시간으로 표시하는 jQuery -->
 	                                <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 	                                <script type="text/javascript">
 		                                $(document).ready(function () {
+		                                	// 영업시간 
 			                                $('input.timepicker').timepicker({
 			                                    timeFormat: 'HH:mm',
 			                                    interval: 30, // 시간 간격
@@ -174,30 +197,8 @@
 			                                    dropdown: true,
 			                                    scrollbar: true
 			                                });
-		                                }); 
-	                                </script>
-                            	</td>
-						    </tr>
-						    <tr>
-                                <th scope="row">브레이크타임</th> <!-- select box -->
-                                <td>
-                                	<div class="row">
-	                               	   <div class="col-2">
-	                                	  <input type="checkbox" id="nobreak"> 없음
-	                                   </div>
-	                                   <!-- res_breaktime -->
-	                               	   <div class="col-5">
-	                                       <input class="form-control timepicker2" type ="text" name="res_breakstart" id="res_breakstart"> <!-- 브레이크 타임 시작 시간 -->
-	                                   </div>
-	                                   <div class="col-5">
-	                                       <input class="form-control timepicker2" type ="text" name="res_breakend" id="res_breakend"> <!-- 브레이크 타임 시작 시간 -->
-	                                   </div>
-                                    </div>
-                                </td>
-	 	                            <!-- 브레이크타임 24시간으로 표시하는 jQuery -->
-	                                <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
-	                                <script type="text/javascript">
-		                                $(document).ready(function () {
+		                                	
+		                                	// 브레이크타임
 			                                $('input.timepicker2').timepicker({
 			                                    timeFormat: 'HH:mm',
 			                                    interval: 60, // 시간 간격
@@ -210,7 +211,8 @@
 			                                    scrollbar: true
 			                                });
 			                                
-			                                // 체크 박스 선택시 브레이크타임 시간 null값으로 변경, disabled 상태로 바꿔주기
+			                                // 없음(체크 박스) 선택시 브레이크타임 시간 null값으로 변경, disabled 상태로 바꿔주기
+			                                // 해제시 disabled 상태 해제
 			                                $("#nobreak").change(function() {
 			                                    var isChecked = $(this).is(":checked");
 			                                    $("#res_breakstart, #res_breakend").prop("disabled", isChecked).val(isChecked ? "" : null);
@@ -220,14 +222,14 @@
                                 
                             </tr>
 						    <tr>
-						    	<th scope="row">총 테이블 수</th>
-						    	<td><input type="text" class="form-control" name="res_totaltable" placeholder="숫자만 입력"  onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"></td>
+						    	<th scope="row"><label for="res_total_table">총 테이블 수</label></th>
+						    	<td><input type="text" class="form-control" id="res_total_table" name="res_total_table" placeholder="숫자만 입력" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" required></td>
 						    </tr>
 						    <tr>
                                 <th scope="row">휴무일</th> <!-- select box -->
 						    	<td>
                                     <div class="dropdown">
-                                        <select name="res_dayoff" class="form-select form-select" aria-label=".form-select example" style="width: 180px;">
+                                        <select name="res_dayoff" class="form-select" style="width: 180px;">
 											<option selected value="없음">없음</option>
 											<option value="월요일">월요일</option>
 											<option value="화요일">화요일</option>
@@ -244,29 +246,17 @@
                                 <th scope="row">편의 시설</th>
 						    	<td>
 									  <input class="form-check-input" type="checkbox" name="res_amenity" id="amenity" value="단체석">
-									  <label class="form-check-label" for="amenity">
-									    단체석
-									  </label>
+									  <label class="form-check-label" for="amenity">단체석</label>
 									  <input class="form-check-input" type="checkbox" name="res_amenity" id="amenity2" value="주차">
-									  <label class="form-check-label" for="amenity2">
-									    주차
-									  </label>
+									  <label class="form-check-label" for="amenity2">주차</label>
 									  <input class="form-check-input" type="checkbox" name="res_amenity" id="amenity3" value="발렛파킹">
-									  <label class="form-check-label" for="amenity3">
-									    발렛파킹
-									  </label> <br>
+									  <label class="form-check-label" for="amenity3">발렛파킹</label> <br>
 									  <input class="form-check-input" type="checkbox" name="res_amenity" id="amenity4" value="예약">
-									  <label class="form-check-label" for="amenity4">
-									    예약
-									  </label>
+									  <label class="form-check-label" for="amenity4">예약</label>
 									  <input class="form-check-input" type="checkbox" name="res_amenity" id="amenity5" value="반려동물 동반">
-									  <label class="form-check-label" for="amenity5">
-									    반려동물 동반
-									  </label>
+									  <label class="form-check-label" for="amenity5">반려동물 동반</label>
 									  <input class="form-check-input" type="checkbox" name="res_amenity" id="amenity6" value="장애인 편의시설">
-									  <label class="form-check-label" for="amenity6">
-									    장애인 편의시설
-									  </label>
+									  <label class="form-check-label" for="amenity6">장애인 편의시설</label>
 						    	</td>
 						    </tr>
 						    <tr>
@@ -276,7 +266,7 @@
 						    <tr>
                                 <th scope="row"><label for="menu">메뉴</label></th>
 						    	<td>
-						    		<button type="button" id="menu" class="btn btn-warning" style="color: white;"  data-bs-toggle="modal" data-bs-target="#menu">메뉴 추가</button>
+						    		<button type="button" id="menu" class="btn btn-warning" style="color: black;" data-bs-toggle="modal" data-bs-target="#menuModal">메뉴 추가</button>
 							 		<div class="row mt-3 align-items-center">
 							            <table class="table">
 							                <thead>
@@ -289,16 +279,16 @@
 							                <tbody class="table-group-divider">
 							                <!-- foreach 문으로 작성 -->
 							                  <tr>
-							                    <td scope="row">또루뀨막또</td>
-							                    <td>38000</td>
+							                    <td scope="row">런치코스</td>
+							                    <td>50000</td>
 							                    <td>
 								                    <button type="button" class="btn btn-warning text-white me-1" data-bs-toggle="modal" data-bs-target="#menuPro">수정</button>
 								                    <button class="btn btn-warning text-white">삭제</button>
 							                    </td>
 							                  </tr>
 							                  <tr>
-							                    <td scope="row">또루뀨막또</td>
-							                    <td>38000</td>
+							                    <td scope="row">디너코스</td>
+							                    <td>100000</td>
 							                    <td>
 								                    <button type="button" class="btn btn-warning text-white me-1" data-bs-toggle="modal" data-bs-target="#menuPro">수정</button>
 								                    <button class="btn btn-warning text-white">삭제</button>
@@ -312,7 +302,7 @@
 						    <tr>
                                 <th scope="row">
                                 	가게사진<br>
-                                	사진 1장 <br>선택 필수</lable>
+                                	<a style="font-size: small; font-weight: normal;">(사진 1장 선택 필수)</a>
                                 </th>
 						    	<td>
 						    		<input type="file" name="res_photo1" class="form-control" style="color: white;"><br>
@@ -420,98 +410,47 @@
 <!-- 다음 api -->        
 		</div>
         <!-- 가게내용 페이지 끝 -->
-		  
 
-		  
-
-
-<!-- 메뉴 추가 모달창 -->
-<div class="modal fade" id="menu" tabindex="-1" aria-labelledby="menu" aria-hidden="true">
+<!-- 메뉴 추가 모달 창 -->
+<div class="modal fade" id="menuModal" tabindex="-1" aria-labelledby="menuModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="menu">메뉴 추가</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-		<!-- 메뉴 추가 내용 시작 -->
-		<form action="menuInsert" method="post">
-	        <div class="modal-body">
-			         <div class="container d-flex justify-content-center p-3 modal-content border-0">
-							<table>
-								<tr>
-									<th>메뉴 이름</th>
-									<td><input type="text" class="form-control" name="menu_name"></td>
-								</tr>
-								<tr>
-									<th>메뉴 가격</th>
-									<td><input type="text" class="form-control" name="menu_price" placeholder="숫자만 입력"  onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"></td>
-								</tr>
-								<tr>
-									<th>메뉴 설명</th>
-									<td><textarea rows="5" cols="30" class="form-control" name="menu_intro"></textarea></td>
-								</tr>
-								<tr>
-									<th>메뉴 사진</th>
-									<td><input type="file" name="menu_photo" class="form-control" multiple="multiple"></td>
-								</tr>
-							</table>
-					</div>
-		   </div>
-			<!-- 메뉴 추가 내용 끝 -->
-    	   <div class="modal-footer">
-            <button type="submit" class="btn btn-warning" id="storeMenuInsert" style="color: white;">추가</button>
-          	<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-       	   </div>
-		</form>
-      </div>
-    </div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="menuModalLabel">메뉴 추가</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="menuInsert" method="post">
+	            <div class="modal-body container d-flex justify-content-center p-3 modal-content border-0">
+	                <div class="container d-flex justify-content-center p-3 modal-content border-0">
+								<table>
+									<tr>
+										<th><label for="">메뉴 이름</label></th>
+										<td><input type="text" class="form-control" name="me_name" id="me_name"></td>
+									</tr>
+									<tr>
+										<th><label for="">메뉴 가격</label></th>
+										<td><input type="text" class="form-control"  name="me_name" id="me_name"placeholder="숫자만 입력"  onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"></td>
+									</tr>
+									<tr>
+										<th><label for="">메뉴 설명</label></th>
+										<td><textarea rows="5" cols="30" class="form-control" name="menu_intro"></textarea></td>
+									</tr>
+									<tr>
+										<th><label for="">메뉴 사진</label></th>
+										<td><input type="file" name="menu_photo" class="form-control" multiple="multiple"></td>
+									</tr>
+								</table>
+	                </div>
+	            </div>
+	            <div class="modal-footer">
+		            <button type="submit" class="btn btn-warning" id="storeMenuInsert" style="color: white;">추가</button>
+		          	<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+				</div>
+            </form>
+		</div>
+	</div>
 </div>
-<!-- 메뉴 추가 모달창 -->
-
-<!-- 메뉴 수정 모달창 -->
-<div class="modal fade" id="menuPro" tabindex="-1" aria-labelledby="menuPro" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="menu">메뉴 수정</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-		<!-- 메뉴 수정 내용 시작 -->
-        <div class="modal-body">
-	         <div class="container d-flex justify-content-center p-3 modal-content border-0">
-				<form action="#" method="get">
-					<table>
-						<tr>
-							<th>메뉴 이름</th>
-							<td><input type="text" class="form-control"></td>
-						</tr>
-						<tr>
-							<th>메뉴 가격</th>
-							<td>
-								<input type="text" class="form-control" placeholder="숫자만 입력" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"/>
-							</td>
-						</tr>
-						<tr>
-							<th>메뉴 설명</th>
-							<td><textarea rows="5" cols="30" class="form-control"></textarea></td>
-						</tr>
-						<tr>
-							<th>메뉴 사진</th>
-							<td><input type="file" class="form-control" multiple="multiple"></td>
-						</tr>
-					</table>
-				</form>
-			</div>
-        </div>
-		<!-- 메뉴 수정 내용 끝 -->
-        <div class="modal-footer">
-            <button type="submit" class="btn btn-warning" id="storeMenuInsert" style="color: white;" >수정</button>
-          	<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-        </div>
-      </div>
-    </div>
-</div>
-<!-- 메뉴 수정 모달창 -->
+<!-- 메뉴 추가 모달 창 -->		  
 
 
     

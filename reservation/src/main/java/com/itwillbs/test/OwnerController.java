@@ -56,25 +56,24 @@ public class OwnerController {
 	public String restaurantInsertPro(RestaurantVO restaurant, Model model) {
 		System.out.println(restaurant);
 		
+		
 		int insertCount = service.registStore(restaurant);
 		
 		// 성공시 storeInsertSucess 리다이렉트 
 		// 실패시 fail_back.jsp 가게등록 실패 출력
-		if(insertCount > 0) {
-			
-			return "redirect:/restaurantInsertSucess";
-		} else {
-			
+		if(insertCount > 0) { // 성공
+			return "redirect:/restaurantList";
+		} else { // 실패
 			model.addAttribute("msg", "가게 등록 실패!");
 			return "fail_back";
 		}
 	}
 	
-	// 가게 등록 성공시 StoreList로 리다이렉트
-	@GetMapping("restaurantInsertSucess")
-	public String restaurantInsertSucess() {
-		return "redirect:/restaurantList";
-	}
+//	// 가게 등록 성공시 StoreList로 리다이렉트
+//	@GetMapping("restaurantInsertSucess")
+//	public String restaurantInsertSucess() {
+//		return "redirect:/restaurantList";
+//	}
 	
 	//owner의 식당리스트로 이동 Mapping
 	// 가게 목록 조회

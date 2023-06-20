@@ -20,7 +20,7 @@ public class RestaurantService {
 	}
 	
 	public int registStore(RestaurantVO restaurant) {
-		return mapper.insertStore(restaurant);
+		return mapper.insertRestaurant(restaurant);
 	}
 	
 	//점주 예약 정보 조회
