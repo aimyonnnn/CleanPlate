@@ -118,17 +118,6 @@ public class LoginController {
 	        response.addCookie(cookie);
 	    }
 
-	    // 로그인 유지를 체크한 경우 - 삭제 예정입니다
-	    if (keepLoggedIn) {
-	        Cookie cookie = new Cookie("keepLoggedIn", id);
-	        cookie.setMaxAge(7 * 24 * 60 * 60);
-	        response.addCookie(cookie);
-	    } else {
-	        Cookie cookie = new Cookie("keepLoggedIn", "");
-	        cookie.setMaxAge(0);
-	        response.addCookie(cookie);
-	    }
-
 	    // 로그인 완료 후 메인으로 리다이렉트
 	    return "redirect:/";
 	}
