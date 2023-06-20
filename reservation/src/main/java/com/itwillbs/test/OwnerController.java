@@ -56,6 +56,7 @@ public class OwnerController {
 	public String restaurantInsertPro(RestaurantVO restaurant, Model model) {
 		System.out.println(restaurant);
 		
+		// 사업자등록번호 중복시 실패
 		
 		int insertCount = service.registStore(restaurant);
 		
