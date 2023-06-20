@@ -89,10 +89,10 @@ public class OwnerController {
 	
 	//owner의 가게 수정 페이지로 이동 Mapping
 	@GetMapping("restaurantUpdatePage")
-	public String restaurantUpdatePage(@RequestParam String res_brn, Model model) {
+	public String restaurantUpdatePage(@RequestParam String res_idx, Model model) {
 		
 		// 가게 상세 정보 저장
-		RestaurantVO restaurant = service.getRestaurantInfo(res_brn);
+		RestaurantVO restaurant = service.getRestaurantInfo(res_idx);
 		
 		model.addAttribute("restaurant", restaurant);
 		return "owner/restaurantUpdatePage";

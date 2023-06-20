@@ -79,7 +79,7 @@
 	                                <td>${restaurant.res_tel }</td>
 	                                <td>${restaurant.res_address } ${restaurant.res_detailAddress }</td>
 	                                <!-- 수정 버튼 클릭시 파라미터로 사업자번호 전달 -->
-	                                <td><button type="button" class="btn btn-warning" style="color: white;" onclick="location.href='restaurantUpdatePage?res_brn=${restaurant.res_brn}'">수정</button></td>
+	                                <td><button type="button" class="btn btn-warning" style="color: white;" onclick="location.href='restaurantUpdatePage?res_idx=${restaurant.res_idx}'">수정</button></td>
 	                        	</tr>
 	                        </c:forEach>
                         </tbody>

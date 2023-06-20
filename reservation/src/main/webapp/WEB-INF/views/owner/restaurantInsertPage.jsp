@@ -107,7 +107,7 @@
                                         <!-- 사업자번호 자리수는 10자리 000-00-00000 형식 (하이픈 포함시 12자리)-->
                                         <!-- pattern 속성에 정규표현식 입력하여 숫자만 입력가능-->
                                         <input class="form-control" type="text" name="res_brn" id="res_brn" maxlength="12" pattern="[0-9]{3}-[0-9]{2}-[0-9]{5}" placeholder="'-'빼고 숫자만 입력">
-                                        <button type="button" class="btn btn-outline-secondary">인증</button>
+                                        <button type="button" class="btn btn-warning" style="color: black;">인증</button>
                                     </div>
                                 </td>
                             </tr>
@@ -126,39 +126,39 @@
                                 </td>
                             </tr>
 						    <tr>
-                                <th><label for="button-addon2">주소</th>
+                                <th scope="row"><label for="addfind">주소</th>
 								<td>
 								<!-- 다음 api 사용 -->
 								<div class="input-group mb-3">
 									<input type="text" class="form-control" id="address" name="res_address" placeholder="주소" readonly>
-									<input type="button" onclick="DaumPostcode()" value="주소 찾기" class="btn btn-outline-secondary" id="button-addon2">
+									<input type="button" onclick="DaumPostcode()" value="주소 찾기" class="btn btn-warning" style="color: black;" id="addfind">
 								</div>									
                                 
 								<div class="input-group mb-3 mt-2">
                                     <input type="text" class="form-control" id="detailAddress" name="res_detailAddress" placeholder="상세주소"> 
 									<input type="text" class="form-control" id="extraAddress" placeholder="참고항목">
 								</div>
-								<!-- 우편번호 선택시(주소까지만 입력) 지도 표시 -->
+								<!-- 주소 입력시 지도 표시 -->
 								<div id="map" style="width:300px;height:300px;margin-top:10px;display:none"></div>
 								</td>
 						    </tr>
 						    <!-- 영업 시간 시작 -->
 						    <tr>
-                                <th scope="row"><label for="res_open1">영업시간</label></th>
+                                <th scope="row"><label for="res_open">영업시간</label></th>
 						    	<td>
+	                                <!-- res_openinghours -->
 	                                <div class="row">
-	                                    <div class="col-6">
-	                                    	<!-- res_openinghours -->
-	                                    	<!-- 영업 시작 시간 -->
-	                                        <input class="form-control timepicker" id="timepicker_open" type="text" name="res_open"> 
+	                                    <div class="col-5">
+	                                        <input class="form-control timepicker" id="res_open" type="text" name="res_open"> 
 	                                    </div>
-	                                    <div class="col-6">
-	                                   		 <!-- 영업 마감 시간 -->
-	                                        <input class="form-control timepicker" id="timepicker_close" type="text" name="res_close"> 
+	                                    <div class="col-1">
+	                                    	<b>-</b>
+	                                    </div>
+	                                    <div class="col-5">
+	                                        <input class="form-control timepicker" id="res_close" type="text" name="res_close"> 
 	                                    </div>
 	
 	                                </div>
-	                                
 	                                <!-- 영업시간 24시간으로 표시하는 jQuery -->
 	                                <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 	                                <script type="text/javascript">
@@ -174,8 +174,6 @@
 			                                    dropdown: true,
 			                                    scrollbar: true
 			                                });
-			                                
-			                                
 		                                }); 
 	                                </script>
                             	</td>
@@ -243,7 +241,7 @@
                                 </td>
 						    </tr>
 						    <tr>
-                                <th scope="row">가게 편의 시설</th>
+                                <th scope="row">편의 시설</th>
 						    	<td>
 									  <input class="form-check-input" type="checkbox" name="res_amenity" id="amenity" value="단체석">
 									  <label class="form-check-label" for="amenity">
@@ -313,8 +311,8 @@
 						    </tr>
 						    <tr>
                                 <th scope="row">
-                                	<label for="birth">가게사진</label><br>
-                                	사진 1장 <br>선택 필수
+                                	가게사진<br>
+                                	사진 1장 <br>선택 필수</lable>
                                 </th>
 						    	<td>
 						    		<input type="file" name="res_photo1" class="form-control" style="color: white;"><br>
