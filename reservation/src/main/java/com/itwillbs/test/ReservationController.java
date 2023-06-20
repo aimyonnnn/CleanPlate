@@ -75,16 +75,16 @@ public class ReservationController {
 	
 	// 예약취소 버튼을 눌렀을 때 상태 처리
 	@GetMapping("resCancel")
-	public String resCancel(@RequestParam int r_idx, Model model) {
+	public String resCancel(@RequestParam int r_idx, @RequestParam int r_status, Model model) {
 		
-		int updateCount = service.CancelStatus(r_idx);
+		int updateCount = service.CancelStatus(r_idx, r_status);
 		
 		if(updateCount < 0) {
 			model.addAttribute("msg", "취소 실패");
 			return "fail_back";
 		}
 		
-		return "redirect:StoreReservation";
+		return "redirect:restaurantReservation";
 	}
 	
 	

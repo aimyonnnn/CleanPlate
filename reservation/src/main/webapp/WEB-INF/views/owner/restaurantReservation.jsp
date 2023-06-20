@@ -216,8 +216,11 @@
 		        			</div>
 						    <div class="d-flex justify-content-center">
 						    	<c:if test="${resList.r_status eq 1  }">
-				        			<button type="button" class="btn btn-outline-warning" onclick="location.href='resCancel?r_idx=${resList.r_idx }'" id="cancelButton" style="margin-left: 10px;"> 예약 취소</button>
+				        			<button type="button" class="btn btn-outline-warning" onclick="cancel(${resList.r_idx })" id="cancelButton" style="margin-left: 10px;"> 예약 취소</button>
 				        		</c:if>
+<%-- 						    	<c:if test="${resList.r_status eq 2  }">
+				        			<button type="button" class="btn btn-outline-warning" onclick="noShow(${resList.r_idx })" id="cancelButton" style="margin-left: 10px;"> 노쇼</button>
+				        		</c:if> --%>
 				        		<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="margin-left: 10px;">닫기</button>
 						    </div>
 					</div>
@@ -227,6 +230,7 @@
 		</div>
 	</div>
 </div>
+
 </c:forEach>
 	<!-- 예약관리 출력 첫번째 모달창 끝 -->	
  
@@ -249,9 +253,25 @@ $(document).ready(function() {
 	  });
 	});
 	
+	
 
 </script>
 
+<script type="text/javascript">
+	function noShow(r_idx) {
+		let result = confirm("노쇼가 확실합니까?");
+		if(result){
+			location.href='resCancel?r_idx=' + r_idx + '&r_status=4';
+		}
+	}
+	
+	function cancel(r_idx) {
+		let result = confirm("취소가 확실합니까?");
+		if(result){
+			location.href='resCancel?r_idx=' + r_idx + '&r_status=3';
+		}
+	}
+</script>
 
 
 

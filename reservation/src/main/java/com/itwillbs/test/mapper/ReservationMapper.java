@@ -23,7 +23,7 @@ public interface ReservationMapper {
 	List<RestaurantVO> selectOwnerRestaurantList(String sId);
 	
 	// 취소버튼 누를시 상태를 취소로 변경
-	int UpdateCancleStatus(int r_idx);
+	int UpdateCancleStatus(@Param("r_idx") int r_idx, @Param("r_status") int r_status);
 
 	// 양도 결제 완료 시 업데이트 처리
 	int updateReservation(@Param("sId") String sId, @Param("r_idx") int r_idx);

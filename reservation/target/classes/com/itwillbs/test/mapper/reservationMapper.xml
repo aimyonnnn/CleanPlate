@@ -44,7 +44,7 @@
 	
 	<update id="UpdateCancleStatus">
 		UPDATE reservation
-		SET r_status = 3
+		SET r_status = #{r_status}
 		WHERE r_idx = #{r_idx}
 	</update>
 </mapper>

@@ -32,8 +32,8 @@ public class ReservationService {
 	}
 	
 	// 상태를 취소로 변경
-	public int CancelStatus(int r_idx) {
-		return mapper.UpdateCancleStatus(r_idx);
+	public int CancelStatus(int r_idx, int r_status) {
+		return mapper.UpdateCancleStatus(r_idx, r_status);
 	}
 	
 	// 예약 테이블의 판매자 회원번호를 구매자의 회원번호로 업데이트 및 예약상태 컬럼을 '4-양도' 변경함
