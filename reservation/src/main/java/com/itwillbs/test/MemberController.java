@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,8 +42,11 @@ public class MemberController {
 	public String memberInfo(HttpSession session, String id, String passwd, HttpServletRequest request, HttpServletResponse response,
         Model model) {
 		
-	MemberVO member = service.isCorrectMember(id, passwd);
-	if(member == null) {
+	MemberVO member = service.isCorrectMember(id);
+	
+	BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+	
+	if(member == null || !passwordEncoder.matches(passwd, member.getM_passwd())) {
 		try {
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter w;

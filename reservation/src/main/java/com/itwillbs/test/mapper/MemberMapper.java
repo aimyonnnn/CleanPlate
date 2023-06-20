@@ -20,7 +20,7 @@ public interface MemberMapper {
 	int updatePassword(MemberVO membervo);
 
 	// 맴버 정보 수정을 위한 아이디 및 패스워드 조회
-	MemberVO isCorrectMember(@Param("id") String id, @Param("passwd") String passwd);
+	MemberVO isCorrectMember(String id);
 
 	// 멤버 정보 수정
 	int updateMember(MemberVO member);

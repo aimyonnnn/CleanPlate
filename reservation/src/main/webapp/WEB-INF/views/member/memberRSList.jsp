@@ -213,7 +213,7 @@
 		            			<!-- 예약내역 테이블 끝 -->
 		        			</div>
 						    <div class="d-flex justify-content-center">
-				        		<button type="button" class="btn btn-outline-warning" id="cancelButton">예약 취소하기</button>
+				        		<button type="button" class="btn btn-outline-warning" onclick="cancel(${resList.r_idx })">예약 취소하기</button>
 				        		<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="margin-left: 10px;">닫기</button>
 						    </div>
 					</div>
@@ -304,6 +304,7 @@
 	 		window.location.href = "memberRSList";
 	 	});
  	</script>
+ 	
  	<script type="text/javascript">
 	$(document).ready(function() {
 		  $("#status").on("change", function() {
@@ -320,6 +321,23 @@
 		  });
 		});
 	</script>
+	
+<script type="text/javascript">
+	function noShow(r_idx) {
+		let result = confirm("노쇼가 확실합니까?");
+		if(result){
+			location.href='resCancel?r_idx=' + r_idx + '&r_status=4';
+		}
+	}
+	
+	function cancel(r_idx) {
+		let result = confirm("취소가 확실합니까? \n (취소할 경우 예약을 되돌릴 수 없으며 다시 예약해야합니다.)");
+		if(result){
+			alert("취소가 완료되었습니다.");
+			location.href='resCancel?r_idx=' + r_idx + '&r_status=3';
+		}
+	}
+</script>
  
     <!-- 하단 부분 include 처리영역 -->
     <hr class="mt-5">

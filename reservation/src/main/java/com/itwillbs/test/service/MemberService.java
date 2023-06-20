@@ -29,8 +29,8 @@ public class MemberService {
 	}
 
 	// 회원정보 폼 접근 시 , id, passwd 확인
-	public MemberVO isCorrectMember(String id, String passwd) {
-		return mapper.isCorrectMember(id, passwd);
+	public MemberVO isCorrectMember(String id) {
+		return mapper.isCorrectMember(id);
 	}
 
 	// 회원 정보 수정

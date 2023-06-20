@@ -33,7 +33,7 @@
 	<select id="isCorrectMember" resultType="com.itwillbs.test.vo.MemberVO">
 		    select * 
 		    	from members
-		    		where m_id = #{id} and m_passwd = #{passwd}
+		    		where m_id = #{id}
 	</select>
 	
 	<!-- 멤버 정보 조회 -->
