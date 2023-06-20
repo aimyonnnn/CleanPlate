@@ -221,17 +221,22 @@
 		    </div>
 		    <button type="button" class="btn btn-warning mx-2" id="storeName">가게이름순</button>
 		    <button type="button" class="btn btn-warning mx-2" id="openEarly">오픈시간순</button>
-		    <button type="button" class="btn btn-warning mx-2" id="reservationMany">예약많은순</button>
-		    <button type="button" class="btn btn-warning mx-2" id="reviewMany">평점순</button>
+		    <button type="button" class="btn btn-warning mx-2" id="reviewHigh">평점높은순</button>
+		    <button type="button" class="btn btn-warning mx-2" id="reviewLow">평점낮은순</button>
+<!-- 		    <button type="button" class="btn btn-warning mx-2" id="reservationMany">예약많은순</button> -->
 		  </div>
 		</div>
 		<!-- 정렬 버튼 -->
 		
 	   <script>
-	   // JSON 데이터 가져오기
+	   // 식당 JSON 가져오기
        let restaurantList = <%= new Gson().toJson(request.getAttribute("restaurantList")) %>;
        console.log("restaurantList : " + restaurantList);
-    
+       
+       // 리뷰 JSON 가져오기
+       let reviewScores = <%= new Gson().toJson(request.getAttribute("reviewScores")) %>;
+       console.log("reviewScores : " + reviewScores);
+       
        // 구 선택에 따른 가게 목록 필터링
        $('#districtSelect').change(function() {
          var selectedDistrict = $(this).val();
@@ -268,7 +273,25 @@
 		  console.log(restaurantList);
 	      appendList(restaurantList);
 	  });
-       
+      
+      // 평점 높은순 정렬
+	  $('#reviewHigh').on('click', () => {
+		  reviewScores.sort((a, b) => {
+	        return b.average_score - a.average_score;
+	    });
+		  console.log(reviewScores);
+	      appendList(reviewScores);
+	  });
+      
+      // 평점 낮은순 정렬
+	  $('#reviewLow').on('click', () => {
+		  reviewScores.sort((a, b) => {
+	        return a.average_score - b.average_score;
+	    });
+		  console.log(reviewScores);
+	      appendList(reviewScores);
+	  });
+      
        // appendList() 
        function appendList(restaurantList) {
       	 

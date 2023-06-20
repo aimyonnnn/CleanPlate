@@ -56,7 +56,7 @@
 			  </c:when>
 		   <c:otherwise>
 		    <c:choose>
-		      <c:when test="${not empty sessionScope.sId and sessionScope.sId ne 'admin'}">
+		    <c:when test="${not empty sessionScope.sId and sessionScope.sId ne 'admin'}">
 		        <button type="button" class="btn btn-outline-light text-white me-2 border-0 bg-transparent" onclick="location.href='member'">${sessionScope.sId} 님</button>
 		        <button type="button" class="btn btn-outline-light text-white border-0 bg-transparent" onclick="location.href='memberRSList'">예약내역</button>
 		      </c:when>

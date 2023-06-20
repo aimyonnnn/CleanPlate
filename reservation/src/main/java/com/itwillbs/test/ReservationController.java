@@ -1,6 +1,7 @@
 package com.itwillbs.test;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.itwillbs.test.service.ReservationService;
+import com.itwillbs.test.service.RestaurantService;
 import com.itwillbs.test.vo.RestaurantVO;
 import com.itwillbs.test.vo.ReviewVO;
 
@@ -20,19 +22,31 @@ public class ReservationController {
 	
 	@Autowired
 	private ReservationService service;
+	@Autowired
+	private RestaurantService restaurantService;
+	@Autowired
+	private ReservationService reservationService;
 	
 	
-	// 예약 검색 페이지
 	@GetMapping("reservationMain")
 	public String reservationMain(Model model) {
 		
-		// 전체 식당 조회
-		List<RestaurantVO> restaurantList = service.getRestaurantList();
-		
-		model.addAttribute("restaurantList", restaurantList);
-		
-		return "reservation/reservation_main";
+	    // 전체 식당 조회
+	    List<RestaurantVO> restaurantList = service.getRestaurantList();
+	    
+	    // 가게별 리뷰 점수 조회
+	    List<Map<String, Object>> reviewScores = restaurantService.getRestaurantReviewScores();
+	    
+	    // 예약이 많은 순서로 식당 조회
+	    List<Map<String, Object>> reservationCounts = reservationService.getReservationCountByRestaurant();
+	    
+	    model.addAttribute("restaurantList", restaurantList);
+	    model.addAttribute("reviewScores", reviewScores);
+	    model.addAttribute("reservationCounts", reservationCounts);
+	    
+	    return "reservation/reservation_main";
 	}
+
 	
 	// 가게 상세 페이지
 	@GetMapping("reservationStore")
@@ -64,13 +78,9 @@ public class ReservationController {
 	@PostMapping("getRestaurantName")
 	@ResponseBody
 	public List<RestaurantVO> getRestaurantName(@RequestParam("name") String resName, Model model) {
-		
 		List<RestaurantVO> restaurantName = service.getRestaurantName(resName);
-		
 		model.addAttribute("restaurantName", restaurantName);
-		
 		return restaurantName;
-		
 	}
 	
 	// 예약취소 버튼을 눌렀을 때 상태 처리

@@ -2,6 +2,7 @@ package com.itwillbs.test.service;
 
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,7 +46,11 @@ public class ReservationService {
 	public List<ReviewVO> getReviewList(int res_idx) {
 		return mapper.selectReviewList(res_idx);
 	}
-
-
+	
+	// 예약이 많은 순서로 식당 조회
+	public List<Map<String, Object>> getReservationCountByRestaurant() {
+		return mapper.selectReservationCountByRestaurant();
+	}
+	
 	
 }

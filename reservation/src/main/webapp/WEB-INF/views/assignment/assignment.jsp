@@ -228,7 +228,6 @@
 					  </h5>
 					  <!-- 가게명 클릭시 가게 상세정보 페이지로 이동 -->
                       <p>예약 날짜 : <span>${assignment.r_date}</span></p>
-                      <p>메뉴 : <span>${assignment.cr_type}</span></p>
                       <p>가격 : <span>${assignment.a_price}원</span></p>
                       예약번호 : <!-- 예약번호 나중에 지울 예정입니다 --> <input type="text" name="r_idx" value="${assignment.r_idx}" readonly="readonly">
                       <div class="d-flex">
@@ -341,10 +340,9 @@
 	           let template = `<div class="col-md-4 mt-5" data-aos="fade-up" data-aos-anchor-placement="center-bottom">
 				               <div class="card">
 				               <img src="${pageContext.request.contextPath}/resources/images/${'${data.res_photo1}'}" class="card-img-top" alt="Item Image">
-				                 <div class="card-body">
+				                 <div class="card-body">1
 				                   <h5><span onclick="goToReservationReserve('${"${data.res_idx}"}')">${'${data.res_name}'}</span></h5>
 				                   <p>예약 날짜 : <span>${'${data.r_date}'}</span></p>
-				                   <p>메뉴 : <span>${'${data.cr_type}'}</span></p>
 				                   <p>가격 : <span>${'${data.a_price}'}원</span></p>
 				                   예약번호 : <!-- 예약번호 나중에 지울 예정입니다 --> <input type="text" name="r_idx" value="${'${data.r_idx}'}" readonly="readonly">
 				                   <div class="d-flex">

@@ -96,7 +96,15 @@
 				, res_intro = #{res_intro}
 					WHERE
 						res_brn = #{res_brn}
-	</update>	
+	</update>
+	
+	<!-- 가게별 리뷰 점수 조회 -->
+	<select id="selectRestaurantReviewScores" resultType="java.util.Map">
+		 SELECT res.res_idx, res.res_name, res_openinghours, res_photo1, res_intro, res_address, res_detailAddress, AVG(rv.rv_scope) AS average_score
+			 FROM restaurant res
+			 	JOIN reviews rv ON res.res_idx = rv.res_idx
+				 GROUP BY res.res_idx, res.res_name, res_openinghours, res_photo1, res_intro, res_address, res_detailAddress;
+	</select>
 
 
 </mapper>

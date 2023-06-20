@@ -47,4 +47,13 @@
 		SET r_status = #{r_status}
 		WHERE r_idx = #{r_idx}
 	</update>
+	
+    <!-- 예약이 많은 순서로 식당의 예약 수 조회 -->
+    <select id="selectReservationCountByRestaurant" resultType="java.util.Map">
+	    SELECT res_idx, COUNT(*) AS reservation_count
+	    	FROM reservation
+	   			 GROUP BY res_idx
+	    			ORDER BY reservation_count DESC
+    </select>
+	
 </mapper>

@@ -37,5 +37,10 @@ public class RestaurantService {
 		return mapper.updateRestaurant(restaurant);
 	}
 	
-	
+	// 가게별 리뷰 출력
+	public List<Map<String, Object>> getRestaurantReviewScores() {
+		return mapper.selectRestaurantReviewScores();
+	}
+		
+		
 }

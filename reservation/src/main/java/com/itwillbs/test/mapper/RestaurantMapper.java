@@ -21,5 +21,7 @@ public interface RestaurantMapper {
 	RestaurantVO selectRestaurant(String res_brn);
 
 	int updateRestaurant(RestaurantVO restaurant);
+
+	List<Map<String, Object>> selectRestaurantReviewScores();
 	
 }

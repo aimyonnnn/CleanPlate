@@ -2,6 +2,7 @@ package com.itwillbs.test.mapper;
 
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -29,6 +30,12 @@ public interface ReservationMapper {
 	int updateReservation(@Param("sId") String sId, @Param("r_idx") int r_idx);
 
 	List<ReviewVO> selectReviewList(int res_idx);
+	
+	// 가게별 리뷰 점수 조회
+	List<Map<String, Object>> selectRestaurantReviewScores();
+	
+	// 예약이 많은 순서로 식당 조회
+	List<Map<String, Object>> selectReservationCountByRestaurant();
 
 	
 }
