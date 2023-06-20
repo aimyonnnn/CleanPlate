@@ -280,7 +280,9 @@
 
 		 // 처음에 보이도록 설정할 행을 선택합니다.
 		 $(".REVIEW tr").slice(0, initialRowCount).css("display", "table-row");
-
+		 if ($(".REVIEW tr").length <= initialRowCount) {
+		     $('#load').fadeOut(0);
+		   }
 		 $("#load").click(function(e) {
 		   e.preventDefault();
 

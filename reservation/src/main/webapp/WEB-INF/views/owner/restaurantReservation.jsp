@@ -218,7 +218,7 @@
 						    	<c:if test="${resList.r_status eq 1  }">
 				        			<button type="button" class="btn btn-outline-warning" onclick="cancel(${resList.r_idx })" id="cancelButton" style="margin-left: 10px;"> 예약 취소</button>
 				        		</c:if>
-<%-- 						    	<c:if test="${resList.r_status eq 2  }">
+<%-- 						    <c:if test="${resList.r_status eq 2  }">
 				        			<button type="button" class="btn btn-outline-warning" onclick="noShow(${resList.r_idx })" id="cancelButton" style="margin-left: 10px;"> 노쇼</button>
 				        		</c:if> --%>
 				        		<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="margin-left: 10px;">닫기</button>
@@ -252,9 +252,6 @@ $(document).ready(function() {
 	    });
 	  });
 	});
-	
-	
-
 </script>
 
 <script type="text/javascript">
