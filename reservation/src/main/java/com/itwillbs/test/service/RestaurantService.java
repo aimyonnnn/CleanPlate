@@ -28,10 +28,6 @@ public class RestaurantService {
 		return mapper.selectReservationList(sId);
 	}
 	
-	//점주 예약 메뉴 정보 조회
-	public List<Reservation_DetailVO> getRDList(String sId) {
-		return mapper.selectRDList(sId);
-	}
 	// 가게 목록 조회
 	public List<RestaurantVO> getRestaurantList() {
 		return mapper.selectRestaurantList();

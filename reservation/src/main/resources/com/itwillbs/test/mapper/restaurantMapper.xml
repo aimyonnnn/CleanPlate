@@ -35,11 +35,17 @@
 	</insert>
 	
 	<select id="selectReservationList">
-		SELECT *
-		FROM reservation_info
-		WHERE c_idx = (SELECT c_idx
-			FROM ceo
-			WHERE c_id = #{id});
+		SELECT r.r_idx, c.cr_type, r.r_amount, r.r_tables, r.r_personnel, m.m_name, r.r_status, r.r_date, r.r_request, res.res_name
+			FROM reservation r JOIN restaurant res
+			ON r.res_idx = res.res_idx
+			JOIN members m
+			ON r.m_idx = m.m_idx
+			JOIN course c
+			ON r.cr_idx = c.cr_idx
+			WHERE res.c_idx = (SELECT c_idx
+					FROM ceo
+					WHERE c_id = #{id}
+					);
 	</select>
 	
 	<select id="selectRDList">
@@ -57,10 +63,6 @@
 			);
 	</select>
 	
-	<select id="selectRestaurantList" resultType="com.itwillbs.test.vo.RestaurantVO">
-		SELECT * 
-			FROM restaurant
-	</select>
 	
 	<select id="selectRestaurant" resultType="com.itwillbs.test.vo.RestaurantVO">
 		SELECT * 

@@ -27,14 +27,12 @@ public class OwnerController {
 	public String restaurantReservation(Model model, HttpSession session) {
 		
 		List<ReservationVO> resList = service.getReservationList((String)session.getAttribute("sId"));
-		List<Reservation_DetailVO> RDList = service.getRDList((String)session.getAttribute("sId"));
 		List<RestaurantVO> restaurantList = resService.getOwnerRestaurantList((String)session.getAttribute("sId"));
 		
-		System.out.println(restaurantList);
+		System.out.println(resList);
 		
 		model.addAttribute("restaurantList", restaurantList);
 		model.addAttribute("resList",resList);
-		model.addAttribute("RDList",RDList);
 		
 		return "owner/restaurantReservation";
 	}

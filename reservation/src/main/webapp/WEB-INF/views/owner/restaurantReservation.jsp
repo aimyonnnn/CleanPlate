@@ -168,6 +168,18 @@
 					                        <td><fmt:formatDate value="${resList.r_date }" pattern="HH시mm분"/></td>
 					                    </tr>
 					                    <tr>
+					                        <th>예약코스</th>
+					                        <td>${resList.cr_type }</td>
+					                    </tr>
+					                    <tr>
+					                        <th>예약비용</th>
+					                        <td>${resList.r_amount }</td>
+					                    </tr>
+					                    <tr>
+					                        <th>테이블 수</th>
+					                        <td>${resList.r_tables }</td>
+					                    </tr>
+					                    <tr>
 					                        <th>인원</th>
 					                        <td>${resList.r_personnel }</td>
 					                    </tr>
@@ -194,15 +206,9 @@
 			                            	</c:choose>
 					                        </td>
 					                    </tr>
-										<tr>
-					                        <th>메뉴</th>
-					                        <td>
-					                        <c:forEach var="RDList" items="${RDList }">
-					                        	<c:if test="${resList.r_idx eq RDList.r_idx }">
-													${RDList.me_name } : ${RDList.quantity }개<br>
-												</c:if>
-											</c:forEach>
-											</td>
+					                    <tr>
+					                    	<th>요청사항</th>
+					                    	<td>${resList.r_request }</td>
 					                    </tr>
 		                			</tbody>
 		           				 </table>

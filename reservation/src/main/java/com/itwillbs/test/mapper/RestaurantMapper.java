@@ -16,8 +16,6 @@ public interface RestaurantMapper {
 
 	List<ReservationVO> selectReservationList(String sId);
 
-	List<Reservation_DetailVO> selectRDList(String sId);
-
 	List<RestaurantVO> selectRestaurantList();
 
 	RestaurantVO selectRestaurant(String res_brn);

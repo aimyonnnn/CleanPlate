@@ -41,4 +41,10 @@
 		ON rv.m_idx = m.m_idx
 		WHERE res_idx = #{res_idx};
 	</select>	
+	
+	<update id="UpdateCancleStatus">
+		UPDATE reservation
+		SET r_status = 3
+		WHERE r_idx = #{r_idx}
+	</update>
 </mapper>
