@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itwillbs.test.mapper.MenuMapper">
+	<!-- 메뉴 추가 -->
+	<insert id="insertMenu">
+		INSERT
+			INTO menus
+				VALUES (
+					null -- idx 자동증가
+					, #{me_name} 
+					, #{me_price} 
+					, #{me_context} 
+					, #{me_photo} 
+				)
+	</insert>
+	
+	<select id="selectMenuList"  resultType="com.itwillbs.test.vo.MenuVO">
+		SELECT *
+			FROM menus
+	</select>
+	
+</mapper>

@@ -271,30 +271,44 @@
 							            <table class="table">
 							                <thead>
 							                  <tr>
+							                  	
 							                    <th scope="col" class="col-5">메뉴 이름</th>
 							                    <th scope="col" class="col-3">가격</th>
 							                    <th scope="col"></th>
 							                  </tr>
 							                </thead>
-							                <tbody class="table-group-divider">
-							                <!-- foreach 문으로 작성 -->
-							                  <tr>
-							                    <td scope="row">런치코스</td>
-							                    <td>50000</td>
-							                    <td>
-								                    <button type="button" class="btn btn-warning text-white me-1" data-bs-toggle="modal" data-bs-target="#menuPro">수정</button>
-								                    <button class="btn btn-warning text-white">삭제</button>
-							                    </td>
-							                  </tr>
-							                  <tr>
-							                    <td scope="row">디너코스</td>
-							                    <td>100000</td>
-							                    <td>
-								                    <button type="button" class="btn btn-warning text-white me-1" data-bs-toggle="modal" data-bs-target="#menuPro">수정</button>
-								                    <button class="btn btn-warning text-white">삭제</button>
-							                    </td>
-							                  </tr>
-							                </tbody>
+						                  	<c:forEach var="menu" items="${menuList }">
+						                  		
+								                <tbody class="table-group-divider">
+								                  <tr>
+								                    <td scope="row">${menu.me_name }</td>
+								                    <td>${menu.me_price }</td>
+								                    <td>
+									                    <button type="button" class="btn btn-warning text-white me-1" data-bs-toggle="modal" data-bs-target="#menuPro">수정</button>
+									                    <button class="btn btn-warning text-white">삭제</button>
+								                    </td>
+								                  </tr>
+								                </tbody>
+						                  	</c:forEach>
+<!-- 							                <tbody class="table-group-divider"> -->
+<!-- 							                foreach 문으로 작성 -->
+<!-- 							                  <tr> -->
+<!-- 							                    <td scope="row">런치코스</td> -->
+<!-- 							                    <td>50000</td> -->
+<!-- 							                    <td> -->
+<!-- 								                    <button type="button" class="btn btn-warning text-white me-1" data-bs-toggle="modal" data-bs-target="#menuPro">수정</button> -->
+<!-- 								                    <button class="btn btn-warning text-white">삭제</button> -->
+<!-- 							                    </td> -->
+<!-- 							                  </tr> -->
+<!-- 							                  <tr> -->
+<!-- 							                    <td scope="row">디너코스</td> -->
+<!-- 							                    <td>100000</td> -->
+<!-- 							                    <td> -->
+<!-- 								                    <button type="button" class="btn btn-warning text-white me-1" data-bs-toggle="modal" data-bs-target="#menuPro">수정</button> -->
+<!-- 								                    <button class="btn btn-warning text-white">삭제</button> -->
+<!-- 							                    </td> -->
+<!-- 							                  </tr> -->
+<!-- 							                </tbody> -->
 							              </table>
 							          </div>						    		
 						    	</td>
@@ -424,20 +438,22 @@
 	                <div class="container d-flex justify-content-center p-3 modal-content border-0">
 								<table>
 									<tr>
-										<th><label for="">메뉴 이름</label></th>
+										<th><label for="me_name">메뉴 이름</label></th>
 										<td><input type="text" class="form-control" name="me_name" id="me_name"></td>
 									</tr>
 									<tr>
-										<th><label for="">메뉴 가격</label></th>
-										<td><input type="text" class="form-control"  name="me_price" id="me_price"placeholder="숫자만 입력"  onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"></td>
+										<th><label for="me_price">메뉴 가격</label></th>
+										<td><input type="text" class="form-control"  name="me_price" id="me_price"
+										placeholder="숫자만 입력"  onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"></td>
 									</tr>
 									<tr>
-										<th><label for="">메뉴 설명</label></th>
-										<td><textarea rows="5" cols="30" class="form-control" name="me_context"></textarea></td>
+										<th><label for="me_context">메뉴 설명</label></th>
+										<td><textarea rows="5" cols="30" class="form-control" name="me_context" id="me_context"></textarea></td>
 									</tr>
 									<tr>
-										<th><label for="">메뉴 사진</label></th>
-										<td><input type="file" name="me_photo" class="form-control" multiple="multiple"></td>
+										<th><label for="me_photo">메뉴 사진</label></th>
+<!-- 										multiple="multiple" -->
+										<td><input type="file" name="me_photo" id="me_photo" class="form-control" ></td>
 									</tr>
 								</table>
 	                </div>
