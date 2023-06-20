@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.itwillbs.test.vo.RestaurantVO;
+import com.itwillbs.test.vo.ReviewVO;
 
 
 @Mapper
@@ -26,6 +27,8 @@ public interface ReservationMapper {
 
 	// 양도 결제 완료 시 업데이트 처리
 	int updateReservation(@Param("sId") String sId, @Param("r_idx") int r_idx);
+
+	List<ReviewVO> selectReviewList(int res_idx);
 
 	
 }

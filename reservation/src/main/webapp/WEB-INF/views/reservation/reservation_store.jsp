@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -233,196 +234,18 @@
 			<h3 class="fw-bold mt-2 p-2">REVIEW</h3>
 			<table class="table table-bordered REVIEW">
 				<tbody>
-					<tr>
-						<td><img src="https://www.walkerhill.com/assets/vistawalkerhillseoul/global/images/etc/menu_myongwolgwan0102.jpg" class="d-block" alt="..."></td>
-						<td>
-							<dl class="row">
-								<dt class="mt-3">★★★★☆(별점)</dt>
-					        	<dd class="mt-3">냠냠(닉네임)</dd>
-								<dt class="mt-3">최상의 우육을 선별하여 명월관의 노하우로 숙성 시켰습니다. 이 특별한 한우 모둠 한상은 명월관의 최고급 참숯과 만나 은은한 참숯의 향과 함께 입안 가득 깊은 풍미와 감칠맛을 느끼실수 있습니다.(리뷰내용)</dt>
-							</dl>
-						</td>
-				    </tr>
-					<tr>
-						<td><img src="https://www.walkerhill.com/assets/vistawalkerhillseoul/global/images/etc/menu_myongwolgwan0102.jpg" class="d-block" alt="..."></td>
-						<td>
-							<dl class="row">
-								<dt class="mt-3">★★★★★(별점)</dt>
-					        	<dd class="mt-3">소고기(닉네임)</dd>
-								<dt class="mt-3">최상의 우육을 선별하여 명월관의 노하우로 숙성 시켰습니다. 이 특별한 한우 모둠 한상은 명월관의 최고급 참숯과 만나 은은한 참숯의 향과 함께 입안 가득 깊은 풍미와 감칠맛을 느끼실수 있습니다.(리뷰내용)</dt>
-							</dl>
-						</td>
-				    </tr>
-					<tr>
-						<td><img src="https://www.walkerhill.com/assets/vistawalkerhillseoul/global/images/etc/menu_myongwolgwan0102.jpg" class="d-block" alt="..."></td>
-						<td>
-							<dl class="row">
-								<dt class="mt-3">★★★★★(별점)</dt>
-					        	<dd class="mt-3">소고기(닉네임)</dd>
-								<dt class="mt-3">최상의 우육을 선별하여 명월관의 노하우로 숙성 시켰습니다. 이 특별한 한우 모둠 한상은 명월관의 최고급 참숯과 만나 은은한 참숯의 향과 함께 입안 가득 깊은 풍미와 감칠맛을 느끼실수 있습니다.(리뷰내용)</dt>
-							</dl>
-						</td>
-				    </tr>
-					<tr>
-						<td><img src="https://www.walkerhill.com/assets/vistawalkerhillseoul/global/images/etc/menu_myongwolgwan0102.jpg" class="d-block" alt="..."></td>
-						<td>
-							<dl class="row">
-								<dt class="mt-3">★★★★★(별점)</dt>
-					        	<dd class="mt-3">소고기(닉네임)</dd>
-								<dt class="mt-3">최상의 우육을 선별하여 명월관의 노하우로 숙성 시켰습니다. 이 특별한 한우 모둠 한상은 명월관의 최고급 참숯과 만나 은은한 참숯의 향과 함께 입안 가득 깊은 풍미와 감칠맛을 느끼실수 있습니다.(리뷰내용)</dt>
-							</dl>
-						</td>
-				    </tr>
-					<tr>
-						<td><img src="https://www.walkerhill.com/assets/vistawalkerhillseoul/global/images/etc/menu_myongwolgwan0102.jpg" class="d-block" alt="..."></td>
-						<td>
-							<dl class="row">
-								<dt class="mt-3">★★★★★(별점)</dt>
-					        	<dd class="mt-3">소고기(닉네임)</dd>
-								<dt class="mt-3">최상의 우육을 선별하여 명월관의 노하우로 숙성 시켰습니다. 이 특별한 한우 모둠 한상은 명월관의 최고급 참숯과 만나 은은한 참숯의 향과 함께 입안 가득 깊은 풍미와 감칠맛을 느끼실수 있습니다.(리뷰내용)</dt>
-							</dl>
-						</td>
-				    </tr>
-					<tr>
-						<td><img src="https://www.walkerhill.com/assets/vistawalkerhillseoul/global/images/etc/menu_myongwolgwan0102.jpg" class="d-block" alt="..."></td>
-						<td>
-							<dl class="row">
-								<dt class="mt-3">★★★★★(별점)</dt>
-					        	<dd class="mt-3">소고기(닉네임)</dd>
-								<dt class="mt-3">최상의 우육을 선별하여 명월관의 노하우로 숙성 시켰습니다. 이 특별한 한우 모둠 한상은 명월관의 최고급 참숯과 만나 은은한 참숯의 향과 함께 입안 가득 깊은 풍미와 감칠맛을 느끼실수 있습니다.(리뷰내용)</dt>
-							</dl>
-						</td>
-				    </tr>
-					<tr>
-						<td><img src="https://www.walkerhill.com/assets/vistawalkerhillseoul/global/images/etc/menu_myongwolgwan0102.jpg" class="d-block" alt="..."></td>
-						<td>
-							<dl class="row">
-								<dt class="mt-3">★★★★★(별점)</dt>
-					        	<dd class="mt-3">소고기(닉네임)</dd>
-								<dt class="mt-3">최상의 우육을 선별하여 명월관의 노하우로 숙성 시켰습니다. 이 특별한 한우 모둠 한상은 명월관의 최고급 참숯과 만나 은은한 참숯의 향과 함께 입안 가득 깊은 풍미와 감칠맛을 느끼실수 있습니다.(리뷰내용)</dt>
-							</dl>
-						</td>
-				    </tr>
-					<tr>
-						<td><img src="https://www.walkerhill.com/assets/vistawalkerhillseoul/global/images/etc/menu_myongwolgwan0102.jpg" class="d-block" alt="..."></td>
-						<td>
-							<dl class="row">
-								<dt class="mt-3">★★★★★(별점)</dt>
-					        	<dd class="mt-3">소고기(닉네임)</dd>
-								<dt class="mt-3">최상의 우육을 선별하여 명월관의 노하우로 숙성 시켰습니다. 이 특별한 한우 모둠 한상은 명월관의 최고급 참숯과 만나 은은한 참숯의 향과 함께 입안 가득 깊은 풍미와 감칠맛을 느끼실수 있습니다.(리뷰내용)</dt>
-							</dl>
-						</td>
-				    </tr>
-					<tr>
-						<td><img src="https://www.walkerhill.com/assets/vistawalkerhillseoul/global/images/etc/menu_myongwolgwan0102.jpg" class="d-block" alt="..."></td>
-						<td>
-							<dl class="row">
-								<dt class="mt-3">★★★★★(별점)</dt>
-					        	<dd class="mt-3">소고기(닉네임)</dd>
-								<dt class="mt-3">최상의 우육을 선별하여 명월관의 노하우로 숙성 시켰습니다. 이 특별한 한우 모둠 한상은 명월관의 최고급 참숯과 만나 은은한 참숯의 향과 함께 입안 가득 깊은 풍미와 감칠맛을 느끼실수 있습니다.(리뷰내용)</dt>
-							</dl>
-						</td>
-				    </tr>
-					<tr>
-						<td><img src="https://www.walkerhill.com/assets/vistawalkerhillseoul/global/images/etc/menu_myongwolgwan0102.jpg" class="d-block" alt="..."></td>
-						<td>
-							<dl class="row">
-								<dt class="mt-3">★★★★★(별점)</dt>
-					        	<dd class="mt-3">소고기(닉네임)</dd>
-								<dt class="mt-3">최상의 우육을 선별하여 명월관의 노하우로 숙성 시켰습니다. 이 특별한 한우 모둠 한상은 명월관의 최고급 참숯과 만나 은은한 참숯의 향과 함께 입안 가득 깊은 풍미와 감칠맛을 느끼실수 있습니다.(리뷰내용)</dt>
-							</dl>
-						</td>
-				    </tr>
-					<tr>
-						<td><img src="https://www.walkerhill.com/assets/vistawalkerhillseoul/global/images/etc/menu_myongwolgwan0102.jpg" class="d-block" alt="..."></td>
-						<td>
-							<dl class="row">
-								<dt class="mt-3">★★★★★(별점)</dt>
-					        	<dd class="mt-3">소고기(닉네임)</dd>
-								<dt class="mt-3">최상의 우육을 선별하여 명월관의 노하우로 숙성 시켰습니다. 이 특별한 한우 모둠 한상은 명월관의 최고급 참숯과 만나 은은한 참숯의 향과 함께 입안 가득 깊은 풍미와 감칠맛을 느끼실수 있습니다.(리뷰내용)</dt>
-							</dl>
-						</td>
-				    </tr>
-					<tr>
-						<td><img src="https://www.walkerhill.com/assets/vistawalkerhillseoul/global/images/etc/menu_myongwolgwan0102.jpg" class="d-block" alt="..."></td>
-						<td>
-							<dl class="row">
-								<dt class="mt-3">★★★★★(별점)</dt>
-					        	<dd class="mt-3">소고기(닉네임)</dd>
-								<dt class="mt-3">최상의 우육을 선별하여 명월관의 노하우로 숙성 시켰습니다. 이 특별한 한우 모둠 한상은 명월관의 최고급 참숯과 만나 은은한 참숯의 향과 함께 입안 가득 깊은 풍미와 감칠맛을 느끼실수 있습니다.(리뷰내용)</dt>
-							</dl>
-						</td>
-				    </tr>
-					<tr>
-						<td><img src="https://www.walkerhill.com/assets/vistawalkerhillseoul/global/images/etc/menu_myongwolgwan0102.jpg" class="d-block" alt="..."></td>
-						<td>
-							<dl class="row">
-								<dt class="mt-3">★★★★★(별점)</dt>
-					        	<dd class="mt-3">소고기(닉네임)</dd>
-								<dt class="mt-3">최상의 우육을 선별하여 명월관의 노하우로 숙성 시켰습니다. 이 특별한 한우 모둠 한상은 명월관의 최고급 참숯과 만나 은은한 참숯의 향과 함께 입안 가득 깊은 풍미와 감칠맛을 느끼실수 있습니다.(리뷰내용)</dt>
-							</dl>
-						</td>
-				    </tr>
-					<tr>
-						<td><img src="https://www.walkerhill.com/assets/vistawalkerhillseoul/global/images/etc/menu_myongwolgwan0102.jpg" class="d-block" alt="..."></td>
-						<td>
-							<dl class="row">
-								<dt class="mt-3">★★★★★(별점)</dt>
-					        	<dd class="mt-3">소고기(닉네임)</dd>
-								<dt class="mt-3">최상의 우육을 선별하여 명월관의 노하우로 숙성 시켰습니다. 이 특별한 한우 모둠 한상은 명월관의 최고급 참숯과 만나 은은한 참숯의 향과 함께 입안 가득 깊은 풍미와 감칠맛을 느끼실수 있습니다.(리뷰내용)</dt>
-							</dl>
-						</td>
-				    </tr>
-					<tr>
-						<td><img src="https://www.walkerhill.com/assets/vistawalkerhillseoul/global/images/etc/menu_myongwolgwan0102.jpg" class="d-block" alt="..."></td>
-						<td>
-							<dl class="row">
-								<dt class="mt-3">★★★★★(별점)</dt>
-					        	<dd class="mt-3">소고기(닉네임)</dd>
-								<dt class="mt-3">최상의 우육을 선별하여 명월관의 노하우로 숙성 시켰습니다. 이 특별한 한우 모둠 한상은 명월관의 최고급 참숯과 만나 은은한 참숯의 향과 함께 입안 가득 깊은 풍미와 감칠맛을 느끼실수 있습니다.(리뷰내용)</dt>
-							</dl>
-						</td>
-				    </tr>
-					<tr>
-						<td><img src="https://www.walkerhill.com/assets/vistawalkerhillseoul/global/images/etc/menu_myongwolgwan0102.jpg" class="d-block" alt="..."></td>
-						<td>
-							<dl class="row">
-								<dt class="mt-3">★★★★★(별점)</dt>
-					        	<dd class="mt-3">소고기(닉네임)</dd>
-								<dt class="mt-3">최상의 우육을 선별하여 명월관의 노하우로 숙성 시켰습니다. 이 특별한 한우 모둠 한상은 명월관의 최고급 참숯과 만나 은은한 참숯의 향과 함께 입안 가득 깊은 풍미와 감칠맛을 느끼실수 있습니다.(리뷰내용)</dt>
-							</dl>
-						</td>
-				    </tr>
-					<tr>
-						<td><img src="https://www.walkerhill.com/assets/vistawalkerhillseoul/global/images/etc/menu_myongwolgwan0102.jpg" class="d-block" alt="..."></td>
-						<td>
-							<dl class="row">
-								<dt class="mt-3">★★★★★(별점)</dt>
-					        	<dd class="mt-3">소고기(닉네임)</dd>
-								<dt class="mt-3">최상의 우육을 선별하여 명월관의 노하우로 숙성 시켰습니다. 이 특별한 한우 모둠 한상은 명월관의 최고급 참숯과 만나 은은한 참숯의 향과 함께 입안 가득 깊은 풍미와 감칠맛을 느끼실수 있습니다.(리뷰내용)</dt>
-							</dl>
-						</td>
-				    </tr>
-					<tr>
-						<td><img src="https://www.walkerhill.com/assets/vistawalkerhillseoul/global/images/etc/menu_myongwolgwan0102.jpg" class="d-block" alt="..."></td>
-						<td>
-							<dl class="row">
-								<dt class="mt-3">★★★★★(별점)</dt>
-					        	<dd class="mt-3">소고기(닉네임)</dd>
-								<dt class="mt-3">최상의 우육을 선별하여 명월관의 노하우로 숙성 시켰습니다. 이 특별한 한우 모둠 한상은 명월관의 최고급 참숯과 만나 은은한 참숯의 향과 함께 입안 가득 깊은 풍미와 감칠맛을 느끼실수 있습니다.(리뷰내용)</dt>
-							</dl>
-						</td>
-				    </tr>
-					<tr>
-						<td><img src="https://www.walkerhill.com/assets/vistawalkerhillseoul/global/images/etc/menu_myongwolgwan0102.jpg" class="d-block" alt="..."></td>
-						<td>
-							<dl class="row">
-								<dt class="mt-3">★★★★★(별점)</dt>
-					        	<dd class="mt-3">소고기(닉네임)</dd>
-								<dt class="mt-3">최상의 우육을 선별하여 명월관의 노하우로 숙성 시켰습니다. 이 특별한 한우 모둠 한상은 명월관의 최고급 참숯과 만나 은은한 참숯의 향과 함께 입안 가득 깊은 풍미와 감칠맛을 느끼실수 있습니다.(리뷰내용)</dt>
-							</dl>
-						</td>
-				    </tr>
+					<c:forEach items="${reviewList }" var="reviewList">
+						<tr>
+							<td><img src="https://www.walkerhill.com/assets/vistawalkerhillseoul/global/images/etc/menu_myongwolgwan0102.jpg" class="d-block" alt="..."></td>
+							<td>
+								<dl class="row">
+									<dt class="mt-3">★★★★☆(별점)</dt>
+						        	<dd class="mt-3">${reviewList.m_nick }</dd>
+									<dt class="mt-3">${reviewList.rv_comment }</dt>
+								</dl>
+							</td>
+					    </tr>
+				    </c:forEach>
 					<tr>
 						<td><img src="https://www.walkerhill.com/assets/vistawalkerhillseoul/global/images/etc/menu_myongwolgwan0102.jpg" class="d-block" alt="..."></td>
 						<td>

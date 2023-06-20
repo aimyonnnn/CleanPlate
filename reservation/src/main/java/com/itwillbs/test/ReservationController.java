@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.itwillbs.test.service.ReservationService;
 import com.itwillbs.test.vo.RestaurantVO;
+import com.itwillbs.test.vo.ReviewVO;
 
 
 @Controller
@@ -35,7 +36,14 @@ public class ReservationController {
 	
 	// 가게 상세 페이지
 	@GetMapping("reservationStore")
-	public String reservationStore() {
+	public String reservationStore(Model model) {
+		
+		int res_idx = 1;
+		
+		// 각 가게의 리뷰 불러오기
+		List<ReviewVO> reviewList = service.getReviewList(res_idx);
+		model.addAttribute("reviewList",reviewList);
+		
 		return "reservation/reservation_store";
 	}
 	

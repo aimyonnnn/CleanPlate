@@ -34,5 +34,11 @@
 					 WHERE r_idx = #{r_idx}
 	</update>
 	<!-- 양도 거래 완료 시 예약테이블의 판매자 예약 내역을 구매자로 업데이트 처리 -->
-
+	
+	<select id="selectReviewList" resultType="com.itwillbs.test.vo.ReviewVO">
+		SELECT rv_idx, rv_scope, rv_comment, rv_img, res_idx, rv.m_idx, m.m_nick
+		FROM reviews rv JOIN members m
+		ON rv.m_idx = m.m_idx
+		WHERE res_idx = #{res_idx};
+	</select>	
 </mapper>
