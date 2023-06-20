@@ -92,10 +92,27 @@
                     </tbody>
                 </table>  
                 
-                <!-- 작동하는지 넣어본 것입니다. 알맞게 작동되면 페이지 완료후 고치기 -->
-                  <h1>Member Like</h1>
-				  <p>식당 이름: <a href="restaurantDetail.jsp">식당 이름</a></p>
-				  <p>식당 정보: 식당 정보 내용</p>             
+               <!-- 작동하는지 넣어본 것입니다. 알맞게 작동되면 페이지 완료후 고치기 -->
+				<table>
+        			<thead>
+			            <tr>
+			                <th>Like Index</th>
+			                <th>Restaurant Index</th>
+			                <th>Member ID</th>
+			                <th>Liked Status</th>
+			            </tr>
+			        </thead>
+			        <tbody>
+				            <c:forEach var="like" items="${memberLike}">
+				                <tr>
+				                    <td>${like.like_idx}</td>
+				                    <td>${like.res_idx}</td>
+				                    <td>${like.m_id}</td>
+				                    <td>${like.liked}</td>
+				                </tr>
+				            </c:forEach>
+				        </tbody>
+				    </table>                
             </div>
             <!-- 내용 구역 -->
 

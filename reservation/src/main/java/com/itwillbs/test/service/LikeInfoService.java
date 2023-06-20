@@ -1,12 +1,14 @@
 package com.itwillbs.test.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.itwillbs.test.mapper.LikeInfoMapper;
+import com.itwillbs.test.vo.LikeInfoVO;
 
 @Service
 public class LikeInfoService {
@@ -21,7 +23,10 @@ public class LikeInfoService {
 	  map.put("m_id", m_id);
 	  map.put("liked", liked);
 	  mapper.toggleLikeStatus(map);
-	  
-   };
+   }
+   
+	  public List<LikeInfoVO> getMemberLike() {
+			return mapper.selectLikeList();
+	};
     
 }

@@ -1,8 +1,12 @@
 package com.itwillbs.test;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -10,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.itwillbs.test.service.LikeInfoService;
+import com.itwillbs.test.vo.LikeInfoVO;
 
 @Controller
 public class LikeInfoController {
@@ -33,5 +38,15 @@ public class LikeInfoController {
 
         return response;
     }
+    
+	// 찜한 가게 목록 조회
+    @GetMapping("/memberLike")
+    public String memberLike(Model model) {
+        List<LikeInfoVO> memberLike = likeInfoService.getMemberLike();
+        model.addAttribute("memberLike", memberLike);
+        return "member/memberLike";
+    }
+	
+    
 
 }

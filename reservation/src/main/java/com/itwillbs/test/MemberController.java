@@ -98,11 +98,11 @@ public class MemberController {
 		return "member/memberRSList";
 	}
 	
-	// 내가 찜한 식당
-	@GetMapping("memberLike")
-	public String memberLike() {
-		return "member/memberLike";
-	}
+//	// 내가 찜한 식당
+//	@GetMapping("memberLike")
+//	public String memberLike() {
+//		return "member/memberLike";
+//	}
 	
 	// 내가 쓴 리뷰
 	@GetMapping("memberReview")

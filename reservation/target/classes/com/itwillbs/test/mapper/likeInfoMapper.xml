@@ -7,4 +7,8 @@
         INSERT INTO like_info (res_idx, m_id, liked)
         VALUES (#{res_idx}, #{m_id}, #{liked})
     </insert>
+    
+    <select id="selectLikeList" resultType="com.itwillbs.test.vo.LikeInfoVO"> 
+    	SELECT * FROM like_info
+     </select>
 </mapper>

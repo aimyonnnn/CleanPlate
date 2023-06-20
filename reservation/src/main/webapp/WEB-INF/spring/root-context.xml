@@ -13,14 +13,14 @@
 		<property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
 		
 		<!-- 서버 -->
-		<property name="jdbcUrl" value="jdbc:mysql://itwillbs.com:3306/c5d2302t2"></property>
-		<property name="username" value="c5d2302t2"></property>
-		<property name="password" value="1234"></property>
+<!-- 		<property name="jdbcUrl" value="jdbc:mysql://itwillbs.com:3306/c5d2302t2"></property> -->
+<!-- 		<property name="username" value="c5d2302t2"></property> -->
+<!-- 		<property name="password" value="1234"></property> -->
 		
 		<!-- 집에서 따로 작업하고 싶을 땐 밑에꺼 주석 풀고 사용 -->
-<!-- 		<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/CleanPlate"></property> -->
-<!-- 		<property name="username" value="root"></property> -->
-<!-- 		<property name="password" value="1234"></property> -->
+		<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/CleanPlate"></property>
+		<property name="username" value="root"></property>
+		<property name="password" value="1234"></property>
 
 	</bean>
 	
