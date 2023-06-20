@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,6 +20,7 @@
    	<!-- 공통 상단바 구역 -->
 <%@ include file="../common/common_header.jsp" %>
    	<!-- 공통 상단바 구역 -->
+
 
     <!-- 제목 구역 -->
 	<div class="container">
@@ -45,11 +47,13 @@
 		    <h2 style="margin-left: 40px; margin-top: 30px;">예약내역</h2>
 		        <!-- 드롭다운 시작 -->
 		        <div class="dropdown" style="margin-left: 40px;">
-				  <select class="form-select form-select mb-3" aria-label=".form-select example" style="width: 130px;">
-					  <option selected value="planToVisit">방문예정</option>
-					  <option value="visited">방문완료</option>
-					  <option value="cancelNoshow">취소/노쇼</option>
-					</select>
+						<select class="form-select form-select mb-3" id="status" aria-label=".form-select example" style="width: 180px;">
+							<option selected value="">전체상태</option>
+							<option value="방문예정">방문예정</option>
+							<option value="방문완료">방문완료</option>
+							<option value="취소">취소</option>
+							<option value="양도">양도</option>
+						</select>
 				</div>
 				<!-- 드롭다운 끝 -->
 			</div>
@@ -80,22 +84,35 @@
                         </tr>
                     </thead>
                     <tbody>
+                    <c:forEach items="${resList }" var="resList" >
                         <tr>
-                            <td>000001</td>
-                            <td>동백키친</td>
-                            <td>23-05-23</td>
-                            <td>17:00</td>
-                            <td>방문예정</td>
-                            <td><button type="button" class="btn btn-warning" style="color: white;" data-bs-toggle="modal" data-bs-target="#rsListModal">상세보기</button></td>
+                            <td>${resList.r_idx }</td>
+                            <td>${resList.res_name }</td>
+                            <td><fmt:formatDate value="${resList.r_date }" pattern="yy-MM-dd"/></td>
+                            <td><fmt:formatDate value="${resList.r_date }" pattern="HH:mm"/></td>
+                            <td>
+	                            <c:choose>
+	                           		<c:when test="${resList.r_status eq 1 }">
+	                           			방문예정
+	                           		</c:when>
+	                           		<c:when test="${resList.r_status eq 2 }">
+	                           			방문완료
+	                           		</c:when>
+	                           		<c:when test="${resList.r_status eq 3 }">
+	                           			취소
+	                           		</c:when>
+	                           		<c:otherwise>
+	                           			양도
+	                           		</c:otherwise>
+	                           	</c:choose>
+                            </td>
+                            <td>
+                            <button type="button" class="btn btn-warning" style="color: white;" data-bs-toggle="modal" data-bs-target="#rsListModal${resList.r_idx }">상세보기</button>
+                            <button type="button" class="btn btn-outline-warning" style="margin-left: 10px;" data-bs-toggle="modal" data-bs-target="#assignmentModal${resList.r_idx }">예약 양도하기</button>
+                            </td>
+                            
                         </tr>
-                        <tr>
-                            <td>000002</td>
-                            <td>동백키친</td>
-                            <td>23-05-24</td>
-                            <td>12:00</td>
-                            <td>방문예정</td>
-                            <td><button type="button" class="btn btn-warning" style="color: white;" data-bs-toggle="modal" data-bs-target="#rsListModal">상세보기</button></td>
-                        </tr>
+                   </c:forEach>
                     </tbody>
                 </table> 
             </div>
@@ -103,7 +120,8 @@
     </div>
  
  	<!-- 예약내역 출력 첫번째 모달창 -->
-	<div class="modal fade" id="rsListModal" tabindex="-1" aria-labelledby="rsListModalLabel" aria-hidden="true">
+ 	<c:forEach var="resList" items="${resList }">
+	 <div class="modal fade" id="rsListModal${resList.r_idx }" tabindex="-1" aria-labelledby="rsListModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg">
 	    	<div class="modal-content">
 	    		<div class="modal-header">
@@ -132,49 +150,70 @@
 					        	<!-- 예약내역 테이블 시작 -->
 					            <table class="mt-3 table d-flex justify-content-center">
 					                <tbody>
+										<tr>
+					                        <th>예약번호</th>
+					                        <td>${resList.r_idx }</td>
+					                    </tr>
 					                    <tr>
 					                        <th>날짜</th>
-					                        <td>2023년 05월 23일</td>
+					                        <td><fmt:formatDate value="${resList.r_date }" pattern="yyyy년MM월dd일"/></td>
 					                    </tr>
 					                    <tr>
 					                        <th>시간</th>
-					                        <td>오후 17:00</td>
+					                        <td><fmt:formatDate value="${resList.r_date }" pattern="HH시mm분"/></td>
 					                    </tr>
 					                    <tr>
 					                        <th>인원</th>
-					                        <td>5명</td>
+					                        <td>${resList.r_personnel } 명</td>
 					                    </tr>
 					                    <tr>
 					                        <th>예약자</th>
-					                        <td>홍길동</td>
+					                        <td>${resList.m_name } 님</td>
 					                    </tr>
 					                    <tr>
-					                        <th>[오시는길]</th>
-					                        <td>부산광역시 해운대구 달맞이길 117번가길 85</td>
+					                        <th>예약코스</th>
+					                        <td>${resList.cr_type }</td>
 					                    </tr>
 					                    <tr>
-					                        <th>[편의시설]</th>
-					                        <td>
-					                        	발렛비<br>
-					                            -런치 1시간 30분 기준 3,000원<br>
-					                            -디너 4시간 기준 5,000원
-					                        </td>
+					                        <th>예약비용</th>
+					                        <td>${resList.r_amount } 원</td>
 					                    </tr>
 					                    <tr>
-					                        <th>[안내사항]</th>
-					                        <td>
-					                            예약 변경 및 취소는 예약일 기준 일주일 전까지만 가능합니다.<br>
-					                            그 이후로는 환불 및 날짜변경이 불가하니 변동사항 있으실 경우<br>
-					                            사전에 레스토랑으로 연락 주시기 바랍니다.
-					                        </td>
+					                        <th>테이블 수</th>
+					                        <td>${resList.r_tables } 개</td>
 					                    </tr>
+					                    <c:forEach var="rsList" items="${rsList }">
+						                   <c:if test="${rsList.res_idx eq resList.res_idx }">
+						                    <tr>
+						                        <th>[오시는길]</th>
+						                        <td>
+					                        		${rsList.res_address } <br>
+					                        		${rsList.res_detailAddress }
+						                        </td>
+						                    </tr>
+						                    <tr>
+						                        <th>[편의시설]</th>
+						                        <td>
+						                        	${rsList.res_amenity } <br>
+					                        		${rsList.res_amenity_info }
+						                        </td>
+						                    </tr>
+						                    <tr>
+						                        <th>[안내사항]</th>
+						                        <td>
+						                            예약 변경 및 취소는 예약일 기준 일주일 전까지만 가능합니다.<br>
+						                            그 이후로는 환불 및 날짜변경이 불가하니 변동사항 있으실 경우<br>
+						                            사전에 레스토랑으로 연락 주시기 바랍니다.
+						                        </td>
+						                    </tr>
+						                    </c:if>
+					                    </c:forEach>
 		                			</tbody>
 		           				 </table>
 		            			<!-- 예약내역 테이블 끝 -->
 		        			</div>
 						    <div class="d-flex justify-content-center">
 				        		<button type="button" class="btn btn-outline-warning" id="cancelButton">예약 취소하기</button>
-				        		<button type="button" class="btn btn-outline-warning" style="margin-left: 10px;" data-bs-toggle="modal" data-bs-target="#assignmentModal">예약 양도하기</button>
 				        		<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="margin-left: 10px;">닫기</button>
 						    </div>
 					</div>
@@ -185,10 +224,12 @@
 		</div>
 	</div>
 </div>
+</c:forEach>
 	<!-- 예약내역 출력 첫번째 모달창 끝 -->
  	
  	<!-- 두번째 양도 관련 모달창 -->
-	<div class="modal fade" id="assignmentModal" tabindex="-1" aria-labelledby="assignmentModalLabel" aria-hidden="true">
+ 	<c:forEach var="resList" items="${resList }">
+	<div class="modal fade" id="assignmentModal${resList.r_idx }" tabindex="-1" aria-labelledby="assignmentModalLabel" aria-hidden="true">
 	  <div class="modal-dialog modal-lg">
 	    <div class="modal-content">
 	      <div class="modal-header">
@@ -208,11 +249,26 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>000001</td>
-                            <td>동백키친</td>
-                            <td>23-05-23</td>
-                            <td>17:00</td>
-                            <td>방문예정</td>
+                            <td>${resList.r_idx }</td>
+                            <td>${resList.res_name }</td>
+                            <td><fmt:formatDate value="${resList.r_date }" pattern="yy-MM-dd"/></td>
+                            <td><fmt:formatDate value="${resList.r_date }" pattern="HH:mm"/></td>
+                            <td>
+	                            <c:choose>
+	                           		<c:when test="${resList.r_status eq 1 }">
+	                           			방문예정
+	                           		</c:when>
+	                           		<c:when test="${resList.r_status eq 2 }">
+	                           			방문완료
+	                           		</c:when>
+	                           		<c:when test="${resList.r_status eq 3 }">
+	                           			취소
+	                           		</c:when>
+	                           		<c:otherwise>
+	                           			양도
+	                           		</c:otherwise>
+	                           	</c:choose>
+                            </td>
                         </tr>
                    </tbody>
             </table>
@@ -227,6 +283,7 @@
 	    </div>
 	  </div>
 	</div>
+	</c:forEach>
 	<!-- 두번째 양도 관련 모달창 끝 -->
  	
  	
@@ -247,6 +304,22 @@
 	 		window.location.href = "memberRSList";
 	 	});
  	</script>
+ 	<script type="text/javascript">
+	$(document).ready(function() {
+		  $("#status").on("change", function() {
+		    var selectedStatus = $("#status").val();
+	
+		    $("table tbody tr").each(function() {
+		      var statusCell = $(this).find("td:nth-child(5)");
+		      var status = statusCell.text().trim();
+	
+		      var showRow = (selectedStatus === "" || status === selectedStatus);
+	
+		      $(this).toggle(showRow);
+		    });
+		  });
+		});
+	</script>
  
     <!-- 하단 부분 include 처리영역 -->
     <hr class="mt-5">

@@ -3,6 +3,7 @@ package com.itwillbs.test;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.itwillbs.test.service.MemberService;
 import com.itwillbs.test.vo.AssignmentVO;
 import com.itwillbs.test.vo.MemberVO;
+import com.itwillbs.test.vo.ReservationVO;
+import com.itwillbs.test.vo.RestaurantVO;
 
 @Controller
 public class MemberController {
@@ -94,7 +97,15 @@ public class MemberController {
 	
 	// 예약 내역 클릭시 
 	@GetMapping("memberRSList")
-	public String memberRSList() {
+	public String memberRSList(Model model ,HttpSession session) {
+		
+		String sId = (String)session.getAttribute("sId");
+		List<ReservationVO> resList = service.getMemberReservationList(sId);
+		List<RestaurantVO> rsList = service.getMemberRestaurant(sId);
+		
+		model.addAttribute("resList", resList);
+		model.addAttribute("rsList", rsList);
+		
 		return "member/memberRSList";
 	}
 	

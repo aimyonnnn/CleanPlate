@@ -17,6 +17,6 @@ public class ReservationVO {
 	private int r_status; // 예약 상태 (출력할때)
 	private Timestamp r_date; // 예약 날짜
 	private String r_request; // 요청사항
-//	private int res_idx; // 레스토랑 번호
+	private int res_idx; // 레스토랑 번호
 	private String res_name; // 식당 이름 (점주 예약 관리 페이지 식당이름 출력을 위해)
 }

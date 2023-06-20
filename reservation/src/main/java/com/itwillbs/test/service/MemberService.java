@@ -1,11 +1,15 @@
 package com.itwillbs.test.service;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.itwillbs.test.mapper.MemberMapper;
 import com.itwillbs.test.vo.MemberVO;
+import com.itwillbs.test.vo.ReservationVO;
+import com.itwillbs.test.vo.RestaurantVO;
 
 @Service
 public class MemberService {
@@ -46,5 +50,15 @@ public class MemberService {
 	// 카카오 로그인 시 회원 email을 조회 후 m_id를 리턴받아 세션id에 저장
 	public MemberVO getMemberId(String email) {
 		return mapper.selectMemberId(email);
+	}
+	
+	// 멤버 예약 목록
+	public List<ReservationVO> getMemberReservationList(String sId) {
+		return mapper.selectMemberReservation(sId) ;
+	}
+	
+	// 멤버가 예약한 레스토랑
+	public List<RestaurantVO> getMemberRestaurant(String sId) {
+		return mapper.selectMemberRestaurant(sId) ;
 	}
 }
