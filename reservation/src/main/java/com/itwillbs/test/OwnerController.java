@@ -16,20 +16,15 @@ import com.itwillbs.test.vo.*;
 public class OwnerController {
 	
 	@Autowired
-	private StoreService service;
+	private RestaurantService service;
 	@Autowired
 	private ReservationService resService;
 	
-	// 가게 매출관리 DashBoard
-	@GetMapping("storeDashBoard")
-	public String storeDashBoard() {
-		return "owner/storeDashBoard";
-	}
 	
 	/* 예약관리 페이지 */
 	//owner의 예약관리 페이지 이동 Mapping
-	@GetMapping("StoreReservation")
-	public String StoreReservation(Model model, HttpSession session) {
+	@GetMapping("restaurantReservation")
+	public String restaurantReservation(Model model, HttpSession session) {
 		
 		List<ReservationVO> resList = service.getReservationList((String)session.getAttribute("sId"));
 		List<Reservation_DetailVO> RDList = service.getRDList((String)session.getAttribute("sId"));
@@ -41,32 +36,26 @@ public class OwnerController {
 		model.addAttribute("resList",resList);
 		model.addAttribute("RDList",RDList);
 		
-		return "owner/store_Reservation";
-	}
-	
-	//owner의 예약관리 페이지 이동 Post 방식 Mapping
-	@PostMapping("StoreReservation")
-	public String StoreReservationPost() {
-		return "owner/store_Reservation";
+		return "owner/restaurantReservation";
 	}
 	
 	/* 매출관리 페이지 */
 	//그래프
 	@GetMapping("ownerSalesGraph")
-	public String storeSalesGraph(){
+	public String ownerSalesGraph(){
 		return "owner/ownerSalesGraph";
 	}
 	
 	/* 식당관리 페이지 */
 	//owner의 식당추가로 이동 Mapping
-	@GetMapping("StoreInsertPage")
-	public String StoreInsertPage() {
-		return "owner/store_InsertPage";
+	@GetMapping("restaurantInsertPage")
+	public String restaurantInsertPage() {
+		return "owner/restaurantInsertPage";
 	}
 	
 	// 가게 추가 클릭시 가게등록 작업
-	@PostMapping("storeInsertPro")
-	public String storeInsertPro(RestaurantVO restaurant, Model model) {
+	@PostMapping("restaurantInsertPro")
+	public String restaurantInsertPro(RestaurantVO restaurant, Model model) {
 		System.out.println(restaurant);
 		
 		int insertCount = service.registStore(restaurant);
@@ -75,7 +64,7 @@ public class OwnerController {
 		// 실패시 fail_back.jsp 가게등록 실패 출력
 		if(insertCount > 0) {
 			
-			return "redirect:/storeInsertSucess";
+			return "redirect:/restaurantInsertSucess";
 		} else {
 			
 			model.addAttribute("msg", "가게 등록 실패!");
@@ -84,33 +73,33 @@ public class OwnerController {
 	}
 	
 	// 가게 등록 성공시 StoreList로 리다이렉트
-	@GetMapping("storeInsertSucess")
-	public String storeInsertSucess() {
-		return "redirect:/StoreList";
+	@GetMapping("restaurantInsertSucess")
+	public String restaurantInsertSucess() {
+		return "redirect:/restaurantList";
 	}
 	
 	//owner의 식당리스트로 이동 Mapping
 	// 가게 목록 조회
-	@GetMapping("ownerList")
-	public String StoreList(Model model) {
+	@GetMapping("restaurantList")
+	public String restaurantList(Model model) {
 		List<RestaurantVO> restaurantList = service.getRestaurantList();
 		model.addAttribute("restaurantList", restaurantList);
-		return "owner/ownerList";
+		return "owner/restaurantList";
 	}
 	
 	//owner의 가게 수정 페이지로 이동 Mapping
-	@GetMapping("StoreUpdatePage")
-	public String StoreUpdatePage(@RequestParam String res_brn, Model model) {
+	@GetMapping("restaurantUpdatePage")
+	public String restaurantUpdatePage(@RequestParam String res_brn, Model model) {
 		
 		// 가게 상세 정보 저장
 		RestaurantVO restaurant = service.getRestaurantInfo(res_brn);
 		
 		model.addAttribute("restaurant", restaurant);
-		return "owner/store_UpdatePage";
+		return "owner/restaurantUpdatePage";
 	}
 	// 가게 정보 수정 작업
-	@PostMapping("storeUpdate")
-	public String storeUpdate(RestaurantVO restaurant, Model model) {
+	@PostMapping("restaurantUpdate")
+	public String restaurantUpdate(RestaurantVO restaurant, Model model) {
 		
 		// 가게 정보 수정
 		int updateCount = service.ModifyRestaurant(restaurant);
@@ -126,10 +115,7 @@ public class OwnerController {
 			return "fail_back";
 			
 		}
-		
-		
 	}
-	
 	
 	//owner의 식당마이페이지에서 수정후 이동 Mapping
 	@PostMapping("StoreMypagePro")

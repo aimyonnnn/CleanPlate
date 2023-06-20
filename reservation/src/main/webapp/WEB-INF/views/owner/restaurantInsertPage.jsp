@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -86,17 +88,16 @@
             <!-- 왼쪽 사이드바 버튼들-->
             <!-- 클릭된 버튼은 active 표시함-->
             <div class="btn-group-vertical btn-group-lg d-flex align-self-start" role="group" aria-label="Vertical button group">
-				<button type="button" class="btn btn-outline-warning p-3" onclick="location.href='CeoMypage'">내 정보</button>
-                <button type="button" class="btn btn-outline-warning active p-3" onclick="location.href='StoreList'">가게리스트 </button>
-                <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='StoreReservation'">예약관리</button>
-                <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='StoreSales'">매출관리</button>
-                <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='CeoMypageDelete'">회원탈퇴</button>
+					<button type="button" class="btn btn-outline-warning text-black p-3" onclick="location.href='ownerMypage'">내 정보</button>
+                    <button type="button" class="btn btn-outline-warning  active text-black p-3" onclick="location.href='restaurantList'">가게리스트 </button>
+                    <button type="button" class="btn btn-outline-warning text-black p-3" onclick="location.href='restaurantReservation'">예약관리</button>
+                    <button type="button" class="btn btn-outline-warning text-black p-3" onclick="location.href='ownerWithdrawal'">회원탈퇴</button>
             </div>
         </div>
             <!-- 내용 구역 -->
             <div class="col-10">
                 <!-- 가게내용 페이지 시작 -->
-                   <form action="storeInsertPro" method="post">
+                   <form action="restaurantInsertPro" method="post">
                 	<table class="table" style="margin-left: 70px; width: 58%;">
 						<tbody>
                             <tr>
@@ -129,10 +130,10 @@
 								<td>
 								<!-- 다음 api 사용 -->
 								<div class="input-group mb-3">
-									<input type="text" id="postcode" class="form-control" name="res_postcode" placeholder="우편번호" aria-label="Recipient's username" aria-describedby="button-addon2">
-									<input type="button" onclick="DaumPostcode()" value="우편번호 찾기" class="btn btn-outline-secondary" id="button-addon2">
+									<input type="text" class="form-control" id="address" name="res_address" placeholder="주소" readonly>
+									<input type="button" onclick="DaumPostcode()" value="주소 찾기" class="btn btn-outline-secondary" id="button-addon2">
 								</div>									
-                                <input type="text" class="form-control" id="address" name="res_address" placeholder="주소" readonly>
+                                
 								<div class="input-group mb-3 mt-2">
                                     <input type="text" class="form-control" id="detailAddress" name="res_detailAddress" placeholder="상세주소"> 
 									<input type="text" class="form-control" id="extraAddress" placeholder="참고항목">
@@ -147,16 +148,13 @@
 						    	<td>
 	                                <div class="row">
 	                                    <div class="col-6">
+	                                    	<!-- res_openinghours -->
 	                                    	<!-- 영업 시작 시간 -->
 	                                        <input class="form-control timepicker" id="timepicker_open" type="text" name="res_open"> 
-<!-- 	                                        <input class="form-control timepicker" id="timepicker_open" type="text">  -->
-<!-- 	                                        <input type="text" id="res_open" name="res_open"> -->
 	                                    </div>
 	                                    <div class="col-6">
 	                                   		 <!-- 영업 마감 시간 -->
 	                                        <input class="form-control timepicker" id="timepicker_close" type="text" name="res_close"> 
-<!-- 	                                        <input class="form-control timepicker" id="timepicker_close" type="text">  -->
-<!-- 	                                        <input type="text" id="res_close" name="res_close"> -->
 	                                    </div>
 	
 	                                </div>
@@ -167,7 +165,7 @@
 		                                $(document).ready(function () {
 			                                $('input.timepicker').timepicker({
 			                                    timeFormat: 'HH:mm',
-			                                    interval: 60, // 시간 간격
+			                                    interval: 30, // 시간 간격
 			                                    minTime: '09', // 최소 시간
 			                                    maxTime: '22:00', // 최대 시간
 			                                    defaultTime: '09', // 기본값
@@ -177,9 +175,6 @@
 			                                    scrollbar: true
 			                                });
 			                                
-// 			                                $('#timepicker_open').on('change', function() {
-// 			                                  $('#res_open').val($(this).val() + ":00");
-// 			                                });
 			                                
 		                                }); 
 	                                </script>
@@ -192,6 +187,7 @@
 	                               	   <div class="col-2">
 	                                	  <input type="checkbox" id="nobreak"> 없음
 	                                   </div>
+	                                   <!-- res_breaktime -->
 	                               	   <div class="col-5">
 	                                       <input class="form-control timepicker2" type ="text" name="res_breakstart" id="res_breakstart"> <!-- 브레이크 타임 시작 시간 -->
 	                                   </div>
@@ -225,16 +221,15 @@
 	                                </script>
                                 
                             </tr>
-						    영업 시간 끝
 						    <tr>
-						    	<th scope="row">하루 예약 인원수</th>
-						    	<td><input type="text" class="form-control" name="res_headcount" placeholder="숫자만 입력"  onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"></td>
+						    	<th scope="row">총 테이블 수</th>
+						    	<td><input type="text" class="form-control" name="res_totaltable" placeholder="숫자만 입력"  onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"></td>
 						    </tr>
 						    <tr>
-                                <th scope="row">정기휴무일</th> <!-- select box -->
+                                <th scope="row">휴무일</th> <!-- select box -->
 						    	<td>
                                     <div class="dropdown">
-                                        <select name="res_holiday" class="form-select form-select" aria-label=".form-select example" style="width: 180px;">
+                                        <select name="res_dayoff" class="form-select form-select" aria-label=".form-select example" style="width: 180px;">
 											<option selected value="없음">없음</option>
 											<option value="월요일">월요일</option>
 											<option value="화요일">화요일</option>
@@ -277,9 +272,13 @@
 						    	</td>
 						    </tr>
 						    <tr>
-                                <th scope="row"><label for="res_menu">메뉴</label></th>
+						    	<th scope="row"><label for="res_amenity_info">편의시설 설명</label></th>
+						    	<td colspan="2"><textarea class="form-control" rows="5" cols="50" name="res_amenity_info" id="res_amenity_info"></textarea></td>
+						    </tr>
+						    <tr>
+                                <th scope="row"><label for="menu">메뉴</label></th>
 						    	<td>
-						    		<button type="button" id="res_menu" class="btn btn-warning" style="color: white;"  data-bs-toggle="modal" data-bs-target="#menu">메뉴 추가</button>
+						    		<button type="button" id="menu" class="btn btn-warning" style="color: white;"  data-bs-toggle="modal" data-bs-target="#menu">메뉴 추가</button>
 							 		<div class="row mt-3 align-items-center">
 							            <table class="table">
 							                <thead>
@@ -313,8 +312,15 @@
 						    	</td>
 						    </tr>
 						    <tr>
-                                <th scope="row"><label for="birth">가게사진</label></th>
-						    	<td><input type="file" name="res_photo" class="form-control" style="color: white;"></td>
+                                <th scope="row">
+                                	<label for="birth">가게사진</label><br>
+                                	사진 1장 <br>선택 필수
+                                </th>
+						    	<td>
+						    		<input type="file" name="res_photo1" class="form-control" style="color: white;"><br>
+						    		<input type="file" name="res_photo2" class="form-control" style="color: white;"><br>
+						    		<input type="file" name="res_photo3" class="form-control" style="color: white;"><br>
+						    	</td> 
 						    </tr>
                             <tr>
                                 <th scope="row"><label for="res_intro">가게소개</label></th>
@@ -387,7 +393,6 @@
                 }
 
                 // 주소 정보를 해당 필드에 넣는다.
-                document.getElementById('postcode').value = data.zonecode;
                 document.getElementById("address").value = addr;
                 // 커서를 상세주소 필드로 이동한다.
                 document.getElementById("detailAddress").focus();
