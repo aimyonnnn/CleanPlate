@@ -10,7 +10,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>MyPage</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-		<link href="top.css" rel="stylesheet" type="text/css">
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
 		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
     <!-- 이부분은 지우면 안됩니다 -->
@@ -137,7 +136,7 @@
 									<input type="text" class="form-control" id="extraAddress" placeholder="참고항목">
 								</div>
 								<!-- 주소 입력시 지도 표시 -->
-								<div id="map" style="width:300px;height:300px;margin-top:10px;display:none"></div>
+								<div id="map" style="width:300px;height:300px;margin-top:10px;"></div>
 								</td>
 						    </tr>
 						    <!-- 영업 시간 시작 -->
@@ -354,7 +353,7 @@
         map: map
     });
 
-
+	// 주소 검색, 지도 표시
     function DaumPostcode() {
         new daum.Postcode({
             oncomplete: function(data) {
@@ -415,9 +414,30 @@
                 });
             }
         }).open();
+        
     }
+	
+ 	// 주소로 좌표를 검색합니다
+    geocoder.addressSearch(document.getElementById("address").value, function(result, status) {
+
+        // 정상적으로 검색이 완료됐으면 
+         if (status === kakao.maps.services.Status.OK) {
+
+            var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+            // 결과값으로 받은 위치를 마커로 표시합니다
+            var marker = new kakao.maps.Marker({
+                map: map,
+                position: coords
+            });
+
+            // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+            map.setCenter(coords);
+        } 
+    });   
 </script>
-<!-- 다음 api -->        
+<!-- 다음 api -->    
+
 		</div>
         <!-- 가게내용 페이지 끝 -->
 
