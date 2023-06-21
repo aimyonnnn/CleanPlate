@@ -4,11 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>회원 관리</title>
 </head>
 <body>
   <div class="py-5 text-center">
-    <h2>회원 정보 수정</h2>
+    <h2>회원 관리</h2>
   </div>
 <div class="container">
 

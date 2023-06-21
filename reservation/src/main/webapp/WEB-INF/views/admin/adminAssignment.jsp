@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <!DOCTYPE html>
 <html>
   <head>
@@ -7,7 +8,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1">
 	<%--line-awesome icon 사용을 위한 스타일 시트 --%>
 	<link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
-    <title>admin Assignment</title>
+    <title>양도 관리</title>
     <link href="${pageContext.request.contextPath }/resources/css/adminDetail.css" rel="stylesheet" type="text/css"/>
     <link rel="shortcut icon" href="#">
   </head>
@@ -107,6 +108,7 @@
         <div class="page-header">
           <div>
             <h1>양도 관리</h1>
+            <br>
             <small>양도 관리 페이지</small>
           </div>
         </div> 
@@ -115,8 +117,7 @@
       <div class="title row">
         <div class="col-7">
           <h5 class="title6">총 양도 건수 :</h5>
-          <h5 class="title6">15</h5>
-          <%-- DB 연동 후 th:text="${size() 메서드 이용해서 total 값 받아 추가}" --%>
+          <h5 class="title6">${assignmentList.size() } 건</h5>
         </div>
       </div>
     </div>
@@ -126,26 +127,35 @@
         <thead>
         <tr>
           <th>#</th>
-          <th>판매 회원 ID</th>
-          <th>구매 회원 ID</th>
-          <th>가게 이름</th>
-          <th>양도 일자</th>
-          <th>결제 금액</th>
           <th>양도 상태</th>
+          <th>양도 금액</th>
+          <th>판매자</th>
+          <th>가게 번호</th>
+          <th>양도 관리</th>
         </tr>
         </thead>
         <tbody>
+        <c:forEach items="${assignmentList }" var="assignment">
         <tr>
-          <td>1</td>
-          <%--각 td 태그에 th:text="${파라미터명}으로 값 받아오기 필수" --%>
-          <td>hong2023</td>
-          <td>go2023</td>
-          <td>동백키친</td>
-          <td>2023-06-07</td>
-          <td>2023-06-07</td>
-          <td>58000</td>
-          <td>Y</td>
+          <td>${assignment.a_idx }</td>
+        <%-- 양도 상태 판별 --%>
+          <c:if test="${assignment.a_status == 1}">
+          	<td>양도 완료</td>
+          </c:if>
+          <c:if test="${assignment.a_status == 2}">
+          	<td>결제 대기</td>
+          </c:if>
+          <c:if test="${assignment.a_status == 3}">
+          	<td>양도 취소</td>
+          </c:if>
+        <%-- 양도 상태 판별 --%>
+          <td>${assignment.a_price }</td>
+          <td>${assignment.a_sellerId}</td>
+          <td>${assignment.r_dix}</td>
+      	  <td><button type="button" class="btn btn-sm btn-primary"
+          onclick="location.href='deleteAssignment?idx=${restaurant.res_idx}'">양도 정보 삭제</button></td>
         </tr>
+        </c:forEach>
         </tbody>
       </table>
     </div>

@@ -72,6 +72,11 @@ public class ReservationService {
 	public ReservationVO deleteReservation(String idx) {
 		return mapper.deleteReservation(idx);
 	}
+
+	// 총 결제 금액 조회
+	public int getTotalPay() {
+		return mapper.getTotalPay();
+	}
 	
 	
 }

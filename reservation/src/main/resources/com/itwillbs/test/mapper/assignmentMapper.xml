@@ -21,5 +21,24 @@
 		  	SET a_status = 2
 		  		WHERE r_idx = #{r_idx}
 	</update>
+	
+	<!-- 관리자의 양도 리스트 조회 -->
+	<select id="getAdminAssignmentList" resultType="com.itwillbs.test.vo.AssignmentVO">
+		SELECT *
+			FROM assignment
+	</select>
+	
+	<!-- 관리자의 양도 정보 조회 -->
+	<select id="selectAssignment" resultType="com.itwillbs.test.vo.AssignmentVO">
+		SELECT *
+			FROM assignment
+				WHERE a_idx = #{a_idx}
+	</select>
+	
+	<!-- 관리자의 양도 정보 삭제 -->
+	<delete id="deleteAssignment">
+		DELETE FROM assignment
+			WHERE a_idx = #{a_idx}
+	</delete>
 
 </mapper>

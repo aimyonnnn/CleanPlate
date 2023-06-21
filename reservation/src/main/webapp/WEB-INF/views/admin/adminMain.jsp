@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html>
   <head>
@@ -7,7 +8,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1">
 	<%--line-awesome icon 사용을 위한 스타일 시트 --%>
 	<link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
-    <title>admin Main</title>
+    <title>관리자 페이지</title>
     <link href="${pageContext.request.contextPath }/resources/css/adminDetail.css" rel="stylesheet" type="text/css"/>
     <link rel="shortcut icon" href="#">
   </head>
@@ -120,16 +121,16 @@
                   <small>이번달 총 예약 수</small>
                 </div>
 
-                <h2>200</h2>
-                  <small>지난달의 예약 수: 10</small><br>
+                <h2>${reservationList.size()} 개</h2>
+                  <small>지난달의 예약 수: 0 개</small><br>
                   <%-- DB 연동 후 small 태그에 th:text="'지난달의 예약 수: '+${지난달의 예약 수 파라미터값}" 추가  --%>
-                  <small>n% 증가</small>
+                  <small>0% 증가</small>
                   <%-- 
                   예약이 증가했을 경우 small 태그에
                   th:if="${이번달의 예약 수 파라미터값 >= 지난달의 예약 수 파라미터값}"
                   th:text="'지난달에 비해 '+${이번달의 예약 수 파라미터값/지난달의 예약 수 파라미터값*100}+'% 증가했습니다. '" 추가
                   --%>
-                  <small>n% 감소</small>
+                  <small>0% 감소</small>
                   <%-- 
                   예약이 증가했을 경우 small 태그에
                   th:if="${이번달의 예약 수 파라미터값 < 지난달의 예약 수 파라미터값}"
@@ -150,7 +151,7 @@
                   <small>운영중인 가게 수</small>
                 </div>
 
-                <h2>${RestaurantList.size()}</h2>
+                <h2>${RestaurantList.size()} 개</h2>
 
                 <small>현재 운영중인 총 가게 수입니다.</small>
               </div>
@@ -168,7 +169,7 @@
                   <small>총 예약 수</small>
                 </div>
 
-                <h2>1000</h2>
+                <h2>${reservationList.size()} 개</h2>
 
                 <small>취소된 예약을 제외한 모든 예약 건수를 포함한 값입니다.</small>
               </div>
@@ -185,9 +186,9 @@
               <h3>오늘 총 예약 수</h3>
             </div>
 
-            <form th:action method="post" class="analytics-chart">
+            <form method="post" class="analytics-chart">
               <div class="chart-circle">
-                <h1>N명</h1>
+                <h1>${reservationList.size()} 명</h1>
               </div>
             </form>
           </div>
@@ -195,7 +196,7 @@
           <div class="jobs">
             <h2>최근 예약
                 <small>
-                    <a href="adminAllReservation.jsp">전체 예약 확인하기</a>
+                    <a href="adminReservation">전체 예약 확인하기</a>
                     <span class="las la-arrow-right"></span>
                 </small>
             </h2>
@@ -205,17 +206,23 @@
               <tbody>
               <tr>
                   <td><div><span class = "indicator"></span></div></td>
-                  <td><div th:text="">아이디 :</div></td>
-                  <%-- DB 연동 후 th:text 내에 "'컬럼명: '+${파라미터명}" 추가 --%>
-                  <td><div th:text="">테이블 수 :</div></td>
-                  <td><div th:text="">날짜 :</div></td>
-                  <td><div th:text="">시간 :</div></td>
+                  <td><div>예약 번호 :</div></td>
+                  <td><div>예약 인원 :</div></td>
+                  <td><div>예약 날짜 :</div></td>
+                  <td><div>총 금액 :</div></td>
                   <td><div><button type="button"
-                                   onclick="location.href='#'"
+                                   onclick="location.href='adminReservation'"
                   >관리</button></div></td>
                 </tr>
+                 <c:forEach items="${reservationList }" var="reservation">
+                  <td></td>
+                  <td>${reservation.r_idx }</td>
+                  <td>${reservation.r_personnel }명</td>
+                  <td>${reservation.r_date }</td>
+                  <td>${reservation.r_amount }원</td>
+                 </c:forEach>
               </tbody>
-            </table>                
+            </table>  
           </div>
         </div>
        </div>

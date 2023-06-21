@@ -50,5 +50,8 @@ public interface ReservationMapper {
 	// 관리자의 예약 정보 삭제
 	ReservationVO deleteReservation(String idx);
 
+	// 총 결제 금액 조회
+	int getTotalPay();
+
 	
 }

@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1">
 	<%--line-awesome icon 사용을 위한 스타일 시트 --%>
 	<link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
-    <title>admin reservation</title>
+    <title>예약 관리</title>
     <link href="${pageContext.request.contextPath }/resources/css/adminDetail.css" rel="stylesheet" type="text/css"/>
     <link rel="shortcut icon" href="#">
   </head>
@@ -108,6 +108,7 @@
         <div class="page-header">
           <div>
             <h1>예약 관리</h1>
+            <br>
             <small>예약 관리 페이지</small>
           </div>
         </div> 
@@ -116,7 +117,7 @@
       <div class="title row">
         <div class="col-7">
           <h5 class="title6">총 예약 건수 :</h5>
-          <h5 class="title6">${reservationList.size() }</h5>
+          <h5 class="title6">${reservationList.size() } 개</h5>
         </div>
       </div>
     </div>
@@ -129,23 +130,38 @@
           <th>예약 인원</th>
           <th>예약 일자</th>
           <th>총 금액</th>
-          <th>가게 이름</th>
-          <th>결제 일자</th>
+          <th>예약 상태</th>
+          <th>예약 회원번호</th>
+          <th>예약 식당번호</th>
           <th>예약 관리</th>
         </tr>
         </thead>
+<!--         1-방문예정, 2-방문완료, 3-취소, 4-양도', -->
         <tbody>
         <c:forEach items="${reservationList }" var="reservation">
         <tr>
           <td>${reservation.r_idx }</td>
-          <td>${reservation.r_personnel }</td>
+          <td>${reservation.r_personnel }명</td>
           <td>${reservation.r_date }</td>
-          <td>${reservation.r_amount }</td>
-          <td>2023-06-07</td>
-          <td>58000</td>
-          <td><button type="button" class="btn btn-sm btn-primary"
-                      onclick="location.href='deleteReservationForm'"
-          >정보 수정</button></td>
+          <td>${reservation.r_amount }원</td>
+          <%-- 예약 상태 판별 --%>
+          <c:if test="${reservation.r_status == 1}">
+         	 <td>방문예정</td>
+          </c:if>
+          <c:if test="${reservation.r_status == 2}">
+         	 <td>방문완료</td>
+          </c:if>
+          <c:if test="${reservation.r_status == 3}">
+         	 <td>취소</td>
+          </c:if>
+          <c:if test="${reservation.r_status == 4}">
+         	 <td>양도</td>
+          </c:if>
+          <%-- 예약 상태 판별 --%>
+          <td>${reservation.m_idx }</td>
+          <td>${reservation.res_idx }</td>
+        <td><button type="button" class="btn btn-sm btn-primary"
+        onclick="location.href='deleteReservationForm?idx=${reservation.r_idx}'">정보 수정</button></td>
         </tr>
         </c:forEach>
         </tbody>

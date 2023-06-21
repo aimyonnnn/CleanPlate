@@ -8,7 +8,7 @@
 </head>
 <body>
   <div class="py-5 text-center">
-    <h2>가게 정보 수정</h2>
+    <h2>가게 관리</h2>
   </div>
 
 <div class="container">
@@ -27,6 +27,10 @@
       <input type="text" id="res_name" name="res_name" class="form-control" value="${restaurantVO.res_name }">
     </div>
     <div>
+      <label for="ceoIdx">점주 이름</label>
+      <input type="text" id="c_idx" name="c_idx" class="form-control" value="${restaurantVO.c_name }">
+    </div>
+    <div>
       <label for="restaurantTel">가게 전화번호</label>
       <input type="text" id="res_tel" name="res_tel" class="form-control" value="${restaurantVO.res_tel }">
     </div>
@@ -34,17 +38,13 @@
       <label for="restaurantAdress">가게 주소</label>
       <input type="text" id="restaurantAdress" name="restaurantAdress" class="form-control" value="${restaurantVO.res_address }, ${restaurantVO.res_detailAddress }">
     </div>
-    <div>
-      <label for="ceoIdx">점주 번호(idx)</label>
-      <input type="text" id="c_idx" name="c_idx" class="form-control" value="${restaurantVO.c_idx }">
-    </div>
 
     <hr class="my-4">
 
    <div class="row">
       <div class="col">
         <button class="w-100 btn btn-danger btn-lg" type="submit">수정하기</button>
-        <button class="w-100 btn btn-danger btn-lg" type="button" onclick="location.href='deleteRestaurant'">삭제하기</button>
+        <button class="w-100 btn btn-danger btn-lg" type="button" onclick="location.href='deleteStore'">삭제하기</button>
       </div>
       <div class="col">
         <button class="w-100 btn btn-secondary btn-lg"

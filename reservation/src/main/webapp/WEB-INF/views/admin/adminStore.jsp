@@ -108,6 +108,7 @@
         <div class="page-header">
           <div>
             <h1>가게 관리</h1>
+            <br>
             <small>가게 관리 페이지</small>
           </div>
         </div> 

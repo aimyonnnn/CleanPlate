@@ -10,6 +10,7 @@
 				where res_idx = #{res_idx}		
 	</select>
 	
+	<!-- 가게 추가 -->
 	<insert id="insertRestaurant">
 		INSERT 
 			INTO restaurant
@@ -35,46 +36,45 @@
 	
 	</insert>
 	
+	<!-- 예약 내역 조회 -->
 	<select id="selectReservationList">
-			SELECT r.r_idx, me.me_name , r.r_amount, r.r_tables, r.r_personnel, m.m_name, r.r_status, r.r_date, r.r_request, res.res_name
+		SELECT r.r_idx, c.cr_type, r.r_amount, r.r_tables, r.r_personnel, m.m_name, r.r_status, r.r_date, r.r_request, res.res_name
 			FROM reservation r JOIN restaurant res
 			ON r.res_idx = res.res_idx
 			JOIN members m
 			ON r.m_idx = m.m_idx
-			JOIN menus me
-			ON r.me_idx = me.me_idx
-			WHERE r.res_idx IN (SELECT res_idx
-					FROM restaurant
-					WHERE c_idx = (SELECT c_idx
-								FROM ceo
-								WHERE c_id = #{id}
-								)
-					)
-			ORDER BY r.r_idx;
+			JOIN course c
+			ON r.cr_idx = c.cr_idx
+			WHERE res.c_idx = (SELECT c_idx
+					FROM ceo
+					WHERE c_id = #{id}
+					);
 	</select>
 	
-	<select id="selectRDList">
-		SELECT *
-			FROM reservation_detail_info
-			WHERE r_idx IN(
-				SELECT r_idx
-				FROM reservation
-				WHERE res_idx IN(SELECT res_idx
-						FROM restaurant
-						WHERE c_idx = (SELECT c_idx
-							FROM ceo
-							WHERE c_id = #{sId})
-						)
-			);
-	</select>
+	<!-- 사용되지 않는 구문 주석처리  -->
+<!-- 	<select id="selectRDList"> -->
+<!-- 		SELECT * -->
+<!-- 			FROM reservation_detail_info -->
+<!-- 			WHERE r_idx IN( -->
+<!-- 				SELECT r_idx -->
+<!-- 				FROM reservation -->
+<!-- 				WHERE res_idx IN(SELECT res_idx -->
+<!-- 						FROM restaurant -->
+<!-- 						WHERE c_idx = (SELECT c_idx -->
+<!-- 							FROM ceo -->
+<!-- 							WHERE c_id = #{sId}) -->
+<!-- 						) -->
+<!-- 			); -->
+<!-- 	</select> -->
 	
-	
+	<!-- 가게 내역 조회 -->
 	<select id="selectRestaurantList" resultType="com.itwillbs.test.vo.RestaurantVO">
 		SELECT * 
-			FROM restaurant
+			FROM restaurant r JOIN ceo c
+			ON r.c_idx = c.c_idx
 	</select>
 	
-	
+	<!-- 가게 정보 수정 -->
 	<update id="updateRestaurant">
 		UPDATE restaurant
 			SET
@@ -94,7 +94,7 @@
 				, res_intro = #{res_intro}
 					WHERE
 						res_brn = #{res_brn}
-	</update>	
+	</update>
 	
 	<!-- 가게별 리뷰 점수 조회 -->
 	<select id="selectRestaurantReviewScores" resultType="java.util.Map">
@@ -104,7 +104,7 @@
 				 GROUP BY res.res_idx, res.res_name, res_openinghours, res_photo1, res_intro, res_address, res_detailAddress;
 	</select>
 	
-		<!-- 가게 조회 -->
+	<!-- 가게 조회 -->
 	<select id="selectRestaurant" resultType="com.itwillbs.test.vo.RestaurantVO">
 		SELECT *
 			FROM restaurant
@@ -136,5 +136,5 @@
 				ON r.c_idx = c.c_idx
 				WHERE r.res_idx = #{res_idx}
 	</select>
-	
+
 </mapper>

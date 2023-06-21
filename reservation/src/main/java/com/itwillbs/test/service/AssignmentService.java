@@ -24,4 +24,14 @@ public class AssignmentService {
 		return mapper.updateStatus(r_idx);
 	}
 	
+	// 관리자의 양도 리스트 조회
+	public List<AssignmentVO> getAdminAssignmentList() {
+		return mapper.getAdminAssignmentList();
+	}
+
+	// 관리자의 양도 정보 삭제
+	public int deleteAssignment(String idx) {
+		return mapper.deleteAssignment(idx);
+	}
+	
 }

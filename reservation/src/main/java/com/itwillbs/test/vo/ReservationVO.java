@@ -19,4 +19,5 @@ public class ReservationVO {
 	private String r_request; // 요청사항
 	private int res_idx; // 레스토랑 번호
 	private String res_name; // 식당 이름 (점주 예약 관리 페이지 식당이름 출력을 위해)
+	private int total; // 사이트 총 매출 조회를 위한 컬럼
 }

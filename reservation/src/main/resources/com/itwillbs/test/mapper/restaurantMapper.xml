@@ -74,12 +74,6 @@
 			FROM restaurant
 	</select>
 	
-	<select id="selectRestaurant" resultType="com.itwillbs.test.vo.RestaurantVO">
-		SELECT * 
-			FROM restaurant
-				WHERE
-					res_idx = #{res_idx}
-	</select>
 	
 	<update id="updateRestaurant">
 		UPDATE restaurant
@@ -110,5 +104,37 @@
 				 GROUP BY res.res_idx, res.res_name, res_openinghours, res_photo1, res_intro, res_address, res_detailAddress;
 	</select>
 	
+		<!-- 가게 조회 -->
+	<select id="selectRestaurant" resultType="com.itwillbs.test.vo.RestaurantVO">
+		SELECT *
+			FROM restaurant
+				WHERE res_brn = #{res_brn}
+	</select>
+	
+	<!-- 관리자의 가게 정보 수정 -->
+	<update id="adminStoreUpdate" parameterType="com.itwillbs.test.vo.RestaurantVO">
+		UPDATE restaurant
+			SET res_brn = #{res_brn}
+			   ,res_name = #{res_name}
+			   ,res_tel = #{res_tel}
+			   ,res_address = SUBSTRING_INDEX(#{restaurantAdress}, ',' ,1)
+			   ,res_detailAddress = SUBSTRING_INDEX(#{restaurantAdress}, ',' , -1)
+			   ,c_idx = #{c_idx}
+				WHERE res_idx = #{res_idx}
+	</update>
+	
+	<!-- 관리자의 가게 정보 삭제 -->
+	<delete id="deleteRestaurant">
+		DELETE FROM restaurant
+			WHERE res_idx = #{res_idx}
+	</delete>
+	
+	<!-- 관리자의 가게 조회 -->
+	<select id="selectAdminRestaurant" resultType="com.itwillbs.test.vo.RestaurantVO">
+		SELECT * 
+			FROM restaurant r JOIN ceo c
+				ON r.c_idx = c.c_idx
+				WHERE r.res_idx = #{res_idx}
+	</select>
 	
 </mapper>

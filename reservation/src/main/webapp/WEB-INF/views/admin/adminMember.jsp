@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1">
 	<%--line-awesome icon 사용을 위한 스타일 시트 --%>
 	<link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
-    <title>admin Member</title>
+    <title>회원 관리</title>
     <link href="${pageContext.request.contextPath }/resources/css/adminDetail.css" rel="stylesheet" type="text/css"/>
     <link rel="shortcut icon" href="#">
   </head>
@@ -149,7 +149,7 @@
           <td>${member.m_email }</td>
         <%-- 회원 상태 판별 --%>
         <c:if test="${member.m_status == 1}">
-        	<td>정상</td>
+        	<td>활동중</td>
         </c:if>
         <c:if test="${member.m_status == 2}">
         	<td>정지</td>

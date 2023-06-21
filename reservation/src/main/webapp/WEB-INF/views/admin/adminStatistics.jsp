@@ -8,7 +8,7 @@
 	<%--line-awesome icon 사용을 위한 스타일 시트 --%>
 	<link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
-    <title>admin statistics</title>
+    <title>관리자 페이지</title>
     <link href="${pageContext.request.contextPath }/resources/css/adminDetail.css" rel="stylesheet" type="text/css"/>
     <link rel="shortcut icon" href="#">
   </head>
@@ -119,8 +119,8 @@
             <div class="card-flex">
               <div class="card-into">
                 <div class="card-head">
-					<small>총 방문자 수</small>
-					<h2>581</h2>
+					<small>총 예약 수</small>
+					<h2>${reservationList.size() } 건</h2>
                 </div>
               </div>
               <div class="card-chart danger">
@@ -128,13 +128,12 @@
               </div>
             </div>
           </div>
-         
           <div class="card-single">
             <div class="card-flex">
               <div class="card-into">
                 <div class="card-head">
-					<small>페이지 뷰</small>
-					<h2>3,267</h2>
+					<small>총 결제 금액</small>
+					<h2>${total } 원</h2>
                 </div>
               </div>
               <div class="card-chart black">
@@ -148,7 +147,7 @@
               <div class="card-into">
                 <div class="card-head">
 					<small>가입자 수</small>
-					<h2>30</h2>
+					<h2>${memberList.size() } 명</h2>
                 </div>
               </div>
               <div class="card-chart success">

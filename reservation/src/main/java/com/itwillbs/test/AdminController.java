@@ -3,6 +3,9 @@ package com.itwillbs.test;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,9 +13,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.itwillbs.test.service.AssignmentService;
 import com.itwillbs.test.service.MemberService;
 import com.itwillbs.test.service.ReservationService;
 import com.itwillbs.test.service.RestaurantService;
+import com.itwillbs.test.vo.AssignmentVO;
 import com.itwillbs.test.vo.MemberVO;
 import com.itwillbs.test.vo.ReservationVO;
 import com.itwillbs.test.vo.RestaurantVO;
@@ -25,6 +30,8 @@ public class AdminController {
 	ReservationService rservice;
 	@Autowired
 	RestaurantService reservice;
+	@Autowired
+	AssignmentService aservice;
 	
 	//=============================== 관리자 페이지 메인 ==================================
 	
@@ -49,7 +56,23 @@ public class AdminController {
 	
 	// 관리자의 사이트 이용 통계 페이지로 이동
 	@GetMapping("adminStatistics")
-	public String adminStatistics() {
+	public String adminStatistics(Model model, HttpServletRequest request) {
+		// 회원 목록 조회
+		List<MemberVO> memberList = mservice.memberList();
+		model.addAttribute("memberList", memberList);
+		
+		// 예약 목록 조회
+		List<ReservationVO> reservationList = rservice.getReservationList();
+		model.addAttribute("reservationList" ,reservationList);
+		
+		// 가게 목록 조회
+		List<RestaurantVO> RestaurantList = reservice.getRestaurantList();
+		model.addAttribute("RestaurantList", RestaurantList);
+		
+		// 총 결제 금액 조회
+		int total = rservice.getTotalPay();
+		request.setAttribute("total", total);
+		
 		return "admin/adminStatistics";
 	}
 	
@@ -161,14 +184,21 @@ public class AdminController {
 	
 	// ==================================================================================
 	
+	// ================================ 양도 관리 페이지 ================================
 	// 관리자의 양도 관리 페이지로 이동
 	@GetMapping("adminAssignment")
-	public String adminAssignment() {
+	public String adminAssignment(Model model) {
+		List<AssignmentVO> assignmentList = aservice.getAdminAssignmentList();
+		model.addAttribute("assignmentList", assignmentList);
 		return "admin/adminAssignment";
 	}
 	
-	/*
-	 * 정보 수정 폼인 deleteXXXForm은 각 관리 페이지에서 _blank로 새 창 띄워 보여줄 예정(매핑X)
-	 */
+	// 양도 정보 삭제 시
+	@PostMapping("deleteAssignment")
+	public String deleteAssignment(@RequestParam String idx , HttpServletResponse response) {
+		aservice.deleteAssignment(idx);
+		return "redirect:/adminAssignment";
+	}
 	
+	// ==================================================================================
 }

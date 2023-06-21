@@ -89,4 +89,10 @@
 		DELETE FROM reservation
 			WHERE r_idx = #{r_idx}
 	</delete>
+	
+	<!-- 총 결제 금액 조회 -->
+	<select id="getTotalPay" resultType="int"> 
+		SELECT SUM(r_amount) AS total
+			FROM reservation
+	</select>	
 </mapper>
