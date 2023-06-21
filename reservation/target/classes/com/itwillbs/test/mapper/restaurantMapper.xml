@@ -12,6 +12,12 @@
 	
 	<!-- 가게 추가 -->
 	<insert id="insertRestaurant">
+	
+		<selectKey keyProperty="c_idx" resultType="int" order="BEFORE">
+			SELECT c_idx FROM ceo 
+				WHERE c_id = #{c_id}
+		</selectKey>
+		
 		INSERT 
 			INTO restaurant
 			VALUES (
@@ -31,10 +37,11 @@
 				, #{res_photo2}
 				, #{res_photo3}
 				, #{res_intro}
-				
+				, #{c_idx}
 			)
-	
+			
 	</insert>
+	
 	
 	<!-- 예약 내역 조회 -->
 	<select id="selectReservationList">
@@ -81,19 +88,20 @@
 				res_brn = #{res_brn}
 				, res_name = #{res_name}
 				, res_tel = #{res_tel}
-				, res_postcode = #{res_postcode}
 				, res_address = #{res_address}
 				, res_detailAddress = #{res_detailAddress}
-				, res_open = #{res_open}
-				, res_close = #{res_close}
-				, res_breakstart = #{res_breakstart}
-				, res_breakend = #{res_breakend}
-				, res_holiday = #{res_holiday}
+				, res_openinghours = CONCAT(#{res_open}, '-' , #{res_close}) -- res_openinghours 문자열 결합 
+				, res_breaktime = CONCAT(#{res_breakstart}, '-' , #{res_breakend}) -- res_breaktime 문자열 결합 
+				, res_total_table = #{res_total_table}
+				, res_dayoff = #{res_dayoff}
 				, res_amenity = #{res_amenity}
-				, res_photo = #{res_photo}
+				, res_amenity_info = #{res_amenity_info}
+				, res_photo1 = #{res_photo1}
+				, res_photo2 = #{res_photo2}
+				, res_photo3 = #{res_photo3}
 				, res_intro = #{res_intro}
 					WHERE
-						res_brn = #{res_brn}
+						res_idx = #{res_idx}
 	</update>
 	
 	<!-- 가게별 리뷰 점수 조회 -->

@@ -2,7 +2,7 @@ package com.itwillbs.test.mapper;
 
 import java.util.*;
 
-import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.*;
 
 import com.itwillbs.test.vo.*;
 
@@ -38,6 +38,7 @@ public interface RestaurantMapper {
 
 	// 관리자의 가게 조회
 	RestaurantVO selectAdminRestaurant(String idx);
+
 	
 	
 }

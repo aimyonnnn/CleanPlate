@@ -56,5 +56,7 @@ public class RestaurantService {
 	public int deleteRestaurant(String idx) {
 		return mapper.deleteRestaurant(idx);
 	}
+	
+
 		
 }

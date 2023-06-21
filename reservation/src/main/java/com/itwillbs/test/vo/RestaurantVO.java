@@ -53,6 +53,7 @@ public class RestaurantVO {
 	private String res_photo2;
 	private String res_photo3;
 	private String res_intro;
-	private String c_name;
+	private String c_id;
+	private int c_idx;
 	
 }
