@@ -51,26 +51,26 @@
         <div class="btn-group">
         
 			<c:choose>
-			  <c:when test="${empty sessionScope.sId and empty sessionScope.cId}">
-			    <button type="button" class="btn btn-outline-light text-white me-2 border-0 bg-transparent" onclick="location.href='loginForm'">로그인</button>
-			  </c:when>
-		   <c:otherwise>
-		    <c:choose>
-		    <c:when test="${not empty sessionScope.sId and sessionScope.sId ne 'admin'}">
-		        <button type="button" class="btn btn-outline-light text-white me-2 border-0 bg-transparent" onclick="location.href='member'">${sessionScope.sId} 님</button>
-		        <button type="button" class="btn btn-outline-light text-white border-0 bg-transparent" onclick="location.href='memberRSList'">예약내역</button>
-		      </c:when>
-		      <c:when test="${sessionScope.sId eq 'admin'}">
-		        <button type="button" class="btn btn-outline-light text-white border-0 bg-transparent" onclick="location.href='adminMain'">관리자모드</button>
-		      </c:when>
-		      <c:when test="${not empty sessionScope.cId}">
-		        <button type="button" class="btn btn-outline-light text-white me-2 border-0 bg-transparent" onclick="location.href='StoreReservation'">${sessionScope.cId} 점주님</button>
-		        <button type="button" class="btn btn-outline-light text-white border-0 bg-transparent" onclick="location.href='storeDashBoard'">매출관리</button>
-		      </c:when>
-		    </c:choose>
-		    <button type="button" class="btn btn-outline-light text-white me-2 border-0 bg-transparent" onclick="location.href='logout'" id="logout">로그아웃</button>
-		  </c:otherwise>
-		 </c:choose>
+				<c:when test="${empty sessionScope.sId and empty sessionScope.cId}">
+					<button type="button" class="btn btn-outline-light text-white me-2 border-0 bg-transparent" onclick="location.href='loginForm'">로그인</button>
+				</c:when>
+				<c:otherwise>
+			<c:choose>
+				<c:when test="${not empty sessionScope.sId and sessionScope.sId ne 'admin'}">
+					<button type="button" class="btn btn-outline-light text-white me-2 border-0 bg-transparent" onclick="location.href='member'">${sessionScope.sId} 님</button>
+					<button type="button" class="btn btn-outline-light text-white border-0 bg-transparent" onclick="location.href='memberRSList'">예약내역</button>
+				</c:when>
+				<c:when test="${sessionScope.sId eq 'admin'}">
+					<button type="button" class="btn btn-outline-light text-white border-0 bg-transparent" onclick="location.href='adminMain'">관리자모드</button>
+				</c:when>
+				<c:when test="${not empty sessionScope.cId}">
+					<button type="button" class="btn btn-outline-light text-white me-2 border-0 bg-transparent" onclick="location.href='restaurantReservation'">${sessionScope.cId} 점주님</button>
+					<button type="button" class="btn btn-outline-light text-white border-0 bg-transparent" onclick="location.href='storeDashBoard'">매출관리</button>
+				</c:when>
+			</c:choose>
+					<button type="button" class="btn btn-outline-light text-white me-2 border-0 bg-transparent" onclick="location.href='logout'" id="logout">로그아웃</button>
+				</c:otherwise>
+			</c:choose>
 
 		</div>
       </div>

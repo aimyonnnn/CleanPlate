@@ -61,24 +61,27 @@
         <img src="${pageContext.request.contextPath}/resources/images/logo.gif" style="width: 150px; height: 150px;" onclick="location.href='<c:url value="/"/>'">
         <div>
         	
-            <c:choose>
-                <c:when test="${empty sessionScope.sId}">
-                	<!-- 세션 id가 존재하지 않을 경우 로그인 버튼 출력 -->
-                    <button type="button" class="btn btn-outline-light text-black me-2 border-0" onclick="location.href='loginForm'">로그인</button>
-                </c:when>
-                <c:otherwise>
-                    <!-- 세션 id가 존재할 경우 세션 아이디에 저장된 회원 닉네임 출력 -->
-                    <button type="button" class="btn btn-outline-light text-black me-2 border-0" onclick="location.href='member'">${sessionScope.sId} 님</button>
-			  		<!-- 세션 id가 존재할 경우 예약내역 버튼 활성화 -->
-			  		<button type="button" class="btn btn-outline-light text-black border-0 bg-transparent" onclick="location.href='memberRSList'">예약내역</button>
-			  		<!-- 세션 id가 "admin"인 경우 관리자 탭 표시 -->
-			  		<c:if test="${sessionScope.sId eq 'admin'}">
-		                <button type="button" class="btn btn-outline-light text-black border-0 bg-transparent" onclick="location.href='adminMain'">관리자모드</button>
-		            </c:if>
-                	<!-- 세션 id가 존재할 경우 로그아웃 버튼 출력 -->
-                    <button type="button" class="btn btn-outline-light text-black border-0" onclick="location.href='logout'" id="logout">로그아웃</button>
-                </c:otherwise>
-            </c:choose>
+           <c:choose>
+			  <c:when test="${empty sessionScope.sId and empty sessionScope.cId}">
+			    <button type="button" class="btn btn-outline-light text-black border-0 bg-transparent" onclick="location.href='loginForm'">로그인</button>
+			  </c:when>
+			  <c:otherwise>
+			    <c:choose>
+			      <c:when test="${not empty sessionScope.sId and sessionScope.sId ne 'admin'}">
+			        <button type="button" class="btn btn-outline-light text-black border-0 bg-transparent" onclick="location.href='member'">${sessionScope.sId} 님</button>
+			        <button type="button" class="btn btn-outline-light text-black border-0 bg-transparent" onclick="location.href='memberRSList'">예약내역</button>
+			      </c:when>
+			      <c:when test="${sessionScope.sId eq 'admin'}">
+			        <button type="button" class="btn btn-outline-light text-black border-0 bg-transparent" onclick="location.href='adminMain'">관리자모드</button>
+			      </c:when>
+			      <c:when test="${not empty sessionScope.cId}">
+			        <button type="button" class="btn btn-outline-light text-black border-0 bg-transparent" onclick="location.href='restaurantReservation'">${sessionScope.cId} 점주님</button>
+			        <button type="button" class="btn btn-outline-light text-black border-0 bg-transparent" onclick="location.href='storeDashBoard'">매출관리</button>
+			      </c:when>
+			    </c:choose>
+			    <button type="button" class="btn btn-outline-light text-black border-0 bg-transparent" onclick="location.href='logout'" id="logout">로그아웃</button>
+			  </c:otherwise>
+			</c:choose>
             
         </div>
     </div>
@@ -99,7 +102,7 @@
 						<li class="nav-item me-5"><a class="nav-link active" aria-current="page"  href ='<c:url value="/" />'>Home</a></li>
 						<li class="nav-item me-5"><a class="nav-link" href ='<c:url value="/reservationMain" />'>Reservation</a></li>
 						<li class="nav-item me-5"><a class="nav-link" href ='<c:url value="/assignment" />'>Assignment</a></li>
-						<li class="nav-item"><a class="nav-link" href ='<c:url value="admin" />'>Help</a></li>
+						<li class="nav-item"><a class="nav-link" href ='<c:url value="/" />'>Help</a></li>
 					</ul>
 				</div>
 			</div>
