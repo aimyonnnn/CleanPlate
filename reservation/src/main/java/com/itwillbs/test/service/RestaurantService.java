@@ -15,7 +15,7 @@ public class RestaurantService {
 	private RestaurantMapper mapper;
 	
 	// Reservation 탭의 가게 정보 조회하기
-	public RestaurantVO getRestaurantInfo(String res_idx) {
+	public RestaurantVO getRestaurantInfo(int res_idx) {
 		return mapper.selectRestaurantInfo(res_idx);
 	}
 	

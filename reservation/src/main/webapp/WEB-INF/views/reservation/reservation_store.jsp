@@ -105,8 +105,8 @@
    	<!-- 위로 가기 버튼 -->
 
 	<!-- 가게 상세페이지 시작 -->
-	<div class="container-fluid w-50">
-		<h3 class="fs-2 fw-bold mt-3 text-center">명월관</h3>
+	<div class="container-fluid w-75">
+		<h3 class="fs-2 fw-bold mt-3 text-center">${restaurantInfo.res_name}</h3>
 		<!-- 이미지 슬라이드 시작 -->
 		<div id="carouselExampleControls" class="mt-4 carousel slide" data-bs-ride="carousel">
 			<div class="carousel-inner">
@@ -133,8 +133,8 @@
 	
 	<!-- 가게 메인 소개 -->
 	<div class="mb-2 text-center" style="padding-top:30px">
-		 <h5 class="fw-bold p-2">HANWOO BEEF BARBECUE RESTAURANT, MYONGWOLGWAN 명월관</h5>
-		 <p style="font-size: 14px;">한우 숯불구이 전문점 명월관은 최상급 한우와 최고급 참숯만을 사용하여 차별화된 한우 맛을 선보입니다.<br>단청 무늬 한옥의 단아한 멋 과 모던함이 돋보이는 실내 인테리어 그리고 한강이 내려다 보이는 아름다운 야외 정원을 갖추고 있어 특별한 날을 위한 최고의 장소 입니다.</p>
+		 <h5 class="fw-bold p-2">${restaurantInfo.res_name}</h5>
+		 <p style="font-size: 14px;">${restaurantInfo.res_intro}</p>
 	</div>
 	<!-- 가게 메인 소개 끝 -->
 	<hr>
@@ -149,7 +149,6 @@
 				<tr>
 					<th scope="col" colspan="2">
 						<h3 class="fw-bold mt-2 p-2 text-center">INFORMATION</h3>
-						<button type="button" class="btn btn-outline-secondary text-black rounded-0 float-end">문의하기</button>
 					</th>
 				</tr>
 			</thead>
@@ -158,15 +157,25 @@
 					<td style="border-right: 1px solid #dee2e6; width: 50%;">
 					    <dl class="row">
 					    	<dt class="col-sm-3">운영 시간</dt>
-					        <dd class="col-sm-9">· 11:00 ~ 21:00</dd>
+					        <dd class="col-sm-9">· ${restaurantInfo.res_openinghours}</dd>
 					        <dt class="col-sm-3">휴식 시간</dt>
-					        <dd class="col-sm-9">· 15:00 ~ 16:00</dd>
+					        <dd class="col-sm-9">· ${restaurantInfo.res_breaktime}</dd>
 					        <dt class="col-sm-3">정기 휴무일</dt>
-					        <dd class="col-sm-9">· 월요일</dd>
+					        <dd class="col-sm-9">· 
+					        <c:choose>
+						        <c:when test="${restaurantInfo.res_dayoff == '0'}">월요일</c:when>
+							    <c:when test="${restaurantInfo.res_dayoff == '1'}">화요일</c:when>
+							    <c:when test="${restaurantInfo.res_dayoff == '2'}">수요일</c:when>
+							    <c:when test="${restaurantInfo.res_dayoff == '3'}">목요일</c:when>
+							    <c:when test="${restaurantInfo.res_dayoff == '4'}">금요일</c:when>
+							    <c:when test="${restaurantInfo.res_dayoff == '5'}">토요일</c:when>
+							    <c:when test="${restaurantInfo.res_dayoff == '6'}">일요일</c:when>
+					        </c:choose>
+					        </dd>
 					        <dt class="col-sm-3">위치</dt>
-					        <dd class="col-sm-9">· 서울특별시 광진구 워커힐로 177 워커힐호텔</dd>
+					        <dd class="col-sm-9">· ${restaurantInfo.res_address},<br>　${restaurantInfo.res_detailAddress}</dd>
 					        <dt class="col-sm-3">예약 및 문의</dt>
-					        <dd class="col-sm-9">· 1670-0006</dd>
+					        <dd class="col-sm-9">· ${restaurantInfo.res_tel}</dd>
 					    </dl>
 					</td>
 			      <td>
@@ -174,10 +183,10 @@
 			      		<dt class="col-sm-3">총 좌석 수</dt>
 			      		<dd class="col-sm-9">
 						    <dl class="row">
-						        <dd class="col-sm-12">· 30석</dd>
-						        <dd class="col-sm-12">· 8 테이블</dd>
-						        <dd class="col-sm-12">· 테이블 당 최대 4인 수용 가능 (단체석 별도 문의)</dd>
-					      		<dd><button type="button" class="btn btn-danger rounded-0 mt-3" style="width: 90%;">지금 예약하기</button></dd>
+						        <dd class="col-sm-12">· ${restaurantInfo.res_total_table * 4}석</dd>
+						        <dd class="col-sm-12">· ${restaurantInfo.res_total_table} 테이블</dd>
+						        <dd class="col-sm-12">· 테이블 당 최대 4인 수용 가능 (단체석 문의)</dd>
+					      		<dd><button type="button" class="btn btn-danger rounded-0 mt-3" style="width: 90%;" onclick="goToReservationReserve('${restaurantInfo.res_idx}')">지금 예약하기</button></dd>
 						    </dl>
 						</dd>
 			      	</dl>
@@ -186,44 +195,44 @@
 			    <tr>
 			      <td colspan="2">
 			      	<dl class="mt-2">
-			      		<dt>가게 편의시설</dt>
-			      		<dd>· 단체석 / 예약 / 주차 </dd>
-			      		<dd>· 명월관 내 주차장은 명월관 이용 고객에 한해 이용하실 수 있으며, 고객 요청 시 유료 발렛 서비스를 제공합니다.</dd>
+			      		<dt class="mb-2">가게 편의시설</dt>
+			      		<dd>· ${restaurantInfo.res_amenity}</dd>
+			      		<dd>· ${restaurantInfo.res_amenity_info}</dd>
 			      	</dl>
 			      </td>
 			    </tr>
 			</tbody>
 		</table>
-		<ul class="list-unstyled">
-        	<li>· 명월관의 예약 접수는 2개월 전 1일 오전 10시부터 가능합니다. 예) 9월 예약 : 7월1일 오전 10시 이후</li>
+		<ul class="list-unstyled" style="font-size: 13px;">
+        		<li>· 드레스 코드 : 본 매장은 정중히 드레스 코드를 요청 드리고 있습니다. * 트레이닝복, 반바지, 민소매, 크록스, 슬리퍼, 샌들 </li>
         </ul>
 		<!-- 가게 정보 끝 -->
+		
+		<!-- 예약하기 클릭 시 가게 상세정보 페이지로 이동 -->
+		<script>
+  	     function goToReservationReserve(res_idx) {
+  		    location.href = "<c:url value='/reservationReserve'/>?res_idx=" + res_idx;
+  	     }
+		</script>
+		<!-- 예약하기 클릭 시 가게 상세정보 페이지로 이동 -->
 		
 		<!-- 메뉴 시작 -->
 		<div>
 			<h3 class="fw-bold mt-2 p-2">MENU</h3>
 			<table class="table table-bordered">
 				<tbody>
+					<c:forEach var="menus" items="${menusList }">
 					<tr>
 						<td><img src="https://www.walkerhill.com/assets/vistawalkerhillseoul/global/images/etc/menu_myongwolgwan0102.jpg" class="d-block" alt="..."></td>
 						<td>
 							<dl class="row">
-								<dt class="mt-3">한우 모둠 한상 런치 스페셜</dt>
-					        	<dd class="mt-3">최상의 우육을 선별하여 명월관의 노하우로 숙성 시켰습니다. 이 특별한 한우 모둠 한상은 명월관의 최고급 참숯과 만나 은은한 참숯의 향과 함께 입안 가득 깊은 풍미와 감칠맛을 느끼실수 있습니다.</dd>
-								<dt class="mt-3">250,000원</dt>
+								<dt class="mt-3">${menus.me_name}</dt>
+					        	<dd class="mt-3">${menus.me_context}</dd>
+								<dt class="mt-3">${menus.me_price}원</dt>
 							</dl>
 						</td>
 				    </tr>
-					<tr>
-						<td><img src="https://www.walkerhill.com/assets/vistawalkerhillseoul/global/images/etc/menu_myongwolgwan0102.jpg" class="d-block" class="d-block" alt="..."></td>
-						<td>
-							<dl class="row">
-								<dt class="mt-3">한우 모둠 한상 디너 스페셜</dt>
-					        	<dd class="mt-3">최상의 우육을 선별하여 명월관의 노하우로 숙성 시켰습니다. 이 특별한 한우 모둠 한상은 명월관의 최고급 참숯과 만나 은은한 참숯의 향과 함께 입안 가득 깊은 풍미와 감칠맛을 느끼실수 있습니다.</dd>
-								<dt class="mt-3">31 0,000원</dt>
-							</dl>
-						</td>
-				    </tr>
+					</c:forEach>
 				</tbody>
 			</table>
 		</div>

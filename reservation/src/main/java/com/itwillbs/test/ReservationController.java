@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.itwillbs.test.service.MenuService;
 import com.itwillbs.test.service.ReservationService;
 import com.itwillbs.test.service.RestaurantService;
+import com.itwillbs.test.vo.MenuVO;
 import com.itwillbs.test.vo.RestaurantVO;
 import com.itwillbs.test.vo.ReviewVO;
 
@@ -26,8 +28,10 @@ public class ReservationController {
 	private RestaurantService restaurantService;
 	@Autowired
 	private ReservationService reservationService;
+	@Autowired
+	private MenuService menuService;
 	
-	
+	// 가게 메인 페이지 
 	@GetMapping("reservationMain")
 	public String reservationMain(Model model) {
 		
@@ -47,19 +51,22 @@ public class ReservationController {
 	    return "reservation/reservation_main";
 	}
 
-	
-	// 가게 상세 페이지
-	@GetMapping("reservationStore")
-	public String reservationStore(Model model) {
-		
-		int res_idx = 1;
-		
-		// 각 가게의 리뷰 불러오기
+	// 가게 정보 조회하기
+   @GetMapping("getRestaurantInfo")
+   public String getRestaurantInfo(@RequestParam int res_idx, Model model) {
+       RestaurantVO restaurantInfo = restaurantService.getRestaurantInfo(res_idx);
+       
+       // 가게 상세페이지에서 메뉴 조회하기 
+       List<MenuVO> menusList = menuService.getMenusList(res_idx);
+       
+    // 각 가게의 리뷰 불러오기
 		List<ReviewVO> reviewList = service.getReviewList(res_idx);
 		model.addAttribute("reviewList",reviewList);
-		
-		return "reservation/reservation_store";
-	}
+       
+       model.addAttribute("restaurantInfo", restaurantInfo);
+       model.addAttribute("menusList", menusList);
+       return "reservation/reservation_store";
+   }
 	
 	// 예약 페이지
 	@GetMapping("reservationReserve")

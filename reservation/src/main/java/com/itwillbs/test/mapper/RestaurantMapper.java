@@ -10,7 +10,7 @@ import com.itwillbs.test.vo.*;
 public interface RestaurantMapper {
 	
 	// Reservation 탭의 가게 정보 조회하기
-	RestaurantVO selectRestaurantInfo(String res_idx);
+	RestaurantVO selectRestaurantInfo(int res_idx);
 
 	// 가게 추가
 	int insertRestaurant(RestaurantVO restaurant);

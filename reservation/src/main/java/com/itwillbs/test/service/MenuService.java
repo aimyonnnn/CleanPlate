@@ -16,9 +16,14 @@ public class MenuService {
 	public int registMenu(MenuVO menu) {
 		return mapper.insertMenu(menu);
 	}
-	// 메뉴 목록 조회
+	// 메뉴 리스트 조회
 	public List<MenuVO> getMenuList() {
 		return mapper.selectMenuList();
+	}
+	
+	// 특정 가게의 메뉴 리스트 조회
+	public List<MenuVO> getMenusList(int res_idx) {
+		return mapper.selectedRestaurantMenuList(res_idx);
 	}
 
 }

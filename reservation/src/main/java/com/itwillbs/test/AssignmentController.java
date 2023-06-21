@@ -19,10 +19,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.itwillbs.test.service.AssignmentService;
 import com.itwillbs.test.service.MemberService;
+import com.itwillbs.test.service.MenuService;
 import com.itwillbs.test.service.ReservationService;
 import com.itwillbs.test.service.RestaurantService;
 import com.itwillbs.test.vo.AssignmentVO;
 import com.itwillbs.test.vo.MemberVO;
+import com.itwillbs.test.vo.MenuVO;
 import com.itwillbs.test.vo.RestaurantVO;
 
 @Controller
@@ -34,8 +36,6 @@ public class AssignmentController {
    private MemberService memberService;
    @Autowired
    private ReservationService reservationService;
-   @Autowired
-   private RestaurantService restaurantService;
    
    private static final Logger logger = LoggerFactory.getLogger(AssignmentController.class);
    
@@ -132,15 +132,5 @@ public class AssignmentController {
        
        return response;
    }
-   
-   // 가게 정보 조회하기
-   @GetMapping("getRestaurantInfo")
-   public String getRestaurantInfo(@RequestParam String res_idx, Model model) {
-       RestaurantVO restaurantInfo = restaurantService.getRestaurantInfo(res_idx);
-       model.addAttribute("restaurantInfo", restaurantInfo);
-       return "reservation/reservation_store";
-   }
- 
-   
    
 }
