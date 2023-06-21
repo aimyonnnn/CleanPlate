@@ -155,7 +155,28 @@ public class LoginController {
 			session.setAttribute("sId", member2.getM_id());
 			return "existing";
 		}
-	}		
+	}	
+	
+	//네이버 로그인
+	@PostMapping("/checkUserNaver")
+	@ResponseBody
+	public String checkUser(@RequestParam("email") String email,HttpSession session) {
+
+		System.out.println("email : "+ email);
+	
+		MemberVO member = service.isCorrectKakaoUser(email);
+		System.out.println(member);
+		
+		if(member == null) {
+			return "new";
+		} else {
+			
+			MemberVO member2 = memberService.getMemberId(email);
+			session.setAttribute("sId", member2.getM_id());
+			return "existing";
+		}
+	}	
+	
 	
 //	//로그아웃
 //	@GetMapping("/logout")

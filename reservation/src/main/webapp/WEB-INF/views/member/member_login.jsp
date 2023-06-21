@@ -99,9 +99,13 @@
 				    	</div>
 				    	<div class="form-element d-flex flex-row">
 				    		<button type="submit" id="submit-btn">로그인</button>
-				    		<div class="ms-1 me-1"></div>
+				    		<div class="ms-1 me-1"><!-- 여백 --></div>
 				    		<!-- 카카오 로그인 -->
-				    		<button type="button" id="submit-btn" onclick="loginWithKakao()" style="background-color: #FEE500; color: #000000 85%;">카카오 로그인</button>
+<!-- 				    		<button type="button" id="submit-btn" onclick="loginWithKakao()" style="background-color: #FEE500; color: #000000 85%;">카카오 로그인</button> -->
+				    		<img src="${pageContext.request.contextPath }/resources/images/kakao_login_large.png"  onclick="loginWithKakao()" width="100px;">
+				    		<div class="ms-1 me-1"><!-- 여백 --></div>
+							<!-- 네이버 로그인 -->				    		
+				    		<img src="${pageContext.request.contextPath }/resources/images/naver_btnG.png" id="naverIdLogin_loginButton">
 				    	   </div>
 					</div>
 					   	<!-- 회원가입, 아이디/비밀번호 찾기 -->
@@ -185,6 +189,60 @@
 		    }
 		</script>
 		<!-- 카카오 로그인 끝 -->
+		
+		<!-- 네이버 로그인 시작 -->
+		<script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
+		<script>
+		var naverLogin = new naver.LoginWithNaverId(
+				{
+					clientId: "0591cHHMSEoSaK8mneX2", // cliendId
+					callbackUrl: "http://localhost:8080/test/loginForm", // Callback URL => 콜백 URL을 8089로 수정해주면 됨!
+					isPopup: false,
+					callbackHandle: true
+				}
+			);	
+		
+		naverLogin.init();
+		
+		$('#naverIdLogin_loginButton').on('click', function() {
+			  naverLogin.getLoginStatus(function(status) {
+				  
+			    if (status) {
+			      var email = naverLogin.user.getEmail();
+			      console.log(email);
+			      console.log(naverLogin);
+			      
+			      $.ajax({
+			        type: 'post',
+			        url: '<c:url value="/checkUserNaver"/>',
+			        data: {email: email},
+			        dataType: 'text',
+			        success: function(response) {
+			          console.log(response);
+			          if (response === 'new') {
+			        	  
+			            sessionStorage.setItem('email', email);
+			            location.href = '<c:url value="/loginForm"/>';
+			            alert('네이버 로그인 성공! 회원가입을 완료해주세요');
+			            
+			          } else if (response === 'existing') {
+			            sessionStorage.removeItem("email");
+			            location.href = '<c:url value="/" />';
+			            alert('네이버 로그인 성공!')
+			          }
+			          
+			        },
+			        error: function(xhr, status, error) {
+			          console.log(error);
+			        }
+			      });
+			    } else {
+			      alert("fail");
+			    }
+			  });
+			});
+		</script>
+		<!-- 네이버 로그인 끝 -->
 		
 	
 	<!-- 개인회원 모달창 -->
