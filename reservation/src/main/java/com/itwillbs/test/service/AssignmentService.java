@@ -34,4 +34,9 @@ public class AssignmentService {
 		return mapper.deleteAssignment(idx);
 	}
 	
+	// 양도 게시판 insert
+	public int registAssignment(int salesValue, String sId, int r_idx) {
+		return mapper.insertAssignment(salesValue, sId, r_idx);
+	}
+	
 }

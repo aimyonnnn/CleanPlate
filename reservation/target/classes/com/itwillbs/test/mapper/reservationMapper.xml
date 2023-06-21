@@ -95,4 +95,11 @@
 		SELECT SUM(r_amount) AS total
 			FROM reservation
 	</select>	
+	
+	<select id="selectReservationInfo" resultType="com.itwillbs.test.vo.ReservationVO">
+		select * 
+			from reservation
+				where r_idx = #{r_idx}
+	</select>
+	
 </mapper>

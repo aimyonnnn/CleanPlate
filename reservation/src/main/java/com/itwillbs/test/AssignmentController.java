@@ -25,6 +25,7 @@ import com.itwillbs.test.service.RestaurantService;
 import com.itwillbs.test.vo.AssignmentVO;
 import com.itwillbs.test.vo.MemberVO;
 import com.itwillbs.test.vo.MenuVO;
+import com.itwillbs.test.vo.ReservationVO;
 import com.itwillbs.test.vo.RestaurantVO;
 
 @Controller
@@ -132,5 +133,42 @@ public class AssignmentController {
        
        return response;
    }
+   
+   @GetMapping("registAssignment")
+   public String registAssignment(
+		   @RequestParam("r_idx") int r_idx,
+		   @RequestParam("salesValue") int salesValue,
+		   Model model, HttpSession session) {
+	   
+	   System.out.println(r_idx + ", " + salesValue);
+	   
+	   // 예약정보 조회하기
+	   ReservationVO reservationInfo = reservationService.getReservationInfo(r_idx);
+	   
+	   // r_amount > 입력금액 일 때 
+	   if(salesValue >	 reservationInfo.getR_amount()) {
+		   model.addAttribute("msg", "예약금액 보다 높게 판매할 수 없습니다. 가격을 다시 입력해주세요");
+		   return "fail_back";
+	   }
+	   
+	   String sId = (String) session.getAttribute("sId");
+	   
+	   // 양도 게시판에 인서트
+	   // 파라미터 a_price(=salesValue), a_sellerId(=sId), r_idx
+	   int insertCount = assignmentService.registAssignment(salesValue, sId, r_idx);
+	   
+	   System.out.println(insertCount);
+	   
+	   if(insertCount != 0) {
+		   model.addAttribute("msg", "양도 게시판에 정상적으로 등록되었습니다!");
+		   model.addAttribute("targetURL", "assignment");
+		   return "success_forward";
+	   }
+	   
+	   return "redirect:/memberRSList";
+   }
+   
+   
+   
    
 }

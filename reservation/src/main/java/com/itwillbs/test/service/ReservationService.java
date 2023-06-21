@@ -78,5 +78,10 @@ public class ReservationService {
 		return mapper.getTotalPay();
 	}
 	
+	// 예약 정보 조회
+	public ReservationVO getReservationInfo(int r_idx) {
+		return mapper.selectReservationInfo(r_idx);
+	}
+	
 	
 }

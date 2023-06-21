@@ -245,6 +245,7 @@
                             <th>날짜</th>
                             <th>시간</th>
                             <th>상태</th>
+                            <th>판매가격 입력</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -269,6 +270,7 @@
 	                           		</c:otherwise>
 	                           	</c:choose>
                             </td>
+                            <td><input type="text" id="salesValue"></td>
                         </tr>
                    </tbody>
             </table>
@@ -276,7 +278,7 @@
 	            	양도한 예약은 양도 게시판에 등록되며, 고객센터를 통해서만 취소가 가능합니다. 
 	            </div>
 	         <div class="mt-3 d-flex justify-content-center">
-        		<button type="button" class="btn btn-outline-warning" id="assignmentButton">예약 양도하기</button>
+        		<button type="button" class="btn btn-outline-warning" id="assignmentButton" onclick="redirectToAssignment('${resList.r_idx}',  $('#salesValue').val())">예약 양도하기</button>
         		<button type="button" class="btn btn-secondary" id="closeButton" data-bs-dismiss="modal" style="margin-left: 10px;">닫기</button>
 		     </div>
 	      </div>
@@ -286,17 +288,28 @@
 	</c:forEach>
 	<!-- 두번째 양도 관련 모달창 끝 -->
  	
+ 	<!-- 양도 관련 스크립트 -->
+ 	<script>
+ 	// 양도 금액 입력 시 유효성 검사
+ 	$(document).ready(function() {
+ 		  $('#salesValue').on('input', function() {
+ 		    var value = $(this).val();
+ 		    $(this).val(value.replace(/[^0-9]/g, ''));
+ 		  });
+ 		});
+ 	
+ 	// 양도 게시판에 insert
+ 	function redirectToAssignment(r_idx, salesValue) {
+ 	    var url = '<c:url value="registAssignment?r_idx=' + r_idx + '&salesValue=' + salesValue + '"/>';
+ 	    window.location.href = url;
+ 	}
+ 	</script>
  	
  	<script>
 	 	<!-- 모달창에서 취소버튼 클릭 시 환불 페이지로 넘어가기 -->
 	 	$(document).on("click", "#cancelButton", function(event){
 	 	    // 예약 환불 페이지로 이동
 	 		window.location.href = '<c:url value="환불페이지"/>';
-	 	});
-	 	<!-- 모달창에서 취소버튼 클릭 시 양도 페이지로 넘어가기 -->
-	 	$(document).on("click", "#assignmentButton", function(event){
-	 	    // 예약 양도 페이지로 이동
-	 		window.location.href = '<c:url value="양도페이지"/>';
 	 	});
 	 	<!-- 모달창에서 닫기버튼 클릭 시 현재 페이지로 돌아가기 -->
 	 	$(document).on("click", "#closeButton", function(event){

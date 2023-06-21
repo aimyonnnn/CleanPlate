@@ -2,6 +2,8 @@ package com.itwillbs.test.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.itwillbs.test.vo.AssignmentVO;
 
 public interface AssignmentMapper {
@@ -17,4 +19,7 @@ public interface AssignmentMapper {
 
 	// 관리자의 양도 정보 삭제
 	int deleteAssignment(String idx);
+	
+	// 양도 게시판 insert
+	int insertAssignment(@Param("salesValue") int salesValue, @Param("sId") String sId, @Param("r_idx") int r_idx);
 }

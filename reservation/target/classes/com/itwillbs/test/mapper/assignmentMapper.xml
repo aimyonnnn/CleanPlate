@@ -39,5 +39,17 @@
 		DELETE FROM assignment
 			WHERE a_idx = #{a_idx}
 	</delete>
+	
+	<!-- 양도 게시판 insert -->
+	<insert id="insertAssignment">
+		insert into
+			assignment values (
+				null
+				, 1 -- 양도상태1-거래가능, 2-거래완료
+				, #{salesValue}
+				, #{sId}
+				, #{r_idx}
+			)
+	</insert>
 
 </mapper>

@@ -52,6 +52,9 @@ public interface ReservationMapper {
 
 	// 총 결제 금액 조회
 	int getTotalPay();
+	
+	// 예약 정보 조회
+	ReservationVO selectReservationInfo(int r_idx);
 
 	
 }
