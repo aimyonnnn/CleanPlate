@@ -7,8 +7,8 @@ import lombok.Data;
 @Data
 public class ReservationVO {
 	private int r_idx; // 예약번호
-//	private int m_idx; // 회원번호
-//	private int c_idx; // 점주 번호
+	private int m_idx; // 회원번호
+	private int c_idx; // 점주 번호
 	private String me_name; //예약한 메뉴
 	private int r_amount; // 예약비용
 	private int r_tables;// 테이블 수

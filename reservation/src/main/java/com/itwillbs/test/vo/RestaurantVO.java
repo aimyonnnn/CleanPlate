@@ -65,6 +65,7 @@ public class RestaurantVO {
 	private String res_intro;
 	
 	private String c_id;
+	private String c_name;
 	private int c_idx;
 	
 }
