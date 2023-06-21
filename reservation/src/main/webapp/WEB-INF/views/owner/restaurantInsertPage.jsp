@@ -465,6 +465,20 @@
 		</div>
 	</div>
 </div>
+
+<script type="text/javascript">
+	//폼 제출 이벤트 리스너 등록
+	document.getElementById('myForm').addEventListener('submit', function(event) {
+	  event.preventDefault(); // 폼 기본 제출 동작 방지
+	
+	  // AJAX 요청을 통한 데이터 전송
+	  var formData = new FormData(this);
+	  // ... AJAX 요청 코드 작성 ...
+	
+	  // 모달 창 닫기
+	  $('#menuModal').modal('hide');
+	});
+</script>
 <!-- 메뉴 추가 모달 창 -->		  
 
 

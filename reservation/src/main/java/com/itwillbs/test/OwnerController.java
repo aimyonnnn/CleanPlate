@@ -60,11 +60,12 @@ public class OwnerController {
 	
 	// 가게 추가 클릭시 가게등록 작업
 	@PostMapping("restaurantInsertPro")
-	public String restaurantInsertPro(RestaurantVO restaurant, Model model) {
+	public String restaurantInsertPro(RestaurantVO restaurant, Model model, HttpSession session) {
 		System.out.println(restaurant);
-		
-		// 사업자등록번호 중복시 실패
-		
+		// 점주 회원인 경우에만 동작
+		String c_id = (String)session.getAttribute("cId");
+		restaurant.setC_id(c_id);
+		// 사업자등록번호 중복시 실패 => api로 한댔음
 		int insertCount = service.registStore(restaurant);
 		
 		// 성공시 storeInsertSucess 리다이렉트 
@@ -75,6 +76,7 @@ public class OwnerController {
 			model.addAttribute("msg", "가게 등록 실패!");
 			return "fail_back";
 		}
+		
 	}
 	
 //	// 가게 등록 성공시 StoreList로 리다이렉트
@@ -96,23 +98,23 @@ public class OwnerController {
 	@GetMapping("restaurantUpdatePage")
 	public String restaurantUpdatePage(@RequestParam int res_idx, Model model) {
 		
-		// 가게 상세 정보 저장
+		// 가게 정보 불러오기
 		RestaurantVO restaurant = service.getRestaurantInfo(res_idx);
 		
+//		model.addAttribute("res_idx", res_idx);
 		model.addAttribute("restaurant", restaurant);
 		return "owner/restaurantUpdatePage";
 	}
 	// 가게 정보 수정 작업
 	@PostMapping("restaurantUpdate")
 	public String restaurantUpdate(RestaurantVO restaurant, Model model) {
-		
-		// 가게 정보 수정
+		// 가게 정보 수정 작업
 		int updateCount = service.ModifyRestaurant(restaurant);
 		// 성공시  success_forward.jsp 로 이동 가게 정보 수정 완료 출력
 		// 실패시 가게 정보 수정 실패! 출력
 		if(updateCount > 0) {
 			model.addAttribute("msg", "가게 정보 수정 완료");
-			model.addAttribute("targetURL", "StoreList");
+			model.addAttribute("targetURL", "restaurantList");
 			return "success_forward";
 			
 		} else {

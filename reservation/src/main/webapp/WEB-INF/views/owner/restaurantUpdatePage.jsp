@@ -96,10 +96,12 @@
             <!-- 내용 구역 -->
             <div class="col-10">
                 <!-- 가게내용 페이지 시작 -->
-                   <form action="restaurantInsertPro" method="post">
+                   <form action="restaurantUpdate" method="post">
                 	<table class="table" style="margin-left: 70px; width: 58%;">
 						<tbody>
                             <tr>
+                            	<!-- hidden으로 res_idx 전달 -->
+                            	<input type="hidden" value="${restaurant.res_idx}" name="res_idx">
                                 <th scope="row"><label for="res_brn">사업자 번호</label></th>
                                 <td>
                                     <div class="input-group">
@@ -326,7 +328,7 @@
 						  </tbody>
                 	</table>
 					<div style="margin-left:380px;">
-					    <button type="submit" class="btn btn-warning" style="color: white;">가게추가</button>
+					    <button type="submit" class="btn btn-warning" style="color: white;">가게수정</button>
 					</div>
 	
 					

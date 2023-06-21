@@ -19,6 +19,9 @@ public class MenuController {
 	@PostMapping ("menuInsert")
 	public String menuInsert(MenuVO menu, Model model) {
 		System.out.println(menu);
+		
+		
+		
 		// 메뉴 추가 작업 
 		int insertCount = service.registMenu(menu);
 		
@@ -32,6 +35,10 @@ public class MenuController {
 			model.addAttribute("msg", "메뉴 등록 실패!");
 			return "fail_back";
 		}
+		
+		
+		
+		
 	}
 	// 메뉴 목록 조회
 	@GetMapping ("menuInfo")
