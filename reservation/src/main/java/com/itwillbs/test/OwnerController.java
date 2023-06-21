@@ -12,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.*;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.*;
 
 import com.itwillbs.test.service.*;
 import com.itwillbs.test.vo.*;
@@ -109,13 +110,39 @@ public class OwnerController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		// ---------------------------------------------------------------
+		// ---------------------------------------------------------------(수정)
 		// VO MultipartFile 객체 꺼내기
-		
-		
+		MultipartFile mFile1 = restaurant.getRes_file1();
+		MultipartFile mFile2 = restaurant.getRes_file1();
+		MultipartFile mFile3 = restaurant.getRes_file1();
+		// ---------------------------------------------------------------
 		
 		// 파일명 중복 방지
+		// "랜덤ID값_파일명.확장자" 형식으로 중복 파일명 처리
 		String uuid = UUID.randomUUID().toString();
+		// UUID 값 원본 파일명 앞에 결합(맨 앞자리 8자리 문자열만 활용)
+		// VO객체 원본 파일에 저장
+		// ---------------------------------------------------------------(수정)
+		// 기본값 널스트링 
+		restaurant.setRes_photo1("");
+		restaurant.setRes_photo2("");
+		restaurant.setRes_photo3("");
+		
+		if(!mFile1.getOriginalFilename().equals("")) {
+			restaurant.setRes_photo1(subDir + "/" + uuid.substring(0, 8) + "_" + mFile1.getOriginalFilename());
+		}
+		if(!mFile2.getOriginalFilename().equals("")) {
+			restaurant.setRes_photo2(subDir + "/" + uuid.substring(0, 8) + "_" + mFile2.getOriginalFilename());
+		}
+		if(!mFile3.getOriginalFilename().equals("")) {
+			restaurant.setRes_photo3(subDir + "/" + uuid.substring(0, 8) + "_" + mFile3.getOriginalFilename());
+		}
+		
+		// ---------------------------------------------------------------
+		System.out.println("실제 업로드 파일명1 : " + restaurant.getRes_photo1());
+		System.out.println("실제 업로드 파일명1 : " + restaurant.getRes_photo2());
+		System.out.println("실제 업로드 파일명1 : " + restaurant.getRes_photo3());
+		
 		
 		
 		// c_idx 가져오기 위해 VO에 저장 
