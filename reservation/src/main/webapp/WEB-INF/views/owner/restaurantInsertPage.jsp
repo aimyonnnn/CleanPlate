@@ -318,9 +318,11 @@
                                 	<a style="font-size: small; font-weight: normal;">(사진 1장 선택 필수)</a>
                                 </th>
 						    	<td>
-						    		<input type="file" name="res_photo1" class="form-control" style="color: white;"><br>
-						    		<input type="file" name="res_photo2" class="form-control" style="color: white;"><br>
-						    		<input type="file" name="res_photo3" class="form-control" style="color: white;"><br>
+						    		<!-- VO의 MultipartFile 변수 이름과 동일 -->
+						    		<!-- 실제 파일명 res_photo1, 2, 3 -->
+						    		<input type="file" name="res_file1" class="form-control" style="color: white;"><br>
+						    		<input type="file" name="res_file2" class="form-control" style="color: white;"><br>
+						    		<input type="file" name="res_file3" class="form-control" style="color: white;"><br>
 						    	</td> 
 						    </tr>
                             <tr>

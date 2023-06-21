@@ -1,6 +1,9 @@
 package com.itwillbs.test;
 
-import java.util.List;
+import java.io.*;
+import java.nio.file.*;
+import java.text.*;
+import java.util.*;
 
 import javax.servlet.http.HttpSession;
 
@@ -57,7 +60,13 @@ public class OwnerController {
 	/* 식당관리 페이지 */
 	//owner의 식당추가로 이동 Mapping
 	@GetMapping("restaurantInsertPage")
-	public String restaurantInsertPage() {
+	public String restaurantInsertPage(HttpSession session, Model model) {
+		// 미로그인, 점주 회원이 아닐 경우 
+		String c_Id = (String)session.getAttribute("cId");
+		if(c_Id == null) {
+			model.addAttribute("msg", "로그인 해주세요");
+			return "fail_back";
+		}
 		return "owner/restaurantInsertPage";
 	}
 	
@@ -65,9 +74,52 @@ public class OwnerController {
 	@PostMapping("restaurantInsertPro")
 	public String restaurantInsertPro(RestaurantVO restaurant, Model model, HttpSession session) {
 		System.out.println(restaurant);
-		// 점주 회원인 경우에만 동작
-		String c_id = (String)session.getAttribute("cId");
-		restaurant.setC_id(c_id);
+		// 미로그인, 점주 회원이 아닐 경우
+		String c_Id = (String)session.getAttribute("cId");
+		if(c_Id == null) {
+			model.addAttribute("msg", "로그인 해주세요");
+			return "fail_back";
+		}
+		
+		// ---------------------------------------------------------------
+		// 업로드(upload) 폴더 생성 
+		// 실제 업로드 경로
+		String uploadDir = "/resources/upload";
+		String saveDir = session.getServletContext().getRealPath(uploadDir);
+		System.out.println("실제 업로드 경로 : "+ saveDir);
+		
+		String subDir = ""; // 서브디렉토리(날짜 구분)
+		
+		// 날짜별 디렉토리 자동 분류 
+		try {
+			// 1. Date 객체 생성(기본 생성자 호출하여 시스템 날짜 정보 활용)
+			Date date = new Date(); 
+
+			// 2. SimpleDateFormat 클래스 활용
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+			// 3. 기존 업로드 경로에 날짜 경로 결합하여 저장
+			saveDir += "/" + sdf.format(date);
+			saveDir += subDir;
+			
+			// java.nio.file.Paths 클래스의 get() 메서드 호출
+			Path path = Paths.get(saveDir);
+			
+			// Files 클래스의 createDirectories() 메서드 호출
+			Files.createDirectories(path);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		// ---------------------------------------------------------------
+		// VO MultipartFile 객체 꺼내기
+		
+		
+		
+		// 파일명 중복 방지
+		String uuid = UUID.randomUUID().toString();
+		
+		
+		// c_idx 가져오기 위해 VO에 저장 
+		restaurant.setC_id(c_Id);
 		// 사업자등록번호 중복시 실패 => api로 한댔음
 		int insertCount = service.registStore(restaurant);
 		

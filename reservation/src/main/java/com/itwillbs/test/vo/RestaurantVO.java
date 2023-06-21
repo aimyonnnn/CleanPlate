@@ -1,5 +1,7 @@
 package com.itwillbs.test.vo;
 
+import org.springframework.web.multipart.*;
+
 import lombok.*;
 
 /*
@@ -49,9 +51,17 @@ public class RestaurantVO {
 	private String res_amenity;
 	private String res_amenity_info;
 	
+	// 실제 파일명 
 	private String res_photo1;
 	private String res_photo2;
 	private String res_photo3;
+	
+	// 파일 업로드시 필요한 MultipartFile 변수 선언
+	// input name 속성명과 동일 
+	private MultipartFile res_file1;
+	private MultipartFile res_file2;
+	private MultipartFile res_file3;
+	
 	private String res_intro;
 	
 	private String c_id;
