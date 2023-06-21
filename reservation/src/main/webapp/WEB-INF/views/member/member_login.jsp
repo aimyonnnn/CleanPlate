@@ -680,6 +680,62 @@
 	</script>
 	<!-- CoolSMS 문자인증 끝 -->
 	
+	<!-- 일반회원 아이디 실시간 중복 체크 -->
+	<script>
+		$(() => {
+		    $("input[name=m_id]").on('input', () => {
+		        var inputVal = $("input[name=m_id]").val();
+		        console.log(inputVal);
+		        $.ajax({
+		            data: {
+		                m_id: inputVal
+		            },
+		            url: '<c:url value="/dupId"/>',
+		            success: function(response) {
+		            	console.log(response);
+		                if (response === "1") { // 아이디가 중복되었을 때
+		                    alert("중복된 아이디 입니다.");
+		                    $("input[name=m_id]").focus();
+		                    $("input[name=m_id]").css('color', 'red');
+		                } else if (response === "0") {
+		                	console.log('사용 가능한 아이디 입니다.');
+	// 		                    alert("사용 가능한 아이디 입니다.");
+		                    $("input[name=m_id]").css('color', 'green');
+		                }
+		            }
+		        });
+		    });
+		});
+	</script>
+	
+	<!-- 기업회원 아이디 실시간 중복 체크 -->
+	<script>
+		$(() => {
+		    $("input[name=c_id]").on('input', () => {
+		        var inputVal = $("input[name=c_id]").val();
+		        console.log(inputVal);
+		        $.ajax({
+		            data: {
+		            	c_id: inputVal
+		            },
+		            url: '<c:url value="/dupId2"/>',
+		            success: function(response) {
+		            	console.log(response);
+		                if (response === "1") { // 아이디가 중복되었을 때
+		                    alert("중복된 아이디 입니다.");
+		                    $("input[name=c_id]").focus();
+		                    $("input[name=c_id]").css('color', 'red');
+		                } else if (response === "0") {
+		                	console.log('사용 가능한 아이디 입니다.');
+	// 		                    alert("사용 가능한 아이디 입니다.");
+		                    $("input[name=c_id]").css('color', 'green');
+		                }
+		            }
+		        });
+		    });
+		});
+	</script>
+	
 	
 	<footer class="footer">
 		<jsp:include page="../common/common_footer.jsp"/>

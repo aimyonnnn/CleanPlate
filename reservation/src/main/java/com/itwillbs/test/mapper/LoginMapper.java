@@ -29,4 +29,10 @@ public interface LoginMapper {
 	// 일반회원, 기업회원 구분
 	int selectUserType(String id);
 	
+	// 아이디 실시간 중복 체크 - 일반회원
+	int isDupId(String m_id);
+	
+	// 아이디 실시간 중복 체크 - 기업회원
+	int isDupId2(String c_id);
+	
 }
