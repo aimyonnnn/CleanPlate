@@ -25,8 +25,14 @@ public class LikeInfoService {
 	  mapper.toggleLikeStatus(map);
    }
    
+    //찜한 가게 목록 출력
 	  public List<LikeInfoVO> getMemberLike() {
 			return mapper.selectLikeList();
 	};
-    
+	
+	// 찜하기 취소
+	public void deletcount(int res_idx, String m_id, String liked) { 
+		mapper.deletcount(res_idx, m_id, liked);
+	}
+	
 }

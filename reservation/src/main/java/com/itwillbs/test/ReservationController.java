@@ -74,6 +74,12 @@ public class ReservationController {
 		return "reservation/reservation_reserve";
 	}
 	
+	// 가게 상세페이지
+	@GetMapping("reservationStore")
+	public String reservationStore() {
+		return "reservation/reservation_store";
+	}
+	
 	// 결제 후 예약 내역 페이지
 	@GetMapping("reservationResult")
 	public String reservationResult() {

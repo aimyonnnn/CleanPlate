@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,6 +9,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Clean Plate</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/bookMark.css" />
     
    	<!-- 공통 상단바 구역 -->
 	<%@ include file="../common/common_header.jsp" %>
@@ -31,45 +33,44 @@
 		}
 		
     </style>
-
     <!-- 위로가기 버튼 CSS -->
-    
-<script>
-  $(document).ready(function() {
-
-    $("#likeBtn").click(function() {
-      var rex_idx = "10001";
-      var m_id = "member1";
-      var liked="false";
-
-          $.ajax({
-            url: '${pageContext.request.contextPath }/toggleLikeStatus',
-            type: 'GET',
-            data: {'rex_idx': rex_idx, 'm_id': m_id, 'liked':liked},
-            async: false,
-            success: function(response) {
-              if (response == "ok") {
-                window.location.reload(true);
-                alert("ok");
-              } else {
-                alert("not ok");
-              }
-            },
-            error: function() {
-              alert("error");
-            }
-          });
-
-          var isLiked = true; 
-
-            if (isLiked) {
-                $("#likeBtn").removeClass("liked").addClass("unliked");
-             } else {
-                $("#likeBtn").removeClass("unliked").addClass("liked");
-             }
-    });
-  });
-  </script>
+    <!-- 찜하기 -->
+		<script>
+		  $(document).ready(function() {
+		    var isLiked = false;
+		    var res_idx = "10001";
+		    var m_id = "member1";
+		    var liked = $("#likeBtn").val() ? "true" : "false";
+			
+		    // 찜하기 버튼 클릭 이벤트
+		    $("#likeBtn").click(function() {
+		      liked = !isLiked ? "true" : "false";
+			  console.log(liked);
+		      $.ajax({
+		        url: '${pageContext.request.contextPath}/toggleLikeStatus',
+		        type: 'GET',
+		        data: {'res_idx': res_idx, 'm_id': m_id, 'liked': liked},
+		        async: false,
+		        success: function(response) {
+		          if (response == "ok") {
+		            isLiked = !isLiked; // 토글하여 변수 값을 변경
+					if(liked=="true"){
+		            {if (isLiked) {
+		              $("#likeBtn").removeClass("unliked").addClass("liked");
+		            } else {
+		              $("#likeBtn").removeClass("liked").addClass("unliked");
+		            }}}
+		            
+		            alert("finish");
+		          } else {
+		            alert("error");
+		          }
+		        }
+		      });
+		    });
+		  });
+		</script>    
+    <!-- 찜하기 -->
     
 </head>
 <body>
@@ -136,12 +137,12 @@
 		 <h5 class="fw-bold p-2">${restaurantInfo.res_name}</h5>
 		 <p style="font-size: 14px;">${restaurantInfo.res_intro}</p>
 	</div>
+	<div style="inline">	
+	<button id="likeBtn" class="unliked" value="true">❤️</button>
+	</div>
 	<!-- 가게 메인 소개 끝 -->
 	<hr>
-	
-	<!-- 찜하기 버튼 -->
-	  <button id="likeBtn" class="unliked">찜하기</button>
-	<!-- 찜하기 버튼 -->  
+	 
 	<!-- 가게 정보 -->
 	<div>
 		<table class="table">
@@ -186,7 +187,7 @@
 						        <dd class="col-sm-12">· ${restaurantInfo.res_total_table * 4}석</dd>
 						        <dd class="col-sm-12">· ${restaurantInfo.res_total_table} 테이블</dd>
 						        <dd class="col-sm-12">· 테이블 당 최대 4인 수용 가능 (단체석 문의)</dd>
-					      		<dd><button type="button" class="btn btn-danger rounded-0 mt-3" style="width: 90%;" onclick="goToReservationReserve('${restaurantInfo.res_idx}')">지금 예약하기</button></dd>
+					      		<dd><button type="button" class="btn btn-danger rounded-0 mt-3" style="width: 90%;" onclick="goToReservationReserve('${restaurantInfo.res_idx}')">지금 예약하기</button>
 						    </dl>
 						</dd>
 			      	</dl>

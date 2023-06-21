@@ -8,7 +8,15 @@
         VALUES (#{res_idx}, #{m_id}, #{liked})
     </insert>
     
+    <!-- 찜한 목록 출력 -->
     <select id="selectLikeList" resultType="com.itwillbs.test.vo.LikeInfoVO"> 
     	SELECT * FROM like_info
      </select>
+     
+     <!-- 찜하기 제거 -->
+    <delete id="deletcount"> 
+    	DELETE FROM like_info 
+    </delete>
+    
+     
 </mapper>
