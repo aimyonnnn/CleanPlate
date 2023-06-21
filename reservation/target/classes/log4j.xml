@@ -57,11 +57,12 @@
 	<!-- 		<appender-ref ref="console" /> -->
 	<!-- 	</logger> -->
 	
+	<!-- 콘솔창이 너무 정신이 없어서 주석처리했습니다. 필요한신 분은 주석해제 하고 사용하세요 -->
 	<!-- 5. jdbc.resultsettable : SELECT 실행 결과(데이터 테이블 = ResultSet 객체 내용) 에 대한 로그 -->
-	<logger name="jdbc.resultsettable" additivity="false">
-		<level value="info" />
-		<appender-ref ref="console" />
-	</logger>
+<!-- 	<logger name="jdbc.resultsettable" additivity="false"> -->
+<!-- 		<level value="info" /> -->
+<!-- 		<appender-ref ref="console" /> -->
+<!-- 	</logger> -->
 
 	<!-- Root Logger -->
 	<root>
