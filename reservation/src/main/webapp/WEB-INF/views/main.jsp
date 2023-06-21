@@ -131,14 +131,14 @@
 	<div class="wrapper scroll-spy">
 	  <div class="inner">
 	    <h1 class="back-to-position to-right delay-0">
-	      odit fuga dolor fugiat vero omnis? Fugiat deserunt itaque
+	      Unparalleled luxury, gastronomic mastery.
 	    </h1>
 	  </div>
 	</div>
 	<div class="wrapper scroll-spy">
 	  <div class="inner2">
 	    <h1 class="back-to-position to-left delay-1">
-	      Fugiat deserunt itaque odit fuga dolor fugiat vero omnis?
+	      Exquisite flavors, elegant ambiance.
 	    </h1>
 	  </div>
 	</div>

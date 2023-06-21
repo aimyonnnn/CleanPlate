@@ -170,8 +170,6 @@
         </div>
     </div>
    	
-    <script>
-    
     <!-- 웹소켓 자바스크립트 -->
     <script type="text/javascript">
         var ws;

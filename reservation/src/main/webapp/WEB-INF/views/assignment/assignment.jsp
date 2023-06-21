@@ -209,10 +209,10 @@
 			  <div class="text-center">
 			    <button type="button" class="btn btn-warning mx-2" id="PriceLow">가격낮은순</button>
 			    <button type="button" class="btn btn-warning mx-2" id="PriceHigh">가격높은순</button>
-			    <button type="button" class="btn btn-warning mx-2" id="PriceBy50">50만원이하</button>
+<!-- 			    <button type="button" class="btn btn-warning mx-2" id="PriceBy50">50만원이하</button> -->
 			    <button type="button" class="btn btn-warning mx-2" id="RevAsc">예약빠른순</button>
-			    <button type="button" class="btn btn-warning mx-2" id="RevDesc">예약느린순</button>
-			    <button type="button" class="btn btn-warning mx-2" id="abc">가나다순</button>
+<!-- 			    <button type="button" class="btn btn-warning mx-2" id="RevDesc">예약느린순</button> -->
+			    <button type="button" class="btn btn-warning mx-2" id="abc">가게이름순</button>
 			    <button type="button" class="btn btn-danger mx-2" id="today">TODAY</button>
 			  </div>
 			</div>
@@ -278,32 +278,32 @@
 	         appendList(assignmentList);
        });
        
-       // 50만원이하 필터
-       $('#PriceBy50').click(() => {
-    	  	let newAssignmentList = assignmentList.filter(a => {
-    	  		return a.a_price <= 500000;
-    	  	});
-    	  	 console.log(newAssignmentList);
-	         appendList(newAssignmentList);
-       });
+//        // 50만원이하 필터
+//        $('#PriceBy50').click(() => {
+//     	  	let newAssignmentList = assignmentList.filter(a => {
+//     	  		return a.a_price <= 500000;
+//     	  	});
+//     	  	 console.log(newAssignmentList);
+// 	         appendList(newAssignmentList);
+//        });
        
        // 예약빠른순 정렬
        $('#RevAsc').click(() => {
     	   assignmentList.sort((a, b) => {
-    		    return Date.parse(a.r_date) - Date.parse(b.r_date);
+    		   return new Date(a.r_date) - new Date(b.r_date);
     	   });
     	    console.log(assignmentList);
 	        appendList(assignmentList);
        });
        
-       // 예약느린순 정렬
-       $('#RevDesc').click(()=>{
-    	   assignmentList.sort((a, b) => {
-    		    return Date.parse(b.r_date) - Date.parse(a.r_date);
-    	   });
-    	    console.log(assignmentList);
-	        appendList(assignmentList);
-       });
+//        // 예약느린순 정렬
+//        $('#RevDesc').click(()=>{
+//     	   assignmentList.sort((a, b) => {
+//     		    return Date.parse(b.r_date) - Date.parse(a.r_date);
+//     	   });
+//     	    console.log(assignmentList);
+// 	        appendList(assignmentList);
+//        });
        
        // 가게명 가나다순 정렬
        $('#abc').click(() => {
@@ -345,7 +345,7 @@
 	           let template = `<div class="col-md-4 mt-5" data-aos="fade-up" data-aos-anchor-placement="center-bottom">
 				               <div class="card">
 				               <img src="${pageContext.request.contextPath}/resources/images/${'${data.res_photo1}'}" class="card-img-top" alt="Item Image">
-				                 <div class="card-body">1
+				                 <div class="card-body">
 				                   <h5><span onclick="goToReservationReserve('${"${data.res_idx}"}')">${'${data.res_name}'}</span></h5>
 				                   <p>예약 날짜 : <span>${'${data.r_date}'}</span></p>
 				                   <p>가격 : <span>${'${data.a_price}'}원</span></p>

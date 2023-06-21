@@ -196,7 +196,7 @@
 		var naverLogin = new naver.LoginWithNaverId(
 				{
 					clientId: "0591cHHMSEoSaK8mneX2", // cliendId
-					callbackUrl: "http://localhost:8080/test/loginForm", // Callback URL => 콜백 URL을 8089로 수정해주면 됨!
+					callbackUrl: "http://localhost:8089/test/loginForm", // Callback URL => 콜백 URL을 8089 or 8080로 수정해주면 됨! 네이버 로그인 현재 검수 신청해놨습니다!
 					isPopup: false,
 					callbackHandle: true
 				}

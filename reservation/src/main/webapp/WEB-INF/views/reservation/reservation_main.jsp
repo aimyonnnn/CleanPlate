@@ -198,15 +198,9 @@
 		<div class="input-group mb-3" style="width: 800px; margin: 0 auto;">
 		  <input type="text" class="form-control" placeholder="식당을 검색하세요" id="restaurantName" name="restaurantName">
 		  <button class="btn btn-outline-secondary bg-white text-dark" type="button" id="restaurantSearch" name="restaurantSearch">검색</button>
-		</div>
-        <!-- 검색 버튼 -->
-        
-	    <!-- 정렬 버튼 -->
-		<div class="col-12 mt-4">
-		  <div class="text-center">
-		    <div class="d-inline-block mx-2">
+		   <div class="d-inline-block mx-2">
 		      <select class="form-select" id="districtSelect">
-		        <option selected disabled>구 선택</option>
+		        <option selected disabled>지역선택</option>
 				<option value="해운대구">해운대구</option>
 				<option value="부산진구">부산진구</option>
 				<option value="동래구">동래구</option>
@@ -224,11 +218,18 @@
 				<option value="서구">서구</option>
 		      </select>
 		    </div>
+		</div>
+        <!-- 검색 버튼 -->
+        
+	    <!-- 정렬 버튼 -->
+		<div class="col-12 mt-4">
+		  <div class="text-center">
 		    <button type="button" class="btn btn-warning mx-2" id="storeName">가게이름순</button>
 		    <button type="button" class="btn btn-warning mx-2" id="openEarly">오픈시간순</button>
 		    <button type="button" class="btn btn-warning mx-2" id="reviewHigh">평점높은순</button>
-		    <button type="button" class="btn btn-warning mx-2" id="reviewLow">평점낮은순</button>
+<!-- 		    <button type="button" class="btn btn-warning mx-2" id="reviewLow">평점낮은순</button> -->
 <!-- 		    <button type="button" class="btn btn-warning mx-2" id="reservationMany">예약많은순</button> -->
+		   
 		  </div>
 		</div>
 		<!-- 정렬 버튼 -->
@@ -242,13 +243,13 @@
        let reviewScores = <%= new Gson().toJson(request.getAttribute("reviewScores")) %>;
        console.log("reviewScores : " + reviewScores);
        
-       // 구 선택에 따른 가게 목록 필터링
+       // 지역 선택에 따른 가게 목록 필터링
        $('#districtSelect').change(function() {
          var selectedDistrict = $(this).val();
          filterRestaurantList(selectedDistrict);
        });
        
-       // 선택한 구에 따라 가게 목록 필터링하여 출력
+       // 선택한 지역에 따라 가게 목록 필터링하여 출력
        function filterRestaurantList(district) {
          var filteredList = restaurantList.filter(function(restaurant) {
            return restaurant.res_detailAddress.includes(district);
@@ -288,14 +289,14 @@
 	      appendList(reviewScores);
 	  });
       
-      // 평점 낮은순 정렬
-	  $('#reviewLow').on('click', () => {
-		  reviewScores.sort((a, b) => {
-	        return a.average_score - b.average_score;
-	    });
-		  console.log(reviewScores);
-	      appendList(reviewScores);
-	  });
+//       // 평점 낮은순 정렬
+// 	  $('#reviewLow').on('click', () => {
+// 		  reviewScores.sort((a, b) => {
+// 	        return a.average_score - b.average_score;
+// 	    });
+// 		  console.log(reviewScores);
+// 	      appendList(reviewScores);
+// 	  });
       
        // appendList() 
        function appendList(restaurantList) {
