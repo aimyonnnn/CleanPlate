@@ -56,4 +56,37 @@
 	    			ORDER BY reservation_count DESC
     </select>
 	
+		<!-- 예약 목록 조회 -->
+	<select id="getReservationList" resultType="com.itwillbs.test.vo.ReservationVO">
+		SELECT DISTINCT * 
+			FROM reservation 
+<!-- 			r JOIN restaurant res JOIN members m -->
+<!-- 				ON r.res_idx = res.res_idx -->
+	</select>
+	
+	<!-- 관리자의 예약 정보 조회 -->
+	<select id="selectReservation" resultType="com.itwillbs.test.vo.ReservationVO">
+		SELECT *
+			FROM reservation
+				WHERE r_idx = #{r_idx}
+	</select>
+	
+	<!-- 관리자의 예약 정보 수정 -->
+	<update id="adminReservationUpdate" parameterType="com.itwillbs.test.vo.ReservationVO">
+		UPDATE reservation
+			SET r_personnel = #{r_personnel}	
+			   ,r_date = #{r_date}
+			   ,r_request = #{r_request}
+			   ,r_status = #{r_status}
+			   ,m_idx = #{m_idx}
+			   ,res_idx = #{res_idx}
+			   ,cr_idx = #{cr_idx}
+				WHERE r_idx = #{r_idx}
+	</update>
+	
+	<!-- 관리자의 예약 정보 삭제 -->
+	<delete id="deleteReservation">
+		DELETE FROM reservation
+			WHERE r_idx = #{r_idx}
+	</delete>
 </mapper>

@@ -61,4 +61,19 @@ public class MemberService {
 	public List<RestaurantVO> getMemberRestaurant(String sId) {
 		return mapper.selectMemberRestaurant(sId) ;
 	}
+	
+	// 비밀번호 확인
+	public String isCorrectPasswd(String id) {
+		return mapper.isCorrectPasswd(id);
+	}
+
+	// 관리자의 멤버 목록 조회
+	public List<MemberVO> memberList() {
+		return mapper.selectMemberList();
+	}
+
+	// 관리자의 멤버 삭제
+	public int deleteMember(String id) {
+		return mapper.deleteMember(id);
+	}
 }

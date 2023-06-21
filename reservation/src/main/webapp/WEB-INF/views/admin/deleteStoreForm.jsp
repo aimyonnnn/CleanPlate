@@ -13,51 +13,42 @@
 
 <div class="container">
 
-  <form action="" th:action method="post">
+  <form action="adminRestaurantUpdate" method="post">
     <div>
-      <label for="storeIdx">가게 번호</label>
-      <input type="text" id="storeIdx" name="storeIdx" class="form-control" value="1" readonly>
-      <%-- 각 text에 DB 연동 후 th:value="${idx 값}" 추가 --%>
+      <label for="restaurantIdx">가게 번호</label>
+      <input type="text" id="res_idx" name="res_idx" class="form-control" value="${restaurantVO.res_idx }">
     </div>
     <div>
-      <label for="storeImg">가게 대표이미지</label>
-      <input type="image" id="storeImg" name="storeImg" class="form-control" src="#">
-      <%-- 각 text에 DB 연동 후 th:value="${idx 값}" 추가 --%>
+      <label for="restaurantBrn">사업자등록번호</label>
+      <input type="text" id="res_brn" name="res_brn" class="form-control" value="${restaurantVO.res_brn }">
     </div>
     <div>
-      <label for="StoreName">가게 이름</label>
-      <input type="text" id="storeName" name="storeName" class="form-control" value="동백키친" readonly>
+      <label for="restaurantName">가게 이름</label>
+      <input type="text" id="res_name" name="res_name" class="form-control" value="${restaurantVO.res_name }">
     </div>
     <div>
-      <label for="ownerId">점주 ID</label>
-      <input type="text" id="ownerId" name="ownerId" class="form-control" value="hong2023" readonly>
+      <label for="restaurantTel">가게 전화번호</label>
+      <input type="text" id="res_tel" name="res_tel" class="form-control" value="${restaurantVO.res_tel }">
     </div>
     <div>
-      <label for="ownerName">점주 이름</label>
-      <input type="text" id="ownerName" name="ownerName" class="form-control" value="홍길동" readonly>
+      <label for="restaurantAdress">가게 주소</label>
+      <input type="text" id="restaurantAdress" name="restaurantAdress" class="form-control" value="${restaurantVO.res_address }, ${restaurantVO.res_detailAddress }">
     </div>
     <div>
-      <label for="storeTel">전화 번호</label>
-      <input type="text" id="storeTel" name="storeTel" class="form-control" value="010-1234-1234" readonly>
-    </div>
-    <div>
-      <label for="storeAdress">가게 주소</label>
-      <input type="text" id="storeAdress" name="storeAdress" class="form-control" value="부산진구 123-12344" readonly>
-    </div>
-    <div>
-      <label for="storeDate">가게 등록일</label>
-      <input type="text" id="storeDate" name="storeDate" class="form-control" value="2023-06-07" readonly>
+      <label for="ceoIdx">점주 번호(idx)</label>
+      <input type="text" id="c_idx" name="c_idx" class="form-control" value="${restaurantVO.c_idx }">
     </div>
 
     <hr class="my-4">
 
-    <div class="row">
+   <div class="row">
       <div class="col">
-        <button class="w-100 btn btn-danger btn-lg" type="submit">삭제하기</button>
+        <button class="w-100 btn btn-danger btn-lg" type="submit">수정하기</button>
+        <button class="w-100 btn btn-danger btn-lg" type="button" onclick="location.href='deleteRestaurant'">삭제하기</button>
       </div>
       <div class="col">
         <button class="w-100 btn btn-secondary btn-lg"
-                onclick="location.href='adminStore.jsp'"
+                onclick="location.href='adminStore'"
                 type="button">취소</button>
       </div>
     </div>

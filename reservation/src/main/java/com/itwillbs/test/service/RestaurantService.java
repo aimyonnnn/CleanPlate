@@ -42,5 +42,19 @@ public class RestaurantService {
 		return mapper.selectRestaurantReviewScores();
 	}
 		
+	// 관리자 페이지 가게 관리
+	public RestaurantVO selectAdminRestaurant(String idx) {
+		return mapper.selectAdminRestaurant(idx);
+	}
+	
+	// 관리자 페이지 가게 정보 수정
+	public RestaurantVO adminRestaurantUpdate(RestaurantVO res) {
+		return mapper.adminRestaurantUpdate(res);
+	}
+	
+	// 관리자 페이지 가게 정보 삭제
+	public int deleteRestaurant(String idx) {
+		return mapper.deleteRestaurant(idx);
+	}
 		
 }

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.itwillbs.test.mapper.AdminMapper">
+	
+	<select id="getReservationList">
+		SELECT 
+			 r_idx
+			,m_id
+			FROM reservation r JOIN members m JOIN restaurant res
+				WHERE r.r_idx = m.m_idx
+					ORDER BY r_idx ASC;
+	</select>
+	
+	<select id="getMemberList" parameterType="com.itwillbs.test.vo.MemberVO">
+		SELECT	*
+			FROM members
+	</select>
+</mapper>

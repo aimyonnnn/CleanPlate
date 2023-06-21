@@ -13,7 +13,7 @@
 
 <div class="container">
 
-  <form action="" th:action method="post">
+  <form action="adminReservationUpdate" th:action method="post">
     <div>
       <label for="reservationIdx">예약 번호</label>
       <input type="text" id="reservationIdx" name="reservationIdx" class="form-control" value="1" readonly>

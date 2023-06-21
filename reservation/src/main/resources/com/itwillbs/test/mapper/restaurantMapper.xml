@@ -10,6 +10,7 @@
 				where res_idx = #{res_idx}		
 	</select>
 	
+	<!-- 가게 추가 -->
 	<insert id="insertRestaurant">
 		INSERT 
 			INTO restaurant
@@ -35,6 +36,7 @@
 	
 	</insert>
 	
+	<!-- 예약 내역 조회 -->
 	<select id="selectReservationList">
 		SELECT r.r_idx, c.cr_type, r.r_amount, r.r_tables, r.r_personnel, m.m_name, r.r_status, r.r_date, r.r_request, res.res_name
 			FROM reservation r JOIN restaurant res
@@ -49,34 +51,30 @@
 					);
 	</select>
 	
-	<select id="selectRDList">
-		SELECT *
-			FROM reservation_detail_info
-			WHERE r_idx IN(
-				SELECT r_idx
-				FROM reservation
-				WHERE res_idx IN(SELECT res_idx
-						FROM restaurant
-						WHERE c_idx = (SELECT c_idx
-							FROM ceo
-							WHERE c_id = #{sId})
-						)
-			);
-	</select>
+	<!-- 사용되지 않는 구문 주석처리  -->
+<!-- 	<select id="selectRDList"> -->
+<!-- 		SELECT * -->
+<!-- 			FROM reservation_detail_info -->
+<!-- 			WHERE r_idx IN( -->
+<!-- 				SELECT r_idx -->
+<!-- 				FROM reservation -->
+<!-- 				WHERE res_idx IN(SELECT res_idx -->
+<!-- 						FROM restaurant -->
+<!-- 						WHERE c_idx = (SELECT c_idx -->
+<!-- 							FROM ceo -->
+<!-- 							WHERE c_id = #{sId}) -->
+<!-- 						) -->
+<!-- 			); -->
+<!-- 	</select> -->
 	
-	
+	<!-- 가게 내역 조회 -->
 	<select id="selectRestaurantList" resultType="com.itwillbs.test.vo.RestaurantVO">
 		SELECT * 
-			FROM restaurant
+			FROM restaurant r JOIN ceo c
+			ON r.c_idx = c.c_idx
 	</select>
 	
-	<select id="selectRestaurant" resultType="com.itwillbs.test.vo.RestaurantVO">
-		SELECT * 
-			FROM restaurant
-				WHERE
-					res_idx = #{res_idx}
-	</select>
-	
+	<!-- 가게 정보 수정 -->
 	<update id="updateRestaurant">
 		UPDATE restaurant
 			SET
@@ -105,6 +103,38 @@
 			 	JOIN reviews rv ON res.res_idx = rv.res_idx
 				 GROUP BY res.res_idx, res.res_name, res_openinghours, res_photo1, res_intro, res_address, res_detailAddress;
 	</select>
-
+	
+	<!-- 가게 조회 -->
+	<select id="selectRestaurant" resultType="com.itwillbs.test.vo.RestaurantVO">
+		SELECT *
+			FROM restaurant
+				WHERE res_brn = #{res_brn}
+	</select>
+	
+	<!-- 관리자의 가게 정보 수정 -->
+	<update id="adminStoreUpdate" parameterType="com.itwillbs.test.vo.RestaurantVO">
+		UPDATE restaurant
+			SET res_brn = #{res_brn}
+			   ,res_name = #{res_name}
+			   ,res_tel = #{res_tel}
+			   ,res_address = SUBSTRING_INDEX(#{restaurantAdress}, ',' ,1)
+			   ,res_detailAddress = SUBSTRING_INDEX(#{restaurantAdress}, ',' , -1)
+			   ,c_idx = #{c_idx}
+				WHERE res_idx = #{res_idx}
+	</update>
+	
+	<!-- 관리자의 가게 정보 삭제 -->
+	<delete id="deleteRestaurant">
+		DELETE FROM restaurant
+			WHERE res_idx = #{res_idx}
+	</delete>
+	
+	<!-- 관리자의 가게 조회 -->
+	<select id="selectAdminRestaurant" resultType="com.itwillbs.test.vo.RestaurantVO">
+		SELECT * 
+			FROM restaurant
+				WHERE
+					res_idx = #{res_idx}
+	</select>
 
 </mapper>

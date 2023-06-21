@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <!DOCTYPE html>
 <html>
   <head>
@@ -115,8 +116,7 @@
       <div class="title row">
         <div class="col-7">
           <h5 class="title6">총 예약 건수 :</h5>
-          <h5 class="title6">20</h5>
-          <%-- DB 연동 후 th:text="${size() 메서드 이용해서 total 값 받아 추가}" --%>
+          <h5 class="title6">${reservationList.size() }</h5>
         </div>
       </div>
     </div>
@@ -126,27 +126,28 @@
         <thead>
         <tr>
           <th>#</th>
-          <th>회원 ID</th>
-          <th>가게 이름</th>
+          <th>예약 인원</th>
           <th>예약 일자</th>
+          <th>총 금액</th>
+          <th>가게 이름</th>
           <th>결제 일자</th>
-          <th>결제 금액</th>
           <th>예약 관리</th>
         </tr>
         </thead>
         <tbody>
+        <c:forEach items="${reservationList }" var="reservation">
         <tr>
-          <td>1</td>
-          <%--각 td 태그에 th:text="${파라미터명}으로 값 받아오기 필수" --%>
-          <td>hong2023</td>
-          <td>동백키친</td>
-          <td>2023-06-07</td>
+          <td>${reservation.r_idx }</td>
+          <td>${reservation.r_personnel }</td>
+          <td>${reservation.r_date }</td>
+          <td>${reservation.r_amount }</td>
           <td>2023-06-07</td>
           <td>58000</td>
           <td><button type="button" class="btn btn-sm btn-primary"
-                      onclick="location.href='deleteReservationForm.jsp '"
+                      onclick="location.href='deleteReservationForm'"
           >정보 수정</button></td>
         </tr>
+        </c:forEach>
         </tbody>
       </table>
     </div>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <!DOCTYPE html>
 <html>
   <head>
@@ -7,7 +8,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1">
 	<%--line-awesome icon 사용을 위한 스타일 시트 --%>
 	<link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
-    <title>admin store</title>
+    <title>가게 관리</title>
     <link href="${pageContext.request.contextPath }/resources/css/adminDetail.css" rel="stylesheet" type="text/css"/>
     <link rel="shortcut icon" href="#">
   </head>
@@ -115,8 +116,7 @@
       <div class="title row">
         <div class="col-7">
           <h5 class="title6">총 가게 수 :</h5>
-          <h5 class="title6">30</h5>
-          <%-- DB 연동 후 th:text="${size() 메서드 이용해서 total 값 받아 추가}" --%>
+          <h5 class="title6">${restaurantList.size() } 개</h5>
         </div>
       </div>
     </div>
@@ -127,26 +127,26 @@
         <tr>
           <th>#</th>
           <th>가게 이름</th>
-          <th>점주 ID</th>
-          <th>점주 이름</th>
+          <th>사업자등록번호</th>
           <th>전화 번호</th>
-          <th>등록일</th>
+          <th>가게 주소</th>
+          <th>점주 이름</th>
           <th>가게 관리</th>
         </tr>
         </thead>
         <tbody>
+        <c:forEach items="${restaurantList }" var="restaurant">
         <tr>
-          <td>1</td>
-          <%--각 td 태그에 th:text="${파라미터명}으로 값 받아오기 필수" --%>
-          <td>동백키친</td>
-          <td>hong2023</td>
-          <td>홍길동</td>
-          <td>010-1234-5678</td>
-          <td>2023-06-07</td>
-          <td><button type="button" class="btn btn-sm btn-primary"
-                      onclick="location.href='deleteStoreForm.jsp '"
-          >정보 수정</button></td>
+          <td>${restaurant.res_idx }</td>
+          <td>${restaurant.res_name }</td>
+          <td>${restaurant.res_brn }</td>
+          <td>${restaurant.res_tel }</td>
+          <td>${restaurant.res_address }, ${restaurant.res_detailAddress }</td>
+          <td>${restaurant.c_name }</td>
+       	  <td><button type="button" class="btn btn-sm btn-primary"
+          onclick="location.href='deleteStoreForm?idx=${restaurant.res_idx}'">정보 수정</button></td>
         </tr>
+        </c:forEach>
         </tbody>
       </table>
     </div>

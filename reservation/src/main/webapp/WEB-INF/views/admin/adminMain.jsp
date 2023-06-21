@@ -150,7 +150,7 @@
                   <small>운영중인 가게 수</small>
                 </div>
 
-                <h2>30</h2>
+                <h2>${RestaurantList.size()}</h2>
 
                 <small>현재 운영중인 총 가게 수입니다.</small>
               </div>

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.itwillbs.test.mapper.ReservationMapper;
+import com.itwillbs.test.vo.ReservationVO;
 import com.itwillbs.test.vo.RestaurantVO;
 import com.itwillbs.test.vo.ReviewVO;
 
@@ -50,6 +51,26 @@ public class ReservationService {
 	// 예약이 많은 순서로 식당 조회
 	public List<Map<String, Object>> getReservationCountByRestaurant() {
 		return mapper.selectReservationCountByRestaurant();
+	}
+	
+	// 예약 목록 조회
+	public List<ReservationVO> getReservationList() {
+		return mapper.getReservationList();
+	}
+
+	// 관리자의 예약 정보 조회
+	public ReservationVO selectReservation(String idx) {
+		return mapper.selectReservation(idx);
+	}
+	
+	// 관리자의 예약 정보 수정
+	public ReservationVO adminReservationUpdate(ReservationVO re) {
+		return mapper.adminReservationUpdate(re);
+	}
+
+	// 관리자의 예약 정보 삭제
+	public ReservationVO deleteReservation(String idx) {
+		return mapper.deleteReservation(idx);
 	}
 	
 	

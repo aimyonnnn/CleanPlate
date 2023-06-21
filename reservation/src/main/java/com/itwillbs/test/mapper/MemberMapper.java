@@ -37,5 +37,14 @@ public interface MemberMapper {
 	List<ReservationVO> selectMemberReservation(String sId);
 
 	List<RestaurantVO> selectMemberRestaurant(String sId);
+	
+	// 비밀번호 확인
+	String isCorrectPasswd(@Param("id") String id);
+	
+	// 관리자의 멤버 목록 조회
+	List<MemberVO> selectMemberList();
+
+	// 관리자의 멤버 정보 삭제
+	int deleteMember(String id);
 
 }

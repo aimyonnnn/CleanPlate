@@ -7,6 +7,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import com.itwillbs.test.vo.ReservationVO;
 import com.itwillbs.test.vo.RestaurantVO;
 import com.itwillbs.test.vo.ReviewVO;
 
@@ -36,6 +37,18 @@ public interface ReservationMapper {
 	
 	// 예약이 많은 순서로 식당 조회
 	List<Map<String, Object>> selectReservationCountByRestaurant();
+
+	// 예약 목록 조회
+	List<ReservationVO> getReservationList();
+
+	// 관리자의 예약 정보 조회
+	ReservationVO selectReservation(String idx);
+
+	// 관리자의 예약 정보 수정
+	ReservationVO adminReservationUpdate(ReservationVO re);
+
+	// 관리자의 예약 정보 삭제
+	ReservationVO deleteReservation(String idx);
 
 	
 }

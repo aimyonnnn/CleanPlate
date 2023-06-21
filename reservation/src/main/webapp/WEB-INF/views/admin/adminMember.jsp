@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html>
   <head>
@@ -107,7 +108,9 @@
         <div class="page-header">
           <div>
             <h1>회원 관리</h1>
+            <br>
             <small>회원 관리 페이지</small>
+            <br>
           </div>
         </div> 
 
@@ -115,8 +118,7 @@
       <div class="title row">
         <div class="col-7">
           <h5 class="title6">총 회원 수 : </h5>
-          <h5 class="title6">500</h5>
-          <%-- DB 연동 후 th:text="${size() 메서드 이용해서 total 값 받아 추가}" --%>
+          <h5 class="title6">${memberList.size() } 명</h5>
         </div>
       </div>
     </div>
@@ -128,25 +130,49 @@
           <th>#</th>
           <th>회원 ID</th>
           <th>이름</th>
+          <th>닉네임</th>
           <th>전화 번호</th>
           <th>이메일</th>
-          <th>예약 횟수</th>
+          <th>회원 상태</th>
+          <th>회원 타입</th>
           <th>회원 관리</th>
         </tr>
         </thead>
         <tbody>
+        <c:forEach items="${memberList }" var="member">
         <tr>
-          <td>1</td>
-          <%--각 td 태그에 th:text="${파라미터명}으로 값 받아오기 필수" --%>
-          <td>hong2023</td>
-          <td>홍길동</td>
-          <td>010-1234-5678</td>
-          <td>zz@zz.com</td>
-          <td>5</td>
-          <td><button type="button" class="btn btn-sm btn-primary"
-                      onclick="location.href='deleteMemberForm.jsp '"
-          >정보 수정</button></td>
+          <td>${member.m_idx }</td>
+          <td>${member.m_id }</td>
+          <td>${member.m_name }</td>
+          <td>${member.m_nick }</td>
+          <td>${member.m_tel }</td>
+          <td>${member.m_email }</td>
+        <%-- 회원 상태 판별 --%>
+        <c:if test="${member.m_status == 1}">
+        	<td>정상</td>
+        </c:if>
+        <c:if test="${member.m_status == 2}">
+        	<td>정지</td>
+        </c:if>
+        <c:if test="${member.m_status == 2}">
+        	<td>탈퇴</td>
+        </c:if>
+        <%-- 회원 상태 판별 --%>
+        <%-- 회원 타입 판별 --%>
+        <c:if test="${member.userType == 1}">
+        	<td>일반회원</td>
+        </c:if>
+        <c:if test="${member.userType == 2}">
+        	<td>기업회원</td>
+        </c:if>
+        <c:if test="${member.userType == 3}">
+        	<td>관리자</td>
+        </c:if>
+        <%-- 회원 타입 판별 --%>
+        <td><button type="button" class="btn btn-sm btn-primary"
+        onclick="location.href='deleteMemberForm?id=${member.m_id}'">정보 수정</button></td>
         </tr>
+        </c:forEach>
         </tbody>
       </table>
     </div>
