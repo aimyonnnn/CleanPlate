@@ -169,7 +169,7 @@
 					                    </tr>
 					                    <tr>
 					                        <th>예약코스</th>
-					                        <td>${resList.cr_type }</td>
+					                        <td>${resList.me_name }</td>
 					                    </tr>
 					                    <tr>
 					                        <th>예약비용</th>

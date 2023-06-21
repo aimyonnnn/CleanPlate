@@ -65,9 +65,6 @@ public class MemberController {
 		member.setM_email2(member.getM_email().split("@")[1]);
 		
 		// 전화번호 분리
-		member.setM_tel1(member.getM_tel().split("-")[0]);
-		member.setM_tel2(member.getM_tel().split("-")[1]);
-		member.setM_tel3(member.getM_tel().split("-")[2]);
 		
 		model.addAttribute("member", member);
 		return "member/memberInfo";

@@ -31,8 +31,10 @@ public class OwnerController {
 	@GetMapping("restaurantReservation")
 	public String restaurantReservation(Model model, HttpSession session) {
 		
-		List<ReservationVO> resList = service.getReservationList((String)session.getAttribute("sId"));
-		List<RestaurantVO> restaurantList = resService.getOwnerRestaurantList((String)session.getAttribute("sId"));
+		System.out.println((String)session.getAttribute("cId"));
+		
+		List<ReservationVO> resList = service.getReservationList((String)session.getAttribute("cId"));
+		List<RestaurantVO> restaurantList = resService.getOwnerRestaurantList((String)session.getAttribute("cId"));
 		
 		System.out.println(resList);
 		

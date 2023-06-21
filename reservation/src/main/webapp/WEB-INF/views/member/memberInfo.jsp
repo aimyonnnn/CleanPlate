@@ -106,18 +106,7 @@
 						    	<th scope="row"><label for="userPhone">휴대폰번호</label></th>
 						    	<td style="height: 40px; vertical-align: middle;">
 							  		<div class="d-flex align-items-center">
-							  			<c:set var="arrTel" value="${fn:split(member.m_tel, '-')}" />
-							    		<select class="form-select" id="m_tel1" required="required" onchange="selectBoxChange2(this.value)" style="width: 80px;">
-							    		<option value="010" <c:if test="${fn:contains(member.m_tel1, '010')}">selected</c:if>>010</option>
-							    		<option value="011" <c:if test="${fn:contains(member.m_tel1, '011')}">selected</c:if>>011</option>
-							    		<option value="016" <c:if test="${fn:contains(member.m_tel1, '016')}">selected</c:if>>016</option>
-							    		<option value="017" <c:if test="${fn:contains(member.m_tel1, '017')}">selected</c:if>>017</option>
-							    		<option value="018" <c:if test="${fn:contains(member.m_tel1, '018')}">selected</c:if>>018</option>
-							    		<option value="019" <c:if test="${fn:contains(member.m_tel1, '019')}">selected</c:if>>019</option>
-							    		</select>&nbsp;-&nbsp;
-							    		<input type="hidden" name="m_tel1" id="changeInput2" value="${arrTel[0]}">
-							    		<input class="form-control" type="text" name="m_tel2"  aria-label="default input example" style="width: 70px;" value="${arrTel[1]}" required="required">&nbsp;-&nbsp;
-							    		<input class="form-control" type="text" name="m_tel3"  aria-label="default input example" style="width: 70px;" value="${arrTel[2]}" required="required">&nbsp;&nbsp;
+							    		<input class="form-control" type="text" name="m_tel" style="width: 200px" aria-label="default input example" value="${member.m_tel }" required="required">
 							        	<br><button type="button" class="btn btn-outline-warning">인증요청</button>
 							    	</div>
 							    	<div class="mt-2 d-flex align-items-center">
