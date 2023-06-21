@@ -12,4 +12,8 @@ public interface CeoMapper {
 
 	String selectCeo(String id);
 
+	CeoVO selectFromCeo(String id);
+
+	int deleteUpdateCeo(int c_idx);
+
 }

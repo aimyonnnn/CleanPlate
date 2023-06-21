@@ -57,6 +57,7 @@ public class RestaurantService {
 		return mapper.deleteRestaurant(idx);
 	}
 	
+	
 
 		
 }

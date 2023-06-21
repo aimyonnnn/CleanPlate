@@ -31,4 +31,16 @@
 	    		where c_id = #{id}
 	</select>
 	
+	<select id="selectFromCeo" resultType="com.itwillbs.test.vo.CeoVO">
+		select *
+			from ceo
+			where c_id = #{id}
+	</select>
+	
+	<update id="deleteUpdateCeo">
+		UPDATE ceo
+			SET c_status = 3
+			WHERE c_idx = #{c_idx}
+	</update>
+	
 </mapper>

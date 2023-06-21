@@ -25,4 +25,14 @@ public class CeoService {
 	public String isCorrectCeo(String id) {
 		return mapper.selectCeo(id);
 	}
+	
+	//점주 회원 탈퇴를 위한 정보 가져오기
+	public CeoVO SelectCeo(String id) {
+		return mapper.selectFromCeo(id);
+	}
+	
+	// 점주 회원 탈퇴 진행(상태변경)
+	public int secessionCeo(int c_idx) {
+		return mapper.deleteUpdateCeo(c_idx);
+	}
 }

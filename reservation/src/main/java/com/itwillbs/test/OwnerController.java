@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.*;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.*;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +20,8 @@ public class OwnerController {
 	private RestaurantService service;
 	@Autowired
 	private ReservationService resService;
+	@Autowired
+	private CeoService ceoService;
 	
 	// 매출관리
 	@GetMapping("storeDashBoard")
@@ -148,6 +151,39 @@ public class OwnerController {
 	public String ownerWithdrawal() {
 		return "owner/ownerWithdrawal";
 	}
+	
+	@PostMapping("ownerWithdrawalPro")
+	public String ownerWithdrawalPro(HttpSession session, @RequestParam(defaultValue = "") String c_passwd, Model model) {
+		
+		if(c_passwd.equals("")) {
+			model.addAttribute("msg","비밀번호를 입력해주세요.");
+			return "fail_back";
+		}
+		
+		String id = (String)session.getAttribute("cId");
+		
+		CeoVO ceo = ceoService.SelectCeo(id);
+		
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		
+		if(!passwordEncoder.matches(c_passwd, ceo.getC_passwd())) {
+			model.addAttribute("msg","비밀번호가 일치하지 않습니다.");
+			return "fail_back";
+		}
+		
+		int deleteCount = ceoService.secessionCeo(ceo.getC_idx());
+		
+		if(deleteCount <= 0) {
+			model.addAttribute("msg","회원탈퇴를 실패하였습니다.");
+			return "fail_back";
+		}
+		
+		session.invalidate();
+		
+		model.addAttribute("success","회원탈퇴 되었습니다.\\n이후에 다시 뵙길 기원하겠습니다.");
+		return "secession_success";
+	}
+
 	
 	//owner의 점주정보 페이지로 이동 Mapping
 	@PostMapping("ownerInfo")

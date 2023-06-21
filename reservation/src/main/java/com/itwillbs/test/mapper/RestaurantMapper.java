@@ -39,6 +39,7 @@ public interface RestaurantMapper {
 	// 관리자의 가게 조회
 	RestaurantVO selectAdminRestaurant(String idx);
 
+
 	
 	
 }
