@@ -126,4 +126,10 @@
 			WHERE m_id = #{m_id}	
 	</delete>
 	
+	<update id="updateMemberStatus">
+		UPDATE members
+			SET m_status = 3
+			WHERE m_idx = #{m_idx}
+	</update>
+	
 </mapper>

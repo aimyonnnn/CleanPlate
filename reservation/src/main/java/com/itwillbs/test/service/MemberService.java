@@ -76,4 +76,9 @@ public class MemberService {
 	public int deleteMember(String id) {
 		return mapper.deleteMember(id);
 	}
+	
+	// 회원 탈퇴시 상태변경
+	public int secessionMember(int m_idx) {
+		return mapper.updateMemberStatus(m_idx);
+	}
 }

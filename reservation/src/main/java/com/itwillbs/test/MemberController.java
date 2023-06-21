@@ -128,4 +128,36 @@ public class MemberController {
 		return "member/memberWithdrawal";
 	}
 	
+	@PostMapping("memberWithdrawalPro")
+	public String memberWithdrawalPro(HttpSession session, @RequestParam(defaultValue = "") String m_passwd, Model model) {
+		
+		if(m_passwd.equals("")) {
+			model.addAttribute("msg","비밀번호를 입력해주세요.");
+			return "fail_back";
+		}
+		
+		String id = (String)session.getAttribute("sId");
+		
+		MemberVO member = service.isCorrectMember(id);
+		
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		
+		if(!passwordEncoder.matches(m_passwd, member.getM_passwd())) {
+			model.addAttribute("msg","비밀번호가 일치하지 않습니다.");
+			return "fail_back";
+		}
+		
+		int deleteCount = service.secessionMember(member.getM_idx());
+		
+		if(deleteCount <= 0) {
+			model.addAttribute("msg","회원탈퇴를 실패하였습니다.");
+			return "fail_back";
+		}
+		
+		session.invalidate();
+		
+		model.addAttribute("success","회원탈퇴 되었습니다.\\n이후에 다시 뵙길 기원하겠습니다.");
+		return "secession_success";
+	}
+	
 }

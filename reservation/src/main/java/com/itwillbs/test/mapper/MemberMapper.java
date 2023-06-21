@@ -46,5 +46,8 @@ public interface MemberMapper {
 
 	// 관리자의 멤버 정보 삭제
 	int deleteMember(String id);
+	
+	//회원 탈퇴시 상태변경
+	int updateMemberStatus(int m_idx);
 
 }

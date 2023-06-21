@@ -8,6 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>MyPage</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- 이부분은 지우면 안됩니다 -->
 </head>
 <body>
@@ -83,22 +84,22 @@
 					</textarea>
 	              </div>
             
-				<form action="#" method="post">
+				<form action="memberWithdrawalPro" method="post">
 			    	<div class="mb-3 row" style="margin-left: 50px;">
 			            <label for="id" class="col-sm-2 col-form-label">아이디</label>
 			            <div class="col-md-6">
-			                <input type="text" readonly class="form-control-plaintext" id="id" value="hong">
+			                <input type="text" readonly class="form-control-plaintext" id="id" value="${sessionScope.sId }">
 			            </div>
 			        </div>
 			        <div class="mb-3 row" style="margin-left: 50px;">
 			            <label for="passwd" class="col-sm-2 col-form-label">비밀번호</label>
 			            <div class="col-md-6">
-			                <input type="password" class="form-control" id="passwd" style="width: 180px;">
+			                <input type="password" name="m_passwd" class="form-control" id="passwd" style="width: 180px;">
 			            </div>
 			        </div>
 			        <div class="mb-3 row">
 			            <div class="col-md-7 d-flex" style="margin-left: 450px;">
-			                <button type="button" class="btn btn-warning" style="color: white;" data-bs-toggle="modal" data-bs-target="#exampleModal">탈퇴하기</button>
+			                <button type="submit" class="btn btn-warning" style="color: white;" onclick="return deletebtn()" >탈퇴하기</button>
 			            </div>
 			        </div>
 			    </form>
@@ -106,27 +107,17 @@
 		</div>
 	</div>
 	<!-- 내용 끝 -->
+	<script type="text/javascript">
+		function deletebtn() {
+			let result = confirm("회원 탈퇴를 하면 서비스를 더 이상 이용하실 수 없습니다.\n 정말 회원 탈퇴를 진행하시겠습니까?)");
+			if(result){
+				return result;
+			} else {
+				return result;
+			}
+		}
+	</script>
 			
-	<!-- 확인 모달 -->
-	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-	    	<div class="modal-content">
-	    		<div class="modal-header">
-	        		<h1 class="modal-title fs-5" id="exampleModalLabel">회원 탈퇴</h1>
-	        		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-	      		</div>
-	      		<div class="modal-body">
-	        		회원 탈퇴를 하면 서비스를 더 이상 이용하실 수 없습니다.<br>
-					정말 회원 탈퇴를 진행하시겠습니까?
-	      		</div>
-	      		<div class="modal-footer">
-	        		<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-	        		<button type="submit" class="btn btn-warning" style="color: white;" id="withdrawButton">탈퇴하기</button>
-	      		</div>
-	    	</div>
-		</div>
-	</div>
-	<!-- 확인 모달 끝 -->
 	
     <!-- 하단 부분 include 처리영역 -->
     <hr class="mt-5">
