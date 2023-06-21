@@ -80,6 +80,16 @@ public class LoginService {
 		return mapper.selectUserType(id);
 	}
 	
+	// 아이디 실시간 중복 체크 - 일반회원
+	public int isDupId(String m_id) {
+		return mapper.isDupId(m_id);
+	}
+	
+	// 아이디 실시간 중복 체크 - 기업회원
+	public int isDupId2(String c_id) {
+		return mapper.isDupId2(c_id);
+	}
+	
 	
 	
 }

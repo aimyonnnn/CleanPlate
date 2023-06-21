@@ -177,6 +177,31 @@ public class LoginController {
 		}
 	}	
 	
+	// 아이디 실시간 중복 체크 - 일반회원
+	@GetMapping("dupId")
+	@ResponseBody
+	public String dupId(@RequestParam String m_id) {
+	  int cnt = service.isDupId(m_id);
+	  System.out.println(cnt);
+	  if (cnt == 0) { // 아이디 중복이 아닐 경우, 조회했을 때 0
+	    return "0"; 
+	  } 
+	  return "1"; // 아이디 중복일 경우, 조회했을 때 1
+	}
+	
+	// 아이디 실시간 중복 체크 - 기업회원
+	@GetMapping("dupId2")
+	@ResponseBody
+	public String dupId2(@RequestParam String c_id) {
+		int cnt = service.isDupId2(c_id);
+		System.out.println(cnt);
+		if (cnt == 0) { // 아이디 중복이 아닐 경우, 조회했을 때 0
+			return "0"; 
+		} 
+		return "1"; // 아이디 중복일 경우, 조회했을 때 1
+	}
+	
+	
 	
 //	//로그아웃
 //	@GetMapping("/logout")
