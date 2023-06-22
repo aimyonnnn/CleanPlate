@@ -248,34 +248,35 @@
 						<tr>
 							<td><img src="https://www.walkerhill.com/assets/vistawalkerhillseoul/global/images/etc/menu_myongwolgwan0102.jpg" class="d-block" alt="..."></td>
 							<td>
-								<dl class="row">
-									<dt class="mt-3">★★★★☆(별점)</dt>
+								<dl class="row">				
+									<!-- 별점 출력 -->					
+									<dt class="mt-3 reviewStars">
+										<c:forEach begin="1" end="5" varStatus="status">
+											<c:choose>
+												<c:when test="${reviewList.rv_scope >= status.index}">
+													<span class="star">
+														<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#ffc107" class="bi bi-star-fill" viewBox="0 0 16 16">
+														  <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+														</svg>
+													</span>
+												</c:when>
+												<c:otherwise>
+													<span class="star-empty">
+														<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#ffc107" class="bi bi-star" viewBox="0 0 16 16">
+														  <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/>
+														</svg>
+													</span>
+												</c:otherwise>
+											</c:choose>
+										</c:forEach>
+										<!-- 별점 출력 끝 -->	
+									</dt>
 						        	<dd class="mt-3">${reviewList.m_nick }</dd>
 									<dt class="mt-3">${reviewList.rv_comment }</dt>
 								</dl>
 							</td>
 					    </tr>
 				    </c:forEach>
-					<tr>
-						<td><img src="https://www.walkerhill.com/assets/vistawalkerhillseoul/global/images/etc/menu_myongwolgwan0102.jpg" class="d-block" alt="..."></td>
-						<td>
-							<dl class="row">
-								<dt class="mt-3">★★★★★(별점)</dt>
-					        	<dd class="mt-3">소고기(닉네임)</dd>
-								<dt class="mt-3">최상의 우육을 선별하여 명월관의 노하우로 숙성 시켰습니다. 이 특별한 한우 모둠 한상은 명월관의 최고급 참숯과 만나 은은한 참숯의 향과 함께 입안 가득 깊은 풍미와 감칠맛을 느끼실수 있습니다.(리뷰내용)</dt>
-							</dl>
-						</td>
-				    </tr>
-					<tr>
-						<td><img src="https://www.walkerhill.com/assets/vistawalkerhillseoul/global/images/etc/menu_myongwolgwan0102.jpg" class="d-block" alt="..."></td>
-						<td>
-							<dl class="row">
-								<dt class="mt-3">★★★★★(별점)</dt>
-					        	<dd class="mt-3">소고기(닉네임)</dd>
-								<dt class="mt-3">최상의 우육을 선별하여 명월관의 노하우로 숙성 시켰습니다. 이 특별한 한우 모둠 한상은 명월관의 최고급 참숯과 만나 은은한 참숯의 향과 함께 입안 가득 깊은 풍미와 감칠맛을 느끼실수 있습니다.(리뷰내용)</dt>
-							</dl>
-						</td>
-				    </tr>
 				</tbody>
 			</table>
 			<div style="text-align: center;">
@@ -323,14 +324,14 @@
 			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 			    mapOption = {
 			        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-			        level: 3 // 지도의 확대 레벨
+			        level: 1 // 지도의 확대 레벨
 			    };  
 			// 지도를 생성합니다    
 			var map = new kakao.maps.Map(mapContainer, mapOption); 
 			// 주소-좌표 변환 객체를 생성합니다
 			var geocoder = new kakao.maps.services.Geocoder();
 			// 주소로 좌표를 검색합니다
-			geocoder.addressSearch('서울특별시 광진구 워커힐로 177', function(result, status) {
+			geocoder.addressSearch('${restaurantInfo.res_address}', function(result, status) {
 			    // 정상적으로 검색이 완료됐으면 
 			     if (status === kakao.maps.services.Status.OK) {
 			        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
