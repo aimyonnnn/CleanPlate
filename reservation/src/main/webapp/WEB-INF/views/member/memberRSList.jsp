@@ -52,7 +52,8 @@
 							<option value="방문예정">방문예정</option>
 							<option value="방문완료">방문완료</option>
 							<option value="취소">취소</option>
-							<option value="양도">양도</option>
+							<option value="양도완료">양도완료</option>
+							<option value="판매중">판매중</option>
 						</select>
 				</div>
 				<!-- 드롭다운 끝 -->
@@ -101,8 +102,11 @@
 	                           		<c:when test="${resList.r_status eq 3 }">
 	                           			취소
 	                           		</c:when>
+	                           		<c:when test="${resList.r_status eq 4 }">
+	                           			양도완료
+	                           		</c:when>
 	                           		<c:otherwise>
-	                           			양도
+	                           			판매중
 	                           		</c:otherwise>
 	                           	</c:choose>
                             </td>
@@ -213,8 +217,17 @@
 		            			<!-- 예약내역 테이블 끝 -->
 		        			</div>
 						    <div class="d-flex justify-content-center">
-				        		<button type="button" class="btn btn-outline-warning" onclick="cancel(${resList.r_idx })">예약 취소하기</button>
-				        		<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="margin-left: 10px;">닫기</button>
+					    	 	  <!-- 예약상태에 따른 취소하기 버튼 활성화, 비활성화 -->
+								  <c:choose>
+								    <c:when test="${resList.r_status eq 1}">
+						        		 <button type="button" class="btn btn-outline-warning" onclick="cancel(${resList.r_idx })">예약 취소하기</button>
+									     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="margin-left: 10px;">닫기</button>
+								    </c:when>
+								    <c:otherwise>
+								    	 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="margin-left: 10px;">닫기</button>
+								    </c:otherwise>
+								  </c:choose>
+								  <!-- 예약상태에 따른 취소하기 버튼 활성화, 비활성화 -->
 						    </div>
 					</div>
 					<!-- 예약내역 내용 끝-->
@@ -255,22 +268,19 @@
                             <td><fmt:formatDate value="${resList.r_date }" pattern="yy-MM-dd"/></td>
                             <td><fmt:formatDate value="${resList.r_date }" pattern="HH:mm"/></td>
                             <td>
-	                            <c:choose>
-	                           		<c:when test="${resList.r_status eq 1 }">
-	                           			방문예정
-	                           		</c:when>
-	                           		<c:when test="${resList.r_status eq 2 }">
-	                           			방문완료
-	                           		</c:when>
-	                           		<c:when test="${resList.r_status eq 3 }">
-	                           			취소
-	                           		</c:when>
-	                           		<c:otherwise>
-	                           			양도
-	                           		</c:otherwise>
-	                           	</c:choose>
-                            </td>
-                            <td><input type="text" id="salesValue"></td>
+	                           	<!-- r_status가 1-방문예정, 2-방문완료, 3-취소, 4-양도완료, 5-판매중 -->
+							    <c:choose>
+						           <c:when test="${resItem.r_status eq 1}">방문예정</c:when>
+						           <c:when test="${resItem.r_status eq 2}">방문완료</c:when>
+						           <c:when test="${resItem.r_status eq 3}">취소</c:when>
+						           <c:when test="${resItem.r_status eq 4}">양도완료</c:when>
+						           <c:otherwise>판매중</c:otherwise>
+							    </c:choose>
+						     </td>
+						     <td>
+						     	<input type="text" class="salesValue">
+					     	 </td>
+						     <!-- r_status가 1-방문예정, 2-방문완료, 3-취소, 4-양도완료, 5-판매중 -->
                         </tr>
                    </tbody>
             </table>
@@ -278,9 +288,21 @@
 	            	양도한 예약은 양도 게시판에 등록되며, 고객센터를 통해서만 취소가 가능합니다. 
 	            </div>
 	         <div class="mt-3 d-flex justify-content-center">
-        		<button type="button" class="btn btn-outline-warning" id="assignmentButton" onclick="redirectToAssignment('${resList.r_idx}',  $('#salesValue').val())">예약 양도하기</button>
-        		<button type="button" class="btn btn-secondary" id="closeButton" data-bs-dismiss="modal" style="margin-left: 10px;">닫기</button>
-		     </div>
+	          <!-- 예약상태에 따른 양도하기 버튼 활성화, 비활성화 -->
+			  <c:choose>
+			    <c:when test="${resList.r_status eq 1}">
+				      <button type="button" class="btn btn-outline-warning" id="assignmentButton"
+				      onclick="redirectToAssignment('${resList.r_idx}', $('.salesValue').val())">예약 양도하기</button>
+				      
+					  <button type="button" class="btn btn-secondary" id="closeButton" data-bs-dismiss="modal" style="margin-left: 10px;">닫기</button>
+			    </c:when>
+			    <c:otherwise>
+			    	  <button type="button" class="btn btn-danger" id="assignmentButton"
+				     onclick="alert('이미 취소 또는 완료된 예약이거나 판매중인 예약입니다.')">이미 취소 또는 완료된 예약이거나 판매중인 예약입니다.</button>
+			    </c:otherwise>
+			  </c:choose>
+			  <!-- 예약상태에 따른 양도하기 버튼 활성화, 비활성화 -->
+			</div>
 	      </div>
 	    </div>
 	  </div>
@@ -292,19 +314,25 @@
  	<script>
  	// 양도 금액 입력 시 유효성 검사
  	$(document).ready(function() {
- 		  $('#salesValue').on('input', function() {
+ 		  $('.salesValue').on('input', function() {
  		    var value = $(this).val();
  		    $(this).val(value.replace(/[^0-9]/g, ''));
  		  });
  		});
  	
- 	// 양도 게시판에 insert
+ 	// 양도 게시판에 글 등록하기
  	function redirectToAssignment(r_idx, salesValue) {
+	 	
+ 		if(confirm("가격을 입력해주세요")){
+ 			
+ 		}
+ 		
  	    var url = '<c:url value="registAssignment?r_idx=' + r_idx + '&salesValue=' + salesValue + '"/>';
  	    window.location.href = url;
  	}
  	</script>
  	
+ 	<!-- 기타 클릭 이벤트 -->
  	<script>
 	 	<!-- 모달창에서 취소버튼 클릭 시 환불 페이지로 넘어가기 -->
 	 	$(document).on("click", "#cancelButton", function(event){

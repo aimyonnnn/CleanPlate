@@ -83,5 +83,9 @@ public class ReservationService {
 		return mapper.selectReservationInfo(r_idx);
 	}
 	
+	// 양도 게시판에 글 등록시 예약상태를 '5-판매중'으로 변경하기
+	public int modifyStatus(int r_idx) {
+		return mapper.updateStatus(r_idx);
+	}
 	
 }

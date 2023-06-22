@@ -55,6 +55,9 @@ public interface ReservationMapper {
 	
 	// 예약 정보 조회
 	ReservationVO selectReservationInfo(int r_idx);
+	
+	// 양도 게시판에 글 등록시 예약상태를 '5-판매중'으로 변경하기
+	int updateStatus(int r_idx);
 
 	
 }

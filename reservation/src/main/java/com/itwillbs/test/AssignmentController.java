@@ -134,6 +134,8 @@ public class AssignmentController {
        return response;
    }
    
+   // 양도 게시판 글 등록하기
+   // 마이 페이지의 예약내역탭에서 진행!
    @GetMapping("registAssignment")
    public String registAssignment(
 		   @RequestParam("r_idx") int r_idx,
@@ -142,10 +144,10 @@ public class AssignmentController {
 	   
 	   System.out.println(r_idx + ", " + salesValue);
 	   
-	   // 예약정보 조회하기
+	   // 예약번호로 예약정보 조회하기
 	   ReservationVO reservationInfo = reservationService.getReservationInfo(r_idx);
 	   
-	   // r_amount > 입력금액 일 때 
+	   // 예약테이블의 r_amount > 입력금액 일 때 
 	   if(salesValue >	 reservationInfo.getR_amount()) {
 		   model.addAttribute("msg", "예약금액 보다 높게 판매할 수 없습니다. 가격을 다시 입력해주세요");
 		   return "fail_back";
@@ -153,17 +155,27 @@ public class AssignmentController {
 	   
 	   String sId = (String) session.getAttribute("sId");
 	   
-	   // 양도 게시판에 인서트
-	   // 파라미터 a_price(=salesValue), a_sellerId(=sId), r_idx
+	   // 양도 게시판에 글 등록하기
+	   // 파라미터 : a_price(=salesValue), a_sellerId(=sId), r_idx
 	   int insertCount = assignmentService.registAssignment(salesValue, sId, r_idx);
 	   
 	   System.out.println(insertCount);
 	   
-	   if(insertCount != 0) {
-		   model.addAttribute("msg", "양도 게시판에 정상적으로 등록되었습니다!");
-		   model.addAttribute("targetURL", "assignment");
-		   return "success_forward";
-	   }
+	   if(insertCount != 0) { // 글 등록 성공 시
+		   
+		   // 양도 게시판에 글이 올라가면 
+		   // 예약번호를 조회하여 예약상태 컬럼인 r_status를 '5-판매중'으로 변경하기
+		   // (r_status가 1-방문예정, 2-방문완료, 3-취소, 4-양도완료, 5-판매중)
+   		   int updateReservationStatus = reservationService.modifyStatus(r_idx);
+   			
+   				if(updateReservationStatus != 0) {
+   					
+   					model.addAttribute("msg", "양도 게시판에 정상적으로 등록되었습니다!");
+   					model.addAttribute("targetURL", "assignment");
+   					return "success_forward";
+   				}
+   				
+	   		}
 	   
 	   return "redirect:/memberRSList";
    }
