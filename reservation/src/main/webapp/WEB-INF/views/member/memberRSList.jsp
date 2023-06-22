@@ -218,6 +218,7 @@
 		        			</div>
 						    <div class="d-flex justify-content-center">
 					    	 	  <!-- 예약상태에 따른 취소하기 버튼 활성화, 비활성화 -->
+					    	 	  <!-- 예약상태가 "1-방문예정" 일때만 취소버튼 활성화 -->
 								  <c:choose>
 								    <c:when test="${resList.r_status eq 1}">
 						        		 <button type="button" class="btn btn-outline-warning" onclick="cancel(${resList.r_idx })">예약 취소하기</button>
@@ -258,7 +259,7 @@
                             <th>날짜</th>
                             <th>시간</th>
                             <th>상태</th>
-                            <th>판매가격 입력</th>
+                            <th class="salesValueWrapper">판매가격 입력</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -277,10 +278,9 @@
 						           <c:otherwise>판매중</c:otherwise>
 							    </c:choose>
 						     </td>
-						     <td>
-						     	<input type="text" class="salesValue">
+						     <td class="salesValueWrapper">
+						     	<input type="text" class="salesValue" id="salesValue${resList.r_idx}">
 					     	 </td>
-						     <!-- r_status가 1-방문예정, 2-방문완료, 3-취소, 4-양도완료, 5-판매중 -->
                         </tr>
                    </tbody>
             </table>
@@ -288,20 +288,34 @@
 	            	양도한 예약은 양도 게시판에 등록되며, 고객센터를 통해서만 취소가 가능합니다. 
 	            </div>
 	         <div class="mt-3 d-flex justify-content-center">
-	          <!-- 예약상태에 따른 양도하기 버튼 활성화, 비활성화 -->
+	         
+	          <!--  ====================================== 예약상태에 따른 동적 버튼 생성하기 ====================================== -->
+			  <!-- 예약상태가 "1-방문예정" 일 경우 "예약 양도하기" 버튼 활성화 -->
+			  <!-- 예약상태가 "5-판매중" 일 경우 가격을 수정할 수 있도록 "가격 수정" 버튼 활성화 -->
+			  <!-- 가격 입력 필드와 가격 수정 버튼을 함께 표시 -->
+			  <!-- 판매중이 아닌 경우에는 가격 수정 버튼 비활성화 -->
+			  
 			  <c:choose>
-			    <c:when test="${resList.r_status eq 1}">
-				      <button type="button" class="btn btn-outline-warning" id="assignmentButton"
-				      onclick="redirectToAssignment('${resList.r_idx}', $('.salesValue').val())">예약 양도하기</button>
-				      
-					  <button type="button" class="btn btn-secondary" id="closeButton" data-bs-dismiss="modal" style="margin-left: 10px;">닫기</button>
-			    </c:when>
-			    <c:otherwise>
-			    	  <button type="button" class="btn btn-danger" id="assignmentButton"
-				     onclick="alert('이미 취소 또는 완료된 예약이거나 판매중인 예약입니다.')">이미 취소 또는 완료된 예약이거나 판매중인 예약입니다.</button>
-			    </c:otherwise>
+			  
+				    <c:when test="${resList.r_status eq 1}">
+	   					<button type="button" class="btn btn-outline-warning" id="assignmentButton" onclick="showModal(); redirectToAssignment(${resList.r_idx})">예약 양도하기</button>
+						<button type="button" class="btn btn-secondary" id="closeButton" data-bs-dismiss="modal" style="margin-left: 10px;">닫기</button>
+				    </c:when>
+				    
+				    <c:when test="${resList.r_status eq 5}">
+				        <div>
+				            <input type="text" class="salesValue2" id="salesValue2${resList.r_idx}">
+				            <button type="button" class="btn btn-primary" onclick="updatePrice(${resList.r_idx})">가격 수정</button>
+				        </div>
+				    </c:when>
+				    
+				    <c:otherwise>
+				    	 <button type="button" class="btn btn-danger" id="assignmentButton"
+					     onclick="alert('이미 취소 또는 완료된 예약이거나 판매중인 예약입니다.')">이미 취소 또는 완료된 예약이거나 판매중인 예약입니다.</button>
+				    </c:otherwise>
+				    
 			  </c:choose>
-			  <!-- 예약상태에 따른 양도하기 버튼 활성화, 비활성화 -->
+	          <!--  ====================================== 예약상태에 따른 동적 버튼 생성하기 ====================================== -->
 			</div>
 	      </div>
 	    </div>
@@ -309,27 +323,93 @@
 	</div>
 	</c:forEach>
 	<!-- 두번째 양도 관련 모달창 끝 -->
+	
+	<script>
+	function showModal() {
+	    // 가격 입력 필드를 감싸는 td 요소를 숨김
+	    $('.salesValueWrapper').hide();
+	}
+	</script>
+ 	
+ 	<!-- 가격 수정을 위한 ajax요청 -->
+ 	<script>
+	    function updatePrice(r_idx) {
+	    	
+	        var salesValue =$("#salesValue2" + r_idx).val();
+	        console.log(salesValue);
+	        
+	        $.ajax({
+	            url: '<c:url value="modifySalesPrice"/>',
+	            method: "POST",
+	            data: {
+	            	r_idx: r_idx,
+	                salesValue: salesValue
+	            },
+	            dataType: "text",
+	            success: function(response) {
+	            	
+					console.log(response);
+					
+					if(response === '1') {
+		                alert("가격이 성공적으로 업데이트되었습니다.");
+		                location.href='<c:url value="memberRSList"/>'
+		                
+					} else if (response === '0') {
+						alert("예약금액 보다 높게 판매할 수 없습니다. 가격을 다시 입력해주세요");
+						
+					}
+					
+	            },
+	            error: function(xhr, status, error) {
+	                console.error("가격 업데이트 오류:", error);
+	            }
+	        });
+	    }
+	</script>
  	
  	<!-- 양도 관련 스크립트 -->
  	<script>
  	// 양도 금액 입력 시 유효성 검사
  	$(document).ready(function() {
- 		  $('.salesValue').on('input', function() {
- 		    var value = $(this).val();
- 		    $(this).val(value.replace(/[^0-9]/g, ''));
- 		  });
- 		});
- 	
- 	// 양도 게시판에 글 등록하기
- 	function redirectToAssignment(r_idx, salesValue) {
-	 	
- 		if(confirm("가격을 입력해주세요")){
- 			
- 		}
  		
- 	    var url = '<c:url value="registAssignment?r_idx=' + r_idx + '&salesValue=' + salesValue + '"/>';
- 	    window.location.href = url;
- 	}
+	  	$('.salesValue').on('input', function() {
+	  		
+	    var value = $(this).val();
+	    
+	    // 값에서 숫자가 아닌 문자를 빈 문자열로 대체함!
+	    // 이렇게 하면 입력 필드에는 숫자 값만 입력됨
+	    $(this).val(value.replace(/[^0-9]/g, ''));
+	    
+	  });
+	  	
+	});
+	
+ 	// 양도 게시판에 글 등록하기
+ 	function redirectToAssignment(r_idx) {
+ 		
+ 	   // id 속성명이 salesValue + r_idx 값을 변수에 저장! => 동적으로 바뀌어야 하는 부분임!
+ 	   // 원래 코드에서는 모든 .salesValue 입력란의 값을 가져오려고 했으나 수정된 코드에서는
+ 	   // 해당 예약의 입력란 값을 정확하게 가져오는 방식으로 변경함!
+ 	   var value = $('#salesValue' + r_idx).val();
+
+	   // 확인 메시지 출력
+	   var confirmation = confirm('입력한 금액이 맞습니까?');
+	   
+	   // 아무값도 입력하지 않았을 때 리턴시켜서 다시 입력하게 하기!
+	   // 입력된 값에서 앞뒤 공백을 제거한 결과가 빈 문자열인지를 확인함
+	   // 즉, 값이 공백으로만 이루어져 있다면 조건이 참이됨!
+	   if (value.trim() === '') {
+	        alert('판매 가격을 정확하게 입력해주세요.');
+	        return;
+	   }
+		
+	   if (confirmation) {
+	      var url = '<c:url value="registAssignment?r_idx=' + r_idx + '&salesValue=' + value + '"/>';
+	      window.location.href = url;
+   	 	}
+	   
+	   showModal();
+  	}
  	</script>
  	
  	<!-- 기타 클릭 이벤트 -->

@@ -40,7 +40,7 @@
 			WHERE a_idx = #{a_idx}
 	</delete>
 	
-	<!-- 양도 게시판 insert -->
+	<!-- 양도 게시판 글 쓰기 -->
 	<insert id="insertAssignment">
 		insert into
 			assignment values (
@@ -51,5 +51,13 @@
 				, #{r_idx}
 			)
 	</insert>
-
+	
+	<update id="updateSalesPrice">
+		update assignment
+			set
+				a_price = #{salesValue}
+			where
+				r_idx = #{r_idx}
+	</update>
+	
 </mapper>

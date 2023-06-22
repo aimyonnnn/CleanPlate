@@ -174,10 +174,33 @@ public class AssignmentController {
    					model.addAttribute("targetURL", "assignment");
    					return "success_forward";
    				}
-   				
 	   		}
 	   
 	   return "redirect:/memberRSList";
+   } // registAssignment
+   
+   
+   // 양도 게시판에 판매중인 게시글의 가격 수정하기 
+   @PostMapping("modifySalesPrice")
+   @ResponseBody
+   public String modifySalesPrice(@RequestParam int salesValue, @RequestParam int r_idx, Model model) {
+	   
+	   System.out.println(r_idx + ", " + salesValue);
+	   
+	   // 예약번호로 예약정보 조회하기
+	   ReservationVO reservationInfo = reservationService.getReservationInfo(r_idx);
+	   
+	   // 예약테이블의 r_amount > 입력금액 일 때 
+	   if(salesValue >	 reservationInfo.getR_amount()) {
+		   return "0";
+	   }
+	   
+	   // 가격 수정하기
+	   int updateCount = assignmentService.modifySalesPrice(salesValue, r_idx);
+	   
+	   if(updateCount != 0) return "1";
+	   
+	   return "0";
    }
    
    

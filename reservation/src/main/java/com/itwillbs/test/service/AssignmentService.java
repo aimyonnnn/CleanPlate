@@ -34,9 +34,14 @@ public class AssignmentService {
 		return mapper.deleteAssignment(idx);
 	}
 	
-	// 양도 게시판 insert
+	// 양도 게시판 글 쓰기
 	public int registAssignment(int salesValue, String sId, int r_idx) {
 		return mapper.insertAssignment(salesValue, sId, r_idx);
+	}
+	
+	// 양도 게시판 가격 수정하기
+	public int modifySalesPrice(int salesValue, int r_idx) {
+		return mapper.updateSalesPrice(salesValue, r_idx);
 	}
 	
 }
