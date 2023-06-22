@@ -22,10 +22,9 @@
 
       <div class="sidebar-main"> 
         <div class="sidebar-user">
-            <img src="${pageContext.request.contextPath }/resources/images/adminProfile.png">
+            <img src="${pageContext.request.contextPath }/resources/images/adminProfile.png" style="height: 70px; width: 70px;">
           <div>
-            <h3>관리자</h3>
-            <span>CleanPlate AdminPage</span>
+            <span>관리자 페이지</span>
           </div>
         </div>
 
@@ -36,19 +35,19 @@
             <ul>
               <li>
                 <a href="./">
-                  <span class="las la-chart-pie"></span>
+                  <span class="las la-home"></span>
                   홈페이지
                 </a>
               </li>
               <li>
                 <a href="adminMain">
-                  <span class="las la-chart-pie"></span>
+                  <span class="las la-user"></span>
                   관리자 메인
                 </a>
               </li>
               <li>
                 <a href="adminStatistics">
-                  <span class="las la-history"></span>
+                  <span class="las la-chart-line"></span>
                   사이트 이용 통계
                 </a>
               </li>
@@ -66,7 +65,7 @@
             </li>
             <li>
                 <a href="adminStore">
-                 <span class="las la-chair"></span>
+                 <span class="las la-store"></span>
                  가게 관리
                  </a>
              </li>
@@ -78,20 +77,26 @@
              </li>
             <li>
               <a href="adminAssignment">
-                  <span class="las la-walking"></span>
+                  <span class="las la-exchange-alt"></span>
                  양도 관리
+              </a>
+            </li>
+            <li>
+              <a href="adminNotice">
+                  <span class="las la-edit"></span>
+                 공지사항 관리
               </a>
             </li>
            </ul>
            <div class="menu-head">
              <span>Team2</span>
            </div>
-            <li><a><span class="las la-chess-king"></span>박수민</a></li>
-            <li><a><span class="las la-laugh"></span>김민진</a></li>
-            <li><a><span class="las la-laugh"></span>김보희</a></li>
-            <li><a><span class="las la-laugh"></span>이재승</a></li>
-            <li><a><span class="las la-laugh"></span>김묘정</a></li>
-            <li><a><span class="las la-laugh"></span>이건무</a></li>
+            <li><a><span class="las la-crown"></span>박수민</a></li>
+            <li><a><span class="las la-laugh-beam"></span>김민진</a></li>
+            <li><a><span class="las la-laugh-squint"></span>김보희</a></li>
+            <li><a><span class="las la-grin-alt"></span>이재승</a></li>
+            <li><a><span class="las la-grin-stars"></span>김묘정</a></li>
+            <li><a><span class="las la-grin-wink"></span>이건무</a></li>
         </div>
       </div>
     </div>
@@ -215,11 +220,13 @@
                                    onclick="location.href='adminReservation'">관리</button></div></td>
               </tr>
                   <c:forEach items="${reservationList }" var="reservation" begin="0" end="5" >
+                  <tr>
                   <td></td>
                   <td>&nbsp;${reservation.r_idx }</td>
                   <td>&nbsp;${reservation.r_personnel }명</td>
                   <td><fmt:formatDate value="${reservation.r_date }" pattern="yy-MM-dd HH:mm" /></td>
                   <td>${reservation.r_amount }원</td>
+                  </tr>
                  </c:forEach>
               </tbody>
             </table>  

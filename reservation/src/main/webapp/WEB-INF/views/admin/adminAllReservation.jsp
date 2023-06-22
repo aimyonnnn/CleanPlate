@@ -20,10 +20,9 @@
 
       <div class="sidebar-main"> 
         <div class="sidebar-user">
-            <img src="adminProfile.png">
+            <img src="${pageContext.request.contextPath }/resources/images/adminProfile.png" style="height: 70px; width: 70px;">
           <div>
-            <h3>관리자</h3>
-            <span>CleanPlate AdminPage</span>
+            <span>관리자 페이지</span>
           </div>
         </div>
 
@@ -33,20 +32,20 @@
             </div>
             <ul>
               <li>
-                <a href="#">
-                  <span class="las la-chart-pie"></span>
+                <a href="./">
+                  <span class="las la-home"></span>
                   홈페이지
                 </a>
               </li>
               <li>
-                <a href="adminMain.jsp">
-                  <span class="las la-chart-pie"></span>
+                <a href="adminMain">
+                  <span class="las la-user"></span>
                   관리자 메인
                 </a>
               </li>
               <li>
-                <a href="adminStatistics.jsp">
-                  <span class="las la-history"></span>
+                <a href="adminStatistics">
+                  <span class="las la-chart-line"></span>
                   사이트 이용 통계
                 </a>
               </li>
@@ -57,39 +56,45 @@
           </div>
           <ul>
             <li>
-                <a href="adminMember.jsp">
+                <a href="adminMember">
                  <span class="las la-users"></span>
                  회원 관리
                  </a>
             </li>
             <li>
-                <a href="adminStore.jsp">
-                 <span class="las la-chair"></span>
+                <a href="adminStore">
+                 <span class="las la-store"></span>
                  가게 관리
                  </a>
              </li>
              <li>
-                <a href="adminReservation.jsp">
+                <a href="adminReservation">
                   <span class="las la-history"></span>
                   예약 관리
                 </a>
              </li>
             <li>
-              <a href="adminAssignment.jsp">
-                  <span class="las la-walking"></span>
+              <a href="adminAssignment">
+                  <span class="las la-exchange-alt"></span>
                  양도 관리
+              </a>
+            </li>
+            <li>
+              <a href="adminNotice">
+                  <span class="las la-edit"></span>
+                 공지사항 관리
               </a>
             </li>
            </ul>
            <div class="menu-head">
              <span>Team2</span>
            </div>
-            <li><a><span class="las la-chess-king"></span>박수민</a></li>
-            <li><a><span class="las la-laugh"></span>김민진</a></li>
-            <li><a><span class="las la-laugh"></span>김보희</a></li>
-            <li><a><span class="las la-laugh"></span>이재승</a></li>
-            <li><a><span class="las la-laugh"></span>김묘정</a></li>
-            <li><a><span class="las la-laugh"></span>이건무</a></li>
+            <li><a><span class="las la-crown"></span>박수민</a></li>
+            <li><a><span class="las la-laugh-beam"></span>김민진</a></li>
+            <li><a><span class="las la-laugh-squint"></span>김보희</a></li>
+            <li><a><span class="las la-grin-alt"></span>이재승</a></li>
+            <li><a><span class="las la-grin-stars"></span>김묘정</a></li>
+            <li><a><span class="las la-grin-wink"></span>이건무</a></li>
         </div>
       </div>
     </div>
