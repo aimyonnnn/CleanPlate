@@ -81,6 +81,7 @@ public class LoginController {
 	        model.addAttribute("msg", msg);
 	        return "fail_back";
 	    }
+	    
 
 	    // 3. userType 값이 1이면 일반회원, 그 외의 값이면 기업회원으로 가정
 	    int userType = 0;
@@ -88,6 +89,27 @@ public class LoginController {
 	        userType = service.getUserType(id); // 일반회원 유형 조회
 	    } catch (Exception ex) {
 	        userType = 2; // 기업회원 유형으로 가정
+	    }
+	    
+	    
+	    //3-1 userType에 따른 유저 의 status를 확인하여 로그인을 할것인지 결정
+	    
+	    int status = 0;
+	    
+	    if(userType == 1) {
+	    	MemberVO member = memberService.isCorrectMember(id);
+	    	status = member.getM_status();
+	    } else {
+	    	CeoVO ceo = ceoService.SelectCeo(id);
+	    	status = ceo.getC_status();
+	    }
+	    
+	    if(status == 2) {
+	        model.addAttribute("msg", "현제 정지이므로 정지가 풀리면 로그인하시길 바랍니다.");
+	        return "fail_back";
+	    } else if (status == 3) {
+	        model.addAttribute("msg", "탈퇴된 계정입니다.");
+	        return "fail_back";
 	    }
 
 	    HttpSession session = request.getSession();
