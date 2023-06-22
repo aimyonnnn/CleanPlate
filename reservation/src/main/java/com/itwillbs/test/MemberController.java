@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.itwillbs.test.handler.MyPasswordEncoder;
 import com.itwillbs.test.service.MemberService;
 import com.itwillbs.test.vo.AssignmentVO;
 import com.itwillbs.test.vo.MemberVO;
@@ -64,7 +65,6 @@ public class MemberController {
 		member.setM_email1(member.getM_email().split("@")[0]);
 		member.setM_email2(member.getM_email().split("@")[1]);
 		
-		// 전화번호 분리
 		
 		model.addAttribute("member", member);
 		return "member/memberInfo";
@@ -73,6 +73,11 @@ public class MemberController {
 	// 회원 정보 수정 시
 	@PostMapping("memberUpdate")
 	public String memberUpdate(Model model, MemberVO member) {
+		//암호화
+		MyPasswordEncoder passwordEncoder = new MyPasswordEncoder();
+		String securePasswd = passwordEncoder.getCryptoPassword(member.getM_passwd());
+		member.setM_passwd(securePasswd);
+		
 		service.updateMember(member);
 		model.addAttribute("member", member);
 		System.out.println(member);

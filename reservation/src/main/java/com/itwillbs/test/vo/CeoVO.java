@@ -14,5 +14,8 @@ public class CeoVO { // 회원 테이블
 	private String c_email; // 이메일
 	private int c_status; // 회원상태
 	private Date c_regdate; // 회원가입일
+	//----------------------------------------------------------------
+	private String c_email1;
+	private String c_email2;
 }
 

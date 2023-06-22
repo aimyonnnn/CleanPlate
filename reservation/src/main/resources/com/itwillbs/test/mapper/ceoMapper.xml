@@ -42,5 +42,14 @@
 			SET c_status = 3
 			WHERE c_idx = #{c_idx}
 	</update>
+	<update id="updateCeo">
+		UPDATE ceo
+			SET c_name = #{c_name}
+				, c_passwd = #{c_passwd}
+				, c_tel=#{c_tel}
+				, c_email = #{c_email1}+'@'+#{c_email2}
+			WHERE 
+				c_id = #{c_id}
+	</update>
 	
 </mapper>

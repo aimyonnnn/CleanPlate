@@ -133,6 +133,8 @@
         </div>
     </div>
 
+<c:set var="twentyFourHours" value="86400000" />
+
  	<!-- 예약관리 첫번째 모달창 (방문예정 상태) -->
  	<c:forEach var="resList" items="${resList }">
 	 <div class="modal fade" id="rsListModal${resList.r_idx }" tabindex="-1" aria-labelledby="rsListModalLabel" aria-hidden="true">
@@ -215,7 +217,7 @@
 		            			<!-- 예약관리 테이블 끝 -->
 		        			</div>
 						    <div class="d-flex justify-content-center">
-						    	<c:if test="${resList.r_status eq 1  }">
+						    	<c:if test="${resList.r_status eq 1 && currentDateTime.time - resList.r_date.time <= twentyFourHours }">
 				        			<button type="button" class="btn btn-outline-warning" onclick="cancel(${resList.r_idx })" id="cancelButton" style="margin-left: 10px;"> 예약 취소</button>
 				        		</c:if>
 <%-- 						    <c:if test="${resList.r_status eq 2  }">
@@ -234,7 +236,7 @@
 	<!-- 예약관리 출력 첫번째 모달창 끝 -->	
  
 <script type="text/javascript">
-$(document).ready(function() {
+	$(document).ready(function() {
 	  $("#status, #restaurantName").on("change", function() {
 	    var selectedStatus = $("#status").val();
 	    var selectedRestaurant = $("#restaurantName").val();

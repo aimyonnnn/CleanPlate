@@ -10,6 +10,7 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 
     <!-- 이부분은 지우면 안됩니다 -->
+
 </head>
 <body>
 	<!-- 공통 상단바 구역 -->
@@ -56,15 +57,15 @@
             <div class="col-10">
                 <form action="ownerInfo" method="post">
                     <div class="mb-3 row d-flex justify-content-center">
-                        <label for="id" class="col-sm-2 col-form-label">아이디</label>
+                        <label for="#" class="col-sm-2 col-form-label">아이디</label>
                         <div class="col-md-6">
-                            <input type="text" readonly class="form-control-plaintext" id="id" value="hong(임시)">
+                            <input type="text" readonly class="form-control-plaintext" name="id" id="id" value="${sessionScope.cId }">
                         </div>
                     </div>
                     <div class="mb-3 row d-flex justify-content-center">
-                        <label for="passwd" class="col-sm-2 col-form-label">비밀번호</label>
+                        <label for="#" class="col-sm-2 col-form-label">비밀번호</label>
                         <div class="col-md-6">
-                            <input type="password" class="form-control" id="passwd" style="width: 180px;">
+                            <input type="password" class="form-control" name="passwd" id="passwd" style="width: 180px;">
                         </div>
                     </div>
                     <div class="mb-3 row">

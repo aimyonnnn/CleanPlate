@@ -35,4 +35,8 @@ public class CeoService {
 	public int secessionCeo(int c_idx) {
 		return mapper.deleteUpdateCeo(c_idx);
 	}
+
+	public void updateCeo(CeoVO ceo) {
+		mapper.updateCeo(ceo);
+	}
 }

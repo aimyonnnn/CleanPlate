@@ -2,9 +2,13 @@ package com.itwillbs.test;
 
 import java.io.*;
 import java.nio.file.*;
+import java.sql.Timestamp;
 import java.text.*;
+import java.time.LocalDateTime;
 import java.util.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.*;
@@ -14,6 +18,7 @@ import org.springframework.ui.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.*;
 
+import com.itwillbs.test.handler.MyPasswordEncoder;
 import com.itwillbs.test.service.*;
 import com.itwillbs.test.vo.*;
 
@@ -45,6 +50,9 @@ public class OwnerController {
 		
 		System.out.println(resList);
 		
+		Timestamp currentDateTime = new Timestamp(System.currentTimeMillis());
+        		
+        model.addAttribute("currentDateTime", currentDateTime);
 		model.addAttribute("restaurantList", restaurantList);
 		model.addAttribute("resList",resList);
 		
@@ -289,11 +297,51 @@ public class OwnerController {
 	
 	//owner의 점주정보 페이지로 이동 Mapping
 	@PostMapping("ownerInfo")
-	public String ownerInfo() {
+	public String ownerInfo(HttpSession session, @RequestParam String id, @RequestParam String passwd, HttpServletRequest request, HttpServletResponse response,
+	        Model model) {
+		
+		CeoVO ceo = ceoService.SelectCeo(id);
+		
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		
+		if(ceo == null || !passwordEncoder.matches(passwd, ceo.getC_passwd())) {
+			try {
+			response.setContentType("text/html; charset=utf-8");
+			PrintWriter w;
+				w = response.getWriter();
+				String msg = "비밀번호가 틀립니다!";
+				w.write("<script>alert('"+msg+"');history.go(-1);</script>");
+				w.flush();
+				w.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		
+		}
+		ceo.setC_email1(ceo.getC_email().split("@")[0]);
+		ceo.setC_email2(ceo.getC_email().split("@")[1]);
+		
+		
+		model.addAttribute("ceo", ceo);
+		
 		return "owner/ownerInfo";
+	
 	}
 	
-
-	
+	@PostMapping("OwnerInfoPro")
+	public String OwnerInfoPro(CeoVO ceo, Model model) {
+		
+		//암호화
+		MyPasswordEncoder passwordEncoder = new MyPasswordEncoder();
+		String securePasswd = passwordEncoder.getCryptoPassword(ceo.getC_passwd());
+		ceo.setC_passwd(securePasswd);
+		
+		ceoService.updateCeo(ceo);
+		model.addAttribute("ceo", ceo);
+		System.out.println(ceo);
+		
+		return "redirect:ownerMypage";
+		
+	}
 	
 }

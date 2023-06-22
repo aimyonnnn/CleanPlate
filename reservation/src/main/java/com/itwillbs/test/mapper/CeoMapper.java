@@ -16,4 +16,6 @@ public interface CeoMapper {
 
 	int deleteUpdateCeo(int c_idx);
 
+	void updateCeo(CeoVO ceo);
+
 }
