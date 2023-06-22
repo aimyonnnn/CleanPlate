@@ -99,8 +99,8 @@ public class OwnerController {
 			// 2. SimpleDateFormat 클래스 활용
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 			// 3. 기존 업로드 경로에 날짜 경로 결합하여 저장
-			saveDir += "/" + sdf.format(date);
-			saveDir += subDir;
+			subDir = sdf.format(date);
+			saveDir += "/" + subDir;
 			
 			// java.nio.file.Paths 클래스의 get() 메서드 호출
 			Path path = Paths.get(saveDir);
@@ -110,7 +110,7 @@ public class OwnerController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		// ---------------------------------------------------------------(수정)
+		// ---------------------------------------------------------------(파일 수정)
 		// VO MultipartFile 객체 꺼내기
 		MultipartFile mFile1 = restaurant.getRes_file1();
 		MultipartFile mFile2 = restaurant.getRes_file1();
@@ -122,20 +122,25 @@ public class OwnerController {
 		String uuid = UUID.randomUUID().toString();
 		// UUID 값 원본 파일명 앞에 결합(맨 앞자리 8자리 문자열만 활용)
 		// VO객체 원본 파일에 저장
-		// ---------------------------------------------------------------(수정)
+		// ---------------------------------------------------------------(파일 수정)
 		// 기본값 널스트링 
 		restaurant.setRes_photo1("");
 		restaurant.setRes_photo2("");
 		restaurant.setRes_photo3("");
 		
+		String fileName1 = uuid.substring(0, 8) + "_" + mFile1.getOriginalFilename();
+		String fileName2 = uuid.substring(0, 8) + "_" + mFile2.getOriginalFilename();
+		String fileName3 = uuid.substring(0, 8) + "_" + mFile3.getOriginalFilename();
+		
+		
 		if(!mFile1.getOriginalFilename().equals("")) {
-			restaurant.setRes_photo1(subDir + "/" + uuid.substring(0, 8) + "_" + mFile1.getOriginalFilename());
+			restaurant.setRes_photo1(subDir + "/" + fileName1);
 		}
 		if(!mFile2.getOriginalFilename().equals("")) {
-			restaurant.setRes_photo2(subDir + "/" + uuid.substring(0, 8) + "_" + mFile2.getOriginalFilename());
+			restaurant.setRes_photo2(subDir + "/" + fileName2);
 		}
 		if(!mFile3.getOriginalFilename().equals("")) {
-			restaurant.setRes_photo3(subDir + "/" + uuid.substring(0, 8) + "_" + mFile3.getOriginalFilename());
+			restaurant.setRes_photo3(subDir + "/" + fileName3);
 		}
 		
 		// ---------------------------------------------------------------
@@ -153,6 +158,24 @@ public class OwnerController {
 		// 성공시 storeInsertSucess 리다이렉트 
 		// 실패시 fail_back.jsp 가게등록 실패 출력
 		if(insertCount > 0) { // 성공
+			// ----------------------------------------------(파일 수정)
+			try {
+				if(!mFile1.getOriginalFilename().equals("")) {
+					mFile1.transferTo(new File(saveDir, fileName1));
+				}
+				if(!mFile2.getOriginalFilename().equals("")) {
+					mFile2.transferTo(new File(saveDir, fileName2));
+				}
+				if(!mFile3.getOriginalFilename().equals("")) {
+					mFile3.transferTo(new File(saveDir, fileName3));
+				}
+			} catch (IllegalStateException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			// ----------------------------------------------
+			
 			return "redirect:/restaurantList";
 		} else { // 실패
 			model.addAttribute("msg", "가게 등록 실패!");

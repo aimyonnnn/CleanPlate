@@ -96,7 +96,8 @@
             <!-- 내용 구역 -->
             <div class="col-10">
                 <!-- 가게내용 페이지 시작 -->
-                   <form action="restaurantInsertPro" method="post">
+                <!-- 파일 업로드 enctype="multipart/form-data" -->
+                   <form action="restaurantInsertPro" method="post" enctype="multipart/form-data">
                 	<table class="table" style="margin-left: 70px; width: 58%;">
 						<tbody>
                             <tr>
@@ -320,7 +321,7 @@
 						    	<td>
 						    		<!-- VO의 MultipartFile 변수 이름과 동일 -->
 						    		<!-- 실제 파일명 res_photo1, 2, 3 -->
-						    		<input type="file" name="res_file1" class="form-control" style="color: white;"><br>
+						    		<input type="file" name="res_file1" style="color: white;"><br>
 						    		<input type="file" name="res_file2" class="form-control" style="color: white;"><br>
 						    		<input type="file" name="res_file3" class="form-control" style="color: white;"><br>
 						    	</td> 
