@@ -103,7 +103,7 @@
                     </thead>
                     <tbody>
                     <c:forEach items="${resList }" var="resList" >
-                        <tr>
+                        <tr class = "res">
                             <td>${resList.r_idx }</td>
                             <td>${resList.res_name }</td>
                             <td><fmt:formatDate value="${resList.r_date }" pattern="yy-MM-dd"/></td>
@@ -230,7 +230,6 @@
 		</div>
 	</div>
 </div>
-
 </c:forEach>
 	<!-- 예약관리 출력 첫번째 모달창 끝 -->	
  
@@ -240,7 +239,7 @@ $(document).ready(function() {
 	    var selectedStatus = $("#status").val();
 	    var selectedRestaurant = $("#restaurantName").val();
 
-	    $("table tbody tr").each(function() {
+	    $("table tbody .res").each(function() {
 	      var statusCell = $(this).find("td:nth-child(5)");
 	      var restaurantNameCell = $(this).find("td:nth-child(2)");
 	      var status = statusCell.text().trim();

@@ -85,7 +85,7 @@
                     </thead>
                     <tbody>
                     <c:forEach items="${resList }" var="resList" >
-                        <tr>
+                        <tr class="res">
                             <td>${resList.r_idx }</td>
                             <td>${resList.res_name }</td>
                             <td><fmt:formatDate value="${resList.r_date }" pattern="yy-MM-dd"/></td>
@@ -323,7 +323,7 @@
 		  $("#status").on("change", function() {
 		    var selectedStatus = $("#status").val();
 	
-		    $("table tbody tr").each(function() {
+		    $("table tbody .res").each(function() {
 		      var statusCell = $(this).find("td:nth-child(5)");
 		      var status = statusCell.text().trim();
 	
