@@ -79,7 +79,8 @@
 	
 	<select id="selectRestaurantList" resultType="com.itwillbs.test.vo.RestaurantVO">
 		SELECT * 
-			FROM restaurant
+			FROM restaurant r JOIN ceo c
+				ON r.c_idx = c.c_idx
 	</select>
 	
 	

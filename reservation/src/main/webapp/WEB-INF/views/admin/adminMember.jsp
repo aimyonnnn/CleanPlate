@@ -85,7 +85,7 @@
            <div class="menu-head">
              <span>Team2</span>
            </div>
-            <li><a><span class="las la-laugh"></span>박수민</a></li>
+            <li><a><span class="las la-chess-king"></span>박수민</a></li>
             <li><a><span class="las la-laugh"></span>김민진</a></li>
             <li><a><span class="las la-laugh"></span>김보희</a></li>
             <li><a><span class="las la-laugh"></span>이재승</a></li>
