@@ -142,7 +142,8 @@
           <th>예약 관리</th>
         </tr>
         </thead>
-<!--         1-방문예정, 2-방문완료, 3-취소, 4-양도', -->
+		<!-- 1-방문예정, 2-방문완료, 3-취소, 4-양도' -->
+ 		<!-- 예약상태(r_status)  1-방문예정, 2-방문완료, 3-취소, 4-양도완료, 5-판매중 => 수정됨 -->
         <tbody>
         <c:forEach items="${reservationList }" var="reservation">
         <tr>
@@ -161,7 +162,10 @@
          	 <td>취소</td>
           </c:if>
           <c:if test="${reservation.r_status == 4}">
-         	 <td>양도</td>
+         	 <td>양도완료</td>
+          </c:if>
+          <c:if test="${reservation.r_status == 5}">
+         	 <td>판매중</td>
           </c:if>
           <%-- 예약 상태 판별 --%>
           <td>${reservation.m_name }</td>
