@@ -107,7 +107,9 @@
                                         <!-- 사업자번호 자리수는 10자리 000-00-00000 형식 (하이픈 포함시 12자리)-->
                                         <!-- pattern 속성에 정규표현식 입력하여 숫자만 입력가능-->
                                         <input class="form-control" type="text" name="res_brn" id="res_brn" maxlength="12" pattern="[0-9]{3}-[0-9]{2}-[0-9]{5}" placeholder="'-'빼고 숫자만 입력" required>
-                                        <button type="button" class="btn btn-warning text-black">인증</button>
+<!--                                         <button type="button" id="verifyBrn" class="btn btn-warning text-black">인증</button>  -->
+											 <!-- api 유효한 버튼은 횟수 제한 때문에 주석처리 해둠 => 실제 사용 시에 id가 담긴 버튼으로 변경 -->
+											 <button type="button" class="btn btn-warning text-black">인증</button> 
                                     </div>
                                 </td>
                             </tr>
@@ -231,13 +233,13 @@
                                     <div class="dropdown">
                                         <select name="res_dayoff" class="form-select" style="width: 180px;">
 											<option selected value="없음">없음</option>
-											<option value="월요일">월요일</option>
-											<option value="화요일">화요일</option>
-											<option value="수요일">수요일</option>
-											<option value="목요일">목요일</option>
-											<option value="금요일">금요일</option>
-											<option value="토요일">토요일</option>
-											<option value="일요일">일요일</option>
+											<option value="1">월요일</option>
+											<option value="2">화요일</option>
+											<option value="3">수요일</option>
+											<option value="4">목요일</option>
+											<option value="5">금요일</option>
+											<option value="6">토요일</option>
+											<option value="0">일요일</option>
 										</select>
 									</div>
                                 </td>
@@ -340,6 +342,50 @@
                 </form>	
 			  </div>
             </div>
+            
+	<!-- 사업자등록번호 공공 api (100회 제한) -->  
+    <script>
+      $(document).ready(function () {
+        $('#verifyBrn').click(function () {
+	    	// 현재 '-' 하이픈을 통해 받고 있으므로 숫자만 받게 replace 해줌 
+	       	let brn = $('input[id="res_brn"]').val().replace(/-/g, '');
+		    var data = {
+		      b_no: [brn] // 사업자 번호 
+		    };
+		
+		    $.ajax({
+		      url: "https://api.odcloud.kr/api/nts-businessman/v1/status?serviceKey=s3Z85p5TlpETkm4z6l3yjHc3ZD6sVqtThi2nYJzlNQM2%2BtdbfHkwpnBDVL2IpKLX%2F28l62eGORrVaKGtjKJivA%3D%3D",
+		      type: "POST",
+		      data: JSON.stringify(data),
+		      dataType: "JSON",
+		      contentType: "application/json",
+		      accept: "application/json",
+		      success: function (result) {
+		    	  // 받아온 result 상태 판별 
+		    	  if(result && result.data[0].b_stt_cd){
+		          	const code = result.data[0].b_stt_cd;
+		            	if(code === "01"){
+		                	alert("인증 성공!");
+		                } else if(code === "02" || code === "03"){
+		                	alert("휴/폐업한 사업자번호 입니다.");
+		                } else if(code === "00"){
+		                	alert("등록되지 않은 사업자 등록 번호입니다.");
+		                } else {
+		                	alert("오류가 발생했습니다.");
+		                }
+		              } else {
+		                alert("번호를 정확하게 입력해주세요.");
+		              }
+		            },
+		            error: function() {
+		                alert('존재하지 않는 사업자번호 입니다.');
+		            }
+		        });
+			});
+		});
+     </script>
+    <!-- 사업자등록번호 api 끝 -->
+            
 <!-- 다음 api -->   
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=001f863eaaba2072ed70014e7f424f2f&libraries=services"></script>
