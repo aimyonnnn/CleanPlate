@@ -92,6 +92,7 @@
                             <td><fmt:formatDate value="${resList.r_date }" pattern="yy-MM-dd"/></td>
                             <td><fmt:formatDate value="${resList.r_date }" pattern="HH:mm"/></td>
                             <td>
+                            	<!--  -->
 	                            <c:choose>
 	                           		<c:when test="${resList.r_status eq 1 }">
 	                           			방문예정
@@ -109,12 +110,12 @@
 	                           			판매중
 	                           		</c:otherwise>
 	                           	</c:choose>
+	                            <!--  -->
                             </td>
                             <td>
-                            <button type="button" class="btn btn-warning" style="color: white;" data-bs-toggle="modal" data-bs-target="#rsListModal${resList.r_idx }">상세보기</button>
-                            <button type="button" class="btn btn-outline-warning" style="margin-left: 10px;" data-bs-toggle="modal" data-bs-target="#assignmentModal${resList.r_idx }">예약 양도하기</button>
+                          		<button type="button" class="btn btn-warning" style="color: white;" data-bs-toggle="modal" data-bs-target="#rsListModal${resList.r_idx }">상세보기</button>
+                            	<button type="button" class="btn btn-outline-warning" style="margin-left: 10px;" data-bs-toggle="modal" data-bs-target="#assignmentModal${resList.r_idx }">양도하기</button>
                             </td>
-                            
                         </tr>
                    </c:forEach>
                     </tbody>
@@ -139,7 +140,7 @@
 	        				<div class="col-md-12" style="text-align: center;">
 	            			<h1 style="color: #FFC107;">예약 안내</h1>
 				            <hr>
-				            <h3 style="font-weight: bold;">키친동백</h3>
+				            <h3 style="font-weight: bold;">광안다이닝</h3>
 	        			</div>
 	    			</div>
 				    <div class="row">
@@ -259,7 +260,21 @@
                             <th>날짜</th>
                             <th>시간</th>
                             <th>상태</th>
-                            <th class="salesValueWrapper">판매가격 입력</th>
+                            <th>
+                               <!--  -->
+	                           <c:choose>
+				                    <c:when test="${resList.r_status eq 5}">
+								     	수정할 가격을 입력하세요
+								    </c:when>
+	                           		<c:when test="${resList.r_status eq 1}">
+								  		판매할 가격을 입력하세요
+								    </c:when>
+								    <c:otherwise>
+								    	기타
+								    </c:otherwise>
+	                           </c:choose>
+	                           <!--  -->
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -278,14 +293,25 @@
 						           <c:otherwise>판매중</c:otherwise>
 							    </c:choose>
 						     </td>
-						     <td class="salesValueWrapper">
-						     	<input type="text" class="salesValue" id="salesValue${resList.r_idx}">
+						     <td>
+						     	<!-- -->
+					     	    <c:choose>
+				                    <c:when test="${resList.r_status eq 5}">
+								        <div>
+								        	<input type="text" class="salesValue2" id="salesValue2${resList.r_idx}" placeholder="가격을 입력하세요">
+								        </div>
+								    </c:when>
+								    <c:when test="${resList.r_status eq 1}">
+								    	<input type="text" class="salesValue" id="salesValue${resList.r_idx}" placeholder="가격을 입력하세요">
+								    </c:when>
+	                           </c:choose>
+	                           <!-- -->
 					     	 </td>
                         </tr>
                    </tbody>
             </table>
 	            <div class="d-flex justify-content-center">
-	            	양도한 예약은 양도 게시판에 등록되며, 고객센터를 통해서만 취소가 가능합니다. 
+	            	<a>양도한 예약은 양도 게시판에 등록되며, 고객센터를 통해서만 취소가 가능합니다.</a> 
 	            </div>
 	         <div class="mt-3 d-flex justify-content-center">
 	         
@@ -294,28 +320,20 @@
 			  <!-- 예약상태가 "5-판매중" 일 경우 가격을 수정할 수 있도록 "가격 수정" 버튼 활성화 -->
 			  <!-- 가격 입력 필드와 가격 수정 버튼을 함께 표시 -->
 			  <!-- 판매중이 아닌 경우에는 가격 수정 버튼 비활성화 -->
-			  
 			  <c:choose>
-			  
 				    <c:when test="${resList.r_status eq 1}">
-	   					<button type="button" class="btn btn-outline-warning" id="assignmentButton" onclick="showModal(); redirectToAssignment(${resList.r_idx})">예약 양도하기</button>
-						<button type="button" class="btn btn-secondary" id="closeButton" data-bs-dismiss="modal" style="margin-left: 10px;">닫기</button>
+	   					<button type="button" class="btn btn-outline-warning" id="assignmentButton" onclick="redirectToAssignment(${resList.r_idx})">양도하기</button>
 				    </c:when>
-				    
 				    <c:when test="${resList.r_status eq 5}">
-				        <div>
-				            <input type="text" class="salesValue2" id="salesValue2${resList.r_idx}">
-				            <button type="button" class="btn btn-primary" onclick="updatePrice(${resList.r_idx})">가격 수정</button>
-				        </div>
+			            <button type="button" class="btn btn-outline-warning" onclick="updatePrice(${resList.r_idx})">수정하기</button>
 				    </c:when>
-				    
 				    <c:otherwise>
 				    	 <button type="button" class="btn btn-danger" id="assignmentButton"
-					     onclick="alert('이미 취소 또는 완료된 예약이거나 판매중인 예약입니다.')">이미 취소 또는 완료된 예약이거나 판매중인 예약입니다.</button>
+					     onclick="alert('이미 취소 또는 완료된 예약입니다.')">이미 취소 또는 완료된 예약입니다.</button>
 				    </c:otherwise>
-				    
 			  </c:choose>
 	          <!--  ====================================== 예약상태에 따른 동적 버튼 생성하기 ====================================== -->
+	          
 			</div>
 	      </div>
 	    </div>
@@ -324,13 +342,6 @@
 	</c:forEach>
 	<!-- 두번째 양도 관련 모달창 끝 -->
 	
-	<script>
-	function showModal() {
-	    // 가격 입력 필드를 감싸는 td 요소를 숨김
-	    $('.salesValueWrapper').hide();
-	}
-	</script>
- 	
  	<!-- 가격 수정을 위한 ajax요청 -->
  	<script>
 	    function updatePrice(r_idx) {
@@ -338,50 +349,53 @@
 	        var salesValue =$("#salesValue2" + r_idx).val();
 	        console.log(salesValue);
 	        
-	        $.ajax({
-	            url: '<c:url value="modifySalesPrice"/>',
-	            method: "POST",
-	            data: {
-	            	r_idx: r_idx,
-	                salesValue: salesValue
-	            },
-	            dataType: "text",
-	            success: function(response) {
-	            	
-					console.log(response);
-					
-					if(response === '1') {
-		                alert("가격이 성공적으로 업데이트되었습니다.");
-		                location.href='<c:url value="memberRSList"/>'
-		                
-					} else if (response === '0') {
-						alert("예약금액 보다 높게 판매할 수 없습니다. 가격을 다시 입력해주세요");
+	        // 확인 메시지 출력
+	        var confirmation = confirm('입력한 금액이 맞습니까?');
+	        
+	        if (confirmation) {
+	        	
+	        	// ======================================== ajax ========================================
+		        $.ajax({
+		            url: '<c:url value="modifySalesPrice"/>',
+		            method: "POST",
+		            data: {
+		            	r_idx: r_idx,
+		                salesValue: salesValue
+		            },
+		            dataType: "text",
+		            success: function(response) {
+		            	
+						console.log(response);
 						
-					}
-					
-	            },
-	            error: function(xhr, status, error) {
-	                console.error("가격 업데이트 오류:", error);
-	            }
-	        });
-	    }
+						if(response === '1') {
+			                alert("가격이 성공적으로 업데이트되었습니다.");
+			                location.href='<c:url value="memberRSList"/>'
+			                
+						} else if (response === '0') {
+							alert("예약금액 보다 높게 판매할 수 없습니다. 가격을 다시 입력해주세요");
+						}
+						
+		            },
+		            error: function(xhr, status, error) {
+		                console.error("가격 업데이트 오류:", error);
+		            }
+		        });
+		    	// ======================================== ajax ========================================
+		    		
+	        } // if
+	    } // updatePrice
 	</script>
  	
  	<!-- 양도 관련 스크립트 -->
  	<script>
  	// 양도 금액 입력 시 유효성 검사
  	$(document).ready(function() {
- 		
 	  	$('.salesValue').on('input', function() {
-	  		
 	    var value = $(this).val();
-	    
 	    // 값에서 숫자가 아닌 문자를 빈 문자열로 대체함!
 	    // 이렇게 하면 입력 필드에는 숫자 값만 입력됨
 	    $(this).val(value.replace(/[^0-9]/g, ''));
-	    
-	  });
-	  	
+	 	});
 	});
 	
  	// 양도 게시판에 글 등록하기
@@ -406,9 +420,8 @@
 	   if (confirmation) {
 	      var url = '<c:url value="registAssignment?r_idx=' + r_idx + '&salesValue=' + value + '"/>';
 	      window.location.href = url;
-   	 	}
+   	   }
 	   
-	   showModal();
   	}
  	</script>
  	
