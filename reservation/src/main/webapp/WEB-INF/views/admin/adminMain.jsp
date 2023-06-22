@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 <!DOCTYPE html>
 <html>
   <head>
@@ -211,14 +212,13 @@
                   <td><div>예약 날짜 :</div></td>
                   <td><div>총 금액 :</div></td>
                   <td><div><button type="button"
-                                   onclick="location.href='adminReservation'"
-                  >관리</button></div></td>
-                </tr>
-                 <c:forEach items="${reservationList }" var="reservation" begin="0" end="5">
+                                   onclick="location.href='adminReservation'">관리</button></div></td>
+              </tr>
+                  <c:forEach items="${reservationList }" var="reservation" begin="0" end="5" >
                   <td></td>
-                  <td>${reservation.r_idx }</td>
-                  <td>${reservation.r_personnel }명</td>
-                  <td>${reservation.r_date }</td>
+                  <td>&nbsp;${reservation.r_idx }</td>
+                  <td>&nbsp;${reservation.r_personnel }명</td>
+                  <td><fmt:formatDate value="${reservation.r_date }" pattern="yy-MM-dd HH:mm" /></td>
                   <td>${reservation.r_amount }원</td>
                  </c:forEach>
               </tbody>

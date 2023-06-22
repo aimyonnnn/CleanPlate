@@ -130,7 +130,7 @@
           <th>양도 상태</th>
           <th>양도 금액</th>
           <th>판매자</th>
-          <th>가게 번호</th>
+          <th>예약 번호</th>
           <th>양도 관리</th>
         </tr>
         </thead>
@@ -151,9 +151,9 @@
         <%-- 양도 상태 판별 --%>
           <td>${assignment.a_price }</td>
           <td>${assignment.a_sellerId}</td>
-          <td>${assignment.r_dix}</td>
-      	  <td><button type="button" class="btn btn-sm btn-primary"
-          onclick="location.href='deleteAssignment?idx=${restaurant.res_idx}'">양도 정보 삭제</button></td>
+          <td>${assignment.r_idx}</td>
+      	  <td><button type="submit" class="btn btn-sm btn-primary" formmethod="get"
+          onclick="location.href='deleteAssignment?idx=${assignment.a_idx}'">양도 정보 삭제</button></td>
         </tr>
         </c:forEach>
         </tbody>

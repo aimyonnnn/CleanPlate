@@ -25,6 +25,7 @@ public class AssignmentVO { // 양도테이블
     private int a_price; // 가격
     private String a_sellerId; // 판매자
     private int r_idx; // 예약번호
+    
 
     // json으로 변환
     public String toJson() {

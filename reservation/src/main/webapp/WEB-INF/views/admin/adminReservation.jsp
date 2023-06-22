@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <!DOCTYPE html>
 <html>
   <head>
@@ -131,8 +132,8 @@
           <th>예약 일자</th>
           <th>총 금액</th>
           <th>예약 상태</th>
-          <th>예약 회원번호</th>
-          <th>예약 식당번호</th>
+          <th>예약 회원 이름</th>
+          <th>예약 식당 이름</th>
           <th>예약 관리</th>
         </tr>
         </thead>
@@ -142,7 +143,7 @@
         <tr>
           <td>${reservation.r_idx }</td>
           <td>${reservation.r_personnel }명</td>
-          <td>${reservation.r_date }</td>
+          <td><fmt:formatDate value="${reservation.r_date }" pattern="yy-MM-dd HH:mm" /></td>
           <td>${reservation.r_amount }원</td>
           <%-- 예약 상태 판별 --%>
           <c:if test="${reservation.r_status == 1}">
@@ -158,9 +159,9 @@
          	 <td>양도</td>
           </c:if>
           <%-- 예약 상태 판별 --%>
-          <td>${reservation.m_idx }</td>
-          <td>${reservation.res_idx }</td>
-        <td><button type="button" class="btn btn-sm btn-primary"
+          <td>${reservation.m_name }</td>
+          <td>${reservation.res_name }</td>
+        <td><button type="submit" class="btn btn-sm btn-primary" formmethod="post"
         onclick="location.href='deleteReservationForm?idx=${reservation.r_idx}'">정보 수정</button></td>
         </tr>
         </c:forEach>

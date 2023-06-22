@@ -194,7 +194,7 @@ public class AdminController {
 	}
 	
 	// 양도 정보 삭제 시
-	@PostMapping("deleteAssignment")
+	@GetMapping("deleteAssignment")
 	public String deleteAssignment(@RequestParam String idx , HttpServletResponse response) {
 		aservice.deleteAssignment(idx);
 		return "redirect:/adminAssignment";
