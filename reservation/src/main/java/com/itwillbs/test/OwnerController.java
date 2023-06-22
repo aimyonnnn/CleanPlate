@@ -121,8 +121,8 @@ public class OwnerController {
 		// ---------------------------------------------------------------(파일 수정)
 		// VO MultipartFile 객체 꺼내기
 		MultipartFile mFile1 = restaurant.getRes_file1();
-		MultipartFile mFile2 = restaurant.getRes_file1();
-		MultipartFile mFile3 = restaurant.getRes_file1();
+		MultipartFile mFile2 = restaurant.getRes_file2();
+		MultipartFile mFile3 = restaurant.getRes_file3();
 		// ---------------------------------------------------------------
 		
 		// 파일명 중복 방지
@@ -136,6 +136,7 @@ public class OwnerController {
 		restaurant.setRes_photo2("");
 		restaurant.setRes_photo3("");
 		
+		// 파일명을 저장할 변수 
 		String fileName1 = uuid.substring(0, 8) + "_" + mFile1.getOriginalFilename();
 		String fileName2 = uuid.substring(0, 8) + "_" + mFile2.getOriginalFilename();
 		String fileName3 = uuid.substring(0, 8) + "_" + mFile3.getOriginalFilename();
@@ -153,8 +154,8 @@ public class OwnerController {
 		
 		// ---------------------------------------------------------------
 		System.out.println("실제 업로드 파일명1 : " + restaurant.getRes_photo1());
-		System.out.println("실제 업로드 파일명1 : " + restaurant.getRes_photo2());
-		System.out.println("실제 업로드 파일명1 : " + restaurant.getRes_photo3());
+		System.out.println("실제 업로드 파일명2 : " + restaurant.getRes_photo2());
+		System.out.println("실제 업로드 파일명3 : " + restaurant.getRes_photo3());
 		
 		
 		
@@ -192,16 +193,17 @@ public class OwnerController {
 		
 	}
 	
-//	// 가게 등록 성공시 StoreList로 리다이렉트
-//	@GetMapping("restaurantInsertSucess")
-//	public String restaurantInsertSucess() {
-//		return "redirect:/restaurantList";
-//	}
 	
 	//owner의 식당리스트로 이동 Mapping
 	// 가게 목록 조회
 	@GetMapping("restaurantList")
-	public String restaurantList(Model model) {
+	public String restaurantList(Model model, HttpSession session) {
+		// 미로그인, 점주 회원이 아닐 경우
+		String c_Id = (String)session.getAttribute("cId");
+		if(c_Id == null) {
+			model.addAttribute("msg", "로그인 해주세요");
+			return "fail_back";
+		}
 		List<RestaurantVO> restaurantList = service.getRestaurantList();
 		model.addAttribute("restaurantList", restaurantList);
 		return "owner/restaurantList";
@@ -209,7 +211,13 @@ public class OwnerController {
 	
 	//owner의 가게 수정 페이지로 이동 Mapping
 	@GetMapping("restaurantUpdatePage")
-	public String restaurantUpdatePage(@RequestParam int res_idx, Model model) {
+	public String restaurantUpdatePage(@RequestParam int res_idx, Model model, HttpSession session) {
+		// 미로그인, 점주 회원이 아닐 경우
+		String c_Id = (String)session.getAttribute("cId");
+		if(c_Id == null) {
+			model.addAttribute("msg", "로그인 해주세요");
+			return "fail_back";
+		}
 		
 		// 가게 정보 불러오기
 		RestaurantVO restaurant = service.getRestaurantInfo(res_idx);
@@ -218,14 +226,108 @@ public class OwnerController {
 		model.addAttribute("restaurant", restaurant);
 		return "owner/restaurantUpdatePage";
 	}
+	
 	// 가게 정보 수정 작업
 	@PostMapping("restaurantUpdate")
-	public String restaurantUpdate(RestaurantVO restaurant, Model model) {
+	public String restaurantUpdate(RestaurantVO restaurant, Model model, HttpSession session) {
+		// 미로그인, 점주 회원이 아닐 경우
+		String c_Id = (String)session.getAttribute("cId");
+		if(c_Id == null) {
+			model.addAttribute("msg", "로그인 해주세요");
+			return "fail_back";
+		}
+		// ---------------------------------------------------------------
+		// 업로드(upload) 폴더 생성 
+		// 실제 업로드 경로
+		String uploadDir = "/resources/upload";
+		String saveDir = session.getServletContext().getRealPath(uploadDir);
+		System.out.println("실제 업로드 경로 : "+ saveDir);
+		
+		String subDir = ""; // 서브디렉토리(날짜 구분)
+		
+		// 날짜별 디렉토리 자동 분류 
+		try {
+			// 1. Date 객체 생성(기본 생성자 호출하여 시스템 날짜 정보 활용)
+			Date date = new Date(); 
+
+			// 2. SimpleDateFormat 클래스 활용
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+			// 3. 기존 업로드 경로에 날짜 경로 결합하여 저장
+			subDir = sdf.format(date);
+			saveDir += "/" + subDir;
+			
+			// java.nio.file.Paths 클래스의 get() 메서드 호출
+			Path path = Paths.get(saveDir);
+			
+			// Files 클래스의 createDirectories() 메서드 호출
+			Files.createDirectories(path);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		// ---------------------------------------------------------------(파일 수정)
+		// VO MultipartFile 객체 꺼내기
+		MultipartFile mFile1 = restaurant.getRes_file1();
+		MultipartFile mFile2 = restaurant.getRes_file2();
+		MultipartFile mFile3 = restaurant.getRes_file3();
+		// ---------------------------------------------------------------
+		
+		// 파일명 중복 방지
+		// "랜덤ID값_파일명.확장자" 형식으로 중복 파일명 처리
+		String uuid = UUID.randomUUID().toString();
+		// UUID 값 원본 파일명 앞에 결합(맨 앞자리 8자리 문자열만 활용)
+		// VO객체 원본 파일에 저장
+		// ---------------------------------------------------------------(파일 수정)
+		// 기본값 널스트링 
+		restaurant.setRes_photo1("");
+		restaurant.setRes_photo2("");
+		restaurant.setRes_photo3("");
+		
+		// 파일명을 저장할 변수 
+		String fileName1 = uuid.substring(0, 8) + "_" + mFile1.getOriginalFilename();
+		String fileName2 = uuid.substring(0, 8) + "_" + mFile2.getOriginalFilename();
+		String fileName3 = uuid.substring(0, 8) + "_" + mFile3.getOriginalFilename();
+		
+		
+		if(!mFile1.getOriginalFilename().equals("")) {
+			restaurant.setRes_photo1(subDir + "/" + fileName1);
+		}
+		if(!mFile2.getOriginalFilename().equals("")) {
+			restaurant.setRes_photo2(subDir + "/" + fileName2);
+		}
+		if(!mFile3.getOriginalFilename().equals("")) {
+			restaurant.setRes_photo3(subDir + "/" + fileName3);
+		}
+		
+		// ---------------------------------------------------------------
+		System.out.println("실제 업로드 파일명1 : " + restaurant.getRes_photo1());
+		System.out.println("실제 업로드 파일명2 : " + restaurant.getRes_photo2());
+		System.out.println("실제 업로드 파일명3 : " + restaurant.getRes_photo3());
+		
+		
+		// c_Id 의 가게인지 확인 필요?
+		
 		// 가게 정보 수정 작업
 		int updateCount = service.ModifyRestaurant(restaurant);
 		// 성공시  success_forward.jsp 로 이동 가게 정보 수정 완료 출력
 		// 실패시 가게 정보 수정 실패! 출력
 		if(updateCount > 0) {
+			// ----------------------------------------------(파일 수정)
+			try {
+				if(!mFile1.getOriginalFilename().equals("")) {
+					mFile1.transferTo(new File(saveDir, fileName1));
+				}
+				if(!mFile2.getOriginalFilename().equals("")) {
+					mFile2.transferTo(new File(saveDir, fileName2));
+				}
+				if(!mFile3.getOriginalFilename().equals("")) {
+					mFile3.transferTo(new File(saveDir, fileName3));
+				}
+			} catch (IllegalStateException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			// ----------------------------------------------
 			model.addAttribute("msg", "가게 정보 수정 완료");
 			model.addAttribute("targetURL", "restaurantList");
 			return "success_forward";

@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>  
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -79,6 +81,25 @@
 	                                <td>${restaurant.res_address } ${restaurant.res_detailAddress }</td>
 	                                <!-- 수정 버튼 클릭시 파라미터로 사업자번호 전달 -->
 	                                <td><button type="button" class="btn btn-warning" style="color: white;" onclick="location.href='restaurantUpdatePage?res_idx=${restaurant.res_idx}'">수정</button></td>
+	                        	</tr>
+	                        	<tr>
+	                        		<td class="td_right">
+	                        			<c:if test="${not empty restaurant.res_photo1 }">
+			                        		<a href="${pageContext.request.contextPath }/resources/upload/${restaurant.res_photo1 }" download="${fn:split(restaurant.res_photo1, '_')[1] }"></a>
+			                        		<img href="${pageContext.request.contextPath }/resources/upload/${restaurant.res_photo1 }" download="${fn:split(restaurant.res_photo1, '_')[1] }">
+	                        			</c:if>
+	                        			<c:if test="${not empty restaurant.res_photo2 }">
+			                        		<a href="${pageContext.request.contextPath }/resources/upload/${restaurant.res_photo2 }" download="${fn:split(restaurant.res_photo2, '_')[1] }"></a>
+			                        		<img href="${pageContext.request.contextPath }/resources/upload/${restaurant.res_photo2 }" download="${fn:split(restaurant.res_photo2, '_')[1] }">
+	                        			</c:if>
+	                        			<c:if test="${not empty restaurant.res_photo3 }">
+			                        		<a href="${pageContext.request.contextPath }/resources/upload/${restaurant.res_photo3 }" download="${fn:split(restaurant.res_photo3, '_')[1] }"></a>
+			                        		<img href="${pageContext.request.contextPath }/resources/upload/${restaurant.res_photo3 }" download="${fn:split(restaurant.res_photo3, '_')[1] }">
+	                        			</c:if>
+	                        			${fn:split(restaurant.res_photo1, '_')[1] }
+	                        			${fn:split(restaurant.res_photo2, '_')[1] }
+	                        			${fn:split(restaurant.res_photo3, '_')[1] }
+									</td>
 	                        	</tr>
 	                        </c:forEach>
                         </tbody>

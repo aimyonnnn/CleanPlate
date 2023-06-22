@@ -316,9 +316,30 @@
                                 </th>
 						    	<td>
 						    		<!-- 파일 출력 배우면 값 넣기 -->
-						    		<input type="file" name="res_photo1" class="form-control" style="color: white;"><br>
-						    		<input type="file" name="res_photo2" class="form-control" style="color: white;"><br>
-						    		<input type="file" name="res_photo3" class="form-control" style="color: white;"><br>
+						    		<c:choose>
+						    			<c:when test="${empty restaurant.res_photo1 }">
+								    		<input type="file" name="res_photo1" class="form-control"><br>
+						    			</c:when>
+						    			<c:otherwise>
+						    				${fn:split(restaurant.res_photo1, '_')[1] }<br>
+						    			</c:otherwise>
+						    		</c:choose>
+						    		<c:choose>
+						    			<c:when test="${empty restaurant.res_photo2 }">
+								    		<input type="file" name="res_photo2" class="form-control"><br>
+						    			</c:when>
+						    			<c:otherwise>
+						    				${fn:split(restaurant.res_photo2, '_')[1] }<br>
+						    			</c:otherwise>
+						    		</c:choose>
+						    		<c:choose>
+						    			<c:when test="${empty restaurant.res_photo3 }">
+								    		<input type="file" name="res_photo3" class="form-control"><br>
+						    			</c:when>
+						    			<c:otherwise>
+						    				${fn:split(restaurant.res_photo3, '_')[1] }
+						    			</c:otherwise>
+						    		</c:choose>
 						    	</td> 
 						    </tr>
                             <tr>
