@@ -32,7 +32,6 @@ public class AdminController {
 	RestaurantService reservice;
 	@Autowired
 	AssignmentService aservice;
-	
 	//=============================== 관리자 페이지 메인 ==================================
 	
 	// 로그인 성공 후 관리자페이지 클릭 시 관리자페이지로 이동
@@ -198,6 +197,16 @@ public class AdminController {
 	public String deleteAssignment(@RequestParam String idx , HttpServletResponse response) {
 		aservice.deleteAssignment(idx);
 		return "redirect:/adminAssignment";
+	}
+	
+	// ==================================================================================
+	
+	// ================================ 공지 관리 페이지 ================================
+
+	// 관리자의 공지 관리 페이지로 이동
+	@GetMapping("adminNotice")
+	public String adminNotice(Model model) {
+		return "admin/adminNotice";
 	}
 	
 	// ==================================================================================
