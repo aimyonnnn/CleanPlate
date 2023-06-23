@@ -3,5 +3,10 @@
 
 <mapper namespace="com.itwillbs.test.mapper.HelpMapper">
 
+	<select id="getHelplist" parameterType="com.itwillbs.test.vo.HelpVO">
+		SELECT *
+			FROM help
+				WHERE h_index = #{h_index}
+	</select>
 
 </mapper>

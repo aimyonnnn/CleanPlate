@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwillbs.test.service.AssignmentService;
+import com.itwillbs.test.service.HelpService;
 import com.itwillbs.test.service.MemberService;
 import com.itwillbs.test.service.ReservationService;
 import com.itwillbs.test.service.RestaurantService;
 import com.itwillbs.test.vo.AssignmentVO;
+import com.itwillbs.test.vo.HelpVO;
 import com.itwillbs.test.vo.MemberVO;
 import com.itwillbs.test.vo.ReservationVO;
 import com.itwillbs.test.vo.RestaurantVO;
@@ -32,6 +34,8 @@ public class AdminController {
 	RestaurantService reservice;
 	@Autowired
 	AssignmentService aservice;
+	@Autowired
+	HelpService hservice;
 	//=============================== 관리자 페이지 메인 ==================================
 	
 	// 로그인 성공 후 관리자페이지 클릭 시 관리자페이지로 이동
@@ -201,13 +205,4 @@ public class AdminController {
 	
 	// ==================================================================================
 	
-	// ================================ 공지 관리 페이지 ================================
-
-	// 관리자의 공지 관리 페이지로 이동
-	@GetMapping("adminNotice")
-	public String adminNotice(Model model) {
-		return "admin/adminNotice";
-	}
-	
-	// ==================================================================================
 }

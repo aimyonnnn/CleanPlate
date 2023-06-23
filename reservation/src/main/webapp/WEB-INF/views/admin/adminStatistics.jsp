@@ -21,7 +21,7 @@
 
       <div class="sidebar-main"> 
         <div class="sidebar-user">
-            <img src="${pageContext.request.contextPath }/resources/images/adminProfile.png" style="height: 70px; width: 70px;">
+            <img src="${pageContext.request.contextPath }/resources/images/adminProfile.png">
           <div>
             <span>관리자 페이지</span>
           </div>
@@ -80,22 +80,16 @@
                  양도 관리
               </a>
             </li>
-            <li>
-              <a href="adminNotice">
-                  <span class="las la-edit"></span>
-                 공지사항 관리
-              </a>
-            </li>
            </ul>
            <div class="menu-head">
              <span>Team2</span>
            </div>
             <li><a><span class="las la-crown"></span>박수민</a></li>
-            <li><a><span class="las la-laugh-beam"></span>김민진</a></li>
-            <li><a><span class="las la-laugh-squint"></span>김보희</a></li>
-            <li><a><span class="las la-grin-alt"></span>이재승</a></li>
-            <li><a><span class="las la-grin-stars"></span>김묘정</a></li>
-            <li><a><span class="las la-grin-wink"></span>이건무</a></li>
+            <li><a><span class="las la-laugh"></span>김민진</a></li>
+            <li><a><span class="las la-laugh"></span>김보희</a></li>
+            <li><a><span class="las la-laugh"></span>이재승</a></li>
+            <li><a><span class="las la-laugh"></span>김묘정</a></li>
+            <li><a><span class="las la-laugh"></span>이건무</a></li>
         </div>
       </div>
     </div>
