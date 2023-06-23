@@ -219,7 +219,7 @@
 		            			<!-- 예약관리 테이블 끝 -->
 		        			</div>
 						    <div class="d-flex justify-content-center">
-						    	<c:if test="${resList.r_status eq 1">
+						    	<c:if test="${resList.r_status eq 1 }">
 				        			<button type="button" class="btn btn-outline-warning" onclick="cancel(${resList.r_idx })" id="cancelButton" style="margin-left: 10px;"> 예약 취소</button>
 				        		</c:if>
 				        		<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="margin-left: 10px;">닫기</button>
