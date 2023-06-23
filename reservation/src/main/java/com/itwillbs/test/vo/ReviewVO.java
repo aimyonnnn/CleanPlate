@@ -1,5 +1,7 @@
 package com.itwillbs.test.vo;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.Data;
 
 /*
@@ -22,5 +24,6 @@ public class ReviewVO {
 	private String rv_comment; // 리뷰내용
 	private String rv_img; // 리뷰 이미지
 	private String m_nick; // 닉네임
-	private String r_idx; // 예약번호
+	private int r_idx; // 예약번호
+	private MultipartFile img;
 }

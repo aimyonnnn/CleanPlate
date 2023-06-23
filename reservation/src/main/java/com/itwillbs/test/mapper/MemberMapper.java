@@ -55,5 +55,14 @@ public interface MemberMapper {
 
 	// 관리자의 회원 정보 수정
 	int adminUpdateMember(MemberVO member);
+	
+	// 회원의 리뷰 작성
+	int insertReview(ReviewVO review);
+	
+	// 리뷰작성 성공시 예약테이블의 리뷰 상태 변경
+	void updateRvStatus(int r_idx);
+	
+	//리뷰 리스트 불러오기
+	List<ReviewVO> selectReviewList(String sId);
 
 }

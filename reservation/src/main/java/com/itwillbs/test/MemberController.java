@@ -1,10 +1,17 @@
 package com.itwillbs.test;
 
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,6 +24,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.itwillbs.test.handler.MyPasswordEncoder;
 import com.itwillbs.test.service.MemberService;
@@ -128,7 +136,18 @@ public class MemberController {
 	
 	// 내가 쓴 리뷰
 	@GetMapping("memberReview")
-	public String memberReview() {
+	public String memberReview(HttpSession session, Model model) {
+		String sId = (String)session.getAttribute("sId");
+		
+		if(sId == null) {
+			model.addAttribute("msg","접근권한이 없습니다.");
+			return "fail_back";
+		}
+		
+		List<ReviewVO> rvList = service.getReviewList(sId);
+		
+		model.addAttribute("rvList",rvList);
+		
 		return "member/memberReview";
 	}
 	
@@ -168,6 +187,83 @@ public class MemberController {
 		
 		model.addAttribute("success","회원탈퇴 되었습니다.\\n이후에 다시 뵙길 기원하겠습니다.");
 		return "secession_success";
+	}
+	
+	@PostMapping("ReviewPro")
+	public String ReviewPro(ReviewVO review, Model model, HttpSession session) {
+
+		System.out.println(review);
+		
+		if(review.getImg().getOriginalFilename()=="") {
+			model.addAttribute("msg","이미지는 필수입니다.");
+			return "fail_back";
+		}
+		
+		// 파일 업로드할 경로
+		String uploadDir = "resources/upload";
+		
+		String saveDir = session.getServletContext().getRealPath(uploadDir);
+		
+		System.out.println("실제 업로드 경로 : " + saveDir);
+		
+		String subDir = ""; //서브디렉토리(날짜 구분)
+		// 설정한 날짜별로 파일 생성
+		try {
+			// 오늘날짜 가지고 옴
+			Date date = new Date();
+			
+			// 가지고 온 날짜를 yyyy/mm/dd 로 변경함 (/ 로 날짜별로 파일을 지정해 주기 위해)
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/mm/dd");
+			
+			//sdf 로 설정된 date를 subDir 에 저장하고 원 경로인 saveDir 과 경로를 합침
+			subDir = sdf.format(date);
+			saveDir += "/" + subDir;
+			
+			// 실제 경로를 관리하는 Path 객체를 리턴받음
+			Path path = Paths.get(saveDir);
+			
+			// Files 클래스의 createDirectories() 메서드를 호출하여 Path 객체가 관리하는 경로 생성
+			// (존재하지 않으면 거쳐가는 경도들 중 없는 경로 모두 생성)
+			Files.createDirectories(path);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		// 객체로 전달된 img 를 MultipartFile 객체로 꺼냄
+		MultipartFile mFile1 = review.getImg();
+		
+		// 파일명 중복 방지를 위해
+		// 렌덤 ID 값을 추출하여 파일명 앞에 붙여서
+		// "렌덤값ID_파일명.확장자" 형식으로 중복 파일명 처리
+		String uuid = UUID.randomUUID().toString();
+		
+		
+		// 생성된 UUID 값과 업로드 파일명을 결합하여 VO 객체에 저장
+		String fileName1 = uuid.substring(0,8)+"_"+mFile1.getOriginalFilename();
+		
+		review.setRv_img(subDir+"/"+fileName1);
+		
+		int insertCount = service.registReview(review);
+		
+		// => 성공 시 업로드 파일을 실제 디렉토리에 이동시킨 후 리뷰목록으로 서블릿 리다이렉트
+		if(insertCount > 0) {
+			
+			service.updateRvStatus(review.getR_idx());
+			
+			if(!mFile1.getOriginalFilename().equals("")) {
+				try {
+					mFile1.transferTo(new File(saveDir,fileName1));
+				} catch (IllegalStateException | IOException e) {
+					e.printStackTrace();
+				}
+			}
+			
+			return "redirect:/";
+		} else {
+			model.addAttribute("msg", "리뷰작성 실패");
+			return "fail_back";
+		}
+		
 	}
 	
 }

@@ -146,4 +146,33 @@
 				WHERE m_idx = #{m_idx}
 	</update>
 	
+	<insert id="insertReview">
+		INSERT INTO
+			reviews
+				VALUES
+					(
+					null
+					, #{rv_scope}
+					, #{rv_comment}
+					, #{rv_img}
+					, #{r_idx}
+					);
+	</insert>
+	
+	<update id="updateRvStatus">
+		UPDATE reservation
+			SET rv_status = 1
+			WHERE r_idx = #{r_idx}
+	</update>
+	
+	<select id="selectReviewList">
+		SELECT *
+			FROM reviews
+			WHERE r_idx IN (SELECT r_idx
+							FROM reservation
+							WHERE m_idx = (SELECT m_idx
+											FROM members
+											WHERE m_id = #{sId})
+							)
+	</select>
 </mapper>
