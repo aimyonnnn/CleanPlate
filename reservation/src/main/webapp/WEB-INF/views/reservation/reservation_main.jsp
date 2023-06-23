@@ -129,6 +129,20 @@
 	  overflow: visible;   /* 넘치는 텍스트 표시 */
 	  max-width: none;     /* 최대 너비 제한 해제 */
 	}
+	
+	/* 위로가기 버튼 */
+	#go-top {
+		  display: none;
+		  position: fixed;
+		  right: 100px;
+		  bottom: 50px;
+		  outline: 0;
+		  border: 0;
+		  background: transparent;
+		  cursor: pointer;
+		  z-index: 9999;
+		  color: #ffc107; /* 색상변경*/
+		}
 	 
 </style>
 </head>
@@ -137,6 +151,36 @@
   rgba(0, 0, 0, 0.8),
   rgba(0, 0, 0, 0.8)),
   url(${pageContext.request.contextPath }/resources/images/1.jpg); background-size: cover;">
+  	
+  	<!-- 위로 가기 버튼 -->
+   	<button id="go-top"><svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor"
+	  class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16">
+	  <path fill-rule="evenodd"
+	    d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z" />
+	</svg></button>
+	
+	<script>
+	var backToTop = () => {
+		  // Scroll | button show/hide
+		  window.addEventListener('scroll', () => {
+		    if (document.querySelector('html').scrollTop > 100) {
+		      document.getElementById('go-top').style.display = "block";
+		    } else {
+		      document.getElementById('go-top').style.display = "none";
+		    }
+		  });
+		  // back to top
+		  document.getElementById('go-top').addEventListener('click', () => {
+		    window.scrollTo({
+		      top: 0,
+		      left: 0,
+		      behavior: 'smooth'
+		    });
+		  })
+		};
+		backToTop();
+	</script>
+	<!-- 위로 가기 버튼 -->
   
      <div class="d-flex justify-content-end mt-5 me-5">
 	      <div class="btn-group">
@@ -355,7 +399,7 @@
       	// 한글자 입력할 때 마다 조회됨!
       	$(()=>{
       		
-      		$('#restaurantName').on('input', () => {
+      		$('#restaurantName').on('change', () => {
       			var resName = $('#restaurantName').val();
       			console.log(resName);
       			

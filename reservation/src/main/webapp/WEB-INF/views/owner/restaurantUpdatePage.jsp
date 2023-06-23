@@ -96,15 +96,15 @@
             <!-- 내용 구역 -->
             <div class="col-10">
                 <!-- 가게내용 페이지 시작 -->
-                   <form action="restaurantUpdate" method="post">
+                   <form action="restaurantUpdate" method="post" enctype="multipart/form-data">
                 	<table class="table" style="margin-left: 70px; width: 58%;">
 						<tbody>
                             <tr>
-                            	<!-- hidden으로 res_idx 전달 -->
-                            	<input type="hidden" value="${restaurant.res_idx}" name="res_idx">
                                 <th scope="row"><label for="res_brn">사업자 번호</label></th>
                                 <td>
                                     <div class="input-group">
+		                            	<!-- hidden으로 res_idx 전달 -->
+		                            	<input type="hidden" value="${restaurant.res_idx}" name="res_idx">
                                         <!-- 사업자번호 변경 불가-->
                                         <input class="form-control" type="text" name="res_brn" id="res_brn" readonly="readonly" value="${restaurant.res_brn }">
                                     </div>
@@ -321,7 +321,7 @@
 							    		<c:choose>
 							    			<c:when test="${empty restaurant.res_photo1 }">
 							    				<div class="col m-1">
-										    		<input type="file" name="res_photo1" class="form-control">
+										    		<input type="file" name="res_file1" class="form-control">
 							    				</div>
 							    			</c:when>
 							    			<c:otherwise>
@@ -331,6 +331,7 @@
 								    				</div>
 								    				<div class="col">
 									    				<img src="${pageContext.request.contextPath }/resources/upload/${restaurant.res_photo1 }" width="150" height="150">
+								    					<input type="file" name="res_file1" style="display: none;">
 								    				</div>
 								    				<div class="col">
 											    		<input type="button" class="btn btn-warning text-black" value="삭제" >
@@ -343,7 +344,7 @@
 							    		<c:choose>
 							    			<c:when test="${empty restaurant.res_photo2 }">
 							    				<div class="col m-1">
-										    		<input type="file" name="res_photo2" class="form-control">
+										    		<input type="file" name="res_file2" class="form-control">
 							    				</div>
 							    			</c:when>
 							    			<c:otherwise>
@@ -353,6 +354,7 @@
 								    				</div>
 								    				<div class="col">
 									    				<img src="${pageContext.request.contextPath }/resources/upload/${restaurant.res_photo2 }" width="150" height="150">
+								    					<input type="file" name="res_file2" style="display: none;">
 								    				</div>
 								    				<div class="col">
 											    		<input type="button" class="btn btn-warning text-black" value="삭제" >
@@ -364,7 +366,7 @@
 							    		<c:choose>
 							    			<c:when test="${empty restaurant.res_photo3 }">
 							    				<div class="col m-1">
-										    		<input type="file" name="res_photo3" class="form-control">
+										    		<input type="file" name="res_file3" class="form-control">
 							    				</div>
 							    			</c:when>
 							    			<c:otherwise>
@@ -374,6 +376,7 @@
 								    				</div>
 								    				<div class="col">
 									    				<img src="${pageContext.request.contextPath }/resources/upload/${restaurant.res_photo3 }" width="150" height="150">
+								    					<input type="file" name="res_file3" style="display: none;">
 								    				</div>
 								    				<div class="col">
 											    		<input type="button" class="btn btn-warning text-black" value="삭제" >
