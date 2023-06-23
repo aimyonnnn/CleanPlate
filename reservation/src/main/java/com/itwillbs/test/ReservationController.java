@@ -21,6 +21,7 @@ import com.itwillbs.test.service.RestaurantService;
 import com.itwillbs.test.service.TimesService;
 import com.itwillbs.test.vo.MemberVO;
 import com.itwillbs.test.vo.MenuVO;
+import com.itwillbs.test.vo.ReservationVO;
 import com.itwillbs.test.vo.RestaurantVO;
 import com.itwillbs.test.vo.ReviewVO;
 import com.itwillbs.test.vo.TimesVO;
@@ -41,6 +42,17 @@ public class ReservationController {
 	private TimesService timesService;
 	@Autowired
 	private MemberService memberService;
+	
+	// 결제하기
+	@PostMapping("reservationPayment")
+	public String reservationPayment(ReservationVO reservation, Model model) {
+		
+		
+		
+			
+		
+		return "reservation/reservation_result";
+	}
 	
 	// 가게 메인 페이지 
 	@GetMapping("reservationMain")
