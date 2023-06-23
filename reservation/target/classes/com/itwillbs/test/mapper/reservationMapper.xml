@@ -112,4 +112,31 @@
 				r_idx = #{r_idx}
 	</update>
 	
+	<!-- r_status가 1-방문예정, 2-방문완료, 3-취소, 4-양도완료, 5-판매중, 6-판매실패 -->
+	<!-- 프로젝트 실행시 /main으로 들어갈 때마다 예약상태가 1-방문예정이고 날짜가 이전 날짜인 예약의 예약상태를 2-방문완료 처리함 -->
+	<update id="updateStatusHome">
+			<![CDATA[
+				UPDATE reservation
+					SET 
+						r_status = 2
+					WHERE
+						r_status = 1
+						AND DATE(r_date) < DATE(NOW());
+			]]>
+	</update>
+	
+	<!-- r_status가 1-방문예정, 2-방문완료, 3-취소, 4-양도완료, 5-판매중, 6-판매실패 -->
+	<!-- 프로젝트 실행시 /main으로 들어갈 때마다 예약상태가 5-판매중이고 날짜가 이전 날짜인 예약의 예약상태를 6-판매실패 처리함 -->
+	<update id="updateStatusHome2">
+		   <![CDATA[
+			 UPDATE reservation
+		  		SET 
+		  			r_status = 6
+		 		WHERE
+		 		  	r_status = 5
+		  			AND DATE(r_date) < CURDATE();
+		    ]]>
+	</update>
+	
+	
 </mapper>

@@ -88,4 +88,13 @@ public class ReservationService {
 		return mapper.updateStatus(r_idx);
 	}
 	
+	// 홈컨트롤러
+	public void modifyStatusHome() {
+		mapper.updateStatusHome();
+	}
+
+	public void modifyStatusHome2() {
+		mapper.updateStatusHome2();
+	}
+	
 }

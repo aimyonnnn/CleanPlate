@@ -58,6 +58,11 @@ public interface ReservationMapper {
 	
 	// 양도 게시판에 글 등록시 예약상태를 '5-판매중'으로 변경하기
 	int updateStatus(int r_idx);
+	
+	// 홈컨트롤러
+	void updateStatusHome();
+
+	void updateStatusHome2();
 
 	
 }

@@ -54,6 +54,7 @@
 							<option value="취소">취소</option>
 							<option value="양도완료">양도완료</option>
 							<option value="판매중">판매중</option>
+							<option value="판매실패">판매실패</option>
 						</select>
 				</div>
 				<!-- 드롭다운 끝 -->
@@ -106,8 +107,11 @@
 	                           		<c:when test="${resList.r_status eq 4 }">
 	                           			양도완료
 	                           		</c:when>
-	                           		<c:otherwise>
+	                           		<c:when test="${resList.r_status eq 5 }">
 	                           			판매중
+	                           		</c:when>
+	                           		<c:otherwise>
+	                           			판매실패
 	                           		</c:otherwise>
 	                           	</c:choose>
 	                            <!--  -->
@@ -288,13 +292,14 @@
                             <td><fmt:formatDate value="${resList.r_date }" pattern="yy-MM-dd"/></td>
                             <td><fmt:formatDate value="${resList.r_date }" pattern="HH:mm"/></td>
                             <td>
-	                           	<!-- r_status가 1-방문예정, 2-방문완료, 3-취소, 4-양도완료, 5-판매중 -->
+	                           	<!-- r_status가 1-방문예정, 2-방문완료, 3-취소, 4-양도완료, 5-판매중, 6-판매실패 -->
 							    <c:choose>
 						           <c:when test="${resItem.r_status eq 1}">방문예정</c:when>
 						           <c:when test="${resItem.r_status eq 2}">방문완료</c:when>
 						           <c:when test="${resItem.r_status eq 3}">취소</c:when>
 						           <c:when test="${resItem.r_status eq 4}">양도완료</c:when>
-						           <c:otherwise>판매중</c:otherwise>
+						           <c:when test="${resItem.r_status eq 5}">판매중</c:when>
+						           <c:when test="${resItem.r_status eq 5}">판매실패</c:when>
 							    </c:choose>
 						     </td>
 						     <td>
@@ -345,6 +350,8 @@
 	</div>
 	</c:forEach>
 	<!-- 두번째 양도 관련 모달창 끝 -->
+	
+	
 	
  	<!-- 가격 수정을 위한 ajax요청 -->
  	<script>

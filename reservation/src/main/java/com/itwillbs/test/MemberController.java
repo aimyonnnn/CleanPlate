@@ -104,7 +104,7 @@ public class MemberController {
 	
 	// 예약 내역 클릭시 
 	@GetMapping("memberRSList")
-	public String memberRSList(Model model ,HttpSession session) {
+	public String memberRSList(Model model, HttpSession session) {
 		
 		String sId = (String)session.getAttribute("sId");
 		List<ReservationVO> resList = service.getMemberReservationList(sId);
