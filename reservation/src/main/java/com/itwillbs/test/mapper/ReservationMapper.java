@@ -45,10 +45,10 @@ public interface ReservationMapper {
 	ReservationVO selectReservation(String idx);
 
 	// 관리자의 예약 정보 수정
-	ReservationVO adminReservationUpdate(ReservationVO re);
+	int adminReservationUpdate(ReservationVO re);
 
 	// 관리자의 예약 정보 삭제
-	ReservationVO deleteReservation(String idx);
+	int deleteReservation(String idx);
 
 	// 총 결제 금액 조회
 	int getTotalPay();

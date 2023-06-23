@@ -81,4 +81,9 @@ public class MemberService {
 	public int secessionMember(int m_idx) {
 		return mapper.updateMemberStatus(m_idx);
 	}
+
+	// 관리자의 멤버 정보 수정
+	public int adminUpdateMember(MemberVO member) {
+		return mapper.adminUpdateMember(member);
+	}
 }

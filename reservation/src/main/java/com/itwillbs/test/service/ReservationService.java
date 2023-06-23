@@ -64,12 +64,12 @@ public class ReservationService {
 	}
 	
 	// 관리자의 예약 정보 수정
-	public ReservationVO adminReservationUpdate(ReservationVO re) {
+	public int adminReservationUpdate(ReservationVO re) {
 		return mapper.adminReservationUpdate(re);
 	}
 
 	// 관리자의 예약 정보 삭제
-	public ReservationVO deleteReservation(String idx) {
+	public int deleteReservation(String idx) {
 		return mapper.deleteReservation(idx);
 	}
 

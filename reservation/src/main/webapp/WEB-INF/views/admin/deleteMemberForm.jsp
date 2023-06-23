@@ -47,7 +47,7 @@
     <div class="row">
       <div class="col">
         <button class="w-100 btn btn-danger btn-lg" type="submit">수정하기</button>
-        <button class="w-100 btn btn-danger btn-lg" type="button" onclick="location.href='deleteMember'">삭제하기</button>
+        <button class="w-100 btn btn-danger btn-lg" type="button" onclick="location.href='deleteMember?id=${memberVO.m_id}'">삭제하기</button>
       </div>
       <div class="col">
         <button class="w-100 btn btn-secondary btn-lg"

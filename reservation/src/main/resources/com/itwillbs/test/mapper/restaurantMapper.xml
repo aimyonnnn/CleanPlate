@@ -129,14 +129,13 @@
 	
 	
 	<!-- 관리자의 가게 정보 수정 -->
-	<update id="adminStoreUpdate" parameterType="com.itwillbs.test.vo.RestaurantVO">
+	<update id="adminRestaurantUpdate">
 		UPDATE restaurant
 			SET res_brn = #{res_brn}
 			   ,res_name = #{res_name}
 			   ,res_tel = #{res_tel}
-			   ,res_address = SUBSTRING_INDEX(#{restaurantAdress}, ',' ,1)
-			   ,res_detailAddress = SUBSTRING_INDEX(#{restaurantAdress}, ',' , -1)
-			   ,c_idx = #{c_idx}
+			   ,res_address = #{res_address}
+			   ,res_detailAddress = #{res_detailAddress}
 				WHERE res_idx = #{res_idx}
 	</update>
 	

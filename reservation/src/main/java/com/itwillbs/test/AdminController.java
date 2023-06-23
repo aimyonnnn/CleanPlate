@@ -100,13 +100,13 @@ public class AdminController {
 	// 회원 정보 수정 시
 	@PostMapping("adminMemberUpdate")
 	public String adminMemberUpdate(Model model, MemberVO member) {
-		mservice.updateMember(member);
+		mservice.adminUpdateMember(member);
 		model.addAttribute("member", member);
 	return "redirect:/adminMember";
 	}
 	
 	// 회원 삭제 시
-	@PostMapping("deleteMember")
+	@GetMapping("deleteMember")
 	public String deleteMember(@RequestParam String id) {
 		mservice.deleteMember(id);
 		
@@ -142,7 +142,7 @@ public class AdminController {
 	}
 	
 	// 가게 삭제 시
-	@PostMapping("deleteStore")
+	@GetMapping("deleteStore")
 	public String deleteStore(@RequestParam String idx) {
 		reservice.deleteRestaurant(idx);
 		
@@ -178,7 +178,7 @@ public class AdminController {
 	}
 	
 	// 예약 삭제 시
-	@PostMapping("deleteReservation")
+	@GetMapping("deleteReservation")
 	public String deleteReservation(@RequestParam String idx) {
 		rservice.deleteReservation(idx);
 		

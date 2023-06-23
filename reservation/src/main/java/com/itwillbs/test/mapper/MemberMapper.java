@@ -50,4 +50,7 @@ public interface MemberMapper {
 	//회원 탈퇴시 상태변경
 	int updateMemberStatus(int m_idx);
 
+	// 관리자의 회원 정보 수정
+	int adminUpdateMember(MemberVO member);
+
 }
