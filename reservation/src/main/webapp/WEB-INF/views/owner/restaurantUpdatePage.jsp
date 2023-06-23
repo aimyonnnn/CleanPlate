@@ -315,31 +315,72 @@
                                 	<a style="font-size: small; font-weight: normal;">(사진 1장 선택 필수)</a>
                                 </th>
 						    	<td>
-						    		<!-- 파일 출력 배우면 값 넣기 -->
-						    		<c:choose>
-						    			<c:when test="${empty restaurant.res_photo1 }">
-								    		<input type="file" name="res_photo1" class="form-control"><br>
-						    			</c:when>
-						    			<c:otherwise>
-						    				${fn:split(restaurant.res_photo1, '_')[1] }<br>
-						    			</c:otherwise>
-						    		</c:choose>
-						    		<c:choose>
-						    			<c:when test="${empty restaurant.res_photo2 }">
-								    		<input type="file" name="res_photo2" class="form-control"><br>
-						    			</c:when>
-						    			<c:otherwise>
-						    				${fn:split(restaurant.res_photo2, '_')[1] }<br>
-						    			</c:otherwise>
-						    		</c:choose>
-						    		<c:choose>
-						    			<c:when test="${empty restaurant.res_photo3 }">
-								    		<input type="file" name="res_photo3" class="form-control"><br>
-						    			</c:when>
-						    			<c:otherwise>
-						    				${fn:split(restaurant.res_photo3, '_')[1] }
-						    			</c:otherwise>
-						    		</c:choose>
+						    		<!-- 가게 사진 있을 경우 이미지 보여주고 삭제버튼 -->
+						    		<!-- 가게 사진 없을 경우 업로드 버튼 -->
+						    		<div class="row">
+							    		<c:choose>
+							    			<c:when test="${empty restaurant.res_photo1 }">
+							    				<div class="col m-1">
+										    		<input type="file" name="res_photo1" class="form-control">
+							    				</div>
+							    			</c:when>
+							    			<c:otherwise>
+							    				<div class="row m-1">
+								    				<div class="col">
+									    				파일명 : ${fn:split(restaurant.res_photo1, '_')[1] }<br>
+								    				</div>
+								    				<div class="col">
+									    				<img src="${pageContext.request.contextPath }/resources/upload/${restaurant.res_photo1 }" width="150" height="150">
+								    				</div>
+								    				<div class="col">
+											    		<input type="button" class="btn btn-warning text-black" value="삭제" >
+								    				</div>
+							    				</div>
+							    			</c:otherwise>
+							    		</c:choose>
+							    	</div>
+						    		<div class="row">
+							    		<c:choose>
+							    			<c:when test="${empty restaurant.res_photo2 }">
+							    				<div class="col m-1">
+										    		<input type="file" name="res_photo2" class="form-control">
+							    				</div>
+							    			</c:when>
+							    			<c:otherwise>
+							    				<div class="row m-1">
+								    				<div class="col" style="align-content: center;">
+									    				${fn:split(restaurant.res_photo2, '_')[1] }<br>
+								    				</div>
+								    				<div class="col">
+									    				<img src="${pageContext.request.contextPath }/resources/upload/${restaurant.res_photo2 }" width="150" height="150">
+								    				</div>
+								    				<div class="col">
+											    		<input type="button" class="btn btn-warning text-black" value="삭제" >
+								    				</div>
+							    				</div>
+							    			</c:otherwise>
+							    		</c:choose>
+							    	</div>
+							    		<c:choose>
+							    			<c:when test="${empty restaurant.res_photo3 }">
+							    				<div class="col m-1">
+										    		<input type="file" name="res_photo3" class="form-control">
+							    				</div>
+							    			</c:when>
+							    			<c:otherwise>
+							    				<div class="row m-1">
+								    				<div class="col">
+									    				${fn:split(restaurant.res_photo3, '_')[1] }<br>
+								    				</div>
+								    				<div class="col">
+									    				<img src="${pageContext.request.contextPath }/resources/upload/${restaurant.res_photo3 }" width="150" height="150">
+								    				</div>
+								    				<div class="col">
+											    		<input type="button" class="btn btn-warning text-black" value="삭제" >
+								    				</div>
+							    				</div>
+							    			</c:otherwise>
+							    		</c:choose>
 						    	</td> 
 						    </tr>
                             <tr>

@@ -1,5 +1,9 @@
 package com.itwillbs.test.vo;
 
+import org.springframework.web.multipart.*;
+
+import com.google.gson.*;
+
 /*
 CREATE TABLE menus (
 	me_idx INT PRIMARY KEY AUTO_INCREMENT COMMENT '메뉴번호',
@@ -11,10 +15,11 @@ CREATE TABLE menus (
 	FOREIGN KEY (res_idx) REFERENCES restaurant (res_idx)
 );
 */
-
-import lombok.Data;
+import lombok.*;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class MenuVO {
 	
 	private int me_idx;
@@ -23,5 +28,7 @@ public class MenuVO {
 	private String me_context;
 	private String me_photo;
 //	private int res_idx;
+	private MultipartFile me_file;
+	
 	
 }
