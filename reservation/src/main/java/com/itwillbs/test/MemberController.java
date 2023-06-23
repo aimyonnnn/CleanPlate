@@ -3,6 +3,7 @@ package com.itwillbs.test;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -109,6 +110,9 @@ public class MemberController {
 		List<ReservationVO> resList = service.getMemberReservationList(sId);
 		List<RestaurantVO> rsList = service.getMemberRestaurant(sId);
 		
+		Timestamp currentDateTime = new Timestamp(System.currentTimeMillis());
+		
+		model.addAttribute("currentDateTime", currentDateTime);
 		model.addAttribute("resList", resList);
 		model.addAttribute("rsList", rsList);
 		

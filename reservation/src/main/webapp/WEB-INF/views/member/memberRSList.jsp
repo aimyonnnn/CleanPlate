@@ -123,6 +123,9 @@
             </div>
         </div>
     </div>
+    
+    <!-- 24시간을 밀리초로 나타낸 값 -->
+    <c:set var="twentyFourHours" value="86400000" />
  
  	<!-- 예약내역 출력 첫번째 모달창 -->
  	<c:forEach var="resList" items="${resList }">
@@ -222,7 +225,7 @@
 					    	 	  <!-- 예약상태가 "1-방문예정" 일때만 취소버튼 활성화 -->
 					    	 	  <!-- DB구문으로 처리 예정 -->
 								  <c:choose>
-								    <c:when test="${resList.r_status eq 1}">
+								    <c:when test="${resList.r_status eq 1 && currentDateTime.time - resList.r_date.time <= twentyFourHours }">
 						        		 <button type="button" class="btn btn-outline-warning" onclick="cancel(${resList.r_idx })">예약 취소하기</button>
 									     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="margin-left: 10px;">닫기</button>
 								    </c:when>

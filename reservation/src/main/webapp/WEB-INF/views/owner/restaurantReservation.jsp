@@ -109,7 +109,7 @@
                             <td><fmt:formatDate value="${resList.r_date }" pattern="yy-MM-dd"/></td>
                             <td><fmt:formatDate value="${resList.r_date }" pattern="HH:mm"/></td>
                             <td>
-	                            <c:choose>
+		                       <c:choose>
 	                           		<c:when test="${resList.r_status eq 1 }">
 	                           			방문예정
 	                           		</c:when>
@@ -119,8 +119,11 @@
 	                           		<c:when test="${resList.r_status eq 3 }">
 	                           			취소
 	                           		</c:when>
+	                           		<c:when test="${resList.r_status eq 4 }">
+	                           			양도완료
+	                           		</c:when>
 	                           		<c:otherwise>
-	                           			양도
+	                           			판매중
 	                           		</c:otherwise>
 	                           	</c:choose>
                             </td>
