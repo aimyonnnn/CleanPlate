@@ -49,7 +49,7 @@
 			set m_name = #{m_name},
 			    m_passwd = #{m_passwd},
 			    m_nick = #{m_nick},
-			    m_tel = concat(#{m_tel1},'-', #{m_tel2}, '-', #{m_tel3}),
+			    m_tel = #{m_tel},
 			    m_email = concat(#{m_email1},'@', #{m_email2}),
 			    m_passwd = #{m_passwd}
 			    	where m_id = #{m_id}
@@ -81,7 +81,7 @@
 	</select>
 	
 	<select id="selectMemberReservation" resultType="com.itwillbs.test.vo.ReservationVO">
-	SELECT r.r_idx, me.me_name, r.r_amount, r.r_tables, r.r_personnel, m.m_name, r.r_status, r.r_date, r.r_request, res.res_name, res.res_idx
+	SELECT r.r_idx, me.me_name, r.r_amount, r.r_tables, r.r_personnel, m.m_name, r.r_status, r.r_date, r.r_request, res.res_name, res.res_idx, r.rv_status
 	FROM reservation r JOIN restaurant res
 	ON r.res_idx = res.res_idx
 	JOIN members m
@@ -92,7 +92,7 @@
 						FROM members 
 						WHERE m_id = #{sId}
 						)
-	ORDER BY r.r_idx
+	ORDER BY r.r_idx ASC
 	</select>
 	
 	<select id="selectMemberRestaurant">
@@ -126,21 +126,24 @@
 			WHERE m_id = #{m_id}	
 	</delete>
 	
+	<!-- 회원 정지 상태로 설정-->
 	<update id="updateMemberStatus">
 		UPDATE members
 			SET m_status = 3
 			WHERE m_idx = #{m_idx}
 	</update>
 	
-	<select id="selectMemberReview">
-		SELECT *
-			FROM reviews
-			WHERE r_idx = (SELECT r_idx
-							FROM reservation
-							WHERE m_idx = (SELECT m_idx
-											FROM members
-											WHERE m_id = ${sId}
-											)
-							)
-	</select>
+	<!-- 관리자의 회원 정보 수정 -->
+	<update id="adminUpdateMember">
+		UPDATE members
+			SET m_idx = #{m_idx}
+			   ,m_id = #{m_id}
+			   ,m_name = #{m_name}
+			   ,m_tel = #{m_tel}
+			   ,m_email = #{m_email}
+			   ,m_status = #{m_status}
+			   ,userType = #{userType}
+				WHERE m_idx = #{m_idx}
+	</update>
+	
 </mapper>

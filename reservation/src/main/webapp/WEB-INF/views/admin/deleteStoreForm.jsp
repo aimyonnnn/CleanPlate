@@ -13,7 +13,7 @@
 
 <div class="container">
 
-  <form action="adminRestaurantUpdate" method="post">
+  <form action="adminStoreUpdate" method="post">
     <div>
       <label for="restaurantIdx">가게 번호</label>
       <input type="text" id="res_idx" name="res_idx" class="form-control" value="${restaurantVO.res_idx }">
@@ -28,7 +28,7 @@
     </div>
     <div>
       <label for="ceoIdx">점주 이름</label>
-      <input type="text" id="c_idx" name="c_idx" class="form-control" value="${restaurantVO.c_name }">
+      <input type="text" id="c_name" name="c_name" class="form-control" value="${restaurantVO.c_name }">
     </div>
     <div>
       <label for="restaurantTel">가게 전화번호</label>
@@ -36,7 +36,11 @@
     </div>
     <div>
       <label for="restaurantAdress">가게 주소</label>
-      <input type="text" id="restaurantAdress" name="restaurantAdress" class="form-control" value="${restaurantVO.res_address }, ${restaurantVO.res_detailAddress }">
+      <input type="text" id="res_address" name="res_address" class="form-control" value="${restaurantVO.res_address }">
+    </div>
+    <div>
+      <label for="restaurantAdress">가게 상세 주소</label>
+      <input type="text" id="res_detailAddress" name="res_detailAddress" class="form-control" value="${restaurantVO.res_detailAddress }">
     </div>
 
     <hr class="my-4">
@@ -44,7 +48,7 @@
    <div class="row">
       <div class="col">
         <button class="w-100 btn btn-danger btn-lg" type="submit">수정하기</button>
-        <button class="w-100 btn btn-danger btn-lg" type="button" onclick="location.href='deleteStore'">삭제하기</button>
+        <button class="w-100 btn btn-danger btn-lg" type="button" onclick="location.href='deleteStore?idx=${restaurantVO.res_idx}'">삭제하기</button>
       </div>
       <div class="col">
         <button class="w-100 btn btn-secondary btn-lg"

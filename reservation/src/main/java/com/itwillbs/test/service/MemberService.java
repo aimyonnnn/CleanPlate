@@ -83,7 +83,9 @@ public class MemberService {
 		return mapper.updateMemberStatus(m_idx);
 	}
 
-	public List<ReviewVO> getMemberReview(String sId) {
-		return mapper.selectMemberReview(sId);
+
+	// 관리자의 멤버 정보 수정
+	public int adminUpdateMember(MemberVO member) {
+		return mapper.adminUpdateMember(member);
 	}
 }

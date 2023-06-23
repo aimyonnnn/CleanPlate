@@ -31,7 +31,7 @@ public interface RestaurantMapper {
 	RestaurantVO selectRestaurant(String res_brn);
 
 	// 관리자의 가게 정보 수정
-	RestaurantVO adminRestaurantUpdate(RestaurantVO res);
+	int adminRestaurantUpdate(RestaurantVO res);
 
 	// 관리자의 가게 정보 삭제
 	int deleteRestaurant(String idx);

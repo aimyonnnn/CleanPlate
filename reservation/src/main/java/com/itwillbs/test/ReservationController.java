@@ -25,6 +25,7 @@ import com.itwillbs.test.vo.ReservationVO;
 import com.itwillbs.test.vo.RestaurantVO;
 import com.itwillbs.test.vo.ReviewVO;
 import com.itwillbs.test.vo.TimesVO;
+import com.mysql.cj.Session;
 
 
 @Controller
@@ -178,7 +179,7 @@ public class ReservationController {
 	
 	// 예약취소 버튼을 눌렀을 때 상태 처리
 	@GetMapping("resCancel")
-	public String resCancel(@RequestParam int r_idx, @RequestParam int r_status, Model model) {
+	public String resCancel(@RequestParam int r_idx, @RequestParam int r_status, Model model, HttpSession session) {
 		
 		int updateCount = service.CancelStatus(r_idx, r_status);
 		
@@ -187,7 +188,11 @@ public class ReservationController {
 			return "fail_back";
 		}
 		
-		return "redirect:restaurantReservation";
+		if(session.getAttribute("sId")==null) {
+			return "redirect:restaurantReservation";
+		} else {
+			return "redirect:memberRSList";
+		}
 	}
 	
 	

@@ -13,8 +13,31 @@
 		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <!-- bootstrap -->
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+      	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <!-- 이부분은 지우면 안됩니다 -->
+    <style>
+        /* 각 별들의 기본 설정 */
+        .starR{
+        display: inline-block;
+        width: 30px;
+        height: 30px;
+        color: transparent;
+        text-shadow: 0 0 0 #f0f0f0;
+        font-size: 1.8em;
+        box-sizing: border-box;
+        cursor: pointer;
+        }
+
+        /* 별 이모지에 마우스 오버 시 */
+        .starR:hover {
+        text-shadow: 0 0 0 #ccc;
+        }
+
+        /* 별 이모지를 클릭 후 class="on"이 되었을 경우 */
+        .starR.on{
+        text-shadow: 0 0 0 #ffbc00;
+        }
+    </style>
 </head>
 <body>
    	<!-- 공통 상단바 구역 -->
@@ -229,8 +252,12 @@
 					    	 	  <!-- 예약상태가 "1-방문예정" 일때만 취소버튼 활성화 -->
 					    	 	  <!-- DB구문으로 처리 예정 -->
 								  <c:choose>
-								    <c:when test="${resList.r_status eq 1 && currentDateTime.time - resList.r_date.time <= twentyFourHours }">
+								    <c:when test="${resList.r_status eq 1 && currentDateTime.time - resList.r_date.time > twentyFourHours }">
 						        		 <button type="button" class="btn btn-outline-warning" onclick="cancel(${resList.r_idx })">예약 취소하기</button>
+									     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="margin-left: 10px;">닫기</button>
+								    </c:when>
+								    <c:when test="${resList.r_status eq 2 && resList.rv_status eq 0 }">
+						        		 <a href="#" class="btn btn-warning" style="color: white;" data-bs-toggle="modal" data-bs-target="#reviewmodify">리뷰작성하기</a>
 									     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="margin-left: 10px;">닫기</button>
 								    </c:when>
 								    <c:otherwise>
@@ -350,8 +377,94 @@
 	</div>
 	</c:forEach>
 	<!-- 두번째 양도 관련 모달창 끝 -->
+
+<!-- 세번째 리뷰 관련 모달창 시작 -->
+<c:forEach items="${resList }" var="resList">
+	<c:if test="${resList.rv_status eq 0 }">
+    <div class="modal" id="reviewmodify" tabindex="-1" >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5">리뷰 작성</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="ReviewPro" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="r_idx" value="${resList.r_idx }">
+				<input type="hidden" name="rv_status" value="1">
+                    <table>
+                        <tr>
+                            <th>리뷰사진</th>
+                            <td><input type="file" name="file" accept="image/*" onchange="checkFileExtension(event)"></td>
+                        </tr>
+                        <tr>
+                            <th>별점</th>
+                            <td>
+                                <div class="starRev">
+                                    <!-- 편의 상 가장 첫번째의 별은 기본으로 class="on"이 되게 설정해주었습니다. -->
+                                    <span class="starR on">⭐</span>
+                                    <span class="starR">⭐</span>
+                                    <span class="starR">⭐</span>
+                                    <span class="starR">⭐</span>
+                                    <span class="starR">⭐</span>
+                                </div>
+                                <!-- 나중에 폼 전송시에는 type을 hidden으로 바꾸면 됨, 지금은 확인해야하니 text로 함-->
+                                <input type="hidden" value="1" id="starRating" name="rv_scope">
+	                            <script>
+	                                <!-- 별점 jQuery -->
+	                                $('.starRev span').click(function(){
+	                                $(this).parent().children('span').removeClass('on');
+	                                $(this).addClass('on').prevAll('span').addClass('on');
+	                                return false;
+	                                });
+	                                let starCount = 0; // 별점을 저장할 변수 선언
+	                                $(".starRev span").click(function(e) { // 콜백함수에 파라미터 추가
+	                                    e.preventDefault(); // a태그 기본 동작 방지
+	                                    // 실제 클릭된 이벤트 요소(e.currentTarget)의 인덱스를 가져옴
+	                                    // index는 0부터 시작이니 +1을 해주면 됨
+	                                    let index = $(e.currentTarget).index() + 1; 
+	//                                     console.log($(e.currentTarget).index()); // 콘솔 확인용
+	                                    starCount = index;
+	                                    $("#starRating").val(starCount); // 전송할 폼의 input에 값을 넣음
+	                                });
+	                                <!-- 별점 jQuery -->
+	                            </script>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>내용</th>
+                            <td><textarea cols="50" rows="5" name="rv_comment"></textarea></td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-warning" style="color: white;">등록</button>
+              <button type="button" class="btn btn-warning" style="color: white;"data-bs-dismiss="modal">취소</button>
+            </div>
+          </div>
+        </div>
+    </div>
+    </c:if>
+</c:forEach>
+<!-- 세번째 리뷰 관련 모달창 끝 -->
+
+	<!-- 업로드파일의 확장자가 img가 아니면 등록이 불가능하다는 문구를 띄우는 스크립트 -->
+	 <script>
+	    function checkFileExtension(event) {
+	      const fileInput = event.target;
+	      const file = fileInput.files[0];
+	      const allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
 	
+	      const fileName = file.name;
+	      const fileExtension = fileName.split('.').pop().toLowerCase();
 	
+	      if (!allowedExtensions.includes(fileExtension)) {
+	        alert('등록이 불가능한 파일입니다.');
+	        fileInput.value = '';
+	      }
+	    }
+	 </script>	
 	
  	<!-- 가격 수정을 위한 ajax요청 -->
  	<script>

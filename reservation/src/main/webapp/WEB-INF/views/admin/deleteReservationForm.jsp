@@ -17,34 +17,35 @@
   <form action="adminReservationUpdate" method="post">
     <div>
       <label for="reservationIdx">예약 번호</label>
-      <input type="text" id="reservationIdx" name="reservationIdx" class="form-control" value="${reservationVO.r_idx}">
+      <input type="text" id="r_idx" name="r_idx" class="form-control" value="${reservationVO.r_idx}">
     </div>
     <div>
       <label for="reservationPersonnel">예약 인원</label>
-      <input type="text" id="reservationPersonnel" name="reservationPersonnel" class="form-control" value="${reservationVO.r_personnel}">
+      <input type="text" id="r_personnel" name="r_personnel" class="form-control" value="${reservationVO.r_personnel}">
     </div>
     <div>
       <label for="reservationDate">예약 일자</label>
-      <input type="text" id="reservationDate" name="reservationDate" class="form-control" value="<fmt:formatDate value="${reservationVO.r_date }" pattern="yy-MM-dd HH:mm" />">
+      <input type="text" id="reservationDate" name="reservationDate" class="form-control" value="<fmt:formatDate value="${reservationVO.r_date }" pattern="yy-MM-dd HH:mm" />" readonly="readonly">
     </div>
     <div>
       <label for="storeName">요청사항</label>
-      <input type="text" id="storeName" name="storeName" class="form-control" value="${reservationVO.r_request}" style="width: 350px; height: 200px">
+      <input type="text" id="r_request" name="r_request" class="form-control" value="${reservationVO.r_request}" style="width: 350px; height: 200px">
     </div>
     <div>
       <label for="paymentDate">총 금액</label>
-      <input type="text" id="paymentDate" name="paymentDate" class="form-control" value="${reservationVO.r_amount}">
+      <input type="text" id="r_amount" name="r_amount" class="form-control" value="${reservationVO.r_amount}">
     </div>
     <div>
       <label for="tax">예약 상태</label>
-      <input type="text" id="tax" name="tax" class="form-control" value="${reservationVO.r_status}">
+      <input type="text" id="r_status" name="r_status" class="form-control" value="${reservationVO.r_status}">
     </div>
     <hr class="my-4">
 
     <div class="row">
       <div class="col">
 <button class="w-100 btn btn-danger btn-lg" type="submit">수정하기</button>
-        <button class="w-100 btn btn-danger btn-lg" type="button" onclick="location.href='deleteReservation'">삭제하기</button>
+<%--         <button class="w-100 btn btn-danger btn-lg" type="button" onclick="location.href='deleteReservation?idx=${reservationVO.r_idx}'">삭제하기</button> --%>
+      <!-- 예약은 바로 삭제가 아닌 status로 취소 상태만 판별 -->
       </div>
       <div class="col">
         <button class="w-100 btn btn-secondary btn-lg"

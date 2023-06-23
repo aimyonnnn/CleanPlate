@@ -48,7 +48,7 @@ public class RestaurantService {
 	}
 	
 	// 관리자 페이지 가게 정보 수정
-	public RestaurantVO adminRestaurantUpdate(RestaurantVO res) {
+	public int adminRestaurantUpdate(RestaurantVO res) {
 		return mapper.adminRestaurantUpdate(res);
 	}
 	

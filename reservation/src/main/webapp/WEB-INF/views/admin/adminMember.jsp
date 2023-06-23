@@ -153,7 +153,7 @@
         <c:if test="${member.m_status == 2}">
         	<td>정지</td>
         </c:if>
-        <c:if test="${member.m_status == 2}">
+        <c:if test="${member.m_status == 3}">
         	<td>탈퇴</td>
         </c:if>
         <%-- 회원 상태 판별 --%>

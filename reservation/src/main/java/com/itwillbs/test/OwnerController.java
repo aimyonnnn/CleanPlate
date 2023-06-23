@@ -50,9 +50,7 @@ public class OwnerController {
 		
 		System.out.println(resList);
 		
-		Timestamp currentDateTime = new Timestamp(System.currentTimeMillis());
         		
-        model.addAttribute("currentDateTime", currentDateTime);
 		model.addAttribute("restaurantList", restaurantList);
 		model.addAttribute("resList",resList);
 		

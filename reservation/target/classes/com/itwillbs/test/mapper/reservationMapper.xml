@@ -72,15 +72,12 @@
 	</select>
 	
 	<!-- 관리자의 예약 정보 수정 -->
-	<update id="adminReservationUpdate" parameterType="com.itwillbs.test.vo.ReservationVO">
+	<update id="adminReservationUpdate" >
 		UPDATE reservation
 			SET r_personnel = #{r_personnel}	
-			   ,r_date = #{r_date}
 			   ,r_request = #{r_request}
+			   ,r_amount = #{r_amount}
 			   ,r_status = #{r_status}
-			   ,m_idx = #{m_idx}
-			   ,res_idx = #{res_idx}
-			   ,cr_idx = #{cr_idx}
 				WHERE r_idx = #{r_idx}
 	</update>
 	
