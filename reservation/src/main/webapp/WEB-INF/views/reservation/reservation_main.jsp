@@ -399,7 +399,7 @@
       	// 한글자 입력할 때 마다 조회됨!
       	$(()=>{
       		
-      		$('#restaurantName').on('input', () => {
+      		$('#restaurantName').on('change', () => {
       			var resName = $('#restaurantName').val();
       			console.log(resName);
       			
