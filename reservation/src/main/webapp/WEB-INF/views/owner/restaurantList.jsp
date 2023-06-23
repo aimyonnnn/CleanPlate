@@ -83,22 +83,17 @@
 	                                <td><button type="button" class="btn btn-warning" style="color: white;" onclick="location.href='restaurantUpdatePage?res_idx=${restaurant.res_idx}'">수정</button></td>
 	                        	</tr>
 	                        	<tr>
+	                        		<th>가게 사진</th>
 	                        		<td class="td_right">
 	                        			<c:if test="${not empty restaurant.res_photo1 }">
-			                        		<a href="${pageContext.request.contextPath }/resources/upload/${restaurant.res_photo1 }" download="${fn:split(restaurant.res_photo1, '_')[1] }"></a>
-			                        		<img href="${pageContext.request.contextPath }/resources/upload/${restaurant.res_photo1 }" download="${fn:split(restaurant.res_photo1, '_')[1] }">
+			                        		<img src="${pageContext.request.contextPath }/resources/upload/${restaurant.res_photo1 }" width="100" height="100">
 	                        			</c:if>
 	                        			<c:if test="${not empty restaurant.res_photo2 }">
-			                        		<a href="${pageContext.request.contextPath }/resources/upload/${restaurant.res_photo2 }" download="${fn:split(restaurant.res_photo2, '_')[1] }"></a>
-			                        		<img href="${pageContext.request.contextPath }/resources/upload/${restaurant.res_photo2 }" download="${fn:split(restaurant.res_photo2, '_')[1] }">
+			                        		<img src="${pageContext.request.contextPath }/resources/upload/${restaurant.res_photo2 }" width="100" height="100">
 	                        			</c:if>
 	                        			<c:if test="${not empty restaurant.res_photo3 }">
-			                        		<a href="${pageContext.request.contextPath }/resources/upload/${restaurant.res_photo3 }" download="${fn:split(restaurant.res_photo3, '_')[1] }"></a>
-			                        		<img href="${pageContext.request.contextPath }/resources/upload/${restaurant.res_photo3 }" download="${fn:split(restaurant.res_photo3, '_')[1] }">
+			                        		<img src="${pageContext.request.contextPath }/resources/upload/${restaurant.res_photo3 }" width="100" height="100">
 	                        			</c:if>
-	                        			${fn:split(restaurant.res_photo1, '_')[1] }
-	                        			${fn:split(restaurant.res_photo2, '_')[1] }
-	                        			${fn:split(restaurant.res_photo3, '_')[1] }
 									</td>
 	                        	</tr>
 	                        </c:forEach>
