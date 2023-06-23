@@ -236,6 +236,7 @@ public class OwnerController {
 			model.addAttribute("msg", "로그인 해주세요");
 			return "fail_back";
 		}
+		System.out.println(restaurant);
 		// ---------------------------------------------------------------
 		// 업로드(upload) 폴더 생성 
 		// 실제 업로드 경로
@@ -281,7 +282,6 @@ public class OwnerController {
 		restaurant.setRes_photo1("");
 		restaurant.setRes_photo2("");
 		restaurant.setRes_photo3("");
-		
 		// 파일명을 저장할 변수 
 		String fileName1 = uuid.substring(0, 8) + "_" + mFile1.getOriginalFilename();
 		String fileName2 = uuid.substring(0, 8) + "_" + mFile2.getOriginalFilename();
