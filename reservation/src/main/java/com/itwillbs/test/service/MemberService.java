@@ -83,12 +83,9 @@ public class MemberService {
 		return mapper.updateMemberStatus(m_idx);
 	}
 
-<<<<<<< HEAD
+
 	// 관리자의 멤버 정보 수정
 	public int adminUpdateMember(MemberVO member) {
 		return mapper.adminUpdateMember(member);
 	}
-=======
-
->>>>>>> branch 'master' of https://github.com/aimyonnnn/King.git
 }
