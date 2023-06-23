@@ -163,11 +163,11 @@
         	pg: "kakopay",
         	pay_method: "card",
             merchant_uid: createOrderNum(), // 주문번호 자동생성
-            name: "${res_name}", // 주문명, restaurant -> res_name
-            amount: "${a_price}", // 결제금액, assignment -> a_price
-            buyer_email: "${buyer_email}", // members -> m_email
-            buyer_name: "${buyer_name}", // members -> m_name
-            buyer_tel: "${buyer_tel}" // members -> m_tel
+            name: "${res_name}",
+            amount: 5000,
+            buyer_email: "${buyer_email}",
+            buyer_name: "${buyer_name}",
+            buyer_tel: "${buyer_tel}"
           }, 
           
           function(rsp) {
@@ -186,38 +186,38 @@
 			 // 2. 양도 테이블의 양도상태 컬럼을 '2-거래완료'로 변경
 			 // 3. 양도 게시판으로 다시 접속 시 '2-거래완료' 처리된 글은 보이지 않음
 			 
-	  		 	 var a_sellerId = '${a_sellerId}';
-	  		 	 var r_idx = '${r_idx}';
+// 	  		 	 var a_sellerId = '${a_sellerId}';
+// 	  		 	 var r_idx = '${r_idx}';
 	  		 	 
-				 $.ajax({
-				    url: '<c:url value="assignUpdate"/>',
-				    type: 'POST',
-				    data: {
-				        a_sellerId: a_sellerId,
-				        r_idx: r_idx
-				    },
-				    dataType: 'json',
-				    success: function(response) {
+// 				 $.ajax({
+// 				    url: '<c:url value="assignUpdate"/>',
+// 				    type: 'POST',
+// 				    data: {
+// 				        a_sellerId: a_sellerId,
+// 				        r_idx: r_idx
+// 				    },
+// 				    dataType: 'json',
+// 				    success: function(response) {
 				    	
-				    	var result = response.result;
-				    	console.log(result);
+// 				    	var result = response.result;
+// 				    	console.log(result);
 				    	
-				    	if(result  === 1) {
-					        alert('예약내역 업데이트 성공!');
-					        location.href = '<c:url value="assignment"/>';
+// 				    	if(result  === 1) {
+// 					        alert('예약내역 업데이트 성공!');
+// 					        location.href = '<c:url value="assignment"/>';
 					        
-				    	}
+// 				    	}
 										        
-				    },
-				    error: function(xhr, status, error) {
-				        console.log('Ajax 오류 발생가 발생했습니다');
-				        console.log('상태 코드: ' + xhr.status);
-				        console.log('에러 메시지: ' + error);
-				    }
-				});
+// 				    },
+// 				    error: function(xhr, status, error) {
+// 				        console.log('Ajax 오류 발생가 발생했습니다');
+// 				        console.log('상태 코드: ' + xhr.status);
+// 				        console.log('에러 메시지: ' + error);
+// 				    }
+// 				});
 	         //================= DB 업데이트 처리 끝 =================
 			  
-//               location.href = "<c:url value='/'/>";
+              location.href = "<c:url value='/'/>";
             
             // ================= 결제 실패 시 =================
             } else {

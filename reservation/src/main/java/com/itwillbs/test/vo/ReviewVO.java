@@ -21,5 +21,6 @@ public class ReviewVO {
 	private int rv_scope; // 별점
 	private String rv_comment; // 리뷰내용
 	private String rv_img; // 리뷰 이미지
-	private String r_idx; //예약번호
+	private String m_nick; // 닉네임
+	private String r_idx; // 예약번호
 }

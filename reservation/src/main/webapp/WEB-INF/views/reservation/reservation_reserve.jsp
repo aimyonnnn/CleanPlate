@@ -21,6 +21,10 @@
 	<%@ include file="../common/common_header.jsp" %>
    	<!-- 공통 상단바 구역 -->
 
+	<!-- iamport -->
+	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+
+
 	<!-- 위로 가기 버튼 -->
    	<button id="go-top"><svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor"
 	  class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16">
@@ -72,12 +76,45 @@
 				<dl class="row fs-3 mt-6">
 					<dt class="col-sm-3">인원</dt>
 					<dd class="col-sm-9">
-						<button type="button" class="btn btn-outline-warning rounded-circle" onclick="count('minus')" value="-" style="width: 39px;">-</button>						
+						<button id="minusButton" type="button" class="btn btn-outline-warning rounded-circle" onclick="count('minus')" value="-" style="width: 39px;">-</button>						
 							<b id='countResult' style="padding: 20px;">1</b>
-						<button type="button" class="btn btn-outline-warning rounded-circle" onclick="count('plus')" value="+" >+</button>
+						<button id="plusButton" type="button" class="btn btn-outline-warning rounded-circle" onclick="count('plus')" value="+" >+</button>
 					</dd>
 				</dl>
 			</div>
+			
+			<script>
+			var countResultValue = 1; // 초기값 설정
+
+			window.addEventListener('DOMContentLoaded', function() {
+			  var minusButton = document.getElementById('minusButton');
+			  var plusButton = document.getElementById('plusButton');
+
+			  minusButton.addEventListener('click', function() {
+			    var countResultElement = document.getElementById('countResult');
+			    countResultValue = parseInt(countResultElement.innerText); // 최종값 업데이트
+			    countResultValue--;
+			    countResultElement.innerText = countResultValue;
+			    sendFinalValue(countResultValue); // 변한 최종값을 함수의 파라미터로 보냄
+			  });
+
+			  plusButton.addEventListener('click', function() {
+			    var countResultElement = document.getElementById('countResult');
+			    countResultValue = parseInt(countResultElement.innerText); // 최종값 업데이트
+			    countResultValue++;
+			    countResultElement.innerText = countResultValue;
+			    sendFinalValue(countResultValue); // 변한 최종값을 함수의 파라미터로 보냄
+			  });
+
+			  console.log(countResultValue);
+			});
+
+			function sendFinalValue(value) {
+			  // 여기서 value를 이용하여 외부로 최종값을 보낼 수 있습니다.
+// 			  console.log('최종값:', value);
+			  // 추가적인 작업 수행 가능
+			}
+			</script>	
 			
 			<!-- 인원 선택 스크립트 -->
 			<script>
@@ -298,8 +335,7 @@
 			<div>
 				<h2 class="fw-bold mt-5 mb-2">예약자 정보 입력</h2>
 				<hr>
-				<form class="row g-3 needs-validation" action="reservationPayment" method="post" novalidate>
-					<input type="text" value="" name="">
+				<form class="row g-3 needs-validation" action="reservationPayment" novalidate>
 					<div class="input-container">
 						<div class="col-md-6">
 							<label for="r_name" class="form-label fw-bold fs-4">이름</label>
@@ -414,16 +450,106 @@
 						<span class="form-label fw-bold fs-4">총금액</span>
 						<div>
 							<p class="mt-2 mb-2" id="menuResult"></p>
-					    	<strong class="fs-3 text-danger" id="totalResult"></strong>
+					    	<strong class="fs-3 text-danger" id="total Result"></strong>
 					    </div>
 					</div>
 					<!-- 총금액 -->
 					<div class="col-12">
-						<button class="btn btn-danger mt-2 mb-4" type="submit" style="width: 564px;">결제하기</button>
+						<button class="btn btn-danger mt-2 mb-4" type="submit" style="width: 564px;" id="requestPay">결제하기</button>
 					</div>
 				</form>
 			</div>
 			<!-- 예약자 정보 입력 끝 -->
+			
+			<!--  -->
+			<script>
+			   $(()=>{
+				  
+			      var IMP = window.IMP;
+			      IMP.init("imp61372336");
+			      
+			       $('#requestPay').on('click', function(e) {
+			    	  
+			    	  // submit 버튼의 기본 동작을 막는다.
+			    	  e.preventDefault();
+			    	  
+			    	  var totalResultElement = document.getElementById('totalResult');
+		    	      var totalResultValue = totalResultElement.innerText;
+		    	      console.log(totalResultValue);
+
+		    	      var countResultElement = document.getElementById('countResult');
+		    	      var countResultValue = countResultElement.innerText;
+		    	      console.log(countResultValue);
+
+		    	      var r_idx = ${param.res_idx}; // res_idx
+		    	      var r_personnel = parseInt(countResultValue); // 인원수 가져오기 (숫자로 변환)
+					  	
+		    	      
+		    	      
+				      // 이후 작업 수행
+				      console.log(r_personnel);
+						 
+			          IMP.request_pay({
+		        		pg: "kakopay",
+		            	pay_method: "card",
+		                merchant_uid: createOrderNum(), // 주문번호 자동생성
+		                name: "결제테스트",
+		                amount: totalResultValue,
+		                buyer_email: "${buyer_email}",
+		                buyer_name: "${buyer_name}",
+		                buyer_tel: "${buyer_tel}"
+			          }, 
+			          
+			          function(rsp) {
+			            console.log(rsp);
+			            
+			            // ================= 결제 성공 시 =================
+			            if (rsp.success) {
+			            	
+			              alert('결제가 완료되었습니다.');
+			              alert(JSON.stringify(rsp));
+			              console.log('결제가 완료되었습니다.');
+			              	 
+						 // ================= DB 업데이트 처리 시작 =================
+							 
+							 
+							 
+							 
+							 
+				  		 	 
+				         //================= DB 업데이트 처리 끝 =================
+						  
+			               location.href = "<c:url value='/'/>";
+			            
+			            // ================= 결제 실패 시 =================
+			            } else {
+			              var msg = '결제에 실패하였습니다.';
+			              msg += '에러내용: ' + rsp.error_msg;
+			              alert(msg);
+			            }
+			          });
+			      });
+			      //=====================================================================================
+			    	  
+			   }); // ready
+			   
+			   
+			   // 주문번호 만들기
+			   function createOrderNum(){
+				   	const date = new Date();
+				   	const year = date.getFullYear();
+				   	const month = String(date.getMonth() + 1).padStart(2, "0");
+				   	const day = String(date.getDate()).padStart(2, "0");
+			   	
+			   	let orderNum = year + month + day;
+			   	for(let i=0;i<10;i++) {
+			   		orderNum += Math.floor(Math.random() * 8);	
+			   	}
+			   		return orderNum;
+			   }
+			       
+			   </script>
+			<!--  -->
 			
 			<script>
 			<!-- 체크박스 -->
