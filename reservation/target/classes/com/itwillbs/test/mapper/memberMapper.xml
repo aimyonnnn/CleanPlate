@@ -132,4 +132,15 @@
 			WHERE m_idx = #{m_idx}
 	</update>
 	
+	<select id="selectMemberReview">
+		SELECT *
+			FROM reviews
+			WHERE r_idx = (SELECT r_idx
+							FROM reservation
+							WHERE m_idx = (SELECT m_idx
+											FROM members
+											WHERE m_id = ${sId}
+											)
+							)
+	</select>
 </mapper>

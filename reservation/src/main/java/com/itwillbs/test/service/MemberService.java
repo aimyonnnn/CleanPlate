@@ -10,6 +10,7 @@ import com.itwillbs.test.mapper.MemberMapper;
 import com.itwillbs.test.vo.MemberVO;
 import com.itwillbs.test.vo.ReservationVO;
 import com.itwillbs.test.vo.RestaurantVO;
+import com.itwillbs.test.vo.ReviewVO;
 
 @Service
 public class MemberService {
@@ -80,5 +81,9 @@ public class MemberService {
 	// 회원 탈퇴시 상태변경
 	public int secessionMember(int m_idx) {
 		return mapper.updateMemberStatus(m_idx);
+	}
+
+	public List<ReviewVO> getMemberReview(String sId) {
+		return mapper.selectMemberReview(sId);
 	}
 }
