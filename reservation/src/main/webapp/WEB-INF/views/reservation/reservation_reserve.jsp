@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -62,110 +64,235 @@
 					<dd>· 외부 음식 반입은 제한됩니다.</dd>
 				</dl>
 			</div>
-			<!-- 인원 선택 버튼 -->
+		<!-- 날짜 및 인원 선택 버튼 -->
+		<div>
 			<div>
 				<h2 class="fw-bold mt-5 mb-2">날짜 & 인원 선택</h2>
 				<hr>
 				<dl class="row fs-3 mt-6">
 					<dt class="col-sm-3">인원</dt>
 					<dd class="col-sm-9">
-						<button type="button" class="btn btn-outline-warning rounded-circle" onclick="count('minus', 'adult')" value="-" style="width: 39px;">-</button>						
-						<b id='adultResult' style="padding: 20px;">0</b>
-						<button type="button" class="btn btn-outline-warning rounded-circle" onclick="count('plus', 'adult')" value="+" >+</button>
+						<button type="button" class="btn btn-outline-warning rounded-circle" onclick="count('minus')" value="-" style="width: 39px;">-</button>						
+							<b id='countResult' style="padding: 20px;">1</b>
+						<button type="button" class="btn btn-outline-warning rounded-circle" onclick="count('plus')" value="+" >+</button>
 					</dd>
 				</dl>
 			</div>
-			<!-- 인원 선택 버튼 -->
+			
+			<!-- 인원 선택 스크립트 -->
 			<script>
-			  function count(type, target) {
-			    // 결과를 표시할 element
-			    const resultElement = document.getElementById(target + 'Result');
-			    // 현재 화면에 표시된 값
-			    let number = parseInt(resultElement.innerText);
-			    // 더하기/빼기
-			    if (type === 'plus') {
-			      number += 1;
-			    } else if (type === 'minus') {
-			      number -= 1;
-			    }
-			    // 음수인 경우 0으로 설정
-			    if (number < 0) {
-			      number = 0;
-			    }
-			    // 결과 출력
-			    resultElement.innerText = number;
-			    // 음수일 경우 마이너스 버튼 비활성화
-			    const minusButton = document.querySelector(`button[value="-"][onclick="count('minus', '${target}')"]`);
-			    if (number === 0) {
-			      minusButton.disabled = true;
-			    } else {
-			      minusButton.disabled = false;
-			    }
+			function count(type) {
+			  // 결과를 표시할 element
+			  const resultElement = document.getElementById('countResult');
+			  // 현재 화면에 표시된 값
+			  let number = parseInt(resultElement.innerText);
+			  // 더하기/빼기
+			  if (type === 'plus') {
+			    number += 1;
+			  } else if (type === 'minus') {
+			    number -= 1;
 			  }
+			  // 기본값이 1로 설정 
+			  if (number < 1) {
+			    number = 1;
+			  }
+			  // 결과 출력
+			  resultElement.innerText = number;
+			
+			  // 1 이하일 경우 마이너스 버튼 비활성화
+			  const minusButton = document.querySelector(`button[value="-"][onclick="count('minus')"]`);
+			  if (number === 1) {
+			    minusButton.disabled = true;
+			  } else {
+			    minusButton.disabled = false;
+			  }
+			  
+			  // 인원 -> 날짜 -> 시간 순으로 선택 후 다시 인원만 선택 못하게 버튼 숨김 (실시간 처리를 위해) 
+			  hideTimeButtons();
+			  
+			}
+			
+			function hideTimeButtons() {
+			  $('.time-buttons').css('display', 'none');
+			}
+			
 			</script>
-			<!-- 인원 선택 버튼 끝 -->
+			<!-- 인원 선택 스크립트 -->
 			
 			<!-- datepicker -->
 			<div class="row">
-				<div class="col-md-6">
-					<div class="datepicker"></div>
-				</div>
-				<div class="col-md-6">
-					<div class="d-flex justify-content-between" style="margin-top: 110px;">
-						<div class="time-buttons" style="display: none;">
-							<span class="d-block p-2 text-bg-light" style="width: 600px;">
-								<strong>
-								<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="var(--bs-dark)" class="bi bi-award-fill" viewBox="0 0 16 16">
-								  <path d="m8 0 1.669.864 1.858.282.842 1.68 1.337 1.32L13.4 6l.306 1.854-1.337 1.32-.842 1.68-1.858.282L8 12l-1.669-.864-1.858-.282-.842-1.68-1.337-1.32L2.6 6l-.306-1.854 1.337-1.32.842-1.68L6.331.864 8 0z"/>
-								  <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1 4 11.794z"/>
-								</svg>
-								LUNCH</strong>
-								<button class="btn btn-outline-dark rounded-0" onclick="selectTime('12:00')" style="margin-left: 250px;">12:00</button>
-							</span>
-							<span class="d-block p-2 mt-4 text-bg-light">
-								<strong>
-								<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="var(--bs-dark)" class="bi bi-award-fill" viewBox="0 0 16 16">
-								  <path d="m8 0 1.669.864 1.858.282.842 1.68 1.337 1.32L13.4 6l.306 1.854-1.337 1.32-.842 1.68-1.858.282L8 12l-1.669-.864-1.858-.282-.842-1.68-1.337-1.32L2.6 6l-.306-1.854 1.337-1.32.842-1.68L6.331.864 8 0z"/>
-								  <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1 4 11.794z"/>
-								</svg>
-								DINNER</strong>
-								<button class="btn btn-outline-dark rounded-0" onclick="selectTime('17:00')" style="margin-left: 245px;">17:00</button>
-							</span>
+		    <div class="col-md-6">
+		        <div class="datepicker"></div>
+		    </div>
+		    <div class="col-md-6">
+		        <div style="margin-top: 110px;">
+		            <div class="time-buttons" style="display: none;">
+		                <div class="row w-100">
+		                    <div class="col">
+		                    	<div id="lunchArea">
+			                        <div class="d-block p-2 text-bg-light" id="lunchButtons">
+										<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="var(--bs-dark)" class="bi bi-award-fill" viewBox="0 0 16 16">
+										  <path d="m8 0 1.669.864 1.858.282.842 1.68 1.337 1.32L13.4 6l.306 1.854-1.337 1.32-.842 1.68-1.858.282L8 12l-1.669-.864-1.858-.282-.842-1.68-1.337-1.32L2.6 6l-.306-1.854 1.337-1.32.842-1.68L6.331.864 8 0z"/>
+										  <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1 4 11.794z"/>
+										</svg>
+										<strong style="margin-right: 35px;">LUNCH</strong>
+										<c:forEach items="${timeList}" var="time">
+								        <c:set var="hour" value="${fn:substring(time.t_time, 0, 2)}"/>
+								        <c:set var="minute" value="${fn:substring(time.t_time, 3, 5)}"/>
+									        <c:if test="${hour >= 11 && hour < 17}">
+									            <input type="hidden" id="price1" value="${menuList[0].me_price}" />
+									            <input type="hidden" id="menuName1" value="${menuList[0].me_name}" />
+									            <button class="btn btn-outline-dark rounded-0" onclick="selectTime(this)" style="margin-left: 25px; margin-right: 25px;">${hour}:${minute}</button>
+									        </c:if>
+	    								</c:forEach>
+			                    	</div>
+								</div>
+							<div class="col">
+								<div id="dinnerArea">
+	                        		<div class="d-block p-2 mt-4 text-bg-light" id="dinnerButtons">
+										<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="var(--bs-dark)" class="bi bi-award-fill" viewBox="0 0 16 16">
+										  <path d="m8 0 1.669.864 1.858.282.842 1.68 1.337 1.32L13.4 6l.306 1.854-1.337 1.32-.842 1.68-1.858.282L8 12l-1.669-.864-1.858-.282-.842-1.68-1.337-1.32L2.6 6l-.306-1.854 1.337-1.32.842-1.68L6.331.864 8 0z"/>
+										  <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1 4 11.794z"/>
+										</svg>
+										<strong style="margin-right: 30px;">DINNER</strong>
+										<c:forEach items="${timeList}" var="time">
+								        <c:set var="hour" value="${fn:substring(time.t_time, 0, 2)}"/>
+								        <c:set var="minute" value="${fn:substring(time.t_time, 3, 5)}"/>
+									        <c:if test="${hour >= 17 && hour <= 23}">
+									            <input type="hidden" id="price2" value="${menuList[1].me_price}" />
+									            <input type="hidden" id="menuName2" value="${menuList[1].me_name}" />
+									            <button class="btn btn-outline-dark rounded-0" onclick="selectTime(this)" style="margin-left: 25px; margin-right: 25px;">${hour}:${minute}</button>
+									        </c:if>
+								   		</c:forEach>
+									</div>
+								</div>
+							</div>
 						</div>
-					</div>
-				</div>		
+					</div>		
+				</div>
+				</div>
 			</div>
+		</div>
 			<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 			<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
 			<script>
-			jQuery(document).ready(function($) {
+			$(document).ready(function() {
 				// 예약이 꽉 찬 날짜 데이터를 얻어온다고 가정하고, 아래 배열에 해당 날짜를 추가함
 			    var fullyBookedDates = ['2023-06-20', '2023-06-22', '2023-06-25'];
-
-			    function disableFullyBookedDates(date) {
-			      var dateString = $.datepicker.formatDate('yy-mm-dd', date);
-			      return [!fullyBookedDates.includes(dateString)];
-			    }
+			    
+				// 휴무일 숫자를 가져옴
+				var dayOff = ${restaurant.res_dayoff};
+				
+				function isDayOff(date) {
+					return date.getDay() === dayOff;
+				}
+				
+				function isFullyBooked(date) {
+					var dateString = $.datepicker.formatDate('yy-mm-dd', date);
+					return fullyBookedDates.includes(dateString);
+				}
+				
+				function disableDates(date) {
+					return [!(isDayOff(date) || isFullyBooked(date))];
+				}
 				$(".datepicker").datepicker({
 					dateFormat: 'yy-mm-dd'
 					,monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'] //달력의 월 부분 텍스트
 					,monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'] //달력의 월 부분 Tooltip
 					,dayNamesMin: ['일','월','화','수','목','금','토'] //달력의 요일 텍스트
 					,dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'] //달력의 요일 Tooltip
-					,minDate: "-2M" //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
+					,minDate: "0D" //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
 					,maxDate: "+6M" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후) 
-					,beforeShowDay: disableFullyBookedDates
+					,beforeShowDay: disableDates
 					,onSelect: function(date) {
 				        // 날짜 선택 시 실행되는 런치/디너 선택 함수 
-				        $(".time-buttons").show(); // 시간 선택 버튼들을 보이도록 설정
-				      }
+      					sendReservationData();
+				    }
 			    });
 			
-			    // 초기값을 오늘 날짜로 설정해줘야 합니다.
+			    // 초기값을 오늘 날짜로 설정
 			    $(".datepicker").datepicker("setDate", new Date());
 			});
-			</script>
 			<!-- datepicker 끝 -->
+			
+			<!-- 선택한 날짜&인원을 실시간으로 조회할 ajax -->
+			function sendReservationData() {
+			  var countResult = parseInt(document.getElementById('countResult').innerText);
+			  var r_date = $('.datepicker').val();
+			  var res_idx = getUrlParameter('res_idx');
+
+			  $.ajax({
+			    url: '<c:url value="/SelectedReservationInfo"/>',
+			    method: 'POST',
+			    data: {
+			      selectedCount: countResult,
+			      r_date: r_date,
+			      res_idx: res_idx
+			    },
+			    success: function(response) {
+					// 선택한 날짜를 예약일에 자동 작성
+					$('#r_date').val(r_date + " ");
+					
+					// 날짜를 선택하면 time-buttons를 표시
+					$('.time-buttons').css('display', 'flex');
+					
+					// ajax로 실시간 조회 후 버튼 표시 
+					console.log(response.showLunchTimeButtons);
+					console.log(response.showDinnerTimeButtons);
+
+					// 런치에 예약 가능할 때
+					if(response.showLunchTimeButtons) {
+					 $("#lunchArea").show();
+					} else {
+					  $("#lunchArea").hide();
+					}
+	
+				    // 디너에 예약 가능할 때
+					if(response.showDinnerTimeButtons) {
+					  $("#dinnerArea").show();
+					} else {
+					  $("#dinnerArea").hide();
+					}
+			    
+			    },
+			    error: function(error) {
+			      console.error(error);
+			    }
+			  });
+			}
+
+			// URL에서 파라미터 값을 가져오는 함수
+			function getUrlParameter(name) {
+			  name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+			  var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+			  var results = regex.exec(location.search);
+			  return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+			}
+			<!-- 선택한 날짜&인원을 실시간으로 조회할 ajax 끝 -->
+
+			<!-- 시간 선택 시 자동 입력 -->
+			function selectTime(button) {
+			    const selectedTime = button.innerText; // 시간
+			    const currentValue = $('#r_date').val(); // 기존에 적혀져 있는 날짜
+			    const date = currentValue.split(' ')[0]; // 날짜 부분만 가져옴
+			    const newDateAndTime = date + ' ' + selectedTime; // 병합된 날짜와 선택한 시간으로 새로운 문자열 생성
+
+			    // 예약 시간에 시간 자동 입력
+			    $('#r_date').val(newDateAndTime);
+
+			    // 가격 계산 및 출력
+			    const hour = parseInt(selectedTime.split(':')[0], 10);
+			    const numberOfPeople = parseInt(document.getElementById('countResult').innerText);
+			    const price = (hour >= 11 && hour <= 16) ? document.getElementById('price1').value
+			                                             : document.getElementById('price2').value;
+			    var menuName = (hour >= 11 && hour <= 16) ? document.getElementById('menuName1').value
+			    										: document.getElementById('menuName2').value;
+			    const totalPrice = price * numberOfPeople;
+			    document.getElementById("totalResult").innerText = totalPrice + '원';
+			    document.getElementById("menuResult").innerText = menuName + " x " + numberOfPeople + "명";
+			}
+			</script>
+			
 			
 			<!-- 예약자 정보 입력 -->
 			<div>
@@ -175,7 +302,7 @@
 					<div class="input-container">
 						<div class="col-md-6">
 							<label for="r_name" class="form-label fw-bold fs-4">이름</label>
-							<input type="text" class="form-control" id="r_name" maxlength="13" pattern="^[가-힣a-zA-Z]+$" required>
+							<input type="text" class="form-control" id="r_name" maxlength="13" pattern="^[가-힣a-zA-Z]+$" value="${memberInfo.m_name}" required>
 							<div class="invalid-feedback">
 								이름은 한글 또는 영문으로만 입력하세요. 
 							</div>
@@ -184,13 +311,13 @@
 					<div class="input-container">
 						<div class="col-md-6">
 							<label for="r_date" class="form-label fw-bold fs-4">예약일</label>
-							<input type="text" class="form-control" id="r_date" value="2023-07-05 12:00" readonly>
+							<input type="text" class="form-control" id="r_date" value="" readonly>
 						</div>
 					</div>
 					<div class="input-container">
 						<div class="col-md-6">
 							<label for="r_tel" class="form-label fw-bold fs-4">전화번호</label>
-							<input type="text" class="form-control" id="r_tel" placeholder="'-'빼고 숫자만 입력" maxlength="13" pattern="^[0-9]+$" required>
+							<input type="text" class="form-control" id="r_tel" placeholder="'-'빼고 숫자만 입력" maxlength="13" pattern="^[0-9]+$" value="${memberInfo.m_tel}" required>
 							<div class="invalid-feedback">
 								전화번호를 숫자만 입력해주세요.
 							</div>
@@ -199,7 +326,7 @@
 					<div class="input-container">
 						<div class="col-md-6">
 							<label for="r_email" class="form-label fw-bold fs-4">이메일</label>
-							<input type="text" class="form-control" id="r_email" placeholder="xxx@xxxx.xxx 형식으로 입력" pattern="^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$" required>
+							<input type="text" class="form-control" id="r_email" placeholder="xxx@xxxx.xxx 형식으로 입력" pattern="^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$" value="${memberInfo.m_email}" required>
 							<div class="invalid-feedback">
 								이메일을 입력해주세요.
 							</div>
@@ -227,7 +354,7 @@
 											<strong class="all_agree">전체 동의</strong>
 										</label>
 									</div>
-									<input type="hidden" name="hidden_check_all" value="0" id="hidden_check_all">
+									<input type="hidden" name="hidden_check_all" id="hidden_check_all">
 								</div>
 								</li>
 							</ul>
@@ -285,8 +412,8 @@
 					<div>
 						<span class="form-label fw-bold fs-4">총금액</span>
 						<div>
-							<p class="mt-2 mb-2">한우 오마카세 x 성인2 x 어린이2</p>
-					    	<strong class="fs-3 text-danger">500,000원</strong>
+							<p class="mt-2 mb-2" id="menuResult"></p>
+					    	<strong class="fs-3 text-danger" id="totalResult"></strong>
 					    </div>
 					</div>
 					<!-- 총금액 -->
@@ -334,7 +461,8 @@
 			<!-- 유효성 검사 스크립트 -->
 			
 			</div>
-			<!-- 예약하기 끝 -->
+		</div>
+		<!-- 예약하기 끝 -->
 	
 	<!-- footer -->
 	<footer class="footer">
@@ -346,5 +474,3 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 </body>
 </html> 
-</body>
-</html>

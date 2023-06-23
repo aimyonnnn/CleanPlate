@@ -1,7 +1,10 @@
 package com.itwillbs.test;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,12 +14,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.itwillbs.test.service.MemberService;
 import com.itwillbs.test.service.MenuService;
 import com.itwillbs.test.service.ReservationService;
 import com.itwillbs.test.service.RestaurantService;
+import com.itwillbs.test.service.TimesService;
+import com.itwillbs.test.vo.MemberVO;
 import com.itwillbs.test.vo.MenuVO;
 import com.itwillbs.test.vo.RestaurantVO;
 import com.itwillbs.test.vo.ReviewVO;
+import com.itwillbs.test.vo.TimesVO;
 
 
 @Controller
@@ -30,6 +37,10 @@ public class ReservationController {
 	private ReservationService reservationService;
 	@Autowired
 	private MenuService menuService;
+	@Autowired
+	private TimesService timesService;
+	@Autowired
+	private MemberService memberService;
 	
 	// 가게 메인 페이지 
 	@GetMapping("reservationMain")
@@ -68,10 +79,67 @@ public class ReservationController {
        return "reservation/reservation_store";
    }
 	
-	// 예약 페이지
+// 예약 페이지
 	@GetMapping("reservationReserve")
-	public String reservationReserve() {
-		return "reservation/reservation_reserve";
+	public String reservationReserve(@RequestParam int res_idx, Model model, HttpSession session) {
+		// 특정 가게의 예약을 받을 수 있는 영업 시간 목록을 조회 
+		List<TimesVO> timeList = timesService.getTimesInfo(res_idx);
+		model.addAttribute("timeList", timeList);
+		
+		// 특정 가게의 정보 조회
+		RestaurantVO restaurant = restaurantService.getRestaurantInfo(res_idx);
+		model.addAttribute("restaurant", restaurant);
+		
+		// 특정 가게의 메뉴 리스트 조회
+		List<MenuVO> menuList = menuService.getMenusList(res_idx);
+		model.addAttribute("menuList", menuList);
+		
+		// 예약하기로 가기 전 세션으로부터 회원 정보 받아오기
+		String sId = (String)session.getAttribute("sId");
+		if(sId == null) { // 로그인 안했을 경우 
+			model.addAttribute("msg", "먼저 로그인을 해주세요.");
+			return "fail_back";
+		} else {
+			// 로그인한 사용자인 경우
+	        MemberVO memberInfo = memberService.selectMember(sId);
+	        model.addAttribute("memberInfo", memberInfo);
+	        return "reservation/reservation_reserve";
+		}
+	}
+	
+	// 실시간 예약 조회 
+	@PostMapping("/SelectedReservationInfo")
+	@ResponseBody
+	public Map<String, Object> selectedReservationInfo(@RequestParam("selectedCount") int selectedCount,
+	                                                   @RequestParam("r_date") String r_date,
+	                                                   @RequestParam("res_idx") int res_idx) {
+	    // 레스토랑 정보에서 예약할 수 있는 총 테이블 수 조회
+	    RestaurantVO restaurant = restaurantService.getRestaurantInfo(res_idx);
+	    int res_total_table = restaurant.getRes_total_table();
+	    
+	    // 예약 정보에서 예약된 테이블 수 조회
+	    int lunch_tables = reservationService.getLunchReservationTables(res_idx, r_date);
+	    int dinner_tables = reservationService.getDinnerReservationTables(res_idx, r_date);
+
+	    int r_tables = 0; // 예약 인원수에 따른 예약할 테이블 갯수
+
+	    if (selectedCount % 4 == 0) { // 인원수를 4인용 테이블로 나눠서 예약할 테이블 수 지정
+	        r_tables = selectedCount / 4;
+	    } else {
+	        r_tables = selectedCount / 4 + 1;
+	    }
+	    
+	    lunch_tables += r_tables; // 런치에 예약된 테이블 수 + 예약할 테이블 수
+	    dinner_tables += r_tables; // 예약된 테이블 수 + 예약할 테이블 수
+	    
+	    boolean showLunchTimeButtons = (lunch_tables <= res_total_table); // 런치 가능
+	    boolean showDinnerTimeButtons = (dinner_tables <= res_total_table); // 디너 가능
+//	    boolean fullDate = (lunch_tables > res_total_table && dinner_tables > res_total_table); // 런치+디너 불가능
+
+	    Map<String, Object> response = new HashMap<>();
+	    response.put("showLunchTimeButtons", showLunchTimeButtons);
+	    response.put("showDinnerTimeButtons", showDinnerTimeButtons);
+	    return response;
 	}
 	
 	// 가게 상세페이지

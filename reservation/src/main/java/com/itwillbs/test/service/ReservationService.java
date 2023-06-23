@@ -96,5 +96,15 @@ public class ReservationService {
 	public void modifyStatusHome2() {
 		mapper.updateStatusHome2();
 	}
+
+	// 예약 정보에서 런치에 예약된 테이블 수 조회
+	public int getLunchReservationTables(int res_idx, String r_date) {
+		return mapper.selectedLunchTables(res_idx, r_date);
+	}
+	
+	// 예약 정보에서 디너에 예약된 테이블 수 조회
+	public int getDinnerReservationTables(int res_idx, String r_date) {
+		return mapper.selectedDinnerTables(res_idx, r_date);
+	}
 	
 }

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itwillbs.test.mapper.TimesMapper">
+
+	<!-- 특정 식당의 시간 조회 -->
+	<select id="selectTimesInfo" resultType="com.itwillbs.test.vo.TimesVO">
+		SELECT t.t_time
+    		FROM restaurant r
+    		JOIN menus m ON r.res_idx = m.res_idx
+    		JOIN times t ON m.me_idx = t.me_idx
+    		WHERE r.res_idx = #{res_idx}
+	</select>
+</mapper>

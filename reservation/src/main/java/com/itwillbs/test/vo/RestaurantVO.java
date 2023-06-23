@@ -46,7 +46,7 @@ public class RestaurantVO {
 	private String res_breakstart;
 	private String res_breakend;
 	
-	private String res_total_table;
+	private int res_total_table;
 	private String res_dayoff;
 	private String res_amenity;
 	private String res_amenity_info;

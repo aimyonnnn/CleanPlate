@@ -64,5 +64,12 @@ public interface ReservationMapper {
 
 	void updateStatusHome2();
 
+	// 런치에 예약된 테이블 수 조회 
+	int selectedLunchTables(@Param("res_idx") int res_idx,@Param("r_date") String r_date);
+
+	// 디너에 예약된 테이블 수 조회 
+	int selectedDinnerTables(@Param("res_idx") int res_idx,@Param("r_date") String r_date);
+
+
 	
 }

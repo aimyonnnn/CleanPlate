@@ -138,5 +138,31 @@
 		    ]]>
 	</update>
 	
+	<!-- 날짜 조회 -->
+	<select id="selectedReservation" resultType="String" parameterType="map">
+		SELECT r_date
+			FROM reservation
+			WHERE r_date LIKE '%${r_date}%' AND res_idx = #{res_idx}
+	</select>
+	
+	<!-- 런치에 예약된 테이블 수 조회 -->
+	<select id="selectedLunchTables" resultType="int" parameterType="map">
+	    SELECT
+	    	IFNULL(SUM(CASE WHEN TIME(r_date) 
+	    		BETWEEN '11:00' AND '16:59' 
+	    		THEN r_tables ELSE 0 END), 0)
+	    	FROM reservation
+	    	WHERE res_idx = #{res_idx} AND DATE(r_date) = #{r_date} AND r_status = 1
+	</select> 
+	
+	<!-- 디너에 예약된 테이블 수 조회 -->
+	<select id="selectedDinnerTables" resultType="int" parameterType="map">
+	    SELECT
+	    	IFNULL(SUM(CASE WHEN TIME(r_date) 
+	    		BETWEEN '17:00' AND '23:00' 
+	    		THEN r_tables ELSE 0 END), 0)
+	    	FROM reservation
+	    	WHERE res_idx = #{res_idx} AND DATE(r_date) = #{r_date} AND r_status = 1
+	</select>
 	
 </mapper>
