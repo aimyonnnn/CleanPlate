@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Param;
 import com.itwillbs.test.vo.MemberVO;
 import com.itwillbs.test.vo.ReservationVO;
 import com.itwillbs.test.vo.RestaurantVO;
+import com.itwillbs.test.vo.ReviewVO;
 
 @Mapper
 public interface MemberMapper {
@@ -49,6 +50,8 @@ public interface MemberMapper {
 	
 	//회원 탈퇴시 상태변경
 	int updateMemberStatus(int m_idx);
+	
+
 
 	// 관리자의 회원 정보 수정
 	int adminUpdateMember(MemberVO member);

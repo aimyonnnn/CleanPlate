@@ -112,13 +112,13 @@
 		<div id="carouselExampleControls" class="mt-4 carousel slide" data-bs-ride="carousel">
 			<div class="carousel-inner">
 				<div class="carousel-item active">
-					<img src="${pageContext.request.contextPath }/resources/storeimages/myung1.jpg" class="d-block w-100" alt="...">
+					<img src="${pageContext.request.contextPath }/resources/images/restaurant/kumuda1.jpg" class="d-block w-100" alt="...">
 				</div>
 				<div class="carousel-item">
-					<img src="${pageContext.request.contextPath }/resources/storeimages/myung2.jpg" class="d-block w-100" alt="...">
+					<img src="${pageContext.request.contextPath }/resources/images/restaurant/kumuda2.jpg" class="d-block w-100" alt="...">
 				</div>
 				<div class="carousel-item">
-					<img src="${pageContext.request.contextPath }/resources/storeimages/myung3.jpg" class="d-block w-100" alt="...">
+					<img src="${pageContext.request.contextPath }/resources/images/restaurant/kumuda3.jpg" class="d-block w-100" alt="...">
 				</div>
 			</div>
 			<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">

@@ -100,7 +100,9 @@
 				, res_address = #{res_address}
 				, res_detailAddress = #{res_detailAddress}
 				, res_openinghours = CONCAT(#{res_open}, '-' , #{res_close}) -- res_openinghours 문자열 결합 
-				, res_breaktime = CONCAT(#{res_breakstart}, '-' , #{res_breakend}) -- res_breaktime 문자열 결합 
+				<if test="not empty res_breaktime">
+					, res_breaktime = CONCAT(#{res_breakstart}, '-' , #{res_breakend}) -- res_breaktime 문자열 결합 
+				</if>
 				, res_total_table = #{res_total_table}
 				, res_dayoff = #{res_dayoff}
 				, res_amenity = #{res_amenity}

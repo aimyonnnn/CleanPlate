@@ -298,7 +298,8 @@
 			<div>
 				<h2 class="fw-bold mt-5 mb-2">예약자 정보 입력</h2>
 				<hr>
-				<form class="row g-3 needs-validation" novalidate>
+				<form class="row g-3 needs-validation" action="reservationPayment" method="post" novalidate>
+					<input type="text" value="" name="">
 					<div class="input-container">
 						<div class="col-md-6">
 							<label for="r_name" class="form-label fw-bold fs-4">이름</label>

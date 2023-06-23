@@ -81,7 +81,7 @@
 	</select>
 	
 	<select id="selectMemberReservation" resultType="com.itwillbs.test.vo.ReservationVO">
-	SELECT r.r_idx, me.me_name, r.r_amount, r.r_tables, r.r_personnel, m.m_name, r.r_status, r.r_date, r.r_request, res.res_name, res.res_idx
+	SELECT r.r_idx, me.me_name, r.r_amount, r.r_tables, r.r_personnel, m.m_name, r.r_status, r.r_date, r.r_request, res.res_name, res.res_idx, r.rv_status
 	FROM reservation r JOIN restaurant res
 	ON r.res_idx = res.res_idx
 	JOIN members m
@@ -92,7 +92,7 @@
 						FROM members 
 						WHERE m_id = #{sId}
 						)
-	ORDER BY r.r_idx
+	ORDER BY r.r_idx ASC
 	</select>
 	
 	<select id="selectMemberRestaurant">

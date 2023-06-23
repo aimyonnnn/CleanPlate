@@ -10,6 +10,7 @@ import com.itwillbs.test.mapper.MemberMapper;
 import com.itwillbs.test.vo.MemberVO;
 import com.itwillbs.test.vo.ReservationVO;
 import com.itwillbs.test.vo.RestaurantVO;
+import com.itwillbs.test.vo.ReviewVO;
 
 @Service
 public class MemberService {
@@ -82,8 +83,12 @@ public class MemberService {
 		return mapper.updateMemberStatus(m_idx);
 	}
 
+<<<<<<< HEAD
 	// 관리자의 멤버 정보 수정
 	public int adminUpdateMember(MemberVO member) {
 		return mapper.adminUpdateMember(member);
 	}
+=======
+
+>>>>>>> branch 'master' of https://github.com/aimyonnnn/King.git
 }

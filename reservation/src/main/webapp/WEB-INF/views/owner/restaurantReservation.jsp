@@ -136,7 +136,6 @@
         </div>
     </div>
 
-<c:set var="twentyFourHours" value="86400000" />
 
  	<!-- 예약관리 첫번째 모달창 (방문예정 상태) -->
  	<c:forEach var="resList" items="${resList }">
@@ -220,12 +219,9 @@
 		            			<!-- 예약관리 테이블 끝 -->
 		        			</div>
 						    <div class="d-flex justify-content-center">
-						    	<c:if test="${resList.r_status eq 1 && currentDateTime.time - resList.r_date.time <= twentyFourHours }">
+						    	<c:if test="${resList.r_status eq 1">
 				        			<button type="button" class="btn btn-outline-warning" onclick="cancel(${resList.r_idx })" id="cancelButton" style="margin-left: 10px;"> 예약 취소</button>
 				        		</c:if>
-<%-- 						    <c:if test="${resList.r_status eq 2  }">
-				        			<button type="button" class="btn btn-outline-warning" onclick="noShow(${resList.r_idx })" id="cancelButton" style="margin-left: 10px;"> 노쇼</button>
-				        		</c:if> --%>
 				        		<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="margin-left: 10px;">닫기</button>
 						    </div>
 					</div>
