@@ -51,7 +51,6 @@ public interface MemberMapper {
 	//회원 탈퇴시 상태변경
 	int updateMemberStatus(int m_idx);
 	
-	// 회원 리뷰 목록
-	List<ReviewVO> selectMemberReview(String sId);
+
 
 }

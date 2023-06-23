@@ -83,7 +83,5 @@ public class MemberService {
 		return mapper.updateMemberStatus(m_idx);
 	}
 
-	public List<ReviewVO> getMemberReview(String sId) {
-		return mapper.selectMemberReview(sId);
-	}
+
 }

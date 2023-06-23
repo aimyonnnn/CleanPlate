@@ -24,6 +24,7 @@ import com.itwillbs.test.vo.AssignmentVO;
 import com.itwillbs.test.vo.MemberVO;
 import com.itwillbs.test.vo.ReservationVO;
 import com.itwillbs.test.vo.RestaurantVO;
+import com.itwillbs.test.vo.ReviewVO;
 
 @Controller
 public class MemberController {
