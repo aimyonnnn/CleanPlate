@@ -63,24 +63,36 @@
                 <div class="input-group mb-5 d-flex shadow-lg d-flex justify-content-center pe-3" style="border-radius: 10px;">
                     <img src="../images/profile.png" alt="" style="width: 100px; height: 100px;" class="justify-content-center">
                     <p class="d-flex align-items-center"><span>님 환영합니다</span></p>
-                    
                 </div>
             </div>
             <div class="col-10">
 		    <h2 style="margin-left: 40px; margin-top: 30px;">예약내역</h2>
 		        <!-- 드롭다운 시작 -->
-		        <div class="dropdown" style="margin-left: 40px;">
-						<select class="form-select form-select mb-3" id="status" aria-label=".form-select example" style="width: 180px;">
-							<option selected value="">전체상태</option>
-							<option value="방문예정">방문예정</option>
-							<option value="방문완료">방문완료</option>
-							<option value="취소">취소</option>
-							<option value="양도완료">양도완료</option>
-							<option value="판매중">판매중</option>
-							<option value="판매실패">판매실패</option>
-						</select>
+		        <div class="row">
+		        	<div class="col-2">
+				        <div class="dropdown" style="margin-left: 40px;">
+							<select class="form-select form-select mb-3" id="status" aria-label=".form-select example" style="width: 180px;">
+								<option selected value="">전체상태</option>
+								<option value="방문예정">방문예정</option>
+								<option value="방문완료">방문완료</option>
+								<option value="취소">취소</option>
+								<option value="양도완료">양도완료</option>
+								<option value="판매중">판매중</option>
+								<option value="판매실패">판매실패</option>
+							</select>
+						</div>
+					</div>
+					<div class="col">
+						<div class="dropdown" style="margin-left: 40px;">
+							<select class="form-select form-select mb-3" aria-label=".form-select example" style="width: 180px;" id="dateFilter">
+							  <option value="">전체날짜</option>
+							  <c:forEach items="${uniqueDates}" var="date">
+							    <option>${date }</option>
+							  </c:forEach>
+							</select>
+						</div>
+					</div>
 				</div>
-				<!-- 드롭다운 끝 -->
 			</div>
         </div>
         <div class="row">
@@ -150,8 +162,10 @@
             </div>
         </div>
     </div>
-    
-    <!-- 24시간을 밀리초로 나타낸 값 -->
+
+
+
+	<!-- 24시간을 밀리초로 나타낸 값 -->
     <c:set var="twentyFourHours" value="86400000" />
  
  	<!-- 예약내역 출력 첫번째 모달창 -->
@@ -388,14 +402,14 @@
               <h1 class="modal-title fs-5">리뷰 작성</h1>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+            <form action="ReviewPro" method="post" enctype="multipart/form-data">
             <div class="modal-body">
-                <form action="ReviewPro" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="r_idx" value="${resList.r_idx }">
 				<input type="hidden" name="rv_status" value="1">
                     <table>
                         <tr>
                             <th>리뷰사진</th>
-                            <td><input type="file" name="file" accept="image/*" onchange="checkFileExtension(event)"></td>
+                            <td><input type="file" name="img" accept="image/*" onchange="checkFileExtension(event)"></td>
                         </tr>
                         <tr>
                             <th>별점</th>
@@ -433,22 +447,42 @@
                         </tr>
                         <tr>
                             <th>내용</th>
-                            <td><textarea cols="50" rows="5" name="rv_comment"></textarea></td>
+                            <td>
+                            	<textarea cols="50" rows="5" name="rv_comment" oninput="countTextareaCharacters()" id="rv_comment"></textarea>
+                            	<p id="characterCount">0/100</p>
+                            </td>
                         </tr>
                     </table>
-                </form>
             </div>
             <div class="modal-footer">
               <button type="submit" class="btn btn-warning" style="color: white;">등록</button>
               <button type="button" class="btn btn-warning" style="color: white;"data-bs-dismiss="modal">취소</button>
             </div>
+            </form>
           </div>
         </div>
     </div>
     </c:if>
 </c:forEach>
 <!-- 세번째 리뷰 관련 모달창 끝 -->
+	<!-- 리뷰 글자 갯수 제한 -->
+	<script>
+	function countTextareaCharacters() {
+        var textarea = document.getElementById('rv_comment');
+        var countElement = document.getElementById('characterCount');
+        var maxLength = 100; // 최대 글자 수
 
+        var currentLength = textarea.value.length;
+        if (currentLength > maxLength) {
+            textarea.value = textarea.value.slice(0, maxLength); // 최대 글자 수까지만 남기고 잘라냄
+            currentLength = maxLength; // 현재 글자 수를 최대 글자 수로 설정
+            alert("최대 글자 수입니다.");
+        }
+        countElement.textContent = currentLength + "/" + maxLength;
+	}
+
+	</script>
+	
 	<!-- 업로드파일의 확장자가 img가 아니면 등록이 불가능하다는 문구를 띄우는 스크립트 -->
 	 <script>
 	    function checkFileExtension(event) {
@@ -563,40 +597,44 @@
 	 		window.location.href = "memberRSList";
 	 	});
  	</script>
- 	
- 	<script type="text/javascript">
-	$(document).ready(function() {
-		  $("#status").on("change", function() {
-		    var selectedStatus = $("#status").val();
+	<script>
+	  $(document).ready(function() {
+	    $('#dateFilter, #status').change(function() {
+	      var selectedDate = $('#dateFilter').val();
+	      var selectedStatus = $('#status').val();
 	
-		    $("table tbody .res").each(function() {
-		      var statusCell = $(this).find("td:nth-child(5)");
-		      var status = statusCell.text().trim();
+	      $('.res').hide(); // 모든 데이터 숨기기
 	
-		      var showRow = (selectedStatus === "" || status === selectedStatus);
+	      $('.res').each(function() {
+	        var dateCell = $(this).find("td:nth-child(3)");
+	        var statusCell = $(this).find("td:nth-child(5)");
+	        var date = dateCell.text().trim();
+	        var status = statusCell.text().trim();
 	
-		      $(this).toggle(showRow);
-		    });
-		  });
-		});
+	        var showRow = (selectedDate === '' || date === selectedDate) && (selectedStatus === '' || status === selectedStatus);
+	
+	        $(this).toggle(showRow);
+	      });
+	    });
+	  });
 	</script>
 	
-<script type="text/javascript">
-	function noShow(r_idx) {
-		let result = confirm("노쇼가 확실합니까?");
-		if(result){
-			location.href='resCancel?r_idx=' + r_idx + '&r_status=4';
+	<script type="text/javascript">
+		function noShow(r_idx) {
+			let result = confirm("노쇼가 확실합니까?");
+			if(result){
+				location.href='resCancel?r_idx=' + r_idx + '&r_status=4';
+			}
 		}
-	}
-	
-	function cancel(r_idx) {
-		let result = confirm("취소가 확실합니까? \n (취소할 경우 예약을 되돌릴 수 없으며 다시 예약해야합니다.)");
-		if(result){
-			alert("취소가 완료되었습니다.");
-			location.href='resCancel?r_idx=' + r_idx + '&r_status=3';
+		
+		function cancel(r_idx) {
+			let result = confirm("취소가 확실합니까? \n (취소할 경우 예약을 되돌릴 수 없으며 다시 예약해야합니다.)");
+			if(result){
+				alert("취소가 완료되었습니다.");
+				location.href='resCancel?r_idx=' + r_idx + '&r_status=3';
+			}
 		}
-	}
-</script>
+	</script>
  
     <!-- 하단 부분 include 처리영역 -->
     <hr class="mt-5">

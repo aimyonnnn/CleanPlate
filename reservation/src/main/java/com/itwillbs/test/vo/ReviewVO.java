@@ -25,5 +25,6 @@ public class ReviewVO {
 	private String rv_img; // 리뷰 이미지
 	private String m_nick; // 닉네임
 	private int r_idx; // 예약번호
-	private MultipartFile img;
+	private MultipartFile img; // 진짜 이미지
+	private String res_name; //레스토랑 이름
 }

@@ -10,7 +10,9 @@ import java.nio.file.Paths;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -121,6 +123,16 @@ public class MemberController {
 		
 		Timestamp currentDateTime = new Timestamp(System.currentTimeMillis());
 		
+		Set<String> uniqueDates = new HashSet<>();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yy-MM-dd");
+
+		for (ReservationVO reservation : resList) {
+		    Timestamp rDate = reservation.getR_date();
+		    String dateString = dateFormat.format(rDate);
+		    uniqueDates.add(dateString);
+		}
+		
+	    model.addAttribute("uniqueDates", uniqueDates);
 		model.addAttribute("currentDateTime", currentDateTime);
 		model.addAttribute("resList", resList);
 		model.addAttribute("rsList", rsList);
@@ -194,7 +206,7 @@ public class MemberController {
 
 		System.out.println(review);
 		
-		if(review.getImg().getOriginalFilename()=="") {
+		if(review.getImg().getOriginalFilename().equals("")) {
 			model.addAttribute("msg","이미지는 필수입니다.");
 			return "fail_back";
 		}

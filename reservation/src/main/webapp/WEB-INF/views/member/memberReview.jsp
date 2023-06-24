@@ -84,9 +84,9 @@
                 <div class="row align-items-center" style="margin-left: 50px;">
 	                <c:forEach items="${rvList }" var="rvList">
 	                    <div class="card ms-3 me-5 mt-5 align-items-center" style="width: 20rem;">
-	                        <img src="..." width="150" height="150" class="card-img-top" alt="리뷰사진">
+	                        <img src="${pageContext.request.contextPath }/resources/upload/${rvList.rv_img }" width="100" height="100">
 	                        <div class="card-body">
-	                          <h5 class="card-title">오마카세</h5>
+	                          <h5 class="card-title">${rvList.res_name }</h5>
 	                          <p class="card-text">${rvList.rv_comment }</p>
 	                          <a href="#" class="btn btn-warning" style="color: white;" data-bs-toggle="modal" data-bs-target="#reviewmodify">수정</a>
 	                          <a href="#" class="btn btn-warning" style="color: white;" data-bs-toggle="modal" data-bs-target="#reviewdelete">삭제</a>

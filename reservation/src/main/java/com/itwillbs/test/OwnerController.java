@@ -48,9 +48,16 @@ public class OwnerController {
 		List<ReservationVO> resList = service.getReservationList((String)session.getAttribute("cId"));
 		List<RestaurantVO> restaurantList = resService.getOwnerRestaurantList((String)session.getAttribute("cId"));
 		
-		System.out.println(resList);
+		Set<String> uniqueDates = new HashSet<>();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yy-MM-dd");
+
+		for (ReservationVO reservation : resList) {
+		    Timestamp rDate = reservation.getR_date();
+		    String dateString = dateFormat.format(rDate);
+		    uniqueDates.add(dateString);
+		}
 		
-        		
+	    model.addAttribute("uniqueDates", uniqueDates);		
 		model.addAttribute("restaurantList", restaurantList);
 		model.addAttribute("resList",resList);
 		
