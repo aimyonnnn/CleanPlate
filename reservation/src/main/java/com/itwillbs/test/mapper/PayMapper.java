@@ -25,4 +25,11 @@ public interface PayMapper {
 	
 	// 결제내역 조회
 	PayVO selectPayInfoByRidx(int r_idx);
+	
+	// 결제정보 저장
+	int insertReservationPayInfo(
+			@Param("p_orderNum") String p_orderNum, 
+			@Param("payment_num") String payment_num,  
+			@Param("payment_total_price") int payment_total_price, 
+			@Param("sId") String sId);
 }

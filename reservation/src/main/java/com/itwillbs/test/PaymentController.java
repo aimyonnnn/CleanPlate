@@ -93,7 +93,7 @@ public class PaymentController {
 		if (!"".equals(pay.getPayment_num())) {
 	        String token = payService.getToken();
 	        int amount = Integer.parseInt(payService.paymentInfo(pay.getPayment_num(), token));
-	        int refundAmount = (int) (amount * 0.0005); // 결제 금액의 0.05%로 환불할 금액 계산
+	        int refundAmount = (int) Math.round(amount * 0.0005); // 결제 금액의 0.05%로 환불할 금액 계산
 	        payService.payMentCancle(token, pay.getPayment_num(), refundAmount, pay.getReason());
 	    }
 		

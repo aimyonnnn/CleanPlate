@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.itwillbs.test.service.MemberService;
 import com.itwillbs.test.service.MenuService;
+import com.itwillbs.test.service.PayService;
 import com.itwillbs.test.service.ReservationService;
 import com.itwillbs.test.service.RestaurantService;
 import com.itwillbs.test.service.TimesService;
@@ -44,6 +45,8 @@ public class ReservationController {
 	private TimesService timesService;
 	@Autowired
 	private MemberService memberService;
+	@Autowired
+	private PayService payService;
 	
 	// 가게 메인 페이지 
 	@GetMapping("reservationMain")
@@ -157,6 +160,7 @@ public class ReservationController {
 	public String reservationUpdate(
 			 // vo객체로 받으니깐 시간쪽에서 변환하다가 에러나서 따로 분리함
 			 // DB순서대로 적음
+			 HttpSession session,
 			 @RequestParam("r_personnel") int r_personnel,
 			 @RequestParam("r_date") String r_date,
 			 @RequestParam("r_request") String r_request,
@@ -165,15 +169,29 @@ public class ReservationController {
 			 @RequestParam("m_idx") int m_idx,
 			 @RequestParam("res_idx") int res_idx,
 		     @RequestParam("r_tables") int r_tables,
-		     @RequestParam("me_idx") int me_idx) {
+		     @RequestParam("me_idx") int me_idx,
+		     @RequestParam("p_orderNum") String p_orderNum, // 주문번호-자동생성한것
+	         @RequestParam("payment_num") String payment_num, // 아임포트 주문번호
+	         @RequestParam("payment_total_price") int payment_total_price // 결제가격
+	         ) {
 		
 		System.out.println("reservationUpdate");
+		String sId = (String) session.getAttribute("sId");
 		
 		int insertCount = reservationService.registReservation(
 				r_personnel, r_date, r_request, r_amount, 
 				r_status, m_idx, res_idx, r_tables, me_idx);
 		
-		if(insertCount != 0) { return "1"; }
+		if(insertCount != 0) { 
+			
+			// ======================= 결제정보 payment 테이블에 저장  =======================
+			int ReservationPayInfoCount = payService.registReservationPayInfo(p_orderNum, payment_num, payment_total_price, sId);
+			
+			System.out.println(ReservationPayInfoCount);
+			
+			return "1"; 
+			
+		}
 		
 		return "0"; // 실패시
 	}

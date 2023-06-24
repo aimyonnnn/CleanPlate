@@ -177,6 +177,11 @@ public class PayService {
 	public PayVO getPayInfoByRidx(int r_idx) {
 		return mapper.selectPayInfoByRidx(r_idx);
 	}
+	
+	// 결제정보 저장
+	public int registReservationPayInfo(String p_orderNum, String payment_num, int payment_total_price, String sId) {
+		return mapper.insertReservationPayInfo(p_orderNum, payment_num, payment_total_price, sId);
+	}
 
 	
 }

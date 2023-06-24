@@ -41,5 +41,22 @@
 				where r_idx = #{r_idx}
 	</select>
 	
+	<!-- 예약정보 저장 -->
+	<insert id="insertReservationPayInfo" parameterType="java.util.Map">
+	<selectKey resultType="int" keyProperty="r_idx" order="AFTER">
+        SELECT LAST_INSERT_ID() AS r_idx
+    </selectKey>
+		 INSERT INTO
+			  	payment VALUES (
+			  		null
+				    ,#{p_orderNum}
+				    ,#{payment_num}
+				    ,now()
+				    ,#{payment_total_price}
+				    ,1
+				    ,(SELECT m_idx FROM members WHERE m_id = #{sId}) -- m_idx
+				    ,1 -- 임시값
+			  	)
+	</insert>
  
 </mapper>

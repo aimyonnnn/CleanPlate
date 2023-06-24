@@ -456,7 +456,6 @@
 		    	      var res_idx = ${param.res_idx};
 		    	      var m_idx = ${memberInfo.m_idx};
 		    	      var me_idx = $('#menuIdx').val();
-// 		    	      var rv_status 
 		    	      
 		    	      // 카카오 페이 결제 시작!
 		    	      // 나중에 이니시스로 바꾸면 되는 부분!
@@ -466,7 +465,7 @@
 		                merchant_uid: createOrderNum(), // 주문번호 자동생성
 		                name: "CleanPlate",
 		                amount: r_amount, // 총 금액 입력
-		                buyer_email: "$memberInfo.m_email}",
+		                buyer_email: "${memberInfo.m_email}",
 		                buyer_name: "${memberInfo.m_name}",
 		                buyer_tel: "${memberInfo.m_tel}"
 			          }, 
@@ -482,18 +481,25 @@
 			              console.log('결제가 완료되었습니다.');
 					   // ================= DB 업데이트 처리 시작 =================
 						   
+						    var payment_num = rsp.imp_uid; // 아임포트 주문번호
+				  		 	var p_orderNum = rsp.merchant_uid; // 주문번호-자동생성한것
+	  		 	 			var payment_total_price = rsp.paid_amount; // 결제가격
+						   
 							// 아까 위에서 변수에 저장한 값들을 data 오브젝트에 저장함
 							var data = {
-							  r_personnel: r_personnel,
-							  r_tables: r_tables,
-							  r_date: r_date,
-							  r_request: r_request,
-							  r_amount: r_amount,
-							  r_status: r_status,
-							  res_idx: res_idx,
-							  m_idx: m_idx,
-							  me_idx: me_idx
-							};
+										  r_personnel: r_personnel,
+										  r_tables: r_tables,
+										  r_date: r_date,
+										  r_request: r_request,
+										  r_amount: r_amount,
+										  r_status: r_status,
+										  res_idx: res_idx,
+										  m_idx: m_idx,
+										  me_idx: me_idx,
+										  payment_num: payment_num,
+										  p_orderNum: p_orderNum,
+										  payment_total_price: payment_total_price
+									  };
 						    
 						 	console.log("ajax2");
 							
