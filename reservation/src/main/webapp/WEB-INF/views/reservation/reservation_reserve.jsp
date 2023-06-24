@@ -423,6 +423,7 @@
 						<span class="form-label fw-bold fs-4">총금액</span>
 						<div>
 							<p class="mt-2 mb-2" id="menuResult"></p>
+							<input type="hidden" id="menuIdx">
 					    	<strong class="fs-3 text-danger" id="totalResult"></strong>
 					    </div>
 					</div>
