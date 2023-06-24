@@ -8,5 +8,24 @@
 			FROM help
 				WHERE h_index = #{h_index}
 	</select>
-
+	
+	<insert id="insertQNA">
+		INSERT INTO QNA VALUES(
+			NULL
+			, #{q_subject}
+			, #{q_context}
+			, null
+			, #{q_division}
+			, #{q_category}
+			<choose>
+				<when test="q_file != ''">
+				, #{q_file}
+				</when>
+				<otherwise>
+				, null
+				</otherwise>
+			</choose>
+			, #{m_idx}
+		)
+	</insert>
 </mapper>

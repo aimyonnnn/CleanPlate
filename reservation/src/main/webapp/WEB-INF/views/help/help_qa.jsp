@@ -31,13 +31,13 @@
 	          공지사항
 	        </a>
 	        <a href="../help/help_fq.jsp" class="list-group-item list-group-item-action">FAQ</a>
-	        <a href="../help/help_qa.jsp" class="list-group-item list-group-item-action active">Q&A</a>
+	        <a href="QNA" class="list-group-item list-group-item-action active">Q&A</a>
 	      </div>
         </div>
         <div class="col-6">
             <div class="list-group list-group-horizontal">
-                <a href="../help/help_qa_2.jsp" class="list-group-item list-group-item-action">문의하기</a>
-                <a href="../help/help_qa.jsp" class="list-group-item list-group-item-action active" aria-current="true">문의내역</a>
+                <a href="QNABoard" class="list-group-item list-group-item-action">문의하기</a>
+                <a href="QNA" class="list-group-item list-group-item-action active" aria-current="true">문의내역</a>
             </div>
         </div>
     </div>

@@ -43,8 +43,8 @@
         </div>
         <div class="col-6">
             <div class="list-group list-group-horizontal">
-                <a href="../help/help_qa_2.jsp" class="list-group-item list-group-item-action active" aria-current="true">문의하기</a>
-                <a href="../help/help_qa.jsp" class="list-group-item list-group-item-action">문의내역</a>
+                <a href="QNABoard" class="list-group-item list-group-item-action active" aria-current="true">문의하기</a>
+                <a href="QNA" class="list-group-item list-group-item-action">문의내역</a>
             </div>
         </div>
     </div>
@@ -56,7 +56,7 @@
         </div>
     </div>
     <hr>
-    <form action="">
+    <form action="QNABoardPro" method="post" enctype= multipart/form-data >
     <div class="row">
         <div class="col">
                 <div class="form-group">
@@ -101,7 +101,7 @@ PalaTable는 식당 예약 서비스 제공을 위한 정보 외에 추가 정�
 
 귀하는 개인정보 수집에 동의하지 않을 수 있으며, 귀하가 동의하지 않을 경우 PalaTable Q&A 접수가 제한될 수 있습니다.
                 </textarea>
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">  [필수] 개인정보 수집 동의합니다
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" required="required">  [필수] 개인정보 수집 동의합니다
             </div>
         </div>
     </div>
@@ -114,33 +114,34 @@ PalaTable는 식당 예약 서비스 제공을 위한 정보 외에 추가 정�
             <table class="table my-2">
                 <tr>
                     <th class="col-1">구분<b>*</b></th>
-                    <td class="col"><input type="radio" name="flexRadioDefault" checked>일반 문의 <input type="radio" name="flexRadioDefault">점주 문의</td>
+                    <td class="col"><input type="radio" name="q_division" value="1" checked>일반 문의 <input type="radio" value="2" name="flexRadioDefault">점주 문의</td>
                 </tr>
                 <tr>
                     <th class="col-1">유형<b>*</b></th>
                     <td class="col">
-                        <select class="form-select" aria-label="Default select example">
-                            <option selected>유형을 선택하세요</option>
+                        <select class="form-select" name="q_category" aria-label="Default select example" required="required">
+                            <option value="" selected>유형을 선택하세요</option>
                             <option value="1">결제 문의</option>
                             <option value="2">오류 문의</option>
                             <option value="3">사용 문의</option>
+                            <option value="4">기타 문의</option>
                         </select>
                     </td>
                 </tr>
                 <tr>
                     <th class="col-1">제목<b>*</b></th>
-                    <td><input type="text" class="form-control"></td>
+                    <td><input type="text" class="form-control" name="q_subject" required="required"></td>
                 </tr>
                 <tr>
                     <th class="col-1">내용<b>*</b></th>
                     <td class="col">
-                        <textarea class="form-control" id="exampleFormControlTextarea2" rows="8"></textarea>
+                        <textarea class="form-control" name="q_context" id="exampleFormControlTextarea2" rows="8" required="required"></textarea>
                     </td>
                 </tr>
                 <tr>
                     <th class="col-1">파일첨부</th>
                     <td class="col">
-                        <input type="file" class="form-control" id="inputGroupFile02" style="width:300px;">
+                        <input type="file" class="form-control" name="file" id="inputGroupFile02" style="width:300px;">
                     <b>* 용량제한:5MB이하</b></td>
                 </tr>
             </table>

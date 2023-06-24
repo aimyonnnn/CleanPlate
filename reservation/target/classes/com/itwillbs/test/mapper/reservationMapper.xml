@@ -175,8 +175,8 @@
 				    , #{r_status}
 				    , #{m_idx}
 				    , #{res_idx}
-				    , #{me_idx}
 				    , #{r_tables}
+				    , #{me_idx}
 				    , 1
 				  )
 	</insert>

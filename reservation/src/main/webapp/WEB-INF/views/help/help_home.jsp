@@ -28,7 +28,7 @@
           공지사항
         </a>
         <a href="../help/help_fq.jsp" class="list-group-item list-group-item-action">FAQ</a>
-        <a href="../help/help_qa.jsp" class="list-group-item list-group-item-action">Q&A</a>
+        <a href="QNA" class="list-group-item list-group-item-action">Q&A</a>
       </div>
     </div>
     <!-- 게시판 -->
