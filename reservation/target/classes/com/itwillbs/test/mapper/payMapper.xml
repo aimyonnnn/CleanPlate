@@ -4,17 +4,17 @@
 <mapper namespace="com.itwillbs.test.mapper.PayMapper">
  	
  	<insert id="insertPayInfo" parameterType="java.util.Map">
-	  INSERT INTO
-		  	payment VALUES (
-		  		null
-			    ,#{p_orderNum}
-			    ,#{payment_num}
-			    ,now()
-			    ,#{payment_total_price}
-			    ,1
-			    ,#{sId}
-			    ,#{r_idx}
-		  	)
+		  INSERT INTO
+			  	payment VALUES (
+			  		null
+				    ,#{p_orderNum}
+				    ,#{payment_num}
+				    ,now()
+				    ,#{payment_total_price}
+				    ,1
+				    ,(SELECT m_idx FROM members WHERE m_id = #{sId}) -- m_idx
+				    ,#{r_idx}
+			  	)
 	</insert>
  
  
