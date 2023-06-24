@@ -8,9 +8,9 @@
 		  	payment VALUES (
 		  		null
 			    ,#{p_orderNum}
-			    ,#{p_imp_uid}
+			    ,#{payment_num}
 			    ,now()
-			    ,#{p_price}
+			    ,#{payment_total_price}
 			    ,1
 			    ,#{sId}
 			    ,#{r_idx}

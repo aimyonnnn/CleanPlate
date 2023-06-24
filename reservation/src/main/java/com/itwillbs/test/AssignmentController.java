@@ -23,6 +23,7 @@ import com.itwillbs.test.service.PayService;
 import com.itwillbs.test.service.ReservationService;
 import com.itwillbs.test.vo.AssignmentVO;
 import com.itwillbs.test.vo.MemberVO;
+import com.itwillbs.test.vo.PayVO;
 import com.itwillbs.test.vo.ReservationVO;
 
 @Controller
@@ -39,14 +40,18 @@ public class AssignmentController {
    
    private static final Logger logger = LoggerFactory.getLogger(AssignmentController.class);
    
+   @GetMapping("assignmentPaymentCancel")
+   public String assignmentPaymentCancel(PayVO pay) {
+	   
+	   return "assignment/assignmentPaymentCancel";
+   }
+   
    @GetMapping("/assignment")
    public String getAssignment(Model model) {
-	   
 	   // 양도 게시판 출력 리스트
        List<AssignmentVO> assignmentList = assignmentService.getAssignmentList();
        model.addAttribute("assignmentList", assignmentList);
        return "assignment/assignment";
-       
    }
    
    // WebSocket - 동의
@@ -105,10 +110,10 @@ public class AssignmentController {
    @ResponseBody
    public Map<String, Integer> assignUpdate(
            HttpSession session,
-           @RequestParam("p_orderNum") String p_orderNum,
-           @RequestParam("p_imp_uid") String p_imp_uid,
-           @RequestParam("p_price") int p_price,
-           @RequestParam("a_sellerId") String a_sellerId,
+           @RequestParam("p_orderNum") String p_orderNum, // 주문번호-자동생성한것
+           @RequestParam("payment_num") String payment_num, // 아임포트 주문번호
+           @RequestParam("payment_total_price") int payment_total_price, // 결제가격
+           @RequestParam("a_sellerId") String a_sellerId, 
            @RequestParam("r_idx") int r_idx
 		   ) {
 	   
@@ -118,12 +123,12 @@ public class AssignmentController {
       
        System.out.println("r_idx :" + r_idx);
        System.out.println("a_sellerId :" + a_sellerId);
-       System.out.println("p_imp_uid : " + p_imp_uid);
+       System.out.println("p_imp_uid : " + payment_num);
        System.out.println("p_orderNum :" + p_orderNum);
-       System.out.println("p_price : " + p_price);
+       System.out.println("p_price : " + payment_total_price);
        
        // ======================= 결제정보 payment 테이블에 저장  =======================
-       int insertCount = payService.registPayInfo(p_orderNum, p_imp_uid, p_price, sId, r_idx);
+       int insertCount = payService.registPayInfo(p_orderNum, payment_num, payment_total_price, sId, r_idx);
        
        System.out.println(insertCount);
        

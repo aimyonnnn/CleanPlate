@@ -187,9 +187,9 @@
 			 
 	  		 	 var a_sellerId = '${a_sellerId}';
 	  		 	 var r_idx = '${r_idx}';
-	  		 	 var p_imp_uid = rsp.imp_uid;
-	  		 	 var p_orderNum = rsp.merchant_uid;
-	  		 	 var p_price = rsp.paid_amount;
+	  		 	 var payment_num = rsp.imp_uid; // 아임포트 주문번호
+	  		 	 var p_orderNum = rsp.merchant_uid; // 주문번호-자동생성한것
+	  		 	 var payment_total_price = rsp.paid_amount; // 결제가격
 	  		 	 
 				 $.ajax({
 				    url: '<c:url value="assignUpdate"/>',
@@ -197,9 +197,9 @@
 				    data: {
 				        a_sellerId: a_sellerId,
 				        r_idx: r_idx,
-				        p_imp_uid: p_imp_uid,
+				        payment_num: payment_num,
 		  		 	    p_orderNum: p_orderNum,
- 		  		 	  	p_price: p_price
+		  		 		payment_total_price: payment_total_price
 				    },
 				    dataType: 'json',
 				    success: function(response) {
