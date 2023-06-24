@@ -3,6 +3,7 @@
 
 <mapper namespace="com.itwillbs.test.mapper.PayMapper">
  	
+ 	<!-- 결제정보 저장 -->
  	<insert id="insertPayInfo" parameterType="java.util.Map">
 		  INSERT INTO
 			  	payment VALUES (
@@ -16,6 +17,12 @@
 				    ,#{r_idx}
 			  	)
 	</insert>
- 
+ 	
+ 	<!-- 결제내역 조회 -->
+ 	<select id="selectPayInfo" resultType="com.itwillbs.test.vo.PayVO">
+	    select *
+	   		from payment 
+	   			 where m_idx = (select m_idx from members where m_id = #{sId})
+	</select>
  
 </mapper>

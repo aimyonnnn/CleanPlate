@@ -39,13 +39,7 @@ public class AssignmentController {
    private PayService payService;
    
    private static final Logger logger = LoggerFactory.getLogger(AssignmentController.class);
-   
-   @GetMapping("assignmentPaymentCancel")
-   public String assignmentPaymentCancel(PayVO pay) {
-	   
-	   return "assignment/assignmentPaymentCancel";
-   }
-   
+ 
    @GetMapping("/assignment")
    public String getAssignment(Model model) {
 	   // 양도 게시판 출력 리스트
