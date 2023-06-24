@@ -22,15 +22,15 @@
 	<div class="container">
 	    <div class="row">
 	        <div class="col-md-12" style="text-align: center;">
-	            <h1 style="color: #FFC107;">예약 안내</h1>
-	            <hr>
-	            <h3 style="font-weight: bold;">${reservation.res_name }</h3>
+	        	<img src="${pageContext.request.contextPath }/resources/images/reservation.png" style="margin-top: 15px; width: 100px; height: 100px;">
+	            <p class="mt-4 mb-4" style="font-size: 30px; line-height:36px; letter-spacing: -3px;">예약이 완료되었습니다.</p>
 	        </div>
 	    </div>
 	    <div class="row">
-	        <div class="mt-2 col-md-12">
+	        <div class="mt-2 col-md-12 text-center">
 	            <img src="https://lh3.googleusercontent.com/p/AF1QipNY1MlSKhc_HLzeW1-s9SauzPn9woiO3QmNd9eA=s680-w680-h510" 
 	                 class="rounded mx-auto d-block" height="300px" width="500px">
+	            <h2 class="mt-4 mb-4 fw-bold" style="line-height:36px; letter-spacing: -3px;">${reservation.res_name }</h2>
 	        </div>
 	    </div>
 	    <div class="container">
@@ -96,7 +96,7 @@
 		        </div>
 		        <!-- 예약내역 버튼 -->
 		        <div class="d-flex justify-content-center">
-			        <button type="button" class="btn btn-outline-warning mb-2" style="margin-left: 10px;" id="reservationList">예약내역 바로가기</button>
+			        <button type="button" class="btn btn-outline-warning mb-2" style="margin-left: 10px;" id="reservationList">나의 예약내역 바로가기</button>
 		        	<button type="button" id="mainButton" class="btn btn-outline-secondary mb-2" style="margin-left: 5px;">메인으로 가기</button>
 		        </div>
 		    </div>
