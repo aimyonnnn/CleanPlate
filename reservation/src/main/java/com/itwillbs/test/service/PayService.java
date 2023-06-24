@@ -156,6 +156,18 @@ public class PayService {
 		return updatePaymentCount;
 	}
 	
+	// 결제 취소 - 양도
+	public int orderCancle2(PayVO pay) throws Exception {
+		
+		if (!pay.getPayment_num().equals("")) {
+			String token = getToken();
+			int price = pay.getPayment_total_price();
+			payMentCancle(token, pay.getPayment_num(), price, pay.getReason());
+		}
+		
+		return 1;
+	}
+	
 	// 결제리스트 조회
 	public List<PayVO> getPayInfo(String sId) {
 		return mapper.selectPayInfo(sId) ;
