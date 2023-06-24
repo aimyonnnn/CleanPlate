@@ -108,9 +108,20 @@ public class ReservationService {
 		return mapper.selectedDinnerTables(res_idx, r_date);
 	}
 
+	// 예약 등록
 	public int registReservation(int r_personnel, String r_date, String r_request, int r_amount,
 			int r_status, int m_idx, int res_idx,  int me_idx, int r_tables) {
 		return mapper.insertReservation(r_personnel, r_date, r_request, r_amount, r_status, m_idx, res_idx, me_idx, r_tables);
+	}
+
+	// 예약 번호 조회
+	public int getReservationIdx(String r_date, int m_idx, int res_idx) {
+		return mapper.selectReservationIdx(r_date, m_idx, res_idx);
+	}
+
+	// 예약번호로 레스토랑, 예약내역 조회
+	public ReservationVO getReservationAllInfo(int r_idx) {
+		return mapper.selectReservationAllInfo(r_idx);
 	}
 	
 }

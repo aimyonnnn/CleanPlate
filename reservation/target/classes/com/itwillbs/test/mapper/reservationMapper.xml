@@ -181,8 +181,24 @@
 				  )
 	</insert>
 	
+	<!-- 예약번호 조회 -->
+	<select id="selectReservationIdx" resultType="int">
+		SELECT r_idx
+			FROM reservation
+			WHERE r_date = #{r_date} 
+				AND m_idx = #{m_idx} 
+				AND res_idx = #{res_idx}
+				ORDER BY r_idx DESC
+ 				LIMIT 1
+	</select>
 	
-	
-	
+	<select id="selectReservationAllInfo" parameterType="int" resultType="com.itwillbs.test.vo.ReservationVO">
+		SELECT *
+	        FROM reservation r
+	        JOIN members m ON r.m_idx = m.m_idx
+	       	JOIN restaurant res ON r.res_idx = res.res_idx
+	       	JOIN menus me ON r.me_idx = me.me_idx
+	        WHERE r.r_idx = #{r_idx} 
+	</select>
 	
 </mapper>

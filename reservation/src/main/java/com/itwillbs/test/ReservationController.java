@@ -161,6 +161,7 @@ public class ReservationController {
 			 // vo객체로 받으니깐 시간쪽에서 변환하다가 에러나서 따로 분리함
 			 // DB순서대로 적음
 			 HttpSession session,
+			 Model model,
 			 @RequestParam("r_personnel") int r_personnel,
 			 @RequestParam("r_date") String r_date,
 			 @RequestParam("r_request") String r_request,
@@ -178,18 +179,23 @@ public class ReservationController {
 		System.out.println("reservationUpdate");
 		String sId = (String) session.getAttribute("sId");
 		
+		// 예약 등록
 		int insertCount = reservationService.registReservation(
 				r_personnel, r_date, r_request, r_amount, 
 				r_status, m_idx, res_idx, r_tables, me_idx);
 		
-		if(insertCount != 0) { 
+		// 예약번호 조회
+		int r_idx = reservationService.getReservationIdx(r_date, m_idx, res_idx);
+		
+		
+		if(r_idx != 0) { 
 			
 			// ======================= 결제정보 payment 테이블에 저장  =======================
 			int ReservationPayInfoCount = payService.registReservationPayInfo(p_orderNum, payment_num, payment_total_price, sId);
 			
 			System.out.println(ReservationPayInfoCount);
 			
-			return "1"; 
+			return Integer.toString(r_idx); 
 			
 		}
 		
@@ -198,7 +204,10 @@ public class ReservationController {
 	
 	// 예약 완료 페이지
 	@GetMapping("reservationResult")
-	public String reservationResult() {
+	public String reservationResult(@RequestParam int r_idx, Model model) {
+		// 예약번호로 레스토랑, 예약내역 조회
+		ReservationVO reservation = reservationService.getReservationAllInfo(r_idx);
+		model.addAttribute("reservation", reservation);		
 		return "reservation/reservation_result";
 	}
 	

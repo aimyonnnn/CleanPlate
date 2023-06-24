@@ -514,11 +514,11 @@
 								    console.log(response);
  										
 								    // 리턴받은 값이 1일 경우 예약내역 업데이트 성공!
-								    if (response === '1') {
+								    if (response != 0) {
 								      alert('예약내역 업데이트 성공!');
 								      
 								      // 결제 완료 후 이동할 페이지
-								      location.href = '<c:url value="reservationResult"/>';
+								      location.href = '<c:url value="reservationResult"/>' + "?r_idx=" + response;
 								    }
 								  },
 								  error: function(xhr, status, error) {

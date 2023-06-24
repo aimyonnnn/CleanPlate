@@ -86,8 +86,8 @@
 							</select>
 						</div>
 					</div>
-					<div class="col">
-						<div class="dropdown" style="margin-left: 40px;">
+					<div class="col" style="margin-left: 70px;">
+						<div class="dropdown">
 							<select class="form-select form-select mb-3" aria-label=".form-select example" style="width: 180px;" id="dateFilter">
 							  <option value="">전체날짜</option>
 							  <c:forEach items="${uniqueDates}" var="date">
@@ -209,11 +209,11 @@
 					                    </tr>
 					                    <tr>
 					                        <th>날짜</th>
-					                        <td><fmt:formatDate value="${resList.r_date }" pattern="yyyy년MM월dd일"/></td>
+					                        <td><fmt:formatDate value="${resList.r_date }" pattern="yyyy년 MM월 dd일"/></td>
 					                    </tr>
 					                    <tr>
 					                        <th>시간</th>
-					                        <td><fmt:formatDate value="${resList.r_date }" pattern="HH시mm분"/></td>
+					                        <td><fmt:formatDate value="${resList.r_date }" pattern="HH시 mm분"/></td>
 					                    </tr>
 					                    <tr>
 					                        <th>인원</th>
