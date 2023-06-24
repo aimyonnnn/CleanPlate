@@ -26,13 +26,19 @@ public class LikeInfoService {
    }
    
     //찜한 가게 목록 출력
-	  public List<LikeInfoVO> getMemberLike() {
-			return mapper.selectLikeList();
+	  public List<Map<String, Object>> memberLikelist() {
+			return mapper.memberLikelist();
 	};
 	
-	// 찜하기 취소
+	// 찜하기 취소(하트)
 	public void deletcount(int res_idx, String m_id, String liked) { 
 		mapper.deletcount(res_idx, m_id, liked);
 	}
+
+	// 찜하기 해제(버튼)
+	public void deleteFromLikes(Map<String, Object> paramMap) {
+		mapper.deleteFromLikes(paramMap);		
+	}
+
 	
 }

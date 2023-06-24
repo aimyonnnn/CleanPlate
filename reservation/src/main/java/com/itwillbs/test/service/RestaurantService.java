@@ -56,6 +56,11 @@ public class RestaurantService {
 	public int deleteRestaurant(String idx) {
 		return mapper.deleteRestaurant(idx);
 	}
+
+	//리뷰 수 계산
+	public int getRestaurantrievewNum() {
+		return mapper.getRestaurantrievewNum();
+	}
 	
 	
 

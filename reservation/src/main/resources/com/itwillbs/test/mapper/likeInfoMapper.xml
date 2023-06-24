@@ -7,16 +7,34 @@
         INSERT INTO like_info (res_idx, m_id, liked)
         VALUES (#{res_idx}, #{m_id}, #{liked})
     </insert>
-    
-    <!-- 찜한 목록 출력 -->
-    <select id="selectLikeList" resultType="com.itwillbs.test.vo.LikeInfoVO"> 
-    	SELECT * FROM like_info
-     </select>
      
      <!-- 찜하기 제거 -->
     <delete id="deletcount"> 
     	DELETE FROM like_info 
     </delete>
     
+    <!-- 로그인한 회원의 찜목록 조회 (가게사진, 가게이름, 가게평점, 가게리뷰수)-->
+ 	<select id="memberLikelist" resultType="java.util.Map">
+    SELECT l.res_idx as res_idx, r.res_photo1 as res_photo1, r.res_name as res_name, s.rv_scope as rv_scope, c.count as count
+        FROM members m join like_info l
+        ON m.m_id = l.m_id
+        left join restaurant r 
+        ON l.res_idx = r.res_idx
+        LEFT JOIN (select res_idx, avg(rv_scope) as rv_scope
+        FROM reviews
+        GROUP BY res_idx) s
+        ON s.res_idx = l.res_idx
+        LEFT JOIN ( select res_idx, count(res_idx) as count
+        FROM reviews
+        GROUP BY res_idx ) c
+        ON c.res_idx = l.res_idx
+        WHERE m.m_id = 'member'<!-- 'member'를 매개변수로 받아와야함. 데이터가없어서 임시로 member -->
+     </select>
+     
+    <!-- 찜하기 해제(버튼) -->
+    <delete id="deleteFromLikes" parameterType="java.util.Map">
+        DELETE FROM like_info
+        WHERE m_id = #{m_id} AND res_idx = #{res_idx}
+    </delete>
      
 </mapper>

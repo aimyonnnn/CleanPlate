@@ -38,8 +38,8 @@
 		<script>
 		  $(document).ready(function() {
 		    var isLiked = false;
-		    var res_idx = "10001";
-		    var m_id = "member1";
+		    var res_idx = ${restaurantInfo.res_idx};
+		    var m_id = ${sessionScope.sId};
 		    var liked = $("#likeBtn").val() ? "true" : "false";
 			
 		    // 찜하기 버튼 클릭 이벤트
@@ -49,7 +49,7 @@
 		      $.ajax({
 		        url: '${pageContext.request.contextPath}/toggleLikeStatus',
 		        type: 'GET',
-		        data: {'res_idx': res_idx, 'm_id': m_id, 'liked': liked},
+		        data: {'res_idx': ${restaurantInfo.res_idx}, 'm_id':${sessionScope.sId}, 'liked': liked},
 		        async: false,
 		        success: function(response) {
 		          if (response == "ok") {
@@ -61,9 +61,9 @@
 		              $("#likeBtn").removeClass("liked").addClass("unliked");
 		            }}}
 		            
-		            alert("finish");
+		            alert("찜 완료!");
 		          } else {
-		            alert("error");
+		            alert("에러 발생");
 		          }
 		        }
 		      });

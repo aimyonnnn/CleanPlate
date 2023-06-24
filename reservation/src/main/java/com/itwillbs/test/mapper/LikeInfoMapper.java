@@ -10,9 +10,13 @@ public interface LikeInfoMapper {
     public void toggleLikeStatus(Map<String, Object> map);
     
     //찜한 가게 출력
-	public List<LikeInfoVO> selectLikeList();
+	public List<Map<String, Object>> memberLikelist();
 
-	//찜하기 취소
+	//찜하기 취소(하트)
 	public void deletcount(int res_idx, String m_id, String liked);
+
+	//찜하기 해제(버튼)
+	public void deleteFromLikes(Map<String, Object> paramMap);
+
 	
 }

@@ -2,22 +2,54 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
+   	<!-- 공통 상단바 구역 -->
+	<%@ include file="../common/common_header.jsp" %>
+   	<!-- 공통 상단바 구역 -->
     <!-- 이부분은 지우면 안됩니다 -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>MyPage</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <!-- 이부분은 지우면 안됩니다 -->
+			<script>
+			    $(document).ready(function() {
+			        function storeValues(resIdx) {
+			            var res_idx = resIdx;
+			            var m_id = "member";
+			            //alert(res_idx);
+			
+			            $.ajax({
+			                url: '${pageContext.request.contextPath}/deletecount',
+			                data: {
+			                    'res_idx': res_idx,
+			                    'm_id': m_id
+			                },
+			                type: 'GET',
+			                success: function(response) {
+			                    alert("찜 해제 되었습니다.");
+			                    location.reload();
+			                },
+			                error: function(xhr, status, error) {
+			                    alert(error);
+			                }
+			            });
+			        }
+			        $('button.cancel-btn').click(function() {
+			            var resIdx = $(this).attr('data-resname');
+			            storeValues(resIdx);
+			        });
+			    });
+			</script>
+
+</head>
 </head>
 
 
 <body>
-   	<!-- 공통 상단바 구역 -->
-<%@ include file="../common/common_header.jsp" %>
-   	<!-- 공통 상단바 구역 -->
 
     <!-- 제목 구역 -->
 	<div class="container">
@@ -57,88 +89,35 @@
             </div>
             <!-- 내용 구역 -->
                 <!-- 내용 --> 
-                <table class="table text-center" style="margin-left: 50px;">
+                <table class="table text-center" style="margin-left: 50px; width:70%;" >
                     <thead>
                         <tr>
-                            <th></th>
+                            <th>가게사진</th>
                             <th>가게명</th>
                             <th>별점</th>
                             <th>리뷰수</th>
-                            <th>예약</th>
+                            <th>찜상태</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td><img src="..." class="img-thumbnail" alt="가게사진" style="width: 150px; height: 150px;"></td>
-                            <td>XX오마카세</td>
-                            <td>별점표현</td>
-                            <td>리뷰수</td>
-                            <td>
-                                <button type="button" class="btn btn-warning" style="color: white;" data-bs-toggle="modal" data-bs-target="#likedelete">찜 취소</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><img src="..." class="img-thumbnail" alt="가게사진" style="width: 150px; height: 150px;"></td>
-                            <td>XX파인다이닝</td>
-                            <td>별점표현</td>
-                            <td>리뷰수</td>
-                            <td>
-                                <button type="button" class="btn btn-warning" style="color: white;" data-bs-toggle="modal" data-bs-target="#likedelete">찜 취소</button>
-                            </td>
-                        </tr>
-                        
-                    </tbody>
+					<c:forEach var="like" items="${memberLike}">
+					<input type="hidden" id="res_idx" value="${like.res_idx}">
+					 <tr>
+					 <td>
+		                <img src="resources/images/${like.res_photo1}" style="width: 200px; height: auto;">
+		            </td>
+		            <td>${like.res_name}</td>
+		            <td>${like.rv_scope}</td>
+		            <td>${like.count}</td>
+		            <td>
+					<button type="button" class="btn btn-warning cancel-btn" style="color: white;" data-resname="${like.res_idx}">찜 해제</button>
+					</tr>
+					</c:forEach>
+					</tbody>
                 </table>  
-                
-                                    <!-- 작동하는지 넣어본 것입니다. 알맞게 작동되면 페이지 완료후 고치기 -->
-          				<c:forEach var="like" items="${RestaurantService}">
-                                ${like.res_name}
-                        </c:forEach> 
-            <table>
-                 <thead>
-                     <tr>
-                         <th>Like Index</th>
-                         <th>Restaurant Index</th>
-                         <th>Member ID</th>
-                         <th>Liked Status</th>
-                     </tr>
-                 </thead>
-                 <tbody>
-                        <c:forEach var="like" items="${memberLike}">
-                            <tr>
-                                <td>${like.like_idx}</td>
-                                <td>${like.res_idx}</td>
-                                <td>${like.m_id}</td>
-                                <td>${like.liked}</td>
-                            </tr>
-                        </c:forEach>
-                       
-                    </tbody>
-                </table>        
             </div>
             <!-- 내용 구역 -->
-
-            </div>
-    </div>
-
-    <!-- 찜 취소 모달창-->
-    <div class="modal fade" id="likedelete" tabindex="-1" >
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5">찜 취소</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              찜을 취소 하시겠습니까?
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-warning" style="color: white;">확인</button>
-              <button type="button" class="btn btn-warning" style="color: white;"data-bs-dismiss="modal">취소</button>
-            </div>
           </div>
-        </div>
-    </div>
 
     <!-- 하단 부분 include 처리영역 -->
     <hr class="mt-5">

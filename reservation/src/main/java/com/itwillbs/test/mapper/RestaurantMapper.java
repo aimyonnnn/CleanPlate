@@ -39,6 +39,9 @@ public interface RestaurantMapper {
 	// 관리자의 가게 조회
 	RestaurantVO selectAdminRestaurant(String idx);
 
+	// 리뷰수 조회 계산
+	int getRestaurantrievewNum();
+
 
 	
 	
