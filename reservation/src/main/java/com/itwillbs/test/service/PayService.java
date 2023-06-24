@@ -178,7 +178,7 @@ public class PayService {
 		return mapper.selectPayInfoByRidx(r_idx);
 	}
 	
-	// 결제정보 저장
+	// 결제정보 저장 - 예약
 	public int registReservationPayInfo(String p_orderNum, String payment_num, int payment_total_price, String sId) {
 		return mapper.insertReservationPayInfo(p_orderNum, payment_num, payment_total_price, sId);
 	}

@@ -26,7 +26,7 @@ public interface PayMapper {
 	// 결제내역 조회
 	PayVO selectPayInfoByRidx(int r_idx);
 	
-	// 결제정보 저장
+	// 결제정보 저장 - 예약
 	int insertReservationPayInfo(
 			@Param("p_orderNum") String p_orderNum, 
 			@Param("payment_num") String payment_num,  
