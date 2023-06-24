@@ -1,6 +1,7 @@
 package com.itwillbs.test.service;
 
 
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
 
@@ -105,6 +106,11 @@ public class ReservationService {
 	// 예약 정보에서 디너에 예약된 테이블 수 조회
 	public int getDinnerReservationTables(int res_idx, String r_date) {
 		return mapper.selectedDinnerTables(res_idx, r_date);
+	}
+
+	public int registReservation(int r_personnel, String r_date, String r_request, int r_amount,
+			int r_status, int m_idx, int res_idx,  int me_idx, int r_tables) {
+		return mapper.insertReservation(r_personnel, r_date, r_request, r_amount, r_status, m_idx, res_idx, me_idx, r_tables);
 	}
 	
 }

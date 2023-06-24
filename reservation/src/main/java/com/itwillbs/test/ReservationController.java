@@ -1,5 +1,6 @@
 package com.itwillbs.test;
 
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,17 +44,6 @@ public class ReservationController {
 	private TimesService timesService;
 	@Autowired
 	private MemberService memberService;
-	
-	// 결제하기
-	@PostMapping("reservationPayment")
-	public String reservationPayment(ReservationVO reservation, Model model) {
-		
-		
-		
-			
-		
-		return "reservation/reservation_result";
-	}
 	
 	// 가게 메인 페이지 
 	@GetMapping("reservationMain")
@@ -161,7 +151,34 @@ public class ReservationController {
 		return "reservation/reservation_store";
 	}
 	
-	// 결제 후 예약 내역 페이지
+	// 결제 완료 후 DB에 예약내역 입력
+	@PostMapping("reservationUpdate")
+	@ResponseBody
+	public String reservationUpdate(
+			 // vo객체로 받으니깐 시간쪽에서 변환하다가 에러나서 따로 분리함
+			 // DB순서대로 적음
+			 @RequestParam("r_personnel") int r_personnel,
+			 @RequestParam("r_date") String r_date,
+			 @RequestParam("r_request") String r_request,
+			 @RequestParam("r_amount") int r_amount,
+			 @RequestParam("r_status") int r_status,
+			 @RequestParam("m_idx") int m_idx,
+			 @RequestParam("res_idx") int res_idx,
+		     @RequestParam("r_tables") int r_tables,
+		     @RequestParam("me_idx") int me_idx) {
+		
+		System.out.println("reservationUpdate");
+		
+		int insertCount = reservationService.registReservation(
+				r_personnel, r_date, r_request, r_amount, 
+				r_status, m_idx, res_idx, r_tables, me_idx);
+		
+		if(insertCount != 0) { return "1"; }
+		
+		return "0"; // 실패시
+	}
+	
+	// 예약 완료 페이지
 	@GetMapping("reservationResult")
 	public String reservationResult() {
 		return "reservation/reservation_result";

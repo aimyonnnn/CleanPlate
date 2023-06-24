@@ -1,6 +1,7 @@
 package com.itwillbs.test.mapper;
 
 
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
 
@@ -70,6 +71,18 @@ public interface ReservationMapper {
 	// 디너에 예약된 테이블 수 조회 
 	int selectedDinnerTables(@Param("res_idx") int res_idx,@Param("r_date") String r_date);
 
+	// 예약내역 입력
+	int insertReservation(
+		    @Param("r_personnel") int r_personnel,
+		    @Param("r_date") String r_date,
+		    @Param("r_request") String r_request,
+		    @Param("r_amount") int r_amount,
+		    @Param("r_status") int r_status,
+		    @Param("m_idx") int m_idx,
+		    @Param("res_idx") int res_idx,
+		    @Param("me_idx") int me_idx,
+		    @Param("r_tables") int r_tables
+		);
 
-	
+
 }
