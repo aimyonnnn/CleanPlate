@@ -17,6 +17,12 @@ public interface PayMapper {
             @Param("sId") String sId, 
             @Param("r_idx") int r_idx);
 	
-	// 결제내역 조회
+	// 결제리스트 조회
 	List<PayVO> selectPayInfo(String sId);
+	
+	// 결제상태 변경
+	int updatePayment(String payment_num);
+	
+	// 결제내역 조회
+	PayVO selectPayInfoByRidx(int r_idx);
 }

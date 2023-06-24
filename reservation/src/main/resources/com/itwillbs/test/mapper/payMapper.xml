@@ -18,11 +18,28 @@
 			  	)
 	</insert>
  	
- 	<!-- 결제내역 조회 -->
+ 	<!-- 결제리스트 조회 -->
  	<select id="selectPayInfo" resultType="com.itwillbs.test.vo.PayVO">
 	    select *
 	   		from payment 
 	   			 where m_idx = (select m_idx from members where m_id = #{sId})
 	</select>
+	
+	<!-- 결제상태 변경 -->
+	<update id="updatePayment" parameterType="string">
+		update payment
+			set
+				p_status = 2 -- 결제취소
+			where
+				payment_num = #{payment_num}
+	</update>
+	
+	<!-- 결제정보 조회 -->
+	<select id="selectPayInfoByRidx" resultType="com.itwillbs.test.vo.PayVO">
+		select *
+			from payment
+				where r_idx = #{r_idx}
+	</select>
+	
  
 </mapper>

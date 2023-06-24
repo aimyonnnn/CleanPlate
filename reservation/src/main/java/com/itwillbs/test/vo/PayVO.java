@@ -1,6 +1,7 @@
 package com.itwillbs.test.vo;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 import lombok.Data;
 /*
@@ -23,7 +24,7 @@ public class PayVO {
 	private int p_idx; // 결제번호
 	private String p_orderNum; // 주문번호
 	private String payment_num; // 아임포트imp_uid값
-	private Date p_orderDate; // 주문일자
+	private Timestamp p_orderDate; // 주문일자
 	private int payment_total_price; // 가격
 	private int p_status; // 결제상태 1-결제완료 2-결제취소
 	private int m_idx; // 회원번호

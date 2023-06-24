@@ -5,7 +5,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- 이부분은 지우면 안됩니다 -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>MyPage</title>
@@ -14,7 +13,12 @@
         <!-- bootstrap -->
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
       	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <!-- 이부분은 지우면 안됩니다 -->
+      	<!-- iamport -->
+		<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+	    </script>
+		<!-- Sweet Alert 플러그인 -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+		<link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
     <style>
         /* 각 별들의 기본 설정 */
         .starR{
@@ -266,7 +270,7 @@
 					    	 	  <!-- 예약상태가 "1-방문예정" 일때만 취소버튼 활성화 -->
 					    	 	  <!-- DB구문으로 처리 예정 -->
 								  <c:choose>
-								    <c:when test="${resList.r_status eq 1 && currentDateTime.time - resList.r_date.time > twentyFourHours }">
+								    <c:when test="${resList.r_status eq 1 && resList.r_date.time - currentDateTime.time > twentyFourHours }">
 						        		 <button type="button" class="btn btn-outline-warning" onclick="cancel(${resList.r_idx })">예약 취소하기</button>
 									     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="margin-left: 10px;">닫기</button>
 								    </c:when>
@@ -626,15 +630,69 @@
 				location.href='resCancel?r_idx=' + r_idx + '&r_status=4';
 			}
 		}
-		
-		function cancel(r_idx) {
-			let result = confirm("취소가 확실합니까? \n (취소할 경우 예약을 되돌릴 수 없으며 다시 예약해야합니다.)");
-			if(result){
-				alert("취소가 완료되었습니다.");
-				location.href='resCancel?r_idx=' + r_idx + '&r_status=3';
-			}
-		}
 	</script>
+	
+	<script type="text/javascript">
+    function cancel(r_idx) {
+        let result = confirm("취소가 확실합니까? \n (취소할 경우 예약을 되돌릴 수 없으며 다시 예약해야합니다.)");
+
+        var r_idx = 27;
+
+        if (result) {
+
+            // 결제정보 조회를 위한 ajax요청
+            $.ajax({
+                url: '<c:url value="paymentCancel"/>',
+                type: 'POST',
+                data: { r_idx: r_idx },
+                dataType: 'json',
+                success: function(response) {
+					
+                    console.log(JSON.stringify(response));
+
+                    alert(JSON.stringify(response.payment_num));
+                    alert(JSON.stringify(response.payment_total_price));
+					
+                    // 결제 취소를 위한 ajax요청
+                    $.ajax({
+                        url: "payCancel",
+                        type: "POST",
+                        data: {
+                            'payment_num': response.payment_num,
+                            'payment_total_price': response.payment_total_price,
+                            'reason': "테스트 결제 환불"
+                        },
+                        success: function(data) {
+                            // 환불 완료 swal창으로 안내
+                            swal({
+                                title: "환불 성공!",
+                                text: "예약이 성공적으로 취소되었습니다.",
+                                icon: "success",
+                                button: "확인"
+                            }, function() {
+                                // 환불 완료 후 전 화면으로 이동
+                                location.href = "memberRSList";
+                            });
+                        },
+                        error: function(xhr, status, error) {
+                            swal("환불 실패!" + error);
+                        }
+                    }); // ajax
+
+                //=========================================================================
+                	
+                },
+                error: function(xhr, status, error) {
+                    console.log('Ajax 오류 발생했습니다');
+                    console.log('상태 코드: ' + xhr.status);
+                    console.log('에러 메시지: ' + error);
+                }
+            }); // ajax
+            
+        } // if
+    }
+	</script>
+
  
     <!-- 하단 부분 include 처리영역 -->
     <hr class="mt-5">

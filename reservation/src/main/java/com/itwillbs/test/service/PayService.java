@@ -36,7 +36,7 @@ public class PayService {
 		return mapper.insertPayInfo(p_orderNum, payment_num, payment_total_price, sId, r_idx);
 	}
 
-	// ============= API 작업 ======================
+	//====================== API 작업 ======================
 	// 토큰 받아오는 메서드
 	public String getToken() throws Exception {
 		
@@ -149,19 +149,21 @@ public class PayService {
 			payMentCancle(token, pay.getPayment_num(), price, pay.getReason());
 		}
 		
-		// payment_num 으로 조회 후 결제 상태(payment_status) 변경
-//		int updatePaymentCount = mapper.updatePayment(pay.getPayment_num());
-		// 티켓예약 상태변경, 스낵결제 상태변경
-//		int updateTicketCount = mapper.updateTicket(pay.getOrder_num());
-//		int updateSnackCount = mapper.updateSnack(pay.getOrder_num());
-//		System.out.println("updatePaymentCount: " + updatePaymentCount);
+		// payment_num 으로 조회 후 결제상태(p_status) 변경
+		int updatePaymentCount = mapper.updatePayment(pay.getPayment_num());
+		System.out.println("updatePaymentCount : " + updatePaymentCount);
 		
-		return 1;
+		return updatePaymentCount;
 	}
 	
-	// 결제내역 조회
+	// 결제리스트 조회
 	public List<PayVO> getPayInfo(String sId) {
 		return mapper.selectPayInfo(sId) ;
+	}
+	
+	// 결제정보 조회
+	public PayVO getPayInfoByRidx(int r_idx) {
+		return mapper.selectPayInfoByRidx(r_idx);
 	}
 
 	

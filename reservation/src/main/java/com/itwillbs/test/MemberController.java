@@ -30,8 +30,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.itwillbs.test.handler.MyPasswordEncoder;
 import com.itwillbs.test.service.MemberService;
+import com.itwillbs.test.service.PayService;
 import com.itwillbs.test.vo.AssignmentVO;
 import com.itwillbs.test.vo.MemberVO;
+import com.itwillbs.test.vo.PayVO;
 import com.itwillbs.test.vo.ReservationVO;
 import com.itwillbs.test.vo.RestaurantVO;
 import com.itwillbs.test.vo.ReviewVO;
@@ -41,6 +43,8 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService service;
+	@Autowired
+	private PayService payService;
 	
 	// 로그인 성공후 XXX님 클릭시 마이페이지로 이동
 	@GetMapping("member")
@@ -121,6 +125,9 @@ public class MemberController {
 		List<ReservationVO> resList = service.getMemberReservationList(sId);
 		List<RestaurantVO> rsList = service.getMemberRestaurant(sId);
 		
+		// 결제정보 조회
+		List<PayVO> payInfoList = payService.getPayInfo(sId);
+		
 		Timestamp currentDateTime = new Timestamp(System.currentTimeMillis());
 		
 		Set<String> uniqueDates = new HashSet<>();
@@ -132,6 +139,7 @@ public class MemberController {
 		    uniqueDates.add(dateString);
 		}
 		
+		model.addAttribute("payInfoList", payInfoList);
 	    model.addAttribute("uniqueDates", uniqueDates);
 		model.addAttribute("currentDateTime", currentDateTime);
 		model.addAttribute("resList", resList);
