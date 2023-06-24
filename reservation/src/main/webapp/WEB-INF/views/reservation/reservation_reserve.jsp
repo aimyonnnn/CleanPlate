@@ -147,6 +147,7 @@
 									        <c:if test="${hour >= 11 && hour < 17}">
 									            <input type="hidden" id="price1" value="${menuList[0].me_price}" />
 									            <input type="hidden" id="menuName1" value="${menuList[0].me_name}" />
+									            <input type="hidden" id="menuIdx1" value="${menuList[1].me_idx}" />
 									            <button class="btn btn-outline-dark rounded-0" onclick="selectTime(this)" style="margin-left: 25px; margin-right: 25px;">${hour}:${minute}</button>
 									        </c:if>
 	    								</c:forEach>
@@ -166,6 +167,7 @@
 									        <c:if test="${hour >= 17 && hour <= 23}">
 									            <input type="hidden" id="price2" value="${menuList[1].me_price}" />
 									            <input type="hidden" id="menuName2" value="${menuList[1].me_name}" />
+									            <input type="hidden" id="menuIdx2" value="${menuList[1].me_idx}" />
 									            <button class="btn btn-outline-dark rounded-0" onclick="selectTime(this)" style="margin-left: 25px; margin-right: 25px;">${hour}:${minute}</button>
 									        </c:if>
 								   		</c:forEach>
@@ -292,8 +294,11 @@
 			                                             : document.getElementById('price2').value;
 			    var menuName = (hour >= 11 && hour <= 16) ? document.getElementById('menuName1').value
 			    										: document.getElementById('menuName2').value;
+			    var menuIdx = (hour >= 11 && hour <= 16) ? document.getElementById('menuIdx1').value
+														: document.getElementById('menuIdx2').value;
 			    const totalPrice = price * numberOfPeople;
 			    document.getElementById("totalResult").innerText = totalPrice + '원';
+			    document.getElementById("menuIdx").value = menuIdx;
 			    document.getElementById("menuResult").innerText = menuName + " x " + numberOfPeople + "명";
 
 			}
@@ -304,7 +309,6 @@
 				<h2 class="fw-bold mt-5 mb-2">예약자 정보 입력</h2>
 				<hr>
 				<form class="row g-3 needs-validation" action="reservationPayment" novalidate>
-				<input type="text" value="${menuList[0].me_idx}">
 					<div class="input-container">
 						<div class="col-md-6">
 							<label for="r_name" class="form-label fw-bold fs-4">이름</label>
@@ -450,7 +454,7 @@
 		    	      var r_status = 1;
 		    	      var res_idx = ${param.res_idx};
 		    	      var m_idx = ${memberInfo.m_idx};
-		    	      var me_idx = ${menuList[0].me_idx};
+		    	      var me_idx = $('#menuIdx').val();
 // 		    	      var rv_status 
 		    	      
 		    	      // 카카오 페이 결제 시작!
