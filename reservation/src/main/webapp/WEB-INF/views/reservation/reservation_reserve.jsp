@@ -442,11 +442,11 @@
 			    	  e.preventDefault();
 					
 			    	  // 전달해야할 값 => data 객체에 넣을 값
-		    	      var r_personnel = $('#countResult').html();
-		    	      var r_tables = 1;
+		    	      var r_personnel = parseInt($('#countResult').html());
+		    	      var r_tables = Math.ceil(parseInt($('#countResult').text()) / 4);
 		    	      var r_date = $('#r_date').val();
 		    	      var r_request = $('#r_request').val();
-		    	      var r_amount = 100; // $('#totalResult').html(); // 테스트용으로 100원 결제
+		    	      var r_amount = parseInt($('#totalResult').html());
 		    	      var r_status = 1;
 		    	      var res_idx = ${param.res_idx};
 		    	      var m_idx = ${memberInfo.m_idx};
@@ -460,7 +460,7 @@
 		            	pay_method: "card",
 		                merchant_uid: createOrderNum(), // 주문번호 자동생성
 		                name: "CleanPlate",
-		                amount: 100, // 테스트할 때는 100원 결제, 위에 변수에 담아논 "r_amount"를 넣으면 됨
+		                amount: r_amount, // 총 금액 입력
 		                buyer_email: "$memberInfo.m_email}",
 		                buyer_name: "${memberInfo.m_name}",
 		                buyer_tel: "${memberInfo.m_tel}"
