@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.itwillbs.test.mapper.PayMapper">
+ 	
+ 	<insert id="insertPayInfo" parameterType="java.util.Map">
+	  INSERT INTO
+		  	payment VALUES (
+		  		null
+			    ,#{p_orderNum}
+			    ,#{p_imp_uid}
+			    ,now()
+			    ,#{p_price}
+			    ,1
+			    ,#{sId}
+			    ,#{r_idx}
+		  	)
+	</insert>
+ 
+ 
+</mapper>

@@ -19,14 +19,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.itwillbs.test.service.AssignmentService;
 import com.itwillbs.test.service.MemberService;
-import com.itwillbs.test.service.MenuService;
+import com.itwillbs.test.service.PayService;
 import com.itwillbs.test.service.ReservationService;
-import com.itwillbs.test.service.RestaurantService;
 import com.itwillbs.test.vo.AssignmentVO;
 import com.itwillbs.test.vo.MemberVO;
-import com.itwillbs.test.vo.MenuVO;
 import com.itwillbs.test.vo.ReservationVO;
-import com.itwillbs.test.vo.RestaurantVO;
 
 @Controller
 public class AssignmentController {
@@ -37,6 +34,8 @@ public class AssignmentController {
    private MemberService memberService;
    @Autowired
    private ReservationService reservationService;
+   @Autowired
+   private PayService payService;
    
    private static final Logger logger = LoggerFactory.getLogger(AssignmentController.class);
    
@@ -106,15 +105,29 @@ public class AssignmentController {
    @ResponseBody
    public Map<String, Integer> assignUpdate(
            HttpSession session,
+           @RequestParam("p_orderNum") String p_orderNum,
+           @RequestParam("p_imp_uid") String p_imp_uid,
+           @RequestParam("p_price") int p_price,
            @RequestParam("a_sellerId") String a_sellerId,
-           @RequestParam("r_idx") int r_idx) {
+           @RequestParam("r_idx") int r_idx
+		   ) {
+	   
        System.out.println("assignUpdate");
       
        String sId = (String) session.getAttribute("sId");
       
-       System.out.println(r_idx);
-       System.out.println(a_sellerId);
-     
+       System.out.println("r_idx :" + r_idx);
+       System.out.println("a_sellerId :" + a_sellerId);
+       System.out.println("p_imp_uid : " + p_imp_uid);
+       System.out.println("p_orderNum :" + p_orderNum);
+       System.out.println("p_price : " + p_price);
+       
+       // ======================= 결제정보 payment 테이블에 저장  =======================
+       int insertCount = payService.registPayInfo(p_orderNum, p_imp_uid, p_price, sId, r_idx);
+       
+       System.out.println(insertCount);
+       
+       // ======================= 예약상태, 양도상태 컬럼 변경 작업  =======================
        int assignUpdateCount = reservationService.updateReservation(sId, r_idx);
        System.out.println(assignUpdateCount);
       

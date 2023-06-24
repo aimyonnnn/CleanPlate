@@ -143,9 +143,9 @@
 			<button class="btn btn-warning w-100 mt-3" onclick="location.href='assignment'">목록으로</button>
 <!-- 			<button id="cancelPay" class="btn btn-warning">결제취소</button> -->
 		</div>
-		
+	
 	</div>
-   
+	
    <script>
    
    // 1. 구매자가 결제를 할 때!
@@ -177,20 +177,29 @@
               console.log('결제가 완료되었습니다.');
               	 
 			 // ================= DB 업데이트 처리 시작 =================
-		     // 1. 예약 테이블의 회원번호를 구매자의 회원번호로 업데이트 및 예약상태 컬럼을 '4-양도' 변경함
+		     // 결제 완료 시 
+		     // 1. 예약 테이블의 회원번호를 구매자의 회원번호로 업데이트 및 예약상태 컬럼을 '4-양도완료' 변경함
 			 // => 구매자의 회원번호는 sId 세션값으로 아이디를 조회하여 가져옴
 			 // 2. 양도 테이블의 양도상태 컬럼을 '2-거래완료'로 변경
 			 // 3. 양도 게시판으로 다시 접속 시 '2-거래완료' 처리된 글은 보이지 않음
+			 // =========================================================
+			 // 4. PayVO에 결제내역 저장
 			 
 	  		 	 var a_sellerId = '${a_sellerId}';
 	  		 	 var r_idx = '${r_idx}';
+	  		 	 var p_imp_uid = rsp.imp_uid;
+	  		 	 var p_orderNum = rsp.merchant_uid;
+	  		 	 var p_price = rsp.paid_amount;
 	  		 	 
 				 $.ajax({
 				    url: '<c:url value="assignUpdate"/>',
 				    type: 'POST',
 				    data: {
 				        a_sellerId: a_sellerId,
-				        r_idx: r_idx
+				        r_idx: r_idx,
+				        p_imp_uid: p_imp_uid,
+		  		 	    p_orderNum: p_orderNum,
+ 		  		 	  	p_price: p_price
 				    },
 				    dataType: 'json',
 				    success: function(response) {
