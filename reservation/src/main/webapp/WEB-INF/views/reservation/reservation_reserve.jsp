@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="com.google.gson.Gson" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -82,39 +83,6 @@
 					</dd>
 				</dl>
 			</div>
-			
-			<script>
-			var countResultValue = 1; // 초기값 설정
-
-			window.addEventListener('DOMContentLoaded', function() {
-			  var minusButton = document.getElementById('minusButton');
-			  var plusButton = document.getElementById('plusButton');
-
-			  minusButton.addEventListener('click', function() {
-			    var countResultElement = document.getElementById('countResult');
-			    countResultValue = parseInt(countResultElement.innerText); // 최종값 업데이트
-			    countResultValue--;
-			    countResultElement.innerText = countResultValue;
-			    sendFinalValue(countResultValue); // 변한 최종값을 함수의 파라미터로 보냄
-			  });
-
-			  plusButton.addEventListener('click', function() {
-			    var countResultElement = document.getElementById('countResult');
-			    countResultValue = parseInt(countResultElement.innerText); // 최종값 업데이트
-			    countResultValue++;
-			    countResultElement.innerText = countResultValue;
-			    sendFinalValue(countResultValue); // 변한 최종값을 함수의 파라미터로 보냄
-			  });
-
-			  console.log(countResultValue);
-			});
-
-			function sendFinalValue(value) {
-			  // 여기서 value를 이용하여 외부로 최종값을 보낼 수 있습니다.
-// 			  console.log('최종값:', value);
-			  // 추가적인 작업 수행 가능
-			}
-			</script>	
 			
 			<!-- 인원 선택 스크립트 -->
 			<script>
@@ -327,19 +295,20 @@
 			    const totalPrice = price * numberOfPeople;
 			    document.getElementById("totalResult").innerText = totalPrice + '원';
 			    document.getElementById("menuResult").innerText = menuName + " x " + numberOfPeople + "명";
+
 			}
 			</script>
-			
 			
 			<!-- 예약자 정보 입력 -->
 			<div>
 				<h2 class="fw-bold mt-5 mb-2">예약자 정보 입력</h2>
 				<hr>
 				<form class="row g-3 needs-validation" action="reservationPayment" novalidate>
+				<input type="text" value="${menuList[0].me_idx}">
 					<div class="input-container">
 						<div class="col-md-6">
 							<label for="r_name" class="form-label fw-bold fs-4">이름</label>
-							<input type="text" class="form-control" id="r_name" maxlength="13" pattern="^[가-힣a-zA-Z]+$" value="${memberInfo.m_name}" required>
+							<input type="text"  class="form-control" id="r_name"  maxlength="13" pattern="^[가-힣a-zA-Z]+$" value="${memberInfo.m_name}" required>
 							<div class="invalid-feedback">
 								이름은 한글 또는 영문으로만 입력하세요. 
 							</div>
@@ -450,7 +419,7 @@
 						<span class="form-label fw-bold fs-4">총금액</span>
 						<div>
 							<p class="mt-2 mb-2" id="menuResult"></p>
-					    	<strong class="fs-3 text-danger" id="total Result"></strong>
+					    	<strong class="fs-3 text-danger" id="totalResult"></strong>
 					    </div>
 					</div>
 					<!-- 총금액 -->
@@ -463,64 +432,93 @@
 			
 			<!--  -->
 			<script>
+	       
 			   $(()=>{
 				  
+				  // 아임포트 결제 시작
 			      var IMP = window.IMP;
 			      IMP.init("imp61372336");
-			      
 			       $('#requestPay').on('click', function(e) {
-			    	  
-			    	  // submit 버튼의 기본 동작을 막는다.
 			    	  e.preventDefault();
-			    	  
-			    	  var totalResultElement = document.getElementById('totalResult');
-		    	      var totalResultValue = totalResultElement.innerText;
-		    	      console.log(totalResultValue);
-
-		    	      var countResultElement = document.getElementById('countResult');
-		    	      var countResultValue = countResultElement.innerText;
-		    	      console.log(countResultValue);
-
-		    	      var r_idx = ${param.res_idx}; // res_idx
-		    	      var r_personnel = parseInt(countResultValue); // 인원수 가져오기 (숫자로 변환)
-					  	
+					
+			    	  // 전달해야할 값 => data 객체에 넣을 값
+		    	      var r_personnel = $('#countResult').html();
+		    	      var r_tables = 1;
+		    	      var r_date = $('#r_date').val();
+		    	      var r_request = $('#r_request').val();
+		    	      var r_amount = 100; // $('#totalResult').html(); // 테스트용으로 100원 결제
+		    	      var r_status = 1;
+		    	      var res_idx = ${param.res_idx};
+		    	      var m_idx = ${memberInfo.m_idx};
+		    	      var me_idx = ${menuList[0].me_idx};
+// 		    	      var rv_status 
 		    	      
-		    	      
-				      // 이후 작업 수행
-				      console.log(r_personnel);
-						 
+		    	      // 카카오 페이 결제 시작!
+		    	      // 나중에 이니시스로 바꾸면 되는 부분!
 			          IMP.request_pay({
 		        		pg: "kakopay",
 		            	pay_method: "card",
 		                merchant_uid: createOrderNum(), // 주문번호 자동생성
-		                name: "결제테스트",
-		                amount: totalResultValue,
-		                buyer_email: "${buyer_email}",
-		                buyer_name: "${buyer_name}",
-		                buyer_tel: "${buyer_tel}"
+		                name: "CleanPlate",
+		                amount: 100, // 테스트할 때는 100원 결제, 위에 변수에 담아논 "r_amount"를 넣으면 됨
+		                buyer_email: "$memberInfo.m_email}",
+		                buyer_name: "${memberInfo.m_name}",
+		                buyer_tel: "${memberInfo.m_tel}"
 			          }, 
 			          
 			          function(rsp) {
 			            console.log(rsp);
 			            
+			            // 결제 성공시 콜백함수 실행되는 부분
 			            // ================= 결제 성공 시 =================
 			            if (rsp.success) {
-			            	
 			              alert('결제가 완료되었습니다.');
 			              alert(JSON.stringify(rsp));
 			              console.log('결제가 완료되었습니다.');
-			              	 
-						 // ================= DB 업데이트 처리 시작 =================
-							 
-							 
-							 
-							 
-							 
+					   // ================= DB 업데이트 처리 시작 =================
+						   
+							// 아까 위에서 변수에 저장한 값들을 data 오브젝트에 저장함
+							var data = {
+							  r_personnel: r_personnel,
+							  r_tables: r_tables,
+							  r_date: r_date,
+							  r_request: r_request,
+							  r_amount: r_amount,
+							  r_status: r_status,
+							  res_idx: res_idx,
+							  m_idx: m_idx,
+							  me_idx: me_idx
+							};
+						    
+						 	console.log("ajax2");
+							
+						 	// 결제가 완료되었으니 DB에 예약내역를 저장함
+							$.ajax({
+								  url: '<c:url value="reservationUpdate"/>',
+								  type: 'POST',
+								  data: data,
+								  dataType: 'text',
+								  success: function(response) {
+									
+								    console.log(response);
+ 										
+								    // 리턴받은 값이 1일 경우 예약내역 업데이트 성공!
+								    if (response === '1') {
+								      alert('예약내역 업데이트 성공!');
+								      
+								      // 결제 완료 후 이동할 페이지
+								      location.href = '<c:url value="reservationResult"/>';
+								    }
+								  },
+								  error: function(xhr, status, error) {
+								    console.log('Ajax 오류가 발생했습니다.');
+								    console.log('상태 코드: ' + xhr.status);
+								    console.log('에러 메시지: ' + error);
+								  }
+								});
 				  		 	 
 				         //================= DB 업데이트 처리 끝 =================
-						  
-			               location.href = "<c:url value='/'/>";
-			            
+				        	 
 			            // ================= 결제 실패 시 =================
 			            } else {
 			              var msg = '결제에 실패하였습니다.';
@@ -529,28 +527,26 @@
 			            }
 			          });
 			      });
-			      //=====================================================================================
+			      //====================================================================
 			    	  
 			   }); // ready
 			   
-			   
-			   // 주문번호 만들기
-			   function createOrderNum(){
-				   	const date = new Date();
-				   	const year = date.getFullYear();
-				   	const month = String(date.getMonth() + 1).padStart(2, "0");
-				   	const day = String(date.getDate()).padStart(2, "0");
-			   	
-			   	let orderNum = year + month + day;
-			   	for(let i=0;i<10;i++) {
-			   		orderNum += Math.floor(Math.random() * 8);	
-			   	}
-			   		return orderNum;
-			   }
-			       
-			   </script>
+		   // 주문번호 만들기
+		   function createOrderNum(){
+			   	const date = new Date();
+			   	const year = date.getFullYear();
+			   	const month = String(date.getMonth() + 1).padStart(2, "0");
+			   	const day = String(date.getDate()).padStart(2, "0");
+		   	
+		   	let orderNum = year + month + day;
+		   	for(let i=0;i<10;i++) {
+		   		orderNum += Math.floor(Math.random() * 8);	
+		   	}
+		   		return orderNum;
+		   }
+		   </script>
 			<!--  -->
-			
+						
 			<script>
 			<!-- 체크박스 -->
 				$(document).ready(function() {

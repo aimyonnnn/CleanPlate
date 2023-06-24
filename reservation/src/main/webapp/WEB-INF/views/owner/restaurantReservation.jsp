@@ -61,7 +61,7 @@
 				</div>
 				<!-- 가계선택 끝 -->
 				<!-- 방문상태 시작 -->
-				<div class="col">
+				<div class="col-2">
 					<div class="dropdown" style="margin-left: 40px;">
 						<select class="form-select form-select mb-3" id="status" aria-label=".form-select example" style="width: 180px;">
 							<option selected value="">전체상태</option>
@@ -69,6 +69,16 @@
 							<option value="방문완료">방문완료</option>
 							<option value="취소">취소</option>
 							<option value="양도">양도</option>
+						</select>
+					</div>
+				</div>
+				<div class="col">
+					<div class="dropdown" style="margin-left: 40px;">
+						<select class="form-select form-select mb-3" aria-label=".form-select example" style="width: 180px;" id="dateFilter">
+						  <option value="">전체날짜</option>
+						  <c:forEach items="${uniqueDates}" var="date">
+						    <option>${date}</option>
+						  </c:forEach>
 						</select>
 					</div>
 				</div>
@@ -234,24 +244,29 @@
 </c:forEach>
 	<!-- 예약관리 출력 첫번째 모달창 끝 -->	
  
-<script type="text/javascript">
-	$(document).ready(function() {
-	  $("#status, #restaurantName").on("change", function() {
-	    var selectedStatus = $("#status").val();
-	    var selectedRestaurant = $("#restaurantName").val();
+<script>
+  $(document).ready(function() {
+    $('#dateFilter, #status, #restaurantName').change(function() {
+      var selectedDate = $('#dateFilter').val();
+      var selectedStatus = $('#status').val();
+      var selectedRestaurant = $('#restaurantName').val();
 
-	    $("table tbody .res").each(function() {
-	      var statusCell = $(this).find("td:nth-child(5)");
-	      var restaurantNameCell = $(this).find("td:nth-child(2)");
-	      var status = statusCell.text().trim();
-	      var restaurantName = restaurantNameCell.text().trim();
+      $('.res').hide(); // 모든 데이터 숨기기
 
-	      var showRow = (selectedStatus === "" || status === selectedStatus) && (selectedRestaurant === "" || restaurantName === selectedRestaurant);
+      $('.res').each(function() {
+        var dateCell = $(this).find("td:nth-child(3)");
+        var statusCell = $(this).find("td:nth-child(5)");
+        var restaurantNameCell = $(this).find("td:nth-child(2)");
+        var date = dateCell.text().trim();
+        var status = statusCell.text().trim();
+        var restaurantName = restaurantNameCell.text().trim();
 
-	      $(this).toggle(showRow);
-	    });
-	  });
-	});
+        var showRow = (selectedDate === '' || date === selectedDate) && (selectedStatus === '' || status === selectedStatus) && (selectedRestaurant === '' || restaurantName === selectedRestaurant);
+
+        $(this).toggle(showRow);
+      });
+    });
+  });
 </script>
 
 <script type="text/javascript">

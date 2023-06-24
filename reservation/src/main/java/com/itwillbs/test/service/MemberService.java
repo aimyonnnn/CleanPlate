@@ -88,4 +88,21 @@ public class MemberService {
 	public int adminUpdateMember(MemberVO member) {
 		return mapper.adminUpdateMember(member);
 	}
+	
+	//작성된 리뷰 추가
+	public int registReview(ReviewVO review) {
+		return mapper.insertReview(review);
+	}
+
+	//리뷰 작성 성공시 예약테이블의 리뷰 상태 변경
+	public void updateRvStatus(int r_idx) {
+		mapper.updateRvStatus(r_idx);
+		
+	}
+	
+	// 내가 쓴 리뷰 조회
+	public List<ReviewVO> getReviewList(String sId) {
+		return mapper.selectReviewList(sId);
+	}
+
 }

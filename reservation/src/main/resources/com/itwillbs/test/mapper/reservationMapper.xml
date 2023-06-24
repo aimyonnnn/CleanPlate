@@ -162,4 +162,23 @@
 	    	WHERE res_idx = #{res_idx} AND DATE(r_date) = #{r_date} AND r_status = 1
 	</select>
 	
+	<!-- 예약내역 입력 -->
+	<insert id="insertReservation" parameterType="map">
+		  INSERT 
+		  	INTO reservation
+		  		 VALUES (
+				  	null
+				    , #{r_personnel}
+				    , #{r_date}
+				    , #{r_request}
+				    , #{r_amount}
+				    , #{r_status}
+				    , #{m_idx}
+				    , #{res_idx}
+				    , #{me_idx}
+				    , #{r_tables}
+				    , 1
+				  )
+	</insert>
+	
 </mapper>
