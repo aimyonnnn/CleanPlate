@@ -12,6 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
@@ -29,6 +30,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.itwillbs.test.handler.MyPasswordEncoder;
+import com.itwillbs.test.service.AssignmentService;
 import com.itwillbs.test.service.MemberService;
 import com.itwillbs.test.service.PayService;
 import com.itwillbs.test.vo.AssignmentVO;
@@ -45,6 +47,8 @@ public class MemberController {
 	private MemberService service;
 	@Autowired
 	private PayService payService;
+	@Autowired
+	private AssignmentService assignmentService;
 	
 	// 로그인 성공후 XXX님 클릭시 마이페이지로 이동
 	@GetMapping("member")
@@ -148,11 +152,28 @@ public class MemberController {
 		return "member/memberRSList";
 	}
 	
-//	// 내가 찜한 식당
-//	@GetMapping("memberLike")
-//	public String memberLike() {
-//		return "member/memberLike";
-//	}
+	// 양도 관리
+	@GetMapping("memberAssignList")
+	public String memberAssignList(Model model, HttpSession session) {
+		
+		String sId = (String)session.getAttribute("sId");
+		
+		// 결제정보 조회
+		List<PayVO> payInfoList = payService.getPayInfo(sId);
+		
+		// 리스트 조회
+		List<Map<String, Object>> assignList = assignmentService.getAssignmentHistory(sId);
+		
+		Timestamp currentDateTime = new Timestamp(System.currentTimeMillis());
+		Set<String> uniqueDates = new HashSet<>();
+
+		model.addAttribute("payInfoList", payInfoList);
+		model.addAttribute("assignList", assignList);
+		model.addAttribute("uniqueDates", uniqueDates);
+	    model.addAttribute("currentDateTime", currentDateTime);
+		
+		return "member/memberAssignList";
+	}
 	
 	// 내가 쓴 리뷰
 	@GetMapping("memberReview")

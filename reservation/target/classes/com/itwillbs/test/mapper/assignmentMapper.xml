@@ -60,4 +60,15 @@
 				r_idx = #{r_idx}
 	</update>
 	
+	<!-- 양도 관련 리스트 조회 -->
+	<select id="selectAssignmentHistory" resultType="java.util.Map">
+		  SELECT *
+		  		FROM assignment a
+				  JOIN reservation r ON a.r_idx = r.r_idx
+				  JOIN restaurant res ON r.res_idx = res.res_idx
+				  JOIN payment p ON r.r_idx = p.r_idx
+		 			 	WHERE a.a_status IN (1, 2);
+	</select>
+
+	
 </mapper>

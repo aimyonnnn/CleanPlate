@@ -105,6 +105,7 @@
                 <div class="btn-group-vertical btn-group-lg d-flex align-self-start" role="group" aria-label="Vertical button group">
                     <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='member'">내 정보</button>
                     <button type="button" class="btn btn-outline-warning active p-3" onclick="location.href='memberRSList'" >예약 내역</button>
+                    <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='memberAssignList'">양도 관리</button>
                     <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='memberLike'">내가 찜한 식당</button>
                     <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='memberReview'">내가 쓴 리뷰</button>
                     <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='memberWithdrawal'">회원탈퇴</button>
@@ -156,18 +157,9 @@
 	                            <!--  -->
                             </td>
                             <td>
-                            	<!-- 예약상태(r_status)가 4-양도완료 상태일 때 판매자에게 정산하기 버튼을 출력 -->
-                            	<!-- 정산하기 버튼 클릭시 사이트 중개 수수료 5% 차감 후 카드 부분취소 실행 -->
-                            	<c:choose>
-                            		<c:when test="${resList.r_status eq 4 }">
-		                          		<button type="button" class="btn btn-warning" style="color: white;" data-bs-toggle="modal" data-bs-target="#rsListModal${resList.r_idx }">상세보기</button>
-                            			<button type="button" class="btn btn-danger" style="margin-left: 10px;" onclick="cancelAndCalculate(${resList.r_idx })">정산하기</button>
-                            		</c:when>
-                            		<c:otherwise>
-		                          		<button type="button" class="btn btn-warning" style="color: white;" data-bs-toggle="modal" data-bs-target="#rsListModal${resList.r_idx }">상세보기</button>
-		                            	<button type="button" class="btn btn-outline-warning" style="margin-left: 10px;" data-bs-toggle="modal" data-bs-target="#assignmentModal${resList.r_idx }">양도하기</button>
-                            		</c:otherwise>
-                            	</c:choose> 
+                            	<!--  -->
+                          		<button type="button" class="btn btn-warning" style="color: white;" data-bs-toggle="modal" data-bs-target="#rsListModal${resList.r_idx }">상세보기</button>
+                            	<button type="button" class="btn btn-outline-warning" style="margin-left: 10px;" data-bs-toggle="modal" data-bs-target="#assignmentModal${resList.r_idx }">양도하기</button>
                             	<!--  -->                       
                             </td>
                         </tr>
@@ -644,6 +636,7 @@
 		}
 	</script>
 	
+	<!-- 예약 취소 -->
 	<script type="text/javascript">
     function cancel(r_idx) {
         let result = confirm("취소가 확실합니까? \n (취소할 경우 예약을 되돌릴 수 없으며 다시 예약해야합니다.)");
@@ -765,8 +758,6 @@
 	                    console.log('에러 메시지: ' + error);
 	                }
 	            }); // ajax
-			 
-			 
 			 
 		 } // if
 	}
