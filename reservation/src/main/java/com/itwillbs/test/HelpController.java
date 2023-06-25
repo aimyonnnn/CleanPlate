@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
@@ -34,15 +35,29 @@ public class HelpController {
 		return "help/help_home";
 	}
 	
+	//QNA 페이지로 이동
 	@GetMapping("QNA")
 	public String QNA(HttpSession session, Model model) {
 		
-		if(session.getAttribute("sId")==null || session.getAttribute("cId") == null) {
+		String id = "";
+		
+		if(session.getAttribute("sId")==null && session.getAttribute("cId") == null) {
 			model.addAttribute("msg","로그인시 접근이 가능합니다.");
-		} 
+			return "fail_back";
+		} else if(session.getAttribute("sId") != null) {
+			id = (String)session.getAttribute("sId");
+		} else {
+			id = (String)session.getAttribute("cId");
+		}
+		
+		List<QNAVO> QNAList = service.getQNAList(id); 
+		
+		model.addAttribute("QNAList",QNAList);
+		
 		return "help/help_qa";
 	}
 	
+	//QNA 작성 페이지로 이동
 	@GetMapping("QNABoard")
 	public String QNABoard(HttpSession session, Model model, QNAVO qna) {
 		
@@ -55,7 +70,7 @@ public class HelpController {
 		return "help/help_qa_2";
 	}
 	
-	
+	//QNA 작성시 db에 저장
 	@PostMapping("QNABoardPro")
 	public String QNABoardPro(HttpSession session, Model model, QNAVO qna) {
 
@@ -125,6 +140,28 @@ public class HelpController {
 		}
 		
 		
-		return "help/help_qa";
+		return "redirect:QNA";
+	}
+	
+	@PostMapping("QNAAnswer")
+	public String QNAAnswer(QNAVO qna, HttpSession session, Model model) {
+		
+		String id = (String)session.getAttribute("sId");
+		
+		if(!id.equals("admin")) {
+			model.addAttribute("msg","잘못된 접근입니다.");
+			return "fail_back";
+		}
+		
+		int updateCount = service.QnaAnswer(qna);
+		
+		if(updateCount > 0) {
+			
+			return "redirect:QNA";
+		}
+		
+		model.addAttribute("msg","답변실패");
+		return "fail_back";
+		
 	}
 }

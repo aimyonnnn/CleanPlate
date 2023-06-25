@@ -30,4 +30,12 @@ public class HelpService {
 		return mapper.insertQNA(qna);
 	}
 
+	public List<QNAVO> getQNAList(String id) {
+		return mapper.selectQNAList(id);
+	}
+
+	public int QnaAnswer(QNAVO qna) {
+		return mapper.updateQnaAnswer(qna);
+	}
+
 }

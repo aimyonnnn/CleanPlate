@@ -1,5 +1,7 @@
 package com.itwillbs.test.vo;
 
+import java.sql.Timestamp;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.Data;
@@ -29,6 +31,7 @@ public class QNAVO {
 	private int q_division;
 	private int q_category;
 	private String q_file;
+	private Timestamp q_date;
 	private int m_idx;
 	private MultipartFile file;
 }

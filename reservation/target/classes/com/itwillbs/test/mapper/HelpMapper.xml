@@ -9,6 +9,7 @@
 				WHERE h_index = #{h_index}
 	</select>
 	
+	<!-- QNA 작성시 insert -->
 	<insert id="insertQNA">
 		INSERT INTO QNA VALUES(
 			NULL
@@ -17,6 +18,7 @@
 			, null
 			, #{q_division}
 			, #{q_category}
+			, now()
 			<choose>
 				<when test="q_file != ''">
 				, #{q_file}
@@ -28,4 +30,21 @@
 			, #{m_idx}
 		)
 	</insert>
+	
+	<!-- QNA 목록 가져오기 -->
+	<select id="selectQNAList">
+		SELECT *
+		FROM QNA
+		<if test="id != 'admin'">
+			WHERE m_idx = (SELECT m_idx
+							FROM members
+							WHERE m_id = #{id})
+		</if>
+	</select>
+    <!-- QNA 답변 -->
+	<update id="updateQnaAnswer">
+		UPDATE QNA
+		SET q_re_context = #{q_re_context}
+		WHERE q_idx = #{q_idx}
+	</update>
 </mapper>

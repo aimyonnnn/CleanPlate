@@ -15,4 +15,8 @@ public interface HelpMapper {
 
 	int insertQNA(QNAVO qna);
 
+	List<QNAVO> selectQNAList(String id);
+
+	int updateQnaAnswer(QNAVO qna);
+
 }
