@@ -16,7 +16,7 @@
 <div class="container mt-5">
   <div class="row">
     <div class="col">
-      <h2 class="display-5 fst-italic fw-bold">Help</h2>
+      <h2 class="display-5 fst-italic fw-bold"><img src="${pageContext.request.contextPath }/resources/images/help.jpg" style="width: 100%;"></h2>
     </div>
   </div>
 </div>

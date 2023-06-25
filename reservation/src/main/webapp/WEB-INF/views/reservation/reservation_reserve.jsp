@@ -56,9 +56,9 @@
    	<!-- 위로 가기 버튼 -->
 
 	<!-- 예약하기 시작 -->
-		<img src="${pageContext.request.contextPath }/resources/images/r_image.jpg" class="d-block w-100" alt="..." style="height: 50%;">
+		<img src="${pageContext.request.contextPath }/resources/images/r_image1.jpg" class="d-block w-100" alt="..." style="height: 50%;">
 		<div class="container w-100">
-			<div class="mt-4">
+			<div class="mt-4" style="font-size: 20px;">
 				<dl>
 					<dt>다이닝 공지 및 안내사항</dt>
 					<dd class="mt-2">· 좌석 배치는 사전 예약순으로 마감되며, 특정 좌석 지정은 불가능합니다.</dd>
@@ -81,6 +81,7 @@
 							<b id='countResult' style="padding: 20px;">1</b>
 						<button id="plusButton" type="button" class="btn btn-outline-warning rounded-circle" onclick="count('plus')" value="+" >+</button>
 					</dd>
+					<dd style="font-size: 14px; color: red;">※인원 재 선택시 반드시 날짜를 다시 선택해주세요.<dd>
 				</dl>
 			</div>
 			
@@ -352,7 +353,7 @@
 						</div>
 					</div>
 					<!-- 약관 시작 -->
-           			<div class="cont_division" style="width: 574px;">
+           			<div class="cont_division" style="width: 664px;">
              			<span class="terms_agree fw-bold fs-4">약관</span>
              			<div class="agree_box border border-bottom mt-2" style="border-radius: 5px;">
                				<ul class="agree_article" style="margin-top:10px; margin-left: -15px;">
@@ -429,7 +430,7 @@
 					</div>
 					<!-- 총금액 -->
 					<div class="col-12">
-						<button class="btn btn-danger mt-2 mb-4" type="submit" style="width: 564px;" id="requestPay">결제하기</button>
+						<button class="btn btn-danger mt-2 mb-4" type="submit" style="width: 650px;" id="requestPay">결제하기</button>
 					</div>
 				</form>
 			</div>
