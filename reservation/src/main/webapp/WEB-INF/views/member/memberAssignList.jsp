@@ -7,7 +7,7 @@
 <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>MyPage</title>
+        <title>memberAssignList</title>
 		<!-- jQuery CDN -->
 		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <!-- bootstrap -->
@@ -56,16 +56,6 @@
 							</select>
 						</div>
 					</div>
-					<div class="col" style="margin-left: 70px;">
-						<div class="dropdown">
-							<select class="form-select form-select mb-3" aria-label=".form-select example" style="width: 180px;" id="dateFilter">
-							  <option value="">전체날짜</option>
-							  <c:forEach items="${uniqueDates}" var="date">
-							    <option>${date }</option>
-							  </c:forEach>
-							</select>
-						</div>
-					</div>
 				</div>
 			</div>
         </div>
@@ -88,9 +78,6 @@
                     <thead>
                         <tr>
                             <th>예약번호</th>
-<!--                             <th>식당</th> -->
-<!--                             <th>예약날짜</th> -->
-<!--                             <th>시간</th> -->
                             <th>판매금액</th>
                             <th>상태</th>
                             <th></th>
@@ -100,9 +87,6 @@
                     <c:forEach var="list" items="${aList }">
                         <tr class="res">
                             <td>${list.r_idx }</td>
-<%--                             <td>${list.res_name}</td> --%>
-<%--                             <td><fmt:formatDate value="${list.r_date}" pattern="yy-MM-dd"/></td> --%>
-<%--                             <td><fmt:formatDate value="${list.r_date}" pattern="HH:mm"/></td> --%>
                             <td>${list.a_price}원</td>
                             <td>
                             	<!--  -->
@@ -124,7 +108,7 @@
                             	<!-- 양도상태가 2-양도완료 & 결제상태가 2-결제취소인경우 정산완료 출력 -->
                             	<c:choose>
                             		<c:when test="${list.a_status eq 2}">
-                            			<button type="button" class="btn btn-danger" style="margin-left: 10px;" onclick="cancelAndCalculate(${list.r_idx }, ${list.a_price})">정산하기</button>
+                            			<button type="button" class="btn btn-warning" style="margin-left: 10px; color: white;" onclick="cancelAndCalculate(${list.r_idx }, ${list.a_price})">정산하기</button>
                             		</c:when>
                             		<c:otherwise>
 		                            	<button type="button" class="btn btn-outline-warning" style="margin-left: 10px;" data-bs-toggle="modal" data-bs-target="#assignmentModal${list.r_idx }">양도하기</button>
@@ -140,9 +124,6 @@
         </div>
     </div>
 
-	<!-- 24시간을 밀리초로 나타낸 값 -->
-    <c:set var="twentyFourHours" value="86400000" />
- 
  	<!-- 두번째 양도 관련 모달창 -->
  	<c:forEach var="resList" items="${resList }">
 	<div class="modal fade" id="assignmentModal${resList.r_idx }" tabindex="-1" aria-labelledby="assignmentModalLabel" aria-hidden="true">
@@ -221,7 +202,6 @@
 			  <!-- 예약상태가 "1-방문예정" 일 경우 "예약 양도하기" 버튼 활성화 -->
 			  <!-- 예약상태가 "5-판매중" 일 경우 가격을 수정할 수 있도록 "가격 수정" 버튼 활성화 -->
 			  <!-- 가격 입력 필드와 가격 수정 버튼을 함께 표시 -->
-			  <!-- 판매중이 아닌 경우에는 가격 수정 버튼 비활성화 -->
 			  <c:choose>
 				    <c:when test="${resList.r_status eq 1}">
 	   					<button type="button" class="btn btn-outline-warning" id="assignmentButton" onclick="redirectToAssignment(${resList.r_idx})">양도하기</button>
@@ -281,13 +261,12 @@
 		            error: function(xhr, status, error) {
 		                console.error("가격 업데이트 오류:", error);
 		            }
-		        });
-		    	// ======================================== ajax ========================================
+		        }); // ajax
 	        } // if
 	    } // updatePrice
 	</script>
  	
- 	<!-- 양도 관련 스크립트 -->
+ 	<!--  -->
  	<script>
  	// 양도 금액 입력 시 유효성 검사
  	$(document).ready(function() {
@@ -324,15 +303,9 @@
    	   }
   	}
  	</script>
- 	<!--  -->
  	
- 	<!-- 기타 클릭 이벤트 -->
+ 	<!--  -->
  	<script>
-	 	<!-- 모달창에서 취소버튼 클릭 시 환불 페이지로 넘어가기 -->
-	 	$(document).on("click", "#cancelButton", function(event){
-	 	    // 예약 환불 페이지로 이동
-	 		window.location.href = '<c:url value="/"/>';
-	 	});
 	 	<!-- 모달창에서 닫기버튼 클릭 시 현재 페이지로 돌아가기 -->
 	 	$(document).on("click", "#closeButton", function(event){
 	 	    // 예약 양도 페이지로 이동
@@ -340,28 +313,6 @@
 	 	});
  	</script>
  	
-	<script>
-	  $(document).ready(function() {
-	    $('#dateFilter, #status').change(function() {
-	      var selectedDate = $('#dateFilter').val();
-	      var selectedStatus = $('#status').val();
-	
-	      $('.res').hide(); // 모든 데이터 숨기기
-	
-	      $('.res').each(function() {
-	        var dateCell = $(this).find("td:nth-child(3)");
-	        var statusCell = $(this).find("td:nth-child(6)");
-	        var date = dateCell.text().trim();
-	        var status = statusCell.text().trim();
-	
-	        var showRow = (selectedDate === '' || date === selectedDate) && (selectedStatus === '' || status === selectedStatus);
-	
-	        $(this).toggle(showRow);
-	      });
-	    });
-	  });
-	</script>
-	
 	<!-- 판매금액 정산하기 - 부분취소 -->
 	<script type="text/javascript">
 	function cancelAndCalculate(r_idx, a_price) {
@@ -382,10 +333,18 @@
 						
 	                    var refundAmount = a_price * 0.95; // 가격이 수정된 금액을 기준으로 수수료 5% 차감
 	                    
-	                    alert('주문번호 ' + JSON.stringify(response.payment_num)
-	                    		+ '판매금액 정산을 진행합니다. \n수수료 차감 후 최종 정산금액은 '
-	                    		+ refundAmount + '원 입니다.');
-						
+	                    if(JSON.stringify(response.p_status) == 2) { // 이미 결제 취소가 된 경우 return
+	                    	
+							alert('이미 정산이 완료된 예약입니다.');
+							return
+							
+	                    } else { // 결제 취소 시!
+	                    	
+		                    alert('주문번호 ' + JSON.stringify(response.payment_num)
+		                    		+ '판매금액 정산을 진행합니다. \n수수료 차감 후 최종 정산금액은 '
+		                    		+ refundAmount + '원 입니다.');
+	                    }
+	                    
 	                    // 판매금액 정산을 위한 ajax요청 - 부분취소
 	                    $.ajax({
 	                        url: "payCancel2",
