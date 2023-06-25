@@ -45,9 +45,9 @@ public class AssignmentService {
 		return mapper.updateSalesPrice(salesValue, r_idx);
 	}
 	
-	// 양도 관련 리스트 조회
-	public List<Map<String, Object>> getAssignmentHistory(String sId) {
-		return mapper.selectAssignmentHistory(sId);
+	// 양도 내역 조회
+	public List<AssignmentVO> getAssignInfo(String sId) {
+		return mapper.selectAssignInfo(sId);
 	}
 	
 }

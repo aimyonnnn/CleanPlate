@@ -88,21 +88,21 @@
                     <thead>
                         <tr>
                             <th>예약번호</th>
-                            <th>식당</th>
-                            <th>예약날짜</th>
-                            <th>시간</th>
+<!--                             <th>식당</th> -->
+<!--                             <th>예약날짜</th> -->
+<!--                             <th>시간</th> -->
                             <th>판매금액</th>
                             <th>상태</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                    <c:forEach var="list" items="${assignList }">
+                    <c:forEach var="list" items="${aList }">
                         <tr class="res">
                             <td>${list.r_idx }</td>
-                            <td>${list.res_name}</td>
-                            <td><fmt:formatDate value="${list.r_date}" pattern="yy-MM-dd"/></td>
-                            <td><fmt:formatDate value="${list.r_date}" pattern="HH:mm"/></td>
+<%--                             <td>${list.res_name}</td> --%>
+<%--                             <td><fmt:formatDate value="${list.r_date}" pattern="yy-MM-dd"/></td> --%>
+<%--                             <td><fmt:formatDate value="${list.r_date}" pattern="HH:mm"/></td> --%>
                             <td>${list.a_price}원</td>
                             <td>
                             	<!--  -->
@@ -123,11 +123,8 @@
                             	<!-- 양도상태가 2-양도완료 & 결제상태가 1-결제완료인경우 정산하기 출력 -->
                             	<!-- 양도상태가 2-양도완료 & 결제상태가 2-결제취소인경우 정산완료 출력 -->
                             	<c:choose>
-                            		<c:when test="${list.a_status eq 2 && list.p_status eq 1}">
-                            			<button type="button" class="btn btn-danger" style="margin-left: 10px;" onclick="cancelAndCalculate(${list.r_idx })">정산하기</button>
-                            		</c:when>
-                            		<c:when test="${list.a_status eq 2 && list.p_status eq 2}">
-                            			<button type="button" class="btn btn-outline-dark" style="margin-left: 10px;" onclick="alert('정산이 완료된 예약입니다.')">정산완료</button>
+                            		<c:when test="${list.a_status eq 2}">
+                            			<button type="button" class="btn btn-danger" style="margin-left: 10px;" onclick="cancelAndCalculate(${list.r_idx }, ${list.a_price})">정산하기</button>
                             		</c:when>
                             		<c:otherwise>
 		                            	<button type="button" class="btn btn-outline-warning" style="margin-left: 10px;" data-bs-toggle="modal" data-bs-target="#assignmentModal${list.r_idx }">양도하기</button>
@@ -147,8 +144,8 @@
     <c:set var="twentyFourHours" value="86400000" />
  
  	<!-- 두번째 양도 관련 모달창 -->
- 	<c:forEach var="list" items="${assignList }">
-	<div class="modal fade" id="assignmentModal${list.r_idx }" tabindex="-1" aria-labelledby="assignmentModalLabel" aria-hidden="true">
+ 	<c:forEach var="resList" items="${resList }">
+	<div class="modal fade" id="assignmentModal${resList.r_idx }" tabindex="-1" aria-labelledby="assignmentModalLabel" aria-hidden="true">
 	  <div class="modal-dialog modal-lg">
 	    <div class="modal-content">
 	      <div class="modal-header">
@@ -167,10 +164,10 @@
                             <th>
                                <!--  -->
 	                           <c:choose>
-				                    <c:when test="${list.r_status eq 5}">
+				                    <c:when test="${resList.r_status eq 5}">
 								     	수정할 가격을 입력하세요
 								    </c:when>
-	                           		<c:when test="${list.r_status eq 1}">
+	                           		<c:when test="${resList.r_status eq 1}">
 								  		판매할 가격을 입력하세요
 								    </c:when>
 								    <c:otherwise>
@@ -183,31 +180,31 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>${list.r_idx }</td>
-                            <td>${list.res_name }</td>
-                            <td><fmt:formatDate value="${list.r_date }" pattern="yy-MM-dd"/></td>
-                            <td><fmt:formatDate value="${list.r_date }" pattern="HH:mm"/></td>
+                            <td>${resList.r_idx }</td>
+                            <td>${resList.res_name }</td>
+                            <td><fmt:formatDate value="${resList.r_date }" pattern="yy-MM-dd"/></td>
+                            <td><fmt:formatDate value="${resList.r_date }" pattern="HH:mm"/></td>
                             <td>
 	                           	<!-- r_status가 1-방문예정, 2-방문완료, 3-취소, 4-양도완료, 5-판매중, 6-판매실패 -->
 							    <c:choose>
-						           <c:when test="${list.r_status eq 1}">방문예정</c:when>
-						           <c:when test="${list.r_status eq 2}">방문완료</c:when>
-						           <c:when test="${list.r_status eq 3}">취소</c:when>
-						           <c:when test="${list.r_status eq 4}">양도완료</c:when>
-						           <c:when test="${list.r_status eq 5}">판매중</c:when>
-						           <c:when test="${list.r_status eq 5}">판매실패</c:when>
+						           <c:when test="${resItem.r_status eq 1}">방문예정</c:when>
+						           <c:when test="${resItem.r_status eq 2}">방문완료</c:when>
+						           <c:when test="${resItem.r_status eq 3}">취소</c:when>
+						           <c:when test="${resItem.r_status eq 4}">양도완료</c:when>
+						           <c:when test="${resItem.r_status eq 5}">판매중</c:when>
+						           <c:when test="${resItem.r_status eq 5}">판매실패</c:when>
 							    </c:choose>
 						     </td>
 						     <td>
 						     	<!-- -->
 					     	    <c:choose>
-				                    <c:when test="${list.r_status eq 5}">
+				                    <c:when test="${resList.r_status eq 5}">
 								        <div>
-								        	<input type="text" class="salesValue2" id="salesValue2${list.r_idx}" placeholder="가격을 입력하세요">
+								        	<input type="text" class="salesValue2" id="salesValue2${resList.r_idx}" placeholder="가격을 입력하세요">
 								        </div>
 								    </c:when>
-								    <c:when test="${list.r_status eq 1}">
-								    	<input type="text" class="salesValue" id="salesValue${list.r_idx}" placeholder="가격을 입력하세요">
+								    <c:when test="${resList.r_status eq 1}">
+								    	<input type="text" class="salesValue" id="salesValue${resList.r_idx}" placeholder="가격을 입력하세요">
 								    </c:when>
 	                           </c:choose>
 	                           <!-- -->
@@ -226,11 +223,11 @@
 			  <!-- 가격 입력 필드와 가격 수정 버튼을 함께 표시 -->
 			  <!-- 판매중이 아닌 경우에는 가격 수정 버튼 비활성화 -->
 			  <c:choose>
-				    <c:when test="${list.r_status eq 1}">
-	   					<button type="button" class="btn btn-outline-warning" id="assignmentButton" onclick="redirectToAssignment(${list.r_idx})">양도하기</button>
+				    <c:when test="${resList.r_status eq 1}">
+	   					<button type="button" class="btn btn-outline-warning" id="assignmentButton" onclick="redirectToAssignment(${resList.r_idx})">양도하기</button>
 				    </c:when>
-				    <c:when test="${list.r_status eq 5}">
-			            <button type="button" class="btn btn-outline-warning" onclick="updatePrice(${list.r_idx})">수정하기</button>
+				    <c:when test="${resList.r_status eq 5}">
+			            <button type="button" class="btn btn-outline-warning" onclick="updatePrice(${resList.r_idx})">수정하기</button>
 				    </c:when>
 				    <c:otherwise>
 				    	 <button type="button" class="btn btn-danger" id="assignmentButton"
@@ -274,7 +271,7 @@
 						
 						if(response === '1') {
 			                alert("가격이 성공적으로 업데이트되었습니다.");
-			                location.href='<c:url value="memberRSList"/>'
+			                location.href='<c:url value="memberAssignList"/>'
 			                
 						} else if (response === '0') {
 							alert("예약금액 보다 높게 판매할 수 없습니다. 가격을 다시 입력해주세요");
@@ -334,12 +331,12 @@
 	 	<!-- 모달창에서 취소버튼 클릭 시 환불 페이지로 넘어가기 -->
 	 	$(document).on("click", "#cancelButton", function(event){
 	 	    // 예약 환불 페이지로 이동
-	 		window.location.href = '<c:url value="환불페이지"/>';
+	 		window.location.href = '<c:url value="/"/>';
 	 	});
 	 	<!-- 모달창에서 닫기버튼 클릭 시 현재 페이지로 돌아가기 -->
 	 	$(document).on("click", "#closeButton", function(event){
 	 	    // 예약 양도 페이지로 이동
-	 		window.location.href = "memberRSList";
+	 		window.location.href = "memberAssignList";
 	 	});
  	</script>
  	
@@ -367,13 +364,11 @@
 	
 	<!-- 판매금액 정산하기 - 부분취소 -->
 	<script type="text/javascript">
-	function cancelAndCalculate(r_idx) {
+	function cancelAndCalculate(r_idx, a_price) {
 		
 		 let result = confirm("예약번호 " + r_idx + "번의 판매내역 정산을 하시겠습니까? \n결제금액의 5퍼센트를 차감 후 카드 부분취소가 진행됩니다.");
 		 
 		 if(result) {
-			 
-// 			 alert('카드 결제 취소가 완료되었습니다!');
 			 
 			 // 결제정보 조회를 위한 ajax요청
 	            $.ajax({
@@ -385,7 +380,7 @@
 						
 	                    console.log(JSON.stringify(response));
 						
-	                    var refundAmount = response.payment_total_price * 0.95; // 수수료 5% 차감
+	                    var refundAmount = a_price * 0.95; // 가격이 수정된 금액을 기준으로 수수료 5% 차감
 	                    
 	                    alert('주문번호 ' + JSON.stringify(response.payment_num)
 	                    		+ '판매금액 정산을 진행합니다. \n수수료 차감 후 최종 정산금액은 '
@@ -409,7 +404,7 @@
 	                                button: "확인"
 	                            }, function() {
 	                                // 환불 완료 후 전 화면으로 이동
-	                                location.href = "memberRSList";
+	                                location.href = "memberAssignList";
 	                            });
 	                        },
 	                        error: function(xhr, status, error) {

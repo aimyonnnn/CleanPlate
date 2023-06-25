@@ -158,19 +158,16 @@ public class MemberController {
 		
 		String sId = (String)session.getAttribute("sId");
 		
-		// 결제정보 조회
-		List<PayVO> payInfoList = payService.getPayInfo(sId);
-		
 		// 리스트 조회
-		List<Map<String, Object>> assignList = assignmentService.getAssignmentHistory(sId);
-		
-		Timestamp currentDateTime = new Timestamp(System.currentTimeMillis());
-		Set<String> uniqueDates = new HashSet<>();
+		List<PayVO> payInfoList = payService.getPayInfo(sId);
+		List<AssignmentVO> aList = assignmentService.getAssignInfo(sId);
+		List<ReservationVO> resList = service.getMemberReservationList(sId);
+		List<RestaurantVO> rsList = service.getMemberRestaurant(sId);
 
 		model.addAttribute("payInfoList", payInfoList);
-		model.addAttribute("assignList", assignList);
-		model.addAttribute("uniqueDates", uniqueDates);
-	    model.addAttribute("currentDateTime", currentDateTime);
+		model.addAttribute("aList", aList);
+		model.addAttribute("resList", resList);
+		model.addAttribute("rsList", rsList);
 		
 		return "member/memberAssignList";
 	}
