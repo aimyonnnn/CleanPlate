@@ -95,7 +95,10 @@
             <div class="card-body d-flex justify-content-between">
               <div>
                 <p class="card-text mb-2">오늘 총 예약 수</p>
-                <h4>8</h4>
+                <c:forEach var="count" items="${reservationCounts}">
+                가게 번호 : ${count.storeId} 
+                오늘 예약 수 : ${count.reservationCount}<br>
+        		</c:forEach>	
               </div>
               <i class="fas fa-calendar" style="font-size: 30px; margin-top: 20px"></i>
             </div>
@@ -108,7 +111,10 @@
             <div class="card-body d-flex justify-content-between">
               <div>
                 <p class="card-text mb-2">이번 달 총 예약 수</p>
-                <h4>78</h4>
+                 <c:forEach var="allcount" items="${reservationCounts}">
+                가게 번호 : ${allcount.storeId} 
+                이번 달 예약 수: ${allcount.reservationCount}<br>
+        		</c:forEach>
               </div>
               <i class="fas fa-calendar" style="font-size: 30px; margin-top: 20px"></i>
             </div>

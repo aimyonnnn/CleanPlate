@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itwillbs.test.mapper.StoredashMapper">
+	<resultMap id="reservationCountResultMapWithCId" type="java.util.Map">
+	    <constructor>
+	        <idArg column="storeId" javaType="int"/>
+	        <arg column="reservationCount" javaType="int"/>
+	        <arg column="c_id" javaType="String"/>
+	    </constructor>
+	</resultMap>
+    
+    <select id="getTodayReservationCounts" resultMap="java.util.Map">
+		SELECT r.res_idx, COUNT(*) AS today_reservation_count
+		FROM restaurant AS r
+		JOIN ceo AS c ON r.c_idx = c.c_idx
+		JOIN payment AS p ON r.res_idx = p.r_idx
+		WHERE DATE(p.p_orderDate) = CURDATE()
+		GROUP BY r.res_idx;
+    </select>
+    
+    <select id="getMonthlyReservationCounts" resultMap="java.util.Map">
+		SELECT r.res_idx, COUNT(*) AS total_reservation_count
+		FROM restaurant AS r
+		JOIN ceo AS c ON r.c_idx = c.c_idx
+		JOIN payment AS p ON r.res_idx = p.r_idx
+		WHERE YEAR(p.p_orderDate) = YEAR(CURDATE()) AND MONTH(p.p_orderDate) = MONTH(CURDATE())
+		GROUP BY r.res_idx;
+    </select>
+</mapper>
+
+
