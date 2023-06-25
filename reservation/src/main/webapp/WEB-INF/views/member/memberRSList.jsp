@@ -736,7 +736,7 @@
 	                        type: "POST",
 	                        data: {
 	                            'payment_num': response.payment_num,
-	                            'payment_total_price': refundAmount,
+	                            'payment_total_price': response.payment_total_price,
 	                            'reason': "테스트 결제 환불"
 	                        },
 	                        success: function(data) {

@@ -107,8 +107,7 @@ public class PaymentController {
 		if (!"".equals(pay.getPayment_num())) {
 	        String token = payService.getToken();
 	        int amount = Integer.parseInt(payService.paymentInfo(pay.getPayment_num(), token));
-	        int price = (int) Math.round(pay.getPayment_total_price() * 0.95); // 수수료 5% 차감
-	        payService.payMentCancle(token, pay.getPayment_num(), price, pay.getReason());
+	        payService.payMentCancle(token, pay.getPayment_num(), amount, pay.getReason());
 	    }
 		
 		//----------------- DB 작업 -----------------

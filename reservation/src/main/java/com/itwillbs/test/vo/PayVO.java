@@ -1,6 +1,5 @@
 package com.itwillbs.test.vo;
 
-import java.sql.Date;
 import java.sql.Timestamp;
 
 import lombok.Data;
