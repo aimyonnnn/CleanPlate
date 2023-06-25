@@ -32,4 +32,7 @@ public interface PayMapper {
 			@Param("payment_num") String payment_num,  
 			@Param("payment_total_price") int payment_total_price, 
 			@Param("sId") String sId);
+	
+	// 판매금액 정산을 위한 결제정보 조회
+	PayVO selectInfoBySeller(int r_idx);
 }

@@ -22,7 +22,7 @@ public class PaymentController {
 	@Autowired
 	private PayService payService;
 	
-	// 결제 취소
+	// 예약결제 취소를 위한 결제정보 조회
     @PostMapping("paymentCancel")
     @ResponseBody
 	public PayVO paymentCancel(PayVO pay, Model model, @RequestParam("r_idx") int r_idx) {
@@ -35,6 +35,20 @@ public class PaymentController {
     	
 	    return payInfo;
 	}
+    
+    // 판매금액 정산을 위한 결제정보 조회
+    @PostMapping("paymentCancel2")
+    @ResponseBody
+    public PayVO paymentCancel2(PayVO pay, Model model, @RequestParam("r_idx") int r_idx) {
+    	
+    	System.out.println(r_idx);
+    	
+    	PayVO payInfoBySeller = payService.getInfoBySeller(r_idx);
+    	System.out.println(payInfoBySeller);
+    
+    	
+    	return payInfoBySeller;
+    }
 
     // 결제 취소 테스트
 	@GetMapping("paymentCancelTest")
@@ -78,7 +92,7 @@ public class PaymentController {
 		return ResponseEntity.ok().body("예약취소완료"); // <200 OK OK,주문취소완료,[]>
 	}
 	
-	// 양도
+	// 판매금액 정산하기 - 부분취소
 	@PostMapping("payCancel2")
 	public ResponseEntity<String> orderCancle2(PayVO pay) throws Exception {
 		
@@ -93,8 +107,8 @@ public class PaymentController {
 		if (!"".equals(pay.getPayment_num())) {
 	        String token = payService.getToken();
 	        int amount = Integer.parseInt(payService.paymentInfo(pay.getPayment_num(), token));
-	        int refundAmount = (int) Math.round(amount * 0.0005); // 결제 금액의 0.05%로 환불할 금액 계산
-	        payService.payMentCancle(token, pay.getPayment_num(), refundAmount, pay.getReason());
+	        int price = (int) Math.round(pay.getPayment_total_price() * 0.95); // 수수료 5% 차감
+	        payService.payMentCancle(token, pay.getPayment_num(), price, pay.getReason());
 	    }
 		
 		//----------------- DB 작업 -----------------

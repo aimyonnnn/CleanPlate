@@ -166,7 +166,7 @@ public class PayService {
 		return updatePaymentCount;
 	}
 	
-	// 결제 취소 - 양도
+	// 판매금액 정산하기 - 부분취소
 	public int orderCancle2(PayVO pay) throws Exception {
 		
 		if (!pay.getPayment_num().equals("")) {
@@ -175,7 +175,11 @@ public class PayService {
 			payMentCancle(token, pay.getPayment_num(), price, pay.getReason());
 		}
 		
-		return 1;
+		// payment_num 으로 조회 후
+		int updatePaymentCount = mapper.updatePayment(pay.getPayment_num());
+		System.out.println("updatePaymentCount : " + updatePaymentCount);
+		
+		return updatePaymentCount;
 	}
 	
 	// 결제리스트 조회
@@ -191,6 +195,11 @@ public class PayService {
 	// 결제정보 저장 - 예약
 	public int registReservationPayInfo(String p_orderNum, String payment_num, int payment_total_price, String sId) {
 		return mapper.insertReservationPayInfo(p_orderNum, payment_num, payment_total_price, sId);
+	}
+
+	// 판매금액 정산을 위한 결제정보 조회
+	public PayVO getInfoBySeller(int r_idx) {
+		return mapper.selectInfoBySeller(r_idx);
 	}
 
 	

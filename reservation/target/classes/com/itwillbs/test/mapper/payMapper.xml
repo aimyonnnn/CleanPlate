@@ -55,5 +55,15 @@
 				    ,(SELECT r_idx FROM reservation ORDER BY r_idx DESC LIMIT 1)
 			  	)
 	</insert>
+	
+	<!-- 판매금액 정산을 위한 결제정보 조회 -->
+	<!-- 두 번째 구매자가 첫 번째 예약 내역을 양도 받은 경우, 첫 번째 예약 내역의 취소를 수행 -->
+	<select id="selectInfoBySeller" resultType="com.itwillbs.test.vo.PayVO">
+		-- 두 번째 구매자가 첫 번째 예약 내역을 양도 받은 경우, 첫 번째 예약 내역의 취소를 수행
+		select *
+			from payment
+				where r_idx = #{r_idx}
+					limit 1
+	</select>
  
 </mapper>

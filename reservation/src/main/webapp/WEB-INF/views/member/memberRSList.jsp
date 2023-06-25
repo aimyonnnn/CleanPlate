@@ -704,6 +704,7 @@
     }
 	</script>
 	
+	<!-- 판매금액 정산하기 - 부분취소 -->
 	<script type="text/javascript">
 	function cancelAndCalculate(r_idx) {
 		
@@ -711,9 +712,63 @@
 		 
 		 if(result) {
 			 
-			 alert('카드 결제 취소가 완료되었습니다!');
+// 			 alert('카드 결제 취소가 완료되었습니다!');
 			 
-		 }
+			 // 결제정보 조회를 위한 ajax요청
+	            $.ajax({
+	                url: '<c:url value="paymentCancel2"/>',
+	                type: 'POST',
+	                data: { r_idx: r_idx },
+	                dataType: 'json',
+	                success: function(response) {
+						
+	                    console.log(JSON.stringify(response));
+						
+	                    var refundAmount = response.payment_total_price * 0.95; // 수수료 5% 차감
+	                    
+	                    alert('주문번호 ' + JSON.stringify(response.payment_num)
+	                    		+ '판매금액 정산을 진행합니다. \n수수료 차감 후 최종 정산금액은 '
+	                    		+ refundAmount + '원 입니다.');
+						
+	                    // 판매금액 정산을 위한 ajax요청 - 부분취소
+	                    $.ajax({
+	                        url: "payCancel2",
+	                        type: "POST",
+	                        data: {
+	                            'payment_num': response.payment_num,
+	                            'payment_total_price': refundAmount,
+	                            'reason': "테스트 결제 환불"
+	                        },
+	                        success: function(data) {
+	                            // 환불 완료 swal창으로 안내
+	                            swal({
+	                                title: "정산 완료!",
+	                                text: "판매금액이 성공적으로 정산되었습니다.",
+	                                icon: "success",
+	                                button: "확인"
+	                            }, function() {
+	                                // 환불 완료 후 전 화면으로 이동
+	                                location.href = "memberRSList";
+	                            });
+	                        },
+	                        error: function(xhr, status, error) {
+	                            swal("환불 실패!" + error);
+	                        }
+	                    }); // ajax
+
+	                //=========================================================================
+	                	
+	                },
+	                error: function(xhr, status, error) {
+	                    console.log('Ajax 오류 발생했습니다');
+	                    console.log('상태 코드: ' + xhr.status);
+	                    console.log('에러 메시지: ' + error);
+	                }
+	            }); // ajax
+			 
+			 
+			 
+		 } // if
 	}
 	</script>
 
