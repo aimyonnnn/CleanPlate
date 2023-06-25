@@ -36,7 +36,7 @@
 <!-- 서브메뉴버튼 -->
         <div class="col-6">
             <div class="list-group list-group-horizontal">
-                <a href="../help/help_fq.jsp" class="list-group-item list-group-item-action active" aria-current="true">회원</a>
+                <a href="FAQ" class="list-group-item list-group-item-action active" aria-current="true">회원</a>
                 <a href="../help/help_fq_2.jsp" class="list-group-item list-group-item-action">점주</a>
             </div>
         </div>
@@ -46,40 +46,52 @@
 <div class="container my-5">
     <div class="accordion" id="accordionExample">
         <div class="accordion-item">
-        <h2 class="accordion-header">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                Q.  로그인이 안돼요!
-            </button>
-        </h2>
-        <div id="collapseOne" class="accordion-collapse collapse bg-light" data-bs-parent="#accordionExample">
-            <div class="accordion-body">
-                A. 로그인 버튼을 누르세요
-            </div>
-        </div>
-        </div>
+			<h2 class="accordion-header">
+				<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+					Q. 아이디, 비밀번호를 분실했어요!
+				</button>
+			</h2>
+			<div id="collapseOne" class="accordion-collapse collapse bg-light" data-bs-parent="#accordionExample">
+				<div class="accordion-body">
+                A. 
+				아이디나 패스워드를 잊어버리셨나요? <br>
+				홈페이지 메인 로그인 화면 하단에 보이는 [아이디/비밀번호 찾기] 버튼을 통해 가입 당시 등록하신 이름과 휴대폰번호를 입력하시면 아이디와 비밀번호를 찾을 수 있습니다.<br>
+				[아이디 찾기]<br>
+				아이디를 분실한 경우 [아이디 찾기]에서 개인정보보호를 위하여 본인 여부를 확인 후 아이디를 확인하실 수 있습니다.<br>
+				​[비밀번호 찾기]<br>​
+				비밀번호를 분실한 경우 [비밀번호 찾기]에서 개인정보보호를 위하여 본인 여부를 확인한 후, 임시 비밀번호를 발급해드립니다.<br>​
+				임시로 발송된 비밀번호로 로그인하신 후 [마이페이지] - [내 정보] - [나의 정보 변경]에서 비밀번호를 꼭 변경해 주세요.<br>
+                
+				</div>
+			</div>
+		</div>
         <div class="accordion-item">
-        <h2 class="accordion-header">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                Q.  로그인이 안돼요!
-            </button>
-        </h2>
-        <div id="collapseTwo" class="accordion-collapse collapse bg-light" data-bs-parent="#accordionExample">
-            <div class="accordion-body">
-                A. 로그인 버튼을 누르세요
-            </div>
+			<h2 class="accordion-header">
+				<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+					Q. 회원탈퇴는 어디서 하나요?
+				</button>
+			</h2>
+			<div id="collapseTwo" class="accordion-collapse collapse bg-light" data-bs-parent="#accordionExample">
+				<div class="accordion-body">
+					A. 로그인 후 [마이페이지] - [회원탈퇴]를 이용하시면 회원탈퇴가 가능합니다.<br>
+					패스워드를 입력 후 일치하면 회원탈퇴를 진행 하실 수 있습니다.<br>​
+					혹시 서비스 이용에 문제가 있거나 마음에 들지 않아 탈퇴하려고 하시나요?<br>
+					개선사항을 알려주시면 말씀해주신 내용을 최대한 빠르게 확인하겠습니다.<br>
+					* 회원 탈퇴시 개인정보는 삭제되며, 작성하신 글은 데이터베이스에서 삭제 되지 않습니다. <br>
+				</div>
+			</div>
         </div>
-        </div>
-        <div class="accordion-item">
-        <h2 class="accordion-header">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                Q.  로그인이 안돼요!
-            </button>
-        </h2>
-        <div id="collapseThree" class="accordion-collapse collapse bg-light" data-bs-parent="#accordionExample">
-            <div class="accordion-body">
-                A. 로그인 버튼을 누르세요
-            </div>
-        </div>
+		<div class="accordion-item">
+			<h2 class="accordion-header">
+				<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+					Q.  로그인이 안돼요!
+				</button>
+			</h2>
+			<div id="collapseThree" class="accordion-collapse collapse bg-light" data-bs-parent="#accordionExample">
+	            <div class="accordion-body">
+	                A. 로그인 버튼을 누르세요
+	            </div>
+			</div>
         </div>
     </div>
     <!-- 페이지 이동 영역 -->
@@ -114,7 +126,6 @@
         </div>
       </div>
     </div>
-
 
 
 

@@ -164,4 +164,11 @@ public class HelpController {
 		return "fail_back";
 		
 	}
+	
+	
+	// FAQ 페이지로 이동
+	@GetMapping("FAQ")
+	public String FAQform() {
+		return "help/help_fq";
+	}
 }

@@ -1,6 +1,7 @@
 package com.itwillbs.test.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,6 +43,11 @@ public class AssignmentService {
 	// 양도 게시판 가격 수정하기
 	public int modifySalesPrice(int salesValue, int r_idx) {
 		return mapper.updateSalesPrice(salesValue, r_idx);
+	}
+	
+	// 양도 관련 리스트 조회
+	public List<Map<String, Object>> getAssignmentHistory(String sId) {
+		return mapper.selectAssignmentHistory(sId);
 	}
 	
 }
