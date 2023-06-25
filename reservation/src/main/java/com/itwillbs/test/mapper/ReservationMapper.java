@@ -87,6 +87,9 @@ public interface ReservationMapper {
 	int selectReservationIdx(@Param("r_date") String r_date, @Param("m_idx") int m_idx, @Param("res_idx") int res_idx);
 
 	ReservationVO selectReservationAllInfo(int r_idx);
+	
+	// 결제취소 후 예약상태 변경
+	int upadateReservationStatus(int r_idx);
 
 
 }

@@ -21,6 +21,7 @@ import org.springframework.stereotype.Service;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.itwillbs.test.mapper.PayMapper;
+import com.itwillbs.test.mapper.ReservationMapper;
 import com.itwillbs.test.vo.PayVO;
 
 @Service
@@ -28,6 +29,8 @@ public class PayService {
 
 	@Autowired
 	private PayMapper mapper;
+	@Autowired
+	private ReservationMapper reservationMapper;
 
 	private String impKey = "7282578621856564";
 	private String impSecret = "uUdnTnwy30JL3CvPQiB8ymuQNa6zLArW6ljmfO9IZAGStHKe19yY7Fil099s3TJwFHw0UEMhk49KvTBy";
@@ -152,6 +155,10 @@ public class PayService {
 		// payment_num 으로 조회 후 결제상태(p_status) 변경
 		int updatePaymentCount = mapper.updatePayment(pay.getPayment_num());
 		System.out.println("updatePaymentCount : " + updatePaymentCount);
+		
+		// 예약상태(r_status) 변경
+		int upadateReservationCount = reservationMapper.upadateReservationStatus(pay.getR_idx());
+		System.out.println("upadateReservationCount : " + upadateReservationCount);
 		
 		return updatePaymentCount;
 	}

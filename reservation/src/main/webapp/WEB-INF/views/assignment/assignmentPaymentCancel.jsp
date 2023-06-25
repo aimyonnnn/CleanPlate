@@ -63,17 +63,17 @@
     	alert(payment_num);
     	alert(payment_total_price);
 
-    	let commissionRate = 0.005; // 수수료율을 0.5%로 설정
-    	let commissionAmount = Math.round(payment_total_price * commissionRate); // 결제 금액에 적용할 수수료 금액 계산
-    	let refundAmount = payment_total_price - commissionAmount; // 결제 금액에서 수수료 금액을 차감하여 환불 금액 계산
-    	alert(refundAmount);
+//     	let commissionRate = 0.005; // 수수료율을 0.5%로 설정
+//     	let commissionAmount = Math.round(payment_total_price * commissionRate); // 결제 금액에 적용할 수수료 금액 계산
+//     	let refundAmount = payment_total_price - commissionAmount; // 결제 금액에서 수수료 금액을 차감하여 환불 금액 계산
+//     	alert(refundAmount);
 
 		$.ajax({
-			url: "payCancel2", // {환불정보를 수신할 가맹점 서비스 URL}
+			url: "payCancel", // {환불정보를 수신할 가맹점 서비스 URL}
 			type: "POST",
 			data: {
 			'payment_num': payment_num, // "{결제건의 주문번호}" 예: ORD20180131-0000011
-			'payment_total_price': refundAmount, // 2000, 환불금액
+			'payment_total_price': payment_total_price, // 2000, 환불금액
 			'reason': "테스트 결제 환불" // 환불사유
 			}	
 			,success: function(data) {

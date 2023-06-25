@@ -201,4 +201,15 @@
 	        WHERE r.r_idx = #{r_idx} 
 	</select>
 	
+	<!-- 결제 취소 후 예약상태 변경 -->
+	<!-- r_status가 1-방문예정, 2-방문완료, 3-취소, 4-양도완료, 5-판매중, 6-판매실패 -->
+	<update id="upadateReservationStatus">
+		update reservation
+			set
+				r_status = 3 -- 취소
+			where
+				r_idx = #{r_idx}
+	</update>
+	
+	
 </mapper>
