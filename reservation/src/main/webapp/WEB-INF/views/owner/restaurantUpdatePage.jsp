@@ -321,7 +321,7 @@
 							    		<c:choose>
 							    			<c:when test="${empty restaurant.res_photo1 }">
 							    				<div class="col m-1">
-										    		<input type="file" name="res_file1" class="form-control">
+										    		<input type="file" name="res_file1" class="form-control" accept="image/*" onchange="checkFileExtension(event)">
 							    				</div>
 							    			</c:when>
 							    			<c:otherwise>
@@ -344,7 +344,7 @@
 							    		<c:choose>
 							    			<c:when test="${empty restaurant.res_photo2 }">
 							    				<div class="col m-1">
-										    		<input type="file" name="res_file2" class="form-control">
+										    		<input type="file" name="res_file2" class="form-control" accept="image/*" onchange="checkFileExtension(event)">
 							    				</div>
 							    			</c:when>
 							    			<c:otherwise>
@@ -366,7 +366,7 @@
 							    		<c:choose>
 							    			<c:when test="${empty restaurant.res_photo3 }">
 							    				<div class="col m-1">
-										    		<input type="file" name="res_file3" class="form-control">
+										    		<input type="file" name="res_file3" class="form-control" accept="image/*" onchange="checkFileExtension(event)">
 							    				</div>
 							    			</c:when>
 							    			<c:otherwise>
@@ -384,6 +384,24 @@
 							    				</div>
 							    			</c:otherwise>
 							    		</c:choose>
+							    		
+							     <!-- 이미지 파일만 넣을 수 있도록 하는 자바 스크립트 -->
+								 <script>
+								    function checkFileExtension(event) {
+								      const fileInput = event.target;
+								      const file = fileInput.files[0];
+								      const allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+								
+								      const fileName = file.name;
+								      const fileExtension = fileName.split('.').pop().toLowerCase();
+								
+								      if (!allowedExtensions.includes(fileExtension)) {
+								        alert('등록이 불가능한 파일입니다.');
+								        fileInput.value = '';
+								      }
+								    }
+								 </script>	
+								 
 						    	</td> 
 						    </tr>
                             <tr>

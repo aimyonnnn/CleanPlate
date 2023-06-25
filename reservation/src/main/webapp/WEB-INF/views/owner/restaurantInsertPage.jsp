@@ -1,7 +1,9 @@
+<%@page import="com.itwillbs.test.vo.MenuVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ page import="com.google.gson.Gson" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -270,14 +272,9 @@
 						    	<td>
 						    		<button type="button" id="menu" class="btn btn-warning" style="color: black;" data-bs-toggle="modal" data-bs-target="#menuModal">메뉴 추가</button>
 							 		<div class="row mt-3 align-items-center">
-							            <table class="table">
+							            <table class="table" id="menuList">
 							                <thead>
 							                  <tr>
-							                  	   
-	            							<span id="me_name">
-							                  <c:if test="${not empty menu }">
-							                  	${menu }
-							                  </c:if>
 							                  
 							                    <th scope="col" class="col-5">메뉴 이름</th>
 							                    <th scope="col" class="col-3">가격</th>
@@ -297,25 +294,6 @@
 								                  </tr>
 								                </tbody>
 						                  	</c:forEach>
-<!-- 							                <tbody class="table-group-divider"> -->
-<!-- 							                foreach 문으로 작성 -->
-<!-- 							                  <tr> -->
-<!-- 							                    <td scope="row">런치코스</td> -->
-<!-- 							                    <td>50000</td> -->
-<!-- 							                    <td> -->
-<!-- 								                    <button type="button" class="btn btn-warning text-white me-1" data-bs-toggle="modal" data-bs-target="#menuPro">수정</button> -->
-<!-- 								                    <button class="btn btn-warning text-white">삭제</button> -->
-<!-- 							                    </td> -->
-<!-- 							                  </tr> -->
-<!-- 							                  <tr> -->
-<!-- 							                    <td scope="row">디너코스</td> -->
-<!-- 							                    <td>100000</td> -->
-<!-- 							                    <td> -->
-<!-- 								                    <button type="button" class="btn btn-warning text-white me-1" data-bs-toggle="modal" data-bs-target="#menuPro">수정</button> -->
-<!-- 								                    <button class="btn btn-warning text-white">삭제</button> -->
-<!-- 							                    </td> -->
-<!-- 							                  </tr> -->
-<!-- 							                </tbody> -->
 							              </table>
 							          </div>						    		
 						    	</td>
@@ -328,10 +306,27 @@
 						    	<td>
 						    		<!-- VO의 MultipartFile 변수 이름과 동일 -->
 						    		<!-- 실제 파일명 res_photo1, 2, 3 -->
-						    		<input type="file" name="res_file1" class="form-control "><br>
-						    		<input type="file" name="res_file2" class="form-control" ><br>
-						    		<input type="file" name="res_file3" class="form-control"><br>
+						    		<input type="file" name="res_file1" class="form-control" accept="image/*" onchange="checkFileExtension(event)"><br>
+						    		<input type="file" name="res_file2" class="form-control" accept="image/*" onchange="checkFileExtension(event)"><br>
+						    		<input type="file" name="res_file3" class="form-control" accept="image/*" onchange="checkFileExtension(event)"><br>
+						    		
 						    	</td> 
+						    	 <!-- 이미지 파일만 넣을 수 있도록 하는 자바 스크립트 -->
+								 <script>
+								    function checkFileExtension(event) {
+								      const fileInput = event.target;
+								      const file = fileInput.files[0];
+								      const allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+								
+								      const fileName = file.name;
+								      const fileExtension = fileName.split('.').pop().toLowerCase();
+								
+								      if (!allowedExtensions.includes(fileExtension)) {
+								        alert('등록이 불가능한 파일입니다.');
+								        fileInput.value = '';
+								      }
+								    }
+								 </script>	
 						    </tr>
                             <tr>
                                 <th scope="row"><label for="res_intro">가게소개</label></th>
@@ -528,15 +523,15 @@
 
 <!-- 메뉴 추가 모달 창 -->		 
 
-<!-- 모달창 폼데이터 전송 --> 
 <script type="text/javascript">
+// 모달창 폼데이터 전송 
 	$("#menuVOInsert").submit(function(event) {
-	    // 폼이 전송되는 것을 막습니다. 폼을 제출할 때 AJAX 요청을 보낼 것이기 때문입니다.
+	    // 폼이 전송되는 것 막음, 폼을 제출할 때 AJAX 요청을 보냄
 	    event.preventDefault();
 	
 	    var form_data = new FormData(this); // 폼 데이터 생성
 	
-	    // AJAX 요청 생성
+	    // 모달의 폼데이터 전송 ajax
 	    $.ajax({
 	        type : "POST",
 	        url : $(this).attr("action"),
@@ -545,41 +540,36 @@
 	        data : form_data,
 	        success : function(response) {
 	            console.log(response);
+	            
+	            var menu = response;
+	            
+	            
 	            // 전송 후 모달창을 닫음
 	            $("#menuModal").modal("hide");
 	            // 모달창 닫은 후 폼 초기화 
 	            $('#menuModal').on('hidden.bs.modal', function (e) {
 	            	$(this).find('#menuVOInsert')[0].reset();
 	            });
-
+	            
+	            // menu 데이터를 이용하여 새로운 row 생성
+	            var $table = $("#menuList");
+	            var $new_row = $("<tr></tr>");
+	            $new_row.append("<td>" + menu.me_name + "</td>");
+	            $new_row.append("<td>" + menu.me_price + "</td>");
+	            $new_row.append("<td><button class='btn btn-warning' style='color: black;'>삭제</button></td>"); // 수정/삭제 버튼 등
+	            $table.append($new_row); // 새로운 row를 table에 추가
+	            
+	            
 	        },
 	        error : function(xhr, status, error) {
 	            console.log("error");
 	        },
 
 	    });
+	    
 	});
-	
-	
-	$.ajax({
-		  type: "POST",
-		  url: "menuVOInsert",
-		  data: JSON.stringify(menu),
-		  dataType: "json",
-		  contentType: "application/json; charset=utf-8",
-		  success: function(data) {
-			console.log(data);
-		    $("#me_name").text(data.nam);
-		    $("#me_price").text(data.price);
-		    // 추가적으로 필요한 DOM 조작 로직을 여기에 작성할 수 있습니다.
-		  },
-		  error: function(xhr, status, error) {
-		    console.log("error");
-		  }
-		});
-	
+// 모달창 폼데이터 전송	
 </script>
-
     
     <!-- 하단 부분 include 처리영역 -->
     <hr class="mt-5">
