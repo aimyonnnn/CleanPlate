@@ -32,11 +32,11 @@ public class OwnerController {
 	@Autowired
 	private CeoService ceoService;
 	
-	// 매출관리
-	@GetMapping("storeDashBoard")
-	public String storeDashBoard() {
-		return "owner/storeDashBoard";
-	}
+//	// 매출관리
+//	@GetMapping("storeDashBoard")
+//	public String storeDashBoard() {
+//		return "owner/storeDashBoard";
+//	}
 	
 	/* 예약관리 페이지 */
 	//owner의 예약관리 페이지 이동 Mapping
