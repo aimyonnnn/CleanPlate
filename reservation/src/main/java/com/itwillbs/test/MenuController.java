@@ -18,11 +18,23 @@ public class MenuController {
 	// 모달창의 menuVO 값 가져오기
 	@PostMapping("menuVOInsert")
 	@ResponseBody
-	public MenuVO menuVOInsert(@ModelAttribute MenuVO menu) throws Exception {
+	public MenuVO menuVOInsert(@ModelAttribute MenuVO menu, Model model) throws Exception {
 		System.out.println(menu);
 		
+		model.addAttribute("menu", menu);
 		return menu;
 	}
+	// 
+	@PostMapping("menuVOInsert2")
+	public List<MenuVO> menuVOInsert2(@ModelAttribute MenuVO menu, Model model) throws Exception {
+		
+		List<MenuVO> menuList = new ArrayList<MenuVO>();
+		menuList.add(menu);
+		System.out.println(menuList);
+		model.addAttribute("menuList", menuList);
+		return menuList;
+	}
+	
 	
 	// 메뉴 추가
 	@PostMapping("menuInsert")
