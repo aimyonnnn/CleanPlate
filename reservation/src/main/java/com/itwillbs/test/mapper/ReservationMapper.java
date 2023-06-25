@@ -89,7 +89,7 @@ public interface ReservationMapper {
 	ReservationVO selectReservationAllInfo(int r_idx);
 	
 	// 결제취소 후 예약상태 변경
-	int upadateReservationStatus(int r_idx);
+	int updateReservationStatus(String payment_num);
 
 
 }

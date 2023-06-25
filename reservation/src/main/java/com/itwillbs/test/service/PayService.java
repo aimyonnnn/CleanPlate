@@ -152,13 +152,16 @@ public class PayService {
 			payMentCancle(token, pay.getPayment_num(), price, pay.getReason());
 		}
 		
-		// payment_num 으로 조회 후 결제상태(p_status) 변경
-		int updatePaymentCount = mapper.updatePayment(pay.getPayment_num());
-		System.out.println("updatePaymentCount : " + updatePaymentCount);
+		System.out.println("예약번호 : " + pay.getR_idx());
+		System.out.println("결제번호 : " + pay.getPayment_num());
 		
-		// 예약상태(r_status) 변경
-		int upadateReservationCount = reservationMapper.upadateReservationStatus(pay.getR_idx());
-		System.out.println("upadateReservationCount : " + upadateReservationCount);
+		// payment_num 으로 조회 후
+		// 1. 결제상태(p_status) 변경
+		// 2. 예약상태(r_status) 변경
+		int updatePaymentCount = mapper.updatePayment(pay.getPayment_num());
+		int updateReservationCount = reservationMapper.updateReservationStatus(pay.getPayment_num());
+		System.out.println("updatePaymentCount : " + updatePaymentCount);
+		System.out.println("updateReservationCount : " + updateReservationCount);
 		
 		return updatePaymentCount;
 	}

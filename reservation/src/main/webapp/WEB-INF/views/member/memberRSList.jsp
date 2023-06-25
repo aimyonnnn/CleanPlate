@@ -636,8 +636,6 @@
     function cancel(r_idx) {
         let result = confirm("취소가 확실합니까? \n (취소할 경우 예약을 되돌릴 수 없으며 다시 예약해야합니다.)");
 
-//         var r_idx = 27; 테스트용
-
         if (result) {
 
             // 결제정보 조회를 위한 ajax요청
@@ -650,8 +648,9 @@
 					
                     console.log(JSON.stringify(response));
 
-                    alert(JSON.stringify(response.payment_num));
-                    alert(JSON.stringify(response.payment_total_price));
+                    alert('주문번호 ' + JSON.stringify(response.payment_num)
+                    		+ '결제 취소를 진행합니다. \n취소하실 금액은 '
+                    		+ JSON.stringify(response.payment_total_price) + '원 입니다.');
 					
                     // 결제 취소를 위한 ajax요청
                     $.ajax({
