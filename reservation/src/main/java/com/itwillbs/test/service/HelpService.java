@@ -9,6 +9,7 @@ import com.itwillbs.test.mapper.HelpMapper;
 import com.itwillbs.test.mapper.MemberMapper;
 import com.itwillbs.test.vo.HelpVO;
 import com.itwillbs.test.vo.MemberVO;
+import com.itwillbs.test.vo.NoticeVO;
 import com.itwillbs.test.vo.QNAVO;
 
 @Service
@@ -36,6 +37,43 @@ public class HelpService {
 
 	public int QnaAnswer(QNAVO qna) {
 		return mapper.updateQnaAnswer(qna);
+	}
+
+	// 공지 등록
+	public int registNotice(NoticeVO notice) {
+		return mapper.insertNotice(notice);
+	}
+
+	// 공지 글목록 조회 - 검색 가능
+	public List<NoticeVO> getNoticeList(String searchType, String searchKeyword, int startRow, int listLimit) {
+		return mapper.selectNoticeList(searchType, searchKeyword, startRow, listLimit);
+	}
+
+	// 전체 게시물 수 조회 요청 
+	public int getNoticeListCount(String searchType, String searchKeyword) {
+		return mapper.selectNoticeListCount(searchType, searchKeyword);
+	}
+
+	// 공지글 상세정보 조회 요청 => 조회 시 조회수 증가 
+	public NoticeVO getNotice(int no_idx) {
+		// 글정보 조회 
+		NoticeVO notice = mapper.selectNotice(no_idx);
+		if(notice != null) {
+			// 조회수 증가 
+			mapper.updateReadcount(notice);
+		}
+		
+		return notice;
+	}
+
+	// 공지글 수정
+	public int modifyNotice(NoticeVO notice) {
+		return mapper.updateNotice(notice);
+	}
+
+	// 공지글 삭제
+	public int removeNotice(int no_idx) {
+		return mapper.deleteNotice(no_idx);
 	}
 
 }
