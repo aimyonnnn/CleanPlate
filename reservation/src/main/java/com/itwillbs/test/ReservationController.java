@@ -1,6 +1,5 @@
 package com.itwillbs.test;
 
-import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,7 +26,6 @@ import com.itwillbs.test.vo.ReservationVO;
 import com.itwillbs.test.vo.RestaurantVO;
 import com.itwillbs.test.vo.ReviewVO;
 import com.itwillbs.test.vo.TimesVO;
-import com.mysql.cj.Session;
 
 
 @Controller

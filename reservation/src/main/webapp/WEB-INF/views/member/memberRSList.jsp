@@ -156,8 +156,19 @@
 	                            <!--  -->
                             </td>
                             <td>
-                          		<button type="button" class="btn btn-warning" style="color: white;" data-bs-toggle="modal" data-bs-target="#rsListModal${resList.r_idx }">상세보기</button>
-                            	<button type="button" class="btn btn-outline-warning" style="margin-left: 10px;" data-bs-toggle="modal" data-bs-target="#assignmentModal${resList.r_idx }">양도하기</button>
+                            	<!-- 예약상태(r_status)가 4-양도완료 상태일 때 판매자에게 정산하기 버튼을 출력 -->
+                            	<!-- 정산하기 버튼 클릭시 사이트 중개 수수료 5% 차감 후 카드 부분취소 실행 -->
+                            	<c:choose>
+                            		<c:when test="${resList.r_status eq 4 }">
+		                          		<button type="button" class="btn btn-warning" style="color: white;" data-bs-toggle="modal" data-bs-target="#rsListModal${resList.r_idx }">상세보기</button>
+                            			<button type="button" class="btn btn-danger" style="margin-left: 10px;" onclick="cancelAndCalculate(${resList.r_idx })">정산하기</button>
+                            		</c:when>
+                            		<c:otherwise>
+		                          		<button type="button" class="btn btn-warning" style="color: white;" data-bs-toggle="modal" data-bs-target="#rsListModal${resList.r_idx }">상세보기</button>
+		                            	<button type="button" class="btn btn-outline-warning" style="margin-left: 10px;" data-bs-toggle="modal" data-bs-target="#assignmentModal${resList.r_idx }">양도하기</button>
+                            		</c:otherwise>
+                            	</c:choose> 
+                            	<!--  -->                       
                             </td>
                         </tr>
                    </c:forEach>
@@ -601,6 +612,7 @@
 	 		window.location.href = "memberRSList";
 	 	});
  	</script>
+ 	
 	<script>
 	  $(document).ready(function() {
 	    $('#dateFilter, #status').change(function() {
@@ -690,6 +702,19 @@
             
         } // if
     }
+	</script>
+	
+	<script type="text/javascript">
+	function cancelAndCalculate(r_idx) {
+		
+		 let result = confirm("예약번호 " + r_idx + "번의 판매내역 정산을 하시겠습니까? \n결제금액의 5퍼센트를 차감 후 카드 부분취소가 진행됩니다.");
+		 
+		 if(result) {
+			 
+			 alert('카드 결제 취소가 완료되었습니다!');
+			 
+		 }
+	}
 	</script>
 
  
