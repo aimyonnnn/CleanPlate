@@ -403,7 +403,7 @@
 	<!-- CoolSMS 문자인증 시작 -->
 	<script>
 	$('#verifyRequest').click(function(){
-		let to = $('input[id="phone"]').val();
+		let to = $('input[id="m_tel"]').val();
 		$.ajax({
 			url : '<c:url value="/checkPhone"/>',
 			type : "POST",
@@ -654,7 +654,7 @@
 	<!-- CoolSMS 문자인증 시작 -->
 	<script>
 	$('#businessRequest').click(function(){
-		let to = $('input[id="businessPhone"]').val();
+		let to = $('input[id="c_tel"]').val();
 		$.ajax({
 			url : '<c:url value="/checkPhone"/>',
 			type : "POST",
