@@ -2,6 +2,8 @@ package com.itwillbs.test;
 
 import java.util.*;
 
+import javax.servlet.http.*;
+
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 import org.springframework.ui.*;
@@ -15,13 +17,18 @@ public class MenuController {
 	@Autowired
 	private MenuService service;
 	
-	// 모달창의 menuVO 값 가져오기
+	  private List<MenuVO> menuList = new ArrayList<MenuVO>();
+	
+	// 모달창의 MenuVO 값 가져오기
 	@PostMapping("menuVOInsert")
 	@ResponseBody
-	public MenuVO menuVOInsert(@ModelAttribute MenuVO menu, Model model) throws Exception {
+	public MenuVO menuVOInsert(@ModelAttribute MenuVO menu, Model model, HttpSession session) throws Exception {
 		System.out.println(menu);
+		menuList.add(menu);
 		
 		model.addAttribute("menu", menu);
+		session.setAttribute("menuList", menuList);
+		System.out.println(menuList);
 		return menu;
 	}
 	// 
