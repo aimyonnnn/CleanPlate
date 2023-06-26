@@ -26,8 +26,8 @@ public class LikeInfoService {
    }
    
     //찜한 가게 목록 출력
-	  public List<Map<String, Object>> memberLikelist() {
-			return mapper.memberLikelist();
+	  public List<Map<String, Object>> memberLikelist(String sId) {
+			return mapper.memberLikelist(sId);
 	};
 	
 	// 찜하기 취소(하트)
