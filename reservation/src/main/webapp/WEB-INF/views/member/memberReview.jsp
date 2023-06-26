@@ -89,8 +89,7 @@
 	                        <div class="card-body">
 	                          <h5 class="card-title">${rvList.res_name }</h5>
 	                          <p class="card-text">${rvList.rv_comment }</p>
-	                          <a href="#" class="btn btn-warning" style="color: white;" data-bs-toggle="modal" data-bs-target="#reviewmodify">수정</a>
-	                          <a href="#" class="btn btn-warning" style="color: white;" data-bs-toggle="modal" data-bs-target="#reviewdelete">삭제</a>
+	                          <button class="btn btn-warning" style="color: white;" onclick="rvDelete(${rvList.rv_idx})">삭제</button>
 	                        </div>
 	                    </div>
 	                </c:forEach>
@@ -98,6 +97,15 @@
             </div>
         </div>
     </div>
+    <script type="text/javascript">
+    	function rvDelete(num) {
+			var result = confirm("정말 삭제하시겠습니까? ");
+			if(result){
+				location.href="RvDelete?rv_idx="+num
+			}
+    		
+		}
+    </script>
     
     
     <!-- 수정 버튼 클릭시 리뷰 수정 모달창-->

@@ -59,7 +59,7 @@
 								WHERE c_id = #{id}
 								)
 					)
-			ORDER BY r.r_idx;
+			ORDER BY r.r_idx desc
 	</select>
 	
 	<select id="selectRDList">
@@ -161,4 +161,17 @@
 			WHERE r_idx = #{r_idx}
 	</select>
 	
+	<select id="getOwnerReservationCount">
+			SELECT COUNT(*)
+			FROM reservation
+			WHERE 
+				res_idx IN (SELECT res_idx
+							FROM restaurant
+							WHERE 
+								c_idx = (SELECT c_idx
+											FROM ceo
+											WHERE 
+												c_id = #{cId})
+											)
+	</select>
 </mapper>

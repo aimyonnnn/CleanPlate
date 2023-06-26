@@ -49,7 +49,7 @@
 <!-- 문의 내역 영역 -->
 <div class="container mt-5">
 	<c:choose>
-		<c:when test="${QNAList ne null }">
+		<c:when test="${QNAList eq null }">
 			<h5 style="text-align: center; color: gray;">아직 문의사항이 없습니다.</h5>
 		</c:when>
 		<c:otherwise>

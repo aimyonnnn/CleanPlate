@@ -276,7 +276,7 @@
 						        		 <button type="button" class="btn btn-outline-warning" onclick="cancel(${resList.r_idx })">예약 취소하기</button>
 									     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="margin-left: 10px;">닫기</button>
 								    </c:when>
-								    <c:when test="${resList.r_status eq 2 && resList.rv_status eq 0 }">
+								    <c:when test="${resList.r_status eq 2 && resList.rv_status eq 1 }">
 						        		 <a href="#" class="btn btn-warning" style="color: white;" data-bs-toggle="modal" data-bs-target="#reviewmodify">리뷰작성하기</a>
 									     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="margin-left: 10px;">닫기</button>
 								    </c:when>

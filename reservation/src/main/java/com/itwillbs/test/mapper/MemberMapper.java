@@ -64,5 +64,8 @@ public interface MemberMapper {
 	
 	//리뷰 리스트 불러오기
 	List<ReviewVO> selectReviewList(String sId);
+	
+	//리뷰 삭제
+	int deleteReveiw(int rv_idx);
 
 }

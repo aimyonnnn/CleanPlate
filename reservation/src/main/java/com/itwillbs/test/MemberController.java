@@ -304,4 +304,19 @@ public class MemberController {
 		
 	}
 	
+	@GetMapping("RvDelete")
+	public String RvDelete(@RequestParam int rv_idx, Model model ) {
+		
+		System.out.println(rv_idx);
+		
+		int deleteCount = service.deletReview(rv_idx);
+		
+		if(deleteCount > 0) {
+			return "redirect:memberReview";
+		}
+		
+		model.addAttribute("msg", "리뷰작성 실패");
+		return "fail_back";
+	}
+	
 }

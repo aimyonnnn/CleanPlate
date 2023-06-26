@@ -155,7 +155,6 @@
 					, #{rv_scope}
 					, #{rv_comment}
 					, #{rv_img}
-					, #{r_idx}
 					, #{res_idx}
 					, #{m_idx}
 					);
@@ -179,4 +178,9 @@
                             FROM members
                             WHERE m_id = #{sId})
 	</select>
+	
+	<delete id="deleteReveiw">
+		DELETE FROM reviews
+			WHERE rv_idx = #{rv_idx}
+	</delete>
 </mapper>

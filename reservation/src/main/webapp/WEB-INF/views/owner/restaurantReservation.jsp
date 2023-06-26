@@ -22,7 +22,6 @@
    	<!-- 공통 상단바 구역 -->
 <%@ include file="../common/common_header.jsp" %>
    	<!-- 공통 상단바 구역 -->
-
     <!-- 제목 구역 -->
 	<div class="container">
         <div class="row">

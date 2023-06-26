@@ -116,4 +116,8 @@ public class MemberService {
 		return mapper.selectReviewList(sId);
 	}
 
+	public int deletReview(int rv_idx) {
+		return mapper.deleteReveiw(rv_idx);
+	}
+
 }

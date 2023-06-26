@@ -16,7 +16,7 @@ public interface RestaurantMapper {
 	int insertRestaurant(RestaurantVO restaurant);
 
 	// 예약 내역 조회
-	List<ReservationVO> selectReservationList(String sId);
+	List<ReservationVO> selectReservationList(@Param("id") String cId);
 
 	// 가게 내역 조회
 	List<RestaurantVO> selectRestaurantList();
@@ -44,6 +44,9 @@ public interface RestaurantMapper {
 	
 	// 예약 조회
 	ReservationVO getReservation(int r_idx);
+	
+	// 점주 예약 갯수
+	int getOwnerReservationCount(String cId);
 
 
 	

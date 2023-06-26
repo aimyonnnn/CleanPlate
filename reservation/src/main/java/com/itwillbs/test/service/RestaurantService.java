@@ -61,6 +61,10 @@ public class RestaurantService {
 	public int getRestaurantrievewNum() {
 		return mapper.getRestaurantrievewNum();
 	}
+
+	public int getOwnerReservationCount(String cId) {
+		return mapper.getOwnerReservationCount(cId);
+	}
 	
 	
 
