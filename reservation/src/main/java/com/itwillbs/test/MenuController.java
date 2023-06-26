@@ -17,47 +17,40 @@ public class MenuController {
 	@Autowired
 	private MenuService service;
 	
-	  private List<MenuVO> menuList = new ArrayList<MenuVO>();
 	
 	// 모달창의 MenuVO 값 가져오기
-	 @ResponseBody
+	@ResponseBody
 	@PostMapping("menuVOInsert")
-	public MenuVO menuVOInsert(@ModelAttribute MenuVO menu, Model model, HttpSession session) throws Exception {
-		System.out.println(menu);
+	public MenuVO menuVOInsert(@ModelAttribute MenuVO menu, HttpSession session) throws Exception {
+//		System.out.println(menu);
+		// 파일 업로드
+		
 		return menu;
 	}
-	// 
-	@PostMapping("menuVOInsert2")
-	public List<MenuVO> menuVOInsert2(@ModelAttribute MenuVO menu, Model model) throws Exception {
-		
-		List<MenuVO> menuList = new ArrayList<MenuVO>();
-		menuList.add(menu);
-		System.out.println(menuList);
-		model.addAttribute("menuList", menuList);
-		return menuList;
-	}
+	 
 	
 	
 	// 메뉴 추가
+	@ResponseBody
 	@PostMapping("menuInsert")
-	public String menuInsert(MenuVO menu, Model model) {
-		System.out.println(menu);
+	public String menuInsert(@ModelAttribute List<MenuVO> menuList, Model model) {
+		System.out.println("menuInsert 안 " + menuList);
 		
-		
+		return "";
 		
 		// 메뉴 추가 작업 
-		int insertCount = service.registMenu(menu);
+//		int insertCount = service.registMenu(menu);
 		
 		// 성공시 가게 목록 조회 작업
 		// 실패시 이전페이지 
-		if(insertCount > 0) {
-			model.addAttribute("menu", menu);
-			return "success";
-			
-		} else {
-			model.addAttribute("msg", "메뉴 등록 실패!");
-			return "fail";
-		}
+//		if(insertCount > 0) {
+//			model.addAttribute("menu", menu);
+//			return "success";
+//			
+//		} else {
+//			model.addAttribute("msg", "메뉴 등록 실패!");
+//			return "fail";
+//		}
 		
 	}
 	
