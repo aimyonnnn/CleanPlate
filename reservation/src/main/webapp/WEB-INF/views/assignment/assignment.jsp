@@ -254,7 +254,7 @@
 			    <button type="button" class="btn btn-warning mx-2" id="PriceHigh">가격높은순</button>
 <!-- 			    <button type="button" class="btn btn-warning mx-2" id="PriceBy50">50만원이하</button> -->
 			    <button type="button" class="btn btn-warning mx-2" id="RevAsc">예약빠른순</button>
-<!-- 			    <button type="button" class="btn btn-warning mx-2" id="RevDesc">예약느린순</button> -->
+			    <button type="button" class="btn btn-warning mx-2" id="reviewHigh">평점높은순</button>
 			    <button type="button" class="btn btn-warning mx-2" id="abc">가게이름순</button>
 			    <button type="button" class="btn btn-danger mx-2" id="today">TODAY</button>
 			  </div>
@@ -302,6 +302,9 @@
    	   // JSON 데이터 가져오기
        let assignmentList = <%= new Gson().toJson(request.getAttribute("assignmentList")) %>;
        console.log("assignmentList : " + assignmentList);
+       
+       // 리뷰 JSON 가져오기
+       let reviewScores = <%= new Gson().toJson(request.getAttribute("reviewScores")) %>;
        
        // 가격낮은순 정렬
        $('#PriceLow').click(() => {
@@ -360,6 +363,15 @@
     	   console.log(assignmentList);
 	       appendList(assignmentList);
        });
+       
+       // 평점 높은순 정렬
+ 	  $('#reviewHigh').on('click', () => {
+ 		  reviewScores.sort((a, b) => {
+ 	        return b.average_score - a.average_score;
+ 	    });
+ 		  console.log(reviewScores);
+ 	      appendList(reviewScores);
+ 	  });
        
        // 당일예약 필터
        $('#today').click(() => {

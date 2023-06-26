@@ -21,10 +21,12 @@ import com.itwillbs.test.service.AssignmentService;
 import com.itwillbs.test.service.MemberService;
 import com.itwillbs.test.service.PayService;
 import com.itwillbs.test.service.ReservationService;
+import com.itwillbs.test.service.RestaurantService;
 import com.itwillbs.test.vo.AssignmentVO;
 import com.itwillbs.test.vo.MemberVO;
 import com.itwillbs.test.vo.PayVO;
 import com.itwillbs.test.vo.ReservationVO;
+import com.itwillbs.test.vo.RestaurantVO;
 
 @Controller
 public class AssignmentController {
@@ -37,14 +39,21 @@ public class AssignmentController {
    private ReservationService reservationService;
    @Autowired
    private PayService payService;
+   @Autowired
+   private RestaurantService restaurantService;
+   
    
    private static final Logger logger = LoggerFactory.getLogger(AssignmentController.class);
  
    @GetMapping("/assignment")
    public String getAssignment(Model model) {
-	   // 양도 게시판 출력 리스트
+	   
+	   // 리스트 출력
        List<AssignmentVO> assignmentList = assignmentService.getAssignmentList();
+       List<Map<String, Object>> reviewScores = restaurantService.getRestaurantReviewScores();
+       
        model.addAttribute("assignmentList", assignmentList);
+	   model.addAttribute("reviewScores", reviewScores);
        return "assignment/assignment";
    }
    
