@@ -6,7 +6,9 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.itwillbs.test.mapper.CeoMapper;
 import com.itwillbs.test.mapper.MemberMapper;
+import com.itwillbs.test.mapper.RestaurantMapper;
 import com.itwillbs.test.vo.MemberVO;
 import com.itwillbs.test.vo.ReservationVO;
 import com.itwillbs.test.vo.RestaurantVO;
@@ -17,6 +19,9 @@ public class MemberService {
 	
 	@Autowired
 	private MemberMapper mapper;
+	
+	@Autowired
+	private RestaurantMapper rMapper;
 
 	// 개인회원 등록
 	public int registMember(MemberVO member) {
@@ -91,6 +96,12 @@ public class MemberService {
 	
 	//작성된 리뷰 추가
 	public int registReview(ReviewVO review) {
+		
+		ReservationVO reservation = rMapper.getReservation(review.getR_idx());
+		
+		review.setM_idx(reservation.getM_idx());
+		review.setRes_idx(reservation.getRes_idx());
+		
 		return mapper.insertReview(review);
 	}
 

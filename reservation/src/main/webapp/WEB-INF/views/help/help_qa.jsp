@@ -48,71 +48,78 @@
 
 <!-- 문의 내역 영역 -->
 <div class="container mt-5">
-	<c:forEach items="${QNAList }" var="QNAList">
-	  <div class="accordion" id="accordionExample">
-	    <div class="accordion-item">
-	      <h2 class="accordion-header">
-	        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${QNAList.q_idx }" aria-expanded="false" aria-controls="collapseOne">
-	        <div class="container text-center">
-	          <div class="row">
-	            <div class="col-1">
-	              ${QNAList.q_idx }
-	            </div>
-	            <div class="col-6">
-	              ${QNAList.q_subject }
-	            </div>
-	            <div class="col-2">
-	              <fmt:formatDate value="${QNAList.q_date }" pattern="yyyy-MM-dd"/>
-	            </div>
-	            <div class="col-2"> 
-	              <c:choose>
-	              	<c:when test="${QNAList.q_re_context eq null }">
-	              		문의 진행중
-	              	</c:when>
-	              	<c:otherwise>
-	              		문의 완료
-	              	</c:otherwise>
-	              </c:choose>
-	            </div>
-	          </div>
-	        </div>
-	        </button>
-	      </h2>
-	      <div id="collapse${QNAList.q_idx }" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-	        <div class="accordion-body">
-	         ${QNAList.q_context }
-	         <c:if test="${QNAList.q_re_context ne null }">
-		         <br><br>
-		         <hr>
-		         답변 : ${QNAList.q_re_context }
-	         </c:if>
-	         <c:choose>
-		         <c:when test="${QNAList.q_re_context eq null and sessionScope.sId eq 'admin' }">
-		         	<form action="QNAAnswer" method="post">
-		         		<input type="hidden" value="${QNAList.q_idx }" name="q_idx">
-		         		<br>
-		         		<br>
-		         		<hr>
-				         <textarea class="form-control" name="q_re_context" id="exampleFormControlTextarea2" rows="5" required="required"></textarea>
-				         <div class="btn-group-sm text-end" role="group" aria-label="Basic outlined example">
-				            <button type="submit" class="btn btn-outline-primary mt-3" >답변</button>
-				         </div>
-			        </form>
-	         	</c:when>
-	         	<c:otherwise>
-	         		<c:if test="${QNAList.q_re_context eq null and sessionScope.sId ne 'admin' }">
-			         	<div class="btn-group-sm text-end" role="group" aria-label="Basic outlined example">
-				            <button class="btn btn-outline-primary">삭제</button>
-				            <button class="btn btn-outline-primary">수정</button>
-				        </div>
-			    	</c:if>
-	         	</c:otherwise>
-	         </c:choose>
-	        </div>
-	      </div>
-	    </div>
-	  </div>
-  </c:forEach>
+	<c:choose>
+		<c:when test="${QNAList ne null }">
+			<h5 style="text-align: center; color: gray;">아직 문의사항이 없습니다.</h5>
+		</c:when>
+		<c:otherwise>
+			<c:forEach items="${QNAList }" var="QNAList">
+			  <div class="accordion" id="accordionExample">
+			    <div class="accordion-item">
+			      <h2 class="accordion-header">
+			        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${QNAList.q_idx }" aria-expanded="false" aria-controls="collapseOne">
+			        <div class="container text-center">
+			          <div class="row">
+			            <div class="col-1">
+			              ${QNAList.q_idx }
+			            </div>
+			            <div class="col-6">
+			              ${QNAList.q_subject }
+			            </div>
+			            <div class="col-2">
+			              <fmt:formatDate value="${QNAList.q_date }" pattern="yyyy-MM-dd"/>
+			            </div>
+			            <div class="col-2"> 
+			              <c:choose>
+			              	<c:when test="${QNAList.q_re_context eq null }">
+			              		문의 진행중
+			              	</c:when>
+			              	<c:otherwise>
+			              		문의 완료
+			              	</c:otherwise>
+			              </c:choose>
+			            </div>
+			          </div>
+			        </div>
+			        </button>
+			      </h2>
+			      <div id="collapse${QNAList.q_idx }" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+			        <div class="accordion-body">
+			         ${QNAList.q_context }
+			         <c:if test="${QNAList.q_re_context ne null }">
+				         <br><br>
+				         <hr>
+				         답변 : ${QNAList.q_re_context }
+			         </c:if>
+			         <c:choose>
+				         <c:when test="${QNAList.q_re_context eq null and sessionScope.sId eq 'admin' }">
+				         	<form action="QNAAnswer" method="post">
+				         		<input type="hidden" value="${QNAList.q_idx }" name="q_idx">
+				         		<br>
+				         		<br>
+				         		<hr>
+						         <textarea class="form-control" name="q_re_context" id="exampleFormControlTextarea2" rows="5" required="required"></textarea>
+						         <div class="btn-group-sm text-end" role="group" aria-label="Basic outlined example">
+						            <button type="submit" class="btn btn-outline-primary mt-3" >답변</button>
+						         </div>
+					        </form>
+			         	</c:when>
+			         	<c:otherwise>
+			         		<c:if test="${QNAList.q_re_context eq null and sessionScope.sId ne 'admin' }">
+					         	<div class="btn-group-sm text-end" role="group" aria-label="Basic outlined example">
+						            <button class="btn btn-outline-primary">삭제</button>
+						            <button class="btn btn-outline-primary">수정</button>
+						        </div>
+					    	</c:if>
+			         	</c:otherwise>
+			         </c:choose>
+			        </div>
+			      </div>
+			    </div>
+			  </div>
+		  </c:forEach>
+		</c:otherwise>
+	</c:choose>
   <!-- 페이지 이동 영역 -->
   <div class="row my-4">
     <div class="col-12">

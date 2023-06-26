@@ -155,4 +155,10 @@
 				WHERE r.res_idx = #{res_idx}
 	</select>
 	
+	<select id="getReservation">
+		SELECT *
+			FROM reservation
+			WHERE r_idx = #{r_idx}
+	</select>
+	
 </mapper>

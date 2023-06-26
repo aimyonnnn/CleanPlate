@@ -41,6 +41,9 @@ public interface RestaurantMapper {
 
 	// 리뷰수 조회 계산
 	int getRestaurantrievewNum();
+	
+	// 예약 조회
+	ReservationVO getReservation(int r_idx);
 
 
 	

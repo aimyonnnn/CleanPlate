@@ -173,7 +173,7 @@ public class MemberController {
 	}
 	
 	// 내가 쓴 리뷰
-	@GetMapping("memberReview")
+	@GetMapping("memberReview") 
 	public String memberReview(HttpSession session, Model model) {
 		String sId = (String)session.getAttribute("sId");
 		

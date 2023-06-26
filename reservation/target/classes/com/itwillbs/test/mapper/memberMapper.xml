@@ -156,6 +156,8 @@
 					, #{rv_comment}
 					, #{rv_img}
 					, #{r_idx}
+					, #{res_idx}
+					, #{m_idx}
 					);
 	</insert>
 	
@@ -168,16 +170,13 @@
 	
 	<!-- 자신이 작성한 리뷰 리스트 보기 -->
 	<select id="selectReviewList">
-        SELECT res.res_name, rv_idx, rv_scope, rv_comment, rv_img, rv.r_idx
-            FROM reviews rv join reservation r 
-            ON rv.r_idx = r.r_idx
+        SELECT res.res_name, rv_idx, rv_scope, rv_comment, rv_img, rv.m_idx, rv.res_idx
+            FROM reviews rv join members m 
+            ON rv.m_idx = m.m_idx
             JOIN restaurant res
-            ON r.res_idx = res.res_idx
-            WHERE r.r_idx IN (SELECT r_idx
-                            FROM reservation
-                            WHERE m_idx = (SELECT m_idx
-                                            FROM members
-                                            WHERE m_id = #{sId})
-                            )
+            ON res.res_idx = rv.res_idx
+            WHERE rv.m_idx = (SELECT m_idx
+                            FROM members
+                            WHERE m_id = #{sId})
 	</select>
 </mapper>
