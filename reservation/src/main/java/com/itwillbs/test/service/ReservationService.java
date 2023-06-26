@@ -2,6 +2,7 @@ package com.itwillbs.test.service;
 
 
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -122,6 +123,11 @@ public class ReservationService {
 	// 예약번호로 레스토랑, 예약내역 조회
 	public ReservationVO getReservationAllInfo(int r_idx) {
 		return mapper.selectReservationAllInfo(r_idx);
+	}
+
+	// 예약이 꽉찬 날 조회
+	public String[] getFullDay() {
+		return mapper.selectFullDay();
 	}
 	
 }

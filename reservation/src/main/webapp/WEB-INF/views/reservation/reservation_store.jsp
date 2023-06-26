@@ -113,13 +113,19 @@
 		<div id="carouselExampleControls" class="mt-4 carousel slide" data-bs-ride="carousel">
 			<div class="carousel-inner">
 				<div class="carousel-item active">
-					<img src="${pageContext.request.contextPath }/resources/images/restaurant/kumuda1.jpg" class="d-block w-100" alt="...">
+					<c:if test="${not empty restaurantInfo.res_photo1 }">
+			        	<img src="${pageContext.request.contextPath }/resources/upload/${restaurantInfo.res_photo1 }">
+	                 </c:if>
 				</div>
 				<div class="carousel-item">
-					<img src="${pageContext.request.contextPath }/resources/images/restaurant/kumuda2.jpg" class="d-block w-100" alt="...">
+           			<c:if test="${not empty restaurantInfo.res_photo2 }">
+             			<img src="${pageContext.request.contextPath }/resources/upload/${restaurantInfo.res_photo2 }">
+           			</c:if>
 				</div>
 				<div class="carousel-item">
-					<img src="${pageContext.request.contextPath }/resources/images/restaurant/kumuda3.jpg" class="d-block w-100" alt="...">
+           			<c:if test="${not empty restaurantInfo.res_photo3 }">
+             			<img src="${pageContext.request.contextPath }/resources/upload/${restaurantInfo.res_photo3 }">
+           			</c:if>
 				</div>
 			</div>
 			<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -165,13 +171,13 @@
 					        <dt class="col-sm-3">정기 휴무일</dt>
 					        <dd class="col-sm-9">· 
 					        <c:choose>
-						        <c:when test="${restaurantInfo.res_dayoff == '0'}">월요일</c:when>
-							    <c:when test="${restaurantInfo.res_dayoff == '1'}">화요일</c:when>
-							    <c:when test="${restaurantInfo.res_dayoff == '2'}">수요일</c:when>
-							    <c:when test="${restaurantInfo.res_dayoff == '3'}">목요일</c:when>
-							    <c:when test="${restaurantInfo.res_dayoff == '4'}">금요일</c:when>
-							    <c:when test="${restaurantInfo.res_dayoff == '5'}">토요일</c:when>
-							    <c:when test="${restaurantInfo.res_dayoff == '6'}">일요일</c:when>
+						        <c:when test="${restaurantInfo.res_dayoff == '1'}">월요일</c:when>
+							    <c:when test="${restaurantInfo.res_dayoff == '2'}">화요일</c:when>
+							    <c:when test="${restaurantInfo.res_dayoff == '3'}">수요일</c:when>
+							    <c:when test="${restaurantInfo.res_dayoff == '4'}">목요일</c:when>
+							    <c:when test="${restaurantInfo.res_dayoff == '5'}">금요일</c:when>
+							    <c:when test="${restaurantInfo.res_dayoff == '6'}">토요일</c:when>
+							    <c:when test="${restaurantInfo.res_dayoff == '0'}">일요일</c:when>
 					        </c:choose>
 					        </dd>
 					        <dt class="col-sm-3">위치</dt>
@@ -225,7 +231,7 @@
 				<tbody>
 					<c:forEach var="menus" items="${menusList }">
 					<tr>
-						<td><img src="https://www.walkerhill.com/assets/vistawalkerhillseoul/global/images/etc/menu_myongwolgwan0102.jpg" class="d-block" alt="..."></td>
+						<td><img src="${pageContext.request.contextPath }/resources/upload/${menus.me_photo }" width="100" height="100"></td>
 						<td>
 							<dl class="row">
 								<dt class="mt-3">${menus.me_name}</dt>
@@ -247,7 +253,7 @@
 				<tbody>
 					<c:forEach items="${reviewList }" var="reviewList">
 						<tr>
-							<td><img src="https://www.walkerhill.com/assets/vistawalkerhillseoul/global/images/etc/menu_myongwolgwan0102.jpg" class="d-block" alt="..."></td>
+							<td><img src="${pageContext.request.contextPath }/resources/upload/${reviewList.rv_img }" width="100" height="100"></td>
 							<td>
 								<dl class="row">				
 									<!-- 별점 출력 -->					

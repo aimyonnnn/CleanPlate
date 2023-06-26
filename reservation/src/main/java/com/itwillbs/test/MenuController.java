@@ -24,11 +24,6 @@ public class MenuController {
 	@PostMapping("menuVOInsert")
 	public MenuVO menuVOInsert(@ModelAttribute MenuVO menu, Model model, HttpSession session) throws Exception {
 		System.out.println(menu);
-		menuList.add(menu);
-		
-		model.addAttribute("menu", menu);
-		session.setAttribute("menuList", menuList);
-		System.out.println(menuList);
 		return menu;
 	}
 	// 

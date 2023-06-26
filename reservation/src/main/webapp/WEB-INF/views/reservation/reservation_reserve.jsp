@@ -81,7 +81,6 @@
 							<b id='countResult' style="padding: 20px;">1</b>
 						<button id="plusButton" type="button" class="btn btn-outline-warning rounded-circle" onclick="count('plus')" value="+" >+</button>
 					</dd>
-					<dd style="font-size: 14px; color: red;">※인원 재 선택시 반드시 날짜를 다시 선택해주세요.<dd>
 				</dl>
 			</div>
 			
@@ -95,8 +94,10 @@
 			  // 더하기/빼기
 			  if (type === 'plus') {
 			    number += 1;
+			    resetResultValues();
 			  } else if (type === 'minus') {
 			    number -= 1;
+			    resetResultValues();
 			  }
 			  // 기본값이 1로 설정 
 			  if (number < 1) {
@@ -185,8 +186,14 @@
 			<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
 			<script>
 			$(document).ready(function() {
+				
 				// 예약이 꽉 찬 날짜 데이터를 얻어온다고 가정하고, 아래 배열에 해당 날짜를 추가함
-			    var fullyBookedDates = ['2023-06-20', '2023-06-22', '2023-06-25'];
+			    var fullyBookedDates = [];
+			    <c:forEach var="date" items="${FullDay}">
+			        var fullDate = "${date}".replace('[', '').replace(']', '').trim();
+			        fullyBookedDates.push(fullDate);
+			    </c:forEach>
+			    console.log(fullyBookedDates);
 			    
 				// 휴무일 숫자를 가져옴
 				var dayOff = ${restaurant.res_dayoff};
@@ -278,29 +285,58 @@
 			}
 			<!-- 선택한 날짜&인원을 실시간으로 조회할 ajax 끝 -->
 
+			function resetResultValues() {
+					// 결과를 초기화합니다.
+					document.getElementById("totalResult").innerText = "";
+					document.getElementById("menuIdx").value = "";
+					document.getElementById("menuResult").innerText = "";
+					
+					// 예약 시간 입력을 초기화합니다.
+					$('#r_date').val('');
+				  
+					// 초기값을 오늘 날짜로 설정
+				    $(".datepicker").datepicker("setDate", new Date());
+				  
+				}
+			
+			
 			<!-- 시간 선택 시 자동 입력 -->
+			// 현재 활성화된 버튼을 저장할 변수
+			let activeButton = null;
+			
 			function selectTime(button) {
-			    const selectedTime = button.innerText; // 시간
-			    const currentValue = $('#r_date').val(); // 기존에 적혀져 있는 날짜
-			    const date = currentValue.split(' ')[0]; // 날짜 부분만 가져옴
-			    const newDateAndTime = date + ' ' + selectedTime; // 병합된 날짜와 선택한 시간으로 새로운 문자열 생성
-
-			    // 예약 시간에 시간 자동 입력
-			    $('#r_date').val(newDateAndTime);
-
-			    // 가격 계산 및 출력
-			    const hour = parseInt(selectedTime.split(':')[0], 10);
-			    const numberOfPeople = parseInt(document.getElementById('countResult').innerText);
-			    const price = (hour >= 11 && hour <= 16) ? document.getElementById('price1').value
-			                                             : document.getElementById('price2').value;
-			    var menuName = (hour >= 11 && hour <= 16) ? document.getElementById('menuName1').value
-			    										: document.getElementById('menuName2').value;
-			    var menuIdx = (hour >= 11 && hour <= 16) ? document.getElementById('menuIdx1').value
-														: document.getElementById('menuIdx2').value;
-			    const totalPrice = price * numberOfPeople;
-			    document.getElementById("totalResult").innerText = totalPrice + '원';
-			    document.getElementById("menuIdx").value = menuIdx;
-			    document.getElementById("menuResult").innerText = menuName + " x " + numberOfPeople + "명";
+				
+				// 이미 활성화 된 버튼 제거 
+				if (activeButton) {
+				     activeButton.classList.remove('active');
+				}
+				
+				// 클릭한 버튼에 active 클래스 추가
+			    button.classList.add('active');
+				
+			    activeButton = button; // 활성화 된 버튼으로 저장
+				
+				const selectedTime = button.innerText; // 시간
+				const currentValue = $('#r_date').val(); // 기존에 적혀져 있는 날짜
+				const date = currentValue.split(' ')[0]; // 날짜 부분만 가져옴
+				const newDateAndTime = date + ' ' + selectedTime; // 병합된 날짜와 선택한 시간으로 새로운 문자열 생성
+				
+				// 예약 시간에 시간 자동 입력
+				$('#r_date').val(newDateAndTime);
+				
+				// 가격 계산 및 출력
+				const hour = parseInt(selectedTime.split(':')[0], 10);
+				const numberOfPeople = parseInt(document.getElementById('countResult').innerText);
+				const price = (hour >= 11 && hour <= 16) ? document.getElementById('price1').value
+				                                         : document.getElementById('price2').value;
+				var menuName = (hour >= 11 && hour <= 16) ? document.getElementById('menuName1').value
+														: document.getElementById('menuName2').value;
+				var menuIdx = (hour >= 11 && hour <= 16) ? document.getElementById('menuIdx1').value
+											: document.getElementById('menuIdx2').value;
+				const totalPrice = price * numberOfPeople;
+				document.getElementById("totalResult").innerText = totalPrice + '원';
+				document.getElementById("menuIdx").value = menuIdx;
+				document.getElementById("menuResult").innerText = menuName + " x " + numberOfPeople + "명";
 
 			}
 			</script>
@@ -348,7 +384,7 @@
 							<label for="r_request" class="form-label fw-bold fs-4">요청사항</label>
 							<textarea cols="20" rows="5" class="form-control" id="r_request"></textarea>
 							<div>
-								※ 요청사항은 업장 사정에 따라 제공이 불가능할 수 있으며 보장되는 항목이 아닙니다. 가능 여부는 방문 시 확인하실 수 있습니다.
+								※ 요청사항은 업장 사정에 따라 제공이 불가능할 수 있으며 보장되는 항목이 아닙니다.<br> 가능 여부는 방문 시 확인하실 수 있습니다.
 							</div>
 						</div>
 					</div>

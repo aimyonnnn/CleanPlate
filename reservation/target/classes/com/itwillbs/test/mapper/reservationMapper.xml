@@ -216,4 +216,14 @@
 		    	) -- 결제 취소 시 예약상태 r_status 3-취소로 변경
 	</update>
 	
+	<!-- 예약이 꽉찬 날 조회 -->
+	<select id="selectFullDay" resultType="string">
+		SELECT DATE_FORMAT(r_date, '%Y-%m-%d')
+			FROM reservation
+			WHERE r_status = 1
+			GROUP BY DATE_FORMAT(r_date, '%Y-%m-%d'), res_idx
+			HAVING SUM(r_tables) >= (SELECT res_total_table * 2 
+										FROM restaurant 
+										WHERE restaurant.res_idx = reservation.res_idx);
+	</select>
 </mapper>

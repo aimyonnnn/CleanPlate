@@ -2,6 +2,7 @@ package com.itwillbs.test.mapper;
 
 
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -90,6 +91,9 @@ public interface ReservationMapper {
 	
 	// 결제취소 후 예약상태 변경
 	int updateReservationStatus(String payment_num);
+
+	// 예약이 꽉찬 날 조회
+	String[] selectFullDay();
 
 
 }

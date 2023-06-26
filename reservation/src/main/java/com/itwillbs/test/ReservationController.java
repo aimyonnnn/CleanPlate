@@ -1,5 +1,7 @@
 package com.itwillbs.test;
 
+import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -97,6 +99,12 @@ public class ReservationController {
 		// 특정 가게의 메뉴 리스트 조회
 		List<MenuVO> menuList = menuService.getMenusList(res_idx);
 		model.addAttribute("menuList", menuList);
+		
+		// 예약이 꽉 찬 날 조회
+		String[] FullDay = reservationService.getFullDay();
+		model.addAttribute("FullDay", Arrays.toString(FullDay));
+		System.out.println(Arrays.toString(FullDay));
+		
 		
 		// 예약하기로 가기 전 세션으로부터 회원 정보 받아오기
 		String sId = (String)session.getAttribute("sId");
