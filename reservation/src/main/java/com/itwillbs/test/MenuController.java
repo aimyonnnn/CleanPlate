@@ -20,8 +20,8 @@ public class MenuController {
 	  private List<MenuVO> menuList = new ArrayList<MenuVO>();
 	
 	// 모달창의 MenuVO 값 가져오기
+	 @ResponseBody
 	@PostMapping("menuVOInsert")
-	@ResponseBody
 	public MenuVO menuVOInsert(@ModelAttribute MenuVO menu, Model model, HttpSession session) throws Exception {
 		System.out.println(menu);
 		menuList.add(menu);
