@@ -1,5 +1,6 @@
 package com.itwillbs.test;
 
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -160,6 +161,12 @@ public class HelpController {
 		model.addAttribute("msg","답변실패");
 		return "fail_back";
 		
+	}
+	
+	// FAQ 회원
+	@GetMapping("FAQ")
+	public String faqMember() {
+		return "help/help_fq";
 	}
 	
 	// Notice 페이지로 이동

@@ -39,17 +39,18 @@
 		  $(document).ready(function() {
 		    var isLiked = false;
 		    var res_idx = ${restaurantInfo.res_idx};
-		    var m_id = ${sessionScope.sId};
+		    var m_id = '<c:out value="${sessionScope.sId}" />';
 		    var liked = $("#likeBtn").val() ? "true" : "false";
 			
 		    // 찜하기 버튼 클릭 이벤트
 		    $("#likeBtn").click(function() {
 		      liked = !isLiked ? "true" : "false";
 			  console.log(liked);
+			  console.log(m_id);
 		      $.ajax({
 		        url: '${pageContext.request.contextPath}/toggleLikeStatus',
 		        type: 'GET',
-		        data: {'res_idx': ${restaurantInfo.res_idx}, 'm_id':${sessionScope.sId}, 'liked': liked},
+		        data: {'res_idx': ${restaurantInfo.res_idx}, 'm_id':m_id, 'liked': liked},
 		        async: false,
 		        success: function(response) {
 		          if (response == "ok") {

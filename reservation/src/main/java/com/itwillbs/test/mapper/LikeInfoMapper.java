@@ -10,7 +10,7 @@ public interface LikeInfoMapper {
     public void toggleLikeStatus(Map<String, Object> map);
     
     //찜한 가게 출력
-	public List<Map<String, Object>> memberLikelist();
+	public List<Map<String, Object>> memberLikelist(String sId);
 
 	//찜하기 취소(하트)
 	public void deletcount(int res_idx, String m_id, String liked);
