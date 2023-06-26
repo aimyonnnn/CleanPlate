@@ -32,22 +32,23 @@ public class LikeInfoController {
 	@Autowired
 	private RestaurantService restaurantService;
     
-    @ResponseBody
-    @RequestMapping(value = "/toggleLikeStatus", method = RequestMethod.GET)
-    public String Count(HttpServletRequest request, @RequestParam int res_idx, @RequestParam String m_id, @RequestParam String liked) {
-      String response = "ok";
-      System.out.println(res_idx);
-      System.out.println(m_id);
-      System.out.println(liked);
-      
-      if(liked.equals("true")) {//이미 눌러져있는 상황
-    	  likeInfoService.deletcount(res_idx, m_id, liked);
-      }else {//안 눌러져있는 상황
-    	  likeInfoService.toggleLikeStatus(res_idx, m_id, liked);
-      }
-      
-      return response;
-    }
+	@ResponseBody
+	@RequestMapping(value = "/toggleLikeStatus", method = RequestMethod.GET)
+	public String toggleLikeStatus(HttpServletRequest request, @RequestParam int res_idx, @RequestParam String m_id, @RequestParam String liked) {
+	  String response = "ok";
+	  System.out.println(res_idx);
+	  System.out.println(m_id);
+	  System.out.println(liked);
+
+	  if (liked.equals("true")) { // 이미 눌러져있는 상황
+	    likeInfoService.deletcount(res_idx, m_id, liked);
+	  } else { // 안 눌러져있는 상황
+	    likeInfoService.toggleLikeStatus(res_idx, m_id, liked);
+	  }
+
+	  return response;
+	}
+
 
     @ResponseBody
     @RequestMapping(value = "/deletecount", method = RequestMethod.GET)

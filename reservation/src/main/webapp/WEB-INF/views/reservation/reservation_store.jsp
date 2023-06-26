@@ -36,40 +36,37 @@
     <!-- 위로가기 버튼 CSS -->
     <!-- 찜하기 -->
 		<script>
-		  $(document).ready(function() {
-		    var isLiked = false;
-		    var res_idx = ${restaurantInfo.res_idx};
-		    var m_id = '<c:out value="${sessionScope.sId}" />';
-		    var liked = $("#likeBtn").val() ? "true" : "false";
-			
-		    // 찜하기 버튼 클릭 이벤트
-		    $("#likeBtn").click(function() {
-		      liked = !isLiked ? "true" : "false";
-			  console.log(liked);
-			  console.log(m_id);
-		      $.ajax({
-		        url: '${pageContext.request.contextPath}/toggleLikeStatus',
-		        type: 'GET',
-		        data: {'res_idx': ${restaurantInfo.res_idx}, 'm_id':m_id, 'liked': liked},
-		        async: false,
-		        success: function(response) {
-		          if (response == "ok") {
-		            isLiked = !isLiked; // 토글하여 변수 값을 변경
-					if(liked=="true"){
-		            {if (isLiked) {
-		              $("#likeBtn").removeClass("unliked").addClass("liked");
-		            } else {
-		              $("#likeBtn").removeClass("liked").addClass("unliked");
-		            }}}
-		            
-		            alert("찜 완료!");
-		          } else {
-		            alert("에러 발생");
-		          }
-		        }
-		      });
-		    });
-		  });
+		$(document).ready(function() {
+			  var res_idx = ${restaurantInfo.res_idx};
+			  var m_id = '<c:out value="${sessionScope.sId}" />';
+			  var liked = $("#likeBtn").val() ? "true" : "false";
+
+			  // 찜하기 버튼 클릭 이벤트
+			  $("#likeBtn").click(function() {
+			    liked = !liked ? "true" : "false";
+			    console.log(liked);
+			    console.log(m_id);
+			    $.ajax({
+			      url: '${pageContext.request.contextPath}/toggleLikeStatus',
+			      type: 'GET',
+			      data: {'res_idx': res_idx, 'm_id': m_id, 'liked': liked},
+			      async: false,
+			      success: function(response) {
+			        if (response == "ok") {
+			          if (liked == "true") {
+			            $("#likeBtn").removeClass("unliked").addClass("liked");
+			          } else {
+			            $("#likeBtn").removeClass("liked").addClass("unliked");
+			          }
+			          alert("찜 완료!");
+			        } else {
+			          alert("에러 발생");
+			        }
+			      }
+			    });
+			  });
+			});
+
 		</script>    
     <!-- 찜하기 -->
     
