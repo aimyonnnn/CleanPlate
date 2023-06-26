@@ -49,7 +49,7 @@
                     <th class="col-1 table-secondary">파일첨부</th>
                     <td class="col" colspan="3">
                     	<c:if test="${not empty notice.no_file}">
-						    <a href="${pageContext.request.contextPath}/resources/upload/${notice.no_file}" download="${fn:substringAfter(notice.no_file, '_')}">${fn:substringAfter(notice.no_file, '_')}</a><br>
+						    <a href="${pageContext.request.contextPath }/resources/upload/${notice.no_file }" download="${notice.no_file }">${fn:split(notice.no_file, '_')[1] }</a><br>
 						</c:if>
                     </td>
                 </tr>

@@ -85,7 +85,7 @@ public class HelpController {
 		}
 		
 		
-		String uploadDir = "resources/upload";
+		String uploadDir = "/resources/upload";
 		
 		//실제 저장 경로
 		String saveDir = session.getServletContext().getRealPath(uploadDir);

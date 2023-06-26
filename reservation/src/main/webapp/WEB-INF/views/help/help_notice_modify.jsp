@@ -72,9 +72,13 @@
 	                    <th class="col-1">파일첨부</th>
 	                    <td class="col">
 	                        <c:choose>
-								<c:when test="${not empty notice.no_file }">
-								    ${fn:substringAfter(notice.no_file, '_')}
+								<c:when test="${empty notice.no_file }">
+									<input type="file" name="file" /><br>
 								</c:when>
+								<c:otherwise>
+									${fn:split(notice.no_file, '_')[1] }
+									<input type="button" value="삭제">
+								</c:otherwise>
 							</c:choose>
 						</td>
 	                </tr>
