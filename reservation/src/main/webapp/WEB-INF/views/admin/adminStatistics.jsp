@@ -192,7 +192,13 @@
                 		, moment().subtract(1, 'day').format('YYYY.MM.DD')
                 		, now.format('YYYY.MM.DD') ],
                     datasets: [{ 
-                        data: [${adminReservationCount6.count}, ${adminReservationCount5.count}, ${adminReservationCount4.count}, ${adminReservationCount3.count}, ${adminReservationCount2.count}, ${adminReservationCount1.count}, ${adminReservationCount0.count}],
+                        data: [${adminReservationCount6.count}
+                        	 , ${adminReservationCount5.count}
+                        	 , ${adminReservationCount4.count}
+                        	 , ${adminReservationCount3.count}
+                        	 , ${adminReservationCount2.count}
+                        	 , ${adminReservationCount1.count}
+                        	 , ${adminReservationCount0.count}],
                         fill: false,
                         pointRadius: 3,
                         lineTension: 0,
