@@ -101,7 +101,8 @@
             <div class="col-10">
                 <!-- 가게내용 페이지 시작 -->
                 <!-- 파일 업로드 enctype="multipart/form-data" -->
-                   <form action="restaurantInsertPro" method="post" enctype="multipart/form-data">
+                   <form action="restaurantInsertPro" id="restaurant" method="post" enctype="multipart/form-data">
+<!--                    <input type="hidden" name=""> -->
                 	<table class="table" style="margin-left: 70px; width: 58%;">
 						<tbody>
                             <tr>
@@ -271,13 +272,12 @@
 						    </tr>
 						    <tr>
                                 <th scope="row"><label for="menu">메뉴</label></th>
-						    	<td>
-						    		<button type="button" id="menu" class="btn btn-warning" style="color: black;" data-bs-toggle="modal" data-bs-target="#menuModal">메뉴 추가</button>
+						    	<td id="td_menu">
+						    		<button type="button" id="menu" class="btn btn-warning" style="color: black;" >메뉴 추가</button>
 							 		<div class="row mt-3 align-items-center">
 							            <table class="table" id="menuList">
 							                <thead>
 							                  <tr>
-							                  ${sessionScope.menuList }
 							                    <th scope="col" class="col-5">메뉴 이름</th>
 							                    <th scope="col" class="col-3">가격</th>
 							                    <th scope="col"></th>
@@ -476,63 +476,66 @@
         <!-- 가게내용 페이지 끝 -->
 
 <!-- 메뉴 추가 모달 창 -->
-<div class="modal fade" id="menuModal" tabindex="-1" aria-labelledby="menuModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="menuModalLabel">메뉴 추가</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-<!--             action="menuVOInsert"  -->
-            <form id="menuVOInsert" method="post" enctype="multipart/form-data" action="menuVOInsert">
-	            <div class="modal-body container d-flex justify-content-center p-3 modal-content border-0">
-	                <div class="container d-flex justify-content-center p-3 modal-content border-0">
-								<table>
-									<tr>
-										<th><label for="me_name">메뉴 이름</label></th>
-										<td>
-	                                        <select name="me_name" id="me_name" class="form-select">										
-													<option value="LUNCH">LUNCH</option>
-													<option value="DINNER">DINNER</option>
-											</select>										
-										</td>
-									</tr>
-									<tr>
-										<th><label for="me_price">메뉴 가격</label></th>
-										<td><input type="text" class="form-control"  name="me_price" id="me_price"
-										placeholder="숫자만 입력"  onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"></td>
-									</tr>
-									<tr>
-										<th><label for="me_context">메뉴 설명</label></th>
-										<td><textarea rows="5" cols="30" class="form-control" name="me_context" id="me_context"></textarea></td>
-									</tr>
-									<tr>
-										<th><label for="me_photo">메뉴 사진</label></th>
-<!-- 										multiple="multiple" -->
-										<td><input type="file" name="me_file" id="me_photo" class="form-control" ></td>
-									</tr>
-								</table>
-	                </div>
-	            </div>
-	            <div class="modal-footer">
-		            <button type="submit" class="btn btn-warning" style="color: white;">추가</button>
-		          	<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-				</div>
-            </form>
-		</div>
-	</div>
-</div>
+<!-- <div class="modal fade" id="menuModal" tabindex="-1" aria-labelledby="menuModalLabel" aria-hidden="true"> -->
+<!--     <div class="modal-dialog"> -->
+<!--         <div class="modal-content"> -->
+<!--             <div class="modal-header"> -->
+<!--                 <h5 class="modal-title" id="menuModalLabel">메뉴 추가</h5> -->
+<!--                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+<!--             </div> -->
+<!-- <!--             action="menuVOInsert"  --> -->
+<!--             <form id="menuVOInsert" method="post" enctype="multipart/form-data" action="menuVOInsert"> -->
+<!-- 	            <div class="modal-body container d-flex justify-content-center p-3 modal-content border-0"> -->
+<!-- 	                <div class="container d-flex justify-content-center p-3 modal-content border-0"> -->
+<!-- 								<table> -->
+<!-- 									<tr> -->
+<!-- 										<th><label for="me_name">메뉴 이름</label></th> -->
+<!-- 										<td> -->
+<!-- 	                                        <select name="me_name" id="me_name" class="form-select">										 -->
+<!-- 													<option value="LUNCH">LUNCH</option> -->
+<!-- 													<option value="DINNER">DINNER</option> -->
+<!-- 											</select>										 -->
+<!-- 										</td> -->
+<!-- 									</tr> -->
+<!-- 									<tr> -->
+<!-- 										<th><label for="me_price">메뉴 가격</label></th> -->
+<!-- 										<td><input type="text" class="form-control"  name="me_price" id="me_price" -->
+<!-- 										placeholder="숫자만 입력"  onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"></td> -->
+<!-- 									</tr> -->
+<!-- 									<tr> -->
+<!-- 										<th><label for="me_context">메뉴 설명</label></th> -->
+<!-- 										<td><textarea rows="5" cols="30" class="form-control" name="me_context" id="me_context"></textarea></td> -->
+<!-- 									</tr> -->
+<!-- 									<tr> -->
+<!-- 										<th><label for="me_photo">메뉴 사진</label></th> -->
+<!-- <!-- 										multiple="multiple" --> -->
+<!-- 										<td><input type="file" name="me_file" id="me_photo" class="form-control" ></td> -->
+<!-- 									</tr> -->
+<!-- 								</table> -->
+<!-- 	                </div> -->
+<!-- 	            </div> -->
+<!-- 	            <div class="modal-footer"> -->
+<!-- 		            <button type="submit" id="btnMenuInsert" class="btn btn-warning" style="color: white;">추가</button> -->
+<!-- 		          	<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button> -->
+<!-- 				</div> -->
+<!--             </form> -->
+<!-- 		</div> -->
+<!-- 	</div> -->
+<!-- </div> -->
+
 
 <!-- 메뉴 추가 모달 창 -->		 
 
 <script type="text/javascript">
-// 모달창 폼데이터 전송 
+
+	var menuList = [];
+	// 모달창 폼데이터 전송 
 	$("#menuVOInsert").submit(function(event) {
 	    // 폼이 전송되는 것 막음, 폼을 제출할 때 AJAX 요청을 보냄
 	    event.preventDefault();
 	
 	    var form_data = new FormData(this); // 폼 데이터 생성
-	
+	    
 	    // 모달의 폼데이터 전송 ajax
 	    $.ajax({
 	        type : "POST",
@@ -544,7 +547,8 @@
 	            console.log(response);
 	            
 	            var menu = response;
-	            
+				menuList.push(menu);
+				console.log(menuList);
 	            
 	            // 전송 후 모달창을 닫음
 	            $("#menuModal").modal("hide");
@@ -558,8 +562,13 @@
 	            var $new_row = $("<tr></tr>");
 	            $new_row.append("<td>" + menu.me_name + "</td>");
 	            $new_row.append("<td>" + menu.me_price + "</td>");
-	            $new_row.append("<td><button class='btn btn-warning' style='color: black;'>삭제</button></td>"); // 수정/삭제 버튼 등
+	            $new_row.append("<td><button class='btn btn-warning' id='menuDelete' style='color: black;'>삭제</button></td>"); // 수정/삭제 버튼 등
 	            $table.append($new_row); // 새로운 row를 table에 추가
+	            
+	     	    $("#restaurant").prepend("<input type='hidden' name='me_name' value='" + menu.me_name + "'>");
+	     	    $("#restaurant").prepend("<input type='hidden' name='me_price' value='" + menu.me_price + "'>");
+	     	    $("#restaurant").prepend("<input type='hidden' name='me_context' value='" + menu.me_context + "'>");
+	     	    $("#restaurant").prepend("<input type='hidden' name='me_file_name' value='" + menu.me_file + "'>");
 	            
 	            
 	        },
@@ -570,6 +579,87 @@
 	    });
 	    
 	});
+	
+	// 삭제 버튼 클릭시 html과 menuList 배열안의 해당 인덱스 삭제 
+	$(document).on("click", "#menuDelete", function() {
+	    var $row = $(this).closest('tr');
+	    var name = $row.find('td:eq(0)').text();
+	    for (var i in menuList) {
+	        if (menuList[i].me_name == name) {
+	            menuList.splice(i, 1);
+	            $row.remove();
+	            break;
+	        }
+	    }
+	});
+	
+	
+	// 가게 추가 form전송시 메뉴 추가
+	$("#restaurantInsertPro").submit(function(event) {
+		$.ajax({
+	        type : "POST",
+	        url : "menuInsert",
+	        processData : false,
+	        contentType : false,
+	        data : {menuList : menuList
+	        },
+	        success : function(response) {
+	            console.log(response);
+	            
+	        },
+	        error : function(xhr, status, error) {
+	            console.log("error");
+	        },
+
+	    });
+	});
+	
+	
+	var tableCount = 0;
+	$("#menu").on("click", function(event) {
+		tableCount++;
+	   $("#td_menu").prepend('<table id="menu_table_' + tableCount + '">'
+				+ '<tr>'
+				+ '<th><label for="me_name">메뉴 이름</label></th>'
+				+ '<td>'
+				+ '    <select name="me_name" id="me_name" class="form-select">	'									
+				+ '			<option value="LUNCH">LUNCH</option>'
+				+ '			<option value="DINNER">DINNER</option>'
+				+ '	</select>	'									
+				+ '</td>'
+				+ '</tr>'
+				+ '<tr>'
+				+ '<th><label for="me_price">메뉴 가격</label></th>'
+				+ '<td><input type="text" class="form-control"  name="me_price" id="me_price"'
+				+ 'placeholder="숫자만 입력"  onKeyup="this.value=this.value.replace(/[^0-9]/g,\'\');"></td>'
+				+ '</tr>'
+				+ '<tr>'
+				+ '<th><label for="me_context">메뉴 설명</label></th>'
+				+ '<td><textarea rows="5" cols="30" class="form-control" name="me_context" id="me_context"></textarea></td>'
+				+ '</tr>'
+				+ '<tr>'
+				+ '<th><label for="me_photo">메뉴 사진</label></th>'
+				+ '<td><input type="file" name="me_file" id="me_photo" class="form-control" ></td>'
+				+ '</tr>'
+				+ '<tr>'
+				+ '<td colspan="2">'
+				+ '<button type="button" onclick="hideMenu(' + tableCount + ')" class="btn btn-warning" style="color: white;">추가</button>'
+				+ '<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>');
+				+ '</td>'
+				+ '</tr>'
+				+ '</table>'
+	    
+	});  
+	
+	
+	function hideMenu(index) {
+		alert(index);
+		$("#menu_table_" + index).hide();
+	}
+// 	$("#btnMenuInsert").on("click", function(event) {
+// 		alert(tableCount);
+// 		$("#menu_table_" + tableCount).hide();
+// 	}); 
 // 모달창 폼데이터 전송	
 </script>
     

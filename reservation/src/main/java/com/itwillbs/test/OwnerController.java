@@ -21,6 +21,7 @@ import org.springframework.web.multipart.*;
 import com.itwillbs.test.handler.MyPasswordEncoder;
 import com.itwillbs.test.service.*;
 import com.itwillbs.test.vo.*;
+import com.mysql.cj.protocol.x.*;
 
 @Controller
 public class OwnerController {
@@ -43,6 +44,7 @@ public class OwnerController {
 	@GetMapping("restaurantReservation")
 	public String restaurantReservation(Model model, HttpSession session) {
 		
+		System.out.println((String)session.getAttribute("cId"));
 		
 		List<ReservationVO> resList = service.getReservationList((String)session.getAttribute("cId"));
 		List<RestaurantVO> restaurantList = resService.getOwnerRestaurantList((String)session.getAttribute("cId"));
@@ -85,8 +87,24 @@ public class OwnerController {
 	
 	// 가게 추가 클릭시 가게등록 작업
 	@PostMapping("restaurantInsertPro")
-	public String restaurantInsertPro(RestaurantVO restaurant, Model model, HttpSession session) {
+	public String restaurantInsertPro(RestaurantVO restaurant, MenuListVO arrMenuList, Model model, HttpSession session) {
 		System.out.println(restaurant);
+//		System.out.println(Arrays.toString(menuList));
+		System.out.println(arrMenuList);
+		
+		
+//		List<MenuVO> menuList = new ArrayList<MenuVO>();
+		
+		for(int i = 0; i < arrMenuList.getMe_name().length; i++) {
+			
+			MenuVO menu = new MenuVO();
+			menu.setMe_name(arrMenuList.getMe_name()[i]);
+			menu.setMe_price(arrMenuList.getMe_price()[i]);
+			
+//		service.xxxx -> 
+			
+		}
+		
 		// 미로그인, 점주 회원이 아닐 경우
 		String c_Id = (String)session.getAttribute("cId");
 		if(c_Id == null) {

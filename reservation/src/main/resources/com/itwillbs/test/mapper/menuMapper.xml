@@ -11,6 +11,7 @@
 					, #{me_price} 
 					, #{me_context} 
 					, #{me_photo} 
+					, #{res_idx} 
 				)
 	</insert>
 	

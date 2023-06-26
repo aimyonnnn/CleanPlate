@@ -1,5 +1,7 @@
 package com.itwillbs.test.vo;
 
+import java.util.*;
+
 import org.springframework.web.multipart.*;
 
 import com.google.gson.*;
@@ -18,22 +20,18 @@ CREATE TABLE menus (
 import lombok.*;
 
 @Data
-public class MenuVO {
+@AllArgsConstructor
+@NoArgsConstructor
+public class MenuListVO {
 	
-	private int me_idx;
-	private String me_name;
-	private int me_price;
-	private String me_context;
-	private String me_photo;
-	private MultipartFile me_file;
-//	private String me_file_name;
-	private int res_idx;
-	@Override
-	public String toString() {
-		return "MenuVO [me_idx=" + me_idx + ", me_name=" + me_name + ", me_price=" + me_price + ", me_context="
-				+ me_context + ", me_photo=" + me_photo + ", me_file=" + me_file.getOriginalFilename() + ", res_idx=" + res_idx + "]";
-	}
-	
+	private int[] me_idx;
+	private String[] me_name;
+	private int[] me_price;
+	private String[] me_context;
+	private String[] me_photo;
+	private MultipartFile[] me_file;
+	private String[] me_file_name;
+	private int[] res_idx;
 	
 	
 }
