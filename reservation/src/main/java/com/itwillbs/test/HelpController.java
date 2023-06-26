@@ -35,7 +35,9 @@ public class HelpController {
 	
 	//QNA 페이지로 이동
 	@GetMapping("QNA")
-	public String QNA(HttpSession session, Model model) {
+	public String QNA(@RequestParam(defaultValue = "") String searchType, 
+			@RequestParam(defaultValue = "") String searchKeyword, 
+			@RequestParam(defaultValue = "1") int pageNum,HttpSession session, Model model) {
 		
 		String id = "";
 		
@@ -48,8 +50,25 @@ public class HelpController {
 			id = (String)session.getAttribute("cId");
 		}
 		
-		List<QNAVO> QNAList = service.getQNAList(id); 
 		
+		
+		int listLimit = 10; // 한 페이지에서 표시할 목록 수
+		int StartRow = (pageNum - 1) * listLimit; // 조회 시작 행 번호
+		List<QNAVO> QNAList = service.getQNAList(id, searchType, searchKeyword, StartRow, listLimit); // 게시물 목록 조회 요청
+		int listCount = service.getQnaListCount(id, searchType, searchKeyword); // 전체 게시물 수 조회 요청 
+		
+		int pageListLimit = 3; // 페이지 개수 제한
+		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0); // 최대 페이지
+		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1; // 시작 페이지
+		int endPage = startPage + pageListLimit - 1; // 끝 페이지
+		
+		if(maxPage < endPage) { // 끝 페이지가 전체보다 클 경우 끝 페이지로 교체  
+			endPage = maxPage;
+		}
+		
+		PageInfoVO pageInfo = new PageInfoVO(listCount, pageListLimit, startPage, maxPage, endPage);
+		
+		model.addAttribute("pageInfo", pageInfo);
 		model.addAttribute("QNAList",QNAList);
 		
 		return "help/help_qa";

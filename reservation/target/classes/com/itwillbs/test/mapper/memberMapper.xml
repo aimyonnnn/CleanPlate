@@ -163,7 +163,7 @@
 	<!-- 리뷰 작성시 status 변경 -->
 	<update id="updateRvStatus">
 		UPDATE reservation
-			SET rv_status = 1
+			SET rv_status = 2
 			WHERE r_idx = #{r_idx}
 	</update>
 	

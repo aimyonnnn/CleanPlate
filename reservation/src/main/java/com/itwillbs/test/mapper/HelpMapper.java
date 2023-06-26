@@ -17,7 +17,7 @@ public interface HelpMapper {
 
 	int insertQNA(QNAVO qna);
 
-	List<QNAVO> selectQNAList(String id);
+	List<QNAVO> selectQNAList(@Param("id")String id,@Param("searchType") String searchType,@Param("searchKeyword") String searchKeyword, @Param("startRow") int startRow, @Param("listLimit") int listLimit);
 
 	int updateQnaAnswer(QNAVO qna);
 
@@ -41,5 +41,8 @@ public interface HelpMapper {
 
 	// 공지글 삭제
 	int deleteNotice(int no_idx);
+	
+	// QNA 글 수
+	int selectQnaListCount(@Param("id")String id, @Param("searchType") String searchType, @Param("searchKeyword") String searchKeyword);
 
 }

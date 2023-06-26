@@ -31,8 +31,8 @@ public class HelpService {
 		return mapper.insertQNA(qna);
 	}
 
-	public List<QNAVO> getQNAList(String id) {
-		return mapper.selectQNAList(id);
+	public List<QNAVO> getQNAList(String id, String searchType, String searchKeyword, int startRow, int listLimit) {
+		return mapper.selectQNAList(id, searchType, searchKeyword, startRow, listLimit);
 	}
 
 	public int QnaAnswer(QNAVO qna) {
@@ -74,6 +74,11 @@ public class HelpService {
 	// 공지글 삭제
 	public int removeNotice(int no_idx) {
 		return mapper.deleteNotice(no_idx);
+	}
+	
+	// 전체 QNA 수 조회 요청
+	public int getQnaListCount(String id,String searchType, String searchKeyword) {
+		return mapper.selectQnaListCount(id, searchType, searchKeyword);
 	}
 
 }

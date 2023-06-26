@@ -121,37 +121,82 @@
 		</c:otherwise>
 	</c:choose>
   <!-- 페이지 이동 영역 -->
-  <div class="row my-4">
-    <div class="col-12">
-      <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-center">
-          <li class="page-item">
-            <a class="page-link" href="#" aria-label="Previous">
-              <span aria-hidden="true">&laquo;</span>
-            </a>
-          </li>
-          <li class="page-item"><a class="page-link" href="#">1</a></li>
-          <li class="page-item"><a class="page-link" href="#">2</a></li>
-          <li class="page-item"><a class="page-link" href="#">3</a></li>
-          <li class="page-item">
-            <a class="page-link" href="#" aria-label="Next">
-              <span aria-hidden="true">&raquo;</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
-    </div>
-  </div>
-  <!-- 검색 영역 -->
-  <div class="row justify-content-center">
-    <div class="col-3">
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button type="button" class="btn btn-outline-primary">Search</button>
-      </form>
-    </div>
-  </div>
-</div>
+    <div class="row my-4">
+	    <div class="col-12">
+	        <nav aria-label="Page navigation example">
+	            <ul class="pagination justify-content-center">
+	                <!-- 이전 버튼 -->
+	                <c:choose>
+	                    <c:when test="${pageNum > 1}">
+	                        <li class="page-item">
+	                            <a class="page-link" href="QNA?pageNum=${pageNum - 1}" aria-label="Previous">
+	                                <span aria-hidden="true">&laquo;</span>
+	                            </a>
+	                        </li>
+	                    </c:when>
+	                    <c:otherwise>
+	                        <li class="page-item disabled">
+	                            <a class="page-link" href="#" aria-label="Previous">
+	                                <span aria-hidden="true">&laquo;</span>
+	                            </a>
+	                        </li>
+	                    </c:otherwise>
+	                </c:choose>
+	
+	                <!-- 페이지 번호 -->
+	                <c:forEach var="i" begin="${pageInfo.startPage}" end="${pageInfo.endPage}">
+	                    <c:choose>
+	                        <c:when test="${pageNum eq i}">
+	                            <li class="page-item active">
+	                                <a class="page-link" href="#">${i}</a>
+	                            </li>
+	                        </c:when>
+	                        <c:otherwise>
+	                            <li class="page-item">
+	                                <a class="page-link" href="QNA?pageNum=${i}">${i}</a>
+	                            </li>
+	                        </c:otherwise>
+	                    </c:choose>
+	                </c:forEach>
+	
+	                <!-- 다음 버튼 -->
+	                <c:choose>
+	                    <c:when test="${pageNum < pageInfo.maxPage}">
+	                        <li class="page-item">
+	                            <a class="page-link" href="QNA?pageNum=${pageNum + 1}" aria-label="Next">
+	                                <span aria-hidden="true">&raquo;</span>
+	                            </a>
+	                        </li>
+	                    </c:when>
+	                    <c:otherwise>
+	                        <li class="page-item disabled">
+	                            <a class="page-link" href="#" aria-label="Next">
+	                                <span aria-hidden="true">&raquo;</span>
+	                            </a>
+	                        </li>
+	                    </c:otherwise>
+	                </c:choose>
+	            </ul>
+	        </nav>
+	    </div>
+	</div>
+	<!-- 페이지 이동 버튼 끝 -->
+    
+    
+    	<!-- 검색창 -->
+	    <div class="row justify-content-center">
+		    <div class="col-4">
+		        <form class="d-flex" role="search" method="get" action="QNA">
+		            <select class="form-select me-2" name="searchType" id="searchType" aria-label="Search Type" style="width: 200px;">
+		                <option value="subject" <c:if test="${param.searchType eq 'subject' }">selected</c:if>>제목</option>
+		                <option value="content" <c:if test="${param.searchType eq 'content' }">selected</c:if>>내용</option>
+		                <option value="subject_content" <c:if test="${param.searchType eq 'subject_content' }">selected</c:if>>제목&내용</option>
+		            </select>
+		            <input class="form-control me-2" type="search" name="searchKeyword" placeholder="Search" aria-label="Search" value="${searchKeyword}">
+		            <button type="submit" class="btn btn-outline-primary">Search</button>
+		        </form>
+		    </div>
+		</div>
 
 <!-- 하단 부분은 나중에 inclue로 넣을꺼니깐 참고 -->
 <!-- ==================================================================================================================================== -->
