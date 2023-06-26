@@ -454,7 +454,7 @@
 								<label for="c_passwd" style="width: 100%;">비밀번호<br></label>
 							    	<input type="password" name="c_passwd" id="c_passwd" class="form-control" placeholder="8~16자리/영문, 숫자, 특수문자 조합" minlength="8" maxlength="16" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,16}$" required>
 								<div class="invalid-feedback">
-				                    비밀번호는 4~20자리의 영문, 숫자 특수문자만 사용 가능합니다.
+				                    비밀번호는 8~16자리/영문, 숫자, 특수문자 조합만 사용 가능합니다.
 				                </div>
 							</div>
 							<div class="input-container">
@@ -521,7 +521,7 @@
 										<div class="agree_desc">
 											<div class="InpBox">
 												<div class="form-check">
-													<input class="form-check-input" type="checkbox" name="agreeCheck" id="agree_rule2" required>
+													<input class="form-check-input" type="checkbox" name="agreeCheckCeo" id="agree_rule2" required>
 														<label class="form-check-label" for="agree_rule2">
 															<span><strong>(필수) 회원 약관에 동의</strong></span>
 														</label>
@@ -536,7 +536,7 @@
 	                      				<div class="agree_desc">
 											<div class="InpBox">
 												<div class="form-check">
-													<input class="form-check-input" type="checkbox" name="agreeCheck" id="agree_take2" required>
+													<input class="form-check-input" type="checkbox" name="agreeCheckCeo" id="agree_take2" required>
 														<label class="form-check-label" for="agree_take2">
 															<span><strong>(필수) 개인정보 수집 및 이용에 동의</strong></span>
 														</label>
@@ -591,14 +591,14 @@
 	// 기업회원 - 체크박스 
 	$(document).ready(function() {
 		$("#agreeAllCeo").click(function() {
-			if($("#agreeAllCeo").is(":checked")) $("input[name=agreeCheck]").prop("checked", true);
-			else $("input[name=agreeCheck]").prop("checked", false);
+			if($("#agreeAllCeo").is(":checked")) $("input[name=agreeCheckCeo]").prop("checked", true);
+			else $("input[name=agreeCheckCeo]").prop("checked", false);
 		});
-
-		$("input[name=agreeCheck]").click(function() {
-			var total = $("input[name=agreeCheck]").length;
-			var checked = $("input[name=agreeCheck]:checked").length;
-
+	
+		$("input[name=agreeCheckCeo]").click(function() {
+			var total = $("input[name=agreeCheckCeo]").length;
+			var checked = $("input[name=agreeCheckCeo]:checked").length;
+	
 			if(total != checked) $("#agreeAllCeo").prop("checked", false);
 			else $("#agreeAllCeo").prop("checked", true); 
 		});
@@ -622,19 +622,20 @@
 	
 	 
 	// 기업회원 비밀번호 확인
-	 $(function() {
-	   $('#c_passwdCheck').blur(function() {
-	     var password = $('#c_passwd').val();
-	     var confirmPassword = $(this).val();
+	$(document).ready(function() {
+	  $('#c_passwdCheck').on('input', function() {
+	    var password = $('#c_passwd').val().trim();
+	    var confirmPassword = $(this).val().trim();
 	
-	     if (password !== confirmPassword) {
-	       $(this).val('');
-	       $('#password-error2').show();
-	     } else {
-	    	 $('#password-error2').hide();
-	     }
-	   });
-	 });
+	    if (password !== confirmPassword) {
+	      $(this).removeClass('is-valid').addClass('is-invalid');
+	      $('#password-error2').show();
+	    } else {
+	      $(this).removeClass('is-invalid').addClass('is-valid');
+	      $('#password-error2').hide();
+	    }
+	  });
+	});
 	
 	// 유효성 검사
  	window.addEventListener('load', () => {
