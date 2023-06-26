@@ -226,7 +226,7 @@
                 <li class="nav-item me-5"><a class="nav-link active" aria-current="page" href ='<c:url value="/" />' style="color: white;">Home</a></li>
                 <li class="nav-item me-5"><a class="nav-link" href ='<c:url value="/reservationMain" />' style="color: white;">Reservation</a></li>
                 <li class="nav-item me-5"><a class="nav-link" href ='<c:url value="/assignment" />' style="color: white;">Assignment</a></li>
-                <li class="nav-item"><a class="nav-link" href ='<c:url value="/helpHome" />' style="color: white;">Help</a></li>
+                <li class="nav-item"><a class="nav-link" href ='<c:url value="/Notice" />' style="color: white;">Help</a></li>
               </ul>
             </div>
           </div>
@@ -234,16 +234,21 @@
       </div>
       <!-- 네비바 끝 -->
     
-   
     <!-- container 시작 -->
     <div class="container">
     
     	<!-- 상단 배너 -->
-        <div class="banner">
-            <h2 class="banner-title">당신의 예약을 양도해보세요!</h2>
-            <p class="banner-description">누군가의 특별한 날을 더욱 특별하게 만들어주세요.</p>
-        </div>
+<!--         <div class="banner"> -->
+<!--             <h2 class="banner-title">당신의 예약을 양도해보세요!</h2> -->
+<!--             <p class="banner-description">누군가의 특별한 날을 더욱 특별하게 만들어주세요.</p> -->
+<!--         </div> -->
        <!-- 상단 배너 --> 
+       
+       <!-- 검색 버튼 -->
+		<div class="input-group mb-4" style="width: 800px; margin: 0 auto;">
+		  <input type="text" class="form-control" placeholder="식당을 검색하세요" id="restaurantName" name="restaurantName">
+		  <button class="btn btn-outline-secondary bg-white text-dark" type="button" id="restaurantSearch" name="restaurantSearch">검색</button>
+       	</div>
        	
         <div class="row">
         	
@@ -252,9 +257,7 @@
 			  <div class="text-center">
 			    <button type="button" class="btn btn-warning mx-2" id="PriceLow">가격낮은순</button>
 			    <button type="button" class="btn btn-warning mx-2" id="PriceHigh">가격높은순</button>
-<!-- 			    <button type="button" class="btn btn-warning mx-2" id="PriceBy50">50만원이하</button> -->
 			    <button type="button" class="btn btn-warning mx-2" id="RevAsc">예약빠른순</button>
-			    <button type="button" class="btn btn-warning mx-2" id="reviewHigh">평점높은순</button>
 			    <button type="button" class="btn btn-warning mx-2" id="abc">가게이름순</button>
 			    <button type="button" class="btn btn-danger mx-2" id="today">TODAY</button>
 			  </div>
@@ -275,9 +278,9 @@
 					    </span>
 					  </h5>
 					  <!-- 가게명 클릭시 가게 상세정보 페이지로 이동 -->
-                      <p>예약 날짜 : <span>${assignment.r_date}</span></p>
+                      <p>예약 날짜 : <span><fmt:formatDate value="${assignment.r_date }" pattern="yyyy년 MM월 dd일 HH시 mm분"/></span></p>
                       <p>가격 : <span>${assignment.a_price}원</span></p>
-                      예약번호 : <!-- 예약번호 나중에 지울 예정입니다 --> <input type="text" name="r_idx" value="${assignment.r_idx}" readonly="readonly">
+                      예약번호 : <input type="text" name="r_idx" value="${assignment.r_idx}" readonly="readonly" style="border: none;">
                       <div class="d-flex">
 	                    <button type="button" class="btn btn-warning btn-chat w-50 mx-2"
 	                     id="contactButton" onclick="location.href='<c:url value="assignAgree"/>'">채팅문의</button>
@@ -301,7 +304,7 @@
       
    	   // JSON 데이터 가져오기
        let assignmentList = <%= new Gson().toJson(request.getAttribute("assignmentList")) %>;
-       console.log("assignmentList : " + assignmentList);
+//        console.log("assignmentList : " + assignmentList);
        
        // 리뷰 JSON 가져오기
        let reviewScores = <%= new Gson().toJson(request.getAttribute("reviewScores")) %>;
@@ -311,7 +314,7 @@
          	assignmentList.sort(function(a, b) {
           		 return a.a_price - b.a_price;
        	 	});
-		     console.log(assignmentList);
+// 		     console.log(assignmentList);
 	         appendList(assignmentList);
        });
        
@@ -320,36 +323,18 @@
        		assignmentList.sort((a, b) => {
 				return b.a_price - a.a_price;       			
        		});
-	       	 console.log(assignmentList);
+// 	       	 console.log(assignmentList);
 	         appendList(assignmentList);
        });
-       
-//        // 50만원이하 필터
-//        $('#PriceBy50').click(() => {
-//     	  	let newAssignmentList = assignmentList.filter(a => {
-//     	  		return a.a_price <= 500000;
-//     	  	});
-//     	  	 console.log(newAssignmentList);
-// 	         appendList(newAssignmentList);
-//        });
        
        // 예약빠른순 정렬
        $('#RevAsc').click(() => {
     	   assignmentList.sort((a, b) => {
     		   return new Date(a.r_date) - new Date(b.r_date);
     	   });
-    	    console.log(assignmentList);
+//     	    console.log(assignmentList);
 	        appendList(assignmentList);
        });
-       
-//        // 예약느린순 정렬
-//        $('#RevDesc').click(()=>{
-//     	   assignmentList.sort((a, b) => {
-//     		    return Date.parse(b.r_date) - Date.parse(a.r_date);
-//     	   });
-//     	    console.log(assignmentList);
-// 	        appendList(assignmentList);
-//        });
        
        // 가게명 가나다순 정렬
        $('#abc').click(() => {
@@ -360,18 +345,9 @@
     				return -1
     			}
     	   });
-    	   console.log(assignmentList);
+//     	   console.log(assignmentList);
 	       appendList(assignmentList);
        });
-       
-       // 평점 높은순 정렬
- 	  $('#reviewHigh').on('click', () => {
- 		  reviewScores.sort((a, b) => {
- 	        return b.average_score - a.average_score;
- 	    });
- 		  console.log(reviewScores);
- 	      appendList(reviewScores);
- 	  });
        
        // 당일예약 필터
        $('#today').click(() => {
@@ -384,7 +360,7 @@
              today.getDate() === reservationDate.getDate()
            );
          });
-         console.log(filteredList);
+//          console.log(filteredList);
          appendList(filteredList);
        });
        
@@ -395,7 +371,7 @@
 	         card.empty();
 	         
 	         $.each(assignmentList, (index, data) => {
-	           console.log(data);
+// 	           console.log(data);
 	           
 	           let template = `<div class="col-md-4 mt-5" data-aos="fade-up" data-aos-anchor-placement="center-bottom">
 				               <div class="card">
@@ -404,7 +380,7 @@
 				                   <h5><span onclick="goToReservationReserve('${"${data.res_idx}"}')">${'${data.res_name}'}</span></h5>
 				                   <p>예약 날짜 : <span>${'${data.r_date}'}</span></p>
 				                   <p>가격 : <span>${'${data.a_price}'}원</span></p>
-				                   예약번호 : <!-- 예약번호 나중에 지울 예정입니다 --> <input type="text" name="r_idx" value="${'${data.r_idx}'}" readonly="readonly">
+				                   예약번호 : <input type="text" name="r_idx" value="${'${data.r_idx}'}" readonly="readonly" style="border: none;">
 				                   <div class="d-flex">
 				                    <button type="button" class="btn btn-warning btn-chat w-50 mx-2"
 				                    	id="contactButton" onclick="location.href='<c:url value="assignAgree"/>'">채팅문의</button>
@@ -426,6 +402,66 @@
   		  }
          
 	 </script>
+	 
+	 <script>
+      	// 검색 버튼 클릭 시 <input>의 식당 이름을 가져와서 ajax 요청 후 실시간 출력하기
+      	// 한글자 입력할 때 마다 조회됨!
+      	$(()=>{
+      		
+      		$('#restaurantName').on('input', () => {
+      			var resName = $('#restaurantName').val();
+//       			console.log(resName);
+      			
+      			 $.ajax({
+      	                url: '<c:url value="/getRestaurantName"/>',
+      	                type: 'POST',
+      	                dataType: 'json',
+      	                data: {
+      	                  name: resName
+      	                },
+      	                success: function(response) {
+//       	                console.log(response);
+      	                
+      	                let card = $('#assignContainer');
+      		         	card.empty();
+      		         
+      		        	$.each(assignmentList, (index, data) => {
+//       		            console.log(data);
+      		           
+      		            let template = `<div class="col-md-4 mt-5" data-aos="fade-up" data-aos-anchor-placement="center-bottom">
+      					               <div class="card">
+      					               <img src="${pageContext.request.contextPath}/resources/images/${'${data.res_photo1}'}" class="card-img-top" alt="Item Image">
+      					                 <div class="card-body">
+      					                   <h5><span onclick="goToReservationReserve('${"${data.res_idx}"}')">${'${data.res_name}'}</span></h5>
+      					                   <p>예약 날짜 : <span>${'${data.r_date}'}</span></p>
+      					                   <p>가격 : <span>${'${data.a_price}'}원</span></p>
+      					                   예약번호 : <input type="text" name="r_idx" value="${'${data.r_idx}'}" readonly="readonly" style="border: none;">
+      					                   <div class="d-flex">
+      					                    <button type="button" class="btn btn-warning btn-chat w-50 mx-2"
+      					                    	id="contactButton" onclick="location.href='<c:url value="assignAgree"/>'">채팅문의</button>
+      				                    	<button type="button" class="btn btn-warning btn-chat w-50 mx-2" id="payButton"
+      				    						onclick="location.href='<c:url value="assignmentPayment"/>' 
+      				    						+ '?r_idx=${"${data.r_idx}"}&r_date=${"${data.r_date}"}&a_price=${"${data.a_price}"}&res_name=${"${data.res_name}"}&a_sellerId=${"${data.a_sellerId}"}'">바로구매</button>
+      				                      </div>
+      					                 </div>
+      					               </div>
+      					             </div> `;
+      					             
+      		           	card.append(template);
+      		           
+      	     	         });
+      	                
+      	                },
+      	                error: function(xhr, status, error) {
+      	                  alert('AJAX 요청이 실패하였습니다.', error);
+      	             	}
+      	            });
+      			
+      		}); // click
+      		
+      	}); // ready
+        </script>		
+	 
 
 	<!-- 하단 여백을 주기 위한 div 박스 -->
 	<div style="height: 300px; width: 100%"></div>
