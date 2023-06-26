@@ -6,8 +6,10 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.web.session.RequestedUrlRedirectInvalidSessionStrategy;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -67,8 +69,9 @@ public class LikeInfoController {
 
 
 	@GetMapping("/memberLike")
-    public String memberLike(Model model) {
-        List<Map<String, Object>> memberLike = likeInfoService.memberLikelist();
+    public String memberLike(HttpSession session, Model model) {
+		String sId = (String) session.getAttribute("sId");
+        List<Map<String, Object>> memberLike = likeInfoService.memberLikelist(sId);
         System.out.println(memberLike);
 
         for (Map<String, Object> restaurant : memberLike) {

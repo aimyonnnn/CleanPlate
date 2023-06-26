@@ -28,7 +28,8 @@
         FROM reviews
         GROUP BY res_idx ) c
         ON c.res_idx = l.res_idx
-        WHERE m.m_id = 'member'<!-- 'member'를 매개변수로 받아와야함. 데이터가없어서 임시로 member -->
+        WHERE m.m_id = '${sId}'
+<!-- 'member'를 매개변수로 받아와야함. 데이터가없어서 임시로 member -->
      </select>
      
     <!-- 찜하기 해제(버튼) -->

@@ -19,7 +19,7 @@
 			    $(document).ready(function() {
 			        function storeValues(resIdx) {
 			            var res_idx = resIdx;
-			            var m_id = "member";
+			            var m_id = ${sessionScope.sId};
 			            //alert(res_idx);
 			
 			            $.ajax({
