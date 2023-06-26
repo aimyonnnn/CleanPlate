@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 <!DOCTYPE html>
 <html>
   <head>
@@ -148,7 +149,7 @@
           	<td>양도 취소</td>
           </c:if>
         <%-- 양도 상태 판별 --%>
-          <td>${assignment.a_price }</td>
+          <td><fmt:formatNumber value="${assignment.a_price}" />원</td>
           <td>${assignment.a_sellerId}</td>
           <td>${assignment.r_idx}</td>
       	  <td><button type="submit" class="btn btn-sm btn-primary" formmethod="get"

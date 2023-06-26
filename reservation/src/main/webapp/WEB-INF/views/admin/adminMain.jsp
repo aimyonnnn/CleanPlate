@@ -202,13 +202,13 @@
                   <td><div><button type="button"
                                    onclick="location.href='adminReservation'">관리</button></div></td>
               </tr>
-                  <c:forEach items="${reservationList }" var="reservation" begin="0" end="5" >
+                  <c:forEach items="${reservationList }" var="reservation" begin="0" end="4" >
                   <tr>
                   <td></td>
                   <td>&nbsp;${reservation.r_idx }</td>
                   <td>&nbsp;${reservation.r_personnel }명</td>
                   <td><fmt:formatDate value="${reservation.r_date }" pattern="yy-MM-dd HH:mm" /></td>
-                  <td>${reservation.r_amount }원</td>
+                  <td><fmt:formatNumber value="${reservation.r_amount }" />원</td>
                   </tr>
                  </c:forEach>
               </tbody>

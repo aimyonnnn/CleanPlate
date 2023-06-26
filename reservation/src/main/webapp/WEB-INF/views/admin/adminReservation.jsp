@@ -144,7 +144,7 @@
           <td>${reservation.r_idx }</td>
           <td>${reservation.r_personnel }명</td>
           <td><fmt:formatDate value="${reservation.r_date }" pattern="yy-MM-dd HH:mm" /></td>
-          <td>${reservation.r_amount }원</td>
+          <td><fmt:formatNumber value="${reservation.r_amount}" />원</td>
           <%-- 예약 상태 판별 --%>
           <c:if test="${reservation.r_status == 1}">
          	 <td>방문예정</td>

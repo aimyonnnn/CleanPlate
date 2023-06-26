@@ -1,8 +1,6 @@
 package com.itwillbs.test.mapper;
 
 
-import java.sql.Timestamp;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -95,5 +93,7 @@ public interface ReservationMapper {
 	// 예약이 꽉찬 날 조회
 	String[] selectFullDay();
 
+	// 지난 일자 예약 수 조회
+	ReservationVO adminReservationCount(int i);
 
 }

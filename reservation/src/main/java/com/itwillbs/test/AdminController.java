@@ -19,7 +19,6 @@ import com.itwillbs.test.service.MemberService;
 import com.itwillbs.test.service.ReservationService;
 import com.itwillbs.test.service.RestaurantService;
 import com.itwillbs.test.vo.AssignmentVO;
-import com.itwillbs.test.vo.HelpVO;
 import com.itwillbs.test.vo.MemberVO;
 import com.itwillbs.test.vo.ReservationVO;
 import com.itwillbs.test.vo.RestaurantVO;
@@ -68,9 +67,25 @@ public class AdminController {
 		List<ReservationVO> reservationList = rservice.getReservationList();
 		model.addAttribute("reservationList" ,reservationList);
 		
+		// 지난 일자 예약 수 조회
+		ReservationVO adminReservationCount = new ReservationVO();
+		for(int i = 0; i <= 6; i++) {
+			adminReservationCount = rservice.adminReservationCount(i);
+			model.addAttribute("adminReservationCount" + i, adminReservationCount);
+			System.out.println(adminReservationCount);
+			// 조회 결과 없을 경우 0 값으로 대체
+			if(adminReservationCount == null) {
+				ReservationVO defaultVO = new ReservationVO();
+				defaultVO.setC_idx(0);
+				defaultVO.setCount(0);
+				model.addAttribute("adminReservationCount" + i, defaultVO);
+			}
+			
+		}
+		
 		// 가게 목록 조회
-		List<RestaurantVO> RestaurantList = reservice.getRestaurantList();
-		model.addAttribute("RestaurantList", RestaurantList);
+			List<RestaurantVO> RestaurantList = reservice.getRestaurantList();
+			model.addAttribute("RestaurantList", RestaurantList);
 		
 		// 총 결제 금액 조회
 		int total = rservice.getTotalPay();

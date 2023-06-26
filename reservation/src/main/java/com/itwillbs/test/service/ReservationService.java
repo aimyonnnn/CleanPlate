@@ -1,8 +1,6 @@
 package com.itwillbs.test.service;
 
 
-import java.sql.Timestamp;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -129,5 +127,10 @@ public class ReservationService {
 	public String[] getFullDay() {
 		return mapper.selectFullDay();
 	}
-	
+
+	// 지난 일자 예약 수 조회
+	public ReservationVO adminReservationCount(int i) {
+		return mapper.adminReservationCount(i);
+	}
+
 }

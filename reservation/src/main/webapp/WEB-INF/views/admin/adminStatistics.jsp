@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import="java.util.Date" %> 
 <!DOCTYPE html>
 <html>
   <head>
@@ -7,10 +10,11 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1">
 	<%--line-awesome icon 사용을 위한 스타일 시트 --%>
 	<link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
     <title>관리자 페이지</title>
     <link href="${pageContext.request.contextPath }/resources/css/adminDetail.css" rel="stylesheet" type="text/css"/>
     <link rel="shortcut icon" href="#">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
   </head>
   <body>
 <!-- --------------------사이드 바 영역----------------------------  -->
@@ -132,7 +136,7 @@
               <div class="card-into">
                 <div class="card-head">
 					<small>총 결제 금액</small>
-					<h2>${total } 원</h2>
+					<h2><fmt:formatNumber value="${total }" /> 원</h2>
                 </div>
               </div>
               <div class="card-chart black">
@@ -158,85 +162,77 @@
          <br>
 <%-- ------------- --%>    
 
+
 <div>
 	<!--차트가 그려질 부분-->
-	<canvas id="totalVisitChart" style="width: 900px; height: 300px;"></canvas>
+	<canvas id="totalChart" style="width: 900px; height: 300px;"></canvas>
 </div>
 <br>
-<img width="18" height="18" src="https://img.icons8.com/material-rounded/24/info-squared.png" alt="information--v2"/><small>집계일: 2023.05.30 ~ 2023.06.08</small>
-         
+<!-- 6일 전, 오늘 날짜 데이터 -->
+<jsp:useBean id="javaDate" class="java.util.Date" />
+<fmt:formatDate var="nowDate" value="${javaDate}" pattern="yyyy-MM-dd"/>
+<c:set var="sixDayAgo" value="<%=new Date(new Date().getTime() - 60*60*24*1000*6)%>"/>
+<fmt:formatDate value="${sixDayAgo}" pattern="yyyy-MM-dd" var="sixDayAgoStr"/>
+
+<img width="18" height="18" src="https://img.icons8.com/material-rounded/24/info-squared.png" alt="information--v2"/><small>집계일: ${sixDayAgoStr } ~ ${nowDate }</small>
 
 <script type="text/javascript">
+			var now = moment();
             var context = document
-                .getElementById('totalVisitChart')
+                .getElementById('totalChart')
                 .getContext('2d');
             var myChart = new Chart(context, {
-                type: 'line', // 차트의 형태
+                type: 'line', // 차트의 형	태
                 data: { // 차트에 들어갈 데이터
-                    labels: [
-                        //x 축
-                        '2023.05.30','2023.05.31','2023.06.01','2023.06.02','2023.06.03','2023.06.04','2023.06.05', '2023.06.06', '2023.06.07', '2023.06.08'
-                     ],
-                    datasets: [
-                        { //데이터
-                            label: '총 방문자 수', //차트 제목
-                            fill: false, // line 형태일 때, 선 안쪽을 채우는지 안채우는지
-                            data: [
-                                20,21,24,25,26,27,34,35,36,37 //x축 label에 대응되는 데이터 값
-                            ],
-                            backgroundColor: [
-                                //색상
-                                'rgb(255, 51, 0)'
-                            ],
-                            borderColor: [
-                                //경계선 색상
-                                'rgb(255, 51, 0)'
-                            ],
-                            borderWidth: 1 //경계선 굵기
-                        } ,
-                        {
-                            label: '페이지 뷰', 
-                            fill: false,
-                            data: [
-                            	27,31,35,41,48,51,69,72,75,81
-                            ],
-                            backgroundColor: [
-                                //색상
-                                'rgb(0, 0, 0)'
-                            ],
-                            borderColor: [
-                                //경계선 색상
-                                'rgb(0, 0, 0)'
-                            ],
-                            borderWidth: 1 //경계선 굵기
-                        } ,
-                        {
-                            label: '가입자 수', 
-                            fill: false,
-                            data: [
-                            	2,7,8,9,10,10,15,21,25,30
-                            ],
-                            backgroundColor: [
-                                //색상
-                                'rgb(0, 153, 31)'
-                            ],
-                            borderColor: [
-                                //경계선 색상
-                                'rgb(0, 153, 31)'
-                            ],
-                            borderWidth: 1 //경계선 굵기
-                        }
+                	labels: [ moment().subtract(6, 'day').format('YYYY.MM.DD')
+                		, moment().subtract(5, 'day').format('YYYY.MM.DD')
+                		, moment().subtract(4, 'day').format('YYYY.MM.DD')
+                		, moment().subtract(3, 'day').format('YYYY.MM.DD')
+                		, moment().subtract(2, 'day').format('YYYY.MM.DD')
+                		, moment().subtract(1, 'day').format('YYYY.MM.DD')
+                		, now.format('YYYY.MM.DD') ],
+                    datasets: [{ 
+                        data: [${adminReservationCount6.count}, ${adminReservationCount5.count}, ${adminReservationCount4.count}, ${adminReservationCount3.count}, ${adminReservationCount2.count}, ${adminReservationCount1.count}, ${adminReservationCount0.count}],
+                        fill: false,
+                        pointRadius: 3,
+                        lineTension: 0,
+                        label: '예약 수',
+                        borderColor: 'rgb(255, 51, 0)',
+                        borderWidth: 1,
+                        backgroundColor: 'rgb(255, 51, 0)',
+                      }, { 
+                        data: [70, 90, 44, 60, 83, 90, 95],
+                        fill: false,
+                        pointRadius: 3,
+                        lineTension: 0,
+                        label: '결제 금액(X1000)',
+                        borderColor: 'rgb(0, 0, 0)',
+                        borderWidth: 1,
+                        backgroundColor: 'rgb(0, 0, 0)',
+                      }, { 
+                        data: [10, 21, 60, 44, 17, 21, 17],
+                        fill: false,
+                        pointRadius: 3,
+                        lineTension: 0,
+                        label: '가입자',
+                        borderColor: 'rgb(0, 153, 31)',
+                        borderWidth: 1,
+                        backgroundColor: 'rgb(0, 153, 31)',
+                      }
                     ]
-                },
+                  },
                 options: {
+                	title : {
+                		display : true,
+                		text : "사이트 이용 통계"
+                	},
                     scales: {
-                        yAxes: [
-                            {
+                        yAxes: [{
                                 ticks: { display : false, // y축 텍스트 삭제
-                                    beginAtZero: true
+                                    beginAtZero: true,
+                                    autoSkip: false
                                 }
-                            }
-                        ]
+                            }]
                     }
                 }
             });
