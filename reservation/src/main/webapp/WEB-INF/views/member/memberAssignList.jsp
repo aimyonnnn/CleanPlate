@@ -43,7 +43,7 @@
                 </div>
             </div>
             <div class="col-10">
-		    <h2 style="margin-left: 40px; margin-top: 30px;">양도관리</h2>
+		    <h2 style="margin-left: 40px; margin-top: 30px;">판매내역</h2>
 		        <!-- 드롭다운 시작 -->
 		        <div class="row">
 		        	<div class="col-2">
@@ -65,7 +65,7 @@
                 <div class="btn-group-vertical btn-group-lg d-flex align-self-start" role="group" aria-label="Vertical button group">
                     <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='member'">내 정보</button>
                     <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='memberRSList'" >예약 내역</button>
-                    <button type="button" class="btn btn-outline-warning active p-3" onclick="location.href='memberAssignList'">양도 관리</button>
+                    <button type="button" class="btn btn-outline-warning active p-3" onclick="location.href='memberAssignList'">판매 내역</button>
                     <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='memberLike'">내가 찜한 식당</button>
                     <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='memberReview'">내가 쓴 리뷰</button>
                     <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='memberWithdrawal'">회원탈퇴</button>
@@ -89,16 +89,14 @@
                             <td>${list.r_idx }</td>
                             <td>${list.a_price}원</td>
                             <td>
-                            	<!--  -->
+                            	<!-- list.p_status eq 1 => 판매중 -->
+                            	<!-- list.p_status eq 2 => 판매완료 -->
 	                            <c:choose>
-	                           		<c:when test="${list.a_status eq 1}">
+	                           		<c:when test="${list.p_status eq 1}">
 	                           			판매중
 	                           		</c:when>
-	                           		<c:when test="${list.a_status eq 2}">
-	                           			판매완료
-	                           		</c:when>
 	                           		<c:otherwise>
-	                           			판매실패
+	                           			판매완료
 	                           		</c:otherwise>
 	                           	</c:choose>
 	                            <!--  -->
@@ -115,10 +113,6 @@
                             			<button type="button" class="btn btn-outline-dark" 
                             			style="margin-left: 10px;" onclick="cancelAndCalculate(${list.r_idx }, ${list.a_price})">정산완료</button>
                             		</c:when>
-                            		<c:otherwise>
-		                            	<button type="button" class="btn btn-outline-warning"
-		                            	style="margin-left: 10px;" data-bs-toggle="modal" data-bs-target="#assignmentModal${list.r_idx }">가격수정</button>
-                            		</c:otherwise>
                             	</c:choose> 
                             	<!--  -->                       
                             </td>
