@@ -79,7 +79,7 @@
 								<option value="방문예정">방문예정</option>
 								<option value="방문완료">방문완료</option>
 								<option value="취소">취소</option>
-								<option value="양도완료">양도완료</option>
+								<option value="양도완료[구매]">양도완료[구매]</option>
 								<option value="판매중">판매중</option>
 								<option value="판매실패">판매실패</option>
 							</select>
@@ -89,7 +89,7 @@
 						<div class="dropdown">
 							<select class="form-select form-select mb-3" aria-label=".form-select example" style="width: 180px;" id="dateFilter">
 							  <option value="">전체날짜</option>
-							  <c:forEach items="${uniqueDates}" var="date">
+							  <c:forEach items="${sortedDates}" var="date">
 							    <option>${date }</option>
 							  </c:forEach>
 							</select>
@@ -141,10 +141,10 @@
 	                           			방문완료
 	                           		</c:when>
 	                           		<c:when test="${resList.r_status eq 3 }">
-	                           			취소
+	                           			<span style="color: red;">취소</span>
 	                           		</c:when>
 	                           		<c:when test="${resList.r_status eq 4 }">
-	                           			<span style="color: green;">양도완료</span>
+	                           			<span style="color: green;">양도완료[구매]</span>
 	                           		</c:when>
 	                           		<c:when test="${resList.r_status eq 5 }">
 	                           			판매중

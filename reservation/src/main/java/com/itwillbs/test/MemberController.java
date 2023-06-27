@@ -9,8 +9,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -39,6 +41,8 @@ import com.itwillbs.test.vo.PayVO;
 import com.itwillbs.test.vo.ReservationVO;
 import com.itwillbs.test.vo.RestaurantVO;
 import com.itwillbs.test.vo.ReviewVO;
+
+import edu.emory.mathcs.backport.java.util.Collections;
 
 @Controller
 public class MemberController {
@@ -145,7 +149,7 @@ public class MemberController {
 		
 		Timestamp currentDateTime = new Timestamp(System.currentTimeMillis());
 		
-		Set<String> uniqueDates = new HashSet<>();
+		Set<String> uniqueDates = new LinkedHashSet<>();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yy-MM-dd");
 
 		for (ReservationVO reservation : resList) {
@@ -153,9 +157,13 @@ public class MemberController {
 		    String dateString = dateFormat.format(rDate);
 		    uniqueDates.add(dateString);
 		}
-		
+
+		List<String> sortedDates = new ArrayList<>(uniqueDates);
+		Collections.sort(sortedDates);
+		Collections.reverse(sortedDates);
+
 		model.addAttribute("payInfoList", payInfoList);
-	    model.addAttribute("uniqueDates", uniqueDates);
+	    model.addAttribute("sortedDates", sortedDates);
 		model.addAttribute("currentDateTime", currentDateTime);
 		model.addAttribute("resList", resList);
 		model.addAttribute("rsList", rsList);
