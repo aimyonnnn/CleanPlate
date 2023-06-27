@@ -15,8 +15,8 @@
 	function upOK(){
 		// submit 확인 스크립트
    	 	if(confirm('수정하시겠습니까?') == true){ // 확인
-   	 		alert('수정되었습니다.');
        		document.form.submit();
+   	 		alert('수정되었습니다.');
     	} else { // 취소
     		alert('취소되었습니다.');
     		return;
