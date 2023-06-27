@@ -84,7 +84,7 @@ public class OwnerController {
 	}
 	
 	/* 식당관리 페이지 */
-	//owner의 식당추가로 이동 Mapping
+	// 가게 등록 버튼 클릭시 가게 등록 폼으로 이동 
 	@GetMapping("restaurantInsertPage")
 	public String restaurantInsertPage(HttpSession session, Model model) {
 		// 미로그인, 점주 회원이 아닐 경우 
@@ -206,12 +206,12 @@ public class OwnerController {
 			System.out.println("실제 업로드 파일명3 : " + restaurant.getRes_photo3());
 			
 			for(int i = 0; i < arrMenuList.getMe_name().length; i++) {
-				System.out.println("메뉴 파일명 " + i + Arrays.toString(arrMenuList.getMe_photo()));
+				System.out.println("메뉴 파일명 " + i + arrMenuList.getMe_photo()[i]);
 			}
 			
 			// c_idx 가져오기 위해 VO에 저장 
 			restaurant.setC_id(c_Id);
-			// 사업자등록번호 중복시 실패 => api로 한댔음
+			// 사업자등록번호 중복시 실패 => 사업자번호 인증 api
 			int insertCount = service.registStore(restaurant);
 			
 			// 성공시 restaurantList 리다이렉트 
@@ -229,7 +229,7 @@ public class OwnerController {
 						mFile3.transferTo(new File(saveDir, fileName3));
 					}
 					
-					// 메뉴 사진 
+					// 메뉴 사진
 					for(int i = 0; i < arrMenuList.getMe_name().length; i++) {
 						if(!arrMenuFile[i].getOriginalFilename().equals("")) {
 							arrMenuFile[i].transferTo(new File(saveDir, arrFileName[i]));
@@ -242,7 +242,7 @@ public class OwnerController {
 				}
 				// ----------------------------------------------
 				// 메뉴 추가 DB 작업 
-				// 방금등록한 res_idx 조회 (c_idx와 res_brn으로 조회)
+				// 방금 등록한 가게의 res_idx 조회 (c_idx와 res_brn으로 조회)
 				int c_idx = restaurant.getC_idx();
 				String res_brn = restaurant.getRes_brn();
 				int res_idx = service.selectRestaurantRes_idx(c_idx, res_brn);
@@ -260,19 +260,28 @@ public class OwnerController {
 					
 //					menuList.add(menu);
 					// 메뉴 등록 요청
-					// c_idx, res_brn 추가 파라미터로 해서 mapper에서 조회
+					// c_idx, res_brn 파라미터로 전달하여 mapper에서 조회도 가능
 					int insertMenuCount = menuService.registMenu(menu);
 					
+					// 메뉴 idx 조회 
 					int me_idx = menuService.getMeIdx(menu);
 					
-					if(insertMenuCount > 0) {
+					
+					
+					if(insertMenuCount > 0) { // 메뉴 등록 성공시 예약 시간 등록요청
+						
+						// 중복값 발생 이유 => menu반복문안이라서
 						for(int j = 0; j < arrTimeList.getT_time().length; j++) {
 							TimesVO t_Time = new TimesVO();
-							t_Time.setT_time(arrTimeList.getT_time()[i]);
+							t_Time.setT_time(arrTimeList.getT_time()[j]);
 							t_Time.setRes_idx(res_idx);
+							// 조회한 메뉴idx 저장
 							t_Time.setMe_idx(me_idx);
 							timesService.insertTime(t_Time);
 						}
+					} else { // 메뉴 등록 실패시 
+						model.addAttribute("msg", "가게 등록 실패!");
+						return "fail_back";
 					}
 					
 				}

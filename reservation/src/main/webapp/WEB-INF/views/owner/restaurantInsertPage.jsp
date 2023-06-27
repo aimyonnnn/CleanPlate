@@ -276,7 +276,7 @@
 						    <tr>
 								<th scope="row"><label for="menu">메뉴</label></th>
 						    	<td id="td_menu">
-						    		<button type="button" id="menu" class="btn btn-warning" style="color: black;" >메뉴 추가</button>
+						    		<button type="button" id="menu" class="btn btn-warning" style="color: black;" >메뉴 추가</button><br>
 						    		<a style="font-size: small; font-weight: normal;">버튼을 클릭하여 메뉴를 추가해주세요</a>
 							 		<div class="row mt-3 align-items-center">
 							            <table class="table" id="menuList">
@@ -298,23 +298,7 @@
 						    		<button type="button" id="t_timeInsert" class="btn btn-warning" style="color: black;" >추가</button>
 						    	</th>
 						    	<td id="td_Time">
-						    		<div class="row">
-										<input class="form-control timepicker3" type ="text" name="t_time" id="t_time" style="text-align: center; width: 100px;" placeholder="클릭하여 시간 선택">
-						    			<div class="col-6">
-						    			</div>
-<!-- 						    			<div class="col-2"> -->
-<!-- 											<input class="form-check-input" type="radio" value="LUNCH"> -->
-<!-- 											<label></label> -->
-<!-- 						    			</div> -->
-<!-- 						    			<div class="col-2" > -->
-<!-- 											<input class="form-check-input" type="radio" value="DINNER"> -->
-<!-- 						    			</div> -->
-<!-- 						    			<div class="col-2"> -->
-<!-- 											  <input class="form-check-input" type="checkbox" name="res_amenity" id="amenity4" value="예약"> -->
-<!-- 											  <label class="form-check-label" for="amenity4">예약</label> -->
-<!-- 						    			</div> -->
-						    			
-						    		</div>
+										<input class="form-control timepicker3" type ="text" name="t_time" id="t_time" style="text-align: center; width: 200px;" placeholder="클릭하여 시간 선택">
 						    	</td>
 						    </tr>
 						    <tr>
@@ -325,7 +309,7 @@
 						    	<td>
 						    		<!-- VO의 MultipartFile 변수 이름과 동일 -->
 						    		<!-- 실제 파일명 res_photo1, 2, 3 -->
-						    		<input type="file" name="res_file1" class="form-control" accept="image/*" onchange="checkFileExtension(event)"><br>
+						    		<input type="file" name="res_file1" class="form-control" accept="image/*" onchange="checkFileExtension(event)" required><br>
 						    		<input type="file" name="res_file2" class="form-control" accept="image/*" onchange="checkFileExtension(event)"><br>
 						    		<input type="file" name="res_file3" class="form-control" accept="image/*" onchange="checkFileExtension(event)"><br>
 						    		
@@ -575,8 +559,9 @@
 		  });
 	});
 	
+	// 추가 버튼 클릭시 예약시간을 입력받는 input태그 생성
 	$("#t_timeInsert").on("click", function(event) {
-		$("#td_Time").append("<input class='form-control timepicker3' type ='text' name='t_time' id='t_time' style='text-align: center;'>");
+		$("#td_Time").append("<input class='form-control timepicker3' type ='text' name='t_time' id='t_time' style='text-align: center; width: 200px;' placeholder='클릭하여 시간 선택''>");
 	}); 
 	
 // 	$("#btnMenuInsert").on("click", function(event) {
