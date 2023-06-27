@@ -76,13 +76,17 @@ public class AssignmentController {
    }
    
    // WebSocket - 입장
-   @PostMapping("/assignAgreePro")
-   public String loginProcess(@RequestParam String id, HttpServletRequest request, HttpSession session, Model model) {
+   @GetMapping("/assignAgreePro")
+   public String loginProcess(@RequestParam String a_sellerId, HttpServletRequest request, HttpSession session, Model model) {
 	   
 	   // 현재 세션에 저장된 id로 주문자 정보 조회하기
 	   // 기업회원은 구매 불가능!
 	   String sId = (String) session.getAttribute("sId");
-	   System.out.println(sId);
+	   System.out.println("a_sellerId : " + a_sellerId);
+	   sId = a_sellerId;
+	   
+	   List<AssignmentVO> aList = assignmentService.getAssignInfo(sId);
+	   model.addAttribute("aList", aList);
 	   
 	   // 세션 아이디가 존재하지 않을 경우
 	   if (sId == null) {
@@ -90,7 +94,7 @@ public class AssignmentController {
 	        return "fail_back";
 	    }
 	   
-      logger.info("Welcome "+id);
+      logger.info("Welcome " + a_sellerId);
       return "assignment/assignmentChat";
    }
    

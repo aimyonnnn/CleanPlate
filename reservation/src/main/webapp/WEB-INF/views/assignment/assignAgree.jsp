@@ -77,7 +77,7 @@ $(document).ready(function() {
                 </p>
             </div>
             <div class="panel-body">
-                <form id="login-form" method="post" action="assignAgreePro">
+<!--                 <form id="login-form" method="get" action="assignAgreePro"> -->
                     <div>
                     	<!-- hidden 태그로 전송 - 양도번호, 회원번호 -->
                         <input type="hidden" name="id" class="form-control" style="text-align: center;">
@@ -85,9 +85,11 @@ $(document).ready(function() {
                         <input type="hidden" name="m_idx" class="form-control" style="text-align: center;">
                     </div>
                     <div>
-                        <button type="submit" class="form-control btn btn-warning" style="margin-bottom: -10px;">>동의하기</button>
+                        <button type="submit" class="form-control btn btn-dark mb-1" style="margin-bottom: -10px;"
+                        onclick="location.href='<c:url value="assignAgreePro"/>' 
+						+ '?r_idx=${param.r_idx}&r_date=${param.r_date}&a_price=${param.a_price}&res_name=${param.res_name}&a_sellerId=${param.a_sellerId}'">동의하기</button>
                     </div>
-                </form>
+<!--                 </form> -->
             </div>
         </div>
    	</div>

@@ -44,7 +44,7 @@
 	}
 	
 	.chat-header {
-	  background-color: #007bff;
+	  background-color: #212529;
 	  color: #fff;
 	  padding: 15px;
 	  border-radius: 10px 10px 0 0;
@@ -71,7 +71,7 @@
 	  width: 40px;
 	  height: 40px;
 	  border-radius: 50%;
-	  background-color: #007bff;
+	  background-color: #212529;
 	  margin-right: 10px;
 	}
 	
@@ -105,7 +105,7 @@
 	}
 	
 	.message-input button {
-	  background-color: #007bff;
+	  background-color: #212529;
 	  color: #fff;
 	  padding: 8px 15px;
 	  border: none;
@@ -121,7 +121,7 @@
 	}
 	
 	.chat-buttons button {
-	  background-color: #007bff;
+	  background-color: #212529;
 	  color: #fff;
 	  padding: 6px 12px;
 	  border: none;
@@ -148,23 +148,38 @@
   url(${pageContext.request.contextPath }/resources/images/1.jpg); background-size: cover;">
 
    <div style="height: 100px; width: 100%"></div>
-  		
+   
+   <c:set var="curendUser" value="${sessionScope.sId}" />
+  	
    <div class="container-main" data-aos="flip-left">
-        <div class="chat-header">
-            <h2>Clean Plate</h2>
+        <div class="chat-header d-flex justify-content-center">
+            <button type="button" class="btn btn-outline-secondary me-2" style="color:white;" onclick="location.href='assignment'">목록으로</button>
+            <button type="button" class="btn btn-outline-secondary me-2" style="color:white;" onclick="openSocket();">대화연결</button>
+            <button type="button" class="btn btn-outline-secondary me-2" style="color:white;" onclick="location.href='memberRSList'">예약내역</button>
+            <button type="button" class="btn btn-danger" style="color:white;" onclick="location.href='QNA'">신고하기</button>
         </div>
-        <div class="chat-buttons">
-            <button type="button" onclick="openSocket();">대화 연결</button>
-            <button type="button" onclick="location.href='assignment'">목록으로</button>
-        </div>
+        <c:choose>
+	        <c:when test="${not empty aList && param.a_sellerId eq curendUser}">
+		        <div class="chat-buttons">
+		            <input type="text" class="salesValue me-2" id="salesValue" placeholder="현재가격 : ${param.a_price}원">
+		            <button type="button" id="updatePrice" class="btn btn-outline-secondary" onclick="updatePrice('${param.r_idx}')">가격 수정</button>
+		        </div>
+	        </c:when>
+        	<c:otherwise>
+        		<div class="chat-buttons">
+		            <input type="text" class="buyerValue me-2" id="buyerValue" placeholder="현재가격 : ${param.a_price}원" readonly="readonly">
+		            <button type="button" id="updatePrice" class="btn btn-outline-secondary" onclick="location.href='<c:url value="assignmentPayment"/>' 
+						+ '?r_idx=${param.r_idx}&r_date=${param.r_date}&a_price=${param.a_price}&res_name=${param.res_name}&a_sellerId=${param.a_sellerId}'">구매하기</button>
+			   </div>
+        	</c:otherwise>
+        </c:choose>
+        
         <div class="message-list" id="messages"></div>
         <div style="height: 20px; width: 100%"></div>
         <div class="message-input">
             <input type="text" id="sender" value="${sessionScope.sId}" style="display: none;">
-            <input type="text" id="messageinput" placeholder="메시지를 입력하세요">
-            <button type="button" onclick="send();">메시지 전송</button>
-<%--             <button type="button" onclick="location.href='<c:url value='/'/>'">거래 완료</button> --%>
-            <button type="button" id="completeButton">거래 완료</button>
+            <input type="text" id="messageinput" placeholder="메시지를 입력하세요" onkeydown="handleKeyDown(event)">
+<!--             <button type="button" onclick="send();">메시지 전송</button> -->
 <!--             <button type="button" onclick="closeSocket();">연결 종료</button> -->
 <!--             <button type="button" onclick="clearText();">채팅내역 삭제</button> -->
         </div>
@@ -202,11 +217,21 @@
             
         }
         
-        function send(){
-            var text = document.getElementById("messageinput").value+","+document.getElementById("sender").value;
-            ws.send(text);
-            text = "";
-        }
+        // 키 다운 이벤트 처리
+        function handleKeyDown(event) {
+        	  if (event.key === 'Enter') {
+        	    send(); // 엔터 키를 누르면 send() 함수 호출
+        	  }
+       	}
+		
+        // send()
+       	function send() {
+	      	var text = document.getElementById("messageinput").value; // 입력된 텍스트 가져오기
+	      	var sender = document.getElementById("sender").value; // 발신자 정보 가져오기
+	      	var message = text + "," + sender; // 텍스트와 발신자 정보를 합쳐서 메시지 생성
+	       	ws.send(message); // 웹소켓을 통해 메시지 전송
+	       	document.getElementById("messageinput").value = ""; // 텍스트 지우기
+       	}
         
         function closeSocket(){
             ws.close();
@@ -222,6 +247,53 @@
       	}
         
   </script>
+  
+  <!-- 가격 수정을 위한 ajax요청 -->
+  <script>
+	    function updatePrice(r_idx) {
+	    	
+	    	var salesValue =$("#salesValue").val();
+	    	console.log(r_idx);
+	        console.log(salesValue);
+	    	
+	    	
+	        // 확인 메시지 출력
+	        var confirmation = confirm('입력한 금액이 맞습니까?');
+	        
+	        if (confirmation) {
+	        	
+	        	// ======================================== ajax ========================================
+		        $.ajax({
+		            url: '<c:url value="modifySalesPrice"/>',
+		            method: "POST",
+		            data: {
+		            	r_idx: r_idx,
+		                salesValue: salesValue
+		            },
+		            dataType: "text",
+		            success: function(response) {
+		            	
+						var modifyValue = response.trim();
+						console.log(modifyValue);
+						
+						if(response === '1') {
+			                alert("가격이 성공적으로 업데이트되었습니다.");
+			                location.href='<c:url value="memberRSList"/>'
+			                
+						} else {
+							alert("예약금액 보다 높게 판매할 수 없습니다. 가격을 다시 입력해주세요");
+						}
+						
+		            },
+		            error: function(xhr, status, error) {
+		                console.error("가격 업데이트 오류:", error);
+		            }
+		        });
+		    	// ======================================== ajax ========================================
+		    		
+	        } // if
+	    } // updatePrice
+	</script>
   
   	<!-- AOS 라이브러리 -->
 	<script src="https://unpkg.com/aos@next/dist/aos.js"></script>

@@ -283,7 +283,8 @@
                       예약번호 : <input type="text" name="r_idx" value="${assignment.r_idx}" readonly="readonly" style="border: none;">
                       <div class="d-flex">
 	                    <button type="button" class="btn btn-warning btn-chat w-50 mx-2"
-	                     id="contactButton" onclick="location.href='<c:url value="assignAgree"/>'">채팅문의</button>
+	                     id="contactButton" onclick="location.href='<c:url value="assignAgree"/>'
+	                     + '?r_idx=${assignment.r_idx}&r_date=${assignment.r_date}&a_price=${assignment.a_price}&res_name=${assignment.res_name}&a_sellerId=${assignment.a_sellerId}'">채팅문의</button>
 						<button type="button" class="btn btn-warning btn-chat w-50 mx-2" id="payButton"
 						onclick="location.href='<c:url value="assignmentPayment"/>' 
 						+ '?r_idx=${assignment.r_idx}&r_date=${assignment.r_date}&a_price=${assignment.a_price}&res_name=${assignment.res_name}&a_sellerId=${assignment.a_sellerId}'">바로구매</button>
@@ -438,7 +439,8 @@
       					                   예약번호 : <input type="text" name="r_idx" value="${'${data.r_idx}'}" readonly="readonly" style="border: none;">
       					                   <div class="d-flex">
       					                    <button type="button" class="btn btn-warning btn-chat w-50 mx-2"
-      					                    	id="contactButton" onclick="location.href='<c:url value="assignAgree"/>'">채팅문의</button>
+      					                    	id="contactButton" onclick="location.href='<c:url value="assignAgree"/>'
+      					                    	+ '?r_idx=${"${data.r_idx}"}&r_date=${"${data.r_date}"}&a_price=${"${data.a_price}"}&res_name=${"${data.res_name}"}&a_sellerId=${"${data.a_sellerId}"}'">채팅문의</button>
       				                    	<button type="button" class="btn btn-warning btn-chat w-50 mx-2" id="payButton"
       				    						onclick="location.href='<c:url value="assignmentPayment"/>' 
       				    						+ '?r_idx=${"${data.r_idx}"}&r_date=${"${data.r_date}"}&a_price=${"${data.a_price}"}&res_name=${"${data.res_name}"}&a_sellerId=${"${data.a_sellerId}"}'">바로구매</button>
