@@ -273,7 +273,13 @@ public class LoginController {
 	
 		//아이디, 비밀번호 찾기
 		@GetMapping("forgotten")
-		public String forgotten() {
+		public String forgotten(HttpSession session, Model model) {
+			
+			if(session.getAttribute("sId") != null || session.getAttribute("cId") != null) {
+				model.addAttribute("msg", "잘못된 접근입니다.");
+				return "fail_back";
+			}
+			
 			return "member/member_find";
 		}
 		
@@ -484,6 +490,7 @@ public class LoginController {
 	        //세션 유효시간 설정할 필요가있습니다)쿠키랑은 다름!
 	        @GetMapping("/login")
 	        public String login() {
+	        	
 	        	HttpSession session = request.getSession();
 	        	
 	        	// 로그인 성공한 경우 세션 유효 시간 설정 (30분)

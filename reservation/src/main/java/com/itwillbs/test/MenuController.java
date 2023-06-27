@@ -58,7 +58,13 @@ public class MenuController {
 	
 	// 메뉴 목록 조회
 	@GetMapping ("menuInfo")
-	public String menuInfo(Model model) {
+	public String menuInfo(Model model, HttpSession session) {
+		
+		if(session.getAttribute("sId") != null || session.getAttribute("cId") == null) {
+			model.addAttribute("msg", "잘못된 접근입니다.");
+			return "fail_back";
+		}
+		
 		List<MenuVO> menuList = service.getMenuList();
 		model.addAttribute("menuList", menuList);
 		return "owner/restaurantInsertPage";
