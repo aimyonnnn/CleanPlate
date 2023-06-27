@@ -27,7 +27,7 @@
           <div>
             <span>관리자 페이지</span>
           </div>
-        </div>
+      	</div>
 
         <div class="sidebar-menu">
           <div class="menu-head">
@@ -114,9 +114,9 @@
      <main>
         <div class="page-header">
           <div>
-            <h1>주간 데이터 통계</h1>
+            <h1>데이터 통계</h1>
             <br>
-            <small>오늘 날짜를 기준으로 6일 이전까지의 1주일간의 데이터를 가져옵니다.</small>
+            <small>누적된 총 데이터와 오늘 날짜를 기준으로 6일 이전까지의 1주일간의 데이터를 가져옵니다.</small>
           </div>
         </div> 
 
@@ -153,8 +153,51 @@
             <div class="card-flex">
               <div class="card-into">
                 <div class="card-head">
-					<small>가입자 수</small>
+					<small>총 가입자 수</small>
 					<h2>${memberList.size() } 명</h2>
+                </div>
+              </div>
+              <div class="card-chart success">
+                <span class="las la-chart-line"></span>
+              </div>
+            </div>
+          </div>
+         </div>
+         <br>
+        <div class="cards">
+          <div class="card-single">
+            <div class="card-flex">
+              <div class="card-into">
+                <div class="card-head">
+					<small>일일 예약 수</small>
+					<h2>${adminReservationCount0.count} 건</h2>
+                </div>
+              </div>
+              <div class="card-chart danger">
+                <span class="las la-chart-line"></span>
+              </div>
+            </div>
+          </div>
+          <div class="card-single">
+            <div class="card-flex">
+              <div class="card-into">
+                <div class="card-head">
+					<small>일일 결제 금액</small>
+					<h2><fmt:formatNumber value="${adminPaymentCount0.count}" /> 원</h2>
+                </div>
+              </div>
+              <div class="card-chart black">
+                <span class="las la-chart-line"></span>
+              </div>
+            </div>
+          </div>
+         
+          <div class="card-single">
+            <div class="card-flex">
+              <div class="card-into">
+                <div class="card-head">
+					<small>일일 가입자 수</small>
+					<h2>${adminMemberCount0.count} 명</h2>
                 </div>
               </div>
               <div class="card-chart success">
@@ -168,8 +211,8 @@
 
 
 <div>
-	<!--차트가 그려질 부분-->
-	<canvas id="totalChart" style="width: 900px; height: 300px;"></canvas>
+	<!-- 일일 라인 차트가 그려질 부분 -->
+	<canvas id="dailyChart" style="width: 900px; height: 300px;"></canvas>
 </div>
 <br>
 <!-- 6일 전, 오늘 날짜 데이터 -->
@@ -181,10 +224,20 @@
 <img width="18" height="18" src="https://img.icons8.com/material-rounded/24/info-squared.png" alt="information--v2"/>
 <small>집계일: ${sixDayAgoStr } ~ ${nowDate }</small>
 
+<br>
+<!-- 누적 라인 차트가 그려질 부분 -->
+<div>
+	<canvas id="totalChart" style="width: 900px; height: 300px;"></canvas>
+</div>
+<!-- 
+카드 클릭 시 해당 항목 상세 차트 띄우기, 라인 차트 날짜 클릭 시 해당 날짜의 데이터를 막대 형식으로 띄우기
+ -->
+
+<!-- 일일 라인 차트 스크립트  -->
 <script type="text/javascript">
 			var now = moment();
             var context = document
-                .getElementById('totalChart')
+                .getElementById('dailyChart')
                 .getContext('2d');
             var myChart = new Chart(context, {
                 type: 'line', // 차트의 형	태
@@ -247,7 +300,88 @@
                 options: {
                 	title : {
                 		display : true,
-                		text : "주간 데이터 통계"
+                		text : "일일 데이터 차트"
+                	},
+                    scales: {
+                        yAxes: [{
+                                ticks: { display : false, // y축 텍스트 삭제
+                                    beginAtZero: true,
+                                    autoSkip: false
+                                }
+                            }]
+                    }
+                }
+            });
+        </script>   
+             
+<!-- 누적 라인 차트 스크립트 -->
+<script type="text/javascript">
+			var now = moment();
+            var context = document
+                .getElementById('totalChart')
+                .getContext('2d');
+            var myChart = new Chart(context, {
+                type: 'line', // 차트의 형	태
+                data: { // 차트에 들어갈 데이터
+                	labels: [ moment().subtract(6, 'day').format('YYYY.MM.DD')
+                		, moment().subtract(5, 'day').format('YYYY.MM.DD')
+                		, moment().subtract(4, 'day').format('YYYY.MM.DD')
+                		, moment().subtract(3, 'day').format('YYYY.MM.DD')
+                		, moment().subtract(2, 'day').format('YYYY.MM.DD')
+                		, moment().subtract(1, 'day').format('YYYY.MM.DD')
+                		, now.format('YYYY.MM.DD') ],
+                    datasets: [{ 
+                        data: [${adminReservationTotalCount6.count}
+                        	 , ${adminReservationTotalCount5.count}
+                        	 , ${adminReservationTotalCount4.count}
+                        	 , ${adminReservationTotalCount3.count}
+                        	 , ${adminReservationTotalCount2.count}
+                        	 , ${adminReservationTotalCount1.count}
+                        	 , ${adminReservationTotalCount0.count}],
+                        fill: false,
+                        pointRadius: 3,
+                        lineTension: 0,
+                        label: '예약 수',
+                        borderColor: 'rgb(255, 51, 0)',
+                        borderWidth: 1,
+                        backgroundColor: 'rgb(255, 51, 0)',
+                      }, { 
+                        data: [${adminPaymentCount6.count}
+                        	 , ${adminPaymentCount5.count}
+                        	 , ${adminPaymentCount4.count}
+                        	 , ${adminPaymentCount3.count}
+                        	 , ${adminPaymentCount2.count}
+                        	 , ${adminPaymentCount1.count}
+                        	 , ${adminPaymentCount0.count}],
+                        fill: false,
+                        pointRadius: 3,
+                        lineTension: 0,
+                        label: '결제 금액(X1000원)',
+                        borderColor: 'rgb(0, 0, 0)',
+                        borderWidth: 1,
+                        backgroundColor: 'rgb(0, 0, 0)',
+                      }, { 
+                        data: [${adminMemberCount6.count}
+                       		 , ${adminMemberCount5.count}
+                       		 , ${adminMemberCount4.count}
+                       		 , ${adminMemberCount3.count}
+                       		 , ${adminMemberCount2.count}
+                       		 , ${adminMemberCount1.count}
+                       		 , ${adminMemberCount0.count}],
+                        fill: false,
+                        pointRadius: 3,
+                        lineTension: 0,
+                        label: '가입자 수',
+                        borderColor: 'rgb(0, 153, 31)',
+                        borderWidth: 1,
+                        backgroundColor: 'rgb(0, 153, 31)',
+                      }
+                    ]
+                  },
+                options: {
+                	title : {
+                		display : true,
+                		text : "누적 데이터 차트"
                 	},
                     scales: {
                         yAxes: [{

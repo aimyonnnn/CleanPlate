@@ -128,7 +128,7 @@ public class AdminController {
 		List<ReservationVO> reservationList = rservice.getReservationList();
 		model.addAttribute("reservationList" ,reservationList);
 		
-		// 지난 일자 예약 수 조회
+		// 지난 일자 일일 예약 수 조회
 		ReservationVO adminReservationCount = new ReservationVO();
 		for(int i = 0; i <= 6; i++) {
 			adminReservationCount = rservice.adminReservationCount(i);
@@ -142,6 +142,20 @@ public class AdminController {
 			}
 			
 		}	
+		
+		// 지난 일자 총 예약 수 조회
+		ReservationVO adminReservationTotalCount = new ReservationVO();
+		for(int x = 0; x <= 6; x++) {
+			adminReservationTotalCount = rservice.adminReservationTotalCount(x);
+			model.addAttribute("adminReservationTotalCount" + x, adminReservationTotalCount);
+			// 조회 결과 없을 경우 0 값으로 대체
+			if(adminReservationTotalCount == null) {
+				ReservationVO defaultVO = new ReservationVO();
+				defaultVO.setC_idx(0);
+				defaultVO.setCount(0);
+				model.addAttribute("adminReservationTotalCount" + x, defaultVO);
+			}
+		}
 		
 		// 가게 목록 조회
 			List<RestaurantVO> RestaurantList = reservice.getRestaurantList();

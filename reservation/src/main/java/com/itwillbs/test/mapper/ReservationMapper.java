@@ -90,10 +90,13 @@ public interface ReservationMapper {
 	// 예약이 꽉찬 날 조회
 	String[] selectFullDay();
 
-	// 지난 일자 예약 수 조회
+	// 지난 일자 일일 예약 수 조회
 	ReservationVO adminReservationCount(int i);
 
 	// 예약 목록 역순 조회
 	List<ReservationVO> getReservationListDESC();
+
+	// 지난 일자 총 예약 수 조회
+	ReservationVO adminReservationTotalCount(int x);
 
 }
