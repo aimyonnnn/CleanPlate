@@ -114,7 +114,7 @@ Clean Table은 식당 예약 서비스 제공을 위한 정보 외에 추가 정
             <table class="table my-2">
                 <tr>
                     <th class="col-1">구분<b>*</b></th>
-                    <td class="col"><input type="radio" name="q_division" value="1" checked>일반 문의 <input type="radio" value="2" name="flexRadioDefault">점주 문의</td>
+                    <td class="col"><input type="radio" name="q_division" value="1" checked>일반 문의 <input type="radio" name = "q_division" value="2" name="flexRadioDefault">점주 문의</td>
                 </tr>
                 <tr>
                     <th class="col-1">유형<b>*</b></th>
