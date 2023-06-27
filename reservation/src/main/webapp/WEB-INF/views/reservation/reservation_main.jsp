@@ -226,7 +226,7 @@
                 <li class="nav-item me-5"><a class="nav-link active" aria-current="page" href ='<c:url value="/" />' style="color: white;">Home</a></li>
                 <li class="nav-item me-5"><a class="nav-link" href ='<c:url value="/reservationMain" />' style="color: white;">Reservation</a></li>
                 <li class="nav-item me-5"><a class="nav-link" href ='<c:url value="/assignment" />' style="color: white;">Assignment</a></li>
-                <li class="nav-item"><a class="nav-link" href ='<c:url value="/helpHome" />' style="color: white;">Help</a></li>
+                <li class="nav-item"><a class="nav-link" href ='<c:url value="/Notice" />' style="color: white;">Help</a></li>
               </ul>
             </div>
           </div>
@@ -242,9 +242,18 @@
 		<div class="input-group mb-3" style="width: 800px; margin: 0 auto;">
 		  <input type="text" class="form-control" placeholder="식당을 검색하세요" id="restaurantName" name="restaurantName">
 		  <button class="btn btn-outline-secondary bg-white text-dark" type="button" id="restaurantSearch" name="restaurantSearch">검색</button>
-		   <div class="d-inline-block mx-2">
-		      <select class="form-select" id="districtSelect">
-		        <option selected disabled>지역선택</option>
+		</div>
+        <!-- 검색 버튼 -->
+        
+	    <!-- 정렬 버튼 -->
+		<div class="col-12 mt-4">
+		  <div class="text-center">
+		    <button type="button" class="btn btn-warning mx-2" id="storeName">가게이름순</button>
+		    <button type="button" class="btn btn-warning mx-2" id="openEarly">오픈시간순</button>
+		    <button type="button" class="btn btn-warning mx-2" id="reviewHigh">평점높은순</button>
+		    <div class="d-inline-block mx-2">
+		    <select class="form-select form-select-sm mb-3 text-bg-light" id="districtSelect">
+		        <option value="">지역선택</option>
 				<option value="해운대구">해운대구</option>
 				<option value="부산진구">부산진구</option>
 				<option value="동래구">동래구</option>
@@ -260,20 +269,8 @@
 				<option value="동구">동구</option>
 				<option value="남구">남구</option>
 				<option value="서구">서구</option>
-		      </select>
+		    </select>
 		    </div>
-		</div>
-        <!-- 검색 버튼 -->
-        
-	    <!-- 정렬 버튼 -->
-		<div class="col-12 mt-4">
-		  <div class="text-center">
-		    <button type="button" class="btn btn-warning mx-2" id="storeName">가게이름순</button>
-		    <button type="button" class="btn btn-warning mx-2" id="openEarly">오픈시간순</button>
-		    <button type="button" class="btn btn-warning mx-2" id="reviewHigh">평점높은순</button>
-<!-- 		    <button type="button" class="btn btn-warning mx-2" id="reviewLow">평점낮은순</button> -->
-<!-- 		    <button type="button" class="btn btn-warning mx-2" id="reservationMany">예약많은순</button> -->
-		   
 		  </div>
 		</div>
 		<!-- 정렬 버튼 -->
@@ -281,19 +278,20 @@
 	   <script>
 	   // 식당 JSON 가져오기
        let restaurantList = <%= new Gson().toJson(request.getAttribute("restaurantList")) %>;
-       console.log("restaurantList : " + restaurantList);
+//        console.log("restaurantList : " + restaurantList);
        
        // 리뷰 JSON 가져오기
        let reviewScores = <%= new Gson().toJson(request.getAttribute("reviewScores")) %>;
-       console.log("reviewScores : " + reviewScores);
+//        console.log("reviewScores : " + reviewScores);
        
-       // 지역 선택에 따른 가게 목록 필터링
+       // 지역 필터
+       // 1. 지역 선택에 따른 가게 목록 필터링
        $('#districtSelect').change(function() {
          var selectedDistrict = $(this).val();
          filterRestaurantList(selectedDistrict);
        });
        
-       // 선택한 지역에 따라 가게 목록 필터링하여 출력
+       // 2. 선택한 지역에 따라 가게 목록 필터링하여 출력
        function filterRestaurantList(district) {
          var filteredList = restaurantList.filter(function(restaurant) {
            return restaurant.res_detailAddress.includes(district);
@@ -310,7 +308,7 @@
     				return -1
     			}
     	   });
-    	   console.log(restaurantList);
+//     	   console.log(restaurantList);
 	       appendList(restaurantList);
        });
        
@@ -320,7 +318,7 @@
 	      // a.res_open과 b.res_open을 시간 형식(HH:MM)으로 비교하여 오름차순 정렬
 	      return a.res_openinghours.localeCompare(b.res_openinghours, undefined, { numeric: true });
 	  });
-		  console.log(restaurantList);
+// 		  console.log(restaurantList);
 	      appendList(restaurantList);
 	  });
       
@@ -329,18 +327,9 @@
 		  reviewScores.sort((a, b) => {
 	        return b.average_score - a.average_score;
 	    });
-		  console.log(reviewScores);
+// 		  console.log(reviewScores);
 	      appendList(reviewScores);
 	  });
-      
-//       // 평점 낮은순 정렬
-// 	  $('#reviewLow').on('click', () => {
-// 		  reviewScores.sort((a, b) => {
-// 	        return a.average_score - b.average_score;
-// 	    });
-// 		  console.log(reviewScores);
-// 	      appendList(reviewScores);
-// 	  });
       
        // appendList() 
        function appendList(restaurantList) {
@@ -349,7 +338,7 @@
 	   card.empty();
 	         
   	   $.each(restaurantList, (index, data) => {
-       console.log(data);
+//        console.log(data);
          
        let template = `<div class="col-md-4 mt-5" data-aos="fade-up" data-aos-anchor-placement="center-bottom">
               <div class="card">
@@ -401,7 +390,7 @@
       		
       		$('#restaurantName').on('change', () => {
       			var resName = $('#restaurantName').val();
-      			console.log(resName);
+//       			console.log(resName);
       			
       			 $.ajax({
       	                url: '<c:url value="/getRestaurantName"/>',
@@ -417,7 +406,7 @@
       	                card.empty();
       	                
       	                $.each(response, (index, data) => {
-      	     	        console.log(data);
+//       	     	        console.log(data);
       	     	           
      	     	            let template = `<div class="col-md-4 mt-5" data-aos="fade-up" data-aos-anchor-placement="center-bottom">
      	     				               <div class="card">
