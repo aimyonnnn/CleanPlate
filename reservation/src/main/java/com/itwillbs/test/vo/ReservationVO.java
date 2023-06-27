@@ -30,4 +30,5 @@ public class ReservationVO {
     private String res_amenity_info; // 식당 편의시설 설명
     private Timestamp date; // 통계를 위한 날짜 정보
     private int count; // 통계를 위한 예약 수 카운트
+    private String res_photo1; // 대표사진
 }
