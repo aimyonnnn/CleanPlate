@@ -123,7 +123,7 @@ public class ReservationService {
 		return mapper.selectFullDay();
 	}
 
-	// 지난 일자 예약 수 조회
+	// 지난 일자 일일 예약 수 조회
 	public ReservationVO adminReservationCount(int i) {
 		return mapper.adminReservationCount(i);
 	}
@@ -131,6 +131,11 @@ public class ReservationService {
 	// 예약 목록 역순 조회
 	public List<ReservationVO> getReservationListDESC() {
 		return mapper.getReservationListDESC();
+	}
+
+	// 지난 일자 총 예약 수 조회
+	public ReservationVO adminReservationTotalCount(int x) {
+		return mapper.adminReservationTotalCount(x);
 	}
 
 }

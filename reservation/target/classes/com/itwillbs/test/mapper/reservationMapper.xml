@@ -222,7 +222,7 @@
 										WHERE restaurant.res_idx = reservation.res_idx);
 	</select>
 
-	<!-- 관리자 페이지 통계용 데이터 조회  -->
+	<!-- 관리자 페이지 통계용 데이터 조회(일일 합계)  -->
 	<select id="adminReservationCount">
 		SELECT DATE(r_date) AS date,
 			   count(r_idx) AS count
@@ -230,6 +230,14 @@
 					WHERE DATE(r_date) = curdate() - interval #{i} day
 					GROUP BY date
 					ORDER BY date DESC
+	</select>
+	
+	<!-- 관리자 페이지 통계용 데이터 조회(누적 합계) -->
+	<select id="adminReservationTotalCount">
+		SELECT count(r_idx) AS count
+			FROM reservation
+					WHERE r_date <![CDATA[<]]> now() - interval #{x} day
+					ORDER BY r_date DESC
 	</select>
 	
 	<!-- 예약 목록 역순 조회  -->
