@@ -45,4 +45,8 @@ public interface HelpMapper {
 	// QNA 글 수
 	int selectQnaListCount(@Param("id")String id, @Param("searchType") String searchType, @Param("searchKeyword") String searchKeyword);
 
+	String selectMemberIdInfo(int q_idx);
+
+	int deleteQNA(int q_idx);
+
 }

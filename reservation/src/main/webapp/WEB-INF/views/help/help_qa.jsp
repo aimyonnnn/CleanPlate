@@ -60,10 +60,7 @@
 			        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${QNAList.q_idx }" aria-expanded="false" aria-controls="collapseOne">
 			        <div class="container text-center">
 			          <div class="row">
-			            <div class="col-1">
-			              ${QNAList.q_idx }
-			            </div>
-			            <div class="col-6">
+			            <div class="col-7">
 			              ${QNAList.q_subject }
 			            </div>
 			            <div class="col-2">
@@ -107,8 +104,7 @@
 			         	<c:otherwise>
 			         		<c:if test="${QNAList.q_re_context eq null and sessionScope.sId ne 'admin' }">
 					         	<div class="btn-group-sm text-end" role="group" aria-label="Basic outlined example">
-						            <button class="btn btn-outline-primary">삭제</button>
-						            <button class="btn btn-outline-primary">수정</button>
+						            <button class="btn btn-outline-primary" onclick="location.href=DeleteQna?q_idx=${QNAList.q_idx}">삭제</button>
 						        </div>
 					    	</c:if>
 			         	</c:otherwise>
