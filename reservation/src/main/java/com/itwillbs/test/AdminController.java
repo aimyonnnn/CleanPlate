@@ -16,10 +16,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.itwillbs.test.service.AssignmentService;
 import com.itwillbs.test.service.HelpService;
 import com.itwillbs.test.service.MemberService;
+import com.itwillbs.test.service.PayService;
 import com.itwillbs.test.service.ReservationService;
 import com.itwillbs.test.service.RestaurantService;
 import com.itwillbs.test.vo.AssignmentVO;
 import com.itwillbs.test.vo.MemberVO;
+import com.itwillbs.test.vo.PayVO;
 import com.itwillbs.test.vo.ReservationVO;
 import com.itwillbs.test.vo.RestaurantVO;
 
@@ -35,14 +37,26 @@ public class AdminController {
 	AssignmentService aservice;
 	@Autowired
 	HelpService hservice;
+	@Autowired
+	PayService pservice;
 	//=============================== 관리자 페이지 메인 ==================================
 	
 	// 로그인 성공 후 관리자페이지 클릭 시 관리자페이지로 이동
 	@GetMapping("adminMain")
 	public String adminMain(Model model) {
-		// 예약 목록 조회
+		// 예약 목록 조회 / 역순 조회
 		List<ReservationVO> reservationList = rservice.getReservationList();
 		model.addAttribute("reservationList" ,reservationList);
+		List<ReservationVO> reservationDESCList = rservice.getReservationListDESC();
+		model.addAttribute("reservationDESCList" ,reservationDESCList);
+		
+		// 회원 목록 조회
+		List<MemberVO> memberList = mservice.memberList();
+		model.addAttribute("memberList", memberList);
+		
+		// 오늘 총 예약 수
+		ReservationVO todayReservationCount = rservice.adminReservationCount(0);
+		model.addAttribute("todayReservationCount" ,todayReservationCount);
 		
 		// 가게 목록 조회
 		List<RestaurantVO> RestaurantList = reservice.getRestaurantList();
@@ -63,6 +77,21 @@ public class AdminController {
 		List<MemberVO> memberList = mservice.memberList();
 		model.addAttribute("memberList", memberList);
 		
+		// 지난 일자 가입자 수 조회
+		MemberVO adminMemberCount = new MemberVO();
+		for(int i = 0; i <= 6; i++) {
+			adminMemberCount = mservice.adminMemberCount(i);
+			model.addAttribute("adminMemberCount" + i, adminMemberCount);
+			// 조회 결과 없을 경우 0 값으로 대체
+			if(adminMemberCount == null) {
+				MemberVO defaultVO = new MemberVO();
+				defaultVO.setM_idx(0);
+				defaultVO.setCount(0);
+				model.addAttribute("adminMemberCount" + i, defaultVO);
+			}
+			
+		}
+		
 		// 예약 목록 조회
 		List<ReservationVO> reservationList = rservice.getReservationList();
 		model.addAttribute("reservationList" ,reservationList);
@@ -72,7 +101,6 @@ public class AdminController {
 		for(int i = 0; i <= 6; i++) {
 			adminReservationCount = rservice.adminReservationCount(i);
 			model.addAttribute("adminReservationCount" + i, adminReservationCount);
-			System.out.println(adminReservationCount);
 			// 조회 결과 없을 경우 0 값으로 대체
 			if(adminReservationCount == null) {
 				ReservationVO defaultVO = new ReservationVO();
@@ -81,14 +109,28 @@ public class AdminController {
 				model.addAttribute("adminReservationCount" + i, defaultVO);
 			}
 			
-		}
+		}	
 		
 		// 가게 목록 조회
 			List<RestaurantVO> RestaurantList = reservice.getRestaurantList();
 			model.addAttribute("RestaurantList", RestaurantList);
 		
+		// 지난 일자 결제 금액 조회
+		PayVO adminPaymentCount = new PayVO();
+		for(int i = 0; i <= 6; i++) {
+			adminPaymentCount = pservice.adminPaymentCount(i);
+			model.addAttribute("adminPaymentCount" + i, adminPaymentCount);
+			// 조회 결과가 없을 경우 0 값으로 대체
+			if(adminPaymentCount == null) {
+				PayVO defaultVO = new PayVO();
+				defaultVO.setP_idx(0);
+				defaultVO.setCount(0);
+				model.addAttribute("adminPaymentCount" + i, defaultVO);
+			}
+		}
+			
 		// 총 결제 금액 조회
-		int total = rservice.getTotalPay();
+		int total = pservice.getTotalPay();
 		request.setAttribute("total", total);
 		
 		return "admin/adminStatistics";

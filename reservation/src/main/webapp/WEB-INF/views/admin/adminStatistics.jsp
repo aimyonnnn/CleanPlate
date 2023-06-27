@@ -51,7 +51,7 @@
               <li>
                 <a href="adminStatistics">
                   <span class="las la-chart-line"></span>
-                  사이트 이용 통계
+                  주간 데이터 통계
                 </a>
               </li>
             </ul>
@@ -110,9 +110,9 @@
      <main>
         <div class="page-header">
           <div>
-            <h1>사이트 이용 통계</h1>
+            <h1>주간 데이터 통계</h1>
             <br>
-            <h3>실시간 분석</h3>
+            <small>오늘 날짜를 기준으로 6일 이전까지의 1주일간의 데이터를 가져옵니다.</small>
           </div>
         </div> 
 
@@ -174,7 +174,8 @@
 <c:set var="sixDayAgo" value="<%=new Date(new Date().getTime() - 60*60*24*1000*6)%>"/>
 <fmt:formatDate value="${sixDayAgo}" pattern="yyyy-MM-dd" var="sixDayAgoStr"/>
 
-<img width="18" height="18" src="https://img.icons8.com/material-rounded/24/info-squared.png" alt="information--v2"/><small>집계일: ${sixDayAgoStr } ~ ${nowDate }</small>
+<img width="18" height="18" src="https://img.icons8.com/material-rounded/24/info-squared.png" alt="information--v2"/>
+<small>집계일: ${sixDayAgoStr } ~ ${nowDate }</small>
 
 <script type="text/javascript">
 			var now = moment();
@@ -207,7 +208,13 @@
                         borderWidth: 1,
                         backgroundColor: 'rgb(255, 51, 0)',
                       }, { 
-                        data: [70, 90, 44, 60, 83, 90, 95],
+                        data: [${adminPaymentCount6.count}
+                        	 , ${adminPaymentCount5.count}
+                        	 , ${adminPaymentCount4.count}
+                        	 , ${adminPaymentCount3.count}
+                        	 , ${adminPaymentCount2.count}
+                        	 , ${adminPaymentCount1.count}
+                        	 , ${adminPaymentCount0.count}],
                         fill: false,
                         pointRadius: 3,
                         lineTension: 0,
@@ -216,7 +223,13 @@
                         borderWidth: 1,
                         backgroundColor: 'rgb(0, 0, 0)',
                       }, { 
-                        data: [10, 21, 60, 44, 17, 21, 17],
+                        data: [${adminMemberCount6.count}
+                       		 , ${adminMemberCount5.count}
+                       		 , ${adminMemberCount4.count}
+                       		 , ${adminMemberCount3.count}
+                       		 , ${adminMemberCount2.count}
+                       		 , ${adminMemberCount1.count}
+                       		 , ${adminMemberCount0.count}],
                         fill: false,
                         pointRadius: 3,
                         lineTension: 0,

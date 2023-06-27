@@ -120,4 +120,9 @@ public class MemberService {
 		return mapper.deleteReveiw(rv_idx);
 	}
 
+	// 지난 일자 가입자 수 조회
+	public MemberVO adminMemberCount(int i) {
+		return mapper.adminMemberCount(i);
+	}
+
 }

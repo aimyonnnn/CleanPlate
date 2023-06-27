@@ -202,5 +202,14 @@ public class PayService {
 		return mapper.selectInfoBySeller(r_idx);
 	}
 
+	// 총 결제 금액 조회
+	public int getTotalPay() {
+		return mapper.getTotalPay();
+	}
+	
+	// 지난 일자 결제 금액 조회
+	public PayVO adminPaymentCount(int i) {
+		return mapper.adminPaymentCount(i);
+	}
 	
 }

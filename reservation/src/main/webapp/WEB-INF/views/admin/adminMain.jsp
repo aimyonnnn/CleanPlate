@@ -48,7 +48,7 @@
               <li>
                 <a href="adminStatistics">
                   <span class="las la-chart-line"></span>
-                  사이트 이용 통계
+                  주간 데이터 통계
                 </a>
               </li>
             </ul>
@@ -108,7 +108,7 @@
         <div class="page-header">
           <div>
             <h1>관리자 페이지</h1>
-            <small>이용 회원, 예약 통계 확인 및 관리</small>
+            <small>각종 통계 확인 및 관리</small>
           </div>
         </div> 
 
@@ -117,14 +117,12 @@
             <div class="card-flex">
               <div class="card-into">
                 <div class="card-head">
-                  <span>RESERVATION</span>
-                  <small>이번달 총 예약 수</small>
+                  <span>MEMBER</span>
+                  <small>총 회원 수</small>
                 </div>
 
-                <h2>${reservationList.size()} 개</h2>
-                  <small>지난달의 예약 수: 0 개</small><br>
-                  <small>0% 증가</small>
-                  <small>0% 감소</small>
+                <h2>${memberList.size()} 명</h2>
+                <small>DB에 저장된 총 회원 수입니다.</small>
               </div>
               <div class="card-chart danger">
                 <span class="las la-chart-line"></span>
@@ -136,13 +134,13 @@
             <div class="card-flex">
               <div class="card-into">
                 <div class="card-head">
-                  <span>Store</span>
-                  <small>운영중인 가게 수</small>
+                  <span>RESTAURANT</span>
+                  <small>총 가게 수</small>
                 </div>
 
                 <h2>${RestaurantList.size()} 개</h2>
 
-                <small>현재 운영중인 총 가게 수입니다.</small>
+                <small>DB에 저장된 총 가게 수입니다.</small>
               </div>
               <div class="card-chart success">
                 <span class="las la-chart-line"></span>
@@ -154,13 +152,13 @@
             <div class="card-flex">
               <div class="card-into">
                 <div class="card-head">
-                  <span>Total</span>
+                  <span>RESERVATION</span>
                   <small>총 예약 수</small>
                 </div>
 
                 <h2>${reservationList.size()} 개</h2>
 
-                <small>취소된 예약을 제외한 모든 예약 건수를 포함한 값입니다.</small>
+                <small>DB에 저장된 총 예약 건수입니다.</small>
               </div>
               <div class="card-chart yellow">
                 <span class="las la-chart-line"></span>
@@ -177,8 +175,9 @@
 
             <form method="post" class="analytics-chart">
               <div class="chart-circle">
-                <h1>${reservationList.size()} 명</h1>
+                <h1>${todayReservationCount.count} 개</h1>
               </div>
+              <small>예약 일자가 오늘인 예약 데이터만 카운팅합니다.</small>
             </form>
           </div>
 
@@ -202,13 +201,13 @@
                   <td><div><button type="button"
                                    onclick="location.href='adminReservation'">관리</button></div></td>
               </tr>
-                  <c:forEach items="${reservationList }" var="reservation" begin="0" end="4" >
+                  <c:forEach items="${reservationDESCList }" var="reservationDESCList" begin="0" end="4" >
                   <tr>
                   <td></td>
-                  <td>&nbsp;${reservation.r_idx }</td>
-                  <td>&nbsp;${reservation.r_personnel }명</td>
-                  <td><fmt:formatDate value="${reservation.r_date }" pattern="yy-MM-dd HH:mm" /></td>
-                  <td><fmt:formatNumber value="${reservation.r_amount }" />원</td>
+                  <td>&nbsp;${reservationDESCList.r_idx }</td>
+                  <td>&nbsp;${reservationDESCList.r_personnel }명</td>
+                  <td><fmt:formatDate value="${reservationDESCList.r_date }" pattern="yy-MM-dd HH:mm" /></td>
+                  <td><fmt:formatNumber value="${reservationDESCList.r_amount }" />원</td>
                   </tr>
                  </c:forEach>
               </tbody>

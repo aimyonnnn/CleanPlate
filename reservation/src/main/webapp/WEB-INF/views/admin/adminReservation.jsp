@@ -48,7 +48,7 @@
               <li>
                 <a href="adminStatistics">
                   <span class="las la-chart-line"></span>
-                  사이트 이용 통계
+                  주간 데이터 통계
                 </a>
               </li>
             </ul>
@@ -160,6 +160,9 @@
           </c:if>
           <c:if test="${reservation.r_status == 5}">
          	 <td>판매중</td>
+          </c:if>
+          <c:if test="${reservation.r_status == 6}">
+         	 <td>판매 실패</td>
           </c:if>
           <%-- 예약 상태 판별 --%>
           <td>${reservation.m_name }</td>

@@ -26,4 +26,5 @@ public class MemberVO { // 회원 테이블
 	private int m_status; // 회원상태
 	private Date m_regdate; // 회원가입일
 	private int userType; // 일반, 기업회원 구분
+	private int count; // 관리자 페이지 통계용 값
 }

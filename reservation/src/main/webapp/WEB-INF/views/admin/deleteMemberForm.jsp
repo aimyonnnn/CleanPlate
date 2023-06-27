@@ -15,7 +15,8 @@
   <form action="adminMemberUpdate" method="post">
     <div>
       <label for="memberIdx">회원 번호</label>
-      <input type="text" id="m_idx" name="m_idx" class="form-control" value="${memberVO.m_idx}">
+      <input type="text" id="#" name="#" class="form-control" value="${memberVO.m_idx}" disabled="disabled">
+      <input type="hidden" id="m_idx" name="m_idx" class="form-control" value="${memberVO.m_idx}">
     </div>
     <div>
       <label for="memberId">회원 ID</label>

@@ -65,5 +65,21 @@
 				where r_idx = #{r_idx}
 					limit 1
 	</select>
+
+	<!-- 지난 일자 결제 금액 조회  -->
+	<select id="adminPaymentCount">
+		SELECT DATE(p_orderDate) AS date,
+			   count(p_idx) AS count
+			FROM payment
+					WHERE DATE(p_orderDate) = curdate() - interval #{i} day
+					GROUP BY date
+					ORDER BY date DESC
+	</select>
  
+ 		<!-- 총 결제 금액 조회 -->
+ 	<select id="getTotalPay" resultType="int">
+		SELECT SUM(payment_total_price) AS total
+			FROM payment
+				where p_status = 1
+	</select>	
 </mapper>

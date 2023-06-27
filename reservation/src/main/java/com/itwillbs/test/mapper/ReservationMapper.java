@@ -50,9 +50,6 @@ public interface ReservationMapper {
 	// 관리자의 예약 정보 삭제
 	int deleteReservation(String idx);
 
-	// 총 결제 금액 조회
-	int getTotalPay();
-	
 	// 예약 정보 조회
 	ReservationVO selectReservationInfo(int r_idx);
 	
@@ -95,5 +92,8 @@ public interface ReservationMapper {
 
 	// 지난 일자 예약 수 조회
 	ReservationVO adminReservationCount(int i);
+
+	// 예약 목록 역순 조회
+	List<ReservationVO> getReservationListDESC();
 
 }
