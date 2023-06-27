@@ -142,8 +142,10 @@
 		 <p style="font-size: 14px;">${restaurantInfo.res_intro}</p>
 	</div>
 	<div style="inline">	
-	<button id="likeBtn" class="unliked" value="true">❤️</button>
-	</div>
+	   <c:if test="${not empty sessionScope.sId && sessionScope.sId ne 'admin' && sessionScope.sId ne c_id}">
+	     <button id="likeBtn" class="unliked" value="true">❤</button>
+	   </c:if>
+   	</div>
 	<!-- 가게 메인 소개 끝 -->
 	<hr>
 	 
