@@ -270,7 +270,7 @@
 								<label for="m_passwd" style="width: 100%;">비밀번호<br></label>
 							    	<input type="password" name="m_passwd" id="m_passwd" class="form-control" placeholder="8~16자리/영문, 숫자, 특수문자 조합" minlength="8" maxlength="16" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,16}$" required>
 								<div class="invalid-feedback">
-				                    비밀번호는 4~20자리의 영문, 숫자 특수문자만 사용 가능합니다.
+				                    비밀번호는 8~16자리의 영문, 숫자 특수문자 조합만 사용 가능합니다.
 				                </div>
 							</div>
 							<div class="input-container">
