@@ -120,7 +120,7 @@
             <div class="card-body d-flex justify-content-between">
               <div>
                 <p class="card-text mb-2">일간 매출</p>
-                	총 매출: $${todaySalesAmount[0]}<br> 
+                	총 매출: ${todaySalesAmount[0]}원<br> 
               </div>
               <i class="fas fa-calendar" style="font-size: 30px; margin-top: 20px"></i>
             </div>
@@ -132,7 +132,7 @@
             <div class="card-body d-flex justify-content-between">
               <div>
                 <p class="card-text mb-2">주간 매출</p>
-                	총 매출: $${weeklyallSalesAmount[0]}<br> 
+                	총 매출: ${weeklyallSalesAmount[0]}원<br> 
               </div>
               <i class="fas fa-calendar" style="font-size: 30px; margin-top: 20px"></i>
             </div>
