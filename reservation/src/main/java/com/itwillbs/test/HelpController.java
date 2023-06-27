@@ -411,5 +411,32 @@ public class HelpController {
 		return "redirect:/Notice?pageNum=" + pageNum;
 	}
 	
+	@GetMapping("DeleteQna")
+	public String DeleteQna(@RequestParam int q_idx, HttpSession session, Model model) {
+		
+		if(session.getAttribute("sId") == null && session.getAttribute("cId") == null) {
+			model.addAttribute("msg", "잘못된 접근입니다.");
+			return "fail_back";
+		}
+		
+		String id = service.getQnaMemberInfo(q_idx);
+		
+		if(!session.getAttribute("sId").equals(id) && !session.getAttribute("cId").equals(id)) {
+			model.addAttribute("msg", "잘못된 접근입니다.");
+			return "fail_back";
+		}
+		
+		int deleteCount = service.removeQNA(q_idx);
+		
+		if(deleteCount <= 0) {
+			model.addAttribute("msg", "삭제 실패.");
+			return "fail_back";
+		}
+		
+		
+		return "redirect:QNA";
+		
+	}
+	
 	
 }

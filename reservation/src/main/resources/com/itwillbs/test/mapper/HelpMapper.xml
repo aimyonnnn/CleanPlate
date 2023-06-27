@@ -200,4 +200,17 @@
 			</choose>
 		</if>
 	</select>
+	
+	<select id="selectMemberIdInfo">
+		SELECT m.m_id
+			FROM QNA q join members m
+			ON q.m_idx = m.m_idx
+				WHERE q_idx = ${q_idx}
+	</select>
+	
+	<delete id="deleteQNA">
+		DELETE FROM QNA
+			WHERE q_idx = ${q_idx}
+			
+	</delete>
 </mapper>

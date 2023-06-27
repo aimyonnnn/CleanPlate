@@ -80,5 +80,15 @@ public class HelpService {
 	public int getQnaListCount(String id,String searchType, String searchKeyword) {
 		return mapper.selectQnaListCount(id, searchType, searchKeyword);
 	}
+	
+	// QNA 삭제시 동일한 아이디 인가 판별
+	public String getQnaMemberInfo(int q_idx) {
+		return mapper.selectMemberIdInfo(q_idx);
+	}
+	
+	// QNA 삭제
+	public int removeQNA(int q_idx) {
+		return mapper.deleteQNA(q_idx);
+	}
 
 }
