@@ -54,7 +54,7 @@ public class MemberController {
 	@Autowired
 	private AssignmentService assignmentService;
 	
-	// 로그인 성공후 XXX님 클릭시 마이페이지로 이동
+	// 로그인 성공후 XXX님 클릭시 마이페이지로 이동 
 	@GetMapping("member")
 	public String member(HttpServletRequest request, HttpServletResponse response,
 	        Model model, HttpSession session) {
