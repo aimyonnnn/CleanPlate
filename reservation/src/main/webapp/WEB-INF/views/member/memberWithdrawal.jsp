@@ -13,14 +13,14 @@
 </head>
 <body>
    	<!-- 공통 상단바 구역 -->
-<%@ include file="../common/common_header.jsp" %>
+	<%@ include file="../common/common_header.jsp" %>
    	<!-- 공통 상단바 구역 -->
 
     <!-- 제목 구역 -->
 	<div class="container">
         <div class="row mt-4">
           <div class="col">
-            <h2><img src="${pageContext.request.contextPath }/resources/images/mypage/myWithdrawal.jpg" alt="" style="width: 100%;" class="justify-content-center"></h2>
+            <h2><img src="${pageContext.request.contextPath }/resources/images/mypage/muWithdrawal.jpg" alt="" style="width: 100%;" class="justify-content-center"></h2>
           </div>
         </div>
     </div>
@@ -72,7 +72,7 @@
 			    	<div class="mb-3 mt-3 row" style="margin-left: 120px;">
 			            <label for="id" class="col-sm-2 col-form-label">아이디</label>
 			            <div class="col-md-6">
-			                <input type="text" readonly class="form-control-plaintext" id="id" value="${sessionScope.sId }">
+			                <input type="text" readonly class="form-control-plaintext fw-bold" id="id" value="${sessionScope.sId }">
 			            </div>
 			        </div>
 			        <div class="mb-3 row" style="margin-left: 120px;">

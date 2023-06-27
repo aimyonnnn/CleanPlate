@@ -26,81 +26,71 @@
 	
     <!-- 제목 구역 -->
 	<div class="container">
-        <div class="row">
+        <div class="row mt-4">
           <div class="col">
-            <h2>점주 마이페이지</h2>
+            <h2><img src="${pageContext.request.contextPath }/resources/images/mypage/ceoReservation.jpg" alt="" style="width: 100%;" class="justify-content-center"></h2>
           </div>
         </div>
     </div>
 
     <!-- 사이드바, 내용 넣는 구역!-->
-    <div class="container mt-5">
-        <div class="row d-flex justify-content-center">
-            <div class="col-2 align-items-center d-flex">
-                <!-- 버튼 그룹 -->
-                <!-- 프로필 사진 -->
-                <div class="input-group mb-5 d-flex shadow-lg d-flex justify-content-center pe-3" style="border-radius: 10px;">
-                    <img src="../images/profile.png" alt="" style="width: 100px; height: 100px;" class="justify-content-center">
-                    <p class="d-flex align-items-center"><span>님 환영합니다</span></p>
-                    
-                </div>
-            </div>
-            <div class="col-10">
-		    <h2 style="margin-left: 40px; margin-top: 30px;">예약관리</h2>
-		        <!-- 드롭다운 시작 -->
-			<div class="row">
-				<!-- 가계선택 -->
-				<div class="col-2">
-					<div class="dropdown" style="margin-left: 40px;">
-						<select class="form-select form-select mb-3" id="restaurantName" name="res_name" aria-label=".form-select example" style="width: 180px;">
-								<option selected value="">전체식당</option>
-								<c:forEach items="${restaurantList }" var="restaurantList">
-								<option value="${restaurantList.res_name }">${restaurantList.res_name }</option>
-								</c:forEach>
-						</select>
-					</div>
-				</div>
-				<!-- 가계선택 끝 -->
-				<!-- 방문상태 시작 -->
-				<div class="col-2">
-					<div class="dropdown" style="margin-left: 40px;">
-						<select class="form-select form-select mb-3" id="status" aria-label=".form-select example" style="width: 180px;">
-							<option selected value="">전체상태</option>
-							<option value="방문예정">방문예정</option>
-							<option value="방문완료">방문완료</option>
-							<option value="취소">취소</option>
-						</select>
-					</div>
-				</div>
-				<div class="col">
-					<div class="dropdown" style="margin-left: 40px;">
-						<select class="form-select form-select mb-3" aria-label=".form-select example" style="width: 180px;" id="dateFilter">
-						  <option value="">전체날짜</option>
-						  <c:forEach items="${sortedDates}" var="date">
-						    <option>${date}</option>
-						  </c:forEach>
-						</select>
-					</div>
-				</div>
-				<!-- 방문상태 끝 -->
-			</div>
-				<!-- 드롭다운 끝 -->
-			</div>
-        </div>
+    <div class="container">
         <div class="row">
-            <div class="col-2">
-                <!-- 왼쪽 사이드바 버튼 구역-->
+            <div class="col-2" style="margin-top: 60px;">
+                <!-- 왼쪽 사이드바 버튼영역-->
                 <div class="btn-group-vertical btn-group-lg d-flex align-self-start" role="group" aria-label="Vertical button group">
-					<button type="button" class="btn btn-outline-warning text-black p-3" onclick="location.href='ownerMypage'">내 정보</button>
-                    <button type="button" class="btn btn-outline-warning  text-black p-3" onclick="location.href='restaurantList'">가게리스트 </button>
-                    <button type="button" class="btn btn-outline-warning active text-black p-3" onclick="location.href='restaurantReservation'">예약관리</button>
-                    <button type="button" class="btn btn-outline-warning text-black p-3" onclick="location.href='ownerWithdrawal'">회원탈퇴</button>
+					<button type="button" class="btn btn-outline-dark text-black p-3" onclick="location.href='ownerMypage'">내 정보</button>
+					<button type="button" class="btn btn-outline-dark text-black p-3" onclick="location.href='restaurantList'">가게리스트 </button>
+					<button type="button" class="btn btn-outline-dark text-white active p-3" onclick="location.href='restaurantReservation'">예약관리</button>
+					<button type="button" class="btn btn-outline-dark text-black p-3" onclick="location.href='ownerWithdrawal'">회원탈퇴</button>
                 </div>
+                <!-- 왼쪽 사이드바 버튼영역-->
             </div>
             <!-- 내용 -->
-            <div class="col-md-8">
+            <div class="col-8">
+				<div class="row d-flex justify-content-start" style="margin-left: 90px; margin-top: 60px;">
+				<div class="col-10">
+			        <!-- 드롭다운 시작 -->
+					<div class="row">
+						<div class="col-2">
+							<div class="dropdown">
+								<select class="form-select form-select mb-3" id="restaurantName" name="res_name" aria-label=".form-select example" style="width: 180px;">
+										<option selected value="">전체식당</option>
+										<c:forEach items="${restaurantList }" var="restaurantList">
+										<option value="${restaurantList.res_name }">${restaurantList.res_name }</option>
+										</c:forEach>
+								</select>
+							</div>
+						</div>
+						<!-- 방문상태 시작 -->
+						<div class="col">
+							<div class="dropdown" style="margin-left: 90px;">
+								<select class="form-select form-select mb-3" id="status" aria-label=".form-select example" style="width: 180px;">
+									<option selected value="">전체상태</option>
+									<option value="방문예정">방문예정</option>
+									<option value="방문완료">방문완료</option>
+									<option value="취소">취소</option>
+								</select>
+							</div>
+						</div>
+						<div class="col">
+							<div class="dropdown">
+								<select class="form-select form-select mb-3" aria-label=".form-select example" style="width: 180px;" id="dateFilter">
+								  <option value="">전체날짜</option>
+								  <c:forEach items="${sortedDates}" var="date">
+								    <option>${date}</option>
+								  </c:forEach>
+								</select>
+							</div>
+					</div>
+					<!-- 방문상태 끝 -->
+				</div>
+				<!-- 드롭다운 끝 -->
+				</div>
+        	</div>
                 <!-- 내용(추후에 foreach문으로 수정할 부분!) -->
-                <table class="table table-striped text-center" style="margin-left:50px;">
+                <div class="col-12">
+                <table class="table table-striped text-center" style="margin-left:100px;">
                     <thead>
                         <tr>
                             <th>예약번호</th>
@@ -131,13 +121,14 @@
 	                           		</c:otherwise>
 	                           	</c:choose>
                             </td>
-                            <td><button type="button" class="btn btn-warning" style="color: white;" data-bs-toggle="modal" data-bs-target="#rsListModal${resList.r_idx }">상세보기</button></td>
+                            <td><button type="button" class="btn btn-dark" style="color: white;" data-bs-toggle="modal" data-bs-target="#rsListModal${resList.r_idx }">상세보기</button></td>
                         </tr>
                    </c:forEach>
                     </tbody>
                 </table> 
             </div>
         </div>
+    </div>
     </div>
 
 

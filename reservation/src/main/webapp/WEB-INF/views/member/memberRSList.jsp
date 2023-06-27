@@ -90,7 +90,7 @@
 									</select>
 								</div>
 							</div>
-							<div class="col" style="margin-left: 80px;">
+							<div class="col" style="margin-left: 90px;">
 								<div class="dropdown">
 									<select class="form-select form-select mb-3" aria-label=".form-select example" style="width: 180px;" id="dateFilter">
 									  <option value="">전체날짜</option>
@@ -760,8 +760,8 @@
 
  
     <!-- 하단 부분 include 처리영역 -->
-    <hr class="mt-5">
-<%@ include file="../common/common_footer.jsp" %>
+    <hr style="margin-top: 100px;">
+	<%@ include file="../common/common_footer.jsp" %>
     <!-- 하단 부분 include 처리영역 -->
     
     <!-- 이부분은 지우면 안됩니다 -->

@@ -17,51 +17,37 @@
 </head>
 <body>
 	<!-- 공통 상단바 구역 -->
-<%@ include file="../common/common_header.jsp" %>
+	<%@ include file="../common/common_header.jsp" %>
    	<!-- 공통 상단바 구역 -->
 
     <!-- 제목 구역 -->
 	<div class="container">
-        <div class="row">
+        <div class="row mt-4">
           <div class="col">
-            <h2>점주 마이페이지</h2>
+            <h2><img src="${pageContext.request.contextPath }/resources/images/mypage/ceoList.jpg" alt="" style="width: 100%;" class="justify-content-center"></h2>
           </div>
         </div>
     </div>
 
     <!-- 사이드바, 내용 넣는 구역!-->
-    <div class="container mt-5">
-        <div class="row d-flex justify-content-center">
-            <div class="col-2 align-items-center d-flex">
-                <!-- 왼쪽 사이드바 구역 -->
-                <!-- 프로필 사진 -->
-                <div class="input-group mb-5 d-flex shadow-lg d-flex justify-content-center pe-3" style="border-radius: 10px;">
-                    <img src="../image/profile.png" alt="" style="width: 100px; height: 100px;" class="justify-content-center">
-                    <p class="d-flex align-items-center"><span>님 환영합니다</span></p>
-                    
-                </div>
-            </div>
-            <div class="col-10">
-            	<h2 style="margin-left: 40px; margin-top: 40px;">가게 리스트</h2>
-                <button type="button" class="btn btn-warning" style="margin-left: 40px; color: white;" onclick="location.href='restaurantInsertPage'">가게 등록</button>
-            </div>
-        </div>
+    <div class="container">
         <div class="row">
-            <div class="col-2">
-                <!-- 왼쪽 사이드바 버튼들-->
-                <!-- 클릭된 버튼은 active 표시함-->
+            <div class="col-2" style="margin-top: 60px;">
+                <!-- 왼쪽 사이드바 버튼영역-->
                 <div class="btn-group-vertical btn-group-lg d-flex align-self-start" role="group" aria-label="Vertical button group">
-					<button type="button" class="btn btn-outline-warning text-black p-3" onclick="location.href='ownerMypage'">내 정보</button>
-                    <button type="button" class="btn btn-outline-warning  active text-black p-3" onclick="location.href='restaurantList'">가게리스트 </button>
-                    <button type="button" class="btn btn-outline-warning text-black p-3" onclick="location.href='restaurantReservation'">예약관리</button>
-                    <button type="button" class="btn btn-outline-warning text-black p-3" onclick="location.href='ownerWithdrawal'">회원탈퇴</button>
+					<button type="button" class="btn btn-outline-dark text-black p-3" onclick="location.href='ownerMypage'">내 정보</button>
+					<button type="button" class="btn btn-outline-dark text-white active p-3" onclick="location.href='restaurantList'">가게리스트 </button>
+					<button type="button" class="btn btn-outline-dark text-black p-3" onclick="location.href='restaurantReservation'">예약관리</button>
+					<button type="button" class="btn btn-outline-dark text-black p-3" onclick="location.href='ownerWithdrawal'">회원탈퇴</button>
                 </div>
+                <!-- 왼쪽 사이드바 버튼영역-->
             </div>
-            <!-- 내용 구역 -->
+            <!-- 내용 -->
             <!-- 가게리스트  페이지 시작 -->
-                <div class="col-8">
+                <div class="col-9">
+                <button type="button" class="btn btn-dark" style="margin-top: 60px; margin-left: 90px; color: white;" onclick="location.href='restaurantInsertPage'">가게 등록</button>
                     <!-- 내용(추후에 foreach문으로 수정할 부분!) -->
-                    <table class="table table-striped text-center" style="margin-left:50px;">
+                    <table class="table table-striped text-center" style="margin-left:100px;">
                         <thead>
                             <tr>
                                 <th>사업자번호</th>
@@ -80,7 +66,7 @@
 	                                <td>${restaurant.res_tel }</td>
 	                                <td>${restaurant.res_address } ${restaurant.res_detailAddress }</td>
 	                                <!-- 수정 버튼 클릭시 파라미터로 사업자번호 전달 -->
-	                                <td><button type="button" class="btn btn-warning" style="color: white;" onclick="location.href='restaurantUpdatePage?res_idx=${restaurant.res_idx}'">수정</button></td>
+	                                <td><button type="button" class="btn btn-dark" style="color: white;" onclick="location.href='restaurantUpdatePage?res_idx=${restaurant.res_idx}'">수정</button></td>
 	                        	</tr>
 	                        	<!-- 가게 사진 출력 확인용  -->
 <!-- 	                        	<tr> -->
@@ -106,8 +92,8 @@
  
     
     <!-- 하단 부분 include 처리영역 -->
-    <hr class="mt-5">
-<%@ include file="../common/common_footer.jsp" %>
+    <hr style="margin-top: 100px;">
+	<%@ include file="../common/common_footer.jsp" %>
     <!-- 하단 부분 include 처리영역 -->
     
     <!-- 이부분은 지우면 안됩니다 -->

@@ -83,7 +83,7 @@
                 </div>
             </div>
             <div class="col-10">
-            	<h2 style="margin-left: 40px; margin-top: 40px;">가게 등록</h2>
+            	<h2 style="margin-left: 80px; margin-top: 40px;">가게 등록</h2>
             </div>
         </div>
         <div class="row">
@@ -98,7 +98,7 @@
             </div>
         </div>
             <!-- 내용 구역 -->
-            <div class="col-10">
+            <div class="col-8">
                 <!-- 가게내용 페이지 시작 -->
                 <!-- 파일 업로드 enctype="multipart/form-data" -->
                    <form action="restaurantInsertPro" id="restaurant" method="post" enctype="multipart/form-data">
