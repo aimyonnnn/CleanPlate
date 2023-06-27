@@ -25,6 +25,7 @@
 			FROM menus
 			WHERE res_idx = #{res_idx}
 	</select>
+	
 	<select id="getIdx" resultType="INT">
 		SELECT me_idx
 			FROM menus
