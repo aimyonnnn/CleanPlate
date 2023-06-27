@@ -5,12 +5,15 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import org.apache.http.protocol.HTTP;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwillbs.test.service.AssignmentService;
@@ -47,7 +50,15 @@ public class AdminController {
 	
 	// 로그인 성공 후 관리자페이지 클릭 시 관리자페이지로 이동
 	@GetMapping("adminMain")
-	public String adminMain(Model model) {
+	public String adminMain(Model model, HttpSession session) {
+		// 관리자 아이디 판별
+		String sId = (String)session.getAttribute("sId");
+		
+		if(sId == null || !sId.equals("admin")) {
+			model.addAttribute("msg", "잘못된 접근입니다!");
+			return "fail_back";			
+		} 
+		
 		// 예약 목록 조회 / 역순 조회
 		List<ReservationVO> reservationList = rservice.getReservationList();
 		model.addAttribute("reservationList" ,reservationList);
@@ -70,13 +81,30 @@ public class AdminController {
 	
 	// 관리자 메인 페이지에서 전체 예약 확인하기 클릭 시 전체 예약 리스트 페이지로 이동
 	@GetMapping("adminAllReservation")
-	public String adminAllReservation() {
+	public String adminAllReservation(Model model, HttpSession session) {
+		// 관리자 아이디 판별
+		String sId = (String)session.getAttribute("sId");
+		
+		if(sId == null || !sId.equals("admin")) {
+			model.addAttribute("msg", "잘못된 접근입니다!");
+			return "fail_back";			
+		} 
+		
 		return "admin/adminAllReservation";
 	}
 	
 	// 관리자의 사이트 이용 통계 페이지로 이동
 	@GetMapping("adminStatistics")
-	public String adminStatistics(Model model, HttpServletRequest request) {
+	public String adminStatistics(Model model, HttpServletRequest request, HttpSession session) {
+		// 관리자 아이디 판별
+		String sId = (String)session.getAttribute("sId");
+		
+		if(sId == null || !sId.equals("admin")) {
+			model.addAttribute("msg", "잘못된 접근입니다!");
+			return "fail_back";			
+		} 
+		
+		
 		// 회원 목록 조회
 		List<MemberVO> memberList = mservice.memberList();
 		model.addAttribute("memberList", memberList);
@@ -144,7 +172,16 @@ public class AdminController {
 	
 	// 관리자의 회원 관리 페이지로 이동
 	@GetMapping("adminMember")
-	public String adminMember(Model model) {
+	public String adminMember(Model model,HttpSession session) {
+		// 관리자 아이디 판별
+		String sId = (String)session.getAttribute("sId");
+		
+		if(sId == null || !sId.equals("admin")) {
+			model.addAttribute("msg", "잘못된 접근입니다!");
+			return "fail_back";			
+		} 
+		
+		
 		List<MemberVO> memberList = mservice.memberList();
 		model.addAttribute("memberList", memberList);
 		return "admin/adminMember";
@@ -152,7 +189,15 @@ public class AdminController {
 	
 	// 회원 관리 페이지에서 회원 정보 수정 페이지 이동
 	@GetMapping("deleteMemberForm")
-	public String deleteMemberForm(@RequestParam String id, MemberVO member, Model model) {
+	public String deleteMemberForm(@RequestParam String id, MemberVO member, Model model,HttpSession session) {
+		// 관리자 아이디 판별
+		String sId = (String)session.getAttribute("sId");
+		
+		if(sId == null || !sId.equals("admin")) {
+			model.addAttribute("msg", "잘못된 접근입니다!");
+			return "fail_back";			
+		} 
+		
 		member = mservice.selectMember(id);
 		model.addAttribute(member);
 		return "admin/deleteMemberForm";
@@ -160,7 +205,16 @@ public class AdminController {
 	
 	// 회원 정보 수정 시
 	@PostMapping("adminMemberUpdate")
-	public String adminMemberUpdate(Model model, MemberVO member) {
+	public String adminMemberUpdate(Model model, MemberVO member, HttpSession session) {
+		// 관리자 아이디 판별
+		String sId = (String)session.getAttribute("sId");
+		
+		if(sId == null || !sId.equals("admin")) {
+			model.addAttribute("msg", "잘못된 접근입니다!");
+			return "fail_back";			
+		} 
+		
+		
 		mservice.adminUpdateMember(member);
 		model.addAttribute("member", member);
 	return "redirect:/adminMember";
@@ -168,7 +222,15 @@ public class AdminController {
 	
 	// 회원 삭제 시
 	@GetMapping("deleteMember")
-	public String deleteMember(@RequestParam String id) {
+	public String deleteMember(@RequestParam String id, HttpSession session, Model model) {
+		// 관리자 아이디 판별
+		String sId = (String)session.getAttribute("sId");
+		
+		if(sId == null || !sId.equals("admin")) {
+			model.addAttribute("msg", "잘못된 접근입니다!");
+			return "fail_back";			
+		} 
+		
 		mservice.deleteMember(id);
 		
 		return "redirect:/adminMember";
@@ -180,7 +242,16 @@ public class AdminController {
 	
 	// 관리자의 가게 관리 페이지로 이동
 	@GetMapping("adminStore")
-	public String adminStore(Model model) {
+	public String adminStore(Model model, HttpSession session) {
+		// 관리자 아이디 판별
+		String sId = (String)session.getAttribute("sId");
+		
+		if(sId == null || !sId.equals("admin")) {
+			model.addAttribute("msg", "잘못된 접근입니다!");
+			return "fail_back";			
+		} 
+		
+		
 		List<RestaurantVO> restaurantList = reservice.getRestaurantList();
 		model.addAttribute("restaurantList", restaurantList);
 		return "admin/adminStore";
@@ -188,7 +259,16 @@ public class AdminController {
 	
 	// 가게 관리 페이지에서 가게 정보 수정 페이지 이동
 	@GetMapping("deleteStoreForm")
-	public String deleteStoreForm(@RequestParam String idx, RestaurantVO res, Model model) {
+	public String deleteStoreForm(@RequestParam String idx, RestaurantVO res, Model model, HttpSession session) {
+		// 관리자 아이디 판별
+		String sId = (String)session.getAttribute("sId");
+		
+		if(sId == null || !sId.equals("admin")) {
+			model.addAttribute("msg", "잘못된 접근입니다!");
+			return "fail_back";			
+		} 
+		
+		
 		res = reservice.selectAdminRestaurant(idx);
 		model.addAttribute(res);
 		return "admin/deleteStoreForm";
@@ -196,7 +276,16 @@ public class AdminController {
 	
 	// 가게 정보 수정 시
 	@PostMapping("adminStoreUpdate")
-	public String adminStoreUpdate(Model model, RestaurantVO res) {
+	public String adminStoreUpdate(Model model, RestaurantVO res, HttpSession session) {
+		// 관리자 아이디 판별
+		String sId = (String)session.getAttribute("sId");
+		
+		if(sId == null || !sId.equals("admin")) {
+			model.addAttribute("msg", "잘못된 접근입니다!");
+			return "fail_back";			
+		} 
+		
+		
 		reservice.adminRestaurantUpdate(res);
 		model.addAttribute("res", res);
 		return "redirect:/adminStore";
@@ -204,7 +293,15 @@ public class AdminController {
 	
 	// 가게 삭제 시
 	@GetMapping("deleteStore")
-	public String deleteStore(@RequestParam String idx) {
+	public String deleteStore(@RequestParam String idx, Model model, HttpSession session) {
+		// 관리자 아이디 판별
+		String sId = (String)session.getAttribute("sId");
+		
+		if(sId == null || !sId.equals("admin")) {
+			model.addAttribute("msg", "잘못된 접근입니다!");
+			return "fail_back";			
+		} 
+		
 		reservice.deleteRestaurant(idx);
 		
 		return "redirect:/adminStore";
@@ -216,7 +313,16 @@ public class AdminController {
 	
 	// 관리자의 예약 관리 페이지로 이동
 	@GetMapping("adminReservation")
-	public String adminReservation(Model model) {
+	public String adminReservation(Model model,HttpSession session) {
+		// 관리자 아이디 판별
+		String sId = (String)session.getAttribute("sId");
+		
+		if(sId == null || !sId.equals("admin")) {
+			model.addAttribute("msg", "잘못된 접근입니다!");
+			return "fail_back";			
+		} 
+		
+		
 		List<ReservationVO> reservationList = rservice.getReservationList();
 		model.addAttribute("reservationList", reservationList);
 		return "admin/adminReservation";
@@ -224,7 +330,16 @@ public class AdminController {
 	
 	// 예약 관리 페이지에서 예약 정보 수정 페이지 이동
 	@GetMapping("deleteReservationForm")
-	public String deleteReservationForm(@RequestParam String idx, ReservationVO re, Model model) {
+	public String deleteReservationForm(@RequestParam String idx, ReservationVO re, Model model,HttpSession session) {
+		// 관리자 아이디 판별
+		String sId = (String)session.getAttribute("sId");
+		
+		if(sId == null || !sId.equals("admin")) {
+			model.addAttribute("msg", "잘못된 접근입니다!");
+			return "fail_back";			
+		} 
+		
+		
 		re = rservice.selectReservation(idx);
 		model.addAttribute(re);
 		return "admin/deleteReservationForm";
@@ -232,7 +347,16 @@ public class AdminController {
 	
 	// 예약 정보 수정 시
 	@PostMapping("adminReservationUpdate")
-	public String adminReservationUpdate(Model model, ReservationVO re) {
+	public String adminReservationUpdate(Model model, ReservationVO re,HttpSession session) {
+		// 관리자 아이디 판별
+		String sId = (String)session.getAttribute("sId");
+		
+		if(sId == null || !sId.equals("admin")) {
+			model.addAttribute("msg", "잘못된 접근입니다!");
+			return "fail_back";			
+		} 
+		
+		
 		rservice.adminReservationUpdate(re);
 		model.addAttribute("re", re);
 		return "redirect:/adminReservation";
@@ -240,7 +364,15 @@ public class AdminController {
 	
 	// 예약 삭제 시
 	@GetMapping("deleteReservation")
-	public String deleteReservation(@RequestParam String idx) {
+	public String deleteReservation(@RequestParam String idx,HttpSession session, Model model) {
+		// 관리자 아이디 판별
+		String sId = (String)session.getAttribute("sId");
+		
+		if(sId == null || !sId.equals("admin")) {
+			model.addAttribute("msg", "잘못된 접근입니다!");
+			return "fail_back";			
+		} 
+		
 		rservice.deleteReservation(idx);
 		
 		return "redirect:/adminReservation";
@@ -251,7 +383,16 @@ public class AdminController {
 	// ================================ 양도 관리 페이지 ================================
 	// 관리자의 양도 관리 페이지로 이동
 	@GetMapping("adminAssignment")
-	public String adminAssignment(Model model) {
+	public String adminAssignment(Model model,HttpSession session) {
+		// 관리자 아이디 판별
+		String sId = (String)session.getAttribute("sId");
+		
+		if(sId == null || !sId.equals("admin")) {
+			model.addAttribute("msg", "잘못된 접근입니다!");
+			return "fail_back";			
+		} 
+		
+		
 		List<AssignmentVO> assignmentList = aservice.getAdminAssignmentList();
 		model.addAttribute("assignmentList", assignmentList);
 		return "admin/adminAssignment";
@@ -259,7 +400,16 @@ public class AdminController {
 	
 	// 양도 정보 삭제 시
 	@GetMapping("deleteAssignment")
-	public String deleteAssignment(@RequestParam String idx , HttpServletResponse response) {
+	public String deleteAssignment(@RequestParam String idx , HttpServletResponse response, HttpSession session, Model model) {
+		// 관리자 아이디 판별
+		String sId = (String)session.getAttribute("sId");
+		
+		if(sId == null || !sId.equals("admin")) {
+			model.addAttribute("msg", "잘못된 접근입니다!");
+			return "fail_back";			
+		} 
+		
+		
 		aservice.deleteAssignment(idx);
 		return "redirect:/adminAssignment";
 	}
@@ -269,7 +419,16 @@ public class AdminController {
 	// ================================ 리뷰 관리 페이지 ================================
 	// 관리자의 리뷰 관리 페이지로 이동
 	@GetMapping("adminReview")
-	public String adminReview(Model model) {
+	public String adminReview(Model model, HttpSession session) {
+		// 관리자 아이디 판별
+		String sId = (String)session.getAttribute("sId");
+		
+		if(sId == null || !sId.equals("admin")) {
+			model.addAttribute("msg", "잘못된 접근입니다!");
+			return "fail_back";			
+		} 
+		
+		
 		List<ReviewVO> reviewList = revservice.getAdminReviewList();
 		model.addAttribute("reviewList", reviewList);
 		
@@ -278,7 +437,16 @@ public class AdminController {
 	
 	// 리뷰 정보 삭제 시
 	@GetMapping("deleteReview")
-	public String deleteReview(@RequestParam String idx , HttpServletResponse response) {
+	public String deleteReview(@RequestParam String idx , HttpServletResponse response,HttpSession session, Model model) {
+		// 관리자 아이디 판별
+		String sId = (String)session.getAttribute("sId");
+		
+		if(sId == null || !sId.equals("admin")) {
+			model.addAttribute("msg", "잘못된 접근입니다!");
+			return "fail_back";			
+		} 
+		
+		
 		revservice.deleteReview(idx);
 		return "redirect:/adminReview";
 	}
