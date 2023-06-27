@@ -84,11 +84,12 @@
 				ON r.c_idx = c.c_idx
 	</select>
 	
-	<!-- 가게 조회 -->
-	<select id="selectRestaurant" resultType="com.itwillbs.test.vo.RestaurantVO">
-		SELECT *
+	<!-- 메뉴 등록을 위한 res_idx 조회 -->
+	<select id="selectRestaurantRes_idx" resultType="int">
+		SELECT res_idx
 			FROM restaurant
 				WHERE res_brn = #{res_brn}
+					AND c_idx = #{c_idx}
 	</select>
 	<!-- 가게정보 수정 -->
 	<update id="updateRestaurant">

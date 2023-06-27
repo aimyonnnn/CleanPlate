@@ -82,20 +82,21 @@
 	                                <!-- 수정 버튼 클릭시 파라미터로 사업자번호 전달 -->
 	                                <td><button type="button" class="btn btn-warning" style="color: white;" onclick="location.href='restaurantUpdatePage?res_idx=${restaurant.res_idx}'">수정</button></td>
 	                        	</tr>
-	                        	<tr>
-	                        		<th>가게 사진</th>
-	                        		<td class="td_right">
-	                        			<c:if test="${not empty restaurant.res_photo1 }">
-			                        		<img src="${pageContext.request.contextPath }/resources/upload/${restaurant.res_photo1 }" width="100" height="100">
-	                        			</c:if>
-	                        			<c:if test="${not empty restaurant.res_photo2 }">
-			                        		<img src="${pageContext.request.contextPath }/resources/upload/${restaurant.res_photo2 }" width="100" height="100">
-	                        			</c:if>
-	                        			<c:if test="${not empty restaurant.res_photo3 }">
-			                        		<img src="${pageContext.request.contextPath }/resources/upload/${restaurant.res_photo3 }" width="100" height="100">
-	                        			</c:if>
-									</td>
-	                        	</tr>
+	                        	<!-- 가게 사진 출력 확인용  -->
+<!-- 	                        	<tr> -->
+<!-- 	                        		<th>가게 사진</th> -->
+<!-- 	                        		<td class="td_right"> -->
+<%-- 	                        			<c:if test="${not empty restaurant.res_photo1 }"> --%>
+<%-- 			                        		<img src="${pageContext.request.contextPath }/resources/upload/${restaurant.res_photo1 }" width="100" height="100"> --%>
+<%-- 	                        			</c:if> --%>
+<%-- 	                        			<c:if test="${not empty restaurant.res_photo2 }"> --%>
+<%-- 			                        		<img src="${pageContext.request.contextPath }/resources/upload/${restaurant.res_photo2 }" width="100" height="100"> --%>
+<%-- 	                        			</c:if> --%>
+<%-- 	                        			<c:if test="${not empty restaurant.res_photo3 }"> --%>
+<%-- 			                        		<img src="${pageContext.request.contextPath }/resources/upload/${restaurant.res_photo3 }" width="100" height="100"> --%>
+<%-- 	                        			</c:if> --%>
+<!-- 									</td> -->
+<!-- 	                        	</tr> -->
 	                        </c:forEach>
                         </tbody>
                     </table> 

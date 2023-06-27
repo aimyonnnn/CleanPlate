@@ -17,4 +17,8 @@ public class TimesService {
 		return mapper.selectTimesInfo(res_idx);
 	}
 
+	public void insertTime(TimesVO t_Time) {
+		mapper.insertTime(t_Time);
+	}
+
 }

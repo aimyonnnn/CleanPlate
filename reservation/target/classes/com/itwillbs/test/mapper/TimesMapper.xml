@@ -10,4 +10,32 @@
     		JOIN times t ON m.me_idx = t.me_idx
     		WHERE r.res_idx = #{res_idx}
 	</select>
+	
+	<!-- 시간 등록 -->
+	<insert id="insertTime">
+		<selectKey resultType="com.itwillbs.test.vo.MenuVO" order="BEFORE">
+			SELECT m.me_name, m.me_idx
+			
+				FROM menus m JOIN restaurant r
+					ON m.res_idx = r.res_idx
+						WHERE r.res_idx = #{res_idx}
+		</selectKey>
+		INSERT 
+			INTO times
+			VALUES (
+				#{t_time}
+				<choose>
+					<when test="t_time gt '09:00:00' and t_time lt '17:00:00' and me_name eq 'LUNCH'">
+						,#{me_idx}
+					</when>
+					<when test="t_time gt '17:00:00' and t_time lt '22:00:00' and me_name eq 'DINNER'">
+						,#{me_idx}
+					</when>
+					<otherwise>
+						,#{me_idx}
+					</otherwise>
+				</choose>
+			)
+
+	</insert>
 </mapper>

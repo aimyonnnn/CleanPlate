@@ -27,8 +27,6 @@ public interface RestaurantMapper {
 	// 가게별 리뷰 점수 조회
 	List<Map<String, Object>> selectRestaurantReviewScores();
 
-	// 가게 조회
-	RestaurantVO selectRestaurant(String res_brn);
 
 	// 관리자의 가게 정보 수정
 	int adminRestaurantUpdate(RestaurantVO res);
@@ -48,6 +46,8 @@ public interface RestaurantMapper {
 	// 점주 예약 갯수
 	int getOwnerReservationCount(String cId);
 
+	// 메뉴 등록을 위한 res_idx 조회
+	int selectRestaurantRes_idx(@Param("c_idx") int c_idx,@Param("res_brn") String res_brn);
 
 	
 	

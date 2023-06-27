@@ -234,14 +234,14 @@
 						    	<td>
                                     <div class="dropdown">
                                         <select name="res_dayoff" class="form-select" style="width: 180px;">
-											<option value="없음" <c:if test="${restaurant.res_dayoff eq '없음' }">selected</c:if>>없음</option>
-											<option value="월요일" <c:if test="${restaurant.res_dayoff eq '월요일' }">selected</c:if>>월요일</option>
-											<option value="화요일" <c:if test="${restaurant.res_dayoff eq '화요일' }">selected</c:if>>화요일</option>
-											<option value="수요일" <c:if test="${restaurant.res_dayoff eq '수요일' }">selected</c:if>>수요일</option>
-											<option value="목요일" <c:if test="${restaurant.res_dayoff eq '목요일' }">selected</c:if>>목요일</option>
-											<option value="금요일" <c:if test="${restaurant.res_dayoff eq '금요일' }">selected</c:if>>금요일</option>
-											<option value="토요일" <c:if test="${restaurant.res_dayoff eq '토요일' }">selected</c:if>>토요일</option>
-											<option value="일요일" <c:if test="${restaurant.res_dayoff eq '일요일' }">selected</c:if>>일요일</option>
+											<option value="" <c:if test="${restaurant.res_dayoff eq '없음' }">selected</c:if>>없음</option>
+											<option value="1" <c:if test="${restaurant.res_dayoff eq '1' }">selected</c:if>>월요일</option>
+											<option value="2" <c:if test="${restaurant.res_dayoff eq '2' }">selected</c:if>>화요일</option>
+											<option value="3" <c:if test="${restaurant.res_dayoff eq '3' }">selected</c:if>>수요일</option>
+											<option value="4" <c:if test="${restaurant.res_dayoff eq '4' }">selected</c:if>>목요일</option>
+											<option value="5" <c:if test="${restaurant.res_dayoff eq '5' }">selected</c:if>>금요일</option>
+											<option value="6" <c:if test="${restaurant.res_dayoff eq '6' }">selected</c:if>>토요일</option>
+											<option value="7" <c:if test="${restaurant.res_dayoff eq '7' }">selected</c:if>>일요일</option>
 										</select>
 									</div>
                                 </td>

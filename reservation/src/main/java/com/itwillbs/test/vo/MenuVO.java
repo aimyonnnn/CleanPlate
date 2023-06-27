@@ -26,7 +26,7 @@ public class MenuVO {
 	private String me_context;
 	private String me_photo;
 	private MultipartFile me_file;
-//	private String me_file_name;
+	private String me_file_name;
 	private int res_idx;
 	@Override
 	public String toString() {

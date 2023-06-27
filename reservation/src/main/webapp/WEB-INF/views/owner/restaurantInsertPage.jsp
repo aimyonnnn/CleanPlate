@@ -156,13 +156,13 @@
 	                                <!-- res_openinghours -->
 	                                <div class="row">
 	                                    <div class="col-5">
-	                                        <input class="form-control timepicker" id="res_open" type="text" name="res_open"> 
+	                                        <input class="form-control timepicker" id="res_open" type="text" name="res_open" style="text-align: center;"> 
 	                                    </div>
 	                                    <div class="col-1">
 	                                    	<b style="font-size: large;">-</b>
 	                                    </div>
 	                                    <div class="col-5">
-	                                        <input class="form-control timepicker" id="res_close" type="text" name="res_close"> 
+	                                        <input class="form-control timepicker" id="res_close" type="text" name="res_close" style="text-align: center;"> 
 	                                    </div>
 	
 	                                </div>
@@ -178,16 +178,17 @@
 	                                   </div>
 	                                   <!-- res_breaktime -->
 	                               	   <div class="col-4">
-	                                       <input class="form-control timepicker2" type ="text" name="res_breakstart" id="res_breakstart"> <!-- 브레이크 타임 시작 시간 -->
+	                                       <input class="form-control timepicker2" type ="text" name="res_breakstart" id="res_breakstart">
 	                                   </div>
 	                               	   <div class="col-1">
 	                                	  <b style="font-size: large;">-</b>
 	                                   </div>
 	                                   <div class="col-4">
-	                                       <input class="form-control timepicker2" type ="text" name="res_breakend" id="res_breakend"> <!-- 브레이크 타임 시작 시간 -->
+	                                       <input class="form-control timepicker2" type ="text" name="res_breakend" id="res_breakend">
 	                                   </div>
                                     </div>
                                 </td>
+                            </tr>
 	 	                            <!-- 24시간으로 표시하는 jQuery -->
 	                                <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 	                                <script type="text/javascript">
@@ -224,10 +225,12 @@
 			                                    var isChecked = $(this).is(":checked");
 			                                    $("#res_breakstart, #res_breakend").prop("disabled", isChecked).val(isChecked ? "" : null);
 			                                });
+			                                
+
+			                                
 		                                });   
 	                                </script>
                                 
-                            </tr>
 						    <tr>
 						    	<th scope="row"><label for="res_total_table">총 테이블 수</label></th>
 						    	<td><input type="text" class="form-control" id="res_total_table" name="res_total_table" placeholder="숫자만 입력" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" required></td>
@@ -237,7 +240,7 @@
 						    	<td>
                                     <div class="dropdown">
                                         <select name="res_dayoff" class="form-select" style="width: 180px;">
-											<option selected value="없음">없음</option>
+											<option selected value="">없음</option>
 											<option value="1">월요일</option>
 											<option value="2">화요일</option>
 											<option value="3">수요일</option>
@@ -271,33 +274,47 @@
 						    	<td colspan="2"><textarea class="form-control" rows="5" cols="50" name="res_amenity_info" id="res_amenity_info"></textarea></td>
 						    </tr>
 						    <tr>
-                                <th scope="row"><label for="menu">메뉴</label></th>
+								<th scope="row"><label for="menu">메뉴</label></th>
 						    	<td id="td_menu">
 						    		<button type="button" id="menu" class="btn btn-warning" style="color: black;" >메뉴 추가</button>
+						    		<a style="font-size: small; font-weight: normal;">버튼을 클릭하여 메뉴를 추가해주세요</a>
 							 		<div class="row mt-3 align-items-center">
 							            <table class="table" id="menuList">
 							                <thead>
 							                  <tr>
 							                    <th scope="col" class="col-5">메뉴 이름</th>
 							                    <th scope="col" class="col-3">가격</th>
-							                    <th scope="col"></th>
 							                  </tr>
 							                </thead>
-						                  	<c:forEach var="menu" items="${menuList }">
-						                  		
-								                <tbody class="table-group-divider">
-								                  <tr>
-								                    <td scope="row">${menu.me_name }</td>
-								                    <td>${menu.me_price }</td>
-								                    <td>
-									                    <button type="button" class="btn btn-warning text-white me-1" data-bs-toggle="modal" data-bs-target="#menuPro">수정</button>
-									                    <button class="btn btn-warning text-white">삭제</button>
-								                    </td>
-								                  </tr>
-								                </tbody>
-						                  	</c:forEach>
+							                <tbody id="menuTable">
+							                </tbody>
 							              </table>
 							          </div>						    		
+						    	</td>
+						    </tr>
+						    <tr>
+						    	<th scope="row">
+						    		<label for="t_time">예약 시간</label>
+						    		<button type="button" id="t_timeInsert" class="btn btn-warning" style="color: black;" >추가</button>
+						    	</th>
+						    	<td id="td_Time">
+						    		<div class="row">
+										<input class="form-control timepicker3" type ="text" name="t_time" id="t_time" style="text-align: center; width: 100px;" placeholder="클릭하여 시간 선택">
+						    			<div class="col-6">
+						    			</div>
+<!-- 						    			<div class="col-2"> -->
+<!-- 											<input class="form-check-input" type="radio" value="LUNCH"> -->
+<!-- 											<label></label> -->
+<!-- 						    			</div> -->
+<!-- 						    			<div class="col-2" > -->
+<!-- 											<input class="form-check-input" type="radio" value="DINNER"> -->
+<!-- 						    			</div> -->
+<!-- 						    			<div class="col-2"> -->
+<!-- 											  <input class="form-check-input" type="checkbox" name="res_amenity" id="amenity4" value="예약"> -->
+<!-- 											  <label class="form-check-label" for="amenity4">예약</label> -->
+<!-- 						    			</div> -->
+						    			
+						    		</div>
 						    	</td>
 						    </tr>
 						    <tr>
@@ -473,148 +490,14 @@
 	</script>
 	<!-- 다음 api -->        
 		</div>
-        <!-- 가게내용 페이지 끝 -->
-
-<!-- 메뉴 추가 모달 창 -->
-<!-- <div class="modal fade" id="menuModal" tabindex="-1" aria-labelledby="menuModalLabel" aria-hidden="true"> -->
-<!--     <div class="modal-dialog"> -->
-<!--         <div class="modal-content"> -->
-<!--             <div class="modal-header"> -->
-<!--                 <h5 class="modal-title" id="menuModalLabel">메뉴 추가</h5> -->
-<!--                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
-<!--             </div> -->
-<!-- <!--             action="menuVOInsert"  --> -->
-<!--             <form id="menuVOInsert" method="post" enctype="multipart/form-data" action="menuVOInsert"> -->
-<!-- 	            <div class="modal-body container d-flex justify-content-center p-3 modal-content border-0"> -->
-<!-- 	                <div class="container d-flex justify-content-center p-3 modal-content border-0"> -->
-<!-- 								<table> -->
-<!-- 									<tr> -->
-<!-- 										<th><label for="me_name">메뉴 이름</label></th> -->
-<!-- 										<td> -->
-<!-- 	                                        <select name="me_name" id="me_name" class="form-select">										 -->
-<!-- 													<option value="LUNCH">LUNCH</option> -->
-<!-- 													<option value="DINNER">DINNER</option> -->
-<!-- 											</select>										 -->
-<!-- 										</td> -->
-<!-- 									</tr> -->
-<!-- 									<tr> -->
-<!-- 										<th><label for="me_price">메뉴 가격</label></th> -->
-<!-- 										<td><input type="text" class="form-control"  name="me_price" id="me_price" -->
-<!-- 										placeholder="숫자만 입력"  onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"></td> -->
-<!-- 									</tr> -->
-<!-- 									<tr> -->
-<!-- 										<th><label for="me_context">메뉴 설명</label></th> -->
-<!-- 										<td><textarea rows="5" cols="30" class="form-control" name="me_context" id="me_context"></textarea></td> -->
-<!-- 									</tr> -->
-<!-- 									<tr> -->
-<!-- 										<th><label for="me_photo">메뉴 사진</label></th> -->
-<!-- <!-- 										multiple="multiple" --> -->
-<!-- 										<td><input type="file" name="me_file" id="me_photo" class="form-control" ></td> -->
-<!-- 									</tr> -->
-<!-- 								</table> -->
-<!-- 	                </div> -->
-<!-- 	            </div> -->
-<!-- 	            <div class="modal-footer"> -->
-<!-- 		            <button type="submit" id="btnMenuInsert" class="btn btn-warning" style="color: white;">추가</button> -->
-<!-- 		          	<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button> -->
-<!-- 				</div> -->
-<!--             </form> -->
-<!-- 		</div> -->
-<!-- 	</div> -->
-<!-- </div> -->
+		<!-- 가게내용 페이지 끝 -->
 
 
-<!-- 메뉴 추가 모달 창 -->		 
 
 <script type="text/javascript">
 
-	var menuList = [];
-	// 모달창 폼데이터 전송 
-	$("#menuVOInsert").submit(function(event) {
-	    // 폼이 전송되는 것 막음, 폼을 제출할 때 AJAX 요청을 보냄
-	    event.preventDefault();
-	
-	    var form_data = new FormData(this); // 폼 데이터 생성
-	    
-	    // 모달의 폼데이터 전송 ajax
-	    $.ajax({
-	        type : "POST",
-	        url : $(this).attr("action"),
-	        processData : false,
-	        contentType : false,
-	        data : form_data,
-	        success : function(response) {
-	            console.log(response);
-	            
-	            var menu = response;
-				menuList.push(menu);
-				console.log(menuList);
-	            
-	            // 전송 후 모달창을 닫음
-	            $("#menuModal").modal("hide");
-	            // 모달창 닫은 후 폼 초기화 
-	            $('#menuModal').on('hidden.bs.modal', function (e) {
-	            	$(this).find('#menuVOInsert')[0].reset();
-	            });
-	            
-	            // menu 데이터를 이용하여 새로운 row 생성
-	            var $table = $("#menuList");
-	            var $new_row = $("<tr></tr>");
-	            $new_row.append("<td>" + menu.me_name + "</td>");
-	            $new_row.append("<td>" + menu.me_price + "</td>");
-	            $new_row.append("<td><button class='btn btn-warning' id='menuDelete' style='color: black;'>삭제</button></td>"); // 수정/삭제 버튼 등
-	            $table.append($new_row); // 새로운 row를 table에 추가
-	            
-	     	    $("#restaurant").prepend("<input type='hidden' name='me_name' value='" + menu.me_name + "'>");
-	     	    $("#restaurant").prepend("<input type='hidden' name='me_price' value='" + menu.me_price + "'>");
-	     	    $("#restaurant").prepend("<input type='hidden' name='me_context' value='" + menu.me_context + "'>");
-	     	    $("#restaurant").prepend("<input type='hidden' name='me_file_name' value='" + menu.me_file + "'>");
-	            
-	            
-	        },
-	        error : function(xhr, status, error) {
-	            console.log("error");
-	        },
-
-	    });
-	    
-	});
-	
-	// 삭제 버튼 클릭시 html과 menuList 배열안의 해당 인덱스 삭제 
-	$(document).on("click", "#menuDelete", function() {
-	    var $row = $(this).closest('tr');
-	    var name = $row.find('td:eq(0)').text();
-	    for (var i in menuList) {
-	        if (menuList[i].me_name == name) {
-	            menuList.splice(i, 1);
-	            $row.remove();
-	            break;
-	        }
-	    }
-	});
-	
-	
-	// 가게 추가 form전송시 메뉴 추가
-	$("#restaurantInsertPro").submit(function(event) {
-		$.ajax({
-	        type : "POST",
-	        url : "menuInsert",
-	        processData : false,
-	        contentType : false,
-	        data : {menuList : menuList
-	        },
-	        success : function(response) {
-	            console.log(response);
-	            
-	        },
-	        error : function(xhr, status, error) {
-	            console.log("error");
-	        },
-
-	    });
-	});
-	
-	
+	// 메뉴추가 버튼 클릭시 메뉴등록 폼 생성
+	// 테이블 갯수를 세는 변수
 	var tableCount = 0;
 	$("#menu").on("click", function(event) {
 		tableCount++;
@@ -622,7 +505,7 @@
 				+ '<tr>'
 				+ '<th><label for="me_name">메뉴 이름</label></th>'
 				+ '<td>'
-				+ '    <select name="me_name" id="me_name" class="form-select">	'									
+				+ '	<select name="me_name" id="me_name" class="form-select">	'									
 				+ '			<option value="LUNCH">LUNCH</option>'
 				+ '			<option value="DINNER">DINNER</option>'
 				+ '	</select>	'									
@@ -631,7 +514,7 @@
 				+ '<tr>'
 				+ '<th><label for="me_price">메뉴 가격</label></th>'
 				+ '<td><input type="text" class="form-control"  name="me_price" id="me_price"'
-				+ 'placeholder="숫자만 입력"  onKeyup="this.value=this.value.replace(/[^0-9]/g,\'\');"></td>'
+				+ 'placeholder="숫자만 입력"  onKeyup="this.value=this.value.replace(/[^0-9]/g,\'\');" required></td>'
 				+ '</tr>'
 				+ '<tr>'
 				+ '<th><label for="me_context">메뉴 설명</label></th>'
@@ -644,28 +527,69 @@
 				+ '<tr>'
 				+ '<td colspan="2">'
 				+ '<button type="button" onclick="hideMenu(' + tableCount + ')" class="btn btn-warning" style="color: white;">추가</button>'
-				+ '<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>');
+				+ '<button type="button" onclick="deleteMenu(' + tableCount +')" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>'
 				+ '</td>'
 				+ '</tr>'
-				+ '</table>'
-	    
+				+ '</table>');
 	});  
 	
-	
+	// 추가 버튼 클릭시 메뉴등록 폼 숨기기
+	// 메뉴이름, 가격에 출력하기
 	function hideMenu(index) {
-		alert(index);
-		$("#menu_table_" + index).hide();
+		// 
+		var meName = $("#menu_table_" + tableCount).find("#me_name").val();
+		var mePrice = $("#menu_table_" + tableCount).find("#me_price").val();
+		
+// 		alert(typeof(meName));
+// 		alert("메뉴 이름: " + meName + ", 메뉴 가격: " + mePrice);
+		
+		if(meName === "" || mePrice === "") { // 메뉴이름이나 메뉴가격이 널스트링일 경우(입력하지 않았을 경우)
+			alert('메뉴 가격을 입력해주세요');
+		} else {
+			alert('메뉴 등록'); 
+			// 추가 버튼 클릭시 메뉴등록 폼 숨기기
+			$("#menu_table_" + index).hide();
+			// 메뉴이름, 가격 출력
+			$("#menuTable").append("<tr><td scope='col' class='col-5'>" + meName + "</td><td scope='col' class='col-3'>" + mePrice + "</td></tr>");
+			
+		}
+		
 	}
+	// 닫기 버튼 클릭시 메뉴등록 테이블 삭제
+	function deleteMenu(index) {
+		$("#menu_table_" + index).remove();
+	}
+	
+	// 예약 시간 timepicker
+	$(document).on('focus', 'input.timepicker3', function() {
+		  $(this).timepicker({
+		      timeFormat: 'HH:mm',
+		      interval: 30, // 시간 간격
+		      minTime: '09:00', // 최소 시간
+		      maxTime: '22:00', // 최대 시간
+		      defaultTime: '09:00', // 기본값
+// 		      startTime: '09:00', // 시작시간
+		      dynamic: true,
+		      dropdown: true,
+		      scrollbar: true
+		  });
+	});
+	
+	$("#t_timeInsert").on("click", function(event) {
+		$("#td_Time").append("<input class='form-control timepicker3' type ='text' name='t_time' id='t_time' style='text-align: center;'>");
+	}); 
+	
 // 	$("#btnMenuInsert").on("click", function(event) {
 // 		alert(tableCount);
 // 		$("#menu_table_" + tableCount).hide();
 // 	}); 
-// 모달창 폼데이터 전송	
+
+
 </script>
     
     <!-- 하단 부분 include 처리영역 -->
     <hr class="mt-5">
-<%@ include file="../common/common_footer.jsp" %>
+	<%@ include file="../common/common_footer.jsp" %>
     <!-- 하단 부분 include 처리영역 -->
     
     <!-- 이부분은 지우면 안됩니다 -->
