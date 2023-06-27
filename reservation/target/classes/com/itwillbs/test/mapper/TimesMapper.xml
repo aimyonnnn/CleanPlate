@@ -14,8 +14,7 @@
 	<!-- 시간 등록 -->
 	<insert id="insertTime">
 		<selectKey resultType="com.itwillbs.test.vo.MenuVO" order="BEFORE">
-			SELECT m.me_name, m.me_idx
-			
+			SELECT me_name
 				FROM menus m JOIN restaurant r
 					ON m.res_idx = r.res_idx
 						WHERE r.res_idx = #{res_idx}

@@ -17,6 +17,9 @@ public interface MenuMapper {
 
 	// 특정 가게의 메뉴리스트 조회 
 	List<MenuVO> selectedRestaurantMenuList(int res_idx);
+	
+	// me_idx를 가져옴
+	int getIdx(MenuVO menu);
 
 
 }

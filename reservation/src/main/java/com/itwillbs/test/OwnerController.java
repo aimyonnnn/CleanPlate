@@ -256,15 +256,21 @@ public class OwnerController {
 					menu.setMe_context(arrMenuList.getMe_context()[i]);
 					menu.setMe_photo(arrMenuList.getMe_photo()[i]);
 					menu.setRes_idx(res_idx);
+					
+					
 //					menuList.add(menu);
 					// 메뉴 등록 요청
 					// c_idx, res_brn 추가 파라미터로 해서 mapper에서 조회
 					int insertMenuCount = menuService.registMenu(menu);
+					
+					int me_idx = menuService.getMeIdx(menu);
+					
 					if(insertMenuCount > 0) {
 						for(int j = 0; j < arrTimeList.getT_time().length; j++) {
 							TimesVO t_Time = new TimesVO();
 							t_Time.setT_time(arrTimeList.getT_time()[i]);
 							t_Time.setRes_idx(res_idx);
+							t_Time.setMe_idx(me_idx);
 							timesService.insertTime(t_Time);
 						}
 					}
