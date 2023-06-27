@@ -50,4 +50,9 @@ public class AssignmentService {
 		return mapper.selectAssignInfo(sId);
 	}
 	
+	// 실시간 가격 조회
+	public int getPrice(int r_idx) {
+		return mapper.selectPrice(r_idx);
+	}
+	
 }

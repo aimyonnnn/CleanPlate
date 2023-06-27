@@ -184,6 +184,35 @@
 <!--             <button type="button" onclick="clearText();">채팅내역 삭제</button> -->
         </div>
     </div>
+    
+    <!-- 실시간 가격 갱신 -->
+    <script type="text/javascript">
+    function updateInputValue() {
+ 		
+	      $.ajax({
+	        url: '<c:url value="getPrice"/>',
+	        method: 'GET',
+	        data : {
+	        	r_idx: ${param.r_idx}
+	        },
+	        dataType : 'text',
+	        success: function(response) {
+	          
+	          var inputValue = response.trim();
+	          var inputElement = $('#buyerValue'); // 인풋 박스의 요소
+	          console.log('실시간 가격 조회 : ' + inputValue);
+	          inputElement.value = "현재가격 : " + inputValue + "원"; // 인풋 박스의 내용 갱신
+	          
+	        },
+	        error: function(error) {
+	          console.error('내용 갱신 오류:', error);
+	        }
+	      });
+	      
+    }
+    // n초마다 인풋 박스의 내용 갱신
+    setInterval(updateInputValue, 5000);
+    </script>
    	
     <!-- 웹소켓 자바스크립트 -->
     <script type="text/javascript">
@@ -255,7 +284,6 @@
 	    	var salesValue =$("#salesValue").val();
 	    	console.log(r_idx);
 	        console.log(salesValue);
-	    	
 	    	
 	        // 확인 메시지 출력
 	        var confirmation = confirm('입력한 금액이 맞습니까?');

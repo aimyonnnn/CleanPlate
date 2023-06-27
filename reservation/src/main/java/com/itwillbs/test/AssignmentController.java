@@ -42,9 +42,19 @@ public class AssignmentController {
    @Autowired
    private RestaurantService restaurantService;
    
-   
    private static final Logger logger = LoggerFactory.getLogger(AssignmentController.class);
- 
+   	
+   // 실시간 가격 업데이트
+   @GetMapping("/getPrice")
+   @ResponseBody
+   public String getPrice(@RequestParam("r_idx") int r_idx) {
+	   
+	   int price = assignmentService.getPrice(r_idx); 
+	   System.out.println(price);
+	   
+	   return String.valueOf(price);
+   }
+   
    @GetMapping("/assignment")
    public String getAssignment(Model model) {
 	   

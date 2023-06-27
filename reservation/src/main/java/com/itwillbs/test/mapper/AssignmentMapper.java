@@ -28,4 +28,7 @@ public interface AssignmentMapper {
 	
 	// 양도 내역 조회
 	List<AssignmentVO> selectAssignInfo(String sId);
+	
+	// 실시간 가격 조회
+	int selectPrice(int r_idx);
 }

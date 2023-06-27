@@ -462,8 +462,7 @@
       		}); // click
       		
       	}); // ready
-        </script>		
-	 
+        </script>
 
 	<!-- 하단 여백을 주기 위한 div 박스 -->
 	<div style="height: 300px; width: 100%"></div>

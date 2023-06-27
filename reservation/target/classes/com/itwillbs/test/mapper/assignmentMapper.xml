@@ -72,6 +72,11 @@
 			JOIN payment AS p ON a.r_idx = p.r_idx
 				GROUP BY a.a_idx;
 	</select>
-
+	
+	<select id="selectPrice">
+		select a_price
+			from assignment
+				where r_idx = #{r_idx}
+	</select>
 	
 </mapper>
