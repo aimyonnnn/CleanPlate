@@ -65,10 +65,10 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbar">
-          <form class="d-flex">
-            <input class="form-control input-animation" placeholder="Search">
-            <button class="btn btn-outline-secondary input-button" type="submit">검색</button>
-          </form>
+<!--           <form class="d-flex"> -->
+<!--             <input class="form-control input-animation" placeholder="Search"> -->
+<!--             <button class="btn btn-outline-secondary input-button" type="submit">검색</button> -->
+<!--           </form> -->
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <!-- <li class="nav-item">
               <a class="nav-link" href="#">
