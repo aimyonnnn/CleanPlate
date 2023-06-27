@@ -109,8 +109,9 @@ public class ReservationController {
 		
 		// 예약하기로 가기 전 세션으로부터 회원 정보 받아오기
 		String sId = (String)session.getAttribute("sId");
+		String cId = (String)session.getAttribute("cId");
 		if(sId == null) { // 로그인 안했을 경우 
-			model.addAttribute("msg", "먼저 로그인을 해주세요.");
+			model.addAttribute("msg", "회원만 이용 가능합니다! 먼저 로그인을 해주세요.");
 			return "fail_back";
 		} else {
 			// 로그인한 사용자인 경우
@@ -118,8 +119,9 @@ public class ReservationController {
 	        model.addAttribute("memberInfo", memberInfo);
 	        return "reservation/reservation_reserve";
 		}
-	}
-	
+		
+		
+	}	
 	// 실시간 예약 조회 
 	@PostMapping("/SelectedReservationInfo")
 	@ResponseBody

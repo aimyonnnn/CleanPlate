@@ -28,7 +28,7 @@
 	    </div>
 	    <div class="row">
 	        <div class="mt-2 col-md-12 text-center">
-	            <img src="https://lh3.googleusercontent.com/p/AF1QipNY1MlSKhc_HLzeW1-s9SauzPn9woiO3QmNd9eA=s680-w680-h510" 
+	            <img src="${pageContext.request.contextPath }/resources/upload/${reservation.res_photo1}" width="100" height="100"
 	                 class="rounded mx-auto d-block" height="300px" width="500px">
 	            <h2 class="mt-4 mb-4 fw-bold" style="line-height:36px; letter-spacing: -3px;">${reservation.res_name }</h2>
 	        </div>

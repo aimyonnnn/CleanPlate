@@ -236,10 +236,10 @@ public class HelpController {
 	public String noticeBoard(HttpSession session, Model model, NoticeVO notice) {
 		
 		// 아이디가 관리자가 아닐 경우
-//		if(!session.getAttribute("sId").equals("admin")) {
-//			model.addAttribute("msg","관리자만 접근이 가능합니다.");
-//			return "fail_back";
-//		} 
+		if(!session.getAttribute("sId").equals("admin")) {
+			model.addAttribute("msg","관리자만 접근이 가능합니다.");
+			return "fail_back";
+		} 
 		
 		return "help/help_notice_form";
 	}
@@ -249,10 +249,10 @@ public class HelpController {
 	public String noticeBoardPro(HttpSession session, Model model, NoticeVO notice) {
 		
 		// 아이디가 관리자가 아닐 경우 
-//		if(!session.getAttribute("sId").equals("admin")) {
-//			model.addAttribute("msg","관리자만 접근이 가능합니다.");
-//			return "fail_back";
-//		} 
+		if(!session.getAttribute("sId").equals("admin")) {
+			model.addAttribute("msg","관리자만 접근이 가능합니다.");
+			return "fail_back";
+		} 
 		
 		String uploadDir = "/resources/upload";
 		
@@ -328,10 +328,10 @@ public class HelpController {
 			HttpSession session, Model model) {
 		
 		// 아이디가 관리자가 아닐 경우 
-//		if(!session.getAttribute("sId").equals("admin")) {
-//			model.addAttribute("msg","관리자만 접근이 가능합니다.");
-//			return "fail_back";
-//		} 
+		if(!session.getAttribute("sId").equals("admin")) {
+			model.addAttribute("msg","관리자만 접근이 가능합니다.");
+			return "fail_back";
+		} 
 		
 		// 공지 게시글 조회 
 		NoticeVO notice = service.getNotice(no_idx);
@@ -347,10 +347,10 @@ public class HelpController {
 			Model model, HttpServletRequest request) {
 		
 		// 아이디가 관리자가 아닐 경우 
-//		if(!session.getAttribute("sId").equals("admin")) {
-//			model.addAttribute("msg","관리자만 접근이 가능합니다.");
-//			return "fail_back";
-//		} 
+		if(!session.getAttribute("sId").equals("admin")) {
+			model.addAttribute("msg","관리자만 접근이 가능합니다.");
+			return "fail_back";
+		} 
 		
 		String uploadDir = "/resources/upload"; 
 		String saveDir = session.getServletContext().getRealPath(uploadDir);
@@ -410,10 +410,10 @@ public class HelpController {
 			HttpSession session, Model model) {
 		
 		// 아이디가 관리자가 아닐 경우 
-//		if(!session.getAttribute("sId").equals("admin")) {
-//			model.addAttribute("msg","관리자만 접근이 가능합니다.");
-//			return "fail_back";
-//		} 
+		if(!session.getAttribute("sId").equals("admin")) {
+			model.addAttribute("msg","관리자만 접근이 가능합니다.");
+			return "fail_back";
+		} 
 		
 		int deleteCount = service.removeNotice(no_idx); // 공지글 삭제
 		
