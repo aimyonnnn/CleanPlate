@@ -144,7 +144,7 @@
 	                           			취소
 	                           		</c:when>
 	                           		<c:when test="${resList.r_status eq 4 }">
-	                           			양도완료
+	                           			<span style="color: green;">양도완료</span>
 	                           		</c:when>
 	                           		<c:when test="${resList.r_status eq 5 }">
 	                           			판매중

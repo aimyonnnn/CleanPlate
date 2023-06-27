@@ -80,7 +80,7 @@ $(document).ready(function() {
                 <form id="login-form" method="post" action="assignAgreePro">
                     <div>
                     	<!-- hidden 태그로 전송 - 양도번호, 회원번호 -->
-                        <input type="text" name="id" class="form-control" style="text-align: center;">
+                        <input type="hidden" name="id" class="form-control" style="text-align: center;">
                         <input type="hidden" name="a_idx" class="form-control" style="text-align: center;">
                         <input type="hidden" name="m_idx" class="form-control" style="text-align: center;">
                     </div>
