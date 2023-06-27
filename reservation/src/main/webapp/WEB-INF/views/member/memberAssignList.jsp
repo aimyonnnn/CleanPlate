@@ -383,6 +383,25 @@
 		 } // if
 	}
 	</script>
+	
+	<script>
+	  $(document).ready(function() {
+	    $('#status').change(function() {
+	      var selectedStatus = $('#status').val();
+	
+	      $('.res').hide(); // 모든 데이터 숨기기
+	
+	      $('.res').each(function() {
+	        var statusCell = $(this).find("td:nth-child(3)");
+	        var status = statusCell.text().trim();
+	
+	        var showRow = (selectedStatus === '' || status === selectedStatus);
+	
+	        $(this).toggle(showRow);
+	      });
+	    });
+	  });
+	</script>
 
     <hr class="mt-5">
 <%@ include file="../common/common_footer.jsp" %>
