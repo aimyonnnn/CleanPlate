@@ -474,10 +474,9 @@
 			
 			<!--  -->
 			<script>
-	       
 			   $(()=>{
 				  
-				  // 아임포트 결제 시작
+				  // 결제 시작
 			      var IMP = window.IMP;
 			      IMP.init("imp61372336");
 			       $('#requestPay').on('click', function(e) {
@@ -510,14 +509,28 @@
 			          function(rsp) {
 			            console.log(rsp);
 			            
-			            // 결제 성공시 콜백함수 실행되는 부분
 			            // ================= 결제 성공 시 =================
 			            if (rsp.success) {
-			              alert('결제가 완료되었습니다.');
-			              alert(JSON.stringify(rsp));
-			              console.log('결제가 완료되었습니다.');
-					   // ================= DB 업데이트 처리 시작 =================
-						   
+			            	
+			              // alert('결제가 완료되었습니다.');
+			              // alert(JSON.stringify(rsp));
+			              // console.log('결제가 완료되었습니다.');
+			              
+			              // ================= 결제검증 시작 =================
+			    			$.ajax({
+			    	        	type : "POST",
+			    	        	url : "<c:url value='verifyIamport/'/>" + rsp.imp_uid 
+			    	        }).done(function(data) {
+			    	        	
+			    	        	console.log(data);
+			    	        	
+			    	        	// 위의 rsp.paid_amount 와 data.response.amount를 비교한후 로직 실행 (import 서버검증)
+			    	        	if(rsp.paid_amount == data.response.amount) {
+			    	        		
+			    		        	alert("결제 및 결제검증이 완료되었습니다!");
+			    		        	console.log("결제 및 결제검증이 완료되었습니다!");
+						              
+					   		// ================= DB 업데이트 처리 시작 =================
 						    var payment_num = rsp.imp_uid; // 아임포트 주문번호
 				  		 	var p_orderNum = rsp.merchant_uid; // 주문번호-자동생성한것
 	  		 	 			var payment_total_price = rsp.paid_amount; // 결제가격
@@ -566,6 +579,14 @@
 								});
 				  		 	 
 				         //================= DB 업데이트 처리 끝 =================
+				        	 
+		    	        	} else {
+		    	        		alert("결제 실패");
+		    	        	}
+		    	        }); // 결제검증 ajax
+	                	
+	    			   // ================= 결제검증 끝 ================= 
+				        	 
 				        	 
 			            // ================= 결제 실패 시 =================
 			            } else {

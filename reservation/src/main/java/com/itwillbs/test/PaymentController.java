@@ -1,6 +1,8 @@
 package com.itwillbs.test;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.http.HttpSession;
 
@@ -9,18 +11,43 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.itwillbs.test.service.PayService;
 import com.itwillbs.test.vo.PayVO;
+import com.siot.IamportRestClient.IamportClient;
+import com.siot.IamportRestClient.exception.IamportResponseException;
+import com.siot.IamportRestClient.response.IamportResponse;
+import com.siot.IamportRestClient.response.Payment;
 
 @Controller
 public class PaymentController {
 	
 	@Autowired
 	private PayService payService;
+	
+	private IamportClient api;
+	
+	// 결제 검증을 위한 api키
+	public PaymentController() {
+		this.api = new IamportClient("7282578621856564","uUdnTnwy30JL3CvPQiB8ymuQNa6zLArW6ljmfO9IZAGStHKe19yY7Fil099s3TJwFHw0UEMhk49KvTBy");
+	}
+	
+	// 결제 검증
+	@ResponseBody
+	@RequestMapping(value="/verifyIamport/{imp_uid}")
+	public IamportResponse<Payment> paymentByImpUid(
+			Model model
+			, Locale locale
+			, HttpSession session
+			, @PathVariable(value= "imp_uid") String imp_uid) throws IamportResponseException, IOException {
+			System.out.println(imp_uid);
+			return api.paymentByImpUid(imp_uid);
+	}
 	
 	// 예약결제 취소를 위한 결제정보 조회
     @PostMapping("paymentCancel")
