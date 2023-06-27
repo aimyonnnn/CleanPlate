@@ -39,23 +39,31 @@ public class HelpController {
 			@RequestParam(defaultValue = "") String searchKeyword, 
 			@RequestParam(defaultValue = "1") int pageNum,HttpSession session, Model model) {
 		
-		String id = "";
+		String sid = "";
+		String cid = "";
 		
 		if(session.getAttribute("sId")==null && session.getAttribute("cId") == null) {
 			model.addAttribute("msg","로그인시 접근이 가능합니다.");
 			return "fail_back";
 		} else if(session.getAttribute("sId") != null) {
-			id = (String)session.getAttribute("sId");
+			sid = (String)session.getAttribute("sId");
 		} else {
-			id = (String)session.getAttribute("cId");
+			cid = (String)session.getAttribute("cId");
 		}
 		
 		
 		
 		int listLimit = 10; // 한 페이지에서 표시할 목록 수
 		int StartRow = (pageNum - 1) * listLimit; // 조회 시작 행 번호
-		List<QNAVO> QNAList = service.getQNAList(id, searchType, searchKeyword, StartRow, listLimit); // 게시물 목록 조회 요청
-		int listCount = service.getQnaListCount(id, searchType, searchKeyword); // 전체 게시물 수 조회 요청 
+		List<QNAVO> QNAList;
+		int listCount;
+		if(!sid.equals("")) {
+			QNAList = service.getQNAMemberList(sid, searchType, searchKeyword, StartRow, listLimit); // 게시물 목록 조회 요청
+			listCount = service.getQnaListCount(sid, searchType, searchKeyword); // 전체 게시물 수 조회 요청 
+		} else {
+			QNAList = service.getQNACeoList(cid, searchType, searchKeyword, StartRow, listLimit); // 게시물 목록 조회 요청
+			listCount = service.getQnaCeoListCount(cid, searchType, searchKeyword); // 전체 게시물 수 조회 요청 
+		}
 		
 		int pageListLimit = 3; // 페이지 개수 제한
 		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0); // 최대 페이지
@@ -92,15 +100,16 @@ public class HelpController {
 	public String QNABoardPro(HttpSession session, Model model, QNAVO qna) {
 
 		
-		String id = "";
+		String sid = "";
+		String cid = "";
 		
 		if(session.getAttribute("sId")==null && session.getAttribute("cId") == null) {
 			model.addAttribute("msg","로그인시 접근이 가능합니다.");
 			return "fail_back";
 		} else if(session.getAttribute("sId") != null) {
-			id = (String)session.getAttribute("sId");
+			sid = (String)session.getAttribute("sId");
 		} else {
-			id = (String)session.getAttribute("cId");
+			cid = (String)session.getAttribute("cId");
 		}
 		
 		
@@ -142,8 +151,13 @@ public class HelpController {
 			if(!mFile.getOriginalFilename().equals("")) {
 				qna.setQ_file(fileName);
 			}
-		
-		int insertCount = service.registQNA(qna, id);
+			
+		int insertCount;
+		if(!sid.equals("")) {
+			insertCount = service.registQNA(qna, sid);
+		} else {
+			insertCount = service.registCeoQNA(qna, cid);
+		}
 		
 		if(insertCount > 0) {
 			

@@ -33,5 +33,6 @@ public class QNAVO {
 	private String q_file;
 	private Timestamp q_date;
 	private int m_idx;
+	private int c_idx;
 	private MultipartFile file;
 }

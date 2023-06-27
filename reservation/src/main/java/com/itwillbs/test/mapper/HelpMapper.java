@@ -14,10 +14,18 @@ public interface HelpMapper {
 
 	// help 게시판 목록 조회
 	List<HelpVO> getHelplist(int h_index);
-
+	
+	//회원 qna 추가
 	int insertQNA(QNAVO qna);
-
-	List<QNAVO> selectQNAList(@Param("id")String id,@Param("searchType") String searchType,@Param("searchKeyword") String searchKeyword, @Param("startRow") int startRow, @Param("listLimit") int listLimit);
+	
+	//점주 qna 추가
+	int insertCeoQNA(QNAVO qna);
+	
+	// 회원 QNA 리스트
+	List<QNAVO> selectQNAMemberList(@Param("id")String id,@Param("searchType") String searchType,@Param("searchKeyword") String searchKeyword, @Param("startRow") int startRow, @Param("listLimit") int listLimit);
+	
+	// 점주 QNA 리스트
+	List<QNAVO> selectQNACeoList(@Param("id")String id,@Param("searchType") String searchType,@Param("searchKeyword") String searchKeyword, @Param("startRow") int startRow, @Param("listLimit") int listLimit);
 
 	int updateQnaAnswer(QNAVO qna);
 
@@ -48,5 +56,10 @@ public interface HelpMapper {
 	String selectMemberIdInfo(int q_idx);
 
 	int deleteQNA(int q_idx);
+	
+	// 점주 QNA 글 수
+	int selectQnaCeoListCount(@Param("id")String id, @Param("searchType") String searchType, @Param("searchKeyword") String searchKeyword);
+
+	
 
 }
