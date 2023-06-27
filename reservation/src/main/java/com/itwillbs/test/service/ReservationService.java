@@ -72,11 +72,6 @@ public class ReservationService {
 	public int deleteReservation(String idx) {
 		return mapper.deleteReservation(idx);
 	}
-
-	// 총 결제 금액 조회
-	public int getTotalPay() {
-		return mapper.getTotalPay();
-	}
 	
 	// 예약 정보 조회
 	public ReservationVO getReservationInfo(int r_idx) {
@@ -131,6 +126,11 @@ public class ReservationService {
 	// 지난 일자 예약 수 조회
 	public ReservationVO adminReservationCount(int i) {
 		return mapper.adminReservationCount(i);
+	}
+
+	// 예약 목록 역순 조회
+	public List<ReservationVO> getReservationListDESC() {
+		return mapper.getReservationListDESC();
 	}
 
 }

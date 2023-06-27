@@ -183,4 +183,14 @@
 		DELETE FROM reviews
 			WHERE rv_idx = #{rv_idx}
 	</delete>
+	
+	<!-- 관리자 페이지 통계용 데이터 조회 -->
+	<select id="adminMemberCount">
+			SELECT DATE(m_regdate) AS date,
+			   count(m_idx) AS count
+			FROM members
+					WHERE DATE(m_regdate) = curdate() - interval #{i} day
+					GROUP BY date
+					ORDER BY date DESC
+	</select>
 </mapper>

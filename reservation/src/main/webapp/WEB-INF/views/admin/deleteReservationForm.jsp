@@ -17,15 +17,16 @@
   <form action="adminReservationUpdate" method="post">
     <div>
       <label for="reservationIdx">예약 번호</label>
-      <input type="text" id="r_idx" name="r_idx" class="form-control" value="${reservationVO.r_idx}">
+      <input type="text" id="#" name="#" class="form-control" value="${reservationVO.r_idx}" disabled="disabled">
+      <input type="hidden" id="r_idx" name="r_idx" class="form-control" value="${reservationVO.r_idx}">
     </div>
     <div>
       <label for="reservationPersonnel">예약 인원</label>
       <input type="text" id="r_personnel" name="r_personnel" class="form-control" value="${reservationVO.r_personnel}">
     </div>
     <div>
-      <label for="reservationDate">예약 일자</label>
-      <input type="text" id="reservationDate" name="reservationDate" class="form-control" value="<fmt:formatDate value="${reservationVO.r_date }" pattern="yy-MM-dd HH:mm" />" readonly="readonly">
+      <label for="reservationDateUpdate">예약 일자</label>
+      <input type="timestamp" id="r_date" name="r_date" class="form-control" value="${reservationVO.r_date}">
     </div>
     <div>
       <label for="storeName">요청사항</label>

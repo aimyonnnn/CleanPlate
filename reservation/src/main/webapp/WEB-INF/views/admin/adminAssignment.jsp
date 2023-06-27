@@ -48,7 +48,7 @@
               <li>
                 <a href="adminStatistics">
                   <span class="las la-chart-line"></span>
-                  사이트 이용 통계
+                  주간 데이터 통계
                 </a>
               </li>
             </ul>

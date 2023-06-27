@@ -50,7 +50,8 @@ public class ReservationController {
 	
 	// 가게 메인 페이지 
 	@GetMapping("reservationMain")
-	public String reservationMain(Model model) {
+	public String reservationMain(Model model, HttpSession session) {
+		
 		
 	    // 전체 식당 조회
 	    List<RestaurantVO> restaurantList = service.getRestaurantList();
@@ -154,11 +155,6 @@ public class ReservationController {
 	    return response;
 	}
 	
-	// 가게 상세페이지
-	@GetMapping("reservationStore")
-	public String reservationStore() {
-		return "reservation/reservation_store";
-	}
 	
 	// 결제 완료 후 DB에 예약내역 입력
 	@PostMapping("reservationUpdate")
@@ -212,6 +208,7 @@ public class ReservationController {
 	@GetMapping("reservationResult")
 	public String reservationResult(@RequestParam int r_idx, Model model) {
 		// 예약번호로 레스토랑, 예약내역 조회
+		
 		ReservationVO reservation = reservationService.getReservationAllInfo(r_idx);
 		model.addAttribute("reservation", reservation);		
 		return "reservation/reservation_result";

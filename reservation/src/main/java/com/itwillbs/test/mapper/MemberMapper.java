@@ -68,4 +68,7 @@ public interface MemberMapper {
 	//리뷰 삭제
 	int deleteReveiw(int rv_idx);
 
+	// 지난 일자 가입자 수 조회
+	MemberVO adminMemberCount(int i);
+
 }

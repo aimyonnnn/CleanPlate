@@ -529,13 +529,14 @@
 		            dataType: "text",
 		            success: function(response) {
 		            	
-						console.log(response);
+						var modifyValue = response.trim();
+						console.log(modifyValue);
 						
 						if(response === '1') {
 			                alert("가격이 성공적으로 업데이트되었습니다.");
 			                location.href='<c:url value="memberRSList"/>'
 			                
-						} else if (response === '0') {
+						} else {
 							alert("예약금액 보다 높게 판매할 수 없습니다. 가격을 다시 입력해주세요");
 						}
 						

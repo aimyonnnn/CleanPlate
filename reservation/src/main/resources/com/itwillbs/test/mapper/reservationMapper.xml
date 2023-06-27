@@ -76,6 +76,7 @@
 		UPDATE reservation
 			SET r_personnel = #{r_personnel}	
 			   ,r_request = #{r_request}
+			   ,r_date = #{r_date}
 			   ,r_amount = #{r_amount}
 			   ,r_status = #{r_status}
 				WHERE r_idx = #{r_idx}
@@ -86,12 +87,6 @@
 		DELETE FROM reservation
 			WHERE r_idx = #{r_idx}
 	</delete>
-	
-	<!-- 총 결제 금액 조회 -->
-	<select id="getTotalPay" resultType="int"> 
-		SELECT SUM(r_amount) AS total
-			FROM reservation
-	</select>	
 	
 	<!-- 예약 정보 조회 -->
 	<select id="selectReservationInfo" resultType="com.itwillbs.test.vo.ReservationVO">
@@ -234,6 +229,16 @@
 			FROM reservation
 					WHERE DATE(r_date) = curdate() - interval #{i} day
 					GROUP BY date
-					ORDER BY date desc
+					ORDER BY date DESC
+	</select>
+	
+	<!-- 예약 목록 역순 조회  -->
+	<select id="getReservationListDESC" resultType="com.itwillbs.test.vo.ReservationVO">
+		SELECT DISTINCT * 
+			FROM reservation r
+				JOIN restaurant res JOIN members m
+				ON r.res_idx = res.res_idx AND r.m_idx = m.m_idx
+				WHERE r.r_status = 1 OR r.r_status = 2
+				ORDER BY r.r_idx DESC
 	</select>
 </mapper>

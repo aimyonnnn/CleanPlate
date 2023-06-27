@@ -53,7 +53,13 @@ public class MemberController {
 	// 로그인 성공후 XXX님 클릭시 마이페이지로 이동
 	@GetMapping("member")
 	public String member(HttpServletRequest request, HttpServletResponse response,
-	        Model model) {
+	        Model model, HttpSession session) {
+		
+		if(session.getAttribute("sId") == null || session.getAttribute("cId") != null) {
+			model.addAttribute("msg", "잘못된 접근입니다.");
+			return "fail_back";
+		}
+		
 		
 		return "member/memberForm";
 	}
@@ -125,6 +131,11 @@ public class MemberController {
 	@GetMapping("memberRSList")
 	public String memberRSList(Model model, HttpSession session) {
 		
+		if(session.getAttribute("sId") == null || session.getAttribute("cId") != null) {
+			model.addAttribute("msg", "잘못된 접근입니다.");
+			return "fail_back";
+		}
+		
 		String sId = (String)session.getAttribute("sId");
 		List<ReservationVO> resList = service.getMemberReservationList(sId);
 		List<RestaurantVO> rsList = service.getMemberRestaurant(sId);
@@ -155,6 +166,11 @@ public class MemberController {
 	// 양도 관리
 	@GetMapping("memberAssignList")
 	public String memberAssignList(Model model, HttpSession session) {
+		
+		if(session.getAttribute("sId") == null || session.getAttribute("cId") != null) {
+			model.addAttribute("msg", "잘못된 접근입니다.");
+			return "fail_back";
+		}
 		
 		String sId = (String)session.getAttribute("sId");
 		
@@ -191,7 +207,13 @@ public class MemberController {
 	
 	// 회원탈퇴 
 	@GetMapping("memberWithdrawal")
-	public String memberWithdrawal() {
+	public String memberWithdrawal(HttpSession session, Model model) {
+		
+		if(session.getAttribute("sId") == null || session.getAttribute("cId") != null) {
+			model.addAttribute("msg", "잘못된 접근입니다.");
+			return "fail_back";
+		}
+		
 		return "member/memberWithdrawal";
 	}
 	
@@ -305,7 +327,8 @@ public class MemberController {
 	}
 	
 	@GetMapping("RvDelete")
-	public String RvDelete(@RequestParam int rv_idx, Model model ) {
+	public String RvDelete(@RequestParam int rv_idx, Model model,HttpSession session) {
+		
 		
 		System.out.println(rv_idx);
 		
@@ -315,7 +338,7 @@ public class MemberController {
 			return "redirect:memberReview";
 		}
 		
-		model.addAttribute("msg", "리뷰작성 실패");
+		model.addAttribute("msg", "리뷰삭제 실패");
 		return "fail_back";
 	}
 	

@@ -29,4 +29,5 @@ public class PayVO {
 	private int m_idx; // 회원번호
 	private int r_idx; // 예약번호
 	private String reason; // "테스트 결제 환불" 고정값
+	private int count; // 총 결제 금액
 }

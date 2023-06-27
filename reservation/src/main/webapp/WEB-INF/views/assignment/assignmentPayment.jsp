@@ -210,7 +210,7 @@
 				    	
 				    	if(result  === 1) {
 					        alert('예약내역 업데이트 성공!');
-					        location.href = '<c:url value="assignment"/>';
+					        location.href = '<c:url value="reservationResult"/>?r_idx=' + r_idx;
 					        
 				    	}
 										        

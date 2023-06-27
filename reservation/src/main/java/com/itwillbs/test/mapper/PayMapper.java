@@ -35,4 +35,10 @@ public interface PayMapper {
 	
 	// 판매금액 정산을 위한 결제정보 조회
 	PayVO selectInfoBySeller(int r_idx);
+
+	// 총 결제 금액 조회
+	int getTotalPay();
+
+	// 지난 일자 결제 금액 조회
+	PayVO adminPaymentCount(int i);
 }

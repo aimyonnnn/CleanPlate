@@ -16,7 +16,8 @@
   <form action="adminStoreUpdate" method="post">
     <div>
       <label for="restaurantIdx">가게 번호</label>
-      <input type="text" id="res_idx" name="res_idx" class="form-control" value="${restaurantVO.res_idx }">
+      <input type="text" id="#" name="#" class="form-control" value="${restaurantVO.res_idx }" disabled="disabled">
+      <input type="hidden" id="res_idx" name="res_idx" class="form-control" value="${restaurantVO.res_idx }">
     </div>
     <div>
       <label for="restaurantBrn">사업자등록번호</label>
