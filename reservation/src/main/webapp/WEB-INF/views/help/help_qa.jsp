@@ -104,7 +104,7 @@
 			         	<c:otherwise>
 			         		<c:if test="${QNAList.q_re_context eq null and sessionScope.sId ne 'admin' }">
 					         	<div class="btn-group-sm text-end" role="group" aria-label="Basic outlined example">
-						            <button class="btn btn-outline-primary" onclick="location.href=DeleteQna?q_idx=${QNAList.q_idx}">삭제</button>
+						            <button class="btn btn-outline-primary" onclick="location.href='DeleteQna?q_idx=${QNAList.q_idx}'">삭제</button>
 						        </div>
 					    	</c:if>
 			         	</c:otherwise>

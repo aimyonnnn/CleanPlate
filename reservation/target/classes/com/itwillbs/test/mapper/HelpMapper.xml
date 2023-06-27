@@ -287,6 +287,13 @@
 				WHERE q_idx = ${q_idx}
 	</select>
 	
+	<select id="selectCeoIdInfo" resultType="String">
+		SELECT c.c_id
+			FROM QNA q join ceo c
+			ON q.c_idx = c.c_idx
+				WHERE q_idx = ${q_idx}
+	</select>
+	
 	<delete id="deleteQNA">
 		DELETE FROM QNA
 			WHERE q_idx = ${q_idx}

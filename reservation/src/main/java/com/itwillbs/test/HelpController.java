@@ -433,7 +433,13 @@ public class HelpController {
 			return "fail_back";
 		}
 		
-		String id = service.getQnaMemberInfo(q_idx);
+		String id="";
+		
+		if(session.getAttribute("sId") != null) {
+			id = service.getQnaMemberInfo(q_idx);
+		} else {
+			id = service.getQnaCeoInfo(q_idx);
+		}
 		
 		if(!session.getAttribute("sId").equals(id) && !session.getAttribute("cId").equals(id)) {
 			model.addAttribute("msg", "잘못된 접근입니다.");

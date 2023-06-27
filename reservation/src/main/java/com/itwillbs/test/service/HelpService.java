@@ -103,6 +103,11 @@ public class HelpService {
 		return mapper.selectMemberIdInfo(q_idx);
 	}
 	
+	// CEO QNA 삭제시 동일한 아이디 인가 판별
+	public String getQnaCeoInfo(int q_idx) {
+		return mapper.selectCeoIdInfo(q_idx);
+	}
+	
 	// QNA 삭제
 	public int removeQNA(int q_idx) {
 		return mapper.deleteQNA(q_idx);
@@ -111,5 +116,6 @@ public class HelpService {
 	public int getQnaCeoListCount(String cid, String searchType, String searchKeyword) {
 		return mapper.selectQnaCeoListCount(cid, searchType, searchKeyword);
 	}
+	
 
 }

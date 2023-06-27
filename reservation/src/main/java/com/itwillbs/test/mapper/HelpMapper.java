@@ -60,6 +60,8 @@ public interface HelpMapper {
 	// 점주 QNA 글 수
 	int selectQnaCeoListCount(@Param("id")String id, @Param("searchType") String searchType, @Param("searchKeyword") String searchKeyword);
 
+	String selectCeoIdInfo(int q_idx);
+
 	
 
 }
