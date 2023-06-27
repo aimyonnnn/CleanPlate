@@ -222,7 +222,7 @@
                         fill: false,
                         pointRadius: 3,
                         lineTension: 0,
-                        label: '결제 금액(X1000)',
+                        label: '결제 금액(X1000원)',
                         borderColor: 'rgb(0, 0, 0)',
                         borderWidth: 1,
                         backgroundColor: 'rgb(0, 0, 0)',
@@ -237,7 +237,7 @@
                         fill: false,
                         pointRadius: 3,
                         lineTension: 0,
-                        label: '가입자',
+                        label: '가입자 수',
                         borderColor: 'rgb(0, 153, 31)',
                         borderWidth: 1,
                         backgroundColor: 'rgb(0, 153, 31)',
@@ -247,7 +247,7 @@
                 options: {
                 	title : {
                 		display : true,
-                		text : "사이트 이용 통계"
+                		text : "주간 데이터 통계"
                 	},
                     scales: {
                         yAxes: [{
