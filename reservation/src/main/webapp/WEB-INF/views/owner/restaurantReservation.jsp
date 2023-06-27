@@ -67,7 +67,6 @@
 							<option value="방문예정">방문예정</option>
 							<option value="방문완료">방문완료</option>
 							<option value="취소">취소</option>
-							<option value="양도">양도</option>
 						</select>
 					</div>
 				</div>
@@ -119,20 +118,14 @@
                             <td><fmt:formatDate value="${resList.r_date }" pattern="HH:mm"/></td>
                             <td>
 		                       <c:choose>
-	                           		<c:when test="${resList.r_status eq 1 }">
-	                           			방문예정
-	                           		</c:when>
 	                           		<c:when test="${resList.r_status eq 2 }">
 	                           			방문완료
 	                           		</c:when>
 	                           		<c:when test="${resList.r_status eq 3 }">
 	                           			취소
 	                           		</c:when>
-	                           		<c:when test="${resList.r_status eq 4 }">
-	                           			양도완료
-	                           		</c:when>
 	                           		<c:otherwise>
-	                           			판매중
+	                           			방문예정
 	                           		</c:otherwise>
 	                           	</c:choose>
                             </td>
@@ -204,9 +197,6 @@
 					                        <th>상태</th>
 					                        <td>
 					                        <c:choose>
-			                            		<c:when test="${resList.r_status eq 1 }">
-			                            			방문예정
-			                            		</c:when>
 			                            		<c:when test="${resList.r_status eq 2 }">
 			                            			방문완료
 			                            		</c:when>
@@ -214,7 +204,7 @@
 			                            			취소
 			                            		</c:when>
 			                            		<c:otherwise>
-			                            			양도
+			                            			방문예정
 			                            		</c:otherwise>
 			                            	</c:choose>
 					                        </td>
