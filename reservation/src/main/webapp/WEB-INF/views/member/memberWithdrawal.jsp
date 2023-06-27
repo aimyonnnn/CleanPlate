@@ -18,49 +18,32 @@
 
     <!-- 제목 구역 -->
 	<div class="container">
-        <div class="row">
+        <div class="row mt-4">
           <div class="col">
-            <h2>마이페이지</h2>
+            <h2><img src="${pageContext.request.contextPath }/resources/images/mypage/myWithdrawal.jpg" alt="" style="width: 100%;" class="justify-content-center"></h2>
           </div>
         </div>
     </div>
 
     <!-- 사이드바, 내용 넣는 구역!-->
-    <div class="container mt-5">
-        <div class="row d-flex justify-content-center">
-            <div class="col-2 align-items-center d-flex">
-                <!-- 버튼 그룹 -->
-                <!-- 프로필 사진 -->
-                <div class="input-group mb-5 d-flex shadow-lg d-flex justify-content-center pe-3" style="border-radius: 10px;">
-                    <img src="${pageContext.request.contextPath }/resources/images/adminProfile.png" alt="" style="width: 100px; height: 100px;" class="justify-content-center">
-                    <p class="d-flex align-items-center"><span>님 환영합니다</span></p>
-                </div>
-            </div>
-            <div class="col-10">
-            	<h2 style="margin-left: 40px; margin-top: 30px;">회원 탈퇴</h2>
-            	<div style="margin-left: 40px;">
-            		회원탈퇴를 신청하기 전에 안내사항을 꼭 확인해주세요. 
-            	</div>
-        	</div>
-        </div>
+    <div class="container">
         <div class="row">
-            <div class="col-2">
+            <div class="col-2" style="margin-top: 60px;">
                 <!-- 왼쪽 사이드바 버튼영역-->
                 <div class="btn-group-vertical btn-group-lg d-flex align-self-start" role="group" aria-label="Vertical button group">
-                    <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='member'" >내 정보</button>
-                    <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='memberRSList'" >예약 내역</button>
-                    <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='memberAssignList'">양도 관리</button>
-                    <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='memberLike'">내가 찜한 식당</button>
-                    <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='memberReview'">내가 쓴 리뷰</button>
-                    <button type="button" class="btn btn-outline-warning active p-3" onclick="location.href='memberWithdrawal'">회원탈퇴</button>
+                    <button type="button" class="btn btn-outline-dark p-3" onclick="location.href='member'">내 정보</button>
+                    <button type="button" class="btn btn-outline-dark p-3" onclick="location.href='memberRSList'" >예약 내역</button>
+                    <button type="button" class="btn btn-outline-dark p-3" onclick="location.href='memberAssignList'">판매 내역</button>
+                    <button type="button" class="btn btn-outline-dark p-3" onclick="location.href='memberLike'">내가 찜한 식당</button>
+                    <button type="button" class="btn btn-outline-dark p-3" onclick="location.href='memberReview'">내가 쓴 리뷰</button>
+                    <button type="button" class="btn btn-outline-dark active p-3" onclick="location.href='memberWithdrawal'">회원탈퇴</button>
                 </div>
                 <!-- 왼쪽 사이드바 버튼영역-->
             </div>
             <!-- 내용 -->
-            <div class="col-10">
-            	
-            	 <div class="input-container" style="margin-left: 50px;">
-	                <label for="agree_privacy">아래 내용을 꼭 확인해 주세요.<br></label>
+            <div class="col-10 mt-4">
+            	 <div class="input-container" style="margin-top: 35px; margin-left: 120px;">
+	                <label for="agree_privacy">회원 탈퇴 전 아래 내용을 꼭 확인해 주세요.<br></label>
 	                <textarea id="agree_privacy" rows="14" readonly style="width: 80%;">
 회원탈퇴 즉시 회원정보는 모두 삭제되며, 재가입시에도 복원되지 않습니다.
 
@@ -86,21 +69,21 @@
 	              </div>
             
 				<form action="memberWithdrawalPro" method="post">
-			    	<div class="mb-3 row" style="margin-left: 50px;">
+			    	<div class="mb-3 mt-3 row" style="margin-left: 120px;">
 			            <label for="id" class="col-sm-2 col-form-label">아이디</label>
 			            <div class="col-md-6">
 			                <input type="text" readonly class="form-control-plaintext" id="id" value="${sessionScope.sId }">
 			            </div>
 			        </div>
-			        <div class="mb-3 row" style="margin-left: 50px;">
+			        <div class="mb-3 row" style="margin-left: 120px;">
 			            <label for="passwd" class="col-sm-2 col-form-label">비밀번호</label>
 			            <div class="col-md-6">
 			                <input type="password" name="m_passwd" class="form-control" id="passwd" style="width: 180px;">
 			            </div>
 			        </div>
 			        <div class="mb-3 row">
-			            <div class="col-md-7 d-flex" style="margin-left: 450px;">
-			                <button type="submit" class="btn btn-warning" style="color: white;" onclick="return deletebtn()" >탈퇴하기</button>
+			            <div class="col-md-7 d-flex mt-3" style="margin-left: 500px;">
+			                <button type="submit" class="btn btn-dark" style="color: white;" onclick="return deletebtn()" >탈퇴하기</button>
 			            </div>
 			        </div>
 			    </form>
@@ -121,8 +104,8 @@
 			
 	
     <!-- 하단 부분 include 처리영역 -->
-    <hr class="mt-5">
-<%@ include file="../common/common_footer.jsp" %>
+    <hr style="margin-top: 100px;">
+	<%@ include file="../common/common_footer.jsp" %>
     <!-- 하단 부분 include 처리영역 -->
     
     <!-- 이부분은 지우면 안됩니다 -->
