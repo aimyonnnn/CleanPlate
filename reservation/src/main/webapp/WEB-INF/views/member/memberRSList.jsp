@@ -345,12 +345,12 @@
                             <td>
 	                           	<!-- r_status가 1-방문예정, 2-방문완료, 3-취소, 4-양도완료, 5-판매중, 6-판매실패 -->
 							    <c:choose>
-						           <c:when test="${resItem.r_status eq 1}">방문예정</c:when>
-						           <c:when test="${resItem.r_status eq 2}">방문완료</c:when>
-						           <c:when test="${resItem.r_status eq 3}">취소</c:when>
-						           <c:when test="${resItem.r_status eq 4}">양도완료</c:when>
-						           <c:when test="${resItem.r_status eq 5}">판매중</c:when>
-						           <c:when test="${resItem.r_status eq 5}">판매실패</c:when>
+						           <c:when test="${resList.r_status eq 1}">방문예정</c:when>
+						           <c:when test="${resList.r_status eq 2}">방문완료</c:when>
+						           <c:when test="${resList.r_status eq 3}">취소</c:when>
+						           <c:when test="${resList.r_status eq 4}">양도완료</c:when>
+						           <c:when test="${resList.r_status eq 5}">판매중</c:when>
+						           <c:when test="${resList.r_status eq 6}">판매실패</c:when>
 							    </c:choose>
 						     </td>
 						     <td>
