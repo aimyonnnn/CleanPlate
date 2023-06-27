@@ -5,7 +5,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- 이부분은 지우면 안됩니다 -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>MyPage</title>
@@ -14,14 +13,17 @@
         <!-- bootstrap -->
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <!-- 이부분은 지우면 안됩니다 -->
-
+		<!-- iamport -->
+		<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+		<!-- Sweet Alert 플러그인 -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+		<link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
 
 </head>
 <body>
    	<!-- 공통 상단바 구역 -->
-<%@ include file="../common/common_header.jsp" %>
-   	<!-- 공통 상단바 구역 -->
+	<%@ include file="../common/common_header.jsp" %>
+	
     <!-- 제목 구역 -->
 	<div class="container">
         <div class="row">
@@ -74,7 +76,7 @@
 					<div class="dropdown" style="margin-left: 40px;">
 						<select class="form-select form-select mb-3" aria-label=".form-select example" style="width: 180px;" id="dateFilter">
 						  <option value="">전체날짜</option>
-						  <c:forEach items="${uniqueDates}" var="date">
+						  <c:forEach items="${sortedDates}" var="date">
 						    <option>${date}</option>
 						  </c:forEach>
 						</select>
@@ -274,16 +276,72 @@
 	}
 </script>
 
+	<!-- 예약 취소 -->
+	<script type="text/javascript">
+    function cancel(r_idx) {
+        let result = confirm("취소가 확실합니까? \n (취소할 경우 예약을 되돌릴 수 없으며 다시 예약해야합니다.)");
+
+        if (result) {
+
+            // 결제정보 조회를 위한 ajax요청
+            $.ajax({
+                url: '<c:url value="paymentCancel"/>',
+                type: 'POST',
+                data: { r_idx: r_idx },
+                dataType: 'json',
+                success: function(response) {
+					
+                    console.log(JSON.stringify(response));
+
+                    alert('주문번호 ' + JSON.stringify(response.payment_num)
+                    		+ '결제 취소를 진행합니다. \n취소하실 금액은 '
+                    		+ JSON.stringify(response.payment_total_price) + '원 입니다.');
+					
+                    // 결제 취소를 위한 ajax요청
+                    $.ajax({
+                        url: "payCancel",
+                        type: "POST",
+                        data: {
+                            'payment_num': response.payment_num,
+                            'payment_total_price': response.payment_total_price,
+                            'reason': "테스트 결제 환불"
+                        },
+                        success: function(data) {
+                            // 환불 완료 swal창으로 안내
+                            swal({
+                                title: "환불 성공!",
+                                text: "예약이 성공적으로 취소되었습니다.",
+                                icon: "success",
+                                button: "확인"
+                            }, function() {
+                                // 환불 완료 후 전 화면으로 이동
+                                location.href = "memberRSList";
+                            });
+                        },
+                        error: function(xhr, status, error) {
+                            swal("환불 실패!" + error);
+                        }
+                    }); // ajax
+
+                //=========================================================================
+                	
+                },
+                error: function(xhr, status, error) {
+                    console.log('Ajax 오류 발생했습니다');
+                    console.log('상태 코드: ' + xhr.status);
+                    console.log('에러 메시지: ' + error);
+                }
+            }); // ajax
+            
+        } // if
+    }
+	</script>
 
 
 
-
-	<!-- 하단 부분 include 처리영역 -->
     <hr class="mt-5">
-<%@ include file="../common/common_footer.jsp" %>
-    <!-- 하단 부분 include 처리영역 -->
+	<%@ include file="../common/common_footer.jsp" %>
     
-    <!-- 이부분은 지우면 안됩니다 -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
     
 </body>

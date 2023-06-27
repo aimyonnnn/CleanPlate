@@ -23,6 +23,8 @@ import com.itwillbs.test.service.*;
 import com.itwillbs.test.vo.*;
 import com.mysql.cj.protocol.x.*;
 
+import edu.emory.mathcs.backport.java.util.Collections;
+
 @Controller
 public class OwnerController {
 	
@@ -49,7 +51,7 @@ public class OwnerController {
 		List<ReservationVO> resList = service.getReservationList((String)session.getAttribute("cId"));
 		List<RestaurantVO> restaurantList = resService.getOwnerRestaurantList((String)session.getAttribute("cId"));
 		
-		Set<String> uniqueDates = new HashSet<>();
+		Set<String> uniqueDates = new LinkedHashSet<>();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yy-MM-dd");
 
 		for (ReservationVO reservation : resList) {
@@ -57,8 +59,12 @@ public class OwnerController {
 		    String dateString = dateFormat.format(rDate);
 		    uniqueDates.add(dateString);
 		}
+
+		List<String> sortedDates = new ArrayList<>(uniqueDates);
+		Collections.sort(sortedDates);
+		Collections.reverse(sortedDates);
 		
-	    model.addAttribute("uniqueDates", uniqueDates);		
+	    model.addAttribute("sortedDates", sortedDates);		
 		model.addAttribute("restaurantList", restaurantList);
 		model.addAttribute("resList",resList);
 		
