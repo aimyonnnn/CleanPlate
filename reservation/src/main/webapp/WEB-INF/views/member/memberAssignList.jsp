@@ -107,11 +107,17 @@
                             	<!-- 양도상태가 2-양도완료 & 결제상태가 1-결제완료인경우 정산하기 출력 -->
                             	<!-- 양도상태가 2-양도완료 & 결제상태가 2-결제취소인경우 정산완료 출력 -->
                             	<c:choose>
-                            		<c:when test="${list.a_status eq 2}">
-                            			<button type="button" class="btn btn-danger" style="margin-left: 10px; color: white;" onclick="cancelAndCalculate(${list.r_idx }, ${list.a_price})">정산하기</button>
+                            		<c:when test="${list.p_status eq 1}">
+                            			<button type="button" class="btn btn-danger"
+                            			style="margin-left: 10px; color: white;" onclick="cancelAndCalculate(${list.r_idx }, ${list.a_price})">정산하기</button>
+                            		</c:when>
+                            		<c:when test="${list.p_status eq 2}">
+                            			<button type="button" class="btn btn-outline-dark" 
+                            			style="margin-left: 10px;" onclick="cancelAndCalculate(${list.r_idx }, ${list.a_price})">정산완료</button>
                             		</c:when>
                             		<c:otherwise>
-		                            	<button type="button" class="btn btn-outline-warning" style="margin-left: 10px;" data-bs-toggle="modal" data-bs-target="#assignmentModal${list.r_idx }">가격수정</button>
+		                            	<button type="button" class="btn btn-outline-warning"
+		                            	style="margin-left: 10px;" data-bs-toggle="modal" data-bs-target="#assignmentModal${list.r_idx }">가격수정</button>
                             		</c:otherwise>
                             	</c:choose> 
                             	<!--  -->                       

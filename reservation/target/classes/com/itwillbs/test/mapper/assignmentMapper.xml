@@ -62,11 +62,15 @@
 	</update>
 	
 	<!-- 양도 내역 조회 -->	
+<!-- 		select * -->
+<!-- 			from assignment -->
+<!-- 				where -->
+<!-- 					a_sellerId = #{sId} -->
 	<select id="selectAssignInfo" resultType="com.itwillbs.test.vo.AssignmentVO">
-		select *
-			from assignment
-				where
-					a_sellerId = #{sId}
+		SELECT a.*, Max(p.p_status) AS "p_status"
+			FROM assignment AS a
+			JOIN payment AS p ON a.r_idx = p.r_idx
+				GROUP BY a.a_idx;
 	</select>
 
 	
