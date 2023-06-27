@@ -65,10 +65,10 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbar">
-          <form class="d-flex">
-            <input class="form-control input-animation" placeholder="Search">
-            <button class="btn btn-outline-secondary input-button" type="submit">검색</button>
-          </form>
+<!--           <form class="d-flex"> -->
+<!--             <input class="form-control input-animation" placeholder="Search"> -->
+<!--             <button class="btn btn-outline-secondary input-button" type="submit">검색</button> -->
+<!--           </form> -->
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <!-- <li class="nav-item">
               <a class="nav-link" href="#">
@@ -77,7 +77,7 @@
               </a>
             </li> -->
             <li class="nav-item">
-              <a class="nav-link" href="#">${sessionScope.sId }님 환영합니다</a>
+              <a class="nav-link" href="#">${sessionScope.cId }님 환영합니다</a>
             </li>
           </ul>
         </div>
@@ -95,10 +95,7 @@
             <div class="card-body d-flex justify-content-between">
               <div>
                 <p class="card-text mb-2">오늘 총 예약 수</p>
-                <c:forEach var="count" items="${reservationCounts}">
-                가게 번호 : ${count.storeId} 
-                오늘 예약 수 : ${count.reservationCount}<br>
-        		</c:forEach>	
+    				오늘 예약 수: ${dailystore}<br>
               </div>
               <i class="fas fa-calendar" style="font-size: 30px; margin-top: 20px"></i>
             </div>
@@ -111,10 +108,7 @@
             <div class="card-body d-flex justify-content-between">
               <div>
                 <p class="card-text mb-2">이번 달 총 예약 수</p>
-                 <c:forEach var="allcount" items="${reservationCounts}">
-                가게 번호 : ${allcount.storeId} 
-                이번 달 예약 수: ${allcount.reservationCount}<br>
-        		</c:forEach>
+                	이번 달 예약 수: ${monthlystore}<br>
               </div>
               <i class="fas fa-calendar" style="font-size: 30px; margin-top: 20px"></i>
             </div>
@@ -126,7 +120,7 @@
             <div class="card-body d-flex justify-content-between">
               <div>
                 <p class="card-text mb-2">일간 매출</p>
-                <h4>$2,500,000</h4>
+                	총 매출: $${todaySalesAmount[0]}<br> 
               </div>
               <i class="fas fa-calendar" style="font-size: 30px; margin-top: 20px"></i>
             </div>
@@ -138,7 +132,7 @@
             <div class="card-body d-flex justify-content-between">
               <div>
                 <p class="card-text mb-2">주간 매출</p>
-                <h4>$9,000,000</h4>
+                	총 매출: $${weeklyallSalesAmount[0]}<br> 
               </div>
               <i class="fas fa-calendar" style="font-size: 30px; margin-top: 20px"></i>
             </div>
@@ -177,31 +171,6 @@
         </div>
         <!-- myChart2 시작 -->
 
-        <!-- myChart3 시작 -->
-        <div class="col-lg-6 my-5" data-aos="fade-up" data-aos-anchor-placement="center-bottom">
-          <div class="card">
-            <div class="card-header">
-              <span>주단위 매출 금액</span>
-            </div>
-            <div class="card-body">
-              <canvas id="myChart3"></canvas>
-            </div>
-          </div>
-        </div>
-        <!-- myChart3 시작 -->
-
-        <!-- myChart4 시작 -->
-        <div class="col-lg-6 my-5" data-aos="fade-up" data-aos-anchor-placement="center-bottom">
-          <div class="card">
-            <div class="card-header">
-              <span>최근 3개월 매출 금액</span>
-            </div>
-            <div class="card-body">
-              <canvas id="myChart4"></canvas>
-            </div>
-          </div>
-        </div>
-        <!-- myChart4 시작 -->
 
       </div>
     </div>
@@ -212,97 +181,55 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <script>
-    // myChart
-    var ctx = document.getElementById('myChart').getContext('2d');
-    var myChart = new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: ['월', '화', '수', '목', '금', '토', '일'],
-        datasets: [{
-          label: '# of Votes',
-          data: [5, 2, 3, 5, 4, 8, 20],
-          backgroundColor: 'rgba(255, 99, 132, 0.2)',
-          borderColor: 'rgba(255, 99, 132, 1)',
-          borderWidth: 1
-        }]
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true
-          }
-        }
-      }
-    });
+  var weeklyReservationCounts = ${weeklyReservationCounts};
 
-    // myChart2
-    var ctx2 = document.getElementById('myChart2').getContext('2d');
-    var myChart2 = new Chart(ctx2, {
+  var ctx = document.getElementById('myChart').getContext('2d');
+  var myChart = new Chart(ctx, {
       type: 'line',
       data: {
-        labels: ['월', '화', '수', '목', '금', '토', '일'],
-        datasets: [{
-          label: '# of Votes',
-          data: [2500000, 2000000, 1500000, 2000000, 1500000, 3000000, 3500000],
-          backgroundColor: 'rgba(54, 162, 235, 0.2)',
-          borderColor: 'rgba(54, 162, 235, 1)',
-          borderWidth: 1
-        }]
+          labels: ['월', '화', '수', '목', '금', '토', '일'],
+          datasets: [{
+              label: 'Reservation count',
+              data: ${weeklyReservationCounts},
+              backgroundColor: 'rgba(54, 162, 235, 0.2)',
+              borderColor: 'rgba(54, 162, 235, 1)',
+              borderWidth: 1
+          }]
       },
       options: {
-        scales: {
-          y: {
-            beginAtZero: true
+          scales: {
+              y: {
+                  beginAtZero: true
+              }
           }
-        }
       }
-    });
+  });
 
-    // myChart3
-    var ctx3 = document.getElementById('myChart3').getContext('2d');
-    var myChart3 = new Chart(ctx3, {
+  // myChart2
+  var weeklySalesAmount = ${weeklySalesAmount};
+
+  var ctx2 = document.getElementById('myChart2').getContext('2d');
+  var myChart2 = new Chart(ctx2, {
       type: 'line',
       data: {
-        labels: ['1주', '2주', '3주', '4주', '5주'],
-        datasets: [{
-          label: '# of Votes',
-          data: [2500000, 2000000, 1500000, 2000000, 1500000, 3000000, 3500000],
-          backgroundColor: 'rgba(54, 162, 235, 0.2)',
-          borderColor: 'rgba(54, 162, 235, 1)',
-          borderWidth: 1
-        }]
+          labels: ['월', '화', '수', '목', '금', '토', '일'],
+          datasets: [{
+              label: 'Sales Amount',
+              data: ${weeklySalesAmount},
+              backgroundColor: 'rgba(54, 162, 235, 0.2)',
+              borderColor: 'rgba(54, 162, 235, 1)',
+              borderWidth: 1
+          }]
       },
       options: {
-        scales: {
-          y: {
-            beginAtZero: true
+          scales: {
+              y: {
+                  beginAtZero: true
+              }
           }
-        }
       }
-    });
+  });
 
-    // myChart4
-    var ctx4 = document.getElementById('myChart4').getContext('2d');
-    var myChart4 = new Chart(ctx4, {
-      type: 'bar',
-      data: {
-        labels: ['4월', '5월', '6월'],
-        datasets: [{
-          label: '# of Votes',
-          data: [15000000, 13000000, 16000000],
-          backgroundColor: 'rgba(54, 162, 235, 0.2)',
-          borderColor: 'rgba(54, 162, 235, 1)',
-          borderWidth: 1
-        }]
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true
-          }
-        }
-      }
-    });
   </script>
 
   <!-- AOS 라이브러리 -->
