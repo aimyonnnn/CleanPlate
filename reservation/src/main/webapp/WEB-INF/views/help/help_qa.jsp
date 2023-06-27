@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -83,18 +84,21 @@
 			      <div id="collapse${QNAList.q_idx }" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
 			        <div class="accordion-body">
 			         ${QNAList.q_context }
-			         <c:if test="${QNAList.q_re_context ne null }">
-				         <br><br>
-				         <hr>
+			         <br><br>
+					<c:if test="${not empty QNAList.q_file}">
+		         		첨부파일 : <a
+								href="${pageContext.request.contextPath }/resources/upload/${QNAList.q_file }"
+								download="${fn:split(QNAList.q_file, '_')[1] }">
+								${fn:split(QNAList.q_file, '_')[1] } </a>
+					</c:if>
+					<hr>
+					<c:if test="${QNAList.q_re_context ne null }">
 				         답변 : ${QNAList.q_re_context }
 			         </c:if>
 			         <c:choose>
 				         <c:when test="${QNAList.q_re_context eq null and sessionScope.sId eq 'admin' }">
 				         	<form action="QNAAnswer" method="post">
 				         		<input type="hidden" value="${QNAList.q_idx }" name="q_idx">
-				         		<br>
-				         		<br>
-				         		<hr>
 						         <textarea class="form-control" name="q_re_context" id="exampleFormControlTextarea2" rows="5" required="required"></textarea>
 						         <div class="btn-group-sm text-end" role="group" aria-label="Basic outlined example">
 						            <button type="submit" class="btn btn-outline-primary mt-3" >답변</button>

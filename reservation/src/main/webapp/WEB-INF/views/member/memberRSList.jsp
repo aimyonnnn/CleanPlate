@@ -195,8 +195,12 @@
 	    			</div>
 				    <div class="row">
 				        <div class="mt-2 col-md-12">
-				            <img src="https://lh3.googleusercontent.com/p/AF1QipNY1MlSKhc_HLzeW1-s9SauzPn9woiO3QmNd9eA=s680-w680-h510" 
-				                 class="rounded mx-auto d-block" height="300px" width="500px">
+				        	<c:forEach items="${rsList }" var="rsList">
+				        		<c:if test="${rsList.res_idx eq resList.res_idx }">
+						            <img src="${pageContext.request.contextPath }/resources/upload/${rsList.res_photo1 }" 
+						                 class="rounded mx-auto d-block" height="300px" width="500px">
+				            	</c:if>
+			            	</c:forEach>
 				        </div>
 	   				 </div>
 				    <div class="container">
