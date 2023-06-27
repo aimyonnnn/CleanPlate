@@ -12,8 +12,9 @@
             color: red;
             font-weight: normal;
         }
-
     </style>
+    <!-- CSS -->
+    <link href="${pageContext.request.contextPath }/resources/css/help.css" rel="styleSheet" type="text/css">
 </head>
 <body>
 <%@ include file="../common/common_header.jsp" %>
@@ -34,17 +35,17 @@
     <div class="row gy-3 justify-content-center text-center">
         <div class="col-12">
 	      <div class="list-group list-group-horizontal">
-	        <a href="../help/help_home.jsp" class="list-group-item list-group-item-action" aria-current="true">
+	        <a href="../help/help_home.jsp" class="list-group-item-dark list-group-item-action" aria-current="true">
 	          공지사항
 	        </a>
-	        <a href="../help/help_fq.jsp" class="list-group-item list-group-item-action">FAQ</a>
-	        <a href="../help/help_qa.jsp" class="list-group-item list-group-item-action active">Q&A</a>
+	        <a href="../help/help_fq.jsp" class="list-group-item-dark list-group-item-action">FAQ</a>
+	        <a href="../help/help_qa.jsp" class="list-group-item-dark list-group-item-action active">Q&A</a>
 	      </div>
         </div>
         <div class="col-6">
             <div class="list-group list-group-horizontal">
-                <a href="QNABoard" class="list-group-item list-group-item-action active" aria-current="true">문의하기</a>
-                <a href="QNA" class="list-group-item list-group-item-action">문의내역</a>
+                <a href="QNABoard" class="list-group-item-dark list-group-item-action active" aria-current="true">문의하기</a>
+                <a href="QNA" class="list-group-item-dark list-group-item-action">문의내역</a>
             </div>
         </div>
     </div>
@@ -150,7 +151,7 @@ Clean Table은 식당 예약 서비스 제공을 위한 정보 외에 추가 정
     <div class="row justify-content-center">
         <div class="col-3">
             <div class="d-grid gap-2">
-                <button type="submit" class="btn btn-outline-primary">문의하기</button>
+                <button type="submit" class="btn btn-outline-dark">문의하기</button>
             </div>
         </div>
     </div>

@@ -6,6 +6,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+	<!-- CSS -->
+    <link href="${pageContext.request.contextPath }/resources/css/help.css" rel="styleSheet" type="text/css">
 </head>
 <body>
 <%@ include file="../common/common_header.jsp" %>
@@ -26,18 +28,18 @@
     <div class="row gy-3 justify-content-center text-center">
         <div class="col-12">
 	      <div class="list-group list-group-horizontal">
-	        <a href="../help/help_home.jsp" class="list-group-item list-group-item-action" aria-current="true">
+	        <a href="../help/help_home.jsp" class="list-group-item-dark list-group-item-action" aria-current="true">
 	          공지사항
 	        </a>
-	        <a href="../help/help_fq.jsp" class="list-group-item list-group-item-action active">FAQ</a>
-	        <a href="../help/help_qa.jsp" class="list-group-item list-group-item-action">Q&A</a>
+	        <a href="../help/help_fq.jsp" class="list-group-item-dark list-group-item-action active">FAQ</a>
+	        <a href="../help/help_qa.jsp" class="list-group-item-dark list-group-item-action">Q&A</a>
 	      </div>
         </div>
 <!-- 서브메뉴버튼 -->
         <div class="col-6">
             <div class="list-group list-group-horizontal">
-                <a href="FAQ" class="list-group-item list-group-item-action active" aria-current="true">회원</a>
-                <a href="../help/help_fq_2.jsp" class="list-group-item list-group-item-action">점주</a>
+                <a href="FAQ" class="list-group-item-dark list-group-item-action active" aria-current="true">회원</a>
+                <a href="../help/help_fq_2.jsp" class="list-group-item-dark list-group-item-action">점주</a>
             </div>
         </div>
     </div>
@@ -121,7 +123,7 @@
         <div class="col-3">
           <form class="d-flex" role="search">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button type="button" class="btn btn-outline-primary">Search</button>
+            <button type="button" class="btn btn-outline-dark">Search</button>
           </form>
         </div>
       </div>

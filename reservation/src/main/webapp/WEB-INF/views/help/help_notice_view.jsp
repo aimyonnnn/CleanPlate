@@ -8,6 +8,8 @@
 <title>NOTICE</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 	<!-- 이부분은 지우면 안됩니다. -->  
+	<!-- CSS -->
+    <link href="${pageContext.request.contextPath }/resources/css/help.css" rel="styleSheet" type="text/css">
 </head>
 <body>
 	<%@ include file="../common/common_header.jsp" %>
@@ -24,9 +26,9 @@
     	<div class="row gy-3 justify-content-center text-center">
         	<div class="col-12">
 	      		<div class="list-group list-group-horizontal">
-		        	<a href="Notice" class="list-group-item list-group-item-action active" aria-current="true">공지사항</a>
-			        <a href="../help/help_fq.jsp" class="list-group-item list-group-item-action">FAQ</a>
-			        <a href="QNA" class="list-group-item list-group-item-action">Q&A</a>
+		        	<a href="Notice" class="list-group-item-dark list-group-item-action active" aria-current="true">공지사항</a>
+			        <a href="../help/help_fq.jsp" class="list-group-item-dark list-group-item-action">FAQ</a>
+			        <a href="QNA" class="list-group-item-dark list-group-item-action">Q&A</a>
 	      		</div>
 			</div>
 		</div>
@@ -56,8 +58,8 @@
 			</table>
 <%-- 				<c:if test="${sessionScope.sId eq 'admin' }"> --%>
 					<div class="d-flex justify-content-center">
-					    <a href="NoticeModifyForm?no_idx=${param.no_idx}&pageNum=${param.pageNum}" class="btn btn-outline-primary" style="margin-right: 5px;">수정</a>
-					    <a href="NoticeDelete?no_idx=${param.no_idx}&pageNum=${param.pageNum}" class="btn btn-outline-primary">삭제</a>
+					    <a href="NoticeModifyForm?no_idx=${param.no_idx}&pageNum=${param.pageNum}" class="btn btn-outline-dark" style="margin-right: 5px;">수정</a>
+					    <a href="NoticeDelete?no_idx=${param.no_idx}&pageNum=${param.pageNum}" class="btn btn-outline-dark">삭제</a>
 					</div>
 <%-- 				</c:if> --%>
 			</div>

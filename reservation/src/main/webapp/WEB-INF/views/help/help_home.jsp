@@ -4,8 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>HELP</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+	<!-- CSS -->
+    <link href="${pageContext.request.contextPath }/resources/css/help.css" rel="styleSheet" type="text/css">
 </head>
 <body>
 	<%@ include file="../common/common_header.jsp" %>
@@ -27,23 +29,32 @@
   		<div class="row">
    			<div class="col text-center">
 	      		<div class="list-group list-group-horizontal">
-			        <a href="Notice" class="list-group-item list-group-item-action active" aria-current="true">공지사항</a>
-			        <a href="FAQ" class="list-group-item list-group-item-action">FAQ</a>
-			        <a href="QNA" class="list-group-item list-group-item-action">Q&A</a>
+			        <a href="Notice" class="list-group-item-dark list-group-item-action active" aria-current="true">공지사항</a>
+			        <a href="FAQ" class="list-group-item-dark list-group-item-action">FAQ</a>
+			        <a href="QNA" class="list-group-item-dark list-group-item-action">Q&A</a>
 	      		</div>
     		</div>
    		<!-- 게시판 -->
     	<div class="row gy-4">
       		<div class="col">
         		<table class="table">
-          			<tbody>
+					<thead class="text-center">
+					    <tr>
+					      <th scope="col">제목</th>
+					      <th scope="col">작성자</th>
+					      <th scope="col">날짜</th>
+					      <th scope="col">조회수</th>
+					    </tr>
+					</thead>
+          			<tbody class="text-center">
           				<!-- 상위 고정 공지 출력 -->
           				<c:forEach items="${noticeList }" var="noticeList">
           					<c:if test="${noticeList.no_category == 2}">
 					            <tr>
-					            	<td class="fs-5">
+					            	<td class="fs-5 text-start">
 					            		<a href="NoticeDetail?no_idx=${noticeList.no_idx }&pageNum=${pageNum}" style="text-decoration: none; color: black;">🔉 ${noticeList.no_subject }</a>
 					            	</td>
+					            	<td>관리자</td>
 					            	<td>${noticeList.no_date }</td>
 					            	<td>${noticeList.no_readcount }</td>
 					            </tr>
@@ -54,9 +65,10 @@
 				        <c:forEach items="${noticeList }" var="noticeList">
 				            <c:if test="${noticeList.no_category == 1}">
 					            <tr>
-					            	<td class="fs-5">
+					            	<td class="fs-5 text-start">
 					            		<a href="NoticeDetail?no_idx=${noticeList.no_idx }&pageNum=${pageNum}" style="text-decoration: none; color: black;">${noticeList.no_subject }</a>
 					            	</td>
+					            	<td>관리자</td>
 					            	<td>${noticeList.no_date }</td>
 					            	<td>${noticeList.no_readcount }</td>
 					            </tr>
@@ -66,7 +78,7 @@
 				</table>
 <%-- 				<c:if test="${sessionScope.sId eq 'admin' }"> --%>
 					<div class="d-flex justify-content-end">
-					    <a href="NoticeBoard" class="btn btn-outline-primary">글쓰기</a>
+					    <a href="NoticeBoard" class="btn btn-outline-dark">글쓰기</a>
 					</div>
 <%-- 				</c:if> --%>
 			</div>
@@ -143,8 +155,8 @@
 		                <option value="content" <c:if test="${param.searchType eq 'content' }">selected</c:if>>내용</option>
 		                <option value="subject_content" <c:if test="${param.searchType eq 'subject_content' }">selected</c:if>>제목&내용</option>
 		            </select>
-		            <input class="form-control me-2" type="search" name="searchKeyword" placeholder="Search" aria-label="Search" value="${searchKeyword}">
-		            <button type="submit" class="btn btn-outline-primary">Search</button>
+		            <input class="form-control me-2 w-100" type="search" name="searchKeyword" placeholder="Search" aria-label="Search" value="${searchKeyword}">
+		            <button type="submit" class="btn btn-outline-dark">Search</button>
 		        </form>
 		    </div>
 		</div>

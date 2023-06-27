@@ -98,10 +98,10 @@
 				</button>
 				<div class="collapse navbar-collapse" id="navbarNav">
 					<ul class="navbar-nav gnb">
-						<li class="nav-item me-5"><a class="nav-link active" aria-current="page"  href ='<c:url value="/" />'>Home</a></li>
+						<li class="nav-item me-5"><a class="nav-link" aria-current="page"  href ='<c:url value="/" />'>Home</a></li>
 						<li class="nav-item me-5"><a class="nav-link" href ='<c:url value="/reservationMain" />'>Reservation</a></li>
 						<li class="nav-item me-5"><a class="nav-link" href ='<c:url value="/assignment" />'>Assignment</a></li>
-						<li class="nav-item"><a class="nav-link" href ='<c:url value="/Notice" />'>Help</a></li>
+						<li class="nav-item"><a class="nav-link active" href ='<c:url value="/Notice" />'>Help</a></li>
 					</ul>
 				</div>
 			</div>

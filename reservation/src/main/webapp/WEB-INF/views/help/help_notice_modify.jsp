@@ -14,6 +14,8 @@
 		    font-weight: normal;
 		}
 	</style>
+	<!-- CSS -->
+    <link href="${pageContext.request.contextPath }/resources/css/help.css" rel="styleSheet" type="text/css">
 </head>
 <body>
 <%@ include file="../common/common_header.jsp" %>
@@ -34,9 +36,9 @@
     	<div class="row gy-3 justify-content-center text-center">
         	<div class="col-12">
 	      		<div class="list-group list-group-horizontal">
-		        	<a href="Notice" class="list-group-item list-group-item-action active" aria-current="true">공지사항</a>
-			        <a href="../help/help_fq.jsp" class="list-group-item list-group-item-action">FAQ</a>
-			        <a href="QNA" class="list-group-item list-group-item-action">Q&A</a>
+		        	<a href="Notice" class="list-group-item-dark list-group-item-action active" aria-current="true">공지사항</a>
+			        <a href="../help/help_fq.jsp" class="list-group-item-dark list-group-item-action">FAQ</a>
+			        <a href="QNA" class="list-group-item-dark list-group-item-action">Q&A</a>
 	      		</div>
 			</div>
 		</div>
@@ -87,9 +89,9 @@
     		</div>
     		<div class="row justify-content-center">
 	        	<div class="col-3">
-		            <div class="d-grid gap-2">
-		                <button type="submit" class="btn btn-outline-primary">수정하기</button>
-		                <button type="button" class="btn btn-outline-primary" onclick="history.back()">취소</button>
+		            <div class="d-flex gap-2" style="margin-left: 110px;">
+		                <button type="submit" class="btn btn-outline-dark">수정</button>
+		                <button type="button" class="btn btn-outline-dark" onclick="history.back()">취소</button>
 		            </div>
 				</div>
 			</div>

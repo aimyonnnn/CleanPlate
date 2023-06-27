@@ -9,6 +9,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+	<!-- CSS -->
+    <link href="${pageContext.request.contextPath }/resources/css/help.css" rel="styleSheet" type="text/css">
 </head>
 <body>
 <%@ include file="../common/common_header.jsp" %>
@@ -30,17 +32,17 @@
     <div class="row gy-3 justify-content-center text-center">
         <div class="col-12">
 	      <div class="list-group list-group-horizontal">
-	        <a href="../help/help_home.jsp" class="list-group-item list-group-item-action" aria-current="true">
+	        <a href="../help/help_home.jsp" class="list-group-item-dark list-group-item-action" aria-current="true">
 	          공지사항
 	        </a>
-	        <a href="../help/help_fq.jsp" class="list-group-item list-group-item-action">FAQ</a>
-	        <a href="QNA" class="list-group-item list-group-item-action active">Q&A</a>
+	        <a href="../help/help_fq.jsp" class="list-group-item-dark list-group-item-action">FAQ</a>
+	        <a href="QNA" class="list-group-item-dark list-group-item-action active">Q&A</a>
 	      </div>
         </div>
         <div class="col-6">
             <div class="list-group list-group-horizontal">
-                <a href="QNABoard" class="list-group-item list-group-item-action">문의하기</a>
-                <a href="QNA" class="list-group-item list-group-item-action active" aria-current="true">문의내역</a>
+                <a href="QNABoard" class="list-group-item-dark list-group-item-action">문의하기</a>
+                <a href="QNA" class="list-group-item-dark list-group-item-action active" aria-current="true">문의내역</a>
             </div>
         </div>
     </div>
@@ -101,14 +103,14 @@
 				         		<input type="hidden" value="${QNAList.q_idx }" name="q_idx">
 						         <textarea class="form-control" name="q_re_context" id="exampleFormControlTextarea2" rows="5" required="required"></textarea>
 						         <div class="btn-group-sm text-end" role="group" aria-label="Basic outlined example">
-						            <button type="submit" class="btn btn-outline-primary mt-3" >답변</button>
+						            <button type="submit" class="btn btn-outline-dark mt-3" >답변</button>
 						         </div>
 					        </form>
 			         	</c:when>
 			         	<c:otherwise>
 			         		<c:if test="${QNAList.q_re_context eq null and sessionScope.sId ne 'admin' }">
 					         	<div class="btn-group-sm text-end" role="group" aria-label="Basic outlined example">
-						            <button class="btn btn-outline-primary" onclick="location.href='DeleteQna?q_idx=${QNAList.q_idx}'">삭제</button>
+						            <button class="btn btn-outline-dark" onclick="location.href='DeleteQna?q_idx=${QNAList.q_idx}'">삭제</button>
 						        </div>
 					    	</c:if>
 			         	</c:otherwise>
