@@ -54,44 +54,30 @@
 
     <!-- 제목 구역 -->
 	<div class="container">
-        <div class="row">
+        <div class="row mt-4">
           <div class="col">
-            <h2>마이페이지</h2>
+            <h2><img src="${pageContext.request.contextPath }/resources/images/mypageImage.jpg" alt="" style="width: 100%;" class="justify-content-center"></h2>
           </div>
         </div>
     </div>
 	
-    <!-- 사이드바, 내용 넣는 구역!-->
-    <div class="container mt-5">
-        <div class="row d-flex justify-content-center">
-            <div class="col-2 align-items-center d-flex">
-                <!-- 버튼 그룹 -->
-                <!-- 프로필 사진 -->
-                <div class="input-group mb-5 d-flex shadow-lg d-flex justify-content-center pe-3" style="border-radius: 10px;">
-                    <img src="${pageContext.request.contextPath }/resources/images/adminProfile.png" alt="" style="width: 100px; height: 100px;" class="justify-content-center">
-                    <p class="d-flex align-items-center"><span>님 환영합니다</span></p>
-                </div>
-            </div>
-            <div class="col-10">
-            	<h2 style="margin-left: 40px; margin-top: 40px;">내가 찜한 식당</h2>
-            </div>
-        </div>
+    <<!-- 사이드바, 내용 넣는 구역!-->
+    <div class="container">
         <div class="row">
-            <div class="col-2">
+            <div class="col-2" style="margin-top: 36px;">
                 <!-- 왼쪽 사이드바 버튼영역-->
                 <div class="btn-group-vertical btn-group-lg d-flex align-self-start" role="group" aria-label="Vertical button group">
-                    <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='member'" >내 정보</button>
-                    <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='memberRSList'" >예약 내역</button>
-                    <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='memberAssignList'">양도 관리</button>
-                    <button type="button" class="btn btn-outline-warning active p-3" onclick="location.href='memberLike'">내가 찜한 식당</button>
-                    <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='memberReview'">내가 쓴 리뷰</button>
-                    <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='memberWithdrawal'">회원탈퇴</button>
+                    <button type="button" class="btn btn-outline-dark p-3" onclick="location.href='member'">내 정보</button>
+                    <button type="button" class="btn btn-outline-dark p-3" onclick="location.href='memberRSList'" >예약 내역</button>
+                    <button type="button" class="btn btn-outline-dark p-3" onclick="location.href='memberAssignList'">양도 관리</button>
+                    <button type="button" class="btn btn-outline-dark active p-3" onclick="location.href='memberLike'">내가 찜한 식당</button>
+                    <button type="button" class="btn btn-outline-dark p-3" onclick="location.href='memberReview'">내가 쓴 리뷰</button>
+                    <button type="button" class="btn btn-outline-dark p-3" onclick="location.href='memberWithdrawal'">회원탈퇴</button>
                 </div>
                 <!-- 왼쪽 사이드바 버튼영역-->
             </div>
-            <!-- 내용 구역 -->
-                <!-- 내용 --> 
-                <table class="table text-center" style="margin-left: 50px; width:70%;" >
+            <!-- 내용 -->
+                <table class="table text-center" style="margin-top: 40px; margin-left: 100px; width:70%;" >
                     <thead>
                         <tr>
                             <th>가게사진</th>
@@ -103,16 +89,16 @@
                     </thead>
                     <tbody>
 					<c:forEach var="like" items="${memberLike}">
-					<input type="hidden" id="res_idx" value="${like.res_idx}">
+						<input type="hidden" id="res_idx" value="${like.res_idx}">
 					 <tr>
-					 <td>
-		                <img src="resources/images/${like.res_photo1}" style="width: 200px; height: auto;">
-		            </td>
-		            <td>${like.res_name}</td>
-		            <td>${like.rv_scope}</td>
-		            <td>${like.count}</td>
-		            <td>
-					<button type="button" class="btn btn-warning cancel-btn" style="color: white;" data-resname="${like.res_idx}">찜 해제</button>
+						 <td>
+			                <img src="resources/images/${like.res_photo1}" style="width: 200px; height: auto;">
+			            </td>
+			            <td>${like.res_name}</td>
+			            <td>${like.rv_scope}</td>
+			            <td>${like.count}</td>
+			            <td>
+						<button type="button" class="btn btn-dark cancel-btn" style="color: white;" data-resname="${like.res_idx}">찜 해제</button>
 					</tr>
 					</c:forEach>
 					</tbody>

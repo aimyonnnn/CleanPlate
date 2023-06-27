@@ -43,53 +43,41 @@
 
     <!-- 제목 구역 -->
 	<div class="container">
-        <div class="row">
+        <div class="row mt-4">
           <div class="col">
-            <h2>마이페이지</h2>
+            <h2><img src="${pageContext.request.contextPath }/resources/images/mypageImage.jpg" alt="" style="width: 100%;" class="justify-content-center"></h2>
           </div>
         </div>
     </div>
 
-    <!-- 사이드바, 내용 넣는 구역!-->
-    <div class="container mt-5">
-        <div class="row d-flex justify-content-center">
-            <div class="col-2 align-items-center d-flex">
-                <!-- 버튼 그룹 -->
-                <!-- 프로필 사진 -->
-                <div class="input-group mb-5 d-flex shadow-lg d-flex justify-content-center pe-3" style="border-radius: 10px;">
-                    <img src="${pageContext.request.contextPath }/resources/images/adminProfile.png" alt="" style="width: 100px; height: 100px;" class="justify-content-center">
-                    <p class="d-flex align-items-center"><span>님 환영합니다</span></p>
-                </div>
-            </div>
-            <div class="col-10">
-            	<h2 style="margin-left: 40px; margin-top: 40px;">내가 쓴 리뷰</h2>
-            </div>
-        </div>
+     <!-- 사이드바, 내용 넣는 구역!-->
+    <div class="container">
         <div class="row">
-            <div class="col-2">
+            <div class="col-2" style="margin-top: 60px;">
                 <!-- 왼쪽 사이드바 버튼영역-->
                 <div class="btn-group-vertical btn-group-lg d-flex align-self-start" role="group" aria-label="Vertical button group">
-                    <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='member'" >내 정보</button>
-                    <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='memberRSList'" >예약 내역</button>
-                    <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='memberAssignList'">양도 관리</button>
-                    <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='memberLike'">내가 찜한 식당</button>
-                    <button type="button" class="btn btn-outline-warning active p-3" onclick="location.href='memberReview'">내가 쓴 리뷰</button>
-                    <button type="button" class="btn btn-outline-warning p-3" onclick="location.href='memberWithdrawal'">회원탈퇴</button>
+                    <button type="button" class="btn btn-outline-dark p-3" onclick="location.href='member'">내 정보</button>
+                    <button type="button" class="btn btn-outline-dark p-3" onclick="location.href='memberRSList'" >예약 내역</button>
+                    <button type="button" class="btn btn-outline-dark p-3" onclick="location.href='memberAssignList'">양도 관리</button>
+                    <button type="button" class="btn btn-outline-dark p-3" onclick="location.href='memberLike'">내가 찜한 식당</button>
+                    <button type="button" class="btn btn-outline-dark active p-3" onclick="location.href='memberReview'">내가 쓴 리뷰</button>
+                    <button type="button" class="btn btn-outline-dark p-3" onclick="location.href='memberWithdrawal'">회원탈퇴</button>
                 </div>
                 <!-- 왼쪽 사이드바 버튼영역-->
             </div>
-            <!-- 내용 구역 -->
-            <div class="col-10">
                 
-                <!-- 내용 -->
-                <div class="row align-items-center" style="margin-left: 50px;">
+            <!-- 내용 -->
+            <div class="col-10">
+                <div class="row align-items-center" style="margin-left: 100px; margin-top: 10px;">
 	                <c:forEach items="${rvList }" var="rvList">
 	                    <div class="card ms-3 me-5 mt-5 align-items-center" style="width: 20rem;">
 	                        <img src="${pageContext.request.contextPath }/resources/upload/${rvList.rv_img }" width="100" height="100">
 	                        <div class="card-body">
 	                          <h5 class="card-title">${rvList.res_name }</h5>
 	                          <p class="card-text">${rvList.rv_comment }</p>
-	                          <button class="btn btn-warning" style="color: white;" onclick="rvDelete(${rvList.rv_idx})">삭제</button>
+	                          <div class="d-flex justify-content-center">
+	                         	 <button class="btn btn-dark" style="color: white;" onclick="rvDelete(${rvList.rv_idx})">삭제</button>
+	                          </div>
 	                        </div>
 	                    </div>
 	                </c:forEach>
