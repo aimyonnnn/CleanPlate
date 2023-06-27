@@ -68,7 +68,7 @@
                 <!-- 버튼 그룹 -->
                 <!-- 프로필 사진 -->
                 <div class="input-group mb-5 d-flex shadow-lg d-flex justify-content-center pe-3" style="border-radius: 10px;">
-                    <img src="../images/profile.png" alt="" style="width: 100px; height: 100px;" class="justify-content-center">
+                    <img src="${pageContext.request.contextPath }/resources/images/adminProfile.png" alt="" style="width: 100px; height: 100px;" class="justify-content-center">
                     <p class="d-flex align-items-center"><span>님 환영합니다</span></p>
                 </div>
             </div>
