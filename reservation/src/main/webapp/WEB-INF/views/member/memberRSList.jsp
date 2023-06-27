@@ -281,7 +281,7 @@
 									     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="margin-left: 10px;">닫기</button>
 								    </c:when>
 								    <c:when test="${resList.r_status eq 2 && resList.rv_status eq 1 }">
-						        		 <a href="#" class="btn btn-warning" style="color: white;" data-bs-toggle="modal" data-bs-target="#reviewmodify">리뷰작성하기</a>
+						        		 <button type="button" class="btn btn-warning" style="color: white;" data-bs-toggle="modal" data-bs-target="#reviewmodify">리뷰작성하기</button>
 									     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="margin-left: 10px;">닫기</button>
 								    </c:when>
 								    <c:otherwise>
@@ -404,7 +404,7 @@
 
 <!-- 세번째 리뷰 관련 모달창 시작 -->
 <c:forEach items="${resList }" var="resList">
-	<c:if test="${resList.rv_status eq 0 }">
+	<c:if test="${resList.rv_status eq 1 }">
     <div class="modal" id="reviewmodify" tabindex="-1" >
         <div class="modal-dialog">
           <div class="modal-content">
