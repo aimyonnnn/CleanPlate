@@ -3,6 +3,17 @@
 
 <mapper namespace="com.itwillbs.test.mapper.ReviewMapper">
 	
-	
+	<!-- 리뷰 목록 조회 -->
+	<select id="getAdminReviewList" resultType="com.itwillbs.test.vo.ReviewVO">
+		SELECT rev.rv_idx, rev.rv_scope, m.m_nick, res.res_name
+			FROM reviews rev JOIN members m JOIN restaurant res
+				ON rev.m_idx = m.m_idx
+				AND rev.res_idx = res.res_idx
+	</select>
 
+	<!-- 리뷰 정보 삭제 -->
+	<delete id="deleteReview">
+		DELETE FROM reviews
+			WHERE rv_idx = #{rv_idx}
+	</delete>
 </mapper>

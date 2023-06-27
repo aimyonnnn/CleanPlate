@@ -51,8 +51,9 @@ public interface MemberMapper {
 	//회원 탈퇴시 상태변경
 	int updateMemberStatus(int m_idx);
 	
-
-
+	//리뷰 리스트 불러오기
+	List<ReviewVO> selectReviewList(String sId);
+	
 	// 관리자의 회원 정보 수정
 	int adminUpdateMember(MemberVO member);
 	
@@ -61,9 +62,6 @@ public interface MemberMapper {
 	
 	// 리뷰작성 성공시 예약테이블의 리뷰 상태 변경
 	void updateRvStatus(int r_idx);
-	
-	//리뷰 리스트 불러오기
-	List<ReviewVO> selectReviewList(String sId);
 	
 	//리뷰 삭제
 	int deleteReveiw(int rv_idx);

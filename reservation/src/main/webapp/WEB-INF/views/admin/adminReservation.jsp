@@ -18,8 +18,6 @@
    <input type="checkbox" name="" id="sidebar-toggle">
    
     <div class="sidebar">
-      <div class="sidebar-brand"></div>
-
       <div class="sidebar-main"> 
         <div class="sidebar-user">
             <img src="${pageContext.request.contextPath }/resources/images/adminProfile.png">
@@ -81,9 +79,15 @@
                  양도 관리
               </a>
             </li>
+            <li>
+              <a href="adminReview">
+                  <span class="las la-comment-dots"></span>
+                 리뷰 관리
+              </a>
+            </li>
            </ul>
            <div class="menu-head">
-             <span>Team2</span>
+             <span>2 TEAM</span>
            </div>
             <li><a><span class="las la-crown"></span>박수민</a></li>
             <li><a><span class="las la-laugh"></span>김민진</a></li>

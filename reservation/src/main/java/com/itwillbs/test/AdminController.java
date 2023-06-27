@@ -19,11 +19,13 @@ import com.itwillbs.test.service.MemberService;
 import com.itwillbs.test.service.PayService;
 import com.itwillbs.test.service.ReservationService;
 import com.itwillbs.test.service.RestaurantService;
+import com.itwillbs.test.service.ReviewService;
 import com.itwillbs.test.vo.AssignmentVO;
 import com.itwillbs.test.vo.MemberVO;
 import com.itwillbs.test.vo.PayVO;
 import com.itwillbs.test.vo.ReservationVO;
 import com.itwillbs.test.vo.RestaurantVO;
+import com.itwillbs.test.vo.ReviewVO;
 
 @Controller
 public class AdminController {
@@ -39,6 +41,8 @@ public class AdminController {
 	HelpService hservice;
 	@Autowired
 	PayService pservice;
+	@Autowired
+	ReviewService revservice;
 	//=============================== 관리자 페이지 메인 ==================================
 	
 	// 로그인 성공 후 관리자페이지 클릭 시 관리자페이지로 이동
@@ -258,6 +262,25 @@ public class AdminController {
 	public String deleteAssignment(@RequestParam String idx , HttpServletResponse response) {
 		aservice.deleteAssignment(idx);
 		return "redirect:/adminAssignment";
+	}
+	
+	// ==================================================================================
+	
+	// ================================ 리뷰 관리 페이지 ================================
+	// 관리자의 리뷰 관리 페이지로 이동
+	@GetMapping("adminReview")
+	public String adminReview(Model model) {
+		List<ReviewVO> reviewList = revservice.getAdminReviewList();
+		model.addAttribute("reviewList", reviewList);
+		
+		return "admin/adminReview";
+	}
+	
+	// 리뷰 정보 삭제 시
+	@GetMapping("deleteReview")
+	public String deleteReview(@RequestParam String idx , HttpServletResponse response) {
+		revservice.deleteReview(idx);
+		return "redirect:/adminReview";
 	}
 	
 	// ==================================================================================
