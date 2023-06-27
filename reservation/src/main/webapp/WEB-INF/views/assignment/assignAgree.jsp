@@ -65,42 +65,32 @@ $(document).ready(function() {
   rgba(0, 0, 0, 0.8)),
   url(${pageContext.request.contextPath }/resources/images/1.jpg); background-size: cover;">
   
-<c:choose>
-	<c:when test="${empty sessionScope.sId}">
-			<script>
-				alert("로그인 후에만 접근할 수 있습니다.");
-				location.href = "<c:url value='/'/>"; // 로그인 페이지로 이동
-			</script>
-	</c:when>
-	<c:otherwise>
-		 <div class="container" data-aos="fade-up" data-aos-anchor-placement="center-bottom">
-	        <div class="panel panel-success"  style="background-color: white; border-radius: 10px">
-	            <div class="panel-title">
-	                <p>
+	<div class="container" data-aos="fade-up" data-aos-anchor-placement="center-bottom">
+		<div class="panel panel-success"  style="background-color: white; border-radius: 10px">
+	     	<div class="panel-title">
+                <p>
 	                Clean Plate는 개인 거래에 어떠한 관여도 하지 않습니다.
 	                모든 거래는 사용자 간의 자유로운 합의에 기반하며, 
 	                Clean Plate는 거래 내용이나 결과에 대해 어떠한 책임도 지지 않습니다.
 	                자세한 내용은 이용 약관을 참고해주시기 바랍니다.
 	                채팅방으로 입장하시겠습니까?
-	                </p>
-	            </div>
-	            <div class="panel-body">
-	                <form id="login-form" method="post" action="assignAgreePro">
-	                    <div>
-	                    	<!-- hidden 태그로 전송 - 양도번호, 회원번호 -->
-	                        <input type="text" name="id" class="form-control" style="text-align: center;">
-	                        <input type="hidden" name="a_idx" class="form-control" style="text-align: center;">
-	                        <input type="hidden" name="m_idx" class="form-control" style="text-align: center;">
-	                    </div>
-	                    <div>
-	                        <button type="submit" class="form-control btn btn-warning" style="margin-bottom: -10px;">>동의하기</button>
-	                    </div>
-	                </form>
-	            </div>
-	        </div>
-    	</div>
-	</c:otherwise>
-</c:choose>
+                </p>
+            </div>
+            <div class="panel-body">
+                <form id="login-form" method="post" action="assignAgreePro">
+                    <div>
+                    	<!-- hidden 태그로 전송 - 양도번호, 회원번호 -->
+                        <input type="text" name="id" class="form-control" style="text-align: center;">
+                        <input type="hidden" name="a_idx" class="form-control" style="text-align: center;">
+                        <input type="hidden" name="m_idx" class="form-control" style="text-align: center;">
+                    </div>
+                    <div>
+                        <button type="submit" class="form-control btn btn-warning" style="margin-bottom: -10px;">>동의하기</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+   	</div>
 
 	<!-- AOS 라이브러리 -->
 	<script src="https://unpkg.com/aos@next/dist/aos.js"></script>

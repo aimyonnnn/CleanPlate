@@ -59,13 +59,37 @@ public class AssignmentController {
    
    // WebSocket - 동의
    @GetMapping("/assignAgree")
-   public String login() {
+   public String login(HttpServletRequest request, HttpSession session, Model model) {
+	   
+	   // 현재 세션에 저장된 id로 주문자 정보 조회하기
+	   // 기업회원은 구매 불가능!
+	   String sId = (String) session.getAttribute("sId");
+	   System.out.println(sId);
+	   
+	   // 세션 아이디가 존재하지 않을 경우
+	   if (sId == null) {
+	        model.addAttribute("msg", "일반 회원만 이용 가능합니다.");
+	        return "fail_back";
+	    }
+	   
       return "assignment/assignAgree";
    }
    
    // WebSocket - 입장
    @PostMapping("/assignAgreePro")
-   public String loginProcess(@RequestParam String id, HttpServletRequest request) {
+   public String loginProcess(@RequestParam String id, HttpServletRequest request, HttpSession session, Model model) {
+	   
+	   // 현재 세션에 저장된 id로 주문자 정보 조회하기
+	   // 기업회원은 구매 불가능!
+	   String sId = (String) session.getAttribute("sId");
+	   System.out.println(sId);
+	   
+	   // 세션 아이디가 존재하지 않을 경우
+	   if (sId == null) {
+	        model.addAttribute("msg", "일반 회원만 이용 가능합니다.");
+	        return "fail_back";
+	    }
+	   
       logger.info("Welcome "+id);
       return "assignment/assignmentChat";
    }
@@ -88,7 +112,7 @@ public class AssignmentController {
 	   
 	   // 세션 아이디가 존재하지 않을 경우
 	   if (sId == null) {
-	        model.addAttribute("msg", "로그인 후 이용해주세요");
+	        model.addAttribute("msg", "일반 회원만 이용 가능합니다.");
 	        return "fail_back";
 	    }
 	  
