@@ -269,7 +269,7 @@
                 <c:forEach var="assignment" items="${assignmentList}">
                 <div class="col-md-4 mt-5" data-aos="fade-up" data-aos-anchor-placement="center-bottom">
                   <div class="card">
-                    <img src="${pageContext.request.contextPath }/resources/images/${assignment.res_photo1}" class="card-img-top" alt="Item Image">
+                    <img src="${pageContext.request.contextPath }/resources/upload/${assignment.res_photo1}" class="card-img-top" alt="Item Image">
                     <div class="card-body">
                       <!-- 가게명 클릭시 가게 상세정보 페이지로 이동 -->
                       <h5>
@@ -376,7 +376,7 @@
 	           
 	           let template = `<div class="col-md-4 mt-5" data-aos="fade-up" data-aos-anchor-placement="center-bottom">
 				               <div class="card">
-				               <img src="${pageContext.request.contextPath}/resources/images/${'${data.res_photo1}'}" class="card-img-top" alt="Item Image">
+				               <img src="${pageContext.request.contextPath}/resources/upload/${'${data.res_photo1}'}" class="card-img-top" alt="Item Image">
 				                 <div class="card-body">
 				                   <h5><span onclick="goToReservationReserve('${"${data.res_idx}"}')">${'${data.res_name}'}</span></h5>
 				                   <p>예약 날짜 : <span>${'${data.r_date}'}</span></p>
@@ -431,7 +431,7 @@
       		           
       		            let template = `<div class="col-md-4 mt-5" data-aos="fade-up" data-aos-anchor-placement="center-bottom">
       					               <div class="card">
-      					               <img src="${pageContext.request.contextPath}/resources/images/${'${data.res_photo1}'}" class="card-img-top" alt="Item Image">
+      					               <img src="${pageContext.request.contextPath}/resources/upload/${'${data.res_photo1}'}" class="card-img-top" alt="Item Image">
       					                 <div class="card-body">
       					                   <h5><span onclick="goToReservationReserve('${"${data.res_idx}"}')">${'${data.res_name}'}</span></h5>
       					                   <p>예약 날짜 : <span>${'${data.r_date}'}</span></p>

@@ -179,9 +179,7 @@
 					<div class="container">
 					    <div class="row">
 	        				<div class="col-md-12" style="text-align: center;">
-	            			<h1 style="color: #FFC107;">예약 안내</h1>
-				            <hr>
-				            <h3 style="font-weight: bold;">광안다이닝</h3>
+				            <h3 style="font-weight: bold;">${resList.res_name }</h3>
 	        			</div>
 	    			</div>
 				    <div class="row">
