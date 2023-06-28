@@ -205,6 +205,11 @@
 			                                    scrollbar: true
 			                                });
 			                                
+		                                	
+		                                	// 기본 checked 상태이므로 브레이크타임 disabled처리
+		                                    var isChecked = $("#nobreak").is(":checked");
+   											$("#res_breakstart, #res_breakend").prop("disabled", isChecked).val(isChecked ? "" : null);
+		                                	
 			                                // 없음(체크 박스) 선택시 브레이크타임 시간 null값으로 변경, disabled 상태로 바꿔주기
 			                                // 해제시 disabled 상태 해제
 			                                $("#nobreak").change(function() {
@@ -271,18 +276,33 @@
 						    <tr>
 								<th scope="row"><label for="menu">메뉴</label></th>
 						    	<td id="td_menu">
-						    		${menuList }
 						    		<button type="button" id="menu" class="btn btn-dark" style="color: white;" >메뉴 추가</button><br>
-						    		<a style="font-size: small; font-weight: normal;">버튼을 클릭하여 메뉴를 추가해주세요</a>
+						    		<a style="font-size: small; font-weight: normal;">버튼을 클릭하여 메뉴를 추가해주세요</a><br>
+						    		
 							 		<div class="row mt-3 align-items-center">
 							            <table class="table" id="menuList">
 							                <thead>
 							                  <tr>
-							                    <th scope="col" class="col-5">메뉴 이름</th>
-							                    <th scope="col" class="col-3">가격</th>
+							                    <th scope="col" class="col-4">메뉴 이름</th>
+							                    <th scope="col" class="col-4">가격</th>
+							                    <th scope="col" class="col-4"></th>
 							                  </tr>
 							                </thead>
 							                <tbody id="menuTable">
+							                  <c:forEach items="${menuList }" var="menu">
+<%-- 								                  	<input type="hidden" value="${menu.me_name }" name="me_name">				                     --%>
+<%-- 								                  	<input type="hidden" value="${menu.me_price }" name="me_price"> --%>
+<%-- 								                  	<input type="hidden" value="${menu.me_context }" name="me_context">				                     --%>
+<%-- 								                  	<input type="file" value="${menu.me_photo }" name="me_file" style="display:none;"> --%>
+								                  <tr>
+								                  	<td scope="col" class="col-4">${menu.me_name }</td>
+								                  	<td scope="col" class="col-4">${menu.me_price }</td>		
+								                  	<td scope="col" class="col-4">
+								                  		<button type="button" class="btn btn-dark" style="color: white;" onclick="location.href = 'menuDelete?me_idx=${menu.me_idx }'">삭제</button>
+								                  	</td>		
+								                  				                    
+								                  </tr>
+							                  </c:forEach>
 							                </tbody>
 							              </table>
 							          </div>						    		
@@ -293,9 +313,16 @@
 						    		<label for="t_time">예약 시간</label>
 						    	</th>
 						    	<td id="td_Time">
-						    	${timeList }
+					    			<c:forEach items="${timeList }" var="time">
+							    		<div class="d-inline-flex align-items-center">
+							    		<!-- 시간은 time으로 저장되어있어서 00:00:00 출력됨 -->
+							    		<!-- : 으로 문자열 분리 -->
+											<input class="form-control timepicker3" type ="text" name="t_time" id="t_time" 
+											style="text-align: center; width: 200px;" value="${fn:split(time.t_time, ':')[0]}:${fn:split(time.t_time, ':')[1]}">
+							    		</div>
+					    			</c:forEach>
 						    		<div class="d-inline-flex align-items-center">
-										<input class="form-control timepicker3" type ="text" name="t_time" id="t_time" style="text-align: center; width: 200px;" placeholder="클릭하여 시간 선택">
+<!-- 										<input class="form-control timepicker3" type ="text" name="t_time" id="t_time" style="text-align: center; width: 200px;" placeholder="클릭하여 시간 선택"> -->
 							    		<button type="button" id="t_timeInsert" class="btn btn-dark" style="margin-left: 6px;" >추가</button>
 						    		</div>
 						    	</td>
@@ -325,7 +352,7 @@
 								    					<input type="file" name="res_file1" style="display: none;">
 								    				</div>
 								    				<div class="col">
-											    		<input type="button" class="btn btn-dark" value="삭제" >
+											    		<input type="button" class="btn btn-dark" value="삭제" onclick="location.href='restaurantPhotoDelete?res_idx=' + ${restaurant.res_idx} + '&res_photo1=' + '${restaurant.res_photo1}'">
 								    				</div>
 							    				</div>
 							    			</c:otherwise>
@@ -602,19 +629,21 @@
 	});  
 	
 	// 추가 버튼 클릭시 메뉴등록 폼 숨기기
-	// 메뉴이름, 가격에 출력하기
+	// required 처리
 	function hideMenu(index) {
 		// 
 		var meName = $("#menu_table_" + tableCount).find("#me_name").val();
 		var mePrice = $("#menu_table_" + tableCount).find("#me_price").val();
+		var meContent = $("#menu_table_" + tableCount).find("#me_content").val();
+		var mePhoto = $("#menu_table_" + tableCount).find("#me_photo").val();
 		
 // 		alert(typeof(meName));
 // 		alert("메뉴 이름: " + meName + ", 메뉴 가격: " + mePrice);
 		
-		if(meName === "" || mePrice === "") { // 메뉴이름이나 메뉴가격이 널스트링일 경우(입력하지 않았을 경우)
-			alert('메뉴 가격을 입력해주세요');
+		if(meName === "" || mePrice === "" || meContent === "" || mePhoto === "") { // 메뉴이름이나 메뉴가격이 널스트링일 경우(입력하지 않았을 경우)
+			alert('모두 입력해주세요');
 		} else {
-			alert('메뉴 등록'); 
+			alert('메뉴가 등록되었습니다'); 
 			// 추가 버튼 클릭시 메뉴등록 폼 숨기기
 			$("#menu_table_" + index).hide();
 			// 메뉴이름, 가격 출력
@@ -633,10 +662,10 @@
 		  $(this).timepicker({
 		      timeFormat: 'HH:mm',
 		      interval: 30, // 시간 간격
-		      minTime: '09:00', // 최소 시간
+		      minTime: '11:00', // 최소 시간
 		      maxTime: '22:00', // 최대 시간
-		      defaultTime: '09:00', // 기본값
-// 		      startTime: '09:00', // 시작시간
+		      defaultTime: '11:00', // 기본값
+// 		      startTime: '11:00', // 시작시간
 		      dynamic: true,
 		      dropdown: true,
 		      scrollbar: true
@@ -647,11 +676,6 @@
 	$("#t_timeInsert").on("click", function(event) {
 		$("#td_Time").append("<input class='form-control timepicker3' type ='text' name='t_time' id='t_time' style='text-align: center; width: 200px;' placeholder='클릭하여 시간 선택''>");
 	}); 
-	
-// 	$("#btnMenuInsert").on("click", function(event) {
-// 		alert(tableCount);
-// 		$("#menu_table_" + tableCount).hide();
-// 	}); 
 
 
 </script>
