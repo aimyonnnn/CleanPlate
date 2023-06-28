@@ -149,7 +149,7 @@
 
    <div style="height: 100px; width: 100%"></div>
    
-   <c:set var="curendUser" value="${sessionScope.sId}" />
+   <c:set var="currentUser" value="${sessionScope.sId}" />
   	
    <div class="container-main" data-aos="flip-left">
         <div class="chat-header d-flex justify-content-center">
@@ -159,7 +159,7 @@
             <button type="button" class="btn btn-danger" style="color:white;" onclick="location.href='QNA'">신고하기</button>
         </div>
         <c:choose>
-	        <c:when test="${not empty aList && param.a_sellerId eq curendUser}">
+	        <c:when test="${not empty aList && param.a_sellerId eq currentUser}">
 		        <div class="chat-buttons">
 		            <input type="text" class="salesValue me-2" id="salesValue" placeholder="현재가격 : ${param.a_price}원">
 		            <button type="button" id="updatePrice" class="btn btn-outline-secondary" onclick="updatePrice('${param.r_idx}')">가격 수정</button>
@@ -167,7 +167,7 @@
 	        </c:when>
         	<c:otherwise>
         		<div class="chat-buttons">
-		            <input type="text" class="buyerValue me-2" id="buyerValue" placeholder="현재가격 : ${param.a_price}원" readonly="readonly">
+		            <input type="text" class="salesValue me-2" id="salesValue" placeholder="현재가격 : ${param.a_price}원" readonly="readonly">
 		            <button type="button" id="updatePrice" class="btn btn-outline-secondary" onclick="location.href='<c:url value="assignmentPayment"/>' 
 						+ '?r_idx=${param.r_idx}&r_date=${param.r_date}&a_price=${param.a_price}&res_name=${param.res_name}&a_sellerId=${param.a_sellerId}'">구매하기</button>
 			   </div>
@@ -199,9 +199,9 @@
 	        success: function(response) {
 	          
 	          var inputValue = response.trim();
-	          var inputElement = $('#buyerValue'); // 인풋 박스의 요소
-	          console.log('실시간 가격 조회 : ' + inputValue);
-	          inputElement.value = "현재가격 : " + inputValue + "원"; // 인풋 박스의 내용 갱신
+	          var inputElement = document.getElementById("salesValue"); // 입력 상자 엘리먼트 가져오기
+	          inputElement.placeholder = "현재가격 : " + inputValue + "원";
+			  console.log('실시간 가격 조회 : ' + inputValue + '원');
 	          
 	        },
 	        error: function(error) {
@@ -306,10 +306,11 @@
 						
 						if(response === '1') {
 			                alert("가격이 성공적으로 업데이트되었습니다.");
-			                location.href='<c:url value="memberRSList"/>'
+			                document.getElementById("salesValue").value = ""; // 텍스트 지우기
 			                
 						} else {
 							alert("예약금액 보다 높게 판매할 수 없습니다. 가격을 다시 입력해주세요");
+							document.getElementById("salesValue").value = ""; // 텍스트 지우기
 						}
 						
 		            },
