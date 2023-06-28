@@ -17,8 +17,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <!-- 이부분은 지우면 안됩니다 -->
     <script type="text/javascript" src="/assets/global/js/jquery.bxslider.min.js"></script>
-    <!-- 위로가기 버튼 CSS -->
     <style type="text/css">
+    /* 위로 가기 버튼 */
 	    #go-top {
 		  display: none;
 		  position: fixed;
@@ -32,6 +32,19 @@
 		  color: #ffc107; /* 색상변경*/
 		}
 		
+		/* 이미지 출력용 */
+		.image-cell {
+	    position: relative;
+	    padding: 0;
+	    width: 450px; 
+    	height: 250px; 
+		}
+		
+		.cell-image {
+		    width: 100%;
+		    height: 100%;
+		    object-fit: cover;
+		}	
     </style>
     <!-- 위로가기 버튼 CSS -->
     <!-- 찜하기 -->
@@ -230,7 +243,9 @@
 				<tbody>
 					<c:forEach var="menus" items="${menusList }">
 					<tr>
-						<td><img src="${pageContext.request.contextPath }/resources/upload/${menus.me_photo }" width="100" height="100"></td>
+						<td class='image-cell'>
+							<img class="cell-image" src="${pageContext.request.contextPath }/resources/upload/${menus.me_photo }">
+						</td>
 						<td>
 							<dl class="row">
 								<dt class="mt-3">${menus.me_name}</dt>
@@ -252,7 +267,9 @@
 				<tbody>
 					<c:forEach items="${reviewList }" var="reviewList">
 						<tr>
-							<td><img src="${pageContext.request.contextPath }/resources/upload/${reviewList.rv_img }" width="100" height="100"></td>
+							<td class="image-cell">
+								<img class="cell-image" src="${pageContext.request.contextPath }/resources/upload/${reviewList.rv_img }">
+							</td>
 							<td>
 								<dl class="row">				
 									<!-- 별점 출력 -->					

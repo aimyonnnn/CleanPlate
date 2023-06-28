@@ -65,7 +65,7 @@
 	<div class="container">
         <div class="row mt-4">
           <div class="col">
-            <h2><img src="${pageContext.request.contextPath }/resources/images/mypage/ceoReservation.jpg" alt="" style="width: 100%;" class="justify-content-center"></h2>
+            <h2><img src="${pageContext.request.contextPath }/resources/images/mypage/ceoList.jpg" alt="" style="width: 100%;" class="justify-content-center"></h2>
           </div>
         </div>
     </div>
@@ -285,7 +285,7 @@
 						    	<td id="td_Time">
 						    		<div class="d-inline-flex align-items-center">
 										<input class="form-control timepicker3" type ="text" name="t_time" id="t_time" style="text-align: center; width: 200px;" placeholder="클릭하여 시간 선택">
-							    		<button type="button" id="t_timeInsert" class="btn btn-dark ml-2" style="color: white;" >추가</button>
+							    		<button type="button" id="t_timeInsert" class="btn btn-dark" style="color: white; margin-left: 6px;" >추가</button>
 						    		</div>
 						    	</td>
 						    </tr>
