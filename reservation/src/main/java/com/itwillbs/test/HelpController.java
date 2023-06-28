@@ -118,6 +118,7 @@ public class HelpController {
 		//실제 저장 경로
 		String saveDir = session.getServletContext().getRealPath(uploadDir);
 		
+		
 		String subDir = ""; //서브디렉토리(날짜구분하여 저장)
 		// 설정한 날짜별로 파일 생성
 		
@@ -125,7 +126,7 @@ public class HelpController {
 		//오늘날짜 가져옴
 		Date date = new Date();
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/mm/dd");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 		
 		//sdf 로 설정된 date 를 subDir 에 저장
 		subDir = sdf.format(date);
@@ -149,7 +150,7 @@ public class HelpController {
 			String fileName = uuid.substring(0,8)+"_"+mFile.getOriginalFilename();
 			
 			if(!mFile.getOriginalFilename().equals("")) {
-				qna.setQ_file(fileName);
+				qna.setQ_file(subDir + "/" + fileName);
 			}
 			
 		int insertCount;
