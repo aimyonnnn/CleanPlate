@@ -18,5 +18,8 @@ public interface LikeInfoMapper {
 	//찜하기 해제(버튼)
 	public void deleteFromLikes(Map<String, Object> paramMap);
 
+	// 이전에 존재하는지 확인하기 위한 버튼
+	public LikeInfoVO getLikeInfo(Map<String, Object> map);
+
 	
 }

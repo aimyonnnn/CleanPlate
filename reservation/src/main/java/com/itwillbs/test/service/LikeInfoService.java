@@ -15,15 +15,22 @@ public class LikeInfoService {
 	
 	@Autowired
 	private LikeInfoMapper mapper;
-	
-   public void toggleLikeStatus(int res_idx, String m_id, String liked) {
-	  System.out.println("service_check");
-	  Map<String, Object> map = new HashMap<>();
-	  map.put("res_idx", res_idx);
-	  map.put("m_id", m_id);
-	  map.put("liked", liked);
-	  mapper.toggleLikeStatus(map);
-   }
+
+	public void toggleLikeStatus(int res_idx, String m_id, String liked) {
+	    Map<String, Object> map = new HashMap<>();
+	    map.put("res_idx", res_idx);
+	    map.put("m_id", m_id);
+	    map.put("liked", liked);
+	    
+	    LikeInfoVO likeInfo = mapper.getLikeInfo(map);
+	    if (likeInfo != null) {
+	        // 이미 존재하는 경우에는 삭제
+	        mapper.deleteFromLikes(map);
+	    } else {
+	        // 존재하지 않는 경우에는 추가
+	        mapper.toggleLikeStatus(map);
+	    }
+	}
    
     //찜한 가게 목록 출력
 	  public List<Map<String, Object>> memberLikelist(String sId) {

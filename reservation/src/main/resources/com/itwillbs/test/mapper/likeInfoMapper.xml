@@ -4,10 +4,10 @@
 
 <mapper namespace="com.itwillbs.test.mapper.LikeInfoMapper">
     <insert id="toggleLikeStatus" parameterType="java.util.Map">
-        INSERT INTO like_info (res_idx, m_id, liked)
-        VALUES (#{res_idx}, #{m_id}, #{liked})
-    </insert>
-     
+    INSERT INTO like_info (res_idx, m_id, liked)
+    VALUES (#{res_idx}, #{m_id}, #{liked})
+    ON DUPLICATE KEY UPDATE liked = VALUES(liked)
+	</insert>
      <!-- 찜하기 제거 -->
     <delete id="deletcount"> 
     	DELETE FROM like_info 
@@ -29,7 +29,7 @@
         GROUP BY res_idx ) c
         ON c.res_idx = l.res_idx
         WHERE m.m_id = '${sId}'
-<!-- 'member'를 매개변수로 받아와야함. 데이터가없어서 임시로 member -->
+	<!-- 'member'를 매개변수로 받아와야함. 데이터가없어서 임시로 member -->
      </select>
      
     <!-- 찜하기 해제(버튼) -->
@@ -37,5 +37,12 @@
         DELETE FROM like_info
         WHERE m_id = #{m_id} AND res_idx = #{res_idx}
     </delete>
+    
+     <!-- getLikeInfo 가 -->
+    <select id="getLikeInfo" parameterType="java.util.Map" resultType="com.itwillbs.test.vo.LikeInfoVO">
+        SELECT * FROM like_info
+        WHERE res_idx = #{res_idx} AND m_id = #{m_id}
+    </select>
+    
      
 </mapper>
