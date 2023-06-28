@@ -105,8 +105,6 @@
 					</div>
 				     <!-- 로그인 유지, 아이디 저장 체크박스 -->
                    <div class="checkbox-container">
-	                  <input type="checkbox" id="keepLoggedIn" name="keepLoggedIn" ${empty cookie.keepLoggedIn.value ? "" : "checked" }>
-	                  <label for="keepLoggedIn">로그인 유지</label>
 	                  <span class="spacing"></span>
 	                  <input type="checkbox" id="rememberId" name="rememberId" ${empty cookie.rememberId.value ? "" : "checked" }>
 	                  <label for="rememberId">아이디 저장</label>
@@ -761,7 +759,6 @@
 		    });
 		});
 	</script>
-	
 	
 <!-- 	<footer class="footer"> -->
 <%-- 		<jsp:include page="../common/common_footer.jsp"/> --%>
