@@ -201,6 +201,11 @@ public class HelpController {
 	public String faqMember() {
 		return "help/help_fq";
 	}
+	// FAQ 점주
+	@GetMapping("FAQ2")
+	public String faqOwner() {
+		return "help/help_fq_2";
+	}
 	
 	// Notice 페이지로 이동
 	@GetMapping("Notice")
