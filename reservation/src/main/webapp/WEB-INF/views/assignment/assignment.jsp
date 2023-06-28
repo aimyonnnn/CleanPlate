@@ -255,10 +255,10 @@
         	<!-- 정렬 버튼 -->
 			<div class="col-12">
 			  <div class="text-center">
-			    <button type="button" class="btn btn-dark mx-2" id="PriceLow">가격낮은순</button>
-			    <button type="button" class="btn btn-dark mx-2" id="PriceHigh">가격높은순</button>
-			    <button type="button" class="btn btn-dark mx-2" id="RevAsc">예약빠른순</button>
-			    <button type="button" class="btn btn-dark mx-2" id="abc">가게이름순</button>
+			    <button type="button" class="btn btn-warning mx-2" id="PriceLow">가격낮은순</button>
+			    <button type="button" class="btn btn-warning mx-2" id="PriceHigh">가격높은순</button>
+			    <button type="button" class="btn btn-warning mx-2" id="RevAsc">예약빠른순</button>
+			    <button type="button" class="btn btn-warning mx-2" id="abc">가게이름순</button>
 			    <button type="button" class="btn btn-danger mx-2" id="today">TODAY</button>
 			  </div>
 			</div>
@@ -282,10 +282,10 @@
                       <p>가격 : <span>${assignment.a_price}원</span></p>
                       예약번호 : <input type="text" name="r_idx" value="${assignment.r_idx}" readonly="readonly" style="border: none;">
                       <div class="d-flex">
-	                    <button type="button" class="btn btn-dark btn-chat w-50 mx-2"
+	                    <button type="button" class="btn btn-warning btn-chat w-50 mx-2"
 	                     id="contactButton" onclick="location.href='<c:url value="assignAgree"/>'
 	                     + '?r_idx=${assignment.r_idx}&r_date=${assignment.r_date}&a_price=${assignment.a_price}&res_name=${assignment.res_name}&a_sellerId=${assignment.a_sellerId}'">채팅문의</button>
-						<button type="button" class="btn btn-dark btn-chat w-50 mx-2" id="payButton"
+						<button type="button" class="btn btn-warning btn-chat w-50 mx-2" id="payButton"
 						onclick="location.href='<c:url value="assignmentPayment"/>' 
 						+ '?r_idx=${assignment.r_idx}&r_date=${assignment.r_date}&a_price=${assignment.a_price}&res_name=${assignment.res_name}&a_sellerId=${assignment.a_sellerId}'">바로구매</button>
                       </div>
@@ -383,9 +383,9 @@
 				                   <p>가격 : <span>${'${data.a_price}'}원</span></p>
 				                   예약번호 : <input type="text" name="r_idx" value="${'${data.r_idx}'}" readonly="readonly" style="border: none;">
 				                   <div class="d-flex">
-				                    <button type="button" class="btn btn-dark btn-chat w-50 mx-2"
+				                    <button type="button" class="btn btn-warning btn-chat w-50 mx-2"
 				                    	id="contactButton" onclick="location.href='<c:url value="assignAgree"/>'">채팅문의</button>
-			                    	<button type="button" class="btn btn-dark btn-chat w-50 mx-2" id="payButton"
+			                    	<button type="button" class="btn btn-warning btn-chat w-50 mx-2" id="payButton"
 			    						onclick="location.href='<c:url value="assignmentPayment"/>' 
 			    						+ '?r_idx=${"${data.r_idx}"}&r_date=${"${data.r_date}"}&a_price=${"${data.a_price}"}&res_name=${"${data.res_name}"}&a_sellerId=${"${data.a_sellerId}"}'">바로구매</button>
 			                      </div>
@@ -438,10 +438,10 @@
       					                   <p>가격 : <span>${'${data.a_price}'}원</span></p>
       					                   예약번호 : <input type="text" name="r_idx" value="${'${data.r_idx}'}" readonly="readonly" style="border: none;">
       					                   <div class="d-flex">
-      					                    <button type="button" class="btn btn-dark btn-chat w-50 mx-2"
+      					                    <button type="button" class="btn btn-warning btn-chat w-50 mx-2"
       					                    	id="contactButton" onclick="location.href='<c:url value="assignAgree"/>'
       					                    	+ '?r_idx=${"${data.r_idx}"}&r_date=${"${data.r_date}"}&a_price=${"${data.a_price}"}&res_name=${"${data.res_name}"}&a_sellerId=${"${data.a_sellerId}"}'">채팅문의</button>
-      				                    	<button type="button" class="btn btn-dark btn-chat w-50 mx-2" id="payButton"
+      				                    	<button type="button" class="btn btn-warning btn-chat w-50 mx-2" id="payButton"
       				    						onclick="location.href='<c:url value="assignmentPayment"/>' 
       				    						+ '?r_idx=${"${data.r_idx}"}&r_date=${"${data.r_date}"}&a_price=${"${data.a_price}"}&res_name=${"${data.res_name}"}&a_sellerId=${"${data.a_sellerId}"}'">바로구매</button>
       				                      </div>

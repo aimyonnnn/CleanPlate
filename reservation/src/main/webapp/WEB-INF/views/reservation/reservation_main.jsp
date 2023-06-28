@@ -248,9 +248,9 @@
 	    <!-- 정렬 버튼 -->
 		<div class="col-12 mt-4">
 		  <div class="text-center">
-		    <button type="button" class="btn btn-dark mx-2" id="storeName">가게이름순</button>
-		    <button type="button" class="btn btn-dark mx-2" id="openEarly">오픈시간순</button>
-		    <button type="button" class="btn btn-dark mx-2" id="reviewHigh">평점높은순</button>
+		    <button type="button" class="btn btn-warning mx-2" id="storeName">가게이름순</button>
+		    <button type="button" class="btn btn-warning mx-2" id="openEarly">오픈시간순</button>
+		    <button type="button" class="btn btn-warning mx-2" id="reviewHigh">평점높은순</button>
 		    <div class="d-inline-block mx-2">
 		    <select class="form-select form-select-sm mb-3 text-bg-light" id="districtSelect">
 		        <option value="">지역선택</option>
@@ -348,7 +348,7 @@
                   <p class="card-content ellipsis"><!-- 가게소개 -->${'${data.res_intro}'}</p>
                   <p>주소 : ${'${data.res_address}'} ${'${data.res_detailAddress}'}</p>
                   <p>영업 시간 : ${'${data.res_openinghours}'}</p>
-                  <button type="button" class="btn btn-dark btn-chat w-100" id="reservationButton"
+                  <button type="button" class="btn btn-warning btn-chat w-100" id="reservationButton"
                 	  onclick="goToReservationReserve('${"${data.res_idx}"}')">예약하기</button>
                 </div>
               </div>
@@ -373,7 +373,7 @@
 				        <p class="card-content ellipsis"><!-- 가게 소개 -->${restaurant.res_intro}</p>
 				        <p>주소 : ${restaurant.res_address} ${restaurant.res_detailAddress}</p>
 				        <p>영업 시간 : ${restaurant.res_openinghours}</p>
-				        <button type="button" class="btn btn-dark btn-chat w-100" id="contactButton" onclick="goToReservationReserve('${restaurant.res_idx}')">예약하기</button>
+				        <button type="button" class="btn btn-warning btn-chat w-100" id="contactButton" onclick="goToReservationReserve('${restaurant.res_idx}')">예약하기</button>
 				      </div>
 				    </div>
 				  </div>
@@ -416,7 +416,7 @@
      	     				                   <p class="card-content ellipsis"><!-- 가게소개 -->${'${data.res_intro}'}</p>
      	     				                   <p>주소 : ${'${data.res_address}'}</p>
      	     				                   <p>영업 시간 : ${'${data.res_openinghours}'}</p>
-     	     				                   <button type="button" class="btn btn-dark btn-chat w-100" id="reservationButton" 
+     	     				                   <button type="button" class="btn btn-warning btn-chat w-100" id="reservationButton" 
      	     				                	 onclick="goToReservationReserve('${"${data.res_idx}"}')">예약하기</button>
      	     				                 </div>
      	     				               </div>
