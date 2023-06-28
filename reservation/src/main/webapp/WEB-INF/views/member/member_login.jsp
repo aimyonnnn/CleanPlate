@@ -65,6 +65,27 @@
 	    $('.join').attr('data-bs-target', '#business-modal');
 	  });
 	});
+    
+    // 새 창 열렸을 때 창크기 조절
+	function openNewWindow(url) {
+		event.preventDefault(); // 기본 동작인 링크 이동을 막습니다.
+ 	  
+		// 새 창의 크기 및 위치를 지정합니다.
+		var width = 800;
+		var height = 600;
+		var left = (window.innerWidth - width) / 2;
+		var top = (window.innerHeight - height) / 2;
+ 	  
+		// 전달된 url로 이동
+		var newWindow = window.open(url, '_blank', 'width=' + width + ', height=' + height + ', left=' + left + ', top=' + top);
+		
+		// 팝업이 차단되어있을 경우 경고메세지
+		if (!newWindow || newWindow.closed || typeof newWindow.closed == 'undefined') {
+			alert("팝업 차단되었습니다. 팝업 차단을 해제하고 다시 시도하세요.");
+		}
+		
+	}
+    
     </script>
     
 </head>
@@ -360,7 +381,7 @@
 												</div>
 											</div>
 										</div>
-										<a href="/zf_user/help/terms-of-service/person" class="view_indetail" target="_blank">
+										<a class="view_indetail" target="_blank" onclick="openNewWindow('registrationForm')">
 											<span class="blind">회원 약관 상세보기</span>
 										</a>
 									</li>
@@ -530,7 +551,7 @@
 												</div>
 											</div>
 										</div>
-										<a href="/zf_user/help/terms-of-service/person" class="view_indetail" target="_blank">
+										<a class="view_indetail" target="_blank" onclick="openNewWindow('registrationForm')">
 											<span class="blind">회원 약관 상세보기</span>
 										</a>
 									</li>
