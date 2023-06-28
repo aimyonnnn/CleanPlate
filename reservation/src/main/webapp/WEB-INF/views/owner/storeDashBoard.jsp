@@ -95,7 +95,7 @@
             <div class="card-body d-flex justify-content-between">
               <div>
                 <p class="card-text mb-2">오늘 총 예약 수</p>
-    				오늘 예약 수: ${dailystore}<br>
+    				오늘 예약 수: ${dailyStore}<br>
               </div>
               <i class="fas fa-calendar" style="font-size: 30px; margin-top: 20px"></i>
             </div>
@@ -108,7 +108,7 @@
             <div class="card-body d-flex justify-content-between">
               <div>
                 <p class="card-text mb-2">이번 달 총 예약 수</p>
-                	이번 달 예약 수: ${monthlystore}<br>
+                	이번 달 예약 수: ${monthlyStore}<br>
               </div>
               <i class="fas fa-calendar" style="font-size: 30px; margin-top: 20px"></i>
             </div>
@@ -120,7 +120,7 @@
             <div class="card-body d-flex justify-content-between">
               <div>
                 <p class="card-text mb-2">일간 매출</p>
-                	총 매출: ${todaySalesAmount[0]}원<br> 
+                	총 매출: ${todaySalesAmount}원<br> 
               </div>
               <i class="fas fa-calendar" style="font-size: 30px; margin-top: 20px"></i>
             </div>
@@ -132,7 +132,7 @@
             <div class="card-body d-flex justify-content-between">
               <div>
                 <p class="card-text mb-2">주간 매출</p>
-                	총 매출: ${weeklyallSalesAmount[0]}원<br> 
+                	총 매출: ${weeklyAllSalesAmount}원<br> 
               </div>
               <i class="fas fa-calendar" style="font-size: 30px; margin-top: 20px"></i>
             </div>
@@ -181,54 +181,84 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <script>
-  var weeklyReservationCounts = ${weeklyReservationCounts};
-
-  var ctx = document.getElementById('myChart').getContext('2d');
-  var myChart = new Chart(ctx, {
-      type: 'line',
-      data: {
-          labels: ['월', '화', '수', '목', '금', '토', '일'],
-          datasets: [{
-              label: 'Reservation count',
-              data: ${weeklyReservationCounts},
-              backgroundColor: 'rgba(54, 162, 235, 0.2)',
-              borderColor: 'rgba(54, 162, 235, 1)',
-              borderWidth: 1
-          }]
-      },
-      options: {
-          scales: {
-              y: {
-                  beginAtZero: true
-              }
-          }
-      }
-  });
-
-  // myChart2
-  var weeklySalesAmount = ${weeklySalesAmount};
-
-  var ctx2 = document.getElementById('myChart2').getContext('2d');
-  var myChart2 = new Chart(ctx2, {
-      type: 'line',
-      data: {
-          labels: ['월', '화', '수', '목', '금', '토', '일'],
-          datasets: [{
-              label: 'Sales Amount',
-              data: ${weeklySalesAmount},
-              backgroundColor: 'rgba(54, 162, 235, 0.2)',
-              borderColor: 'rgba(54, 162, 235, 1)',
-              borderWidth: 1
-          }]
-      },
-      options: {
-          scales: {
-              y: {
-                  beginAtZero: true
-              }
-          }
-      }
-  });
+	  // myChart1
+	  
+	  var todayReservationCount1 = ${todayReservationCount[0].salesCount};
+	  var todayReservationCount2 = ${todayReservationCount[1].salesCount};
+	  var todayReservationCount3 = ${todayReservationCount[2].salesCount};
+	  var todayReservationCount4 = ${todayReservationCount[3].salesCount};
+	  var todayReservationCount5 = ${todayReservationCount[4].salesCount};
+	//   var todayReservationCount6 = ${todayReservationCount[5].salesCount};
+	//   var todayReservationCount7 = ${todayReservationCount[6].salesCount};
+	//   var todayReservationCount = ${todayReservationCount[0].salesCount};
+	  var ctx = document.getElementById('myChart').getContext('2d');
+	  var myChart = new Chart(ctx, {
+	      type: 'line',
+	      data: {
+	          labels: ['월', '화', '수', '목', '금', '토', '일'],
+	          datasets: [{
+	              label: 'Reservation count',
+	              data: {
+	            	  월:todayReservationCount1,
+	            	  화:todayReservationCount2,
+	            	  수:todayReservationCount3,
+	            	  목:todayReservationCount4,
+	            	  금:todayReservationCount5
+	//             	  토:todayReservationCount6,
+	//             	  일:todayReservationCount7
+	            	  },
+	              backgroundColor: 'rgba(54, 162, 235, 0.2)',
+	              borderColor: 'rgba(54, 162, 235, 1)',
+	              borderWidth: 1
+	          }]
+	      },
+	      options: {
+	          scales: {
+	              y: {
+	                  beginAtZero: true
+	              }
+	          }
+	      }
+	  });
+	
+	  // myChart2
+	
+	  var weeklySalesAmount1 = ${weeklySalesAmount[0].salesAmount};
+	  var weeklySalesAmount2 = ${weeklySalesAmount[1].salesAmount};
+	  var weeklySalesAmount3 = ${weeklySalesAmount[2].salesAmount};
+	  var weeklySalesAmount4 = ${weeklySalesAmount[3].salesAmount};
+	  var weeklySalesAmount5 = ${weeklySalesAmount[4].salesAmount};
+	//   var weeklySalesAmount6 = ${weeklySalesAmount[5].salesAmount};
+	//   var weeklySalesAmount7 = ${weeklySalesAmount[6].salesAmount};
+	  var ctx2 = document.getElementById('myChart2').getContext('2d');
+	  var myChart2 = new Chart(ctx2, {
+	      type: 'line',
+	      data: {
+	          labels: ['월', '화', '수', '목', '금', '토', '일'],
+	          datasets: [{
+	              label: 'Sales Amount',
+	              data: {
+	            	  월 : weeklySalesAmount1,
+	            	  화 : weeklySalesAmount2,
+	            	  수 : weeklySalesAmount3,
+	            	  목 : weeklySalesAmount4,
+	            	  금 : weeklySalesAmount5,
+	//             	  토 : weeklySalesAmount6,
+	//             	  일 : weeklySalesAmount7
+	              },
+	              backgroundColor: 'rgba(54, 162, 235, 0.2)',
+	              borderColor: 'rgba(54, 162, 235, 1)',
+	              borderWidth: 1
+	          }]
+	      },
+	      options: {
+	          scales: {
+	              y: {
+	                  beginAtZero: true
+	              }
+	          }
+	      }
+	  });
 
   </script>
 

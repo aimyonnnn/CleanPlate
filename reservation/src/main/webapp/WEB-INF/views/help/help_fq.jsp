@@ -18,11 +18,11 @@
 
 <!-- 여기부터 공지사항 메뉴 버튼 -->
 <div class="container mt-5">
-	<div class="row">
-		<div class="col">
-			<h2 class="display-5 fst-italic fw-bold"><img src="${pageContext.request.contextPath }/resources/images/help.jpg" style="width: 100%;"></h2>
-		</div>
-	</div>
+  <div class="row">
+    <div class="col">
+      <h2 class="display-5 fst-italic fw-bold">Help</h2>
+    </div>
+  </div>
 </div>
 <div class="container mt-4">
     <div class="row gy-3 justify-content-center text-center">
@@ -36,10 +36,10 @@
 	      </div>
         </div>
 <!-- 서브메뉴버튼 -->
-        <div class="col-6 mt-4">
+        <div class="col-6">
             <div class="list-group list-group-horizontal">
                 <a href="FAQ" class="list-group-item-dark list-group-item-action active" aria-current="true">회원</a>
-                <a href="../help/help_fq_2.jsp" class="list-group-item-dark list-group-item-action">점주</a>
+                <a href="FAQ2" class="list-group-item-dark list-group-item-action">점주</a>
             </div>
         </div>
     </div>
@@ -91,45 +91,29 @@
 			</h2>
 			<div id="collapseThree" class="accordion-collapse collapse bg-light" data-bs-parent="#accordionExample">
 	            <div class="accordion-body">
-	                A. 로그인 버튼을 누르세요
+	                A. 로그인이 되지 않을 경우, 아래와 같이 회원님의 PC 설정상태를 확인해주시기 바랍니다.<br>
+					1. 쿠키 등 검색 기록을 삭제해 주세요.<br>
+					(1) 브라우저 실행> 도구> 인터넷 옵션> 일반> 검색 기록> 삭제 클릭<br>
+					(2) 맨 위 [즐겨찾기 웹 사이트 데이터 보존]을 제외하고 모든 항목에 체크한 후 아래 [삭제] 버튼을 클릭해 주세요.<br>
+					(3) 검색 기록 삭제가 완료되면 인터넷 옵션 창의 [확인] 버튼을 클릭하세요.<br>
+					(4) 띄워놓았던 인터넷 브라우저를 모두 닫고 새로 인터넷 브라우저를 열어 CleanPlate 로그인을 해주세요.<br>
+					2. 보안 수정 재설정<br>
+					(1) 브라우저 실행> 도구> 인터넷 옵션> 보안> 인터넷 메뉴를 클릭하고, 보안 수준을 [기본 수준]클릭해 주세요.<br>
+					(2) 신뢰할 수 있는 사이트 클릭 후 [*.cleanplate.com]을 추가하여 등록해 주세요.<br>
+					(3) 인터넷 옵션 창의 [확인] 버튼을 클릭하세요.<br>
+					(4) 띄워놓았던 인터넷 브라우저를 모두 닫고 새로 인터넷 브라우저를 열어 콘테스트코리아 로그인을 해주세요.<br>
+					3. 제한된 사이트에서 해지<br>
+					(1) 브라우저 실행> 도구> 인터넷 옵션> 보안> 제한된 사이트 클릭하고 [사이트] 버튼을 클릭해 주세요.<br>
+					(2) 제한된 사이트로 CleanPlate가 등록되어 있다면, 선택하신 후 우측의 [제거] 버튼을 클릭해 주세요.<br>
+					(3) 인터넷 옵션 창의 [확인] 버튼을 클릭하세요.<br>
+					(4) 띄워놓았던 인터넷 브라우저를 모두 닫고 새로 인터넷 브라우저를 열어 콘테스트코리아 로그인을 해주세요.<br>
+					위 항목에 해당하지 않는 경우 QNA 게시판으로 문의주시면 확인 후 안내드리도록 하겠습니다.<br>
 	            </div>
 			</div>
         </div>
     </div>
-    <!-- 페이지 이동 영역 -->
-    <div class="row my-4">
-        <div class="col-12">
-          <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-center">
-              <li class="page-item">
-                <a class="page-link" href="#" aria-label="Previous">
-                  <span aria-hidden="true">&laquo;</span>
-                </a>
-              </li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next">
-                  <span aria-hidden="true">&raquo;</span>
-                </a>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </div>
-      <!-- 서치 영역 -->
-      <div class="row justify-content-center">
-        <div class="col-3">
-          <form class="d-flex" role="search">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button type="button" class="btn btn-outline-dark">Search</button>
-          </form>
-        </div>
-      </div>
-    </div>
-
-
+</div>
+<!-- FAQ 목록 페이지 -->
 
 
 <!-- 하단 부분은 나중에 inclue로 넣을꺼니깐 참고 -->

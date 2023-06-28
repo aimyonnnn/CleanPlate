@@ -45,17 +45,18 @@
     </div>
 </div>
 <!-- FAQ 목록 페이지 -->
+
 <div class="container my-5">
-    <div class="accordion" id="accordionExample">
-        <div class="accordion-item">
-        <h2 class="accordion-header">
+	<div class="accordion" id="accordionExample">
+		<div class="accordion-item">
+		<h2 class="accordion-header">
             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                 Q.  가게 삭제는 어떻게 하나요?
             </button>
         </h2>
         <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
             <div class="accordion-body">
-                A. 가게 삭제를 원하신다면 QNA 게시판에 
+                A. 가게 삭제를 원하실 경우 Q&A 게시판에 문의를 남겨주시면 
             </div>
         </div>
         </div>
@@ -84,39 +85,8 @@
         </div>
         </div>
     </div>
-    <!-- 페이지 이동 영역 -->
-    <div class="row my-4">
-        <div class="col-12">
-          <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-center">
-              <li class="page-item">
-                <a class="page-link" href="#" aria-label="Previous">
-                  <span aria-hidden="true">&laquo;</span>
-                </a>
-              </li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next">
-                  <span aria-hidden="true">&raquo;</span>
-                </a>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </div>
-<!-- 검색 영역 -->
-      <div class="row justify-content-center">
-        <div class="col-3">
-          <form class="d-flex" role="search">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button type="button" class="btn btn-outline-primary">Search</button>
-          </form>
-        </div>
-      </div>
-    </div>
 </div>
+<!-- FAQ 목록 페이지 -->
 
 <!-- 하단 부분은 나중에 inclue로 넣을꺼니깐 참고 -->
 <!-- ==================================================================================================================================== -->

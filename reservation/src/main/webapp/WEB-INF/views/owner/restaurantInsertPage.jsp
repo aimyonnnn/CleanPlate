@@ -156,7 +156,7 @@
                             	
 						    </tr>
 						    <tr>
-                                <th scope="row">브레이크타임</th> <!-- select box -->
+                                <th scope="row">브레이크타임</th> 
                                 <td>
                                 	<div class="row">
 	                                   <!-- res_breaktime -->
@@ -326,7 +326,7 @@
 						  </tbody>
                 	</table>
 					<div style="margin-left: 460px; margin-top: 20px;">
-					    <button type="submit" class="btn btn-dark" style="color: white;">가게추가</button>
+					    <button type="submit" class="btn btn-dark" style="color: white;">등록</button>
 					</div>
 	
 					

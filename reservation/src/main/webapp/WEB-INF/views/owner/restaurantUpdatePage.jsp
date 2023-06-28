@@ -1,7 +1,11 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
+<%@page import="com.itwillbs.test.vo.MenuVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ page import="com.google.gson.Gson" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -54,50 +58,38 @@
 </head>
 <body>
 	<!-- 공통 상단바 구역 -->
-<%@ include file="../common/common_header.jsp" %>
+	<%@ include file="../common/common_header.jsp" %>
    	<!-- 공통 상단바 구역 -->
 
     <!-- 제목 구역 -->
 	<div class="container">
-        <div class="row">
+        <div class="row mt-4">
           <div class="col">
-            <h2>점주 마이페이지</h2>
+            <h2><img src="${pageContext.request.contextPath }/resources/images/mypage/ceoList.jpg" alt="" style="width: 100%;" class="justify-content-center"></h2>
           </div>
         </div>
     </div>
 
     <!-- 사이드바, 내용 넣는 구역!-->
-    <div class="container mt-5">
-        <div class="row d-flex justify-content-center">
-            <div class="col-2 align-items-center d-flex">
-                <!-- 왼쪽 사이드바 구역 -->
-                <!-- 프로필 사진 -->
-                <div class="input-group mb-5 d-flex shadow-lg d-flex justify-content-center pe-3" style="border-radius: 10px;">
-                    <img src="../image/profile.png" alt="" style="width: 100px; height: 100px;" class="justify-content-center">
-                    <p class="d-flex align-items-center"><span>님 환영합니다</span></p>
-                    
-                </div>
-            </div>
-            <div class="col-10">
-            	<h2 style="margin-left: 40px; margin-top: 40px;">가게 수정</h2>
-            </div>
-        </div>
+    <div class="container">
         <div class="row">
-          <div class="col-2">
-            <!-- 왼쪽 사이드바 버튼들-->
-            <!-- 클릭된 버튼은 active 표시함-->
-            <div class="btn-group-vertical btn-group-lg d-flex align-self-start" role="group" aria-label="Vertical button group">
-					<button type="button" class="btn btn-outline-warning text-black p-3" onclick="location.href='ownerMypage'">내 정보</button>
-                    <button type="button" class="btn btn-outline-warning  active text-black p-3" onclick="location.href='restaurantList'">가게리스트 </button>
-                    <button type="button" class="btn btn-outline-warning text-black p-3" onclick="location.href='restaurantReservation'">예약관리</button>
-                    <button type="button" class="btn btn-outline-warning text-black p-3" onclick="location.href='ownerWithdrawal'">회원탈퇴</button>
+            <div class="col-2" style="margin-top: 60px;">
+                <!-- 왼쪽 사이드바 버튼영역-->
+                <div class="btn-group-vertical btn-group-lg d-flex align-self-start" role="group" aria-label="Vertical button group">
+					<button type="button" class="btn btn-outline-dark text-black p-3" onclick="location.href='ownerMypage'">내 정보</button>
+					<button type="button" class="btn btn-outline-dark text-white active p-3" onclick="location.href='restaurantList'">가게리스트 </button>
+					<button type="button" class="btn btn-outline-dark text-black p-3" onclick="location.href='restaurantReservation'">예약관리</button>
+					<button type="button" class="btn btn-outline-dark text-black p-3" onclick="location.href='ownerWithdrawal'">회원탈퇴</button>
+                </div>
+                <!-- 왼쪽 사이드바 버튼영역-->
             </div>
-        </div>
-            <!-- 내용 구역 -->
-            <div class="col-10">
-                <!-- 가게내용 페이지 시작 -->
-                   <form action="restaurantUpdate" method="post" enctype="multipart/form-data">
-                	<table class="table" style="margin-left: 70px; width: 58%;">
+            <!-- 내용 -->
+            <div class="col-10 mt-4">
+                <!-- 가게 수정 페이지 시작 -->
+                <!-- 파일 업로드 enctype="multipart/form-data" -->
+                   <form action="restaurantUpdate" id="restaurant" method="post" enctype="multipart/form-data">
+<!--                    <input type="hidden" name=""> -->
+                	<table class="table" style="margin-left: 140px; margin-top: 35px; width: 58%;">
 						<tbody>
                             <tr>
                                 <th scope="row"><label for="res_brn">사업자 번호</label></th>
@@ -130,15 +122,15 @@
 								<!-- 다음 api 사용 -->
 								<div class="input-group mb-3">
 									<input type="text" class="form-control" id="address" name="res_address" placeholder="주소" readonly required value="${restaurant.res_address}">
-									<input type="button" onclick="DaumPostcode()" value="주소 찾기" class="btn btn-warning text-black"  id="addfind">
+									<input type="button" onclick="DaumPostcode()" value="주소 찾기" class="btn btn-dark text-white"  id="addfind">
 								</div>									
                                 
 								<div class="input-group mb-3 mt-2">
                                     <input type="text" class="form-control" id="detailAddress" name="res_detailAddress" placeholder="상세주소" value="${restaurant.res_detailAddress}"> 
 									<input type="text" class="form-control" id="extraAddress" placeholder="참고항목">
 								</div>
-								<!-- 주소 입력시 지도 표시 -->
-								<div id="map" style="width:300px;height:300px;margin-top:10px;"></div>
+								<!-- 불러온 주소로 지도 표시 -->
+								<div id="map" style="width:300px; height:300px; margin-top:10px;"></div>
 								</td>
 						    </tr>
 						    <!-- 영업 시간 시작 -->
@@ -147,14 +139,14 @@
 						    	<td>
 	                                <!-- res_openinghours -->
 	                                <div class="row">
-	                                    <div class="col-5">
-	                                        <input class="form-control timepicker" id="res_open" type="text" name="res_open" value="${fn:split(restaurant.res_openinghours, '-')[0]}"> 
+	                                    <div class="col-4">
+	                                        <input class="form-control timepicker" id="res_open" type="text" name="res_open" value="${fn:split(restaurant.res_openinghours, '-')[0]}" style="text-align: center;"> 
 	                                    </div>
 	                                    <div class="col-1">
 	                                    	<b style="font-size: large;">-</b>
 	                                    </div>
-	                                    <div class="col-5">
-	                                        <input class="form-control timepicker" id="res_close" type="text" name="res_close" value="${fn:split(restaurant.res_openinghours, '-')[1]}"> 
+	                                    <div class="col-4">
+	                                        <input class="form-control timepicker" id="res_close" type="text" name="res_close" style="text-align: center;" value="${fn:split(restaurant.res_openinghours, '-')[1]}"> 
 	                                    </div>
 	
 	                                </div>
@@ -162,32 +154,33 @@
                             	
 						    </tr>
 						    <tr>
-                                <th scope="row">브레이크타임</th> <!-- select box -->
-                                <td>
+                                <th scope="row">브레이크타임</th>
+                                  <td>
                                 	<div class="row">
-	                               	   <div class="col-2">  
-	                                	  <input type="checkbox" <c:if test="${empty restaurant.res_breaktime}">checked</c:if> class="form-check-input" id="nobreak" >없음
-	                                   </div>
 	                                   <!-- res_breaktime -->
 	                               	   <div class="col-4">
 	                                       <input class="form-control timepicker2" type ="text" name="res_breakstart" id="res_breakstart"
-	                                       <c:if test="${empty restaurant.res_breaktime}">disabled</c:if> value="${fn:split(restaurant.res_breaktime, '-')[0]}"> <!-- 브레이크 타임 시작 시간 -->
+	                                       <c:if test="${empty restaurant.res_breaktime}">disabled</c:if> value="${fn:split(restaurant.res_breaktime, '-')[0]}" style="text-align: center;"> 
 	                                   </div>
 	                               	   <div class="col-1">
 	                                	  <b style="font-size: large;">-</b>
 	                                   </div>
 	                                   <div class="col-4">
 	                                       <input class="form-control timepicker2" type ="text" name="res_breakend" id="res_breakend" 
-	                                       <c:if test="${empty restaurant.res_breaktime}">disabled</c:if> value="${fn:split(restaurant.res_breaktime, '-')[1]}"> <!-- 브레이크 타임 시작 시간 -->
+	                                       <c:if test="${empty restaurant.res_breaktime}">disabled</c:if> value="${fn:split(restaurant.res_breaktime, '-')[1]}" style="text-align: center;"> 
+	                                   </div>
+	                               	   <div class="col-2">  
+	                                	  <input type="checkbox" <c:if test="${empty restaurant.res_breaktime}">checked</c:if> class="form-check-input" id="nobreak" >없음
 	                                   </div>
                                     </div>
                                 </td>
+                            </tr>
 	 	                            <!-- 24시간으로 표시하는 jQuery -->
 	                                <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 	                                <script type="text/javascript">
 		                                $(document).ready(function () {
 		                                	// 영업시간 
-			                                $('input.timepicker').timepicker({
+			                                $('input.timepicker').timepicker({ 
 			                                    timeFormat: 'HH:mm',
 			                                    interval: 30, // 시간 간격
 			                                    minTime: '09', // 최소 시간
@@ -218,10 +211,12 @@
 			                                    var isChecked = $(this).is(":checked");
 			                                    $("#res_breakstart, #res_breakend").prop("disabled", isChecked).val(isChecked ? "" : null);
 			                                });
+			                                
+
+			                                
 		                                });   
 	                                </script>
                                 
-                            </tr>
 						    <tr>
 						    	<th scope="row"><label for="res_total_table">총 테이블 수</label></th>
 						    	<td>
@@ -230,7 +225,7 @@
 						    	</td>
 						    </tr>
 						    <tr>
-                                <th scope="row">휴무일</th> <!-- select box -->
+                                <th scope="row">휴무일</th> 
 						    	<td>
                                     <div class="dropdown">
                                         <select name="res_dayoff" class="form-select" style="width: 180px;">
@@ -274,39 +269,33 @@
 						    	<td colspan="2"><textarea class="form-control" rows="5" cols="50" name="res_amenity_info" id="res_amenity_info">${restaurant.res_amenity_info}</textarea></td>
 						    </tr>
 						    <tr>
-                                <th scope="row"><label for="menu">메뉴</label></th>
-						    	<td>
-						    		<button type="button" id="menu" class="btn btn-warning" style="color: black;" data-bs-toggle="modal" data-bs-target="#menuModal">메뉴 추가</button>
+								<th scope="row"><label for="menu">메뉴</label></th>
+						    	<td id="td_menu">
+						    		<button type="button" id="menu" class="btn btn-dark" style="color: white;" >메뉴 추가</button><br>
+						    		<a style="font-size: small; font-weight: normal;">버튼을 클릭하여 메뉴를 추가해주세요</a>
 							 		<div class="row mt-3 align-items-center">
-							            <table class="table">
+							            <table class="table" id="menuList">
 							                <thead>
 							                  <tr>
 							                    <th scope="col" class="col-5">메뉴 이름</th>
 							                    <th scope="col" class="col-3">가격</th>
-							                    <th scope="col"></th>
 							                  </tr>
 							                </thead>
-							                <tbody class="table-group-divider">
-							                <!-- foreach 문으로 작성 -->
-							                  <tr>
-							                    <td scope="row">런치코스</td>
-							                    <td>50000</td>
-							                    <td>
-								                    <button type="button" class="btn btn-warning text-white me-1" data-bs-toggle="modal" data-bs-target="#menuPro">수정</button>
-								                    <button class="btn btn-warning text-white">삭제</button>
-							                    </td>
-							                  </tr>
-							                  <tr>
-							                    <td scope="row">디너코스</td>
-							                    <td>100000</td>
-							                    <td>
-								                    <button type="button" class="btn btn-warning text-white me-1" data-bs-toggle="modal" data-bs-target="#menuPro">수정</button>
-								                    <button class="btn btn-warning text-white">삭제</button>
-							                    </td>
-							                  </tr>
+							                <tbody id="menuTable">
 							                </tbody>
 							              </table>
 							          </div>						    		
+						    	</td>
+						    </tr>
+						    <tr>
+						    	<th scope="row">
+						    		<label for="t_time">예약 시간</label>
+						    	</th>
+						    	<td id="td_Time">
+						    		<div class="d-inline-flex align-items-center">
+										<input class="form-control timepicker3" type ="text" name="t_time" id="t_time" style="text-align: center; width: 200px;" placeholder="클릭하여 시간 선택">
+							    		<button type="button" id="t_timeInsert" class="btn btn-dark" style="margin-left: 6px;" >추가</button>
+						    		</div>
 						    	</td>
 						    </tr>
 						    <tr>
@@ -327,19 +316,19 @@
 							    			<c:otherwise>
 							    				<div class="row m-1">
 								    				<div class="col">
-									    				파일명 : ${fn:split(restaurant.res_photo1, '_')[1] }<br>
+									    				<b>파일명 :</b> ${fn:split(restaurant.res_photo1, '_')[1] }<br>
 								    				</div>
 								    				<div class="col">
 									    				<img src="${pageContext.request.contextPath }/resources/upload/${restaurant.res_photo1 }" width="150" height="150">
 								    					<input type="file" name="res_file1" style="display: none;">
 								    				</div>
 								    				<div class="col">
-											    		<input type="button" class="btn btn-warning text-black" value="삭제" >
+											    		<input type="button" class="btn btn-dark" value="삭제" >
 								    				</div>
 							    				</div>
 							    			</c:otherwise>
 							    		</c:choose>
-							    	</div>
+									</div>
 						    		<div class="row">
 							    		<c:choose>
 							    			<c:when test="${empty restaurant.res_photo2 }">
@@ -350,14 +339,14 @@
 							    			<c:otherwise>
 							    				<div class="row m-1">
 								    				<div class="col" style="align-content: center;">
-									    				${fn:split(restaurant.res_photo2, '_')[1] }<br>
+									    				<b>파일명 :</b> ${fn:split(restaurant.res_photo2, '_')[1] }<br>
 								    				</div>
 								    				<div class="col">
 									    				<img src="${pageContext.request.contextPath }/resources/upload/${restaurant.res_photo2 }" width="150" height="150">
 								    					<input type="file" name="res_file2" style="display: none;">
 								    				</div>
 								    				<div class="col">
-											    		<input type="button" class="btn btn-warning text-black" value="삭제" >
+											    		<input type="button" class="btn btn-dark" value="삭제" >
 								    				</div>
 							    				</div>
 							    			</c:otherwise>
@@ -372,20 +361,20 @@
 							    			<c:otherwise>
 							    				<div class="row m-1">
 								    				<div class="col">
-									    				${fn:split(restaurant.res_photo3, '_')[1] }<br>
+									    				<b>파일명 :</b> ${fn:split(restaurant.res_photo3, '_')[1] }<br>
 								    				</div>
 								    				<div class="col">
 									    				<img src="${pageContext.request.contextPath }/resources/upload/${restaurant.res_photo3 }" width="150" height="150">
 								    					<input type="file" name="res_file3" style="display: none;">
 								    				</div>
 								    				<div class="col">
-											    		<input type="button" class="btn btn-warning text-black" value="삭제" >
+											    		<input type="button" class="btn btn-dark" value="삭제" >
 								    				</div>
 							    				</div>
 							    			</c:otherwise>
 							    		</c:choose>
-							    		
-							     <!-- 이미지 파일만 넣을 수 있도록 하는 자바 스크립트 -->
+						    	</td> 
+						    	 <!-- 이미지 파일만 넣을 수 있도록 하는 자바 스크립트 -->
 								 <script>
 								    function checkFileExtension(event) {
 								      const fileInput = event.target;
@@ -401,8 +390,6 @@
 								      }
 								    }
 								 </script>	
-								 
-						    	</td> 
 						    </tr>
                             <tr>
                                 <th scope="row"><label for="res_intro">가게소개</label></th>
@@ -410,15 +397,59 @@
                             </tr>
 						  </tbody>
                 	</table>
-					<div style="margin-left:380px;">
-					    <button type="submit" class="btn btn-warning" style="color: white;">가게수정</button>
+					<div style="margin-left: 460px; margin-top: 20px;">
+					    <button type="submit" class="btn btn-dark" style="color: white;">수정</button>
 					</div>
 	
 					
                 </form>	
 			  </div>
             </div>
-<!-- 다음 api -->   
+            
+	<!-- 사업자등록번호 공공 api (100회 제한) -->  
+    <script>
+      $(document).ready(function () {
+        $('#verifyBrn').click(function () {
+	    	// 현재 '-' 하이픈을 통해 받고 있으므로 숫자만 받게 replace 해줌 
+	       	let brn = $('input[id="res_brn"]').val().replace(/-/g, '');
+		    var data = {
+		      b_no: [brn] // 사업자 번호 
+		    };
+		
+		    $.ajax({
+		      url: "https://api.odcloud.kr/api/nts-businessman/v1/status?serviceKey=s3Z85p5TlpETkm4z6l3yjHc3ZD6sVqtThi2nYJzlNQM2%2BtdbfHkwpnBDVL2IpKLX%2F28l62eGORrVaKGtjKJivA%3D%3D",
+		      type: "POST",
+		      data: JSON.stringify(data),
+		      dataType: "JSON",
+		      contentType: "application/json",
+		      accept: "application/json",
+		      success: function (result) {
+		    	  // 받아온 result 상태 판별 
+		    	  if(result && result.data[0].b_stt_cd){
+		          	const code = result.data[0].b_stt_cd;
+		            	if(code === "01"){
+		                	alert("인증 성공!");
+		                } else if(code === "02" || code === "03"){
+		                	alert("휴/폐업한 사업자번호 입니다.");
+		                } else if(code === "00"){
+		                	alert("등록되지 않은 사업자 등록 번호입니다.");
+		                } else {
+		                	alert("오류가 발생했습니다.");
+		                }
+		              } else {
+		                alert("번호를 정확하게 입력해주세요.");
+		              }
+		            },
+		            error: function() {
+		                alert('존재하지 않는 사업자번호 입니다.');
+		            }
+		        });
+			});
+		});
+     </script>
+    <!-- 사업자등록번호 api 끝 -->
+            
+-- 다음 api -->   
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=001f863eaaba2072ed70014e7f424f2f&libraries=services"></script>
 <script>
@@ -521,57 +552,111 @@
         } 
     });   
 </script>
-<!-- 다음 api -->    
-
+<!-- 다음 api -->         
 		</div>
-        <!-- 가게내용 페이지 끝 -->
-
-<!-- 메뉴 추가 모달 창 -->
-<div class="modal fade" id="menuModal" tabindex="-1" aria-labelledby="menuModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="menuModalLabel">메뉴 추가</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form action="menuInsert" method="post">
-	            <div class="modal-body container d-flex justify-content-center p-3 modal-content border-0">
-	                <div class="container d-flex justify-content-center p-3 modal-content border-0">
-								<table>
-									<tr>
-										<th><label for="">메뉴 이름</label></th>
-										<td><input type="text" class="form-control" name="me_name" id="me_name"></td>
-									</tr>
-									<tr>
-										<th><label for="">메뉴 가격</label></th>
-										<td><input type="text" class="form-control"  name="me_name" id="me_name"placeholder="숫자만 입력"  onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"></td>
-									</tr>
-									<tr>
-										<th><label for="">메뉴 설명</label></th>
-										<td><textarea rows="5" cols="30" class="form-control" name="menu_intro"></textarea></td>
-									</tr>
-									<tr>
-										<th><label for="">메뉴 사진</label></th>
-										<td><input type="file" name="menu_photo" class="form-control" multiple="multiple"></td>
-									</tr>
-								</table>
-	                </div>
-	            </div>
-	            <div class="modal-footer">
-		            <button type="submit" class="btn btn-warning" id="storeMenuInsert" style="color: white;">추가</button>
-		          	<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-				</div>
-            </form>
-		</div>
-	</div>
-</div>
-<!-- 메뉴 추가 모달 창 -->		  
+<!-- 가게수정 페이지 끝 -->
 
 
+
+<script type="text/javascript">
+
+	// 메뉴추가 버튼 클릭시 메뉴등록 폼 생성
+	// 테이블 갯수를 세는 변수
+	var tableCount = 0;
+	$("#menu").on("click", function(event) {
+		tableCount++;
+	   $("#td_menu").prepend('<table id="menu_table_' + tableCount + '">'
+				+ '<tr>'
+				+ '<th><label for="me_name">메뉴 이름</label></th>'
+				+ '<td>'
+				+ '	<select name="me_name" id="me_name" class="form-select">	'									
+				+ '			<option value="LUNCH">LUNCH</option>'
+				+ '			<option value="DINNER">DINNER</option>'
+				+ '	</select>	'									
+				+ '</td>'
+				+ '</tr>'
+				+ '<tr>'
+				+ '<th><label for="me_price">메뉴 가격</label></th>'
+				+ '<td><input type="text" class="form-control"  name="me_price" id="me_price"'
+				+ 'placeholder="숫자만 입력"  onKeyup="this.value=this.value.replace(/[^0-9]/g,\'\');" required></td>'
+				+ '</tr>'
+				+ '<tr>'
+				+ '<th><label for="me_context">메뉴 설명</label></th>'
+				+ '<td><textarea rows="5" cols="30" class="form-control" name="me_context" id="me_context"></textarea></td>'
+				+ '</tr>'
+				+ '<tr>'
+				+ '<th><label for="me_photo">메뉴 사진</label></th>'
+				+ '<td><input type="file" name="me_file" id="me_photo" class="form-control" ></td>'
+				+ '</tr>'
+				+ '<tr>'
+				+ '<td colspan="2">'
+				+ '<div class="d-flex justify-content-end">'
+			    + '<button type="button" onclick="hideMenu(' + tableCount + ')" class="btn btn-dark me-2" style="color: white;">추가</button>'
+			    + '<button type="button" onclick="deleteMenu(' + tableCount +')" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>'
+				+ '</div>'
+				+ '</td>'
+				+ '</tr>'
+				+ '</table>');
+	});  
+	
+	// 추가 버튼 클릭시 메뉴등록 폼 숨기기
+	// 메뉴이름, 가격에 출력하기
+	function hideMenu(index) {
+		// 
+		var meName = $("#menu_table_" + tableCount).find("#me_name").val();
+		var mePrice = $("#menu_table_" + tableCount).find("#me_price").val();
+		
+// 		alert(typeof(meName));
+// 		alert("메뉴 이름: " + meName + ", 메뉴 가격: " + mePrice);
+		
+		if(meName === "" || mePrice === "") { // 메뉴이름이나 메뉴가격이 널스트링일 경우(입력하지 않았을 경우)
+			alert('메뉴 가격을 입력해주세요');
+		} else {
+			alert('메뉴 등록'); 
+			// 추가 버튼 클릭시 메뉴등록 폼 숨기기
+			$("#menu_table_" + index).hide();
+			// 메뉴이름, 가격 출력
+			$("#menuTable").append("<tr><td scope='col' class='col-5'>" + meName + "</td><td scope='col' class='col-3'>" + mePrice + "</td></tr>");
+			
+		}
+		
+	}
+	// 닫기 버튼 클릭시 메뉴등록 테이블 삭제
+	function deleteMenu(index) {
+		$("#menu_table_" + index).remove();
+	}
+	
+	// 예약 시간 timepicker
+	$(document).on('focus', 'input.timepicker3', function() {
+		  $(this).timepicker({
+		      timeFormat: 'HH:mm',
+		      interval: 30, // 시간 간격
+		      minTime: '09:00', // 최소 시간
+		      maxTime: '22:00', // 최대 시간
+		      defaultTime: '09:00', // 기본값
+// 		      startTime: '09:00', // 시작시간
+		      dynamic: true,
+		      dropdown: true,
+		      scrollbar: true
+		  });
+	});
+	
+	// 추가 버튼 클릭시 예약시간을 입력받는 input태그 생성
+	$("#t_timeInsert").on("click", function(event) {
+		$("#td_Time").append("<input class='form-control timepicker3' type ='text' name='t_time' id='t_time' style='text-align: center; width: 200px;' placeholder='클릭하여 시간 선택''>");
+	}); 
+	
+// 	$("#btnMenuInsert").on("click", function(event) {
+// 		alert(tableCount);
+// 		$("#menu_table_" + tableCount).hide();
+// 	}); 
+
+
+</script>
     
     <!-- 하단 부분 include 처리영역 -->
-    <hr class="mt-5">
-<%@ include file="../common/common_footer.jsp" %>
+    <hr style="margin-top: 100px;">
+	<%@ include file="../common/common_footer.jsp" %>
     <!-- 하단 부분 include 처리영역 -->
     
     <!-- 이부분은 지우면 안됩니다 -->

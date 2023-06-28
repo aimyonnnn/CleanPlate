@@ -207,6 +207,11 @@ public class HelpController {
 	public String faqOwner() {
 		return "help/help_fq_2";
 	}
+	// 회원가입양식 확인
+	@GetMapping("registrationForm")
+	public String registrationForm() {
+		return "help/registrationForm";
+	}
 	
 	// Notice 페이지로 이동
 	@GetMapping("Notice")

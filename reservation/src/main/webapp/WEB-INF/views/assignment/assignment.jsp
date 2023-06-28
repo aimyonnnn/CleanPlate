@@ -255,10 +255,10 @@
         	<!-- 정렬 버튼 -->
 			<div class="col-12">
 			  <div class="text-center">
-			    <button type="button" class="btn btn-warning mx-2" id="PriceLow">가격낮은순</button>
-			    <button type="button" class="btn btn-warning mx-2" id="PriceHigh">가격높은순</button>
-			    <button type="button" class="btn btn-warning mx-2" id="RevAsc">예약빠른순</button>
-			    <button type="button" class="btn btn-warning mx-2" id="abc">가게이름순</button>
+			    <button type="button" class="btn btn-dark mx-2" id="PriceLow">가격낮은순</button>
+			    <button type="button" class="btn btn-dark mx-2" id="PriceHigh">가격높은순</button>
+			    <button type="button" class="btn btn-dark mx-2" id="RevAsc">예약빠른순</button>
+			    <button type="button" class="btn btn-dark mx-2" id="abc">가게이름순</button>
 			    <button type="button" class="btn btn-danger mx-2" id="today">TODAY</button>
 			  </div>
 			</div>
@@ -274,7 +274,7 @@
                       <!-- 가게명 클릭시 가게 상세정보 페이지로 이동 -->
                       <h5>
 					    <span onclick="goToReservationReserve('${assignment.res_idx}')">
-					      ${assignment.res_name}
+					      <b>${assignment.res_name}</b>
 					    </span>
 					  </h5>
 					  <!-- 가게명 클릭시 가게 상세정보 페이지로 이동 -->
@@ -282,10 +282,10 @@
                       <p>가격 : <span>${assignment.a_price}원</span></p>
                       예약번호 : <input type="text" name="r_idx" value="${assignment.r_idx}" readonly="readonly" style="border: none;">
                       <div class="d-flex">
-	                    <button type="button" class="btn btn-warning btn-chat w-50 mx-2"
+	                    <button type="button" class="btn btn-dark btn-chat w-50 mx-2"
 	                     id="contactButton" onclick="location.href='<c:url value="assignAgree"/>'
 	                     + '?r_idx=${assignment.r_idx}&r_date=${assignment.r_date}&a_price=${assignment.a_price}&res_name=${assignment.res_name}&a_sellerId=${assignment.a_sellerId}'">채팅문의</button>
-						<button type="button" class="btn btn-warning btn-chat w-50 mx-2" id="payButton"
+						<button type="button" class="btn btn-dark btn-chat w-50 mx-2" id="payButton"
 						onclick="location.href='<c:url value="assignmentPayment"/>' 
 						+ '?r_idx=${assignment.r_idx}&r_date=${assignment.r_date}&a_price=${assignment.a_price}&res_name=${assignment.res_name}&a_sellerId=${assignment.a_sellerId}'">바로구매</button>
                       </div>
@@ -378,14 +378,14 @@
 				               <div class="card">
 				               <img src="${pageContext.request.contextPath}/resources/upload/${'${data.res_photo1}'}" class="card-img-top" alt="Item Image">
 				                 <div class="card-body">
-				                   <h5><span onclick="goToReservationReserve('${"${data.res_idx}"}')">${'${data.res_name}'}</span></h5>
+				                   <h5><b><span onclick="goToReservationReserve('${"${data.res_idx}"}')">${'${data.res_name}'}</span></b></h5>
 				                   <p>예약 날짜 : <span>${'${data.r_date}'}</span></p>
 				                   <p>가격 : <span>${'${data.a_price}'}원</span></p>
 				                   예약번호 : <input type="text" name="r_idx" value="${'${data.r_idx}'}" readonly="readonly" style="border: none;">
 				                   <div class="d-flex">
-				                    <button type="button" class="btn btn-warning btn-chat w-50 mx-2"
+				                    <button type="button" class="btn btn-dark btn-chat w-50 mx-2"
 				                    	id="contactButton" onclick="location.href='<c:url value="assignAgree"/>'">채팅문의</button>
-			                    	<button type="button" class="btn btn-warning btn-chat w-50 mx-2" id="payButton"
+			                    	<button type="button" class="btn btn-dark btn-chat w-50 mx-2" id="payButton"
 			    						onclick="location.href='<c:url value="assignmentPayment"/>' 
 			    						+ '?r_idx=${"${data.r_idx}"}&r_date=${"${data.r_date}"}&a_price=${"${data.a_price}"}&res_name=${"${data.res_name}"}&a_sellerId=${"${data.a_sellerId}"}'">바로구매</button>
 			                      </div>
@@ -433,15 +433,15 @@
       					               <div class="card">
       					               <img src="${pageContext.request.contextPath}/resources/upload/${'${data.res_photo1}'}" class="card-img-top" alt="Item Image">
       					                 <div class="card-body">
-      					                   <h5><span onclick="goToReservationReserve('${"${data.res_idx}"}')">${'${data.res_name}'}</span></h5>
+      					                   <h5><b><span onclick="goToReservationReserve('${"${data.res_idx}"}')">${'${data.res_name}'}</span></	b></h5>
       					                   <p>예약 날짜 : <span>${'${data.r_date}'}</span></p>
       					                   <p>가격 : <span>${'${data.a_price}'}원</span></p>
       					                   예약번호 : <input type="text" name="r_idx" value="${'${data.r_idx}'}" readonly="readonly" style="border: none;">
       					                   <div class="d-flex">
-      					                    <button type="button" class="btn btn-warning btn-chat w-50 mx-2"
+      					                    <button type="button" class="btn btn-dark btn-chat w-50 mx-2"
       					                    	id="contactButton" onclick="location.href='<c:url value="assignAgree"/>'
       					                    	+ '?r_idx=${"${data.r_idx}"}&r_date=${"${data.r_date}"}&a_price=${"${data.a_price}"}&res_name=${"${data.res_name}"}&a_sellerId=${"${data.a_sellerId}"}'">채팅문의</button>
-      				                    	<button type="button" class="btn btn-warning btn-chat w-50 mx-2" id="payButton"
+      				                    	<button type="button" class="btn btn-dark btn-chat w-50 mx-2" id="payButton"
       				    						onclick="location.href='<c:url value="assignmentPayment"/>' 
       				    						+ '?r_idx=${"${data.r_idx}"}&r_date=${"${data.r_date}"}&a_price=${"${data.a_price}"}&res_name=${"${data.res_name}"}&a_sellerId=${"${data.a_sellerId}"}'">바로구매</button>
       				                      </div>

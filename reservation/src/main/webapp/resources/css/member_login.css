@@ -1,7 +1,4 @@
 ﻿@charset "UTF-8";
-/* body { */
-/*   background-image: url('img.jpg'); */
-/* } */
 
 .form personalLogin {
   position: absolute;
@@ -19,7 +16,7 @@
 
 /* footer 삽입 */
 .footer {
-	position: absolute;
+	position: relative;
 	bottom: 0;
 	width: 100%;
 }

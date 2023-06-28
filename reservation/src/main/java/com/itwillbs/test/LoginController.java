@@ -57,7 +57,7 @@ public class LoginController {
 	// 로그인
 	@PostMapping("loginPro")
 	public String loginMain(@RequestParam String id, @RequestParam String passwd,
-	        boolean rememberId, boolean keepLoggedIn, Model model,
+	        boolean rememberId, Model model,
 	        HttpServletRequest request, HttpServletResponse response) {
 
 	    // 1. id를 조회하여 암호화된 passwd를 가져온다

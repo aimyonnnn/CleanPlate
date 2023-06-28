@@ -1,7 +1,6 @@
 package com.itwillbs.test.service;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -18,41 +17,39 @@ public class StoredashService {
     }
 
     // 오늘의 총 예약수
-    public List<Integer> getTodayReservationCounts() {
+    public int getTodayReservationCounts(String cId) {
         System.out.println("list2");
-        return storedashMapper.getTodayReservationCounts();
+        return storedashMapper.getTodayReservationCounts(cId);
     }
 
     // 이번 달 총 예약수
-    public List<Integer> getMonthlyReservationCounts() {
+    public int getMonthlyReservationCounts(String cId) {
         System.out.println("list3");
-        return storedashMapper.getMonthlyReservationCounts();
+        return storedashMapper.getMonthlyReservationCounts(cId);
     }
-    
+
     // 일간 매출 조회
-    public List<Integer> getTodaySalesAmonut(){
-    	System.out.println("list4");
-    	return storedashMapper.getTodaySalesAmount();
+    public int getTodaySalesAmount(String cId) {
+        System.out.println("list4");
+        return storedashMapper.getTodaySalesAmount(cId);
     }
-     
+
     // 일주일 매출 조회
-    public List<Integer> getWeeklyallSalesAmount() {
-    	System.out.println("list5");
-    	return storedashMapper.getWeeklyallSalesAmount();
+    public int getWeeklyallSalesAmount(String cId) {
+        System.out.println("list5");
+        return storedashMapper.getWeeklyallSalesAmount(cId);
     }
-    
-    //일간 예약 수 조회
-    public List<Integer> getReservationCountsByWeek() {
-         System.out.println("list6");
-         return storedashMapper.getReservationCountsByWeek();    	
+
+    // 일간 예약 수 조회
+    public List<Integer> getReservationCount(String cId) {
+        System.out.println("list6");
+        return storedashMapper.getReservationCount(cId);
     }
+
     // 최근 1주일 간 매출 금액 조회
-    public List<Integer> getWeeklySalesAmount() {
+    public List<Integer> getWeeklySalesAmount(String cId) {
         System.out.println("list7");
-        return storedashMapper.getWeeklySalesAmount();
+        return storedashMapper.getWeeklySalesAmount(cId);
     }
-    
 
 }
-
-
