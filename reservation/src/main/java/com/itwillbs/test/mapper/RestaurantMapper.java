@@ -19,7 +19,7 @@ public interface RestaurantMapper {
 	List<ReservationVO> selectReservationList(@Param("id") String cId);
 
 	// 가게 내역 조회
-	List<RestaurantVO> selectRestaurantList(String c_Id);
+	List<RestaurantVO> selectRestaurantList();
 
 	// 가게 정보 수정
 	int updateRestaurant(RestaurantVO restaurant);

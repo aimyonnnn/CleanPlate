@@ -80,10 +80,8 @@
 	<!-- 가게목록 조회 -->
 	<select id="selectRestaurantList" resultType="com.itwillbs.test.vo.RestaurantVO">
 		SELECT * 
-			FROM restaurant 
-			WHERE c_idx = (SELECT c_idx
-							FROM ceo
-							WHERE c_id = #{c_Id})
+			FROM restaurant r JOIN ceo c
+				ON r.c_idx = c.c_idx
 	</select>
 	
 	<!-- 메뉴 등록을 위한 res_idx 조회 -->

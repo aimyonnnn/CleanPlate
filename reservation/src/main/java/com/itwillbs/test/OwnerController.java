@@ -312,7 +312,7 @@ public class OwnerController {
 			model.addAttribute("msg", "로그인 해주세요");
 			return "fail_back";
 		}
-		List<RestaurantVO> restaurantList = service.getRestaurantList(c_Id);
+		List<RestaurantVO> restaurantList = resService.getOwnerRestaurantList(c_Id);
 		model.addAttribute("restaurantList", restaurantList);
 		return "owner/restaurantList";
 	}
