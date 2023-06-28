@@ -342,7 +342,7 @@
          
        let template = `<div class="col-md-4 mt-5" data-aos="fade-up" data-aos-anchor-placement="center-bottom">
               <div class="card">
-              <img src="${pageContext.request.contextPath}/resources/images/${'${data.res_photo1}'}" class="card-img-top" alt="Item Image">
+              <img src="${pageContext.request.contextPath}/resources/upload/${'${data.res_photo1}'}" class="card-img-top" alt="Item Image">
                 <div class="card-body">
                   <h5 class="card-title"><!-- 가게 이름 -->${'${data.res_name}'}</h5>
                   <p class="card-content ellipsis"><!-- 가게소개 -->${'${data.res_intro}'}</p>
@@ -367,7 +367,7 @@
 			  <c:forEach var="restaurant" items="${restaurantList}">
 				  <div class="col-md-4 mt-5" data-aos="fade-up" data-aos-anchor-placement="center-bottom">
 				    <div class="card">
-				      <img src="${pageContext.request.contextPath }/resources/images/${restaurant.res_photo1}" class="card-img-top" alt="Item Image">
+				      <img src="${pageContext.request.contextPath }/resources/upload/${restaurant.res_photo1}" class="card-img-top" alt="Item Image">
 				      <div class="card-body">
 				        <h5 class="card-title"><!-- 가게 이름 -->${restaurant.res_name}</h5>
 				        <p class="card-content ellipsis"><!-- 가게 소개 -->${restaurant.res_intro}</p>
@@ -410,7 +410,7 @@
       	     	           
      	     	            let template = `<div class="col-md-4 mt-5" data-aos="fade-up" data-aos-anchor-placement="center-bottom">
      	     				               <div class="card">
-     	     				            	<img src="${pageContext.request.contextPath}/resources/images/${'${data.res_photo1}'}" class="card-img-top" alt="Item Image">
+     	     				            	<img src="${pageContext.request.contextPath}/resources/upload/${'${data.res_photo1}'}" class="card-img-top" alt="Item Image">
      	     				                 <div class="card-body">
      	     				                   <h5 class="card-title"><!-- 가게 이름 -->${'${data.res_name}'}</h5>
      	     				                   <p class="card-content ellipsis"><!-- 가게소개 -->${'${data.res_intro}'}</p>
