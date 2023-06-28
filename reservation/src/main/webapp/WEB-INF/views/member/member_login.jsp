@@ -394,7 +394,7 @@
 												</div>
 											</div>
 										</div>
-										<a id="popupClausePrivacyPerson" href="/zf_user/popup/privacy-policy?category=person_privacy_req" class="view_indetail popup_clause_open" target="_blank">
+										<a id="popupClausePrivacyPerson" class="view_indetail popup_clause_open" target="_blank" onclick="openNewWindow('piAgreeForm')">
 											<span class="blind">개인정보 수집 및 이용에 동의 약관 상세보기</span>
 										</a>
 	                    			</li>
@@ -564,7 +564,7 @@
 												 </div>
 											</div>
 										</div>
-										<a id="popupClausePrivacyPerson" href="/zf_user/popup/privacy-policy?category=person_privacy_req" class="view_indetail popup_clause_open" target="_blank">
+										<a id="popupClausePrivacyPerson" class="view_indetail popup_clause_open" target="_blank" onclick="openNewWindow('piAgreeForm')">
 											<span class="blind">개인정보 수집 및 이용에 동의 약관 상세보기</span>
 										</a>
 	                    			</li>

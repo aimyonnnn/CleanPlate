@@ -271,6 +271,7 @@
 						    <tr>
 								<th scope="row"><label for="menu">메뉴</label></th>
 						    	<td id="td_menu">
+						    		${menuList }
 						    		<button type="button" id="menu" class="btn btn-dark" style="color: white;" >메뉴 추가</button><br>
 						    		<a style="font-size: small; font-weight: normal;">버튼을 클릭하여 메뉴를 추가해주세요</a>
 							 		<div class="row mt-3 align-items-center">
@@ -292,6 +293,7 @@
 						    		<label for="t_time">예약 시간</label>
 						    	</th>
 						    	<td id="td_Time">
+						    	${timeList }
 						    		<div class="d-inline-flex align-items-center">
 										<input class="form-control timepicker3" type ="text" name="t_time" id="t_time" style="text-align: center; width: 200px;" placeholder="클릭하여 시간 선택">
 							    		<button type="button" id="t_timeInsert" class="btn btn-dark" style="margin-left: 6px;" >추가</button>
@@ -449,7 +451,7 @@
      </script>
     <!-- 사업자등록번호 api 끝 -->
             
--- 다음 api -->   
+<!-- 다음 api -->   
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=001f863eaaba2072ed70014e7f424f2f&libraries=services"></script>
 <script>

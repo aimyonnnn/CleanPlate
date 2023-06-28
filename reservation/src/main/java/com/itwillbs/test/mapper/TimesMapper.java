@@ -13,4 +13,6 @@ public interface TimesMapper {
 
 	void insertTime(TimesVO t_Time);
 
+	List<TimesVO> selectTimesList(int res_idx);
+
 }

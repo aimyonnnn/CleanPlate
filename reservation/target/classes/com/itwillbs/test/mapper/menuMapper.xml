@@ -20,7 +20,7 @@
 			FROM menus
 	</select>
 	
-	<select id="selectedRestaurantMenuList">
+	<select id="selectedRestaurantMenuList" resultType="com.itwillbs.test.vo.MenuVO">
 		SELECT *
 			FROM menus
 			WHERE res_idx = #{res_idx}
