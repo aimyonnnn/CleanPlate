@@ -134,8 +134,8 @@
 	#go-top {
 		  display: none;
 		  position: fixed;
-		  right: 100px;
-		  bottom: 50px;
+		  right: 28px;
+		  bottom: 105px;
 		  outline: 0;
 		  border: 0;
 		  background: transparent;
