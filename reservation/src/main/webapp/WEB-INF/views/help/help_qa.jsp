@@ -56,11 +56,11 @@
 			<h5 style="text-align: center; color: gray;">아직 문의사항이 없습니다.</h5>
 		</c:when>
 		<c:otherwise>
-			<c:forEach items="${QNAList }" var="QNAList">
 			  <div class="accordion" id="accordionExample">
+				<c:forEach items="${QNAList }" var="QNAList">
 			    <div class="accordion-item">
 			      <h2 class="accordion-header">
-			        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${QNAList.q_idx }" aria-expanded="false" aria-controls="collapseOne">
+			        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${QNAList.q_idx }" aria-expanded="false" aria-controls="collapse${QNAList.q_idx }">
 			        <div class="container text-center">
 			          <div class="row">
 			            <div class="col-7" style="text-align: left;">
@@ -118,8 +118,8 @@
 			        </div>
 			      </div>
 			    </div>
+		  		</c:forEach>
 			  </div>
-		  </c:forEach>
 		</c:otherwise>
 	</c:choose>
   <!-- 페이지 이동 영역 -->
