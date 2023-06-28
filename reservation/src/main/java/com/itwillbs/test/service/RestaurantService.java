@@ -29,8 +29,8 @@ public class RestaurantService {
 	}
 	
 	// 가게 목록 조회
-	public List<RestaurantVO> getRestaurantList() {
-		return mapper.selectRestaurantList();
+	public List<RestaurantVO> getRestaurantList(String c_Id) {
+		return mapper.selectRestaurantList(c_Id);
 	}
 	// 가게 수정
 	public int ModifyRestaurant(RestaurantVO restaurant) {
@@ -68,6 +68,10 @@ public class RestaurantService {
 
 	public int selectRestaurantRes_idx(int c_idx, String res_brn) {
 		return mapper.selectRestaurantRes_idx(c_idx, res_brn);
+	}
+
+	public int getOwnerRestaurantCont(String id) {
+		return mapper.getOwnerRestaurantCount(id);
 	}
 	
 	

@@ -19,7 +19,7 @@ public interface RestaurantMapper {
 	List<ReservationVO> selectReservationList(@Param("id") String cId);
 
 	// 가게 내역 조회
-	List<RestaurantVO> selectRestaurantList();
+	List<RestaurantVO> selectRestaurantList(String c_Id);
 
 	// 가게 정보 수정
 	int updateRestaurant(RestaurantVO restaurant);
@@ -48,6 +48,9 @@ public interface RestaurantMapper {
 
 	// 메뉴 등록을 위한 res_idx 조회
 	int selectRestaurantRes_idx(@Param("c_idx") int c_idx,@Param("res_brn") String res_brn);
+	
+	// 회원탈 퇴시 남은 레스토랑이 존재하는지 확인
+	int getOwnerRestaurantCount(String id);
 
 	
 	

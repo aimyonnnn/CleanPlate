@@ -35,7 +35,7 @@ public class OwnerController {
 	private ReservationService resService;
 	@Autowired
 	private CeoService ceoService;
-	@Autowired
+	@Autowired 
 	private MenuService menuService;
 	@Autowired
 	private TimesService timesService;
@@ -312,7 +312,7 @@ public class OwnerController {
 			model.addAttribute("msg", "로그인 해주세요");
 			return "fail_back";
 		}
-		List<RestaurantVO> restaurantList = service.getRestaurantList();
+		List<RestaurantVO> restaurantList = service.getRestaurantList(c_Id);
 		model.addAttribute("restaurantList", restaurantList);
 		return "owner/restaurantList";
 	}
@@ -491,12 +491,21 @@ public class OwnerController {
 			return "fail_back";
 		}
 		
-		int deleteCount = ceoService.secessionCeo(ceo.getC_idx());
+		int resCount = service.getOwnerRestaurantCont(id);
 		
-		if(deleteCount <= 0) {
-			model.addAttribute("msg","회원탈퇴를 실패하였습니다.");
+		System.out.println(resCount);
+		
+		if(resCount == 0) {
+			int deleteCount = ceoService.secessionCeo(ceo.getC_idx());
+			if(deleteCount <= 0) {
+				model.addAttribute("msg","회원탈퇴를 실패하였습니다.");
+				return "fail_back";
+			}
+		} else {
+			model.addAttribute("msg","아직 삭제되지 않은 레스토랑이 존재합니다.");
 			return "fail_back";
 		}
+		
 		
 		session.invalidate();
 		
