@@ -112,7 +112,7 @@
                             <th>날짜</th>
                             <th>시간</th>
                             <th>상태</th>
-                            <th></th>
+                            <th>상세내역</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -149,7 +149,7 @@
                             <td>
                             	<!--  -->
                           		<button type="button" class="btn btn-dark" style="color: white;" data-bs-toggle="modal" data-bs-target="#rsListModal${resList.r_idx }">상세보기</button>
-                            	<button type="button" class="btn btn-outline-dark" style="margin-left: 10px;" data-bs-toggle="modal" data-bs-target="#assignmentModal${resList.r_idx }">양도하기</button>
+                            	<button type="button" class="btn btn-outline-dark" style="margin-left: 10px;" data-bs-toggle="modal" data-bs-target="#assignmentModal${resList.r_idx }">예약관리</button>
                             	<!--  -->                       
                             </td>
                         </tr>
@@ -299,7 +299,7 @@
 	  <div class="modal-dialog modal-lg">
 	    <div class="modal-content">
 	      <div class="modal-header">
-	        <h5 class="modal-title" id="assignmentModalLabel">예약 양도</h5>
+	        <h5 class="modal-title" id="assignmentModalLabel">예약 관리</h5>
 	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 	      </div>
 	      <div class="modal-body">
@@ -340,7 +340,7 @@
 						           <c:when test="${resList.r_status eq 1}">방문예정</c:when>
 						           <c:when test="${resList.r_status eq 2}">방문완료</c:when>
 						           <c:when test="${resList.r_status eq 3}">취소</c:when>
-						           <c:when test="${resList.r_status eq 4}">양도완료</c:when>
+						           <c:when test="${resList.r_status eq 4}">양도완료[구매]</c:when>
 						           <c:when test="${resList.r_status eq 5}">판매중</c:when>
 						           <c:when test="${resList.r_status eq 6}">판매실패</c:when>
 							    </c:choose>
@@ -368,22 +368,20 @@
 	         <div class="mt-3 d-flex justify-content-center">
 	         
 	          <!--  ====================================== 예약상태에 따른 동적 버튼 생성하기 ====================================== -->
-			  <!-- 예약상태가 "1-방문예정" 일 경우 "예약 양도하기" 버튼 활성화 -->
-			  <!-- 예약상태가 "5-판매중" 일 경우 가격을 수정할 수 있도록 "가격 수정" 버튼 활성화 -->
-			  <!-- 가격 입력 필드와 가격 수정 버튼을 함께 표시 -->
+			  <!-- 예약상태가 "1-방문예정" 일 경우 "양도하기" 버튼 활성화 -->
+			  <!-- 예약상태가 "5-판매중" 일 경우 가격을 수정할 수 있도록 "수정하기" 버튼 활성화 -->
+			  <!-- 가격 입력 인풋과 가격 수정 버튼을 함께 표시 -->
 			  <!-- 판매중이 아닌 경우에는 가격 수정 버튼 비활성화 -->
 			  <c:choose>
 				    <c:when test="${resList.r_status eq 1}">
-	   					<button type="button" class="btn btn-outline-warning" id="assignmentButton" onclick="redirectToAssignment(${resList.r_idx})">양도하기</button>
+	   					<button type="button" class="btn btn-outline-dark" id="assignmentButton" onclick="redirectToAssignment(${resList.r_idx})">양도하기</button>
 				    </c:when>
 				    <c:when test="${resList.r_status eq 5}">
-			            <button type="button" class="btn btn-outline-warning" onclick="updatePrice(${resList.r_idx})">수정하기</button>
+			            <button type="button" class="btn btn-outline-dark" onclick="updatePrice(${resList.r_idx})">수정하기</button>
 				    </c:when>
-				    <c:otherwise>
-				    	 <button type="button" class="btn btn-danger" id="assignmentButton"
-					     onclick="alert('이미 취소 또는 완료된 예약입니다.')">이미 취소 또는 완료된 예약입니다.</button>
-				    </c:otherwise>
 			  </c:choose>
+<!-- 				    	 <button type="button" class="btn btn-danger" id="assignmentButton" -->
+<!-- 					     onclick="alert('이미 취소 또는 완료된 예약입니다.')">이미 취소 또는 완료된 예약입니다.</button> -->
 	          <!--  ====================================== 예약상태에 따른 동적 버튼 생성하기 ====================================== -->
 	          
 			</div>

@@ -73,6 +73,7 @@
                     <tr>
                         <th>예약번호</th>
                         <th>판매금액</th>
+                        <th>정산(예상)금액</th>
                         <th>상태</th>
                         <th>정산관리</th>
                     </tr>
@@ -82,22 +83,28 @@
                     <tr class="res">
                         <td><c:if test="${list.a_sellerId eq currentUser}">${list.r_idx }</c:if></td>
                         <td><c:if test="${list.a_sellerId eq currentUser}">${list.a_price}원</c:if></td>
+                        <td><c:if test="${list.a_sellerId eq currentUser}">${String.format("%.1f", list.a_price * 0.95)}원</c:if></td>
                         <td>
-                        	<!-- list.p_status eq 1 => 판매중 -->
-                        	<!-- list.p_status eq 2 => 판매완료 -->
+                        	<!-- list.a_status eq 2 && list.p_status eq 1 => 판매가 완료된 상태 => "정산을 완료해주세요" 출력-->
+                        	<!-- list.p_status eq 2 => 판매가 완료된 상태 & 정산도 완료된 상태 -->
+                        	<!-- 그 외의 상태는 판매중 -->
                          	<c:choose>
-                        		<c:when test="${list.p_status eq 1 && list.a_sellerId eq currentUser}">
-                        			<span style="color:green;">판매중</span>
+                        		<c:when test="${list.a_status eq 2 && list.p_status eq 1 && list.a_sellerId eq currentUser}">
+                        			<span style="color:green;">정산을 실행해주세요</span>
                         		</c:when>
                         		<c:when test="${list.p_status eq 2 && list.a_sellerId eq currentUser}">
                         			<span style="color:red;">판매완료</span>
                         		</c:when>
+                        		<c:otherwise>
+                        			판매중
+                        		</c:otherwise>
                         	</c:choose>
                          <!--  -->
                         </td>
                         <td>
                         	<!-- 양도상태가 2-양도완료 & 결제상태가 1-결제완료인경우 정산하기 출력 -->
                         	<!-- 양도상태가 2-양도완료 & 결제상태가 2-결제취소인경우 정산완료 출력 -->
+                        	<!-- 그 외의 상태는 정산대기 -->
                         	<c:choose>
                         		<c:when test="${list.a_status eq 2 && list.p_status eq 1 && list.a_sellerId eq currentUser}">
                         			<button type="button" class="btn btn-danger"
@@ -105,10 +112,12 @@
                         		</c:when>
                         		<c:when test="${list.p_status eq 2 && list.a_sellerId eq currentUser}">
                         			<button type="button" class="btn btn-outline-dark" 
-                        			style="margin-left: 10px;" onclick="cancelAndCalculate(${list.r_idx }, ${list.a_price})">정산완료</button>
+                        			style="margin-left: 10px;" onclick="cancelAndCalculate(${list.r_idx }, ${list.a_price})" disabled="disabled">정산완료</button>
                         		</c:when>
                         		<c:otherwise>
-                        			정산대기
+                        			<button type="button" class="btn btn-outline-dark" 
+                        			style="margin-left: 10px;" onclick="location.href='<c:url value="assignAgreePro"/>' 
+						+ '?r_idx=${list.r_idx}&a_price=${list.a_price}&res_name=CleanPlate&a_sellerId=${list.a_sellerId}'">채팅관리</button>
                         		</c:otherwise>
                         	</c:choose> 
                         	<!--  -->                       
