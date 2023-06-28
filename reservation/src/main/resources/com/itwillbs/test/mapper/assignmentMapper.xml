@@ -70,6 +70,7 @@
 		SELECT a.*, Max(p.p_status) AS "p_status"
 			FROM assignment AS a
 			JOIN payment AS p ON a.r_idx = p.r_idx
+				WHERE a_sellerId = #{sId}
 				GROUP BY a.a_idx;
 	</select>
 	

@@ -28,18 +28,18 @@
     <div class="row gy-3 justify-content-center text-center">
         <div class="col-12">
 	      <div class="list-group list-group-horizontal">
-	        <a href="../help/help_home.jsp" class="list-group-item-dark list-group-item-action" aria-current="true">
+	        <a href="Notice" class="list-group-item-dark list-group-item-action" aria-current="true">
 	          공지사항
 	        </a>
-	        <a href="../help/help_fq.jsp" class="list-group-item-dark list-group-item-action active">FAQ</a>
-	        <a href="../help/help_qa.jsp" class="list-group-item-dark list-group-item-action">Q&A</a>
+	        <a href="FAQ" class="list-group-item-dark list-group-item-action active">FAQ</a>
+	        <a href="QNA" class="list-group-item-dark list-group-item-action">Q&A</a>
 	      </div>
         </div>
-<!-- 서브 메뉴 버튼 -->
+<!-- 서브메뉴버튼 -->
         <div class="col-6">
             <div class="list-group list-group-horizontal">
-                <a href="../help/help_fq.jsp" class="list-group-item-dark list-group-item-action">회원</a>
-                <a href="../help/help_fq_2.jsp" class="list-group-item-dark list-group-item-action active" aria-current="true">점주</a>
+                <a href="FAQ" class="list-group-item-dark list-group-item-action" aria-current="true">회원</a>
+                <a href="FAQ2" class="list-group-item-dark list-group-item-action active">점주</a>
             </div>
         </div>
     </div>
@@ -50,12 +50,12 @@
         <div class="accordion-item">
         <h2 class="accordion-header">
             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                Q.  로그인이 안돼요!
+                Q.  가게 삭제는 어떻게 하나요?
             </button>
         </h2>
         <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
             <div class="accordion-body">
-                A. 로그인 버튼을 누르세요
+                A. 가게 삭제를 원하신다면 QNA 게시판에 
             </div>
         </div>
         </div>

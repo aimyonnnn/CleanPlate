@@ -20,7 +20,9 @@
 		<link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
 </head>
 <body>
+
 <%@ include file="../common/common_header.jsp" %>
+<c:set var="currentUser" value="${sessionScope.sId}" />
 
     <!-- 제목 구역 -->
 	<div class="container">
@@ -78,18 +80,18 @@
                 <tbody>
                 <c:forEach var="list" items="${aList }">
                     <tr class="res">
-                        <td>${list.r_idx }</td>
-                        <td>${list.a_price}원</td>
+                        <td><c:if test="${list.a_sellerId eq currentUser}">${list.r_idx }</c:if></td>
+                        <td><c:if test="${list.a_sellerId eq currentUser}">${list.a_price}원</c:if></td>
                         <td>
                         	<!-- list.p_status eq 1 => 판매중 -->
                         	<!-- list.p_status eq 2 => 판매완료 -->
-                         <c:choose>
-                        		<c:when test="${list.p_status eq 1}">
-                        			판매중
+                         	<c:choose>
+                        		<c:when test="${list.p_status eq 1 && list.a_sellerId eq currentUser}">
+                        			<span style="color:green;">판매중</span>
                         		</c:when>
-                        		<c:otherwise>
-                        			판매완료
-                        		</c:otherwise>
+                        		<c:when test="${list.p_status eq 2 && list.a_sellerId eq currentUser}">
+                        			<span style="color:red;">판매완료</span>
+                        		</c:when>
                         	</c:choose>
                          <!--  -->
                         </td>
@@ -97,11 +99,11 @@
                         	<!-- 양도상태가 2-양도완료 & 결제상태가 1-결제완료인경우 정산하기 출력 -->
                         	<!-- 양도상태가 2-양도완료 & 결제상태가 2-결제취소인경우 정산완료 출력 -->
                         	<c:choose>
-                        		<c:when test="${list.p_status eq 1}">
+                        		<c:when test="${list.p_status eq 1 && list.a_sellerId eq currentUser}">
                         			<button type="button" class="btn btn-danger"
                         			style="margin-left: 10px; color: white;" onclick="cancelAndCalculate(${list.r_idx }, ${list.a_price})">정산하기</button>
                         		</c:when>
-                        		<c:when test="${list.p_status eq 2}">
+                        		<c:when test="${list.p_status eq 2 && list.a_sellerId eq currentUser}">
                         			<button type="button" class="btn btn-outline-dark" 
                         			style="margin-left: 10px;" onclick="cancelAndCalculate(${list.r_idx }, ${list.a_price})">정산완료</button>
                         		</c:when>
@@ -109,13 +111,14 @@
                         	<!--  -->                       
                         </td>
                     </tr>
-               </c:forEach>
-                </tbody>
-            </table> 
+           	    </c:forEach>
+       	        </tbody>
+    	        </table> 
+    	        
             </div>
         </div>
     </div>
-	</div>
+    
  	<!-- 두번째 양도 관련 모달창 -->
  	<c:forEach var="resList" items="${resList }">
 	<div class="modal fade" id="assignmentModal${resList.r_idx }" tabindex="-1" aria-labelledby="assignmentModalLabel" aria-hidden="true">
@@ -160,12 +163,12 @@
                             <td>
 	                           	<!-- r_status가 1-방문예정, 2-방문완료, 3-취소, 4-양도완료, 5-판매중, 6-판매실패 -->
 							    <c:choose>
-						           <c:when test="${resItem.r_status eq 1}">방문예정</c:when>
-						           <c:when test="${resItem.r_status eq 2}">방문완료</c:when>
-						           <c:when test="${resItem.r_status eq 3}">취소</c:when>
-						           <c:when test="${resItem.r_status eq 4}">양도완료</c:when>
-						           <c:when test="${resItem.r_status eq 5}">판매중</c:when>
-						           <c:when test="${resItem.r_status eq 5}">판매실패</c:when>
+						           <c:when test="${resList.r_status eq 1}">방문예정</c:when>
+						           <c:when test="${resList.r_status eq 2}">방문완료</c:when>
+						           <c:when test="${resList.r_status eq 3}">취소</c:when>
+						           <c:when test="${resList.r_status eq 4}">양도완료</c:when>
+						           <c:when test="${resList.r_status eq 5}">판매중</c:when>
+						           <c:when test="${resList.r_status eq 6}">판매실패</c:when>
 							    </c:choose>
 						     </td>
 						     <td>
