@@ -7,7 +7,8 @@ public class StoredashVO {
 	private int storeId;
 	private int reservationCount;
 	private String c_id;
-	private String orderDate;
-	private int salesAmount;
-	private int salesCount;
+	private String orderDate; // 예약 날짜
+	private int salesAmount; // 매출 금액
+	private int salesCount; // 매출 건수
+
 }

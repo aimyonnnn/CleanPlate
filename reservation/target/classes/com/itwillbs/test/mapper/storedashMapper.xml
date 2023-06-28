@@ -1,81 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.itwillbs.test.mapper.StoredashMapper">
-    <resultMap id="reservationCountResultMapWithCId" type="java.util.Map">
-        <constructor>
-            <idArg column="storeId" javaType="int"/>
-            <arg column="reservationCount" javaType="int"/>
-            <arg column="c_id" javaType="String"/>
-        </constructor>
-    </resultMap>
+<resultMap id="reservationCountResultMapWithCId" type="java.util.Map">
+    <constructor>
+        <idArg column="storeId" javaType="int"/>
+        <arg column="reservationCount" javaType="int"/>
+        <arg column="c_id" javaType="String"/>
+        <arg column="orderDate" javaType="String"/>
+        <arg column="salesAmount" javaType="int"/>
+        <arg column="salesCount" javaType="int"/>
+    </constructor>
+</resultMap>
 
-    <!--  오늘의 총 예약수 -->
-    <select id="getTodayReservationCounts" resultType="Integer">
-        SELECT COUNT(*) AS todayReservationCount
-        FROM payment p
-        INNER JOIN reservation r ON p.r_idx = r.r_idx
-        INNER JOIN restaurant res ON r.res_idx = res.res_idx
-        INNER JOIN ceo c ON c.c_idx = res.c_idx
-        WHERE c.c_id = "ceotest"
-        AND DATE(p.p_orderDate) = CURDATE();
-    </select>
+<!--  오늘의 총 예약수 -->
+<select id="getTodayReservationCounts" resultType="int">
+    SELECT COUNT(*) AS todayReservationCount
+    FROM payment p
+    INNER JOIN reservation r ON p.r_idx = r.r_idx
+    INNER JOIN restaurant res ON r.res_idx = res.res_idx
+    INNER JOIN ceo c ON c.c_idx = res.c_idx
+    WHERE c.c_id = #{c_id}
+    AND DATE(p.p_orderDate) = CURDATE()
+</select>
 
-    <!-- 이번 달 총 예약수 -->
-    <select id="getMonthlyReservationCounts" resultType="Integer">
-        SELECT COUNT(*) AS monthlyReservationCount
-        FROM payment p
-        INNER JOIN reservation r ON p.r_idx = r.r_idx
-        INNER JOIN restaurant res ON r.res_idx = res.res_idx
-        INNER JOIN ceo c ON c.c_idx = res.c_idx
-        WHERE c.c_id = "ceotest"
-        AND MONTH(p.p_orderDate) = MONTH(CURDATE())
-    </select>
+<!-- 이번 달 총 예약수 -->
+<select id="getMonthlyReservationCounts" resultType="int">
+    SELECT COUNT(*) AS monthlyReservationCount
+    FROM payment p
+    INNER JOIN reservation r ON p.r_idx = r.r_idx
+    INNER JOIN restaurant res ON r.res_idx = res.res_idx
+    INNER JOIN ceo c ON c.c_idx = res.c_idx
+    WHERE c.c_id = #{c_id}
+    AND MONTH(p.p_orderDate) = MONTH(CURDATE())
+</select>
 
-    <!-- 일간 매출 조회 -->
-    <select id="getTodaySalesAmount" resultType="Integer">
-        SELECT COALESCE(SUM(payment_total_price), 0) AS todaySalesAmount
-        FROM payment p
-        INNER JOIN reservation r ON p.r_idx = r.r_idx
-        INNER JOIN restaurant res ON r.res_idx = res.res_idx
-        INNER JOIN ceo c ON c.c_idx = res.c_idx
-        WHERE c.c_id = "ceotest"
-        AND DATE(p.p_orderDate) = CURDATE()
-    </select>
+<!-- 일간 매출 조회 -->
+<select id="getTodaySalesAmount" resultType="int">
+    SELECT COALESCE(SUM(payment_total_price), 0) AS todaySalesAmount
+    FROM payment p
+    INNER JOIN reservation r ON p.r_idx = r.r_idx
+    INNER JOIN restaurant res ON r.res_idx = res.res_idx
+    INNER JOIN ceo c ON c.c_idx = res.c_idx
+    WHERE c.c_id = #{c_id}
+    AND DATE(p.p_orderDate) = CURDATE()
+</select>
 
-    <!-- 일주일 매출 조회 -->
-    <select id="getWeeklyallSalesAmount" resultType="Integer">
-        SELECT COALESCE(SUM(payment_total_price), 0) AS weeklySalesAmount
-        FROM payment p
-        INNER JOIN reservation r ON p.r_idx = r.r_idx
-        INNER JOIN restaurant res ON r.res_idx = res.res_idx
-        INNER JOIN ceo c ON c.c_idx = res.c_idx
-        WHERE c.c_id = "ceotest"
-        AND p.p_orderDate >= CURDATE() - INTERVAL 6 DAY
-    </select>
+<!-- 일주일 매출 조회 -->
+<select id="getWeeklyallSalesAmount" resultType="int">
+    SELECT COALESCE(SUM(payment_total_price), 0) AS weeklySalesAmount
+    FROM payment p
+    INNER JOIN reservation r ON p.r_idx = r.r_idx
+    INNER JOIN restaurant res ON r.res_idx = res.res_idx
+    INNER JOIN ceo c ON c.c_idx = res.c_idx
+    WHERE c.c_id = #{c_id}
+    AND p.p_orderDate >= CURDATE() - INTERVAL 6 DAY
+</select>
 
-    <!-- 일간 예약 수 조회 -->
-    <select id="getReservationCount" resultType="com.itwillbs.test.vo.StoredashVO">
-        SELECT DATE(p.p_orderDate) AS orderDate, COUNT(payment_total_price) AS salesCount
-        FROM payment p
-        INNER JOIN reservation r ON p.r_idx = r.r_idx
-        INNER JOIN restaurant res ON r.res_idx = res.res_idx
-        INNER JOIN ceo c ON c.c_idx = res.c_idx
-        WHERE c.c_id = "ceotest"
-        AND p.p_orderDate >= CURDATE() - INTERVAL 6 DAY
-        GROUP BY DATE(p.p_orderDate)
-        ORDER BY DATE(p.p_orderDate)
-    </select>
-
-    <!-- 최근 1주일 간 매출 금액 조회 -->
-    <select id="getWeeklySalesAmount" resultType="com.itwillbs.test.vo.StoredashVO">
-        SELECT DATE(p.p_orderDate) AS orderDate, SUM(payment_total_price) AS salesAmount
-        FROM payment p
-        INNER JOIN reservation r ON p.r_idx = r.r_idx
-        INNER JOIN restaurant res ON r.res_idx = res.res_idx
-        INNER JOIN ceo c ON c.c_idx = res.c_idx
-        WHERE c.c_id = "ceotest"
-        AND p.p_orderDate >= CURDATE() - INTERVAL 6 DAY
-        GROUP BY DATE(p.p_orderDate)
-        ORDER BY DATE(p.p_orderDate)
-    </select>
 </mapper>
+
+
