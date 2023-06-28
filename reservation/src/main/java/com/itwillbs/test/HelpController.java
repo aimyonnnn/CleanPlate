@@ -212,6 +212,11 @@ public class HelpController {
 	public String registrationForm() {
 		return "help/registrationForm";
 	}
+	// 개인정보동의양식 확인
+	@GetMapping("piAgreeForm")
+	public String piAgreeForm() {
+		return "help/piAgreeForm";
+	}
 	
 	// Notice 페이지로 이동
 	@GetMapping("Notice")

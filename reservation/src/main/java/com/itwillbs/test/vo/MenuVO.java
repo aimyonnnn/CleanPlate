@@ -28,11 +28,6 @@ public class MenuVO {
 	private MultipartFile me_file;
 	private String me_file_name;
 	private int res_idx;
-	@Override
-	public String toString() {
-		return "MenuVO [me_idx=" + me_idx + ", me_name=" + me_name + ", me_price=" + me_price + ", me_context="
-				+ me_context + ", me_photo=" + me_photo + ", me_file=" + me_file.getOriginalFilename() + ", res_idx=" + res_idx + "]";
-	}
 	
 	
 	

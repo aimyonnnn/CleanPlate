@@ -333,9 +333,17 @@ public class OwnerController {
 		
 		// 가게 정보 불러오기
 		RestaurantVO restaurant = service.getRestaurantInfo(res_idx);
+		System.out.println("가게 정보 : " + restaurant);
+		// 메뉴 정보(리스트) 불러오기
+		List<MenuVO> menuList = menuService.getMenusList(res_idx);
+		System.out.println("메뉴 정보 : " + menuList);
+		// 시간 정보 불러오기
+		List<TimesVO> timeList = timesService.getTimesList(res_idx);
+		System.out.println("시간 정보 : " + timeList);
 		
-//		model.addAttribute("res_idx", res_idx);
 		model.addAttribute("restaurant", restaurant);
+		model.addAttribute("menuList", menuList);
+		model.addAttribute("timeList", timeList);
 		return "owner/restaurantUpdatePage";
 	}
 	

@@ -20,5 +20,10 @@ public class TimesService {
 	public void insertTime(TimesVO t_Time) {
 		mapper.insertTime(t_Time);
 	}
+	
+	// 특정 가게의 시간리스트 조회
+	public List<TimesVO> getTimesList(int res_idx) {
+		return mapper.selectTimesList(res_idx);
+	}
 
 }
