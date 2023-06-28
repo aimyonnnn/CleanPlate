@@ -225,7 +225,7 @@
                 return;
             }
             
-            ws = new WebSocket("ws://localhost:8080/test/echo.do");
+            ws = new WebSocket("ws://c5d2302t2.itwillbs.com/reservation/echo.do");
             
             ws.onopen = function(event){
                 if(event.data === undefined){
