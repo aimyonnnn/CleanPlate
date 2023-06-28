@@ -33,7 +33,7 @@
 			</div>
 		</div>
 		<!-- Notice 내용 -->
-		<div class="row my-5 justify-content-center">
+		<div class="row my-5 justify-content-center" style="font-size: 21px;">
 			<div class="col">
 			<h4 class="fw-bold mb-2">공지사항</h4>
 			<table class="table my-2 mt-4">
@@ -56,14 +56,20 @@
                     </td>
                 </tr>
 			</table>
-<%-- 				<c:if test="${sessionScope.sId eq 'admin' }"> --%>
+				<c:if test="${sessionScope.sId eq 'admin' }">
 					<div class="d-flex justify-content-center">
 					    <a href="NoticeModifyForm?no_idx=${param.no_idx}&pageNum=${param.pageNum}" class="btn btn-outline-dark" style="margin-right: 5px;">수정</a>
 					    <a href="NoticeDelete?no_idx=${param.no_idx}&pageNum=${param.pageNum}" class="btn btn-outline-dark">삭제</a>
 					</div>
-<%-- 				</c:if> --%>
+				</c:if>
 			</div>
     	</div>
 	</div>
+	
+	<!-- footer 부분 -->
+	<hr style="margin-top: 100px;">
+	<%@ include file="../common/common_footer.jsp" %>
+	
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -55,7 +55,7 @@
 </head>
 <body>
 	
-	<div class="container bg-white text-black mt-2">
+	<div class="container bg-white text-black fs-4 mt-2">
     <div class="container d-flex justify-content-between align-items-center">
         <img src="${pageContext.request.contextPath}/resources/images/logo.gif" style="width: 150px; height: 150px;" onclick="location.href='<c:url value="/"/>'">
         <div>

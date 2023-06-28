@@ -5,20 +5,27 @@
 }
 
 .form {
-  position:absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  width:350px;
-  height:380px;
-  padding:10px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, calc(-50% - 50px));
+  width: 380px;
+  height: 410px;
+  padding: 10px;
 }
 
 /* footer 삽입 */
 .footer {
-	position: relative;
+	position: absolute;
 	bottom: 0;
 	width: 100%;
+}
+
+/* SNS 로그인 선 */
+.lineLogin {
+	border-top: 1px solid #ccc;
+	flex-grow: 1;
+	margin: 0 10px;
 }
 
 /* 개인회원, 기업회원 버튼 */
@@ -27,13 +34,14 @@
   display:flex;
   align-items:center;
   text-align:center;
+  margin-bottom: 10px;
 }
 
 
 .form .form-header > div {
   width:calc(100% / 2);
   color:#ddd;
-  font-size:18px;
+  font-size:22px;
   font-weight:600;
   cursor:pointer;
 }
@@ -49,7 +57,7 @@
 }
 /* 로그인 유지, 아이디 저장 체크박스 */
 .form .checkbox-container {
-  font-size: 15px;
+  font-size: 16px;
   text-align: center;
   padding: 10px;
 }
@@ -100,7 +108,7 @@
 /* 회원가입, 아이디/비밀번호 찾기 */
 .signup-forgotten a {
   position: relative;
-  font-size: 14px;
+  font-size: 16px;
   text-decoration: none;
   color: #5a5a5a;
 }

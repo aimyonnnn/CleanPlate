@@ -103,38 +103,45 @@
 					    <div class="personalButton">개인회원</div>
 					    <div class="businessButton">기업회원</div>
 					</div>
-				     <!-- 로그인 유지, 아이디 저장 체크박스 -->
-                   <div class="checkbox-container">
-	                  <span class="spacing"></span>
-	                  <input type="checkbox" id="rememberId" name="rememberId" ${empty cookie.rememberId.value ? "" : "checked" }>
-	                  <label for="rememberId">아이디 저장</label>
-	                  </div>
 	                  <!-- 아이디, 비번 입력 -->
                 	 <div class="form-elements">
                      <div class="form-element">
                         <input type="text" placeholder="아이디" name="id" value="${cookie.rememberId.value }">
                      </div>
-                   <div class="form-element">
+                    <div class="form-element">
                       <input type="password" placeholder="비밀번호" name="passwd">
-				    	</div>
+				    </div>
 				    	<div class="form-element d-flex flex-row">
 				    		<button type="submit" id="submit-btn">로그인</button>
-				    		<div class="ms-1 me-1"><!-- 여백 --></div>
-				    		<!-- 카카오 로그인 -->
-<!-- 				    		<button type="button" id="submit-btn" onclick="loginWithKakao()" style="background-color: #FEE500; color: #000000 85%;">카카오 로그인</button> -->
-				    		<img src="${pageContext.request.contextPath }/resources/images/kakao_login_large.png"  onclick="loginWithKakao()" width="100px;">
-				    		<div class="ms-1 me-1"><!-- 여백 --></div>
-							<!-- 네이버 로그인 -->				    		
-				    		<img src="${pageContext.request.contextPath }/resources/images/naver_btnG.png" id="naverIdLogin_loginButton">
-				    	   </div>
-					</div>
-					   	<!-- 회원가입, 아이디/비밀번호 찾기 -->
-					   	<div class="signup-forgotten">
-					           <a class="join" data-bs-toggle="modal" data-bs-target="#personal-modal">회원가입</a> | 
-					           <a class="forgotten" onclick="location.href='forgotten'">아이디/비밀번호 찾기</a>
-					    </div>
-					</form>
-				</div>
+				    	</div>
+				    </div>
+				    	<div class="form-wrapper">
+							<div class="mt-2">
+							    <input type="checkbox" id="rememberId" name="rememberId" ${empty cookie.rememberId.value ? "" : "checked"}>
+							    <label for="rememberId">아이디 저장</label>
+							</div>
+							<!-- 회원가입, 아이디/비밀번호 찾기 -->
+							<div class="signup-forgotten">
+							    <a class="join" data-bs-toggle="modal" data-bs-target="#personal-modal">회원가입</a> | 
+							    <a class="forgotten" onclick="location.href='forgotten'">아이디/비밀번호 찾기</a>
+							</div>
+					    	<div class="mt-2 sns-login-title text-center text-muted">
+								<div class="d-flex align-items-center mb-2 w-100">
+									<span class="lineLogin"></span>
+									SNS 로그인
+									<span class="lineLogin"></span>
+								</div>
+							</div>
+						    <div class="form-element d-flex flex-column">
+						        <!-- 카카오 로그인 -->
+						        <!-- <button type="button" id="submit-btn" onclick="loginWithKakao()" style="background-color: #FEE500; color: #000000 85%;">카카오 로그인</button> -->
+						        <img src="${pageContext.request.contextPath}/resources/images/kakao_logo.jpg" onclick="loginWithKakao()" style="margin-bottom: 6px;">
+						        <!-- 네이버 로그인 -->
+						        <img src="${pageContext.request.contextPath}/resources/images/naver_logo.jpg" id="naverIdLogin_loginButton">
+						    </div>
+						</div>
+				</form>
+			</div>
 		</c:when>
 		<c:otherwise>
 				<!-- 세션 아이디가 존재할 경우 -->
@@ -326,7 +333,7 @@
 							<div class="input-container">
 								<label for="m_tel">전화번호<br></label>
 								<div class="d-flex flex-row">
-									<input type="text" name="m_tel" id="m_tel" class="form-control" placeholder="'-'빼고 숫자만 입력" minlength="9" maxlength="15" pattern="^[0-9]+$" style="width: 78%;" required>
+									<input type="text" name="m_tel" id="m_tel" class="form-control" placeholder="'-'빼고 숫자만 입력" minlength="9" maxlength="15" pattern="^[0-9]+$" style="width: 77%;" required>
 									<button type="button" class="ml-2 btn btn-dark" id="verifyRequest" style="margin-left: 7px;">인증요청</button>
 								</div>
 								<div class="invalid-feedback">
@@ -336,7 +343,7 @@
 	              			<div class="input-container">
 			                <label for="verifyNum">인증번호<br></label>
 			                	<div class="d-flex flex-row">
-				                	<input type="text" id="verifyNum" class="form-control" maxlength="4" pattern="^[0-9]{4}$"  style="width: 78%;" required>
+				                	<input type="text" id="verifyNum" class="form-control" maxlength="4" pattern="^[0-9]{4}$"  style="width: 77%;" required>
 		                			<button type="button" class="btn btn-dark" id="verifyConfirm" style="margin-left: 7px;">인증확인</button>
 			                	</div>
 		                	<div class="invalid-feedback">
@@ -496,7 +503,7 @@
 							<div class="input-container">
 								<label for="c_tel">전화번호<br></label>
 									<div class="d-flex flex-row">
-										<input type="text" name="c_tel" id="c_tel" class="form-control" placeholder="'_'빼고 숫자만 입력" minlength="9" maxlength="15" pattern="^[0-9]+$" style="width:78%;" required>
+										<input type="text" name="c_tel" id="c_tel" class="form-control" placeholder="'_'빼고 숫자만 입력" minlength="9" maxlength="15" pattern="^[0-9]+$" style="width:77%;" required>
 										<button type="button" class="btn btn-dark" id="businessRequest" style="margin-left: 7px;">인증요청</button>
 									</div>
 								<div class="invalid-feedback">
@@ -506,7 +513,7 @@
 							<div class="input-container">
 								<label for="businessNum">인증번호<br></label>
 									<div class="d-flex flex-row">
-										<input type="text" id="businessNum" class="form-control" maxlength="4" pattern="^[0-9]{4}$" style="width:78%" required>
+										<input type="text" id="businessNum" class="form-control" maxlength="4" pattern="^[0-9]{4}$" style="width:77%" required>
 										<button type="button" class="btn btn-dark" id="businessConfirm" style="margin-left: 7px;">인증확인</button>
 									</div>
 								<div class="invalid-feedback">
@@ -760,9 +767,10 @@
 		});
 	</script>
 	
-<!-- 	<footer class="footer"> -->
-<%-- 		<jsp:include page="../common/common_footer.jsp"/> --%>
-<!-- 	</footer> -->
+	<footer class="footer">
+		<hr style="margin-top: 100px;">
+		<jsp:include page="../common/common_footer.jsp"/>
+	</footer>
 	
 	<!-- Bootstrap CDN -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
