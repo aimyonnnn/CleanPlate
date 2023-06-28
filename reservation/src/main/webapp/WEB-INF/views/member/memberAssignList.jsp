@@ -74,7 +74,7 @@
                         <th>예약번호</th>
                         <th>판매금액</th>
                         <th>상태</th>
-                        <th></th>
+                        <th>정산관리</th>
                     </tr>
                 </thead>
                 <tbody>
