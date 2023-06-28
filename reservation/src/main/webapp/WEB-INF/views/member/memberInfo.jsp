@@ -94,12 +94,12 @@
 						    	<th scope="row"><label for="userPhone">휴대폰번호</label></th>
 						    	<td style="height: 40px; vertical-align: middle;">
 							  		<div class="d-flex align-items-center">
-							    		<input class="form-control" type="text" name="m_tel" style="width: 200px" aria-label="default input example" value="${member.m_tel }" required="required">
-							        	<br><button type="button" class="btn btn-outline-dark" style="margin-left: 6px;">인증요청</button>
+							    		<input class="form-control" type="text" name="m_tel" id="m_tel" style="width: 200px" aria-label="default input example" value="${member.m_tel }" required="required">
+							        	<br><button type="button" class="btn btn-outline-dark" id="verifyRequest" style="margin-left: 6px;">인증요청</button>
 							    	</div>
 							    	<div class="mt-2 d-flex align-items-center">
-							    		<input class="form-control" type="text" name="verifyPhone" aria-label="default input example" style="width: 120px;">
-							        	<button type="button" class="btn btn-outline-dark" style="margin-left: 6px;">인증확인</button>
+							    		<input class="form-control" type="text" name="verifyNum" id="verifyNum" aria-label="default input example" style="width: 120px;">
+							        	<button type="button" class="btn btn-outline-dark" id="verifyConfirm" style="margin-left: 6px;">인증확인</button>
 							    	</div>
 								</td>
 						    </tr>
@@ -132,6 +132,35 @@
             </div>
         </div>
     </div>
+    
+    <!-- CoolSMS 문자인증 시작 -->
+	<script>
+	$('#verifyRequest').click(function(){
+		let to = $('input[id="m_tel"]').val();
+		$.ajax({
+			url : '<c:url value="/checkPhone"/>',
+			type : "POST",
+			data : "to=" + to,
+			dataType : "json",
+			success : function(data) {
+				let checkNum = data;
+				alert('checkNum:'+ checkNum);
+				$('#verifyConfirm').click(function(){
+					let userNum = $('input[id="verifyNum"]').val();		
+					if(checkNum == userNum){
+						alert('인증 성공하였습니다.');
+					}else {
+						alert('인증 실패하였습니다. 다시 입력해주세요.');
+					}
+				});
+			},
+			error : function() {
+				alert("에러")
+			}
+		});
+	});
+	</script>
+	<!-- CoolSMS 문자인증 끝 -->
  
     <!-- 하단 부분 include 처리영역 -->
     <hr style="margin-top: 100px;">
