@@ -5,6 +5,7 @@ import java.nio.file.*;
 import java.sql.Timestamp;
 import java.text.*;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -267,7 +268,6 @@ public class OwnerController {
 					int me_idx = menuService.getMeIdx(menu);
 					
 					
-					
 					if(insertMenuCount > 0) { // 메뉴 등록 성공시 예약 시간 등록요청
 						
 						// 중복값 발생 이유 => menu반복문안이라서
@@ -277,7 +277,13 @@ public class OwnerController {
 							t_Time.setRes_idx(res_idx);
 							// 조회한 메뉴idx 저장
 							t_Time.setMe_idx(me_idx);
-							timesService.insertTime(t_Time);
+							LocalTime localTime = LocalTime.parse(t_Time.getT_time());
+							if(menu.getMe_name().equals("LUNCH") && localTime.isBefore(LocalTime.parse("17:00"))){
+								timesService.insertTime(t_Time);
+							}
+							if(menu.getMe_name().equals("DINNER") && (localTime.isAfter(LocalTime.parse("17:00")) || localTime == (LocalTime.parse("17:00")))) {
+								timesService.insertTime(t_Time);
+							}
 						}
 					} else { // 메뉴 등록 실패시 
 						model.addAttribute("msg", "가게 등록 실패!");
