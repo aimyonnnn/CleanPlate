@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>QNA</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 	<!-- CSS -->
     <link href="${pageContext.request.contextPath }/resources/css/help.css" rel="styleSheet" type="text/css">
@@ -144,11 +144,11 @@
 	                        </li>
 	                    </c:otherwise>
 	                </c:choose>
-	
+					
 	                <!-- 페이지 번호 -->
 	                <c:forEach var="i" begin="${pageInfo.startPage}" end="${pageInfo.endPage}">
 	                    <c:choose>
-	                        <c:when test="${pageNum eq i}">
+	                        <c:when test="${param.pageNum eq i}">
 	                            <li class="page-item active">
 	                                <a class="page-link" href="#">${i}</a>
 	                            </li>

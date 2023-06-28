@@ -326,7 +326,7 @@ public class MemberController {
 				}
 			}
 			
-			return "redirect:/";
+			return "redirect:memberRSList";
 		} else {
 			model.addAttribute("msg", "리뷰작성 실패");
 			return "fail_back";
