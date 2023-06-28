@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwillbs.test.mapper.ReservationMapper;
 import com.itwillbs.test.vo.ReservationVO;
@@ -137,5 +138,10 @@ public class ReservationService {
 	public ReservationVO adminReservationTotalCount(int x) {
 		return mapper.adminReservationTotalCount(x);
 	}
+
+	// 일일 예약 시간대 분포 조회
+//	public ReservationVO adminDailyReservaionPie(@RequestParam int i) {
+//		return mapper.adminDailyReservaionPie(i);
+//	}
 
 }

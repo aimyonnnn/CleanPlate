@@ -121,50 +121,7 @@
         </div> 
 
 <%-- 카드 영역 --%> 
-        <div class="cards">
-          <div class="card-single">
-            <div class="card-flex">
-              <div class="card-into">
-                <div class="card-head">
-					<small>총 예약 수</small>
-					<h2>${reservationList.size() } 건</h2>
-                </div>
-              </div>
-              <div class="card-chart danger">
-                <span class="las la-chart-line"></span>
-              </div>
-            </div>
-          </div>
-          <div class="card-single">
-            <div class="card-flex">
-              <div class="card-into">
-                <div class="card-head">
-					<small>총 결제 금액</small>
-					<h2><fmt:formatNumber value="${total }" /> 원</h2>
-                </div>
-              </div>
-              <div class="card-chart black">
-                <span class="las la-chart-line"></span>
-              </div>
-            </div>
-          </div>
-         
-          <div class="card-single">
-            <div class="card-flex">
-              <div class="card-into">
-                <div class="card-head">
-					<small>총 가입자 수</small>
-					<h2>${memberList.size() } 명</h2>
-                </div>
-              </div>
-              <div class="card-chart success">
-                <span class="las la-chart-line"></span>
-              </div>
-            </div>
-          </div>
-         </div>
-         <br>
-        <div class="cards">
+<div class="cards">
           <div class="card-single">
             <div class="card-flex">
               <div class="card-into">
@@ -207,12 +164,14 @@
           </div>
          </div>
          <br>
-<%-- ------------- --%>    
 
+<canvas id="dailyReservation" width="300px" height="450px"></canvas>
 
-<div>
+<div class="card-single">
+	<div class="card-flex">
 	<!-- 일일 라인 차트가 그려질 부분 -->
-	<canvas id="dailyChart" style="width: 900px; height: 300px;"></canvas>
+	<canvas id="dailyChart" width="900px" height="300px"></canvas>
+	</div>
 </div>
 <br>
 <!-- 6일 전, 오늘 날짜 데이터 -->
@@ -226,21 +185,71 @@
 
 <br>
 <!-- 누적 라인 차트가 그려질 부분 -->
-<div>
-	<canvas id="totalChart" style="width: 900px; height: 300px;"></canvas>
+        <div class="cards">
+          <div class="card-single" onclick="totalReservation()">
+            <div class="card-flex">
+              <div class="card-into">
+                <div class="card-head">
+					<small>누적 예약 수</small>
+					<h2>${reservationList.size() } 건</h2>
+                </div>
+              </div>
+              <div class="card-chart danger">
+                <span class="las la-chart-line"></span>
+              </div>
+            </div>
+          </div>
+          <div class="card-single" onclick="totalPay()">
+            <div class="card-flex">
+              <div class="card-into">
+                <div class="card-head">
+					<small>누적 결제 금액</small>
+					<h2><fmt:formatNumber value="${total }" /> 원</h2>
+                </div>
+              </div>
+              <div class="card-chart black">
+                <span class="las la-chart-line"></span>
+              </div>
+            </div>
+          </div>
+         
+          <div class="card-single" onclick="totalJoinMember()">
+            <div class="card-flex">
+              <div class="card-into">
+                <div class="card-head">
+					<small>총 가입자 수</small>
+					<h2>${memberList.size() } 명</h2>
+                </div>
+              </div>
+              <div class="card-chart success">
+                <span class="las la-chart-line"></span>
+              </div>
+            </div>
+          </div>
+         </div>
+         <br>
+         
+<div class="card-single">
+	<div class="card-flex">
+		<canvas id="totalChart" width="900px" height="300px"></canvas>
+	</div>
 </div>
+<br>
+<img width="18" height="18" src="https://img.icons8.com/material-rounded/24/info-squared.png" alt="information--v2"/>
+<small>집계일: ${sixDayAgoStr } ~ ${nowDate }</small>
 <!-- 
 카드 클릭 시 해당 항목 상세 차트 띄우기, 라인 차트 날짜 클릭 시 해당 날짜의 데이터를 막대 형식으로 띄우기
  -->
 
 <!-- 일일 라인 차트 스크립트  -->
 <script type="text/javascript">
+			// 라인 차트 영역
 			var now = moment();
             var context = document
                 .getElementById('dailyChart')
                 .getContext('2d');
-            var myChart = new Chart(context, {
-                type: 'line', // 차트의 형	태
+            var dailyChart = new Chart(context, {
+                type: 'line', // 차트의 형태
                 data: { // 차트에 들어갈 데이터
                 	labels: [ moment().subtract(6, 'day').format('YYYY.MM.DD')
                 		, moment().subtract(5, 'day').format('YYYY.MM.DD')
@@ -311,7 +320,53 @@
                             }]
                     }
                 }
-            });
+            });   
+            
+            document.getElementById("dailyChart").onclick = function(evt) {
+                var activePoints = dailyChart.getElementsAtEvent(evt);
+
+                if(activePoints.length > 0)
+                {
+                    var clickedElementindex = activePoints[0]["_index"];
+
+                    var label = dailyChart.data.labels[clickedElementindex];
+                    console.log("label : " + label);
+
+                    var value = dailyChart.data.datasets[0].data[clickedElementindex];
+                    console.log("value : " + value);
+                }
+            }
+            // --------------------------------------------------------------------------
+            
+            // 일일 예약 시간대 분포 파이 차트 영역
+            var dailyResrvation =  new Chart(document.getElementById("dailyReservation"), {
+        	    type: 'pie',
+        	    data: {
+        	      labels: ["11:00 ~ 13:59시"
+        	    	  	 , "14:00 ~ 16:59시"
+        	    	  	 , "17:00 ~ 19:59시"
+        	    	  	 , "20:00 ~ 23:00시"],
+        	      datasets: [{
+        	        label: "예약 인원",
+        	        backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+        	        data: [ 25, 25,25,25
+//         	        	${adminDailyReservaionPie11.count}
+//         	       		  ,${adminDailyReservaionPie14.count}
+//         	     		  ,${adminDailyReservaionPie17.count}
+//         	      		  ,${adminDailyReservaionPie20.count}
+        	      		  
+        	      		  ]
+        	      }]
+        	    },
+        	    options: {
+        	      responsive: false,
+        	      title: {
+        	        display: true,
+        	        text: '일일 예약 시간대 분포'
+        	      }
+        	    }
+        	});
+            // --------------------------------------------------------------------------
         </script>   
              
 <!-- 누적 라인 차트 스크립트 -->
@@ -321,7 +376,7 @@
                 .getElementById('totalChart')
                 .getContext('2d');
             var myChart = new Chart(context, {
-                type: 'line', // 차트의 형	태
+                type: 'line', // 차트의 형태
                 data: { // 차트에 들어갈 데이터
                 	labels: [ moment().subtract(6, 'day').format('YYYY.MM.DD')
                 		, moment().subtract(5, 'day').format('YYYY.MM.DD')

@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwillbs.test.vo.ReservationVO;
 import com.itwillbs.test.vo.RestaurantVO;
@@ -98,5 +99,8 @@ public interface ReservationMapper {
 
 	// 지난 일자 총 예약 수 조회
 	ReservationVO adminReservationTotalCount(int x);
+
+	// 일일 예약 시간대 분포 조회
+	ReservationVO adminDailyReservaionPie(@RequestParam int i);
 
 }

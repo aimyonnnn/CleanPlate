@@ -140,8 +140,21 @@ public class AdminController {
 				defaultVO.setCount(0);
 				model.addAttribute("adminReservationCount" + i, defaultVO);
 			}
-			
 		}	
+		
+		// 일일 예약 시간대 분포 조회
+//		ReservationVO revVO = new ReservationVO();
+//		for(int i = 11; i <= 20; i= +3) {
+//			revVO = rservice.adminDailyReservaionPie(i);
+//			model.addAttribute("adminDailyReservaionPie" + i, revVO);
+//			// 조회 결과가 없을 경우 0 값으로 대체
+//			if(revVO == null) {
+//				ReservationVO defaultVO = new ReservationVO();
+//				defaultVO.setCount(0);
+//				model.addAttribute("adminDailyReservaionPie" + i, defaultVO);
+//			}
+//		}
+		
 		
 		// 지난 일자 총 예약 수 조회
 		ReservationVO adminReservationTotalCount = new ReservationVO();
@@ -174,7 +187,7 @@ public class AdminController {
 				model.addAttribute("adminPaymentCount" + i, defaultVO);
 			}
 		}
-			
+		
 		// 총 결제 금액 조회
 		int total = pservice.getTotalPay();
 		request.setAttribute("total", total);
