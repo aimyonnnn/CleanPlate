@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 </head>
 <body>
   <div class="py-5 text-center">
@@ -30,7 +31,7 @@
     </div>
     <div>
       <label for="storeName">요청사항</label>
-      <input type="text" id="r_request" name="r_request" class="form-control" value="${reservationVO.r_request}" style="width: 350px; height: 200px">
+      <input type="text" id="r_request" name="r_request" class="form-control" value="${reservationVO.r_request}" style="width: 100%; height: 200px">
     </div>
     <div>
       <label for="paymentDate">총 금액</label>
@@ -44,16 +45,19 @@
 
     <div class="row">
       <div class="col">
-<button class="w-100 btn btn-danger btn-lg" type="submit">수정하기</button>
+<button class="w-100 btn btn-info btn-lg" type="submit">수정하기</button>
 <%--         <button class="w-100 btn btn-danger btn-lg" type="button" onclick="location.href='deleteReservation?idx=${reservationVO.r_idx}'">삭제하기</button> --%>
       <!-- 예약은 바로 삭제가 아닌 status로 취소 상태만 판별 -->
       </div>
+   	</div>
+   	<br>
+    <div class="row">
       <div class="col">
         <button class="w-100 btn btn-secondary btn-lg"
                 onclick="location.href='adminReservation'"
                 type="button">취소</button>
       </div>
-    </div>
+   </div>
   </form>
 </div> <!-- /container -->
 

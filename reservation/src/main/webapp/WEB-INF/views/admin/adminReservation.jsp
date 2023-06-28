@@ -172,7 +172,7 @@
           <td>${reservation.m_name }</td>
           <td>${reservation.res_name }</td>
         <td><button type="submit" class="btn btn-sm btn-primary" formmethod="post"
-        onclick="location.href='deleteReservationForm?idx=${reservation.r_idx}'">정보 수정</button></td>
+        onclick="location.href='deleteReservationForm?idx=${reservation.r_idx}'"><i class="la la-gear"></i>정보 수정</button></td>
         </tr>
         </c:forEach>
         </tbody>

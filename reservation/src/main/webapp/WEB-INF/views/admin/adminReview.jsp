@@ -145,7 +145,7 @@
           <td>${review.m_nick }</td>
           <td>${review.res_name}</td>
       	  <td><button type="submit" class="btn btn-sm btn-primary" formmethod="get"
-          onclick="location.href='deleteReview?idx=${review.rv_idx}'">리뷰 정보 삭제</button></td>
+          onclick="location.href='deleteReview?idx=${review.rv_idx}'"><i class="las la-trash"></i>리뷰 정보 삭제</button></td>
         </tr>
         </c:forEach>
         </tbody>

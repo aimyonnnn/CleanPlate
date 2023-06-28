@@ -148,7 +148,7 @@
           <td>${restaurant.res_address }, ${restaurant.res_detailAddress }</td>
           <td>${restaurant.c_name }</td>
        	  <td><button type="button" class="btn btn-sm btn-primary"
-          onclick="location.href='deleteStoreForm?idx=${restaurant.res_idx}'">정보 수정</button></td>
+          onclick="location.href='deleteStoreForm?idx=${restaurant.res_idx}'"><i class="la la-gear"></i>정보 수정</button></td>
         </tr>
         </c:forEach>
         </tbody>

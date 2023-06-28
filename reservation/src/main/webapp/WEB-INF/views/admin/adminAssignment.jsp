@@ -11,6 +11,7 @@
 	<link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <title>양도 관리</title>
     <link href="${pageContext.request.contextPath }/resources/css/adminDetail.css" rel="stylesheet" type="text/css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="shortcut icon" href="#">
   </head>
   <body>
@@ -157,7 +158,7 @@
           <td>${assignment.a_sellerId}</td>
           <td>${assignment.r_idx}</td>
       	  <td><button type="submit" class="btn btn-sm btn-primary" formmethod="get"
-          onclick="location.href='deleteAssignment?idx=${assignment.a_idx}'">양도 정보 삭제</button></td>
+          onclick="location.href='deleteAssignment?idx=${assignment.a_idx}'"><i class="las la-trash"></i>양도 정보 삭제</button></td>
         </tr>
         </c:forEach>
         </tbody>

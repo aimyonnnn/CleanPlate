@@ -5,12 +5,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 </head>
 <body>
   <div class="py-5 text-center">
     <h2>가게 관리</h2>
   </div>
-
 <div class="container">
 
   <form action="adminStoreUpdate" method="post">
@@ -20,16 +20,19 @@
       <input type="hidden" id="res_idx" name="res_idx" class="form-control" value="${restaurantVO.res_idx }">
     </div>
     <div>
+      <label for="ceoIdx">점주 이름</label>
+      <input type="text" id="#" name="#" class="form-control" value="${restaurantVO.c_name }" disabled="disabled">
+      <input type="hidden" id="c_name" name="c_name" class="form-control" value="${restaurantVO.c_name }">
+    </div>
+    <div>
       <label for="restaurantBrn">사업자등록번호</label>
-      <input type="text" id="res_brn" name="res_brn" class="form-control" value="${restaurantVO.res_brn }">
+      <input type="text" id="#" name="#" class="form-control" value="${restaurantVO.res_brn }" disabled="disabled">
+      <input type="hidden" id="res_brn" name="res_brn" class="form-control" value="${restaurantVO.res_brn }">
     </div>
     <div>
       <label for="restaurantName">가게 이름</label>
-      <input type="text" id="res_name" name="res_name" class="form-control" value="${restaurantVO.res_name }">
-    </div>
-    <div>
-      <label for="ceoIdx">점주 이름</label>
-      <input type="text" id="c_name" name="c_name" class="form-control" value="${restaurantVO.c_name }">
+      <input type="text" id="#" name="#" class="form-control" value="${restaurantVO.res_name }" disabled="disabled">
+      <input type="hidden" id="res_name" name="res_name" class="form-control" value="${restaurantVO.res_name }">
     </div>
     <div>
       <label for="restaurantTel">가게 전화번호</label>
@@ -48,15 +51,21 @@
 
    <div class="row">
       <div class="col">
-        <button class="w-100 btn btn-danger btn-lg" type="submit">수정하기</button>
-        <button class="w-100 btn btn-danger btn-lg" type="button" onclick="location.href='deleteStore?idx=${restaurantVO.res_idx}'">삭제하기</button>
+        <button class="w-100 btn btn-info btn-lg" type="submit">수정하기</button>
       </div>
+   </div>
+   <br>
+   <div class="row">
       <div class="col">
-        <button class="w-100 btn btn-secondary btn-lg"
-                onclick="location.href='adminStore'"
-                type="button">취소</button>
+        <button class="w-100 btn btn-danger btn-lg" type="button" onclick="location.href='deleteStore?idx=${restaurantVO.res_idx}'">삭제하기</button>
+        </div>
+   </div>
+   <br>
+   <div class="row">
+      <div class="col">        
+        <button class="w-100 btn btn-secondary btn-lg" onclick="location.href='adminStore'" type="button">취소</button>
       </div>
-    </div>
+   </div>
   </form>
 </div> <!-- /container -->
 

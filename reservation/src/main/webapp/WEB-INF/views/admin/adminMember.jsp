@@ -114,9 +114,9 @@
             <br>
             <small>회원 관리 페이지</small>
             <br>
+            <i class="la la-gear"></i>
           </div>
         </div> 
-
     <div class="main">
       <div class="title row">
         <div class="col-7">
@@ -173,7 +173,7 @@
         </c:if>
         <%-- 회원 타입 판별 --%>
         <td><button type="button" class="btn btn-sm btn-primary"
-        onclick="location.href='deleteMemberForm?id=${member.m_id}'">정보 수정</button></td>
+        onclick="location.href='deleteMemberForm?id=${member.m_id}'"><i class="la la-gear"></i>정보 수정</button></td>
         </tr>
         </c:forEach>
         </tbody>
