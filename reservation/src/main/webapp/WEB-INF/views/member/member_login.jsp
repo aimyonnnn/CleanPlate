@@ -327,7 +327,7 @@
 								<label for="m_tel">전화번호<br></label>
 								<div class="d-flex flex-row">
 									<input type="text" name="m_tel" id="m_tel" class="form-control" placeholder="'-'빼고 숫자만 입력" minlength="9" maxlength="15" pattern="^[0-9]+$" style="width: 78%;" required>
-									<button type="button" class="ml-2 btn btn-warning" id="verifyRequest" style="margin-left: 7px;">인증요청</button>
+									<button type="button" class="ml-2 btn btn-dark" id="verifyRequest" style="margin-left: 7px;">인증요청</button>
 								</div>
 								<div class="invalid-feedback">
 				                    전화번호를 숫자만 입력해주세요.
@@ -337,7 +337,7 @@
 			                <label for="verifyNum">인증번호<br></label>
 			                	<div class="d-flex flex-row">
 				                	<input type="text" id="verifyNum" class="form-control" maxlength="4" pattern="^[0-9]{4}$"  style="width: 78%;" required>
-		                			<button type="button" class="btn btn-warning" id="verifyConfirm" style="margin-left: 7px;">인증확인</button>
+		                			<button type="button" class="btn btn-dark" id="verifyConfirm" style="margin-left: 7px;">인증확인</button>
 			                	</div>
 		                	<div class="invalid-feedback">
 			                    인증번호를 입력해주세요.
@@ -411,7 +411,7 @@
 						<!-- 약관 끝 -->
 						<!-- 회원가입 버튼 -->
 						<div class="d-flex justify-content-center">
-							<button type="submit" class="mt-1 btn btn-warning" id="signup-button">회원가입</button>
+							<button type="submit" class="mt-1 btn btn-dark" id="signup-button">회원가입</button>
 						</div>
 					</form>
 					</div>
@@ -497,7 +497,7 @@
 								<label for="c_tel">전화번호<br></label>
 									<div class="d-flex flex-row">
 										<input type="text" name="c_tel" id="c_tel" class="form-control" placeholder="'_'빼고 숫자만 입력" minlength="9" maxlength="15" pattern="^[0-9]+$" style="width:78%;" required>
-										<button type="button" class="btn btn-warning" id="businessRequest" style="margin-left: 7px;">인증요청</button>
+										<button type="button" class="btn btn-dark" id="businessRequest" style="margin-left: 7px;">인증요청</button>
 									</div>
 								<div class="invalid-feedback">
 				                    전화번호를 숫자만 입력해주세요.
@@ -507,7 +507,7 @@
 								<label for="businessNum">인증번호<br></label>
 									<div class="d-flex flex-row">
 										<input type="text" id="businessNum" class="form-control" maxlength="4" pattern="^[0-9]{4}$" style="width:78%" required>
-										<button type="button" class="btn btn-warning" id="businessConfirm" style="margin-left: 7px;">인증확인</button>
+										<button type="button" class="btn btn-dark" id="businessConfirm" style="margin-left: 7px;">인증확인</button>
 									</div>
 								<div class="invalid-feedback">
 				                    인증번호를 입력해주세요.
@@ -581,7 +581,7 @@
 						<!-- 약관 끝 -->
 						<!-- 회원가입 버튼 -->
 						<div class="d-flex justify-content-center">
-							<button type="submit" class="mt-1 btn btn-warning" id="signup-button">회원가입</button>
+							<button type="submit" class="mt-1 btn btn-dark" id="signup-button">회원가입</button>
 						</div>
 					</form>
 					</div>

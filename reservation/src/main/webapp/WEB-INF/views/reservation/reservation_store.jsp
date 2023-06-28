@@ -41,9 +41,15 @@
 		}
 		
 		.cell-image {
-		    width: 100%;
-		    height: 100%;
-		    object-fit: cover;
+	    width: 100%;
+	    height: 100%;
+	    object-fit: cover;
+	    }
+		    
+		.carousel-img {
+	    width: 100%; 
+	    height: 400px;
+	    object-fit: cover; /* 종횡비 유지 */
 		}	
     </style>
     <!-- 위로가기 버튼 CSS -->
@@ -118,34 +124,36 @@
 
 	<!-- 가게 상세페이지 시작 -->
 	<div class="container-fluid w-75">
-		<h3 class="fs-2 fw-bold mt-3 text-center">${restaurantInfo.res_name}</h3>
+		<h3 class="fw-bold mt-4 text-center" style="font-size: 33px; line-height:36px; letter-spacing: -3px;">${restaurantInfo.res_name}</h3>
 		<!-- 이미지 슬라이드 시작 -->
 		<div id="carouselExampleControls" class="mt-4 carousel slide" data-bs-ride="carousel">
 			<div class="carousel-inner">
-				<div class="carousel-item active">
-					<c:if test="${not empty restaurantInfo.res_photo1 }">
-			        	<img src="${pageContext.request.contextPath }/resources/upload/${restaurantInfo.res_photo1 }">
-	                 </c:if>
-				</div>
-				<div class="carousel-item">
-           			<c:if test="${not empty restaurantInfo.res_photo2 }">
-             			<img src="${pageContext.request.contextPath }/resources/upload/${restaurantInfo.res_photo2 }">
-           			</c:if>
-				</div>
-				<div class="carousel-item">
-           			<c:if test="${not empty restaurantInfo.res_photo3 }">
-             			<img src="${pageContext.request.contextPath }/resources/upload/${restaurantInfo.res_photo3 }">
-           			</c:if>
-				</div>
+				<c:if test="${not empty restaurantInfo.res_photo1 }">
+					<div class="carousel-item ${restaurantInfo.res_photo1 == restaurantInfo.res_photo1 ? 'active' : ''}">
+						<img class="carousel-img" src="${pageContext.request.contextPath }/resources/upload/${restaurantInfo.res_photo1 }">
+					</div>
+				</c:if>
+				<c:if test="${not empty restaurantInfo.res_photo2 }">
+					<div class="carousel-item ${empty restaurantInfo.res_photo1 and not empty restaurantInfo.res_photo2 ? 'active' : ''}">
+						<img class="carousel-img" src="${pageContext.request.contextPath }/resources/upload/${restaurantInfo.res_photo2 }">
+					</div>
+				</c:if>
+				<c:if test="${not empty restaurantInfo.res_photo3 }">
+					<div class="carousel-item ${empty restaurantInfo.res_photo1 and empty restaurantInfo.res_photo2 and not empty restaurantInfo.res_photo3 ? 'active' : ''}">
+						<img class="carousel-img" src="${pageContext.request.contextPath }/resources/upload/${restaurantInfo.res_photo3 }">
+					</div>
+				</c:if>
 			</div>
-			<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-				<span class="visually-hidden">Previous</span>
-			</button>
-			<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-				<span class="carousel-control-next-icon" aria-hidden="true"></span>
-				<span class="visually-hidden">Next</span>
-			</button>
+			<c:if test="${not empty restaurantInfo.res_photo1 and not empty restaurantInfo.res_photo2 or not empty restaurantInfo.res_photo1 and not empty restaurantInfo.res_photo3 or not empty restaurantInfo.res_photo2 and not empty restaurantInfo.res_photo3}">
+				<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+					<span class="visually-hidden">Previous</span>
+				</button>
+				<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+					<span class="carousel-control-next-icon" aria-hidden="true"></span>
+					<span class="visually-hidden">Next</span>
+				</button>
+			</c:if>
 		</div>
 	<!-- 이미지 슬라이드 끝 -->
 	
@@ -224,7 +232,7 @@
 			</tbody>
 		</table>
 		<ul class="list-unstyled" style="font-size: 13px;">
-        		<li>· 드레스 코드 : 본 매장은 정중히 드레스 코드를 요청 드리고 있습니다. * 트레이닝복, 반바지, 민소매, 크록스, 슬리퍼, 샌들 </li>
+        		<li>· 드레스 코드 : 본 매장은 정중히 드레스 코드를 요청 드리고 있습니다. * 트레이닝복, 반바지, 민소매, 크록스, 슬리퍼, 샌들 제한 </li>
         </ul>
 		<!-- 가게 정보 끝 -->
 		

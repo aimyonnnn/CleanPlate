@@ -42,7 +42,7 @@
 	<div class="container">
         <div class="row mt-4">
           <div class="col">
-            <h2><img src="${pageContext.request.contextPath }/resources/images/mypageImage.jpg" alt="" style="width: 100%;" class="justify-content-center"></h2>
+            <h2><img src="${pageContext.request.contextPath }/resources/images/mypage/mypageImage.jpg" alt="" style="width: 100%;" class="justify-content-center"></h2>
           </div>
         </div>
     </div>

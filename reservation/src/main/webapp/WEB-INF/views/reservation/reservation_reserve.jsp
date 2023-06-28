@@ -55,8 +55,8 @@
 	</script>
    	<!-- 위로 가기 버튼 -->
 
-	<!-- 예약하기 시작 -->
-		<img src="${pageContext.request.contextPath }/resources/images/r_image1.jpg" class="d-block w-100" alt="..." style="height: 50%;">
+		<!-- 예약하기 시작 -->
+		<img src="${pageContext.request.contextPath }/resources/images/r_image1.jpg" class="d-block w-100" alt="..." style="height: 50%; width: auto;">
 		<div class="container w-100">
 			<div class="mt-4" style="font-size: 20px;">
 				<dl>
@@ -196,8 +196,8 @@
 			    console.log(fullyBookedDates);
 			    
 				// 휴무일 숫자를 가져옴
-				var dayOff = '${restaurant.res_dayoff}';
-    			dayOff = (dayOff === '없음') ? '' : parseInt(dayOff);
+				var dayOff = '${restaurant.res_dayoff}'.trim();
+    			dayOff = (dayOff === '') ? null : parseInt(dayOff);
 				
 				function isDayOff(date) {
 					if(dayOff === '') {
@@ -331,11 +331,11 @@
 				// 가격 계산 및 출력
 				const hour = parseInt(selectedTime.split(':')[0], 10);
 				const numberOfPeople = parseInt(document.getElementById('countResult').innerText);
-				const price = (hour >= 11 && hour <= 16) ? document.getElementById('price1').value
+				const price = (hour >= 11 && hour < 17) ? document.getElementById('price1').value
 				                                         : document.getElementById('price2').value;
-				var menuName = (hour >= 11 && hour <= 16) ? document.getElementById('menuName1').value
+				var menuName = (hour >= 11 && hour < 17) ? document.getElementById('menuName1').value
 														: document.getElementById('menuName2').value;
-				var menuIdx = (hour >= 11 && hour <= 16) ? document.getElementById('menuIdx1').value
+				var menuIdx = (hour >= 11 && hour < 17) ? document.getElementById('menuIdx1').value
 											: document.getElementById('menuIdx2').value;
 				const totalPrice = price * numberOfPeople;
 				document.getElementById("totalResult").innerText = totalPrice + '원';

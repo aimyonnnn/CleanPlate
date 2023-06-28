@@ -76,11 +76,11 @@
 			            </c:forEach>
 					</tbody>
 				</table>
-<%-- 				<c:if test="${sessionScope.sId eq 'admin' }"> --%>
+				<c:if test="${sessionScope.sId eq 'admin' }">
 					<div class="d-flex justify-content-end">
 					    <a href="NoticeBoard" class="btn btn-outline-dark">글쓰기</a>
 					</div>
-<%-- 				</c:if> --%>
+				</c:if>
 			</div>
 		</div>
     <!-- 페이지 이동 버튼 -->

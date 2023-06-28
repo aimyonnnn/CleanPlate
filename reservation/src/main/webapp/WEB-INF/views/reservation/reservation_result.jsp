@@ -21,21 +21,18 @@
 	<!-- 예약내역 내용 시작-->
 	<div class="container">
 	    <div class="row">
-	        <div class="col-md-12" style="text-align: center;">
-	        	<img src="${pageContext.request.contextPath }/resources/images/reservation.png" style="margin-top: 15px; width: 100px; height: 100px;">
-	            <p class="mt-4 mb-4" style="font-size: 30px; line-height:36px; letter-spacing: -3px;">예약이 완료되었습니다.</p>
+	        <div class="col-md-12 mt-5" style="text-align: center;">
+	        	<img src="${pageContext.request.contextPath }/resources/images/mypage/reservationResult2.jpg" style="margin-top: 15px;">
 	        </div>
 	    </div>
 	    <div class="row">
-	        <div class="mt-2 col-md-12 text-center">
-	            <img src="${pageContext.request.contextPath }/resources/upload/${reservation.res_photo1}" width="100" height="100"
-	                 class="rounded mx-auto d-block" height="300px" width="500px">
-	            <h2 class="mt-4 mb-4 fw-bold" style="line-height:36px; letter-spacing: -3px;">${reservation.res_name }</h2>
+	        <div class="mt-5 col-md-12 text-center">
+	            <h2 class="mt-5 mb-4 fw-bold" style="line-height:36px; letter-spacing: -3px;">${reservation.res_name }</h2>
 	        </div>
 	    </div>
 	    <div class="container">
 		    <div class="row">
-		        <div class="col-md-12">
+		        <div class="col-md-12 fs-4">
 		        	<!-- 예약내역 테이블 시작 -->
 		            <table class="mt-3 table d-flex justify-content-center">
 		                <tbody>
@@ -96,8 +93,8 @@
 		        </div>
 		        <!-- 예약내역 버튼 -->
 		        <div class="d-flex justify-content-center">
-			        <button type="button" class="btn btn-outline-warning mb-2" style="margin-left: 10px;" id="reservationList">나의 예약내역 바로가기</button>
-		        	<button type="button" id="mainButton" class="btn btn-outline-secondary mb-2" style="margin-left: 5px;">메인으로 가기</button>
+			        <button type="button" class="btn btn-dark mb-2 mt-3" style="margin-left: 10px;" id="reservationList">나의 예약내역 바로가기</button>
+		        	<button type="button" id="mainButton" class="btn btn-outline-secondary mb-2 mt-3" style="margin-left: 5px;">메인으로 가기</button>
 		        </div>
 		    </div>
 		</div>
