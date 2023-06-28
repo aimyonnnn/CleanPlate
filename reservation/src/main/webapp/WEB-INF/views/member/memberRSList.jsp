@@ -156,6 +156,9 @@
                    </c:forEach>
                     </tbody>
                 </table> 
+                <c:if test="${empty resList }">
+                   <h5 style="color: gray; text-align: center;">아직 예약이 없습니다.</h5>
+                </c:if>
             </div>
         </div>
     </div>
