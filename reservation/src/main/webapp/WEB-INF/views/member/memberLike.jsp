@@ -94,7 +94,7 @@
 						 <td>
 			                <img src="resources/images/${like.res_photo1}" style="width: 200px; height: auto;">
 			            </td>
-			            <td>${like.res_name}</td>
+			            <td><a href="http://localhost:8080/test/getRestaurantInfo?res_idx=${like.res_idx}">${like.res_name}</a></td>
 			            <td>${like.rv_scope}</td>
 			            <td>${like.count}</td>
 			            <td>
