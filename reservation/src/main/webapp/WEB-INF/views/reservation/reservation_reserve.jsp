@@ -196,9 +196,13 @@
 			    console.log(fullyBookedDates);
 			    
 				// 휴무일 숫자를 가져옴
-				var dayOff = ${restaurant.res_dayoff};
+				var dayOff = '${restaurant.res_dayoff}';
+    			dayOff = (dayOff === '없음') ? '' : parseInt(dayOff);
 				
 				function isDayOff(date) {
+					if(dayOff === '') {
+						return false;
+					}
 					return date.getDay() === dayOff;
 				}
 				

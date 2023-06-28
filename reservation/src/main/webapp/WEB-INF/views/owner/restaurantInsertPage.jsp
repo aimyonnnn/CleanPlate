@@ -58,52 +58,38 @@
 </head>
 <body>
 	<!-- 공통 상단바 구역 -->
-<%@ include file="../common/common_header.jsp" %>
+	<%@ include file="../common/common_header.jsp" %>
    	<!-- 공통 상단바 구역 -->
 
     <!-- 제목 구역 -->
 	<div class="container">
-        <div class="row">
+        <div class="row mt-4">
           <div class="col">
-            <h2>점주 마이페이지</h2>
+            <h2><img src="${pageContext.request.contextPath }/resources/images/mypage/ceoReservation.jpg" alt="" style="width: 100%;" class="justify-content-center"></h2>
           </div>
         </div>
     </div>
 
     <!-- 사이드바, 내용 넣는 구역!-->
-    <div class="container mt-5">
-        <div class="row d-flex justify-content-center">
-            <div class="col-2 align-items-center d-flex">
-                <!-- 왼쪽 사이드바 구역 -->
-                <!-- 프로필 사진 -->
-                <div class="input-group mb-5 d-flex shadow-lg d-flex justify-content-center pe-3" style="border-radius: 10px;">
-                    <img src="../image/profile.png" alt="" style="width: 100px; height: 100px;" class="justify-content-center">
-                    <p class="d-flex align-items-center"><span>님 환영합니다</span></p>
-                    
-                </div>
-            </div>
-            <div class="col-10">
-            	<h2 style="margin-left: 80px; margin-top: 40px;">가게 등록</h2>
-            </div>
-        </div>
+    <div class="container">
         <div class="row">
-          <div class="col-2">
-            <!-- 왼쪽 사이드바 버튼들-->
-            <!-- 클릭된 버튼은 active 표시함-->
-            <div class="btn-group-vertical btn-group-lg d-flex align-self-start" role="group" aria-label="Vertical button group">
-					<button type="button" class="btn btn-outline-warning text-black p-3" onclick="location.href='ownerMypage'">내 정보</button>
-                    <button type="button" class="btn btn-outline-warning  active text-black p-3" onclick="location.href='restaurantList'">가게리스트 </button>
-                    <button type="button" class="btn btn-outline-warning text-black p-3" onclick="location.href='restaurantReservation'">예약관리</button>
-                    <button type="button" class="btn btn-outline-warning text-black p-3" onclick="location.href='ownerWithdrawal'">회원탈퇴</button>
+            <div class="col-2" style="margin-top: 60px;">
+                <!-- 왼쪽 사이드바 버튼영역-->
+                <div class="btn-group-vertical btn-group-lg d-flex align-self-start" role="group" aria-label="Vertical button group">
+					<button type="button" class="btn btn-outline-dark text-black p-3" onclick="location.href='ownerMypage'">내 정보</button>
+					<button type="button" class="btn btn-outline-dark text-white active p-3" onclick="location.href='restaurantList'">가게리스트 </button>
+					<button type="button" class="btn btn-outline-dark text-black p-3" onclick="location.href='restaurantReservation'">예약관리</button>
+					<button type="button" class="btn btn-outline-dark text-black p-3" onclick="location.href='ownerWithdrawal'">회원탈퇴</button>
+                </div>
+                <!-- 왼쪽 사이드바 버튼영역-->
             </div>
-        </div>
-            <!-- 내용 구역 -->
-            <div class="col-8">
+            <!-- 내용 -->
+            <div class="col-10 mt-4">
                 <!-- 가게내용 페이지 시작 -->
                 <!-- 파일 업로드 enctype="multipart/form-data" -->
                    <form action="restaurantInsertPro" id="restaurant" method="post" enctype="multipart/form-data">
 <!--                    <input type="hidden" name=""> -->
-                	<table class="table" style="margin-left: 70px; width: 58%;">
+                	<table class="table" style="margin-left: 140px; margin-top: 35px; width: 58%;">
 						<tbody>
                             <tr>
                                 <th scope="row"><label for="res_brn">사업자 번호</label></th>
@@ -112,9 +98,9 @@
                                         <!-- 사업자번호 자리수는 10자리 000-00-00000 형식 (하이픈 포함시 12자리)-->
                                         <!-- pattern 속성에 정규표현식 입력하여 숫자만 입력가능-->
                                         <input class="form-control" type="text" name="res_brn" id="res_brn" maxlength="12" pattern="[0-9]{3}-[0-9]{2}-[0-9]{5}" placeholder="'-'빼고 숫자만 입력" required>
-<!--                                         <button type="button" id="verifyBrn" class="btn btn-warning text-black">인증</button>  -->
+<!--                                         <button type="button" id="verifyBrn" class="btn btn-dark text-white">인증</button>  -->
 											 <!-- api 유효한 버튼은 횟수 제한 때문에 주석처리 해둠 => 실제 사용 시에 id가 담긴 버튼으로 변경 -->
-											 <button type="button" class="btn btn-warning text-black">인증</button> 
+											 <button type="button" class="btn btn-dark text-white">인증</button> 
                                     </div>
                                 </td>
                             </tr>
@@ -138,7 +124,7 @@
 								<!-- 다음 api 사용 -->
 								<div class="input-group mb-3">
 									<input type="text" class="form-control" id="address" name="res_address" placeholder="주소" readonly required>
-									<input type="button" onclick="DaumPostcode()" value="주소 찾기" class="btn btn-warning text-black"  id="addfind">
+									<input type="button" onclick="DaumPostcode()" value="주소 찾기" class="btn btn-dark text-white"  id="addfind">
 								</div>									
                                 
 								<div class="input-group mb-3 mt-2">
@@ -155,13 +141,13 @@
 						    	<td>
 	                                <!-- res_openinghours -->
 	                                <div class="row">
-	                                    <div class="col-5">
+	                                    <div class="col-4">
 	                                        <input class="form-control timepicker" id="res_open" type="text" name="res_open" style="text-align: center;"> 
 	                                    </div>
 	                                    <div class="col-1">
 	                                    	<b style="font-size: large;">-</b>
 	                                    </div>
-	                                    <div class="col-5">
+	                                    <div class="col-4">
 	                                        <input class="form-control timepicker" id="res_close" type="text" name="res_close" style="text-align: center;"> 
 	                                    </div>
 	
@@ -173,18 +159,18 @@
                                 <th scope="row">브레이크타임</th> <!-- select box -->
                                 <td>
                                 	<div class="row">
-	                               	   <div class="col-2">
-	                                	  <input type="checkbox" class="form-check-input" id="nobreak">없음
-	                                   </div>
 	                                   <!-- res_breaktime -->
 	                               	   <div class="col-4">
-	                                       <input class="form-control timepicker2" type ="text" name="res_breakstart" id="res_breakstart">
+	                                       <input class="form-control timepicker2" type ="text" name="res_breakstart" id="res_breakstart" style="text-align: center;">
 	                                   </div>
 	                               	   <div class="col-1">
 	                                	  <b style="font-size: large;">-</b>
 	                                   </div>
 	                                   <div class="col-4">
-	                                       <input class="form-control timepicker2" type ="text" name="res_breakend" id="res_breakend">
+	                                       <input class="form-control timepicker2" type ="text" name="res_breakend" id="res_breakend" style="text-align: center;">
+	                                   </div>
+	                               	   <div class="col-2">
+	                                	  <input type="checkbox" class="form-check-input" id="nobreak"> 없음
 	                                   </div>
                                     </div>
                                 </td>
@@ -276,7 +262,7 @@
 						    <tr>
 								<th scope="row"><label for="menu">메뉴</label></th>
 						    	<td id="td_menu">
-						    		<button type="button" id="menu" class="btn btn-warning" style="color: black;" >메뉴 추가</button><br>
+						    		<button type="button" id="menu" class="btn btn-dark" style="color: white;" >메뉴 추가</button><br>
 						    		<a style="font-size: small; font-weight: normal;">버튼을 클릭하여 메뉴를 추가해주세요</a>
 							 		<div class="row mt-3 align-items-center">
 							            <table class="table" id="menuList">
@@ -295,10 +281,12 @@
 						    <tr>
 						    	<th scope="row">
 						    		<label for="t_time">예약 시간</label>
-						    		<button type="button" id="t_timeInsert" class="btn btn-warning" style="color: black;" >추가</button>
 						    	</th>
 						    	<td id="td_Time">
+						    		<div class="d-inline-flex align-items-center">
 										<input class="form-control timepicker3" type ="text" name="t_time" id="t_time" style="text-align: center; width: 200px;" placeholder="클릭하여 시간 선택">
+							    		<button type="button" id="t_timeInsert" class="btn btn-dark ml-2" style="color: white;" >추가</button>
+						    		</div>
 						    	</td>
 						    </tr>
 						    <tr>
@@ -337,8 +325,8 @@
                             </tr>
 						  </tbody>
                 	</table>
-					<div style="margin-left:380px;">
-					    <button type="submit" class="btn btn-warning" style="color: white;">가게추가</button>
+					<div style="margin-left: 460px; margin-top: 20px;">
+					    <button type="submit" class="btn btn-dark" style="color: white;">가게추가</button>
 					</div>
 	
 					
@@ -510,8 +498,10 @@
 				+ '</tr>'
 				+ '<tr>'
 				+ '<td colspan="2">'
-				+ '<button type="button" onclick="hideMenu(' + tableCount + ')" class="btn btn-warning" style="color: white;">추가</button>'
-				+ '<button type="button" onclick="deleteMenu(' + tableCount +')" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>'
+				+ '<div class="d-flex justify-content-end">'
+			    + '<button type="button" onclick="hideMenu(' + tableCount + ')" class="btn btn-dark me-2" style="color: white;">추가</button>'
+			    + '<button type="button" onclick="deleteMenu(' + tableCount +')" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>'
+				+ '</div>'
 				+ '</td>'
 				+ '</tr>'
 				+ '</table>');
@@ -573,7 +563,7 @@
 </script>
     
     <!-- 하단 부분 include 처리영역 -->
-    <hr class="mt-5">
+    <hr style="margin-top: 100px;">
 	<%@ include file="../common/common_footer.jsp" %>
     <!-- 하단 부분 include 처리영역 -->
     
