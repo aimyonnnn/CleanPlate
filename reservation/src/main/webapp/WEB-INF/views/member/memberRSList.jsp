@@ -350,11 +350,11 @@
 					     	    <c:choose>
 				                    <c:when test="${resList.r_status eq 5}">
 								        <div>
-								        	<input type="text" class="salesValue2" id="salesValue2${resList.r_idx}" placeholder="가격을 입력하세요">
+								        	<input type="text" class="salesValue2" id="salesValue2${resList.r_idx}" placeholder="가격을 입력하세요" maxlength="9">
 								        </div>
 								    </c:when>
 								    <c:when test="${resList.r_status eq 1}">
-								    	<input type="text" class="salesValue" id="salesValue${resList.r_idx}" placeholder="가격을 입력하세요">
+								    	<input type="text" class="salesValue" id="salesValue${resList.r_idx}" placeholder="가격을 입력하세요" maxlength="9">
 								    </c:when>
 	                           </c:choose>
 	                           <!-- -->
