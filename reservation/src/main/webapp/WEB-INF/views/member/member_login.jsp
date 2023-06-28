@@ -72,6 +72,7 @@
 	<jsp:include page="../common/common_header.jsp"/>
 	
 	<!-- 세션 아이디가 존재하지 않을 경우에만 로그인폼을 출력 -->
+	<div class="container">
 	<c:choose>	
 		<c:when test="${empty sessionScope.sId }">
 			<!-- 로그인 시작 -->
@@ -120,6 +121,7 @@
 				<!-- 세션 아이디가 존재할 경우 -->
 		</c:otherwise>
 	</c:choose>
+	</div>
 		
 		<!-- 카카오 로그인 시작 -->
 		<script type="text/javascript" src="https://developers.kakao.com/sdk/js/kakao.js"></script>
