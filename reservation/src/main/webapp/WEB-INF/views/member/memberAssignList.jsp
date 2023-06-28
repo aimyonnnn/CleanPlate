@@ -87,10 +87,10 @@
                         	<!-- list.p_status eq 2 => 판매완료 -->
                          	<c:choose>
                         		<c:when test="${list.p_status eq 1 && list.a_sellerId eq currentUser}">
-                        			판매중
+                        			<span style="color:green;">판매중</span>
                         		</c:when>
                         		<c:when test="${list.p_status eq 2 && list.a_sellerId eq currentUser}">
-                        			판매완료
+                        			<span style="color:red;">판매완료</span>
                         		</c:when>
                         	</c:choose>
                          <!--  -->
