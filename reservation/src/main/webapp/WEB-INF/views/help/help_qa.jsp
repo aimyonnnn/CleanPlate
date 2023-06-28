@@ -20,26 +20,26 @@
 
 
 <!-- 여기부터 공지사항 메뉴 버튼 -->
-<div class="container m-5">
-  <div class="row">
-    <div class="col">
-      <h2 class="display-5 fst-italic fw-bold">Help</h2>
-    </div>
-  </div>
+<div class="container mt-5">
+	<div class="row">
+		<div class="col">
+			<h2 class="display-5 fst-italic fw-bold"><img src="${pageContext.request.contextPath }/resources/images/help.jpg" style="width: 100%;"></h2>
+		</div>
+	</div>
 </div>
 
 <div class="container mt-4">
     <div class="row gy-3 justify-content-center text-center">
         <div class="col-12">
 	      <div class="list-group list-group-horizontal">
-	        <a href="../help/help_home.jsp" class="list-group-item-dark list-group-item-action" aria-current="true">
+	        <a href="Notice" class="list-group-item-dark list-group-item-action" aria-current="true">
 	          공지사항
 	        </a>
-	        <a href="../help/help_fq.jsp" class="list-group-item-dark list-group-item-action">FAQ</a>
+	        <a href="FAQ" class="list-group-item-dark list-group-item-action">FAQ</a>
 	        <a href="QNA" class="list-group-item-dark list-group-item-action active">Q&A</a>
 	      </div>
         </div>
-        <div class="col-6">
+        <div class="col-6 mt-4">
             <div class="list-group list-group-horizontal">
                 <a href="QNABoard" class="list-group-item-dark list-group-item-action">문의하기</a>
                 <a href="QNA" class="list-group-item-dark list-group-item-action active" aria-current="true">문의내역</a>
@@ -63,7 +63,7 @@
 			        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${QNAList.q_idx }" aria-expanded="false" aria-controls="collapseOne">
 			        <div class="container text-center">
 			          <div class="row">
-			            <div class="col-7">
+			            <div class="col-7" style="text-align: left;">
 			              ${QNAList.q_subject }
 			            </div>
 			            <div class="col-2">
@@ -196,7 +196,7 @@
 		                <option value="subject_content" <c:if test="${param.searchType eq 'subject_content' }">selected</c:if>>제목&내용</option>
 		            </select>
 		            <input class="form-control me-2" type="search" name="searchKeyword" placeholder="Search" aria-label="Search" value="${searchKeyword}">
-		            <button type="submit" class="btn btn-outline-primary">Search</button>
+		            <button type="submit" class="btn btn-outline-dark">Search</button>
 		        </form>
 		    </div>
 		</div>

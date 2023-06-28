@@ -27,7 +27,7 @@
         	<div class="col-12">
 	      		<div class="list-group list-group-horizontal">
 		        	<a href="Notice" class="list-group-item-dark list-group-item-action active" aria-current="true">공지사항</a>
-			        <a href="../help/help_fq.jsp" class="list-group-item-dark list-group-item-action">FAQ</a>
+			        <a href="FAQ" class="list-group-item-dark list-group-item-action">FAQ</a>
 			        <a href="QNA" class="list-group-item-dark list-group-item-action">Q&A</a>
 	      		</div>
 			</div>
@@ -36,7 +36,7 @@
 		<div class="row my-5 justify-content-center">
 			<div class="col">
 			<h4 class="fw-bold mb-2">공지사항</h4>
-			<table class="table my-2">
+			<table class="table my-2 mt-4">
                 <tr>
                     <th class="col-1 table-secondary">제목</th>
                     <td class="fw-bold">${notice.no_subject}</td>

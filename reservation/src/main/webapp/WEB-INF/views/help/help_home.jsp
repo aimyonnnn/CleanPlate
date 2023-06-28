@@ -40,10 +40,10 @@
         		<table class="table">
 					<thead class="text-center">
 					    <tr>
-					      <th scope="col">제목</th>
-					      <th scope="col">작성자</th>
-					      <th scope="col">날짜</th>
-					      <th scope="col">조회수</th>
+					      <th scope="col" class="text-start">제목</th>
+					      <th scope="col" style="width: 10%;">작성자</th>
+					      <th scope="col" style="width: 10%;">날짜</th>
+					      <th scope="col" style="width: 10%;">조회수</th>
 					    </tr>
 					</thead>
           			<tbody class="text-center">
@@ -51,7 +51,7 @@
           				<c:forEach items="${noticeList }" var="noticeList">
           					<c:if test="${noticeList.no_category == 2}">
 					            <tr>
-					            	<td class="fs-5 text-start">
+					            	<td class="text-start fw-bold">
 					            		<a href="NoticeDetail?no_idx=${noticeList.no_idx }&pageNum=${pageNum}" style="text-decoration: none; color: black;">🔉 ${noticeList.no_subject }</a>
 					            	</td>
 					            	<td>관리자</td>
@@ -65,7 +65,7 @@
 				        <c:forEach items="${noticeList }" var="noticeList">
 				            <c:if test="${noticeList.no_category == 1}">
 					            <tr>
-					            	<td class="fs-5 text-start">
+					            	<td class="text-start">
 					            		<a href="NoticeDetail?no_idx=${noticeList.no_idx }&pageNum=${pageNum}" style="text-decoration: none; color: black;">${noticeList.no_subject }</a>
 					            	</td>
 					            	<td>관리자</td>

@@ -25,24 +25,24 @@
 
 <!-- 여기부터 공지사항 메뉴 버튼 -->
 <div class="container mt-5">
-  <div class="row">
-    <div class="col">
-      <h2 class="display-5 fst-italic fw-bold">Help</h2>
-    </div>
-  </div>
+	<div class="row">
+		<div class="col">
+			<h2 class="display-5 fst-italic fw-bold"><img src="${pageContext.request.contextPath }/resources/images/help.jpg" style="width: 100%;"></h2>
+		</div>
+	</div>
 </div>
 <div class="container mt-4">
     <div class="row gy-3 justify-content-center text-center">
         <div class="col-12">
 	      <div class="list-group list-group-horizontal">
-	        <a href="../help/help_home.jsp" class="list-group-item-dark list-group-item-action" aria-current="true">
+	        <a href="Notice" class="list-group-item-dark list-group-item-action" aria-current="true">
 	          공지사항
 	        </a>
-	        <a href="../help/help_fq.jsp" class="list-group-item-dark list-group-item-action">FAQ</a>
-	        <a href="../help/help_qa.jsp" class="list-group-item-dark list-group-item-action active">Q&A</a>
+	        <a href="FAQ" class="list-group-item-dark list-group-item-action">FAQ</a>
+	        <a href="QNA" class="list-group-item-dark list-group-item-action active">Q&A</a>
 	      </div>
         </div>
-        <div class="col-6">
+        <div class="col-6 mt-4">
             <div class="list-group list-group-horizontal">
                 <a href="QNABoard" class="list-group-item-dark list-group-item-action active" aria-current="true">문의하기</a>
                 <a href="QNA" class="list-group-item-dark list-group-item-action">문의내역</a>
