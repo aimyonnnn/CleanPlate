@@ -125,4 +125,9 @@ public class MemberService {
 		return mapper.adminMemberCount(i);
 	}
 
+	// 지난 일자 총 가입자 수 조회
+	public MemberVO adminMemberTotalCount(int i) {
+		return mapper.adminMemberTotalCount(i);
+	}
+
 }

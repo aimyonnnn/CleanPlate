@@ -232,30 +232,12 @@
 					ORDER BY date DESC
 	</select>
 	
-	<!-- 관리자 페이지 통계용 데이터 조회(일일 예약 시간대 분포) -->
-<!-- 	<select id="adminDailyReservaionPie"> -->
-<!-- 		SELECT  count(*) AS count -->
-<!-- 			FROM reservation -->
-<!-- 				<if test='i = 11'> -->
-<!-- 				WHERE DATE(r_date) = CURDATE() - interval 0 day and '11:00'<![CDATA[<=]]> DATE_FORMAT(r_date, '%H:%s') <![CDATA[<]]> '14:00' -->
-<!-- 				</if>  -->
-<!-- 				<if test='i = 14'> -->
-<!-- 				WHERE DATE(r_date) = CURDATE() - interval 0 day and '14:00'<![CDATA[<=]]> DATE_FORMAT(r_date, '%H:%s') <![CDATA[<]]> '17:00' -->
-<!-- 				</if> -->
-<!-- 				<if test='i = 17'> -->
-<!-- 				WHERE DATE(r_date) = CURDATE() - interval 0 day and '17:00'<![CDATA[<=]]> DATE_FORMAT(r_date, '%H:%s') <![CDATA[<]]> '20:00' -->
-<!-- 				</if> -->
-<!-- 				<if test='i = 20'> -->
-<!-- 				WHERE DATE(r_date) = CURDATE() - interval 0 day and '20:00'<![CDATA[<=]]> DATE_FORMAT(r_date, '%H:%s') <![CDATA[<=]]> '23:00' -->
-<!-- 				</if> -->
-<!-- 	</select> -->
-	
 	<!-- 관리자 페이지 통계용 데이터 조회(누적 합계) -->
 	<select id="adminReservationTotalCount">
 		SELECT count(r_idx) AS count
 			FROM reservation
-					WHERE r_date <![CDATA[<]]> now() - interval #{x} day
-					ORDER BY r_date DESC
+				WHERE r_date <![CDATA[<=]]> now() - interval #{x} day
+				ORDER BY r_date DESC
 	</select>
 	
 	<!-- 예약 목록 역순 조회  -->

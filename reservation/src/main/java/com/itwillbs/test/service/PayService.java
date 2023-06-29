@@ -211,5 +211,10 @@ public class PayService {
 	public PayVO adminPaymentCount(int i) {
 		return mapper.adminPaymentCount(i);
 	}
+
+	// 지난 일자 총 결제 금액 조회
+	public PayVO adminPaymentTotalCount(int x) {
+		return mapper.adminPaymentTotalCount(x);
+	}
 	
 }

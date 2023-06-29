@@ -139,9 +139,4 @@ public class ReservationService {
 		return mapper.adminReservationTotalCount(x);
 	}
 
-	// 일일 예약 시간대 분포 조회
-//	public ReservationVO adminDailyReservaionPie(@RequestParam int i) {
-//		return mapper.adminDailyReservaionPie(i);
-//	}
-
 }

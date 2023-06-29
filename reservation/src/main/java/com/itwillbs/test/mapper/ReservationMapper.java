@@ -100,7 +100,4 @@ public interface ReservationMapper {
 	// 지난 일자 총 예약 수 조회
 	ReservationVO adminReservationTotalCount(int x);
 
-	// 일일 예약 시간대 분포 조회
-	ReservationVO adminDailyReservaionPie(@RequestParam int i);
-
 }

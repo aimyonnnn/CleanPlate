@@ -124,6 +124,20 @@ public class AdminController {
 			
 		}
 		
+		// 지난 일자 총 가입자 수 조회
+		MemberVO adminMemberTotalCount = new MemberVO();
+		for(int i = 0; i <= 6; i++) {
+			adminMemberTotalCount = mservice.adminMemberTotalCount(i);
+			model.addAttribute("adminMemberTotalCount" + i, adminMemberTotalCount);
+			// 조회 결과 없을 경우 0 값으로 대체
+			if(adminMemberTotalCount == null) {
+				MemberVO defaultVO = new MemberVO();
+				defaultVO.setM_idx(0);
+				defaultVO.setCount(0);
+				model.addAttribute("adminMemberTotalCount" + i, defaultVO);
+			}
+		}	
+		
 		// 예약 목록 조회
 		List<ReservationVO> reservationList = rservice.getReservationList();
 		model.addAttribute("reservationList" ,reservationList);
@@ -141,20 +155,6 @@ public class AdminController {
 				model.addAttribute("adminReservationCount" + i, defaultVO);
 			}
 		}	
-		
-		// 일일 예약 시간대 분포 조회
-//		ReservationVO revVO = new ReservationVO();
-//		for(int i = 11; i <= 20; i= +3) {
-//			revVO = rservice.adminDailyReservaionPie(i);
-//			model.addAttribute("adminDailyReservaionPie" + i, revVO);
-//			// 조회 결과가 없을 경우 0 값으로 대체
-//			if(revVO == null) {
-//				ReservationVO defaultVO = new ReservationVO();
-//				defaultVO.setCount(0);
-//				model.addAttribute("adminDailyReservaionPie" + i, defaultVO);
-//			}
-//		}
-		
 		
 		// 지난 일자 총 예약 수 조회
 		ReservationVO adminReservationTotalCount = new ReservationVO();
@@ -188,9 +188,19 @@ public class AdminController {
 			}
 		}
 		
-		// 총 결제 금액 조회
-		int total = pservice.getTotalPay();
-		request.setAttribute("total", total);
+		// 지난 일자 총 결제 금액 조회
+		PayVO adminPaymentTotalCount = new PayVO();
+		for(int x = 0; x <= 6; x++) {
+			adminPaymentTotalCount = pservice.adminPaymentTotalCount(x);
+			model.addAttribute("adminPaymentTotalCount" + x, adminPaymentTotalCount);
+			// 조회 결과 없을 경우 0 값으로 대체
+			if(adminPaymentTotalCount == null) {
+				PayVO defaultVO = new PayVO();
+				defaultVO.setP_idx(0);
+				defaultVO.setCount(0);
+				model.addAttribute("adminPaymentTotalCount" + x, defaultVO);
+			}
+		}
 		
 		return "admin/adminStatistics";
 	}

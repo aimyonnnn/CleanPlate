@@ -41,4 +41,8 @@ public interface PayMapper {
 
 	// 지난 일자 결제 금액 조회
 	PayVO adminPaymentCount(int i);
+
+	// 지난 일자 총 결제 금액 조회
+	PayVO adminPaymentTotalCount(int x);
+
 }

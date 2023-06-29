@@ -69,4 +69,7 @@ public interface MemberMapper {
 	// 지난 일자 가입자 수 조회
 	MemberVO adminMemberCount(int i);
 
+	// 지난 일자 총 가입자 수 조회
+	MemberVO adminMemberTotalCount(int i);
+
 }

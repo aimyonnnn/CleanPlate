@@ -126,7 +126,7 @@
                 </div>
 
                 <h2>${memberList.size()} 명</h2>
-                <small>DB에 저장된 총 회원 수입니다.</small>
+                <small><a style="color: red;">활동 정지된 회원을 포함한</a> 총 회원 수입니다.</small>
               </div>
               <div class="card-chart danger">
                 <span class="las la-chart-line"></span>
@@ -144,7 +144,7 @@
 
                 <h2>${RestaurantList.size()} 개</h2>
 
-                <small>DB에 저장된 총 가게 수입니다.</small>
+                <small>현재 영업 중인 총 가게 수입니다.</small>
               </div>
               <div class="card-chart success">
                 <span class="las la-chart-line"></span>
@@ -162,7 +162,7 @@
 
                 <h2>${reservationList.size()} 개</h2>
 
-                <small>DB에 저장된 총 예약 건수입니다.</small>
+                <small><a style="color: red;">취소된 예약을 포함한</a> 총 예약 건수입니다.</small>
               </div>
               <div class="card-chart yellow">
                 <span class="las la-chart-line"></span>
@@ -181,7 +181,7 @@
               <div class="chart-circle">
                 <h1>${todayReservationCount.count} 개</h1>
               </div>
-              <small>예약 일자가 오늘인 예약 데이터만 카운팅합니다.</small>
+              <small>예약 일자가 <a style="color: blue;">오늘</a>인 예약 데이터만 카운팅합니다.</small>
             </form>
           </div>
 

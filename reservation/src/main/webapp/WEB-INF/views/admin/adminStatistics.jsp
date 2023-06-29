@@ -140,7 +140,7 @@
               <div class="card-into">
                 <div class="card-head">
 					<small>일일 결제 금액</small>
-					<h2><fmt:formatNumber value="${adminPaymentCount0.count}" /> 원</h2>
+					<h2><fmt:formatNumber value="${adminPaymentCount0.count*100}" /> 원</h2>
                 </div>
               </div>
               <div class="card-chart black">
@@ -165,7 +165,7 @@
          </div>
          <br>
 
-<canvas id="dailyReservation" width="300px" height="450px"></canvas>
+<%-- <canvas id="dailyReservation" width="300px" height="450px"></canvas> --%>
 
 <div class="card-single">
 	<div class="card-flex">
@@ -190,8 +190,8 @@
             <div class="card-flex">
               <div class="card-into">
                 <div class="card-head">
-					<small>누적 예약 수</small>
-					<h2>${reservationList.size() } 건</h2>
+					<small>완료된 예약 수</small>
+					<h2>${adminReservationTotalCount0.count} 건</h2>
                 </div>
               </div>
               <div class="card-chart danger">
@@ -204,7 +204,7 @@
               <div class="card-into">
                 <div class="card-head">
 					<small>누적 결제 금액</small>
-					<h2><fmt:formatNumber value="${total }" /> 원</h2>
+					<h2><fmt:formatNumber value="${adminPaymentTotalCount0.count*100 }" /> 원</h2>
                 </div>
               </div>
               <div class="card-chart black">
@@ -218,7 +218,7 @@
               <div class="card-into">
                 <div class="card-head">
 					<small>총 가입자 수</small>
-					<h2>${memberList.size() } 명</h2>
+					<h2>${adminMemberTotalCount0.count } 명</h2>
                 </div>
               </div>
               <div class="card-chart success">
@@ -228,6 +228,8 @@
           </div>
          </div>
          <br>
+         
+<%-- <canvas id="dailyTotalResrvation" width="300px" height="450px"></canvas>          --%>
          
 <div class="card-single">
 	<div class="card-flex">
@@ -284,7 +286,7 @@
                         fill: false,
                         pointRadius: 3,
                         lineTension: 0,
-                        label: '결제 금액(X1000원)',
+                        label: '결제 금액(X100원)',
                         borderColor: 'rgb(0, 0, 0)',
                         borderWidth: 1,
                         backgroundColor: 'rgb(0, 0, 0)',
@@ -349,12 +351,7 @@
         	      datasets: [{
         	        label: "예약 인원",
         	        backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
-        	        data: [ 25, 25,25,25
-//         	        	${adminDailyReservaionPie11.count}
-//         	       		  ,${adminDailyReservaionPie14.count}
-//         	     		  ,${adminDailyReservaionPie17.count}
-//         	      		  ,${adminDailyReservaionPie20.count}
-        	      		  
+        	        data: [ 25,25,25,25
         	      		  ]
         	      }]
         	    },
@@ -396,37 +393,37 @@
                         fill: false,
                         pointRadius: 3,
                         lineTension: 0,
-                        label: '예약 수',
+                        label: '완료된 예약 수',
                         borderColor: 'rgb(255, 51, 0)',
                         borderWidth: 1,
                         backgroundColor: 'rgb(255, 51, 0)',
                       }, { 
-                        data: [${adminPaymentCount6.count}
-                        	 , ${adminPaymentCount5.count}
-                        	 , ${adminPaymentCount4.count}
-                        	 , ${adminPaymentCount3.count}
-                        	 , ${adminPaymentCount2.count}
-                        	 , ${adminPaymentCount1.count}
-                        	 , ${adminPaymentCount0.count}],
+                        data: [${adminPaymentTotalCount6.count}
+                        	 , ${adminPaymentTotalCount5.count}
+                        	 , ${adminPaymentTotalCount4.count}
+                        	 , ${adminPaymentTotalCount3.count}
+                        	 , ${adminPaymentTotalCount2.count}
+                        	 , ${adminPaymentTotalCount1.count}
+                        	 , ${adminPaymentTotalCount0.count}],
                         fill: false,
                         pointRadius: 3,
                         lineTension: 0,
-                        label: '결제 금액(X1000원)',
+                        label: '누적 결제 금액(X100원)',
                         borderColor: 'rgb(0, 0, 0)',
                         borderWidth: 1,
                         backgroundColor: 'rgb(0, 0, 0)',
                       }, { 
-                        data: [${adminMemberCount6.count}
-                       		 , ${adminMemberCount5.count}
-                       		 , ${adminMemberCount4.count}
-                       		 , ${adminMemberCount3.count}
-                       		 , ${adminMemberCount2.count}
-                       		 , ${adminMemberCount1.count}
-                       		 , ${adminMemberCount0.count}],
+                        data: [${adminMemberTotalCount6.count}
+                       		 , ${adminMemberTotalCount5.count}
+                       		 , ${adminMemberTotalCount4.count}
+                       		 , ${adminMemberTotalCount3.count}
+                       		 , ${adminMemberTotalCount2.count}
+                       		 , ${adminMemberTotalCount1.count}
+                       		 , ${adminMemberTotalCount0.count}],
                         fill: false,
                         pointRadius: 3,
                         lineTension: 0,
-                        label: '가입자 수',
+                        label: '총 가입자 수',
                         borderColor: 'rgb(0, 153, 31)',
                         borderWidth: 1,
                         backgroundColor: 'rgb(0, 153, 31)',
@@ -448,6 +445,34 @@
                     }
                 }
             });
+            // 누적 예약 시간대 분포 파이 차트 영역
+            var dailyTotalResrvation =  new Chart(document.getElementById("dailyTotalResrvation"), {
+        	    type: 'pie',
+        	    data: {
+        	      labels: ["11:00 ~ 13:59시"
+        	    	  	 , "14:00 ~ 16:59시"
+        	    	  	 , "17:00 ~ 19:59시"
+        	    	  	 , "20:00 ~ 23:00시"],
+        	      datasets: [{
+        	        label: "예약 인원",
+        	        backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+        	        data: [ 25,25,25,25
+//         	        	${adminDailyReservaionPie11.count}
+//         	       		  ,${adminDailyReservaionPie14.count}
+//         	     		  ,${adminDailyReservaionPie17.count}
+//         	      		  ,${adminDailyReservaionPie20.count}
+        	      		  
+        	      		  ]
+        	      }]
+        	    },
+        	    options: {
+        	      responsive: false,
+        	      title: {
+        	        display: true,
+        	        text: '완료된 예약 시간대 분포'
+        	      }
+        	    }
+        	});
         </script>        
     	</main>
     </div>
