@@ -103,7 +103,7 @@
 				
 				<!-- 개인회원 비밀번호 찾기 폼 시작 -->
 				<div class="modal-header">
-					<h1 class="modal-title fs-5" id="exampleModalLabel">비밀번호 찾기</h1>
+					<h1 class="modal-title fs-5" id="exampleModalLabel">임시비밀번호 발급</h1>
 				</div>
 				<div class="modal-body">
 					<div>
