@@ -92,7 +92,7 @@
 						<input type="hidden" id="res_idx" value="${like.res_idx}">
 					 <tr>
 						 <td>
-			                <img src="resources/images/${like.res_photo1}" style="width: 200px; height: auto;">
+			                <img src="${pageContext.request.contextPath }/resources/images/${like.res_photo1}" style="width: 200px; height: auto;">
 			            </td>
 						<td><a href='<c:url value="/getRestaurantInfo?res_idx=${like.res_idx}"/>'>${like.res_name}</a></td>
 			            <td>${like.rv_scope}</td>
