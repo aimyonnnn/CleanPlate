@@ -348,8 +348,16 @@ public class OwnerController {
 	}
 	
 	// 가게 정보 수정 작업
+	// 가게 정보 수정후 메뉴 수정, 예약시간 수정
 	@PostMapping("restaurantUpdate")
-	public String restaurantUpdate(RestaurantVO restaurant, Model model, HttpSession session) {
+	public String restaurantUpdate(RestaurantVO restaurant, MenuListVO arrMenuList, TimesListVO arrTimeList, Model model, HttpSession session) {
+		// 가게
+		System.out.println(restaurant);
+		// 메뉴 목록
+		System.out.println(arrMenuList);
+		// 예약 시간
+		System.out.println(arrTimeList);
+		
 		// 미로그인, 점주 회원이 아닐 경우
 		String c_Id = (String)session.getAttribute("cId");
 		if(c_Id == null) {
@@ -390,6 +398,8 @@ public class OwnerController {
 		MultipartFile mFile1 = restaurant.getRes_file1();
 		MultipartFile mFile2 = restaurant.getRes_file2();
 		MultipartFile mFile3 = restaurant.getRes_file3();
+		// arrMenuList MenuListVO 객체 꺼내기 (배열)
+		MultipartFile[] arrMenuFile = arrMenuList.getMe_file();
 		// ---------------------------------------------------------------
 		
 		// 파일명 중복 방지
@@ -402,10 +412,26 @@ public class OwnerController {
 		restaurant.setRes_photo1("");
 		restaurant.setRes_photo2("");
 		restaurant.setRes_photo3("");
+		
+		// arrMenuList 원본 파일명 기본값 널스트링 저장
+		
+		String[] np = new String[arrMenuList.getMe_name().length];
+		for(int i = 0; i < arrMenuList.getMe_name().length; i++) {
+			np[i] = "";
+		}
+		arrMenuList.setMe_photo(np);
+		
 		// 파일명을 저장할 변수 
 		String fileName1 = uuid.substring(0, 8) + "_" + mFile1.getOriginalFilename();
 		String fileName2 = uuid.substring(0, 8) + "_" + mFile2.getOriginalFilename();
 		String fileName3 = uuid.substring(0, 8) + "_" + mFile3.getOriginalFilename();
+		
+		// 메뉴 파일명을 저장할 h배열
+		String[] arrFileName = new String[arrMenuList.getMe_name().length];
+		for(int i = 0; i < arrFileName.length; i++) {
+			String fileName = uuid.substring(0, 8) + "_" + arrMenuFile[i].getOriginalFilename();
+			arrFileName[i] = fileName;
+		}
 		
 		
 		if(!mFile1.getOriginalFilename().equals("")) {
@@ -418,19 +444,31 @@ public class OwnerController {
 			restaurant.setRes_photo3(subDir + "/" + fileName3);
 		}
 		
+		for(int i = 0; i < arrMenuList.getMe_name().length; i++) {
+			if(!arrMenuFile[i].getOriginalFilename().equals("")) {
+				np[i] = subDir + "/" + arrFileName[i];
+			}
+		}
+		arrMenuList.setMe_photo(np);
+		
+		
 		// ---------------------------------------------------------------
 		System.out.println("실제 업로드 파일명1 : " + restaurant.getRes_photo1());
 		System.out.println("실제 업로드 파일명2 : " + restaurant.getRes_photo2());
 		System.out.println("실제 업로드 파일명3 : " + restaurant.getRes_photo3());
 		
+		for(int i = 0; i < arrMenuList.getMe_name().length; i++) {
+			System.out.println("메뉴 파일명 " + i + arrMenuList.getMe_photo()[i]);
+		}
 		
-		// c_Id 의 가게인지 확인 필요?
+		// c_idx 가져오기 위해 VO에 저장 
+		restaurant.setC_id(c_Id);
 		
 		// 가게 정보 수정 작업
 		int updateCount = service.ModifyRestaurant(restaurant);
-		// 성공시  success_forward.jsp 로 이동 가게 정보 수정 완료 출력
+		// 성공시  success_forward.jsp 로 이동 가게 정보 수정 완료 출력후 가게리스트 페이지로 이동
 		// 실패시 가게 정보 수정 실패! 출력
-		if(updateCount > 0) {
+		if(updateCount > 0) { // 가게 등록 성공시
 			// ----------------------------------------------(파일 수정)
 			try {
 				if(!mFile1.getOriginalFilename().equals("")) {
@@ -442,12 +480,30 @@ public class OwnerController {
 				if(!mFile3.getOriginalFilename().equals("")) {
 					mFile3.transferTo(new File(saveDir, fileName3));
 				}
+				// 메뉴 사진
+				for(int i = 0; i < arrMenuList.getMe_name().length; i++) {
+					if(!arrMenuFile[i].getOriginalFilename().equals("")) {
+						arrMenuFile[i].transferTo(new File(saveDir, arrFileName[i]));
+					}
+				}
 			} catch (IllegalStateException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 			// ----------------------------------------------
+			// 메뉴 추가 DB 작업
+			for(int i = 0; i < arrMenuList.getMe_name().length; i++) {
+				MenuVO menu = new MenuVO();
+				menu.setMe_name(arrMenuList.getMe_name()[i]);
+				menu.setMe_price(arrMenuList.getMe_price()[i]);
+				menu.setMe_context(arrMenuList.getMe_context()[i]);
+				menu.setMe_photo(arrMenuList.getMe_photo()[i]);
+				menu.setRes_idx(restaurant.getRes_idx());
+				
+					
+			}
+			
 			model.addAttribute("msg", "가게 정보 수정 완료");
 			model.addAttribute("targetURL", "restaurantList");
 			return "success_forward";
@@ -457,6 +513,15 @@ public class OwnerController {
 			return "fail_back";
 			
 		}
+	}
+	
+	// 가게 사진 삭제
+	@GetMapping("restaurantPhotoDelete")
+	public String restaurantPhotoDelete(@RequestParam String res_photo) {
+		
+		int deleteCount = service.deletePhoto(res_photo);
+		
+		return "";
 	}
 	
 	//owner의 식당마이페이지에서 수정후 이동 Mapping

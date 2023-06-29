@@ -62,7 +62,7 @@
 	                        	<tr>
 	                                <td>${restaurant.res_brn }</td>
 	                                <!-- 가게명 클릭시 가게 상세정보 페이지로 이동 -->
-	                                <td><a href='#'>${restaurant.res_name }</a></td>
+	                                <td><a href='getRestaurantInfo?res_idx=${restaurant.res_idx}'>${restaurant.res_name }</a></td>
 	                                <td>${restaurant.res_tel }</td>
 	                                <td>${restaurant.res_address } ${restaurant.res_detailAddress }</td>
 	                                <!-- 수정 버튼 클릭시 파라미터로 사업자번호 전달 -->

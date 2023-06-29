@@ -21,5 +21,8 @@ public interface MenuMapper {
 	// me_idx를 가져옴
 	int getIdx(MenuVO menu);
 
+	int deleteMenu(int me_idx);
+
+
 
 }

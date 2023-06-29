@@ -74,6 +74,10 @@ public class RestaurantService {
 		return mapper.getOwnerRestaurantCount(id);
 	}
 	
+	public int deletePhoto(String res_photo) {
+		return mapper.deletePhoto(res_photo);
+	}
+	
 	
 
 		

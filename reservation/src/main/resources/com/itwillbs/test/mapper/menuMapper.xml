@@ -31,4 +31,11 @@
 			FROM menus
 			WHERE me_name = #{me_name} and res_idx = #{res_idx}
 	</select>
+	<!-- 메뉴 삭제 -->
+	<delete id="deleteMenu">
+		DELETE
+			FROM menus
+				WHERE me_idx = #{me_idx}
+	</delete>
+	
 </mapper>

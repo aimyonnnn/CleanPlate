@@ -49,8 +49,11 @@ public interface RestaurantMapper {
 	// 메뉴 등록을 위한 res_idx 조회
 	int selectRestaurantRes_idx(@Param("c_idx") int c_idx,@Param("res_brn") String res_brn);
 	
-	// 회원탈 퇴시 남은 레스토랑이 존재하는지 확인
+	// 회원 탈퇴시 남은 레스토랑이 존재하는지 확인
 	int getOwnerRestaurantCount(String id);
+	
+	// 가게 사진 삭제
+	int deletePhoto(String res_photo);
 
 	
 	

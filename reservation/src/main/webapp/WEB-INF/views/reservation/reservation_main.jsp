@@ -42,7 +42,7 @@
     <style>
     
     body {
-        background-color: #f8f9fa;
+/*         background-color: #f8f9fa; */
     }
     .container {
     	margin-top: 30px;
@@ -146,7 +146,7 @@
 	 
 </style>
 </head>
-<body style="
+<body  style="
   background-image:linear-gradient(
   rgba(0, 0, 0, 0.8),
   rgba(0, 0, 0, 0.8)),

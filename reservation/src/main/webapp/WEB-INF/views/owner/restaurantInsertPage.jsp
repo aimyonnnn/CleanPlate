@@ -142,13 +142,13 @@
 	                                <!-- res_openinghours -->
 	                                <div class="row">
 	                                    <div class="col-4">
-	                                        <input class="form-control timepicker" id="res_open" type="text" name="res_open" style="text-align: center;"> 
+	                                        <input class="form-control timepicker" id="res_open" type="text" name="res_open" style="text-align: center;" required> 
 	                                    </div>
 	                                    <div class="col-1">
 	                                    	<b style="font-size: large;">-</b>
 	                                    </div>
 	                                    <div class="col-4">
-	                                        <input class="form-control timepicker" id="res_close" type="text" name="res_close" style="text-align: center;"> 
+	                                        <input class="form-control timepicker" id="res_close" type="text" name="res_close" style="text-align: center;" required> 
 	                                    </div>
 	
 	                                </div>
@@ -170,7 +170,7 @@
 	                                       <input class="form-control timepicker2" type ="text" name="res_breakend" id="res_breakend" style="text-align: center;">
 	                                   </div>
 	                               	   <div class="col-2">
-	                                	  <input type="checkbox" class="form-check-input" id="nobreak"> 없음
+	                                	  <input type="checkbox" class="form-check-input" id="nobreak" checked="checked"> 없음
 	                                   </div>
                                     </div>
                                 </td>
@@ -205,10 +205,14 @@
 			                                    scrollbar: true
 			                                });
 			                                
+		                                	// 기본 checked 상태이므로 브레이크타임 disabled처리
+		                                    var isChecked = $("#nobreak").is(":checked");
+   											$("#res_breakstart, #res_breakend").prop("disabled", isChecked).val(isChecked ? "" : null);
+			                                
 			                                // 없음(체크 박스) 선택시 브레이크타임 시간 null값으로 변경, disabled 상태로 바꿔주기
 			                                // 해제시 disabled 상태 해제
 			                                $("#nobreak").change(function() {
-			                                    var isChecked = $(this).is(":checked");
+			                                    isChecked = $(this).is(":checked");
 			                                    $("#res_breakstart, #res_breakend").prop("disabled", isChecked).val(isChecked ? "" : null);
 			                                });
 			                                
@@ -486,7 +490,7 @@
 				+ '<tr>'
 				+ '<th><label for="me_price">메뉴 가격</label></th>'
 				+ '<td><input type="text" class="form-control"  name="me_price" id="me_price"'
-				+ 'placeholder="숫자만 입력"  onKeyup="this.value=this.value.replace(/[^0-9]/g,\'\');" required></td>'
+				+ 'placeholder="숫자만 입력"  onKeyup="this.value=this.value.replace(/[^0-9]/g,\'\');"></td>'
 				+ '</tr>'
 				+ '<tr>'
 				+ '<th><label for="me_context">메뉴 설명</label></th>'
@@ -494,7 +498,7 @@
 				+ '</tr>'
 				+ '<tr>'
 				+ '<th><label for="me_photo">메뉴 사진</label></th>'
-				+ '<td><input type="file" name="me_file" id="me_photo" class="form-control" ></td>'
+				+ '<td><input type="file" name="me_file" id="me_photo" class="form-control"></td>'
 				+ '</tr>'
 				+ '<tr>'
 				+ '<td colspan="2">'
@@ -508,19 +512,21 @@
 	});  
 	
 	// 추가 버튼 클릭시 메뉴등록 폼 숨기기
-	// 메뉴이름, 가격에 출력하기
+	// required 처리
 	function hideMenu(index) {
 		// 
 		var meName = $("#menu_table_" + tableCount).find("#me_name").val();
 		var mePrice = $("#menu_table_" + tableCount).find("#me_price").val();
+		var meContent = $("#menu_table_" + tableCount).find("#me_content").val();
+		var mePhoto = $("#menu_table_" + tableCount).find("#me_photo").val();
 		
 // 		alert(typeof(meName));
 // 		alert("메뉴 이름: " + meName + ", 메뉴 가격: " + mePrice);
 		
-		if(meName === "" || mePrice === "") { // 메뉴이름이나 메뉴가격이 널스트링일 경우(입력하지 않았을 경우)
-			alert('메뉴 가격을 입력해주세요');
+		if(meName === "" || mePrice === "" || meContent === "" || mePhoto === "") { // 메뉴이름이나 메뉴가격이 널스트링일 경우(입력하지 않았을 경우)
+			alert('모두 입력해주세요');
 		} else {
-			alert('메뉴 등록'); 
+			alert('메뉴가 등록되었습니다'); 
 			// 추가 버튼 클릭시 메뉴등록 폼 숨기기
 			$("#menu_table_" + index).hide();
 			// 메뉴이름, 가격 출력
@@ -539,10 +545,10 @@
 		  $(this).timepicker({
 		      timeFormat: 'HH:mm',
 		      interval: 30, // 시간 간격
-		      minTime: '09:00', // 최소 시간
+		      minTime: '11:00', // 최소 시간
 		      maxTime: '22:00', // 최대 시간
-		      defaultTime: '09:00', // 기본값
-// 		      startTime: '09:00', // 시작시간
+		      defaultTime: '11:00', // 기본값
+// 		      startTime: '11:00', // 시작시간
 		      dynamic: true,
 		      dropdown: true,
 		      scrollbar: true
@@ -554,10 +560,6 @@
 		$("#td_Time").append("<input class='form-control timepicker3' type ='text' name='t_time' id='t_time' style='text-align: center; width: 200px;' placeholder='클릭하여 시간 선택''>");
 	}); 
 	
-// 	$("#btnMenuInsert").on("click", function(event) {
-// 		alert(tableCount);
-// 		$("#menu_table_" + tableCount).hide();
-// 	}); 
 
 
 </script>

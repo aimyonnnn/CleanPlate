@@ -26,9 +26,15 @@ public class MenuService {
 		return mapper.selectedRestaurantMenuList(res_idx);
 	}
 	
-	//메뉴 최고 번호 가져오기
+	// 메뉴 최고 번호 가져오기
 	public int getMeIdx(MenuVO menu) {
 		return mapper.getIdx(menu);
 	}
+	
+	// 메뉴 삭제
+	public int deleteMenu(int me_idx) {
+		return mapper.deleteMenu(me_idx);
+	}
+	
 
 }

@@ -97,7 +97,7 @@
 	<c:choose>	
 		<c:when test="${empty sessionScope.sId }">
 			<!-- 로그인 시작 -->
-			<div class="form personalLogin">
+			<div class="form personalLogin" style="margin-top: 30px;">
 				<form action="loginPro" method="post">
 					<div class="form-header">
 					    <div class="personalButton">개인회원</div>

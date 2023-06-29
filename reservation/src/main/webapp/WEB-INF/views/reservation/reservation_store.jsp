@@ -386,6 +386,7 @@
 	
 	<!-- footer -->
 	<footer class="footer">
+		<hr style="margin-top: 100px;">
 		<jsp:include page="../common/common_footer.jsp"/>
 	</footer>
 	<!-- footer -->

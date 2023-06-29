@@ -93,6 +93,10 @@
 	</select>
 	<!-- 가게정보 수정 -->
 	<update id="updateRestaurant">
+		<selectKey keyProperty="c_idx" resultType="int" order="BEFORE">
+			SELECT c_idx FROM ceo 
+				WHERE c_id = #{c_id}
+		</selectKey>
 		UPDATE restaurant
 			SET
 				res_brn = #{res_brn}
@@ -120,6 +124,7 @@
 				, res_intro = #{res_intro}
 					WHERE
 						res_idx = #{res_idx}
+						AND c_idx = #{c_idx}
 	</update>
 	
 	<!-- 가게별 리뷰 점수 조회 -->
@@ -183,4 +188,12 @@
 						FROM ceo
 						WHERE c_id = #{id})
 	</select>
+	
+	<!-- 가게 사진 삭제 -->
+	<delete id="deletePhoto">
+		<!-- 사진은 photo 1,2,3 로 구분 -->
+		DELETE res_photo
+			FROM restaurant
+				WHERE res_idx = #{res_idx}
+	</delete>
 </mapper>
