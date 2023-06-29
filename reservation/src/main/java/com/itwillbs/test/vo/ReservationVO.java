@@ -24,6 +24,7 @@ public class ReservationVO {
 	// -------------------------- 예약내역 출력 참조중
 	private String res_name; // 식당 이름 (점주 예약 관리 페이지 식당이름 출력을 위해)
 	private String m_name; // 예약자 이름 (점주 예약 관리 페이지 예약자이름 출력을 위해)	
+	private String m_tel; // 예약자 전화번호 출력을 위해
     private String res_address; // 식당 주소
     private String res_detailAddress; // 식당 상세주소
     private String res_amenity; // 식당 편의시설 

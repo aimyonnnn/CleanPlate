@@ -45,7 +45,7 @@
 	
 	<!-- 예약 내역 조회 -->
 	<select id="selectReservationList">
-			SELECT r.r_idx, me.me_name , r.r_amount, r.r_tables, r.r_personnel, m.m_name, r.r_status, r.r_date, r.r_request, res.res_name
+			SELECT r.r_idx, me.me_name , r.r_amount, r.r_tables, r.r_personnel, m.m_name, r.r_status, r.r_date, r.r_request, res.res_name, m.m_tel
 			FROM reservation r JOIN restaurant res
 			ON r.res_idx = res.res_idx
 			JOIN members m

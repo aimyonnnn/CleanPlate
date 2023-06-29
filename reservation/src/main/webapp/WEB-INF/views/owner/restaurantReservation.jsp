@@ -138,7 +138,7 @@
  	<!-- 예약관리 첫번째 모달창 (방문예정 상태) -->
  	<c:forEach var="resList" items="${resList }">
 	 <div class="modal fade" id="rsListModal${resList.r_idx }" tabindex="-1" aria-labelledby="rsListModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
+		<div class="modal-dialog modal-lg">
 	    	<div class="modal-content">
 	    		<div class="modal-header">
 	        		<h1 class="modal-title fs-5" id="rsListModalLabel">예약 내역</h1>
@@ -188,6 +188,10 @@
 					                    <tr>
 					                        <th>예약자</th>
 					                        <td>${resList.m_name }</td>
+					                    </tr>
+					                    <tr>
+					                        <th>예약자 전화번호</th>
+					                        <td>${resList.m_tel }</td>
 					                    </tr>
 										<tr>
 					                        <th>상태</th>
