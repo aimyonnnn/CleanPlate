@@ -298,7 +298,7 @@
 								                  	<td scope="col" class="col-4">${menu.me_name }</td>
 								                  	<td scope="col" class="col-4">${menu.me_price }</td>		
 								                  	<td scope="col" class="col-4">
-								                  		<button type="button" class="btn btn-dark" style="color: white;" onclick="location.href = 'menuDelete?me_idx=${menu.me_idx }'">삭제</button>
+								                  		<button type="button" class="btn btn-dark" style="color: white;" onclick="location.href='menuDelete?me_idx=' + ${menu.me_idx } + '&res_idx=' + '${restaurant.res_idx}'">삭제</button>
 								                  	</td>		
 								                  				                    
 								                  </tr>
@@ -319,6 +319,9 @@
 							    		<!-- : 으로 문자열 분리 -->
 											<input class="form-control timepicker3" type ="text" name="t_time" id="t_time" 
 											style="text-align: center; width: 200px;" value="${fn:split(time.t_time, ':')[0]}:${fn:split(time.t_time, ':')[1]}">
+											<button type="button" class="btn btn-dark" style="color: white;" onclick="location.href='timeDelete?t_time=' + 
+											${fn:split(time.t_time, ':')[0]}+':'+${fn:split(time.t_time, ':')[1]}+ '&res_idx=' + '${restaurant.res_idx}'">삭제</button>
+											
 							    		</div>
 					    			</c:forEach>
 						    		<div class="d-inline-flex align-items-center">

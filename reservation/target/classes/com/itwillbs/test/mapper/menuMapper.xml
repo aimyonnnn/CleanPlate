@@ -34,8 +34,18 @@
 	<!-- 메뉴 삭제 -->
 	<delete id="deleteMenu">
 		DELETE
-			FROM menus
+			FROM menus 
 				WHERE me_idx = #{me_idx}
 	</delete>
 	
+	<!-- 예약 시간 삭제시 참고할 me_idx 조회  -->
+	<select id="selectMeidxT" resultType="int">
+	  SELECT m.me_idx
+		FROM menus m
+			JOIN times t ON m.me_idx = t.me_idx
+			JOIN restaurant r ON r.res_idx = m.res_idx
+				WHERE m.res_idx = #{res_idx}
+				AND t.t_time LIKE CONCAT('%', #{t_time}, '%')
+			
+	</select>
 </mapper>

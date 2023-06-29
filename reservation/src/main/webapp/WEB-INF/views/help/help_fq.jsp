@@ -18,11 +18,11 @@
 
 <!-- 여기부터 공지사항 메뉴 버튼 -->
 <div class="container mt-5">
-  <div class="row">
-    <div class="col">
-      <h2 class="display-5 fst-italic fw-bold">Help</h2>
-    </div>
-  </div>
+	<div class="row">
+		<div class="col">
+			<h2 class="display-5 fst-italic fw-bold"><img src="${pageContext.request.contextPath }/resources/images/help.jpg" style="width: 100%;"></h2>
+		</div>
+	</div>
 </div>
 <div class="container mt-4">
     <div class="row gy-3 justify-content-center text-center">

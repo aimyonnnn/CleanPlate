@@ -10,7 +10,7 @@
     		JOIN times t ON m.me_idx = t.me_idx
     		WHERE r.res_idx = #{res_idx}
 	</select>
-	
+	<!-- 예약 시간 등록  -->
 	<insert id="insertTime">
             INSERT
                 INTO times
@@ -19,6 +19,15 @@
                         , #{me_idx}
                     )
      </insert>
+     
+     <!-- 예약 시간 삭제 -->
+     <delete id="deleteTime">
+     	DELETE FROM times
+     		WHERE
+     			t_time = #{t_time} 
+     			AND me_idx= #{me_idx}
+     
+     </delete>
      
      <select id="selectTimesList" resultType="com.itwillbs.test.vo.TimesVO">
      

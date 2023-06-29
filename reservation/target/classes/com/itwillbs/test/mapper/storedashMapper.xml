@@ -56,6 +56,22 @@
     AND p.p_orderDate >= CURDATE() - INTERVAL 6 DAY
 </select>
 
+<!-- 요일 별 주문 수 비교 -->
+<select id="getDailyOrderCounts" resultType="map">
+  SELECT COUNT(*) AS dailyOrderCount, DAYNAME(p.p_orderDate) AS orderDate
+  FROM payment p
+  INNER JOIN reservation r ON p.r_idx = r.r_idx
+  INNER JOIN restaurant res ON r.res_idx = res.res_idx
+  INNER JOIN ceo c ON c.c_idx = res.c_idx
+  WHERE c.c_id = #{c_id}
+  AND MONTH(p.p_orderDate) = MONTH(CURDATE())
+  GROUP BY orderDate
+  ORDER BY FIELD(orderDate, 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday')
+</select>
+
+
+
+
 </mapper>
 
 

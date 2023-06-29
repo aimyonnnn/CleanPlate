@@ -21,7 +21,9 @@ public interface MenuMapper {
 	// me_idx를 가져옴
 	int getIdx(MenuVO menu);
 
-	int deleteMenu(int me_idx);
+	int deleteMenu(@Param("me_idx") int me_idx,@Param("res_idx")  int res_idx);
+
+	int selectMeidxT(@Param("t_time") String t_time,@Param("res_idx") int res_idx);
 
 
 

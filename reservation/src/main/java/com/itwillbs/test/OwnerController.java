@@ -147,8 +147,6 @@ public class OwnerController {
 		MultipartFile mFile1 = restaurant.getRes_file1();
 		MultipartFile mFile2 = restaurant.getRes_file2();
 		MultipartFile mFile3 = restaurant.getRes_file3();
-		// arrMenuList MenuListVO 객체 꺼내기 (배열)
-		MultipartFile[] arrMenuFile = arrMenuList.getMe_file();
 		// ---------------------------------------------------------------
 		
 		// 파일명 중복 방지
@@ -162,26 +160,10 @@ public class OwnerController {
 		restaurant.setRes_photo2("");
 		restaurant.setRes_photo3("");
 		
-		// arrMenuList 원본 파일명 기본값 널스트링 저장
-		
-		String[] np = new String[arrMenuList.getMe_name().length];
-		for(int i = 0; i < arrMenuList.getMe_name().length; i++) {
-			np[i] = "";
-		}
-		arrMenuList.setMe_photo(np);
-		
 		// 파일명을 저장할 변수 
 		String fileName1 = uuid.substring(0, 8) + "_" + mFile1.getOriginalFilename();
 		String fileName2 = uuid.substring(0, 8) + "_" + mFile2.getOriginalFilename();
 		String fileName3 = uuid.substring(0, 8) + "_" + mFile3.getOriginalFilename();
-		
-		// 메뉴 파일명을 저장할 배열
-		String[] arrFileName = new String[arrMenuList.getMe_name().length];
-		for(int i = 0; i < arrFileName.length; i++) {
-			String fileName = uuid.substring(0, 8) + "_" + arrMenuFile[i].getOriginalFilename();
-			arrFileName[i] = fileName;
-		}
-		
 		
 		if(!mFile1.getOriginalFilename().equals("")) {
 			restaurant.setRes_photo1(subDir + "/" + fileName1);
@@ -193,22 +175,11 @@ public class OwnerController {
 			restaurant.setRes_photo3(subDir + "/" + fileName3);
 		}
 		
-		for(int i = 0; i < arrMenuList.getMe_name().length; i++) {
-			if(!arrMenuFile[i].getOriginalFilename().equals("")) {
-				np[i] = subDir + "/" + arrFileName[i];
-			}
-		}
-		arrMenuList.setMe_photo(np);
-		
-		
 		// ---------------------------------------------------------------
 		System.out.println("실제 업로드 파일명1 : " + restaurant.getRes_photo1());
 		System.out.println("실제 업로드 파일명2 : " + restaurant.getRes_photo2());
 		System.out.println("실제 업로드 파일명3 : " + restaurant.getRes_photo3());
 		
-		for(int i = 0; i < arrMenuList.getMe_name().length; i++) {
-			System.out.println("메뉴 파일명 " + i + arrMenuList.getMe_photo()[i]);
-		}
 		
 		// c_idx 가져오기 위해 VO에 저장 
 		restaurant.setC_id(c_Id);
@@ -230,69 +201,105 @@ public class OwnerController {
 					mFile3.transferTo(new File(saveDir, fileName3));
 				}
 				
-				// 메뉴 사진
-				for(int i = 0; i < arrMenuList.getMe_name().length; i++) {
-					if(!arrMenuFile[i].getOriginalFilename().equals("")) {
-						arrMenuFile[i].transferTo(new File(saveDir, arrFileName[i]));
+				if(arrMenuList.getMe_name() !=null) { // 메뉴 추가 등록시 파일 처리 
+					// arrMenuList MenuListVO 객체 꺼내기 (배열)
+					MultipartFile[] arrMenuFile = arrMenuList.getMe_file();
+					String[] np = new String[arrMenuList.getMe_name().length];
+					for(int i = 0; i < arrMenuList.getMe_name().length; i++) {
+						np[i] = "";
+					}
+					// arrMenuList 원본 파일명 기본값 널스트링 저장
+					arrMenuList.setMe_photo(np);
+					// 메뉴 파일명을 저장할 배열
+					String[] arrFileName = new String[arrMenuList.getMe_name().length];
+					for(int i = 0; i < arrFileName.length; i++) {
+						String fileName = uuid.substring(0, 8) + "_" + arrMenuFile[i].getOriginalFilename();
+						arrFileName[i] = fileName;
+					}
+					
+					for(int i = 0; i < arrMenuList.getMe_name().length; i++) {
+						if(!arrMenuFile[i].getOriginalFilename().equals("")) {
+							np[i] = subDir + "/" + arrFileName[i];
+						}
+					}
+					arrMenuList.setMe_photo(np);
+					
+					for(int i = 0; i < arrMenuList.getMe_name().length; i++) {
+						System.out.println("메뉴 파일명 " + i + arrMenuList.getMe_photo()[i]);
+					}
+					
+					// 메뉴 사진
+					for(int i = 0; i < arrMenuList.getMe_name().length; i++) {
+						if(!arrMenuFile[i].getOriginalFilename().equals("")) {
+							arrMenuFile[i].transferTo(new File(saveDir, arrFileName[i]));
+						}
 					}
 				}
+				
 			} catch (IllegalStateException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 			// ----------------------------------------------
-			// 메뉴 추가 DB 작업 
-			// 방금 등록한 가게의 res_idx 조회 (c_idx와 res_brn으로 조회)
-			int c_idx = restaurant.getC_idx();
-			String res_brn = restaurant.getRes_brn();
-			int res_idx = service.selectRestaurantRes_idx(c_idx, res_brn);
-			System.out.println(res_idx);
+			if(arrMenuList.getMe_name() != null) {
+				
+				// 메뉴 추가 DB 작업 
+				// 방금 등록한 가게의 res_idx 조회 (c_idx와 res_brn으로 조회)
+				int c_idx = restaurant.getC_idx();
+				String res_brn = restaurant.getRes_brn();
+				int res_idx = service.selectRestaurantRes_idx(c_idx, res_brn);
+				System.out.println(res_idx);
 //			List<MenuVO> menuList = new ArrayList<MenuVO>();
-			for(int i = 0; i < arrMenuList.getMe_name().length; i++) {
-				
-				MenuVO menu = new MenuVO();
-				menu.setMe_name(arrMenuList.getMe_name()[i]);
-				menu.setMe_price(arrMenuList.getMe_price()[i]);
-				menu.setMe_context(arrMenuList.getMe_context()[i]);
-				menu.setMe_photo(arrMenuList.getMe_photo()[i]);
-				menu.setRes_idx(res_idx);
-				
-				
-//				menuList.add(menu);
-				// 메뉴 등록 요청
-				// c_idx, res_brn 파라미터로 전달하여 mapper에서 조회도 가능
-				int insertMenuCount = menuService.registMenu(menu);
-				
-				// 메뉴 idx 조회 
-				int me_idx = menuService.getMeIdx(menu);
-				
-				
-				if(insertMenuCount > 0) { // 메뉴 등록 성공시 예약 시간 등록요청
+				for(int i = 0; i < arrMenuList.getMe_name().length; i++) {
 					
-					//----------------------------------------------------------
-					// 시간 등록 DB 작업
-					for(int j = 0; j < arrTimeList.getT_time().length; j++) {
-						TimesVO t_Time = new TimesVO();
-						t_Time.setT_time(arrTimeList.getT_time()[j]);
-						t_Time.setRes_idx(res_idx);
-						// 조회한 메뉴idx 저장
-						t_Time.setMe_idx(me_idx);
-						// t_Time 시간으로 변경
-						LocalTime localTime = LocalTime.parse(t_Time.getT_time());
-						// me_name이 LUNCH 이고 t_Time이 17:00 이전일때
-						if(menu.getMe_name().equals("LUNCH") && localTime.isBefore(LocalTime.parse("17:00"))){
-							timesService.insertTime(t_Time);
+					MenuVO menu = new MenuVO();
+					menu.setMe_name(arrMenuList.getMe_name()[i]);
+					menu.setMe_price(arrMenuList.getMe_price()[i]);
+					menu.setMe_context(arrMenuList.getMe_context()[i]);
+					menu.setMe_photo(arrMenuList.getMe_photo()[i]);
+					menu.setRes_idx(res_idx);
+					
+					
+//				menuList.add(menu);
+					// 메뉴 등록 요청
+					// c_idx, res_brn 파라미터로 전달하여 mapper에서 조회도 가능
+					int insertMenuCount = menuService.registMenu(menu);
+					
+					// 메뉴 idx 조회 
+					int me_idx = menuService.getMeIdx(menu);
+					
+					
+					if(insertMenuCount > 0) { // 메뉴 등록 성공시 예약 시간 등록요청
+						
+						//----------------------------------------------------------
+						// 시간 등록 DB 작업
+						if(arrTimeList.getT_time() != null) {
+							
+							for(int j = 0; j < arrTimeList.getT_time().length; j++) {
+								TimesVO t_Time = new TimesVO();
+								t_Time.setT_time(arrTimeList.getT_time()[j]);
+								t_Time.setRes_idx(res_idx);
+								// 조회한 메뉴idx 저장
+								t_Time.setMe_idx(me_idx);
+								// t_Time 시간으로 변경
+								LocalTime localTime = LocalTime.parse(t_Time.getT_time());
+								// me_name이 LUNCH 이고 t_Time이 17:00 이전일때
+								if(menu.getMe_name().equals("LUNCH") && localTime.isBefore(LocalTime.parse("17:00"))){
+									timesService.insertTime(t_Time);
+								}
+								// me_name이 DINNER 이고 t_Time이 17:00 이후 (17:00 포함)일때
+								if(menu.getMe_name().equals("DINNER") && (localTime.isAfter(LocalTime.parse("17:00")) || localTime == (LocalTime.parse("17:00")))) {
+									timesService.insertTime(t_Time);
+								}
+							}
 						}
-						// me_name이 DINNER 이고 t_Time이 17:00 이후 (17:00 포함)일때
-						if(menu.getMe_name().equals("DINNER") && (localTime.isAfter(LocalTime.parse("17:00")) || localTime == (LocalTime.parse("17:00")))) {
-							timesService.insertTime(t_Time);
-						}
+						
+					} else { // 메뉴 등록 실패시 
+						model.addAttribute("msg", "가게 등록 실패!");
+						return "fail_back";
 					}
-				} else { // 메뉴 등록 실패시 
-					model.addAttribute("msg", "가게 등록 실패!");
-					return "fail_back";
-				}
+			}
 				
 			}
 			
@@ -398,8 +405,6 @@ public class OwnerController {
 		MultipartFile mFile1 = restaurant.getRes_file1();
 		MultipartFile mFile2 = restaurant.getRes_file2();
 		MultipartFile mFile3 = restaurant.getRes_file3();
-		// arrMenuList MenuListVO 객체 꺼내기 (배열)
-		MultipartFile[] arrMenuFile = arrMenuList.getMe_file();
 		// ---------------------------------------------------------------
 		
 		// 파일명 중복 방지
@@ -413,25 +418,12 @@ public class OwnerController {
 		restaurant.setRes_photo2("");
 		restaurant.setRes_photo3("");
 		
-		// arrMenuList 원본 파일명 기본값 널스트링 저장
-		
-		String[] np = new String[arrMenuList.getMe_name().length];
-		for(int i = 0; i < arrMenuList.getMe_name().length; i++) {
-			np[i] = "";
-		}
-		arrMenuList.setMe_photo(np);
-		
 		// 파일명을 저장할 변수 
 		String fileName1 = uuid.substring(0, 8) + "_" + mFile1.getOriginalFilename();
 		String fileName2 = uuid.substring(0, 8) + "_" + mFile2.getOriginalFilename();
 		String fileName3 = uuid.substring(0, 8) + "_" + mFile3.getOriginalFilename();
 		
-		// 메뉴 파일명을 저장할 h배열
-		String[] arrFileName = new String[arrMenuList.getMe_name().length];
-		for(int i = 0; i < arrFileName.length; i++) {
-			String fileName = uuid.substring(0, 8) + "_" + arrMenuFile[i].getOriginalFilename();
-			arrFileName[i] = fileName;
-		}
+
 		
 		
 		if(!mFile1.getOriginalFilename().equals("")) {
@@ -444,22 +436,15 @@ public class OwnerController {
 			restaurant.setRes_photo3(subDir + "/" + fileName3);
 		}
 		
-		for(int i = 0; i < arrMenuList.getMe_name().length; i++) {
-			if(!arrMenuFile[i].getOriginalFilename().equals("")) {
-				np[i] = subDir + "/" + arrFileName[i];
-			}
-		}
-		arrMenuList.setMe_photo(np);
-		
 		
 		// ---------------------------------------------------------------
 		System.out.println("실제 업로드 파일명1 : " + restaurant.getRes_photo1());
 		System.out.println("실제 업로드 파일명2 : " + restaurant.getRes_photo2());
 		System.out.println("실제 업로드 파일명3 : " + restaurant.getRes_photo3());
 		
-		for(int i = 0; i < arrMenuList.getMe_name().length; i++) {
-			System.out.println("메뉴 파일명 " + i + arrMenuList.getMe_photo()[i]);
-		}
+
+		
+		
 		
 		// c_idx 가져오기 위해 VO에 저장 
 		restaurant.setC_id(c_Id);
@@ -468,7 +453,7 @@ public class OwnerController {
 		int updateCount = service.ModifyRestaurant(restaurant);
 		// 성공시  success_forward.jsp 로 이동 가게 정보 수정 완료 출력후 가게리스트 페이지로 이동
 		// 실패시 가게 정보 수정 실패! 출력
-		if(updateCount > 0) { // 가게 등록 성공시
+		if(updateCount > 0) { // 가게 수정 성공시
 			// ----------------------------------------------(파일 수정)
 			try {
 				if(!mFile1.getOriginalFilename().equals("")) {
@@ -480,28 +465,99 @@ public class OwnerController {
 				if(!mFile3.getOriginalFilename().equals("")) {
 					mFile3.transferTo(new File(saveDir, fileName3));
 				}
-				// 메뉴 사진
-				for(int i = 0; i < arrMenuList.getMe_name().length; i++) {
-					if(!arrMenuFile[i].getOriginalFilename().equals("")) {
-						arrMenuFile[i].transferTo(new File(saveDir, arrFileName[i]));
+				
+				if(arrMenuList.getMe_name() !=null) { // 메뉴 추가 등록 하였을 경우
+					// arrMenuList MenuListVO 객체 꺼내기 (배열)
+					MultipartFile[] arrMenuFile = arrMenuList.getMe_file();
+					String[] np = new String[arrMenuList.getMe_name().length];
+					for(int i = 0; i < arrMenuList.getMe_name().length; i++) {
+						np[i] = "";
+					}
+					// arrMenuList 원본 파일명 기본값 널스트링 저장
+					arrMenuList.setMe_photo(np);
+					// 메뉴 파일명을 저장할 배열
+					String[] arrFileName = new String[arrMenuList.getMe_name().length];
+					for(int i = 0; i < arrFileName.length; i++) {
+						String fileName = uuid.substring(0, 8) + "_" + arrMenuFile[i].getOriginalFilename();
+						arrFileName[i] = fileName;
+					}
+					
+					for(int i = 0; i < arrMenuList.getMe_name().length; i++) {
+						if(!arrMenuFile[i].getOriginalFilename().equals("")) {
+							np[i] = subDir + "/" + arrFileName[i];
+						}
+					}
+					arrMenuList.setMe_photo(np);
+					
+					for(int i = 0; i < arrMenuList.getMe_name().length; i++) {
+						System.out.println("메뉴 파일명 " + i + arrMenuList.getMe_photo()[i]);
+					}
+					
+					// 메뉴 사진
+					for(int i = 0; i < arrMenuList.getMe_name().length; i++) {
+						if(!arrMenuFile[i].getOriginalFilename().equals("")) {
+							arrMenuFile[i].transferTo(new File(saveDir, arrFileName[i]));
+						}
 					}
 				}
+				
+				
 			} catch (IllegalStateException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 			// ----------------------------------------------
-			// 메뉴 추가 DB 작업
-			for(int i = 0; i < arrMenuList.getMe_name().length; i++) {
-				MenuVO menu = new MenuVO();
-				menu.setMe_name(arrMenuList.getMe_name()[i]);
-				menu.setMe_price(arrMenuList.getMe_price()[i]);
-				menu.setMe_context(arrMenuList.getMe_context()[i]);
-				menu.setMe_photo(arrMenuList.getMe_photo()[i]);
-				menu.setRes_idx(restaurant.getRes_idx());
+			if(arrMenuList.getMe_name() != null) {
 				
+				// 메뉴 추가 DB 작업 
+				for(int i = 0; i < arrMenuList.getMe_name().length; i++) {
 					
+					MenuVO menu = new MenuVO();
+					menu.setMe_name(arrMenuList.getMe_name()[i]);
+					menu.setMe_price(arrMenuList.getMe_price()[i]);
+					menu.setMe_context(arrMenuList.getMe_context()[i]);
+					menu.setMe_photo(arrMenuList.getMe_photo()[i]);
+					menu.setRes_idx(restaurant.getRes_idx());
+//				menuList.add(menu);
+					// 메뉴 등록 요청
+					// c_idx, res_brn 파라미터로 전달하여 mapper에서 조회도 가능
+					int insertMenuCount = menuService.registMenu(menu);
+					
+					// 메뉴 idx 조회 
+					int me_idx = menuService.getMeIdx(menu);
+					
+					
+					if(insertMenuCount > 0) { // 메뉴 등록 성공시 예약 시간 등록요청
+						
+						//----------------------------------------------------------
+						// 시간 등록 DB 작업
+						if(arrTimeList.getT_time() != null) {
+							
+							for(int j = 0; j < arrTimeList.getT_time().length; j++) {
+								TimesVO t_Time = new TimesVO();
+								t_Time.setT_time(arrTimeList.getT_time()[j]);
+								t_Time.setRes_idx(restaurant.getRes_idx());
+								// 조회한 메뉴idx 저장
+								t_Time.setMe_idx(me_idx);
+								// t_Time 시간으로 변경
+								LocalTime localTime = LocalTime.parse(t_Time.getT_time());
+								// me_name이 LUNCH 이고 t_Time이 17:00 이전일때
+								if(menu.getMe_name().equals("LUNCH") && localTime.isBefore(LocalTime.parse("17:00"))){
+									timesService.insertTime(t_Time);
+								}
+								// me_name이 DINNER 이고 t_Time이 17:00 이후 (17:00 포함)일때
+								if(menu.getMe_name().equals("DINNER") && (localTime.isAfter(LocalTime.parse("17:00")) || localTime == (LocalTime.parse("17:00")))) {
+									timesService.insertTime(t_Time);
+								}
+							}
+						}
+						
+					} else { // 메뉴 등록 실패시 
+						model.addAttribute("msg", "가게 수정 실패!");
+						return "fail_back";
+					}
+				}
 			}
 			
 			model.addAttribute("msg", "가게 정보 수정 완료");
@@ -521,7 +577,7 @@ public class OwnerController {
 		
 		int deleteCount = service.deletePhoto(res_photo);
 		
-		return "";
+		return "success_forward";
 	}
 	
 	//owner의 식당마이페이지에서 수정후 이동 Mapping

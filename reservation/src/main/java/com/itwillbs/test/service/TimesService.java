@@ -26,4 +26,8 @@ public class TimesService {
 		return mapper.selectTimesList(res_idx);
 	}
 
+	public int deleteTime(String t_time, int me_idx) {
+		return mapper.deleteTime(t_time, me_idx);
+	}
+
 }
