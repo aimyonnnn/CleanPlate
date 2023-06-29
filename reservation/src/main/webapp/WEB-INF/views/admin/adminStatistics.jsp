@@ -140,7 +140,7 @@
               <div class="card-into">
                 <div class="card-head">
 					<small>일일 결제 금액</small>
-					<h2><fmt:formatNumber value="${adminPaymentCount0.count*100}" /> 원</h2>
+					<h2><fmt:formatNumber value="${adminPaymentCount0.count}" /> 원</h2>
                 </div>
               </div>
               <div class="card-chart black">
@@ -205,7 +205,7 @@
               <div class="card-into">
                 <div class="card-head">
 					<small>누적 결제 금액</small>
-					<h2><fmt:formatNumber value="${adminPaymentTotalCount0.count*100 }" /> 원</h2>
+					<h2><fmt:formatNumber value="${adminPaymentTotalCount0.count }" /> 원</h2>
                 </div>
               </div>
               <div class="card-chart black">
@@ -276,17 +276,17 @@
                         borderWidth: 1,
                         backgroundColor: 'rgb(255, 51, 0)',
                       }, { 
-                        data: [${adminPaymentCount6.count}
-                        	 , ${adminPaymentCount5.count}
-                        	 , ${adminPaymentCount4.count}
-                        	 , ${adminPaymentCount3.count}
-                        	 , ${adminPaymentCount2.count}
-                        	 , ${adminPaymentCount1.count}
-                        	 , ${adminPaymentCount0.count}],
+                        data: [${adminPaymentCount6.count*0.0001}
+                        	 , ${adminPaymentCount5.count*0.0001}
+                        	 , ${adminPaymentCount4.count*0.0001}
+                        	 , ${adminPaymentCount3.count*0.0001}
+                        	 , ${adminPaymentCount2.count*0.0001}
+                        	 , ${adminPaymentCount1.count*0.0001}
+                        	 , ${adminPaymentCount0.count*0.0001}],
                         fill: false,
                         pointRadius: 3,
                         lineTension: 0,
-                        label: '결제 금액(X100원)',
+                        label: '결제 금액(X10000원)',
                         borderColor: 'rgb(0, 0, 0)',
                         borderWidth: 1,
                         backgroundColor: 'rgb(0, 0, 0)',
@@ -398,17 +398,17 @@
                         borderWidth: 1,
                         backgroundColor: 'rgb(255, 51, 0)',
                       }, { 
-                        data: [${adminPaymentTotalCount6.count}
-                        	 , ${adminPaymentTotalCount5.count}
-                        	 , ${adminPaymentTotalCount4.count}
-                        	 , ${adminPaymentTotalCount3.count}
-                        	 , ${adminPaymentTotalCount2.count}
-                        	 , ${adminPaymentTotalCount1.count}
-                        	 , ${adminPaymentTotalCount0.count}],
+                        data: [${adminPaymentTotalCount6.count*0.0001}
+                        	 , ${adminPaymentTotalCount5.count*0.0001}
+                        	 , ${adminPaymentTotalCount4.count*0.0001}
+                        	 , ${adminPaymentTotalCount3.count*0.0001}
+                        	 , ${adminPaymentTotalCount2.count*0.0001}
+                        	 , ${adminPaymentTotalCount1.count*0.0001}
+                        	 , ${adminPaymentTotalCount0.count*0.0001}],
                         fill: false,
                         pointRadius: 3,
                         lineTension: 0,
-                        label: '누적 결제 금액(X100원)',
+                        label: '누적 결제 금액(X10000원)',
                         borderColor: 'rgb(0, 0, 0)',
                         borderWidth: 1,
                         backgroundColor: 'rgb(0, 0, 0)',

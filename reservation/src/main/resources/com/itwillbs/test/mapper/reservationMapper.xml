@@ -62,6 +62,7 @@
 			FROM reservation r
 				JOIN restaurant res JOIN members m
 				ON r.res_idx = res.res_idx AND r.m_idx = m.m_idx
+					ORDER BY r.r_idx
 	</select>
 	
 	<!-- 관리자의 예약 정보 조회 -->
