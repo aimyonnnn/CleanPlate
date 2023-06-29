@@ -53,7 +53,7 @@ public class RestaurantService {
 	}
 	
 	// 관리자 페이지 가게 정보 삭제
-	public int deleteRestaurant(String idx) {
+	public int deleteRestaurant(int idx) {
 		return mapper.deleteRestaurant(idx);
 	}
 
