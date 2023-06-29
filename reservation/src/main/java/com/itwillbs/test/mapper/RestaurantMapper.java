@@ -32,7 +32,7 @@ public interface RestaurantMapper {
 	int adminRestaurantUpdate(RestaurantVO res);
 
 	// 관리자의 가게 정보 삭제
-	int deleteRestaurant(String idx);
+	int deleteRestaurant(int idx);
 
 	// 관리자의 가게 조회
 	RestaurantVO selectAdminRestaurant(String idx);

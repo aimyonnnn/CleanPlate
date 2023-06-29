@@ -136,6 +136,20 @@ public class AdminController {
 			
 		}
 		
+		// 지난 일자 일반 회원 총 가입자 수 조회
+		MemberVO adminMemberTotalCount = new MemberVO();
+		for(int i = 0; i <= 6; i++) {
+			adminMemberTotalCount = mservice.adminMemberTotalCount(i);
+			model.addAttribute("adminMemberTotalCount" + i, adminMemberTotalCount);
+			// 조회 결과 없을 경우 0 값으로 대체
+			if(adminMemberTotalCount == null) {
+				MemberVO defaultVO = new MemberVO();
+				defaultVO.setM_idx(0);
+				defaultVO.setCount(0);
+				model.addAttribute("adminMemberTotalCount" + i, defaultVO);
+			}
+		}	
+		
 		// 지난 일자 기업 회원 가입자 수 조회
 		CeoVO adminCEOMemberCount = new CeoVO();
 		for(int i = 0; i <= 6; i++) {
@@ -422,7 +436,7 @@ public class AdminController {
 	
 	// 가게 삭제 시
 	@GetMapping("deleteStore")
-	public String deleteStore(@RequestParam String idx, Model model, HttpSession session) {
+	public String deleteStore(@RequestParam int idx, Model model, HttpSession session) {
 		// 관리자 아이디 판별
 		String sId = (String)session.getAttribute("sId");
 		
