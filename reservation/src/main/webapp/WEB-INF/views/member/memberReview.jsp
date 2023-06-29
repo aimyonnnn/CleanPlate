@@ -73,9 +73,10 @@
 	                    <div class="card ms-3 me-5 mt-5 align-items-center" style="width: 20rem;">
 	                        <img src="${pageContext.request.contextPath }/resources/upload/${rvList.rv_img }" width="100" height="100">
 	                        <div class="card-body">
-	                          <h5 class="card-title">${rvList.res_name }</h5>
+	                          <a class="card-title h5" href="getRestaurantInfo?res_idx=${rvList.res_idx }" style="text-decoration: none; color: black;">${rvList.res_name }</a>
 	                          <p class="card-text">${rvList.rv_comment }</p>
 	                          <div class="d-flex justify-content-center">
+	                         	 <button class="btn btn-outline-dark me-1" onclick="location.href='getRestaurantInfo?res_idx=${rvList.res_idx }'">예약하기</button>
 	                         	 <button class="btn btn-dark" style="color: white;" onclick="rvDelete(${rvList.rv_idx})">삭제</button>
 	                          </div>
 	                        </div>
