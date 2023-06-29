@@ -288,7 +288,8 @@
 						    	</th>
 						    	<td id="td_Time">
 						    		<div class="d-inline-flex align-items-center">
-										<input class="form-control timepicker3" type ="text" name="t_time" id="t_time" style="text-align: center; width: 200px;" placeholder="클릭하여 시간 선택">
+						    			<!-- null값이 들어가지 못하게 초기 input을 지움 -->
+<!-- 										<input class="form-control timepicker3" type ="text" name="t_time" id="t_time" style="text-align: center; width: 200px;" placeholder="클릭하여 시간 선택"> -->
 							    		<button type="button" id="t_timeInsert" class="btn btn-dark" style="color: white; margin-left: 6px;" >추가</button>
 						    		</div>
 						    	</td>

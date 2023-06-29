@@ -26,11 +26,11 @@ public class MenuController {
 		int deleteCount = service.deleteMenu(me_idx, res_idx);
 		if(deleteCount > 0) {
 			model.addAttribute("msg", "메뉴 삭제");
-			return "success_back";
+			model.addAttribute("targetURL", "restaurantUpdatePage?res_idx="+res_idx);
+			return "success_forward";
 			
 		} else {
 			model.addAttribute("msg", "메뉴 삭제 실패");
-			model.addAttribute("targetURL", "./");
 			return "fail_back";
 		}
 	}
