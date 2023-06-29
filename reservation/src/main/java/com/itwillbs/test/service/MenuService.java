@@ -32,9 +32,13 @@ public class MenuService {
 	}
 	
 	// 메뉴 삭제
-	public int deleteMenu(int me_idx) {
-		return mapper.deleteMenu(me_idx);
+	public int deleteMenu(int me_idx, int res_idx) {
+		return mapper.deleteMenu(me_idx, res_idx);
 	}
 	
+	// 예약시간 삭제시 참고할 me_idx 조회
+	public int selectMeidxT(String t_time, int res_idx) {
+		return mapper.selectMeidxT(t_time, res_idx);
+	}
 
 }

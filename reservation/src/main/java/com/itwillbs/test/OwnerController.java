@@ -468,7 +468,7 @@ public class OwnerController {
 		int updateCount = service.ModifyRestaurant(restaurant);
 		// 성공시  success_forward.jsp 로 이동 가게 정보 수정 완료 출력후 가게리스트 페이지로 이동
 		// 실패시 가게 정보 수정 실패! 출력
-		if(updateCount > 0) { // 가게 등록 성공시
+		if(updateCount > 0) { // 가게 수정 성공시
 			// ----------------------------------------------(파일 수정)
 			try {
 				if(!mFile1.getOriginalFilename().equals("")) {
@@ -521,7 +521,7 @@ public class OwnerController {
 		
 		int deleteCount = service.deletePhoto(res_photo);
 		
-		return "";
+		return "success_forward";
 	}
 	
 	//owner의 식당마이페이지에서 수정후 이동 Mapping
