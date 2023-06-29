@@ -238,10 +238,10 @@
     <div class="container">
     
     	<!-- 상단 배너 -->
-<!--         <div class="banner"> -->
-<!--             <h2 class="banner-title">당신의 예약을 양도해보세요!</h2> -->
-<!--             <p class="banner-description">누군가의 특별한 날을 더욱 특별하게 만들어주세요.</p> -->
-<!--         </div> -->
+        <div class="banner">
+            <h2 class="banner-title">당신의 예약을 양도해보세요!</h2>
+            <p class="banner-description">누군가의 특별한 날을 더욱 특별하게 만들어주세요.</p>
+        </div>
        <!-- 상단 배너 --> 
        
        <!-- 검색 버튼 -->
