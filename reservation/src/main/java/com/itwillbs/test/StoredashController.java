@@ -1,5 +1,8 @@
 package com.itwillbs.test;
 
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -41,6 +44,9 @@ public class StoredashController {
 
         int weeklyAllSalesAmount = storedashService.getWeeklyallSalesAmount(cId);
         model.addAttribute("weeklyAllSalesAmount", weeklyAllSalesAmount);
+
+//        List<Map<String, Object>> dailyOrderCounts = storedashService.getDailyOrderCounts(cId);
+//        model.addAttribute("dailyOrderCounts", dailyOrderCounts);
 
         return "owner/storeDashBoard";
     }

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="com.google.gson.Gson" %>
 <!doctype html>
 <html>
   <head>
@@ -133,7 +134,7 @@
             <div class="card-body d-flex justify-content-between">
               <div>
                 <p class="card-text mb-2"><b>주간 매출</b></p>
-					${weeklyAllSalesAmount}회<br>    
+					${weeklyAllSalesAmount}원<br>    
 	       	 </div>
               <i class="fas fa-calendar" style="font-size: 30px; margin-top: 20px"></i>
             </div>
@@ -143,61 +144,65 @@
       </div><!-- row 끝 -->
     </div><!-- container 끝-->
 
-        <!-- myChart 시작 -->
+<!-- myChart 시작 -->
  <div class="container mt-3"><!-- container 시작-->
   <div class="row"><!-- row 시작-->
 
-    <!-- myChart 시작 -->
-    <div class="col-lg-6" data-aos="fade-up" data-aos-anchor-placement="center-bottom">
-      <div class="card">
-        <div class="card-header">
-          <span>최근 1주일 예약 수</span>
-        </div>
-        <div class="card-body">
-          <canvas id="myChart"></canvas>
-        </div>
-      </div>
+<!-- myChart 시작 -->
+<div class="col-lg-6" data-aos="fade-up" data-aos-anchor-placement="center-bottom">
+  <div class="card">
+    <div class="card-header">
+      <span>요일 별 예약수 비교</span>
     </div>
-    <!-- myChart 끝 -->
+    <div class="card-body">
+      <canvas id="myChart"></canvas>
+    </div>
+  </div>
+</div>
+<!-- myChart 끝 -->
 
-    <!-- myChart2 시작 -->
-    <div class="col-lg-6" data-aos="fade-up" data-aos-anchor-placement="center-bottom">
-      <div class="card">
-        <div class="card-header">
-          <span>최근 1주일 매출 금액</span>
-        </div>
-        <div class="card-body">
-          <canvas id="myChart2"></canvas>
-        </div>
-      </div>
-    </div>
-    <!-- myChart2 시작 -->
+
+<!--     myChart2 시작 -->
+<!--     <div class="col-lg-6" data-aos="fade-up" data-aos-anchor-placement="center-bottom"> -->
+<!--       <div class="card"> -->
+<!--         <div class="card-header"> -->
+<!--           <span>최근 1주일 매출 금액</span> -->
+<!--         </div> -->
+<!--         <div class="card-body"> -->
+<%--           <canvas id="myChart2"></canvas> --%>
+<!--         </div> -->
+<!--       </div> -->
+<!--     </div> -->
+<!--     myChart2 시작 -->
 
   </div>
 </div>
 
-	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<!-- 	<script> -->
-<!-- 	  // Chart 1 -->
-<!-- // 	  const labels = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']; -->
-<!-- // 	  const data = { -->
-<!-- // 	    labels: labels, -->
-<!-- // 	    datasets: [{ -->
-<!-- // 	      label: 'My First Dataset', -->
-<!-- // 	      data: todayReservationCount, -->
-<!-- // 	      fill: false, -->
-<!-- // 	      borderColor: 'rgb(75, 192, 192)', -->
-<!-- // 	      tension: 0.1 -->
-<!-- // 	    }] -->
-<!-- // 	  }; -->
-	
-<!-- // 	  const ctx1 = document.getElementById('myChart').getContext('2d'); -->
-<!-- // 	  new Chart(ctx1, { -->
-<!-- // 	    type: 'line', -->
-<!-- // 	    data: data, -->
-<!-- // 	    options: {} -->
-<!-- // 	  }); -->
-	
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const data = {
+            labels: ['월', '화', '수', '목', '금'],
+            datasets: [{
+                label: '예약수',
+                data: [11, 16, 7, 3, 14],
+                backgroundColor: [
+                    'rgb(255, 99, 132)',
+                    'rgb(75, 192, 192)',
+                    'rgb(255, 205, 86)',
+                    'rgb(201, 203, 207)',
+                    'rgb(54, 162, 235)'
+                ]
+            }]
+        };
+
+        const ctx = document.getElementById('myChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'polarArea',
+            data: data,
+            options: {}
+        });
+    </script>
+
 <!-- // 	  // Chart 2 -->
 <!-- // 	  const data2 = { -->
 <!-- // 	    labels: labels, -->

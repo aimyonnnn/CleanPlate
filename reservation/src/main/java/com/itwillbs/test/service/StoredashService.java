@@ -1,6 +1,9 @@
 package com.itwillbs.test.service;
 
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.stereotype.Service;
 
 import com.itwillbs.test.mapper.StoredashMapper;
@@ -28,5 +31,10 @@ public class StoredashService {
     public int getWeeklyallSalesAmount(String cId) {
         return storedashMapper.getWeeklyallSalesAmount(cId);
     }
+    
+//    public List<Map<String, Object>> getDailyOrderCounts(String cId) {
+//        return storedashMapper.getDailyOrderCounts(cId);
+//    }
+
 }
 

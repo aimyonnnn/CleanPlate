@@ -494,7 +494,7 @@ public class LoginController {
 	        	HttpSession session = request.getSession();
 	        	
 	        	// 로그인 성공한 경우 세션 유효 시간 설정 (30분)
-	        	session.setMaxInactiveInterval(1800);
+	        	session.setMaxInactiveInterval(60*30);
 	        	
 	        	// 로그인 처리 후 홈 페이지로 리다이렉트
 	        	return "redirect:/";
