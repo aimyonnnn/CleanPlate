@@ -69,7 +69,7 @@
 	<!-- 지난 일자 결제 금액 조회  -->
 	<select id="adminPaymentCount">
 		SELECT DATE(p_orderDate) AS date,
-			   sum(payment_total_price)*0.01 AS count
+			   sum(payment_total_price) AS count
 			FROM payment
 					WHERE DATE(p_orderDate) = CURDATE() - interval #{i} day
 					GROUP BY date
@@ -84,7 +84,7 @@
 	
 	<!-- 관리자 페이지 통계용 데이터 조회(누적 합계) -->
 	<select id="adminPaymentTotalCount">
-		SELECT sum(payment_total_price)*0.01 AS count
+		SELECT sum(payment_total_price) AS count
 			FROM payment
 				WHERE p_orderDate <![CDATA[<=]]> now() - interval #{x} day
 	</select>
