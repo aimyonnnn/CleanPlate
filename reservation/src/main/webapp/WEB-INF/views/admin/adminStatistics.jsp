@@ -166,6 +166,7 @@
          <br>
 
 <%-- <canvas id="dailyReservation" width="300px" height="450px"></canvas> --%>
+<!-- 차후 구현 -->
 
 <div class="card-single">
 	<div class="card-flex">
