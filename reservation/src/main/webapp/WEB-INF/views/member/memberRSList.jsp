@@ -206,6 +206,31 @@
 					                        <td>${resList.r_idx }</td>
 					                    </tr>
 					                    <tr>
+					                    	<th>예약상태</th>
+					                    	<td>
+					                    		<c:choose>
+					                           		<c:when test="${resList.r_status eq 1 }">
+					                           			방문예정
+					                           		</c:when>
+					                           		<c:when test="${resList.r_status eq 2 }">
+					                           			방문완료
+					                           		</c:when>
+					                           		<c:when test="${resList.r_status eq 3 }">
+					                           			<span style="color: red;">취소</span>
+					                           		</c:when>
+					                           		<c:when test="${resList.r_status eq 4 }">
+					                           			<span style="color: green;">양도완료[구매]</span>
+					                           		</c:when>
+					                           		<c:when test="${resList.r_status eq 5 }">
+					                           			판매중
+					                           		</c:when>
+					                           		<c:otherwise>
+					                           			판매실패
+					                           		</c:otherwise>
+					                           	</c:choose>
+					                    	</td>
+					                    </tr>
+					                    <tr>
 					                        <th>날짜</th>
 					                        <td><fmt:formatDate value="${resList.r_date }" pattern="yyyy년 MM월 dd일"/></td>
 					                    </tr>
@@ -448,7 +473,7 @@
                         <tr>
                             <th>내용</th>
                             <td>
-                            	<textarea cols="50" rows="5" name="rv_comment" oninput="countTextareaCharacters()" id="rv_comment"></textarea>
+                            	<textarea cols="50" rows="5" name="rv_comment" oninput="countTextareaCharacters()" id="rv_comment" required="required"></textarea>
                             	<p id="characterCount">0/100</p>
                             </td>
                         </tr>

@@ -254,26 +254,10 @@
   });
 </script>
 
-<script type="text/javascript">
-	function noShow(r_idx) {
-		let result = confirm("노쇼가 확실합니까?");
-		if(result){
-			location.href='resCancel?r_idx=' + r_idx + '&r_status=4';
-		}
-	}
-	
-	function cancel(r_idx) {
-		let result = confirm("취소가 확실합니까?");
-		if(result){
-			location.href='resCancel?r_idx=' + r_idx + '&r_status=3';
-		}
-	}
-</script>
-
 	<!-- 예약 취소 -->
 	<script type="text/javascript">
     function cancel(r_idx) {
-        let result = confirm("취소가 확실합니까? \n (취소할 경우 예약을 되돌릴 수 없으며 다시 예약해야합니다.)");
+        let result = confirm("취소가 확실합니까? \n (취소할 경우 예약을 되돌릴 수 없습니다.)");
 
         if (result) {
 
