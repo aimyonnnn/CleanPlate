@@ -116,6 +116,7 @@
 	
     <!-- footer -->
 	<footer class="footer">
+		<hr style="margin-top: 100px;">
 		<%@ include file="../common/common_footer.jsp" %>
 	</footer>
     <!-- footer -->
