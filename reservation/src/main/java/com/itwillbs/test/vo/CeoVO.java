@@ -17,5 +17,6 @@ public class CeoVO { // 회원 테이블
 	//----------------------------------------------------------------
 	private String c_email1;
 	private String c_email2;
+	private int count;
 }
 

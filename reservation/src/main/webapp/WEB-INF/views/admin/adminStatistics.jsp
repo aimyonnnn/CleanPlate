@@ -153,8 +153,10 @@
             <div class="card-flex">
               <div class="card-into">
                 <div class="card-head">
+<!-- 					<small>일일 가입자 수</small> -->
+<%-- 					<h2>${adminMemberCount0.count+adminCEOMemberCount0.count} 명</h2> --%>
 					<small>일일 가입자 수</small>
-					<h2>${adminMemberCount0.count} 명</h2>
+					<h2>{adminMemberTotalCount0.count+adminCEOMemberTotalCount0.count} 명</h2>
                 </div>
               </div>
               <div class="card-chart success">
@@ -219,8 +221,10 @@
               <div class="card-into">
                 <div class="card-head">
 					<small>총 가입자 수</small>
-					<h2>${adminMemberTotalCount0.count } 명</h2>
-                </div>
+					<h2>${adminMemberCount0.count+adminCEOMemberCount0.count} 명</h2>
+					</div>
+<!-- 					<small>총 가입자 수</small> -->
+<%-- 					<h2>${adminMemberTotalCount0.count+adminCEOMemberTotalCount0.count} 명</h2>                </div> --%>
               </div>
               <div class="card-chart success">
                 <span class="las la-chart-line"></span>
@@ -292,13 +296,13 @@
                         borderWidth: 1,
                         backgroundColor: 'rgb(0, 0, 0)',
                       }, { 
-                        data: [${adminMemberCount6.count}
-                       		 , ${adminMemberCount5.count}
-                       		 , ${adminMemberCount4.count}
-                       		 , ${adminMemberCount3.count}
-                       		 , ${adminMemberCount2.count}
-                       		 , ${adminMemberCount1.count}
-                       		 , ${adminMemberCount0.count}],
+                          data: [${adminMemberTotalCount6.count+adminCEOMemberTotalCount6.count}
+                    		 , ${adminMemberTotalCount5.count+adminCEOMemberTotalCount5.count}
+                    		 , ${adminMemberTotalCount4.count+adminCEOMemberTotalCount4.count}
+                    		 , ${adminMemberTotalCount3.count+adminCEOMemberTotalCount3.count}
+                    		 , ${adminMemberTotalCount2.count+adminCEOMemberTotalCount2.count}
+                    		 , ${adminMemberTotalCount1.count+adminCEOMemberTotalCount1.count}
+                    		 , ${adminMemberTotalCount0.count+adminCEOMemberTotalCount0.count}],
                         fill: false,
                         pointRadius: 3,
                         lineTension: 0,
@@ -414,13 +418,13 @@
                         borderWidth: 1,
                         backgroundColor: 'rgb(0, 0, 0)',
                       }, { 
-                        data: [${adminMemberTotalCount6.count}
-                       		 , ${adminMemberTotalCount5.count}
-                       		 , ${adminMemberTotalCount4.count}
-                       		 , ${adminMemberTotalCount3.count}
-                       		 , ${adminMemberTotalCount2.count}
-                       		 , ${adminMemberTotalCount1.count}
-                       		 , ${adminMemberTotalCount0.count}],
+                             data: [${adminMemberCount6.count+adminCEOMemberCount6.count}
+                       		 , ${adminMemberCount5.count+adminCEOMemberCount5.count}
+                       		 , ${adminMemberCount4.count+adminCEOMemberCount4.count}
+                       		 , ${adminMemberCount3.count+adminCEOMemberCount3.count}
+                       		 , ${adminMemberCount2.count+adminCEOMemberCount2.count}
+                       		 , ${adminMemberCount1.count+adminCEOMemberCount1.count}
+                       		 , ${adminMemberCount0.count+adminCEOMemberCount0.count}],
                         fill: false,
                         pointRadius: 3,
                         lineTension: 0,

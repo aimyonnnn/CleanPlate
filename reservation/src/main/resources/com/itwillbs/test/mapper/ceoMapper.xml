@@ -52,4 +52,50 @@
 				c_id = #{c_id}
 	</update>
 	
+	<select id="ceoList">
+		SELECT *
+			FROM ceo
+				ORDER BY c_idx
+	</select>
+	
+	<!-- 기업 회원 정보 조회 -->
+	<select id="selectCEOMember" resultType="com.itwillbs.test.vo.CeoVO">
+		    select * 
+		    	from ceo
+		    		where c_id = #{id}
+	</select>
+	
+	<!-- 관리자의 기업 회원 정보 수정 -->
+	<update id="adminCEOMemberUpdate">
+		UPDATE ceo
+			SET c_idx = #{c_idx}
+			   ,c_id = #{c_id}
+			   ,c_name = #{c_name}
+			   ,c_tel = #{c_tel}
+			   ,c_email = #{c_email}
+			   ,c_status = #{c_status}
+				WHERE c_idx = #{c_idx}
+	</update>
+	
+	<!-- 기업 회원 정보 삭제 --> 
+	<delete id="deleteMember">
+		DELETE FROM ceo
+			WHERE c_id = #{c_id}	
+	</delete>
+	<!-- 관리자 페이지 통계용 데이터 조회 -->
+	<select id="adminCEOMemberCount">
+			SELECT DATE(c_regdate) AS date,
+			   count(c_idx) AS count
+			FROM ceo
+					WHERE DATE(c_regdate) = CURDATE() - interval #{i} day
+					GROUP BY date
+					ORDER BY date DESC
+	</select>
+	
+	<!-- 관리자 페이지 통계용 데이터 조회(누적 합계) -->
+	<select id="adminCEOMemberTotalCount">
+		SELECT count(c_idx) AS count
+			FROM ceo
+				WHERE DATE(c_regdate) <![CDATA[<=]]> now() - interval #{x} day
+	</select>
 </mapper>

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwillbs.test.service.AssignmentService;
+import com.itwillbs.test.service.CeoService;
 import com.itwillbs.test.service.HelpService;
 import com.itwillbs.test.service.MemberService;
 import com.itwillbs.test.service.PayService;
@@ -24,6 +25,7 @@ import com.itwillbs.test.service.ReservationService;
 import com.itwillbs.test.service.RestaurantService;
 import com.itwillbs.test.service.ReviewService;
 import com.itwillbs.test.vo.AssignmentVO;
+import com.itwillbs.test.vo.CeoVO;
 import com.itwillbs.test.vo.MemberVO;
 import com.itwillbs.test.vo.PayVO;
 import com.itwillbs.test.vo.ReservationVO;
@@ -46,6 +48,8 @@ public class AdminController {
 	PayService pservice;
 	@Autowired
 	ReviewService revservice;
+	@Autowired
+	CeoService cservice;
 	//=============================== 관리자 페이지 메인 ==================================
 	
 	// 로그인 성공 후 관리자페이지 클릭 시 관리자페이지로 이동
@@ -65,9 +69,13 @@ public class AdminController {
 		List<ReservationVO> reservationDESCList = rservice.getReservationListDESC();
 		model.addAttribute("reservationDESCList" ,reservationDESCList);
 		
-		// 회원 목록 조회
+		// 일반 회원 목록 조회
 		List<MemberVO> memberList = mservice.memberList();
 		model.addAttribute("memberList", memberList);
+		
+		// 기업 회원 목록 조회
+		List<CeoVO> ceoMemberList = cservice.ceoList();
+		model.addAttribute("ceoMemberList", ceoMemberList);
 		
 		// 오늘 총 예약 수
 		ReservationVO todayReservationCount = rservice.adminReservationCount(0);
@@ -105,9 +113,13 @@ public class AdminController {
 		} 
 		
 		
-		// 회원 목록 조회
+		// 일반 회원 목록 조회
 		List<MemberVO> memberList = mservice.memberList();
 		model.addAttribute("memberList", memberList);
+		
+		// 기업 회원 목록 조회
+		List<CeoVO> ceoMemberList = cservice.ceoList();
+		model.addAttribute("ceoMemberList", ceoMemberList);
 		
 		// 지난 일자 가입자 수 조회
 		MemberVO adminMemberCount = new MemberVO();
@@ -124,17 +136,32 @@ public class AdminController {
 			
 		}
 		
-		// 지난 일자 총 가입자 수 조회
-		MemberVO adminMemberTotalCount = new MemberVO();
+		// 지난 일자 기업 회원 가입자 수 조회
+		CeoVO adminCEOMemberCount = new CeoVO();
 		for(int i = 0; i <= 6; i++) {
-			adminMemberTotalCount = mservice.adminMemberTotalCount(i);
-			model.addAttribute("adminMemberTotalCount" + i, adminMemberTotalCount);
+			adminCEOMemberCount = cservice.adminCEOMemberCount(i);
+			model.addAttribute("adminCEOMemberCount" + i, adminCEOMemberCount);
 			// 조회 결과 없을 경우 0 값으로 대체
-			if(adminMemberTotalCount == null) {
-				MemberVO defaultVO = new MemberVO();
-				defaultVO.setM_idx(0);
+			if(adminMemberCount == null) {
+				CeoVO defaultVO = new CeoVO();
+				defaultVO.setC_idx(0);
 				defaultVO.setCount(0);
-				model.addAttribute("adminMemberTotalCount" + i, defaultVO);
+				model.addAttribute("adminCEOMemberCount" + i, adminCEOMemberCount);
+			}
+			
+		}
+		
+		// 지난 일자 기업 회원 총 가입자 수 조회
+		CeoVO adminCEOMemberTotalCount = new CeoVO();
+		for(int i = 0; i <= 6; i++) {
+			adminCEOMemberTotalCount = cservice.adminCEOMemberTotalCount(i);
+			model.addAttribute("adminCEOMemberTotalCount" + i, adminCEOMemberTotalCount);
+			// 조회 결과 없을 경우 0 값으로 대체
+			if(adminCEOMemberTotalCount == null) {
+				CeoVO defaultVO = new CeoVO();
+				defaultVO.setC_idx(0);
+				defaultVO.setCount(0);
+				model.addAttribute("adminCEOMemberTotalCount" + i, defaultVO);
 			}
 		}	
 		
@@ -207,7 +234,7 @@ public class AdminController {
 	
 	// ================================ 회원 관리 페이지 ================================
 	
-	// 관리자의 회원 관리 페이지로 이동
+	// 관리자의 일반 회원 관리 페이지로 이동
 	@GetMapping("adminMember")
 	public String adminMember(Model model,HttpSession session) {
 		// 관리자 아이디 판별
@@ -216,12 +243,27 @@ public class AdminController {
 		if(sId == null || !sId.equals("admin")) {
 			model.addAttribute("msg", "잘못된 접근입니다!");
 			return "fail_back";			
-		} 
-		
+		}
 		
 		List<MemberVO> memberList = mservice.memberList();
 		model.addAttribute("memberList", memberList);
 		return "admin/adminMember";
+	}
+	
+	// 관리자의 기업 회원 관리 페이지로 이동
+	@GetMapping("adminCEOMember")
+	public String adminCEOMember(Model model,HttpSession session) {
+		// 관리자 아이디 판별
+		String sId = (String)session.getAttribute("sId");
+		
+		if(sId == null || !sId.equals("admin")) {
+			model.addAttribute("msg", "잘못된 접근입니다!");
+			return "fail_back";			
+		}
+		
+		List<CeoVO> ceoList = cservice.ceoList();
+		model.addAttribute("ceoList", ceoList);
+		return "admin/adminCEOMember";
 	}
 	
 	// 회원 관리 페이지에서 회원 정보 수정 페이지 이동
@@ -272,6 +314,56 @@ public class AdminController {
 		
 		return "redirect:/adminMember";
 	}
+	
+	// 기업 회원 관리 페이지에서 기업 회원 정보 수정 페이지 이동
+	@GetMapping("deleteCEOForm")
+	public String deleteCEOForm(@RequestParam String id, CeoVO ceo, Model model,HttpSession session) {
+		// 관리자 아이디 판별
+		String sId = (String)session.getAttribute("sId");
+		
+		if(sId == null || !sId.equals("admin")) {
+			model.addAttribute("msg", "잘못된 접근입니다!");
+			return "fail_back";			
+		} 
+		
+		ceo = cservice.selectCEOMember(id);
+		model.addAttribute(ceo);
+		return "admin/deleteCEOForm";
+	}
+	
+	// 기업 회원 정보 수정 시
+	@PostMapping("adminCEOMemberUpdate")
+	public String adminCEOMemberUpdate(Model model, CeoVO ceo, HttpSession session) {
+		// 관리자 아이디 판별
+		String sId = (String)session.getAttribute("sId");
+		
+		if(sId == null || !sId.equals("admin")) {
+			model.addAttribute("msg", "잘못된 접근입니다!");
+			return "fail_back";			
+		} 
+		
+		cservice.adminCEOMemberUpdate(ceo);
+		model.addAttribute("ceo", ceo);
+		return "redirect:/adminCEOMember";
+	}
+	
+	// 회원 삭제 시
+	@GetMapping("deleteCEO")
+	public String deleteCEO(@RequestParam String id, HttpSession session, Model model) {
+		// 관리자 아이디 판별
+		String sId = (String)session.getAttribute("sId");
+		
+		if(sId == null || !sId.equals("admin")) {
+			model.addAttribute("msg", "잘못된 접근입니다!");
+			return "fail_back";			
+		} 
+		
+		cservice.deleteCEOMember(id);
+		
+		return "redirect:/adminCEOMember";
+	}
+	
+	
 	
 	// ==================================================================================
 	

@@ -112,18 +112,18 @@
           <div>
             <h1>회원 관리</h1>
             <br>
-            <small>일반 회원 관리 페이지</small>
+            <small>기업 회원 관리 페이지</small>
             <br>
           </div>
         </div> 
     <div class="main">
       <div class="title row">
         <div class="col-7">
-          <br><h5 class="title6">총 <a style="color: blue;">일반</a> 회원 수 : </h5>
-          <h5 class="title6">${memberList.size() } 명</h5>
+          <br><h5 class="title6">총 <a style="color: blue;">기업</a> 회원 수 : </h5>
+          <h5 class="title6">${ceoList.size() } 명</h5>
         </div>
       </div>
-       	  	<br><small onclick="location.href='adminCEOMember'"><i class="la la-gear"></i>기업 회원 관리 페이지 전환</small>
+       	  	<br><small onclick="location.href='adminMember'"><i class="la la-gear"></i>일반 회원 관리 페이지 전환</small>
     </div>
 	<br>
     <div class="nav2">
@@ -133,7 +133,6 @@
           <th>No.</th>
           <th>회원 ID</th>
           <th>이름</th>
-          <th>닉네임</th>
           <th>전화 번호</th>
           <th>이메일</th>
           <th>회원 상태</th>
@@ -142,38 +141,26 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${memberList }" var="member">
+        <c:forEach items="${ceoList }" var="ceo">
         <tr>
-          <td>${member.m_idx }</td>
-          <td>${member.m_id }</td>
-          <td>${member.m_name }</td>
-          <td>${member.m_nick }</td>
-          <td>${member.m_tel }</td>
-          <td>${member.m_email }</td>
+          <td>${ceo.c_idx }</td>
+          <td>${ceo.c_id }</td>
+          <td>${ceo.c_name }</td>
+          <td>${ceo.c_tel }</td>
+          <td>${ceo.c_email }</td>
         <%-- 회원 상태 판별 --%>
-        <c:if test="${member.m_status == 1}">
+        <c:if test="${ceo.c_status == 1}">
         	<td>활동중</td>
         </c:if>
-        <c:if test="${member.m_status == 2}">
+        <c:if test="${ceo.c_status == 2}">
         	<td>정지</td>
         </c:if>
-        <c:if test="${member.m_status == 3}">
+        <c:if test="${ceo.c_status == 3}">
         	<td>탈퇴</td>
         </c:if>
-        <%-- 회원 상태 판별 --%>
-        <%-- 회원 타입 판별 --%>
-        <c:if test="${member.userType == 1}">
-        	<td>일반회원</td>
-        </c:if>
-        <c:if test="${member.userType == 2}">
         	<td>기업회원</td>
-        </c:if>
-        <c:if test="${member.userType == 3}">
-        	<td>관리자</td>
-        </c:if>
-        <%-- 회원 타입 판별 --%>
         <td><button type="button" class="btn btn-sm btn-primary"
-        onclick="location.href='deleteMemberForm?id=${member.m_id}'"><i class="la la-gear"></i>정보 수정</button></td>
+        onclick="location.href='deleteCEOForm?id=${ceo.c_id}'"><i class="la la-gear"></i>정보 수정</button></td>
         </tr>
         </c:forEach>
         </tbody>

@@ -39,13 +39,9 @@
       <label for="memberStatus">회원 상태</label>
       <input type="text" id="m_status" name="m_status" class="form-control" value="${memberVO.m_status}" placeholder="상태 1 = 활동중, 상태 2 = 정지, 상태 3 = 탈퇴(요청)">
     </div>
-    <div>
-      <label for="memberUserType">회원 타입</label>
-      <input type="text" id="userType" name="userType" class="form-control" value="${memberVO.userType}" placeholder="타입 1 = 일반회원, 타입 2 = 기업회원, 타입 3 = 관리자">
-    </div>
-
+    
     <hr class="my-4">
-
+    
     <div class="row">
       <div class="col">
         <button class="w-100 btn btn-info btn-lg" type="submit">수정하기</button>

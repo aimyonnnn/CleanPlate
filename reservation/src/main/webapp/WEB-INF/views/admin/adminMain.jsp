@@ -125,7 +125,7 @@
                   <small>총 회원 수</small>
                 </div>
 
-                <h2>${memberList.size()} 명</h2>
+                <h2>${memberList.size()+ceoMemberList.size()} 명</h2>
                 <small><a style="color: red;">활동 정지된 회원을 포함한</a> 총 회원 수입니다.</small>
               </div>
               <div class="card-chart danger">

@@ -1,5 +1,7 @@
 package com.itwillbs.test.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,4 +41,30 @@ public class CeoService {
 	public void updateCeo(CeoVO ceo) {
 		mapper.updateCeo(ceo);
 	}
+
+	// 기업 회원 리스트 조회
+	public List<CeoVO> ceoList() {
+		return mapper.ceoList();
+	}
+
+	public CeoVO selectCEOMember(String id) {
+		return mapper.selectCEOMember(id);
+	}
+
+	public int adminCEOMemberUpdate(CeoVO ceo) {
+		return mapper.adminCEOMemberUpdate(ceo);
+	}
+
+	public int deleteCEOMember(String id) {
+		return mapper.deleteCEOMember(id);
+	}
+
+	public CeoVO adminCEOMemberCount(int i) {
+		return mapper.adminCEOMemberCount(i);
+	}
+
+	public CeoVO adminCEOMemberTotalCount(int i) {
+		return mapper.adminCEOMemberTotalCount(i);
+	}
+
 }
