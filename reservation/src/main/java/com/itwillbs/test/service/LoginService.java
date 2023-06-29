@@ -21,8 +21,8 @@ public class LoginService {
 	
 	// coolsms 문자연동 시작
 	public String PhoneNumberCheck(String to) throws CoolsmsException{
-		String api_key = "#"; // 실제 테스트 시에 바꿔줘야함! 기능 동작 확인 완료함!
-		String api_secret = "#"; // 실제 테스트 시에 바꿔줘야함! 기능 동작 확인 완료함!
+		String api_key = "NCSDN9DK2QVHTNK3"; // 실제 테스트 시에 바꿔줘야함! 기능 동작 확인 완료함!
+		String api_secret = "BQNEILIKNYI934C45WVBE65UTCQFG9ZT"; // 실제 테스트 시에 바꿔줘야함! 기능 동작 확인 완료함!
 		Message coolsms = new Message(api_key, api_secret);
 			
 		Random rand = new Random(); 
@@ -34,7 +34,7 @@ public class LoginService {
 		  
 		HashMap<String, String> params = new HashMap<String, String>();
 	    params.put("to", to);    // 수신전화번호
-	    params.put("from", "#"); // 발신전화번호, 실제 테스트 시에 바꿔줘야함! 기능 동작 확인 완료함!
+	    params.put("from", "01041532874"); // 발신전화번호, 실제 테스트 시에 바꿔줘야함! 기능 동작 확인 완료함!
 	    params.put("type", "sms"); 
 	    params.put("text", "Clean Plate [" + numStr + "] 입니다.");
 	 
